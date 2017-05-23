@@ -74,7 +74,7 @@ padding: 20px 15px;
            height: 55px;
         }
         .selected {
-            background-color:rgb(83, 163, 163);
+            background-color:rgba(250, 46, 10, 0.9);
         }
 /* back colors */
         .blue {
