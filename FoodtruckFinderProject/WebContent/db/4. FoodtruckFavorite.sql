@@ -48,7 +48,7 @@ INSERT INTO foodtruck_tb(foodtruck_id, seller_id, truckName, truck_image, truckH
 VALUES ('F'||truck_seq.nextval, 'ginger', 'ginger트럭', '', '17002000', '서울 용산구', '오늘은 쉽니다', '서울 용산구 000로', '음료', '0', '0', '0', '0', '0');
 
 INSERT INTO foodtruck_tb(foodtruck_id, seller_id, truckName, truck_image, truckHour, area, notice, location, category, payment, parking, drinking, catering, operation_state)
-VALUES ('F'||truck_seq.nextval, 'chocolate', 'chocolate트럭', '', '17002000', '서울 관악구', '초콜릿먹으러오세요', '서울 관악구 333로', '카페', '1', '0', '1', '0', '1');
+VALUES ('F'||truck_seq.nextval, 'chocholate', 'chocolate트럭', '', '17002000', '서울 관악구', '초콜릿먹으러오세요', '서울 관악구 333로', '카페', '1', '0', '1', '0', '1');
 
 INSERT INTO foodtruck_tb(foodtruck_id, seller_id, truckName, truck_image, truckHour, area, notice, location, category, payment, parking, drinking, catering, operation_state)
 VALUES ('F'||truck_seq.nextval, 'gem', 'gem트럭', '', '17002000', '대전 둔산동', '맛있어여', '대전 둔산동 999로', '기타', '1', '1', '1', '1', '1');
