@@ -1,5 +1,10 @@
 # foofa
 food finer, the final project team Jute
 
-아임임
+�븘�엫�엫
+<<<<<<< HEAD
+�씠�듅嫄�
+=======
 juhee!!!!
+Kim
+>>>>>>> branch 'master' of https://github.com/fooFa-the-final/foofa
