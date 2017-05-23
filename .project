@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
+<<<<<<< HEAD
+	<name>Foofa</name>
+=======
 	<name>foofa</name>
+>>>>>>> branch 'master' of https://github.com/fooFa-the-final/foofa.git
 	<comment></comment>
 	<projects>
 	</projects>
