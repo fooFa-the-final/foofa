@@ -34,6 +34,7 @@ ADD FOREIGN KEY(seller_id) REFERENCES seller_tb(seller_id) on delete cascade;
 ALTER TABLE favorite
 ADD FOREIGN KEY(foodtruck_id) REFERENCES foodtruck_tb(foodtruck_id) on delete cascade;
 
+
 --DATA INSERT
 INSERT INTO foodtruck_tb(foodtruck_id, seller_id, truckName, truck_image, truckHour, area, notice, location, category, payment, parking, drinking, catering, operation_state)
 VALUES ('F'||truck_seq.nextval, 'nacho', 'nacho트럭', '', '17002000', '서울 금천구', '안녕하세요', '서울 금천구 시흥대로 198', '브라질', '0', '0', '0', '1', '1');
@@ -79,6 +80,11 @@ INSERT INTO favorite(foodtruck_id, member_id) VALUES ('F3', 'chaeyeong');
 INSERT INTO favorite(foodtruck_id, member_id) VALUES ('F3', 'tzuyu');
 INSERT INTO favorite(foodtruck_id, member_id) VALUES ('F4', 'tzuyu');
 INSERT INTO favorite(foodtruck_id, member_id) VALUES ('F5', 'momo');
+
+
+--외래키설정
+ALTER TABLE adv_tb
+ADD FOREIGN KEY (foodtruck_id) REFERENCES FOODTRUCK_TB(foodtruck_id) on delete cascade;
 
 
 COMMIT;
