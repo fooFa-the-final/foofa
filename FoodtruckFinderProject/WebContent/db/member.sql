@@ -1,4 +1,4 @@
---DROP TABLE MEMBER_TB;
+--DROP TABLE member_tb CASCADE CONSTRAINTS;
 
 CREATE TABLE member_tb (
   member_id varchar2(100),
