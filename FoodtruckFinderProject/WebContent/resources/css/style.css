@@ -329,3 +329,8 @@ table.dataTable thead .sorting:after {
     margin: 15px 0;
 }
 
+.size80 {
+	display: inline;
+	margin-right : 20px;
+	width:80%;
+}
