@@ -7,4 +7,5 @@ food finer, the final project team Jute
 =======
 juhee!!!!
 Kim
+Jung
 >>>>>>> branch 'master' of https://github.com/fooFa-the-final/foofa
