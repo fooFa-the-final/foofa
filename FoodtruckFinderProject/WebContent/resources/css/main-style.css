@@ -60,16 +60,21 @@ color: #FFFFFF;
 padding: 20px 15px;
 }
 #side-menu {
-    background-color:#04B173;
+    
+    background-color:rgba(251, 65, 8, 0.5);
+/*     background-color:rgba(250, 46, 10, 0.9);
+    background-color:rgb(130, 7, 9);
+    background-color:rgba(130, 7, 9, 0.4);
+    background-color:rgb(254, 250, 250);  */
 }
 
  #side-menu a {
             color:#fff;
-           border-bottom: 1px solid #84B899 !important;
+           border-bottom: 1px solid rgba(250, 154, 10, 0.12) !important;
            height: 55px;
         }
         .selected {
-            background-color:rgb(83, 163, 163);
+            background-color:rgba(250, 46, 10, 0.9);
         }
 /* back colors */
         .blue {
@@ -92,7 +97,7 @@ padding: 20px 15px;
 /* tap nvbar Section */
 
 #navbar {
-    background-color:rgb(83, 163, 163);
+    background-color:rgb(130, 7, 9);
 }
 
 .navbar-brand {
@@ -115,14 +120,15 @@ margin-right: -24px;
 }
 
 .body-Login-back {
-    background-color:#84B899;
+    background-color:rgba(250, 154, 10, 0.12);
 }
 
 .margin-tips {
     margin:5px;
 }
 .navbar-default {
-border-color: #27A6BE;
+	
+border-color: rgb(130, 7, 9);
 }
 /*media queries*/
 
