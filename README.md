@@ -8,8 +8,12 @@ food finer, the final project team Jute
 juhee!!!!
 Kim
 <<<<<<< HEAD
+Hi
+=======
+<<<<<<< HEAD
 hi!@!#
 =======
 Jung
+>>>>>>> branch 'master' of https://github.com/fooFa-the-final/foofa.git
 >>>>>>> branch 'master' of https://github.com/fooFa-the-final/foofa.git
 >>>>>>> branch 'master' of https://github.com/fooFa-the-final/foofa
