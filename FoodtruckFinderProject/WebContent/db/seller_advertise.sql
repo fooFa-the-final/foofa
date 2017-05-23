@@ -12,7 +12,7 @@ create table adv_tb(
   adv_id varchar2(50) primary key,
   foodtruck_id varchar2(50),
   period varchar2(50),
-  start_date date,
+  start_date varchar2(50),
   confirm varchar2(1)
 );
 
@@ -40,13 +40,13 @@ insert into seller_tb (seller_id, certification, password, phone) values ('pizza
 
 
 --광고등록
-insert into adv_tb VALUES ('A'||ADVERTISE_SEQ_ADV.NEXTVAL, 'F1', '1', SYSDATE, '1');
-insert into adv_tb VALUES ('A'||ADVERTISE_SEQ_ADV.NEXTVAL, 'F2', '4', SYSDATE, '0');
-insert into adv_tb VALUES ('A'||ADVERTISE_SEQ_ADV.NEXTVAL, 'F3', '5', SYSDATE, '1');
-insert into adv_tb VALUES ('A'||ADVERTISE_SEQ_ADV.NEXTVAL, 'F4', '3', SYSDATE, '0');
-insert into adv_tb VALUES ('A'||ADVERTISE_SEQ_ADV.NEXTVAL, 'F5', '6', SYSDATE, '1');
-insert into adv_tb VALUES ('A'||ADVERTISE_SEQ_ADV.NEXTVAL, 'F6', '3', SYSDATE, '0');
-insert into adv_tb VALUES ('A'||ADVERTISE_SEQ_ADV.NEXTVAL, 'F6', '12', SYSDATE, '1');
-insert into adv_tb VALUES ('A'||ADVERTISE_SEQ_ADV.NEXTVAL, 'F7', '5', SYSDATE, '0');
-insert into adv_tb VALUES ('A'||ADVERTISE_SEQ_ADV.NEXTVAL, 'F8', '6', SYSDATE, '0');
-insert into adv_tb VALUES ('A'||ADVERTISE_SEQ_ADV.NEXTVAL, 'F9', '9', SYSDATE, '1');
+insert into adv_tb VALUES ('A'||ADVERTISE_SEQ_ADV.NEXTVAL, 'F1', '1', '2017052013', '1');
+insert into adv_tb VALUES ('A'||ADVERTISE_SEQ_ADV.NEXTVAL, 'F2', '4', '2017052113', '0');
+insert into adv_tb VALUES ('A'||ADVERTISE_SEQ_ADV.NEXTVAL, 'F3', '5', '2017052913', '1');
+insert into adv_tb VALUES ('A'||ADVERTISE_SEQ_ADV.NEXTVAL, 'F4', '3', '2017052611', '0');
+insert into adv_tb VALUES ('A'||ADVERTISE_SEQ_ADV.NEXTVAL, 'F5', '6', '2017052513', '1');
+insert into adv_tb VALUES ('A'||ADVERTISE_SEQ_ADV.NEXTVAL, 'F6', '3', '2017052213', '0');
+insert into adv_tb VALUES ('A'||ADVERTISE_SEQ_ADV.NEXTVAL, 'F6', '12', '2017052817', '1');
+insert into adv_tb VALUES ('A'||ADVERTISE_SEQ_ADV.NEXTVAL, 'F7', '5', '2017052616', '0');
+insert into adv_tb VALUES ('A'||ADVERTISE_SEQ_ADV.NEXTVAL, 'F8', '6', '2017052513', '0');
+insert into adv_tb VALUES ('A'||ADVERTISE_SEQ_ADV.NEXTVAL, 'F9', '9', '2017052413', '1');
