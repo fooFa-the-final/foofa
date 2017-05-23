@@ -42,7 +42,10 @@ limitations under the License.*/
      
 }
 
-
+.wrap-center div {
+	width: 1000px;
+	margin: 0 auto;
+}
 
     
 
