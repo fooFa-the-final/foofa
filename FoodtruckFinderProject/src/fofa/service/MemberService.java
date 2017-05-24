@@ -1,5 +1,9 @@
 package fofa.service;
 
-public interface MemberService {
+import fofa.domain.Member;
 
+public interface MemberService {
+	
+	boolean register(Member member);
+	
 }
