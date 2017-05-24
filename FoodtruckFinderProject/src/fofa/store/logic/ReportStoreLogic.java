@@ -41,19 +41,38 @@ public class ReportStoreLogic implements ReportStore {
 			session.commit();
 		} finally {
 			session.close();
-		} return delete;
+		} 
+		return delete;
 	}
 
 	@Override
 	public Report selectById(String reportId) {
-		// TODO Auto-generated method stub
-		return null;
+		SqlSession session = factory.openSession();
+		Report report = null;
+		int delete = 0;
+		try{
+			ReportMapper mapper = session.getMapper(ReportMapper.class);
+			report = mapper.selectById(reportId);
+
+		} finally {
+			session.close();
+		} 
+		return report;
 	}
 
 	@Override
 	public List<Report> selectAll() {
-		// TODO Auto-generated method stub
-		return null;
+		SqlSession session = factory.openSession();
+		List<Report> list = null;
+		int delete = 0;
+		try{
+			ReportMapper mapper = session.getMapper(ReportMapper.class);
+			list = mapper.selectAll();
+
+		} finally {
+			session.close();
+		} 
+		return list;
 	}
 
 }
