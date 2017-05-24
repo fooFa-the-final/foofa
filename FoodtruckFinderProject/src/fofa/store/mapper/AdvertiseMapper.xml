@@ -42,17 +42,17 @@
 		WHERE adv_id = #{advId}
 	</select>
 
-	<select id="sortAscCon" resultMap="ADVmap">
+	<select id="sortAsc" parameterType="String" resultMap="ADVmap">
 		<include refid="selectADV" />
-		where confirm = '1' ORDER BY start_date ASC
+		where confirm = #{confirm} ORDER BY start_date ASC
 	</select>
 
-	<select id="sortDescCon" resultMap="ADVmap">
+	<select id="sortDesc" parameterType="String" resultMap="ADVmap">
 		<include refid="selectADV" />
-		where confirm = '1' ORDER BY start_date DESC
+		where confirm = #{confirm} ORDER BY start_date DESC
 	</select>
 
-	<select id="sortAscNotCon" resultMap="ADVmap">
+<!-- 	<select id="sortAscNotCon" resultMap="ADVmap">
 		<include refid="selectADV" />
 		where confirm = '0' ORDER BY start_date ASC
 	</select>
@@ -61,7 +61,7 @@
 		<include refid="selectADV" />
 		where confirm = '0' ORDER BY start_date DESC
 	</select>
-
+ -->
 
 	<insert id="insertAdvertise" parameterType="Advertise">
 

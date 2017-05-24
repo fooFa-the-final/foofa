@@ -13,5 +13,6 @@ public interface AdvertiseStore {
 	List<Advertise> selectByAsc(Boolean approve);
 	List<Advertise> selectByDesc(Boolean approve);
 	List<Advertise> selectNowAd();
+
 	
 }
