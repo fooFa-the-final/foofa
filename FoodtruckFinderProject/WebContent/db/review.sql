@@ -16,11 +16,11 @@ ALTER TABLE REVIEW_TB
 ADD FOREIGN KEY(foodtruck_id) REFERENCES foodtruck_tb(foodtruck_id) ON DELETE CASCADE;
 
 INSERT INTO REVIEW_TB
-VALUES ('R'||REVIEW_SEQ.nextVal, 'memberid', 'f01', '��¥ ���ִ� Ǫ��Ʈ��(Ǫ��Ʈ���� ���ִ°� �ƴ�)0', 5, SYSDATE);
+VALUES ('R'||REVIEW_SEQ.nextVal, 'memberid', 'f01', '진짜 맛있는 푸드트럭(푸드트럭이 맛있는거 아님)0', 5, SYSDATE);
 INSERT INTO REVIEW_TB
-VALUES ('R'||REVIEW_SEQ.nextVal, 'memberid', 'f01', '��¥ ������ Ǫ��Ʈ��(Ǫ��Ʈ���� �����°� �ƴ�)1', 5, SYSDATE);
+VALUES ('R'||REVIEW_SEQ.nextVal, 'memberid', 'f01', '진짜 맛없는 푸드트럭(푸드트럭이 맛없는거 아님)1', 5, SYSDATE);
 INSERT INTO REVIEW_TB
-VALUES ('R'||REVIEW_SEQ.nextVal, 'memberid', 'f01', '�ʳ׵� ������', 5, SYSDATE);
+VALUES ('R'||REVIEW_SEQ.nextVal, 'memberid', 'f01', '너네도 가봐라', 5, SYSDATE);
 
 --DROP TABLE RECOMMAND_TB
 CREATE TABLE RECOMMAND_TB(
@@ -50,8 +50,8 @@ ADD FOREIGN KEY(reporter_id) REFERENCES member_tb(member_id) ON DELETE CASCADE;
 ALTER TABLE REPORT_TB
 ADD FOREIGN KEY(review_id) REFERENCES review_tb(review_id) ON DELETE CASCADE;
 
-INSERT INTO REPORT_TB VALUES('memberid1', 'R01', '�ű��ϰ� �̳� ���丸 ���� ȭ�� ġ�о����');
-INSERT INTO REPORT_TB VALUES('memberid2', 'R01', '�е帳');
+INSERT INTO REPORT_TB VALUES('memberid1', 'R01', '신기하게 이놈 리뷰만 보면 화가 치밀어오름');
+INSERT INTO REPORT_TB VALUES('memberid2', 'R01', '패드립');
 
 --DROP SEQUENCE PHOTO_SEQ;
 CREATE SEQUENCE PHOTO_SEQ START WITH 1 INCREMENT by 1;
