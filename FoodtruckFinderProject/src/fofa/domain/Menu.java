@@ -6,12 +6,10 @@ public class Menu {
 	private String menuName;
 	private int price;
 	private boolean menuState;
+	private String foodtruckId;
 	
 	public String getMenuId() {
 		return menuId;
-	}
-	public void setMenuId(String menuId) {
-		this.menuId = menuId;
 	}
 	public String getMenuName() {
 		return menuName;
@@ -30,6 +28,12 @@ public class Menu {
 	}
 	public void setMenuState(boolean menuState) {
 		this.menuState = menuState;
+	}
+	public String getFoodtruckId() {
+		return foodtruckId;
+	}
+	public void setFoodtruckId(String foodtruckId) {
+		this.foodtruckId = foodtruckId;
 	}
 	
 	
