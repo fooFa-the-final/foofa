@@ -1,5 +1,5 @@
 package fofa.service;
 
-public class AdvertiseService {
+public interface AdvertiseService {
 
 }
