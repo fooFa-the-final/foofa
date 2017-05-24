@@ -12,7 +12,8 @@
 		<result column="gender" property="gender" />
 		<result column="age_range" property="ages" />
 		<result column="opinion" property="suggestion" />
-		<collection property="replies" column="survey_id" ofType="SurveyReply" select="fofa.store.mapper.SurveyReplyMapper.selectBySurveyId"></collection>
+		<collection property="replies" column="survey_id" ofType="SurveyReply"
+			select="fofa.store.mapper.SurveyReplyMapper.selectBySurveyId"></collection>
 	</resultMap>
 
 	<sql id="selectSurvey">
@@ -25,18 +26,23 @@
 		WHERE FOODTRUCK_ID = #{foodtruckId}
 	</select>
 	<select id="selectAvgByAges" parameterType="HashMap" resultMap="Survey">
-		SELECT FOODTRUCK_ID, AGE_RANGE, AVG(SCORE)
+		SELECT #{foodtruckId} FOODTRUCK_ID, S.AGE_RANGE avg_range,
+		AVG(R.SCORE) score
 		FROM SURVEY_TB S, SURVEY_REPLY_TB R
-		WHERE S.SURVEY_ID = R.SURVEY_ID
+		WHERE S.SURVEY_ID
+		= R.SURVEY_ID
 		AND FOODTRUCK_ID= #{foodtruckId}
-		GROUP BY AGE_RANGE;
+		AND R.ITEM_ID = #{itemId}
+		GROUP BY S.AGE_RANGE;
 	</select>
-	<select id="selectAvgByGender"  parameterType="HashMap" resultMap="Survey">
-		SELECT FOODTRUCK_ID, GENDER, AVG(SCORE)
-		FROM SURVEY_TB S, SURVEY_REPLY_TB R
+	<select id="selectAvgByGender" parameterType="HashMap" resultMap="Survey">
+		SELECT #{foodtruckId} foodtruck_id, S.GENDER GENDER, AVG(R.SCORE) score
+		FROM SURVEY_TB
+		S, SURVEY_REPLY_TB R
 		WHERE S.SURVEY_ID = R.SURVEY_ID
 		AND FOODTRUCK_ID= #{foodtruckId}
-		GROUP BY GENDER;
+		AND R.ITEM_ID = #{itemId}
+		GROUP BY S.GENDER;
 	</select>
 </mapper>
   
