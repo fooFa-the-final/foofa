@@ -1,1 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="fofa.store.mapper.SurveyItemMapper">
+
+	<!-- resultMap -->
+	<resultMap type="SurveyItem" id="surveyItemMap">
+		<id column="ITEM_ID" property="itemId" />
+		<result column="ITEM_NAME" property="question" />
+	</resultMap>
+
+	<sql id="selectSurveyItem">
+		SELECT ITEM_ID, ITEM_NAME
+		FROM SURVEY_ITEM_TB
+	</sql>
+
+	<select id="selectAll" resultMap="surveyItemMap">
+		<include refid="selectSurveyItem" />
+	</select>
+
+	<insert id="insert" parameterType="String">
+  		INSERT INTO SURVEY_ITEM_TB (ITEM_ID, ITEM_NAME) 
+  		VALUES ('I'||item_seq.NEXTVAL, #{question})
+  	</insert>
+  	
+  	<update id="update" parameterType="SurveyItem">
+  		UPDATE SURVEY_ITEM_TB
+  		SET ITEM_NAME=#{question}
+  		WHERE ITEM_ID=#{itemId}
+  	</update>
+  	
+  	<delete id="delete" parameterType="String">
+  		DELETE FROM SURVEY_ITEM_TB
+  		WHERE ITEM_ID=#{itemId}
+  	</delete>
+
+</mapper>
+  
+  
+  
+  

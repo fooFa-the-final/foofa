@@ -2,17 +2,23 @@
 
 <mapper namespace="fofa.store.mapper.SurveyReplyMapper">
 	<!-- resultMap -->
-	<resultMap type="Survey" id="surveyMap">
-		<id column="item_id" property="itemId" />
+	<resultMap type="SurveyReply" id="surveyReplyMap">
+		<id column="item_id" property="itemId" 		/>
+		<id column="survey_id" property="surveyId" 		/>
 		<result column="score" property="score" />
 	</resultMap>
 
-	<select id="selectAvgBySurveyItem" parameterType="String" resultMap="SurveyReply">
+	<select id="selectAvgBySurveyItem" parameterType="String" resultMap="surveyReplyMap">
 		select R.item_id itemId, AVG(R.SCORE) score
 		FROM SURVEY_TB S, SURVEY_REPLY_TB R
 		WHERE S.SURVEY_ID = R.SURVEY_ID
 		AND S.FOODTRUCK_ID = #{foodtruckId}
 		group by R.item_id;
 	</select>
+	
+	<insert id="insert" parameterType="SurveyReply">
+  		INSERT INTO SURVEY_REPLY_TB (survey_id, item_id, score) 
+  		VALUES ( #{survey_id}, #{item_id}, #{score})
+  	</insert>
 
 </mapper>
