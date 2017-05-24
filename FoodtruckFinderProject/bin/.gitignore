@@ -1,1 +1,5 @@
 /build/
+/WebContent/
+/pom.xml
+/src/
+/target/
