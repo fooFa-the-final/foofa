@@ -1,1 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="fofa.store.mapper.SellerMapper">
+
+
+	<resultMap type="Seller" id="SELmap">
+		<id column="SELLER_ID" property="sellerId" />
+		<result column="PASSWORD" property="password" />
+		<result column="CERTIFICATION" property="certification" />
+		<result column="PHONE" property="phone" />
+	</resultMap>
+
+
+	<sql id="selectSEL">
+		select SEller_ID, password, certification, phone 
+		from SELLER_TB;
+	</sql>
+
+	<select id="select" parameterType="String" resultMap="SELmap">
+		<include refid="selectSEL" />
+		where seller_id = #{sellerId}
+	</select>
+
+	<select id="insertSeller" parameterType="Seller">
+		insert into Seller_tb VALUES (#{sellerId}, #{password},
+		#{certification}, #{phone})
+	</select>
+
+	<select id="updateSeller" parameterType="Seller" resultMap="SELmap">
+		update
+		seller_tb set password= #{password}, certification =#{certification},  PHONE=#{PHONE}
+		WHERE seller_id = #{sellerId}
+	</select>
+
+	<select id="deleteSeller" parameterType="String" >
+		DELETE
+		FROM Seller_tb
+		WHERE seller_id = #{sellerId}
+	</select>
+
+
+</mapper>
