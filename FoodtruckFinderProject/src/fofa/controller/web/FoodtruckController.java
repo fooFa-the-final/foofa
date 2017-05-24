@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.ui.Model;
+
 import fofa.domain.Foodtruck;
 import fofa.domain.Menu;
 import fofa.service.AdvertiseService;
@@ -29,7 +31,7 @@ public class FoodtruckController {
 		return null;
 	}
 	
-	public String modifyForm(String foodtruckId){
+	public String modifyForm(String foodtruckId, Model model){
 		
 		return null;
 	}
@@ -49,22 +51,22 @@ public class FoodtruckController {
 		return false;
 	}
 	
-	public String searchById(String foodtruckId){
+	public String searchById(String foodtruckId, Model model){
 		
 		return null;
 	}
 	
-	public String searchByLoc(String location){
+	public String searchByLoc(String location, Model model){
 		
 		return null;
 	}
 	
-	public String searchByKeyLoc(String keyword, String location){
+	public String searchByKeyLoc(String keyword, String location, Model model){
 		
 		return null;
 	}
 	
-	public String searchByFilter(HttpServletRequest request){
+	public String searchByFilter(HttpServletRequest request, Model model){
 		
 		return null;
 	}
@@ -86,14 +88,4 @@ public class FoodtruckController {
 	
 	
 }
-
-
-
-
-
-
-
-
-
-
 
