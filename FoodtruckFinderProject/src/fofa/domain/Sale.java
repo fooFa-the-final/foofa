@@ -2,7 +2,7 @@ package fofa.domain;
 
 import java.sql.Date;
 
-public class Sales {
+public class Sale {
 
 	private String location;
 	private String foodtruckId;
