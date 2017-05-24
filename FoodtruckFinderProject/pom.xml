@@ -5,7 +5,7 @@
 	<artifactId>FoodtruckFinderProject</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
-
+	
 	<dependencies>
 		<!-- https://mvnrepository.com/artifact/org.springframework/spring-webmvc -->
 		<dependency>
@@ -50,6 +50,16 @@
 			<artifactId>spring-jdbc</artifactId>
 			<version>4.3.7.RELEASE</version>
 		</dependency>
+		<dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+	  <artifactId>jackson-core</artifactId>
+	  <version>2.8.5</version>
+	</dependency>
+	<dependency>
+	  <groupId>com.fasterxml.jackson.core</groupId>
+	  <artifactId>jackson-databind</artifactId>
+	  <version>2.8.5</version>
+	</dependency>
 	</dependencies>
 
 	<build>
