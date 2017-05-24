@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="fofa.store.mapper.SurveyMapper">
+
+	<!-- resultMap -->
+	<resultMap type="Survey" id="surveyMap">
+		<id column="survey_id" property="surveyId" />
+		<result column="foodtruck_id" property="foodtruckId" />
+		<result column="gender" property="gender" />
+		<result column="age_range" property="ages" />
+		<result column="opinion" property="suggestion" />
+		<collection property="replies" column="survey_id" ofType="SurveyReply" select="fofa.store.mapper.SurveyReplyMapper.selectBySurveyId"></collection>
+	</resultMap>
+
+	<sql id="selectSurvey">
+		SELECT SURVEY_ID, FOODTRUCK_ID, GENDER, AGE_RANGE, OPINION
+		FROM SURVEY_TB
+	</sql>
+
+	<select id="selectByTruckId" parameterType="String" resultMap="surveyMap">
+		<include refid="selectSurvey" />
+		WHERE FOODTRUCK_ID = #{foodtruckId}
+	</select>
+	<select id="selectAvgByAges" parameterType="HashMap" resultMap="Survey">
+		SELECT FOODTRUCK_ID, AGE_RANGE, AVG(SCORE)
+		FROM SURVEY_TB S, SURVEY_REPLY_TB R
+		WHERE S.SURVEY_ID = R.SURVEY_ID
+		AND FOODTRUCK_ID= #{foodtruckId}
+		GROUP BY AGE_RANGE;
+	</select>
+	<select id="selectAvgByGender"  parameterType="HashMap" resultMap="Survey">
+		SELECT FOODTRUCK_ID, GENDER, AVG(SCORE)
+		FROM SURVEY_TB S, SURVEY_REPLY_TB R
+		WHERE S.SURVEY_ID = R.SURVEY_ID
+		AND FOODTRUCK_ID= #{foodtruckId}
+		GROUP BY GENDER;
+	</select>
+</mapper>
+  
+  
+  
+  

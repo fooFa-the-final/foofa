@@ -43,14 +43,14 @@
 		<mapper resource="store/mapper/ImageMapper.xml"/>
 		<mapper resource="store/mapper/MemberMapper.xml"/>
 		<mapper resource="store/mapper/MenuMapper.xml"/>
-		<mapper resource="store/mapper/Recommand.xml"/>
-		<mapper resource="store/mapper/Report.xml"/>
-		<mapper resource="store/mapper/Review.xml"/>
-		<mapper resource="store/mapper/Sales.xml"/>
-		<mapper resource="store/mapper/Seller.xml"/>
-		<mapper resource="store/mapper/SurveyItem.xml"/>
-		<mapper resource="store/mapper/SurveyReply.xml"/>
-		<mapper resource="store/mapper/Survey.xml"/>
+		<mapper resource="store/mapper/RecommandMapper.xml"/>
+		<mapper resource="store/mapper/ReportMapper.xml"/>
+		<mapper resource="store/mapper/ReviewMapper.xml"/>
+		<mapper resource="store/mapper/SalesMapper.xml"/>
+		<mapper resource="store/mapper/SellerMapper.xml"/>
+		<mapper resource="store/mapper/SurveyItemMapper.xml"/>
+		<mapper resource="store/mapper/SurveyReplyMapper.xml"/>
+		<mapper resource="store/mapper/SurveyMapper.xml"/>
 	</mappers>
 
 </configuration>

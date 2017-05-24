@@ -4,6 +4,7 @@ public class SurveyReply {
 	
 	private String itemId;
 	private int score;
+	
 	public String getItemId() {
 		return itemId;
 	}

@@ -87,4 +87,10 @@ public class ReviewServiceLogic implements ReviewService {
 		return false;
 	}
 
+	@Override
+	public boolean removeReport(Report report) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }

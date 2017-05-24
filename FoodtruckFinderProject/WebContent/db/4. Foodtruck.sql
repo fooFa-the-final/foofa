@@ -1,5 +1,5 @@
---DROP TABLE foodtruck_tb;
---DROP TABLE favorite;
+--DROP TABLE foodtruck_tb CASCADE CONSTRAINTS;
+--DROP TABLE favorite CASCADE CONSTRAINTS;
 --DROP SEQUENCE truck_seq;
 
 
@@ -22,18 +22,8 @@ catering VARCHAR2(1),
 operation_state VARCHAR2(1)
 );
 
-CREATE TABLE favorite(
-foodtruck_id VARCHAR2(100),
-member_id VARCHAR2(100),
-constraint FAV_KEY PRIMARY KEY (foodtruck_id, member_id)
-);
-
 ALTER TABLE foodtruck_tb
 ADD FOREIGN KEY(seller_id) REFERENCES seller_tb(seller_id) on delete cascade;
-
-ALTER TABLE favorite
-ADD FOREIGN KEY(foodtruck_id) REFERENCES foodtruck_tb(foodtruck_id) on delete cascade;
-
 
 --DATA INSERT
 INSERT INTO foodtruck_tb(foodtruck_id, seller_id, truckName, truck_image, truckHour, area, notice, location, category, payment, parking, drinking, catering, operation_state)
@@ -49,7 +39,7 @@ INSERT INTO foodtruck_tb(foodtruck_id, seller_id, truckName, truck_image, truckH
 VALUES ('F'||truck_seq.nextval, 'ginger', 'ginger트럭', '', '17002000', '서울 용산구', '오늘은 쉽니다', '서울 용산구 000로', '음료', '0', '0', '0', '0', '0');
 
 INSERT INTO foodtruck_tb(foodtruck_id, seller_id, truckName, truck_image, truckHour, area, notice, location, category, payment, parking, drinking, catering, operation_state)
-VALUES ('F'||truck_seq.nextval, 'chocholate', 'chocolate트럭', '', '17002000', '서울 관악구', '초콜릿먹으러오세요', '서울 관악구 333로', '카페', '1', '0', '1', '0', '1');
+VALUES ('F'||truck_seq.nextval, 'cholate', 'chocolate트럭', '', '17002000', '서울 관악구', '초콜릿먹으러오세요', '서울 관악구 333로', '카페', '1', '0', '1', '0', '1');
 
 INSERT INTO foodtruck_tb(foodtruck_id, seller_id, truckName, truck_image, truckHour, area, notice, location, category, payment, parking, drinking, catering, operation_state)
 VALUES ('F'||truck_seq.nextval, 'gem', 'gem트럭', '', '17002000', '대전 둔산동', '맛있어여', '대전 둔산동 999로', '기타', '1', '1', '1', '1', '1');
@@ -68,23 +58,3 @@ VALUES ('F'||truck_seq.nextval, 'candy', 'candy트럭', '', '17002000', '서울 
 
 INSERT INTO foodtruck_tb(foodtruck_id, seller_id, truckName, truck_image, truckHour, area, notice, location, category, payment, parking, drinking, catering, operation_state)
 VALUES ('F'||truck_seq.nextval, 'pizzaking', 'pizzaking트럭', '', '17002000', '서울 금천구', '피자먹으러오새요', '서울 금천구 시흥대로 200', '양식', '1', '1', '0', '1', '0');
-
-INSERT INTO favorite(foodtruck_id, member_id) VALUES ('F1', 'momo');
-INSERT INTO favorite(foodtruck_id, member_id) VALUES ('F1', 'nayeon');
-INSERT INTO favorite(foodtruck_id, member_id) VALUES ('F1', 'jeongyeon');
-INSERT INTO favorite(foodtruck_id, member_id) VALUES ('F2', 'sana');
-INSERT INTO favorite(foodtruck_id, member_id) VALUES ('F2', 'jihyo');
-INSERT INTO favorite(foodtruck_id, member_id) VALUES ('F2', 'mina');
-INSERT INTO favorite(foodtruck_id, member_id) VALUES ('F2', 'dahyun');
-INSERT INTO favorite(foodtruck_id, member_id) VALUES ('F3', 'chaeyeong');
-INSERT INTO favorite(foodtruck_id, member_id) VALUES ('F3', 'tzuyu');
-INSERT INTO favorite(foodtruck_id, member_id) VALUES ('F4', 'tzuyu');
-INSERT INTO favorite(foodtruck_id, member_id) VALUES ('F5', 'momo');
-
-
---외래키설정
-ALTER TABLE adv_tb
-ADD FOREIGN KEY (foodtruck_id) REFERENCES FOODTRUCK_TB(foodtruck_id) on delete cascade;
-
-
-COMMIT;
