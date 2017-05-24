@@ -1,5 +1,9 @@
 package fofa.controller.web;
 
+import javax.servlet.http.HttpSession;
+
+import org.springframework.ui.Model;
+
 import fofa.domain.Member;
 
 public class MemberController {
@@ -17,19 +21,19 @@ public class MemberController {
 	public String create(Member member){
 		return null;
 	}
-	public String modifyForm(){
+	public String modifyForm(HttpSession session, Model model){
 		return null;
 	}
-	public String modify(String img){
+	public String modify(Member member){
 		return null;
 	}
-	public String checkPw(String password){
+	public String checkPw(HttpSession session, String password){
 		return null;
 	}
-	public String remove(){
+	public String remove(HttpSession session){
 		return null;
 	}
-	public String modifyPicture(String img){
+	public String modifyPicture(HttpSession session, String img){
 		return null;
 	}
 }
