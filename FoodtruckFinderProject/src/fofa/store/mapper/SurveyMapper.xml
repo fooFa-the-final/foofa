@@ -31,7 +31,7 @@
 		WHERE S.SURVEY_ID= R.SURVEY_ID
 		AND FOODTRUCK_ID= #{foodtruckId}
 		AND R.ITEM_ID = #{itemId}
-		GROUP BY S.AGE_RANGE;
+		GROUP BY S.AGE_RANGE
 	</select>
 	<select id="selectAvgByGender" parameterType="HashMap" resultType="Survey">
 		SELECT #{foodtruckId} foodtruck_id, S.GENDER GENDER, AVG(R.SCORE) score
@@ -40,8 +40,15 @@
 		WHERE S.SURVEY_ID = R.SURVEY_ID
 		AND FOODTRUCK_ID= #{foodtruckId}
 		AND R.ITEM_ID = #{itemId}
-		GROUP BY S.GENDER;
+		GROUP BY S.GENDER
 	</select>
+	
+	
+	<insert id="insert" parameterType="Menu">
+  		INSERT INTO SURVEY_TB (SURVEY_ID, FOODTRUCK_ID, GENDER, AGE_RANGE, OPINION) 
+  		VALUES ('S'||survey_seq.NEXTVAL, #{foodtruckId}, #{gender}, #{ages}, #{suggestion})
+  	</insert>
+  	
 </mapper>
   
   
