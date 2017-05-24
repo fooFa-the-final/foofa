@@ -21,6 +21,12 @@ public class Survey {
 	public String getFoodtruckId() {
 		return foodtruckId;
 	}
+	public float getScore() {
+		return score;
+	}
+	public void setScore(float score) {
+		this.score = score;
+	}
 	public void setFoodtruckId(String foodtruckId) {
 		this.foodtruckId = foodtruckId;
 	}
