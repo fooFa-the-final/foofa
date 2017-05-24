@@ -1,5 +1,4 @@
 --DROP TABLE foodtruck_tb CASCADE CONSTRAINTS;
---DROP TABLE favorite CASCADE CONSTRAINTS;
 --DROP SEQUENCE truck_seq;
 
 
@@ -58,3 +57,6 @@ VALUES ('F'||truck_seq.nextval, 'candy', 'candy트럭', '', '17002000', '서울 
 
 INSERT INTO foodtruck_tb(foodtruck_id, seller_id, truckName, truck_image, truckHour, area, notice, location, category, payment, parking, drinking, catering, operation_state)
 VALUES ('F'||truck_seq.nextval, 'pizzaking', 'pizzaking트럭', '', '17002000', '서울 금천구', '피자먹으러오새요', '서울 금천구 시흥대로 200', '양식', '1', '1', '0', '1', '0');
+
+
+COMMIT;
