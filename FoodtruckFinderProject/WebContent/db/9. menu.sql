@@ -1,3 +1,7 @@
+DROP TABLE menu_tb CASCADE CONSTRAINTS;
+DROP SEQUENCE menu_seq;
+
+
 CREATE SEQUENCE menu_seq START WITH 1 INCREMENT BY 1;
 
 CREATE TABLE menu_tb(
@@ -23,4 +27,4 @@ INSERT INTO menu_tb(menu_id, menu_name, price, menu_state, foodtruck_id) VALUES 
 INSERT INTO menu_tb(menu_id, menu_name, price, menu_state, foodtruck_id) VALUES ('M'||menu_seq.NEXTVAL, '전복요리', 10000, '1', 'F3');
 INSERT INTO menu_tb(menu_id, menu_name, price, menu_state, foodtruck_id) VALUES ('M'||menu_seq.NEXTVAL, '새우요리', 10000, '1', 'F3');
 
-COMMIT;
+commit;
