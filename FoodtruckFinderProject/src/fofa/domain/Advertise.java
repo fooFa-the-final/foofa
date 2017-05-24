@@ -6,6 +6,14 @@ public class Advertise {
 	private String sellerId;
 	private String period;
 	private Boolean approve;
+	private String startdate;
+	
+	public String getStartdate() {
+		return startdate;
+	}
+	public void setStartdate(String startdate) {
+		this.startdate = startdate;
+	}
 	public String getAdvId() {
 		return advId;
 	}
