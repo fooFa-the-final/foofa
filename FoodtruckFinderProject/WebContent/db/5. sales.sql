@@ -6,7 +6,7 @@ create table sales_tb(
   foodtruck_id varchar2(50),
   day varchar2(50),
   location varchar2(50),
-  revenue int,
+  revenue number,
   PRIMARY KEY (sales_id)
 );
 

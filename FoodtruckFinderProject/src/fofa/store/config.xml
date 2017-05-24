@@ -17,7 +17,7 @@
 		<typeAlias type="domain.Recommand" alias="Recommand" />
 		<typeAlias type="domain.Report" alias="Report" />
 		<typeAlias type="domain.Review" alias="Review" />
-		<typeAlias type="domain.Sales" alias="Sales" />
+		<typeAlias type="domain.Sale" alias="Sale" />
 		<typeAlias type="domain.Survey" alias="Survey" />
 		<typeAlias type="domain.SurveyItem" alias="SurveyItem" />
 		<typeAlias type="domain.SurveyReply" alias="SurveyReply" />
@@ -37,6 +37,7 @@
 
 	<mappers>
 		<mapper resource="store/mapper/MusicMapper.xml"/>
+		<mapper resource="store/mapper/SalesMapper.xml"/>
 	</mappers>
 
 </configuration>
