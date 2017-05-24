@@ -24,14 +24,14 @@
 		<include refid="selectSurvey" />
 		WHERE FOODTRUCK_ID = #{foodtruckId}
 	</select>
-	<select id="selectAvgByAges" parameterType="String" resultMap="Survey">
+	<select id="selectAvgByAges" parameterType="HashMap" resultMap="Survey">
 		SELECT FOODTRUCK_ID, AGE_RANGE, AVG(SCORE)
 		FROM SURVEY_TB S, SURVEY_REPLY_TB R
 		WHERE S.SURVEY_ID = R.SURVEY_ID
 		AND FOODTRUCK_ID= #{foodtruckId}
 		GROUP BY AGE_RANGE;
 	</select>
-	<select id="selectAvgByGender"  parameterType="String" resultMap="Survey">
+	<select id="selectAvgByGender"  parameterType="HashMap" resultMap="Survey">
 		SELECT FOODTRUCK_ID, GENDER, AVG(SCORE)
 		FROM SURVEY_TB S, SURVEY_REPLY_TB R
 		WHERE S.SURVEY_ID = R.SURVEY_ID
