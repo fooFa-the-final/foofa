@@ -10,6 +10,7 @@ public class Survey {
 	private char gender;
 	private String suggestion;
 	private List<SurveyReply> replies;
+	private float score;
 	
 	public String getSurveyId() {
 		return surveyId;
