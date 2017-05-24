@@ -6,8 +6,7 @@
 <mapper namespace="fofa.store.mapper.AdvertiseMapper">
 
 	<resultMap type="Advertise" id="ADVmap">
-		<id column="id" property="id" />
-		<result column="ADV_ID" property="advId" />
+		<id column="ADV_ID" property="advId" />
 		<result column="SELLER_ID" property="sellerId" />
 		<result column="PERIOD" property="period" />
 		<result column="confirm" property="approve" />
@@ -20,39 +19,34 @@
 		from ADV_TB
 	</sql>
 
-	<select id="read" parameterType="String" resultMap="ADVmap">
-		<include refid="selectADV" />
-		where id = #{advId}
-	</select>
-
-	<select id="readNowAd" resultMap="ADVmap">
+	<select id="selectNowAd" resultMap="ADVmap">
 		<include refid="selectADV" />
 		where where confirm ='1'
 	</select>
 
-	<select id="updateAdv" parameterType="String" resultMap="ADVmap">
+	<select id="update" parameterType="String" resultMap="ADVmap">
 		update
 		adv_tb set confirm = 1
 		where adv_id = #{adv_id};
 	</select>
 
-	<select id="deleteAdv" parameterType="String" resultMap="ADVmap">
+	<select id="delete" parameterType="String" resultMap="ADVmap">
 		DELETE
 		FROM adv_tb
 		WHERE adv_id = #{advId}
 	</select>
 
-	<select id="sortAscCon" resultMap="ADVmap">
+	<select id="selectByAsc" parameterType="String" resultMap="ADVmap">
 		<include refid="selectADV" />
-		where confirm = '1' ORDER BY start_date ASC
+		where confirm = #{confirm} ORDER BY start_date ASC
 	</select>
 
-	<select id="sortDescCon" resultMap="ADVmap">
+	<select id="selectByDesc" parameterType="String" resultMap="ADVmap">
 		<include refid="selectADV" />
-		where confirm = '1' ORDER BY start_date DESC
+		where confirm = #{confirm} ORDER BY start_date DESC
 	</select>
 
-	<select id="sortAscNotCon" resultMap="ADVmap">
+<!-- 	<select id="sortAscNotCon" resultMap="ADVmap">
 		<include refid="selectADV" />
 		where confirm = '0' ORDER BY start_date ASC
 	</select>
@@ -61,9 +55,9 @@
 		<include refid="selectADV" />
 		where confirm = '0' ORDER BY start_date DESC
 	</select>
+ -->
 
-
-	<insert id="insertAdvertise" parameterType="Advertise">
+	<insert id="insert" parameterType="Advertise">
 
 		insert into adv_tb VALUES ('A'||ADVERTISE_SEQ_ADV.NEXTVAL, #{seller_Id},
 		#{period}, #{start_date}, 0)

@@ -8,31 +8,31 @@
 	<resultMap type="Member" id="MemberMap">
 		<id column="member_id" property="memberId"/>
 		<result column="password" property="password"/>
-		<result column="birthday" property="birthday"/>
+		<result column="birth" property="birthday"/>
 		<result column="email" property="email"/>
 		<result column="gender" property="gender"/>
-		<result column="profileImg" property="profileImg"/>
+		<result column="image_src" property="profileImg"/>
 		
 	</resultMap>
 	
-	<insert id="insertMember" parameterType="Member">
-	INSERT INTO member_tb (member_id, password, birthday, email, gender, profileImg)
+	<insert id="insert" parameterType="Member">
+	INSERT INTO member_tb (member_id, password, birth, email, gender, image_src)
  	VALUES (#{memberId}, #{password}, #{birthday}, #{email}, #{gender}, #{profileImg})	
 	</insert>
 	
-	<update id="updateMember" parameterType="Member">
+	<update id="update" parameterType="Member">
 	UPDATE member_tb
-	SET member_id = #{memberId}, #{password}, #{birthday}, #{email}, #{gender}, #{profileImg}
+	SET member_id = #{memberId}, #{password}, #{birthday}, #{email}, #{gender}, #{image_src}
 	WHERE member_id = #{memberId}	
 	</update>
 	
-	<delete id="deleteMember" parameterType="Member">
+	<delete id="delete" parameterType="Member">
 	DELETE
 	FROM member_tb
 	WHERE member_id = #{memberId}
 	</delete>
 	
-	<select id="selectMember" parameterType="String" resultMap="MemberMap">
+	<select id="select" parameterType="String" resultMap="MemberMap">
 	select member_id, password, birthday, email, gender, profileImg
 	FROM member_tb
 	WHERE member_id = #{memberId]

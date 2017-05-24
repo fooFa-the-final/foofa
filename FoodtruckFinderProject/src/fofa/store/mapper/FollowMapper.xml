@@ -7,7 +7,7 @@
 	<mapper namespace="fofa.store.mapper.FollowMapper">
 	
 	<resultMap type="Follow" id="FollowMap">
-	<result property="fromId" column="FromId"/>
+	<id property="fromId" column="FromId"/>
 	<result property="toId" column="toId"/>
 	</resultMap>	
     <insert id ="insertFollow" parameterType="Follow">
