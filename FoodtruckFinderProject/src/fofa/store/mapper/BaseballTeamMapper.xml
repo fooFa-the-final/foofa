@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  
+<mapper namespace="store.mapper.BaseballTeamMapper">
+
+	<resultMap type="BaseballTeam" id="teamMap">
+		<id column="ID" property="teamId" />
+		<result column="NAME" property="name" />
+		<result column="REGION" property="region" />
+		<result column="MANAGER" property="manager" />
+		<result column="STADIUM" property="stadium" />
+		<result column="LOGO" property="logo" />
+		<collection property="players" column="ID" ofType="Player" select="store.mapper.PlayerMapper.retrieveByTeam" javaType="ArrayList" jdbcType="NUMERIC" />
+	</resultMap>
+
+	<sql id="selectTeam">
+		SELECT ID, NAME, REGION, MANAGER, STADIUM, LOGO
+		FROM team_tb 
+	</sql>
+
+	<select id="retrieve" parameterType="String" resultMap="teamMap">
+		<include refid="selectTeam" />
+		WHERE ID = #{teamId}
+	</select>
+	<select id="retrieveAll" resultMap="teamMap">
+		<include refid="selectTeam" />
+	</select>
+
+</mapper>
+  
