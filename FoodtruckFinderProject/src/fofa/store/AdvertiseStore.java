@@ -7,9 +7,9 @@ import fofa.domain.Advertise;
 public interface AdvertiseStore {
 
 	
-	boolean delete(String advid);
-	boolean insert(Advertise advertise);
-	boolean update(Advertise advertise);
+	int delete(String advid);
+	int insert(Advertise advertise);
+	int update(Advertise advertise);
 	List<Advertise> selectByAsc(Boolean approve);
 	List<Advertise> selectByDesc(Boolean approve);
 	List<Advertise> selectNowAd();

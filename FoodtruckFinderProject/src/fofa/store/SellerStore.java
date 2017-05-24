@@ -4,9 +4,9 @@ import fofa.domain.Seller;
 
 public interface SellerStore {
 
-	boolean insert(Seller seller);
-	boolean delete(String id);
-	boolean update(Seller seller);
-	Seller select(Seller seller);
+	int insert(Seller seller);
+	int delete(String id);
+	int update(Seller seller);
+	Seller select(String sellerId);
 	
 }
