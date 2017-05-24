@@ -5,7 +5,7 @@ import java.util.List;
 import fofa.domain.Foodtruck;
 import fofa.domain.Menu;
 
-public interface FoodtruckService {
+public interface FoodtruckSevice {
 	
 	boolean register(Foodtruck foodtruck);
 	
