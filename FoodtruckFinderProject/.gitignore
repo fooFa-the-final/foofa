@@ -1,2 +1,9 @@
-/build/
 /target/
+
+*.properties
+*.MF
+*.lst
+*.class
+*.dmg
+*.exe
+*.com
