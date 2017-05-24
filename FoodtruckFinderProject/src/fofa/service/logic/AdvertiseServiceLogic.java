@@ -2,11 +2,18 @@ package fofa.service.logic;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import fofa.domain.Advertise;
 import fofa.service.AdvertiseService;
+import fofa.store.SellerStore;
 
+@Service
 public class AdvertiseServiceLogic implements AdvertiseService {
 
+	@Autowired
+	private SellerStore sellerStore;
 	
 	@Override
 	public List<Advertise> findByAsc(Boolean approve) {

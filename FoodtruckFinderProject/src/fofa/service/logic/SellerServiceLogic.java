@@ -1,8 +1,11 @@
 package fofa.service.logic;
 
+import org.springframework.stereotype.Service;
+
 import fofa.domain.Seller;
 import fofa.service.SellerService;
 
+@Service
 public class SellerServiceLogic implements SellerService{
 
 	
