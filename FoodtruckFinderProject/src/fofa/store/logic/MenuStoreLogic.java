@@ -48,12 +48,12 @@ public class MenuStoreLogic implements MenuStore{
 	}
 
 	@Override
-	public int delete(String menuId) {
+	public int delete(String menuId, String foodtruckId) {
 		SqlSession session = factory.openSession();
 		int delete = 0;
 		try{
 			MenuMapper mapper = session.getMapper(MenuMapper.class);
-			delete = mapper.delete(menuId);
+			delete = mapper.delete(menuId, foodtruckId);
 			session.commit();
 		} finally {
 			session.close();
