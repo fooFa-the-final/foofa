@@ -18,5 +18,7 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/kosta/Downloads/설치파일/lib&amp;Jar/mybatis-3.4.2/mybatis-3.4.2/mybatis-3.4.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/kosta/Desktop/ojdbc6.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
