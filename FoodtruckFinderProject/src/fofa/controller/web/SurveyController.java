@@ -7,8 +7,15 @@ import org.springframework.ui.Model;
 
 import fofa.domain.Survey;
 import fofa.domain.SurveyItem;
+import fofa.service.FoodtruckService;
+import fofa.service.SurveyItemService;
+import fofa.service.SurveyService;
 
 public class SurveyController {
+	
+	private FoodtruckService foodtruckService;
+	private SurveyService surveyService;
+	private SurveyItemService surveyItemService;
 
 	public String create(Survey survey, Model model){
 		
@@ -31,6 +38,10 @@ public class SurveyController {
 		return null;
 	}	
 	public List<SurveyItem> removeItem(String question){
+		return null;
+	}
+	
+	public String searchAllterms(Model model){
 		return null;
 	}
 }
