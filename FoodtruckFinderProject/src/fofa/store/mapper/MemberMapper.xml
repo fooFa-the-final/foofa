@@ -13,7 +13,7 @@
 		<result column="gender" property="gender"/>
 		<result column="image_src" property="profileImg"/>
 		
-	</resultMap>
+	</resultMap> 
 	
 	<insert id="insert" parameterType="Member">
 	INSERT INTO member_tb (member_id, password, birth, email, gender, image_src)
