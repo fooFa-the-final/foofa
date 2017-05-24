@@ -1,5 +1,16 @@
 package fofa.store;
 
-public interface ReviewStore {
+import java.util.List;
 
+import fofa.domain.Review;
+
+public interface ReviewStore {
+	int insert(Review review);
+	int update(Review review);
+	int delete(String reviewId);
+	Review selectById(String reviewId);
+	List<Review> selectByMemberId(String memberId);
+	List<Review> selectByTruckId(String foodtruckId);
+	List<Review> selectByRecommand();
 }
+
