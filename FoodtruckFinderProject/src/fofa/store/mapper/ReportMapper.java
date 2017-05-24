@@ -6,7 +6,7 @@ import fofa.domain.Report;
 
 public interface ReportMapper {
 	void insert(Report report);
-	void delete(String reportId);
+	void delete(Report report);
 	Report selectById(String reportId);
 	List<Report> selectAll();
 }

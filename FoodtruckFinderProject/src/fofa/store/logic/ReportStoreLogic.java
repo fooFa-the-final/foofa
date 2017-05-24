@@ -14,7 +14,7 @@ public class ReportStoreLogic implements ReportStore {
 	}
 
 	@Override
-	public int delete(String reportId) {
+	public int delete(Report report) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
