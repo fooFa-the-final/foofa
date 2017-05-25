@@ -41,18 +41,21 @@ public class ReviewStoreLogicTest {
 		Member m = new Member();
 		m.setMemberId("momo");
 		review.setWriter(m);
-		int insert = store.insert(review);
-		assertEquals(1, insert);
+		int update = store.update(review);
+		assertEquals(1, update);
 	}
 
 	@Test
 	public void testDelete() {
-		fail("Not yet implemented");
+		
+		int delete = store.delete("R4");
+		assertEquals(1, delete);
 	}
 
 	@Test
 	public void testSelectById() {
-		fail("Not yet implemented");
+		Review review = store.selectById("R1");
+		assertEquals("F1",review.getFoodtruckId());
 	}
 
 	@Test
