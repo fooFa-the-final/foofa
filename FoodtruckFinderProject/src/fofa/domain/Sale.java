@@ -1,7 +1,8 @@
 package fofa.domain;
 
-import java.sql.Date;
+import org.springframework.stereotype.Component;
 
+@Component
 public class Sale {
 
 	private String location;

@@ -1,5 +1,8 @@
 package fofa.domain;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class SurveyReply {
 	
 	private String itemId;

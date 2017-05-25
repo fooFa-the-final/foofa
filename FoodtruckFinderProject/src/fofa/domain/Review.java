@@ -3,6 +3,9 @@ package fofa.domain;
 import java.sql.Date;
 import java.util.List;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class Review {
 	private String reviewId;
 	private String foodtruckId;

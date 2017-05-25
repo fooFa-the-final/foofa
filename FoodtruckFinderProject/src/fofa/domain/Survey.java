@@ -2,6 +2,9 @@ package fofa.domain;
 
 import java.util.List;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class Survey {
 
 	private String surveyId;
