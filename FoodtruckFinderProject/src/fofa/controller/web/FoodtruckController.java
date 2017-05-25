@@ -16,7 +16,7 @@ import fofa.service.AdvertiseService;
 import fofa.service.FavoriteService;
 import fofa.service.FoodtruckService;
 
-@RequestMapping("/foodtruck")
+@RequestMapping("foodtruck")
 @Controller
 public class FoodtruckController {
 	@Autowired
