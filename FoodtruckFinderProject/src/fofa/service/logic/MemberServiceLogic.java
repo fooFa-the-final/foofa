@@ -1,9 +1,12 @@
 package fofa.service.logic;
 
+import org.springframework.stereotype.Service;
+
 import fofa.domain.Member;
 import fofa.service.MemberService;
 import fofa.store.MemberStore;
 
+@Service
 public class MemberServiceLogic implements MemberService{
 	private MemberStore store;
 	

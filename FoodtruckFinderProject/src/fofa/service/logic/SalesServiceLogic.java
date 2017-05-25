@@ -3,11 +3,15 @@ package fofa.service.logic;
 import java.sql.Date;
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import fofa.domain.Sale;
 import fofa.service.SalesService;
 import fofa.store.SalesStore;
 import fofa.store.logic.SalesStoreLogic;
 
+
+@Service
 public class SalesServiceLogic implements SalesService {
 	SalesStore store = null;
 
