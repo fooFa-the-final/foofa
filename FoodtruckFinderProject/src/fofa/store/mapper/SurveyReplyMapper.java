@@ -2,7 +2,6 @@ package fofa.store.mapper;
 
 import java.util.List;
 
-import fofa.domain.Survey;
 import fofa.domain.SurveyReply;
 
 public interface SurveyReplyMapper {

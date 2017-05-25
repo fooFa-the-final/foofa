@@ -7,11 +7,9 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
 import fofa.domain.SurveyItem;
-import fofa.domain.SurveyReply;
 import fofa.store.SurveyItemStore;
 import fofa.store.factory.SqlSessionFactoryProvider;
 import fofa.store.mapper.SurveyItemMapper;
-import fofa.store.mapper.SurveyReplyMapper;
 
 public class SurveyItemStoreLogic implements SurveyItemStore{
 	
