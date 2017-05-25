@@ -5,12 +5,15 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import fofa.domain.SurveyItem;
 import fofa.store.SurveyItemStore;
 import fofa.store.factory.SqlSessionFactoryProvider;
 import fofa.store.mapper.SurveyItemMapper;
 
+@Repository
 public class SurveyItemStoreLogic implements SurveyItemStore{
 	
 	private SqlSessionFactory factory;
