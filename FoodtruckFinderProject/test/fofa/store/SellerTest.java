@@ -57,13 +57,13 @@ public class SellerTest {
 //	
 //	 }
 	//
-//	@Test
-//	public void testSelect() {
-//		String id = "as";
-//		int insert = 0;
-//		 store1.delete(id);
-//
-//	}
+	@Test
+	public void testSelect() {
+
+		
+		assertEquals("candy", store1.select("candy").getSellerId());
+		
+	}
 
 	 
 //	 @Test

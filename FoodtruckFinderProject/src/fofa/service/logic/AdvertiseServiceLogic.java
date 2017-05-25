@@ -1,5 +1,6 @@
 package fofa.service.logic;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,48 +8,66 @@ import org.springframework.stereotype.Service;
 
 import fofa.domain.Advertise;
 import fofa.service.AdvertiseService;
-import fofa.store.SellerStore;
+import fofa.store.AdvertiseStore;
 
 @Service
 public class AdvertiseServiceLogic implements AdvertiseService {
 
 	@Autowired
-	private SellerStore sellerStore;
-	
+	private AdvertiseStore advertiseStore;
+
 	@Override
 	public List<Advertise> findByAsc(Boolean approve) {
-		// TODO Auto-generated method stub
-		return null;
+		List<Advertise> list = new ArrayList<>();
+		list = advertiseStore.selectByAsc(approve);
+		return list;
 	}
-	
+
 	@Override
 	public List<Advertise> findByDesc(Boolean approve) {
-		// TODO Auto-generated method stub
-		return null;
+		List<Advertise> list = new ArrayList<>();
+		list = advertiseStore.selectByDesc(approve);
+		return list;
 	}
-	
+
 	@Override
 	public List<Advertise> findNowAd() {
-		// TODO Auto-generated method stub
-		return null;
+		List<Advertise> list = new ArrayList<>();
+		list = advertiseStore.selectNowAd();
+		return list;
 	}
-	
+
 	@Override
 	public boolean modify(Advertise advertise) {
-		// TODO Auto-generated method stub
-		return false;
+		int sucess;
+		sucess = advertiseStore.update(advertise.getAdvId());
+		if (sucess == 0) {
+			return false;
+		} else {
+			return true;
+		}
 	}
-	
+
 	@Override
 	public boolean register(Advertise advertise) {
-		// TODO Auto-generated method stub
-		return false;
+		int sucess;
+		sucess = advertiseStore.insert(advertise);
+		if (sucess == 0) {
+			return false;
+		} else {
+			return true;
+		}
 	}
-	
+
 	@Override
 	public boolean remove(String advertiseId) {
-		// TODO Auto-generated method stub
-		return false;
+		int sucess;
+		sucess = advertiseStore.delete(advertiseId);
+		if (sucess == 0) {
+			return false;
+		} else {
+			return true;
+		}
 	}
-	
+
 }
