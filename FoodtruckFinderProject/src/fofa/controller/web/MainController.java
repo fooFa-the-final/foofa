@@ -32,7 +32,7 @@ public class MainController {
 
 	@RequestMapping("/index.do")
 	public String showMain(Model model){
-		return "index.jsp";
+		return "view/index.jsp";
 	}
 	
 	public String showMainLogin(HttpSession session, Model model){
