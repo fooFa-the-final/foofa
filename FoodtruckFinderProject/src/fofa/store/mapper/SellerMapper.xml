@@ -24,10 +24,10 @@
 	</select>
 
 
-	<select id="insert" parameterType="Seller">
+	<insert id="insert" parameterType="Seller">
 		insert into Seller_tb (seller_id, password, certification, phone) VALUES
 		(#{sellerId}, #{password},	#{certification}, #{phone})
-	</select>
+	</insert>
 
 	<select id="update" parameterType="Seller" resultMap="SELmap">
 		update
