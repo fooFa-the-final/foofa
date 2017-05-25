@@ -2,6 +2,7 @@ package fofa.controller.web;
 
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,11 +15,9 @@ import fofa.service.logic.SalesServiceLogic;
 @Controller
 public class SalesController {
 
-	private SalesService service;
+	@Autowired
+	private SalesServiceLogic service;
 
-	public SalesController() {
-		service = new SalesServiceLogic();
-	}
 
 	@RequestMapping(value = "sales/create.do", method = RequestMethod.POST)
 	public String create(HttpSession session, Sale sale) {
