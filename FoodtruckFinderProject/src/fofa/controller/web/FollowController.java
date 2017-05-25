@@ -2,8 +2,10 @@ package fofa.controller.web;
 
 import javax.servlet.http.HttpSession;
 
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 
+@Controller
 public class FollowController {
 	
 	public boolean create(String followingId, HttpSession session){

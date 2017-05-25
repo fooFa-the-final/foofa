@@ -4,12 +4,14 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
+import org.springframework.stereotype.Repository;
 
 import fofa.domain.Follow;
 import fofa.store.FollowStore;
 import fofa.store.factory.SqlSessionFactoryProvider;
 import fofa.store.mapper.FollowMapper;
 
+@Repository
 public class FollowStoreLogic implements FollowStore {
 
 	private SqlSessionFactory factory;

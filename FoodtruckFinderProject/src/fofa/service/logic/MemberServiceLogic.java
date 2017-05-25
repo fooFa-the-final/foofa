@@ -1,6 +1,7 @@
 package fofa.service.logic;
 
 import org.springframework.stereotype.Service;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import fofa.domain.Member;
 import fofa.service.MemberService;
@@ -8,6 +9,8 @@ import fofa.store.MemberStore;
 
 @Service
 public class MemberServiceLogic implements MemberService{
+	
+	@Autowired
 	private MemberStore store;
 	
 	
