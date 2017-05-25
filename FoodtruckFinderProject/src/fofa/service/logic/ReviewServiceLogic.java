@@ -28,7 +28,9 @@ public class ReviewServiceLogic implements ReviewService {
 	@Autowired
 	private ReportStore reportStore;
 	
+	@Autowired
 	private RecommandStore recommandStore;
+	
 	@Override
 	public boolean register(Review review) {
 		return reviewStore.insert(review) > 0;
