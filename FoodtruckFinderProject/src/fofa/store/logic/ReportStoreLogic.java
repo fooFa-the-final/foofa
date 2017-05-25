@@ -46,13 +46,11 @@ public class ReportStoreLogic implements ReportStore {
 	}
 
 	@Override
-	public Report selectById(String reportId) {
+	public Report selectById(Report report) {
 		SqlSession session = factory.openSession();
-		Report report = null;
-		int delete = 0;
 		try{
 			ReportMapper mapper = session.getMapper(ReportMapper.class);
-			report = mapper.selectById(reportId);
+			report = mapper.selectById(report);
 
 		} finally {
 			session.close();
@@ -64,7 +62,6 @@ public class ReportStoreLogic implements ReportStore {
 	public List<Report> selectAll() {
 		SqlSession session = factory.openSession();
 		List<Report> list = null;
-		int delete = 0;
 		try{
 			ReportMapper mapper = session.getMapper(ReportMapper.class);
 			list = mapper.selectAll();
