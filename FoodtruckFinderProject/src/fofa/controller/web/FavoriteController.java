@@ -2,23 +2,22 @@ package fofa.controller.web;
 
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 
 import fofa.service.FavoriteService;
 import fofa.service.FoodtruckService;
 import fofa.service.MemberService;
-import fofa.service.logic.FavoriteServiceLogic;
-import fofa.service.logic.FoodtruckServiceLogic;
 
+@Controller
 public class FavoriteController {
+	@Autowired
 	private FavoriteService favoriteService;
+	@Autowired
 	private FoodtruckService foodtruckService;
+	@Autowired
 	private MemberService memberService;
-	
-	public FavoriteController() {
-		favoriteService = new FavoriteServiceLogic();
-		foodtruckService = new FoodtruckServiceLogic();		
-	}
 	
 	public boolean create(HttpSession session, String foodtruckId){
 		
