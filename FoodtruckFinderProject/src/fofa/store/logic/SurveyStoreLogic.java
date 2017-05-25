@@ -1,18 +1,20 @@
 package fofa.store.logic;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
+import org.springframework.stereotype.Repository;
 
 import fofa.domain.Survey;
-import fofa.domain.SurveyItem;
 import fofa.store.SurveyStore;
 import fofa.store.factory.SqlSessionFactoryProvider;
-import fofa.store.mapper.SurveyItemMapper;
 import fofa.store.mapper.SurveyMapper;
 
+@Repository
 public class SurveyStoreLogic implements SurveyStore{
 	
 	private SqlSessionFactory factory;
@@ -22,12 +24,13 @@ public class SurveyStoreLogic implements SurveyStore{
 	}
 	
 	@Override
-	public int insert(Survey survey) {
+	public String insert(Survey survey) {
 		SqlSession session = factory.openSession();
-		int insert = 0;
+		String insert = "";
 		try{
 			SurveyMapper mapper = session.getMapper(SurveyMapper.class);
-		insert = mapper.insert(survey);
+		mapper.insert(survey);
+		insert = survey.getSurveyId();
 		session.commit();
 		} finally {
 			session.close();
@@ -55,7 +58,10 @@ public class SurveyStoreLogic implements SurveyStore{
 		List<Survey> surveys = new ArrayList<>();
 		try {
 			SurveyMapper mapper = session.getMapper(SurveyMapper.class);
-			surveys = mapper.selectAvgByAges(foodtruckId, itemId);
+			Map<String, String> params = new HashMap<>();
+			params.put("foodtruckId", foodtruckId);
+			params.put("itemId", itemId);
+			surveys = mapper.selectAvgByAges(params);
 			session.commit();
 		} finally {
 			session.close();
@@ -69,7 +75,11 @@ public class SurveyStoreLogic implements SurveyStore{
 		List<Survey> surveys = new ArrayList<>();
 		try {
 			SurveyMapper mapper = session.getMapper(SurveyMapper.class);
-			surveys = mapper.selectAvgByGender(foodtruckId, itemId);
+			Map<String, String> params = new HashMap<>();
+
+			params.put("foodtruckId", foodtruckId);
+			params.put("itemId", itemId);
+			surveys = mapper.selectAvgByGender(params);
 			session.commit();
 		} finally {
 			session.close();

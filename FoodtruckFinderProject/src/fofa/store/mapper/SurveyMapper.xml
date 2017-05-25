@@ -26,7 +26,7 @@
 		WHERE FOODTRUCK_ID = #{foodtruckId}
 	</select>
 	<select id="selectAvgByAges" parameterType="HashMap" resultType="Survey">
-		SELECT #{foodtruckId} FOODTRUCK_ID, S.AGE_RANGE avg_range, AVG(R.SCORE) score
+		SELECT #{foodtruckId} FOODTRUCKID, S.AGE_RANGE ages, AVG(R.SCORE) score
 		FROM SURVEY_TB S, SURVEY_REPLY_TB R
 		WHERE S.SURVEY_ID= R.SURVEY_ID
 		AND FOODTRUCK_ID= #{foodtruckId}
@@ -34,7 +34,7 @@
 		GROUP BY S.AGE_RANGE
 	</select>
 	<select id="selectAvgByGender" parameterType="HashMap" resultType="Survey">
-		SELECT #{foodtruckId} foodtruck_id, S.GENDER GENDER, AVG(R.SCORE) score
+		SELECT #{foodtruckId} FOODTRUCKID, S.GENDER GENDER, AVG(R.SCORE) score
 		FROM SURVEY_TB
 		S, SURVEY_REPLY_TB R
 		WHERE S.SURVEY_ID = R.SURVEY_ID
@@ -44,9 +44,12 @@
 	</select>
 	
 	
-	<insert id="insert" parameterType="Menu">
+	<insert id="insert" parameterType="Survey" useGeneratedKeys="true">
+	    <selectKey keyProperty="surveyId" resultType="string" order="BEFORE">
+           SELECT 'S'||survey_seq.nextval FROM DUAL
+        </selectKey>
   		INSERT INTO SURVEY_TB (SURVEY_ID, FOODTRUCK_ID, GENDER, AGE_RANGE, OPINION) 
-  		VALUES ('S'||survey_seq.NEXTVAL, #{foodtruckId}, #{gender}, #{ages}, #{suggestion})
+  		VALUES (#{surveyId}, #{foodtruckId}, #{gender}, #{ages}, #{suggestion})
   	</insert>
   	
 </mapper>

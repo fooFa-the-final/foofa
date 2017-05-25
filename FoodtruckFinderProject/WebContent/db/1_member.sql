@@ -1,11 +1,11 @@
-DROP TABLE member_tb CASCADE CONSTRAINTS;
+--DROP TABLE member_tb CASCADE CONSTRAINTS;
 
 CREATE TABLE member_tb (
   member_id varchar2(100),
   password varchar2(100),
-  birth varchar2(100),
+  birth date,
   email varchar2(100),
-  gender varchar2(100),
+  gender CHAR(1),
   image_src varchar2(300),
   PRIMARY KEY (member_id)
 );

@@ -1,5 +1,6 @@
 package fofa.domain;
 
+import java.sql.Date;
 import java.util.List;
 
 public class Review {
@@ -10,6 +11,7 @@ public class Review {
 	private List<Image> images;
 	private Member writer;
 	private int recommand;
+	private Date writeDate;
 	public String getReviewId() {
 		return reviewId;
 	}
@@ -51,6 +53,13 @@ public class Review {
 	}
 	public void setRecommand(int recommand) {
 		this.recommand = recommand;
+	}
+	
+	public Date getWriteDate() {
+		return writeDate;
+	}
+	public void setWriteDate(Date writeDate) {
+		this.writeDate = writeDate;
 	}
 	@Override
 	public String toString() {

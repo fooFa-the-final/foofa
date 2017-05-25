@@ -17,10 +17,10 @@
   		DELETE FROM report_tb
   		WHERE reporter_id = #{memberId} AND review_id = #{reviewId}
   	</delete>
-	<select id="selectById" parameterType="String" resultMap="reportMap">
+	<select id="selectById" parameterType="Report" resultMap="reportMap">
 		SELECT reporter_id, review_id, reason
 		FROM report_tb
-		WHERE reporter_id=#{memberId}
+		WHERE reporter_id=#{memberId} AND review_id = #{reviewId}
 	</select> 
 	<select id="selectAll" resultMap="reportMap">
 		SELECT reporter_id, review_id, reason
