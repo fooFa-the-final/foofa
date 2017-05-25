@@ -20,9 +20,9 @@ public class SurveyStoreLogic implements SurveyStore{
 	}
 	
 	@Override
-	public int insert(Survey survey) {
+	public String insert(Survey survey) {
 		SqlSession session = factory.openSession();
-		int insert = 0;
+		String insert = "";
 		try{
 			SurveyMapper mapper = session.getMapper(SurveyMapper.class);
 		insert = mapper.insert(survey);

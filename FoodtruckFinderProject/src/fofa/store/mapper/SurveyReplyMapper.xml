@@ -18,7 +18,7 @@
 	
 	<insert id="insert" parameterType="SurveyReply">
   		INSERT INTO SURVEY_REPLY_TB (survey_id, item_id, score) 
-  		VALUES ( #{survey_id}, #{item_id}, #{score})
+  		VALUES ( #{surveId}, #{itemId}, #{score})
   	</insert>
 
 </mapper>
