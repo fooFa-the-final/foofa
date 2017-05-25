@@ -26,43 +26,36 @@
 	
 	</select>
 
-	<select id="update" parameterType="String" resultMap="ADVmap">
+	<update id="update" parameterType="String" >
 		update
-		adv_tb set confirm = 1
-		where adv_id = #{adv_id};
-	</select>
+		adv_tb set confirm = ('1')
+		where adv_id = #{advId}
+	</update>
 
-	<select id="delete" parameterType="String" resultMap="ADVmap">
+	<delete id="delete" parameterType="String" >
 		DELETE
 		FROM adv_tb
 		WHERE adv_id = #{advId}
-	</select>
+	</delete>
 
-	<select id="selectByAsc" parameterType="String" resultMap="ADVmap">
+	<select id="selectByAsc" parameterType="Boolean" resultMap="ADVmap">
 		<include refid="selectADV" />
 		where confirm = #{confirm} ORDER BY start_date ASC
 	</select>
 
-	<select id="selectByDesc" parameterType="String" resultMap="ADVmap">
+	<select id="selectByDesc" parameterType="Boolean" resultMap="ADVmap">
 		<include refid="selectADV" />
 		where confirm = #{confirm} ORDER BY start_date DESC
 	</select>
 
-<!-- 	<select id="sortAscNotCon" resultMap="ADVmap">
-		<include refid="selectADV" />
-		where confirm = '0' ORDER BY start_date ASC
-	</select>
-
-	<select id="sortDescNotCon" resultMap="ADVmap">
-		<include refid="selectADV" />
-		where confirm = '0' ORDER BY start_date DESC
-	</select>
- -->
 
 	<insert id="insert" parameterType="Advertise" >
-
-		insert into adv_tb VALUES ('A'||ADVERTISE_SEQ_ADV.NEXTVAL, #{seller_Id},
-		#{period}, #{start_date}, 0)
+		insert into adv_tb VALUES 
+		('A'||ADVERTISE_SEQ_ADV.NEXTVAL, 
+		#{sellerId},
+		#{period}, 
+		#{startdate}, 
+		#{approve} )
 	</insert>
 
 </mapper>

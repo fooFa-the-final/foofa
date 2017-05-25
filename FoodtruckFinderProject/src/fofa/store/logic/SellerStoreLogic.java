@@ -38,10 +38,15 @@ public class SellerStoreLogic implements SellerStore {
 	public int update(Seller seller) {
 		SqlSession session = factory.openSession();
 		try {
-			Seller seller1 = seller;
-
+			
+			
+			
 			SellerMapper mapper = session.getMapper(SellerMapper.class);
+			Seller seller1 = mapper.select(seller.getSellerId());
+
+			
 			sucess = mapper.update(seller);
+			session.commit();
 			if (seller1 != seller) {
 				sucess = 1;
 			} else {
