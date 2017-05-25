@@ -4,12 +4,14 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
+import org.springframework.stereotype.Repository;
 
 import fofa.domain.Image;
 import fofa.store.ImageStore;
 import fofa.store.factory.SqlSessionFactoryProvider;
 import fofa.store.mapper.ImageMapper;
 
+@Repository
 public class ImageStoreLogic implements ImageStore {
 
 	private SqlSessionFactory factory;
