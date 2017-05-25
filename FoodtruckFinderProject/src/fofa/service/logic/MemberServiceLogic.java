@@ -1,10 +1,14 @@
 package fofa.service.logic;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import fofa.domain.Member;
 import fofa.service.MemberService;
 import fofa.store.MemberStore;
 
 public class MemberServiceLogic implements MemberService{
+	
+	@Autowired
 	private MemberStore store;
 	
 	

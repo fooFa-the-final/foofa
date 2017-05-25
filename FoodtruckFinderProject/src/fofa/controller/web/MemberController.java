@@ -2,10 +2,12 @@ package fofa.controller.web;
 
 import javax.servlet.http.HttpSession;
 
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 
 import fofa.domain.Member;
 
+@Controller
 public class MemberController {
 
 	public String createForm(){

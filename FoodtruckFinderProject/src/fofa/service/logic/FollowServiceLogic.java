@@ -13,7 +13,7 @@ import fofa.store.FollowStore;
 public class FollowServiceLogic implements FollowService{
 
 	@Autowired
-	public FollowStore store;
+	private FollowStore store;
 	
 	@Override
 	public boolean register(Follow follow) {
