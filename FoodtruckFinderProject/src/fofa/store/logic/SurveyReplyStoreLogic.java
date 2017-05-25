@@ -47,4 +47,17 @@ public class SurveyReplyStoreLogic implements SurveyReplyStore {
 		return replies;
 	}
 
+	@Override
+	public List<SurveyReply> selectBySurveyId(String surveyId) {
+		SqlSession session = factory.openSession();
+		List<SurveyReply> replies = new ArrayList<>();
+		try {
+			SurveyReplyMapper mapper = session.getMapper(SurveyReplyMapper.class);
+			replies = mapper.selectBySurveyId(surveyId);
+			session.commit();
+		} finally {
+			session.close();
+		}
+		return replies;
+	}
 }
