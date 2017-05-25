@@ -2,6 +2,8 @@ package fofa.controller.web;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import fofa.domain.Recommand;
 import fofa.domain.Report;
@@ -10,63 +12,74 @@ import fofa.domain.Survey;
 
 @Controller
 public class ReviewController {
+	
+	@RequestMapping("/review/list/member.do")
 	public String searchByMemberId(String memberId, Model model){
-		return null;
+		return "memberReviewList.jsp";
 	}
-	
+
+	@RequestMapping("/review/list/follow.do")
 	public String searchByFollower(String memberId, Model model){
-		return null;
+		return "memberNewsfeed.jsp";
 	}
 	
+	@RequestMapping("/review/list/truck.do")
 	public String searchByFoodtruckId(String foodtruckId, Model model){
-		return null;
+		return "detailFoodtruck.jsp";
 	}
-	
+	@RequestMapping(value="/review/create.do", method=RequestMethod.GET)
 	public String createReviewForm(String foodtruckId, Model model){
-		return null;
+		return "registerReview.jsp";
 	}
 	
-	public String createForm(Review review, Survey survey, Model model){
-		return null;
+	@RequestMapping(value="/review/create.do", method=RequestMethod.POST)
+	public String createReview(Review review, Survey survey, Model model){
+		return "redirect:review/list/truck.do";
 	}
 	
+	@RequestMapping(value="/review/modify.do", method=RequestMethod.GET)
 	public String modifyReviewForm(String reviewId, Model model){
-		return null;
+		return "registerReview.jsp";
 	}
 	
+	@RequestMapping(value="/review/modify.do", method=RequestMethod.POST)
 	public String modifyReview(Review review){
-		return null;
+		return "redirect:review/list/member.do";
 	}
 	
+	@RequestMapping("/review/remove.do")
 	public String removeReview(String reviewId){
-		return null;
+		return "redirect:review/list/truck.do";
 	}
+	
+	@RequestMapping("/review/report/create.do")
 	public void createReport(Report report){
 		
 	}
 	
+	@RequestMapping("/review/report/list.do")
 	public String selectReviewByReport(Model model){
-		return null;
+		return null; // ajax
 	}
 	
+	@RequestMapping("/review/reported/remove.do")
 	public String removeReivewByReport(String reviewId){
-		return null;
+		return "adminReport.jsp";
 	}
 	
+	@RequestMapping("/review/report/remove.do")
 	public String removeReport(String reportId){
-		return null;
+		return "redirect:report/list.do";
 	}
 	
-	public String searchReport(String reportId){
-		return null;
-	}
-	
+	@RequestMapping("/review/recommand.do")
 	public String createRecommand(Recommand recommand){
-		return null;
+		return null; // ajax
 	}
 	
+	@RequestMapping("/review/removerecommand.do")
 	public String removeRecommand(Recommand recommand){
-		return null;
+		return null; // ajax
 	}
 	
 }
