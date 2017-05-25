@@ -25,7 +25,7 @@
     <select id="selectByFromId" parameterType="String" resultMap="followMap">
     select to_Id
     FROM follow_tb
-    WHERE from_Id= #{fromId}
+    WHERE from_Id= #{fromId} AND to_Id =#{toId}
     </select>
     <select id="selectByToId" parameterType="String" resultMap="followMap">
     select FROM_Id
