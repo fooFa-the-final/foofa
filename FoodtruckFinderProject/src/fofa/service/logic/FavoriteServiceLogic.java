@@ -4,31 +4,34 @@ import java.util.List;
 
 import fofa.domain.Favorite;
 import fofa.service.FavoriteService;
+import fofa.store.FavoriteStore;
+import fofa.store.logic.FavoriteStoreLogic;
 
 public class FavoriteServiceLogic implements FavoriteService{
+	private FavoriteStore store;
+	
+	public FavoriteServiceLogic() {
+		store = new FavoriteStoreLogic();
+	}
 
 	@Override
 	public boolean register(Favorite favorite) {
-		// TODO Auto-generated method stub
-		return false;
+		return store.insert(favorite) > 0;
 	}
 
 	@Override
 	public boolean remove(Favorite favorite) {
-		// TODO Auto-generated method stub
-		return false;
+		return store.delete(favorite) > 0;
 	}
 
 	@Override
 	public List<Favorite> findMemberId(String memberId) {
-		// TODO Auto-generated method stub
-		return null;
+		return store.selectByMemberId(memberId);
 	}
 
 	@Override
 	public int findByFoodtruckId(String foodtruckId) {
-		// TODO Auto-generated method stub
-		return 0;
+		return store.selectByTruckId(foodtruckId);
 	}
 
 }

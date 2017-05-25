@@ -7,9 +7,9 @@ import fofa.domain.Sale;
 
 public interface SalesService {
 	
-	void register(Sale sale);
-	void modify(Sale sale);
-	void remove(String saleId);
+	boolean register(Sale sale);
+	boolean modify(Sale sale);
+	boolean remove(String saleId);
 	Sale findDateSale(Date date, String foodtruckId);
 	List<Sale> find1YearSales(String foodtruckId);
 	List<Sale> find10DaysSales(String foodtruckId);
