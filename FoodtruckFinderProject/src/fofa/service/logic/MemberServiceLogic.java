@@ -2,6 +2,7 @@ package fofa.service.logic;
 
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import fofa.domain.Member;
 import fofa.service.MemberService;
