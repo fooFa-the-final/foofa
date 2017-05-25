@@ -72,19 +72,28 @@ public class FoodtruckServiceLogic implements FoodtruckService{
 
 	@Override
 	public List<Menu> registerMenu(Menu menu) {
-		// TODO Auto-generated method stub
+		int regMenu = menuStore.insert(menu);
+		if(regMenu > 0){
+			return menuStore.selectByTruckId(menu.getFoodtruckId());
+		}
 		return null;
 	}
 
 	@Override
 	public List<Menu> modifyMenu(Menu menu) {
-		// TODO Auto-generated method stub
+		int modMenu = menuStore.update(menu);
+		if(modMenu > 0){
+			return menuStore.selectByTruckId(menu.getFoodtruckId());
+		}
 		return null;
 	}
 
 	@Override
-	public List<Menu> removeMenu(String menuId) {
-		// TODO Auto-generated method stub
+	public List<Menu> removeMenu(String menuId, String foodtruckId) {
+		int remMenu = menuStore.delete(menuId, foodtruckId);
+		if(remMenu > 0){
+			return menuStore.selectByTruckId(foodtruckId);
+		}
 		return null;
 	}
 	
