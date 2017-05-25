@@ -14,7 +14,7 @@ public class SellerStoreLogic implements SellerStore {
 
 	private SqlSessionFactory factory;
 
-	int sucess= 1;
+	int sucess= 0;
 
 	public SellerStoreLogic() {
 		factory = SqlSessionFactoryProvider.getSqlSessionFactory();
@@ -26,12 +26,12 @@ public class SellerStoreLogic implements SellerStore {
 		int insert = 0;
 		try {
 			SellerMapper mapper = session.getMapper(SellerMapper.class);
-			sucess = mapper.insert(seller);
+			insert = mapper.insert(seller);
 			session.commit();
 		} finally {
 			session.close();
 		}
-		return sucess;
+		return insert;
 	}
 
 	@Override

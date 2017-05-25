@@ -2,6 +2,8 @@ package fofa.store;
 
 import static org.junit.Assert.*;
 
+import java.util.List;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -41,5 +43,11 @@ public class ReportStoreLogicTest {
 		r.setReviewId("R01");
 		r = rStore.selectById(r);
 		assertEquals("신기하게 이놈 리뷰만 보면 화가 치밀어오름", r.getReason());
+	}
+	
+	@Test
+	public void selectAllTest(){
+		List<Report> list = rStore.selectAll();
+		assertEquals(2, list.size());
 	}
 }

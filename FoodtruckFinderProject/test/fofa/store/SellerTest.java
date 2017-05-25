@@ -1,5 +1,15 @@
 package fofa.store;
 
+import static org.junit.Assert.*;
+
+import java.util.List;
+
+import org.junit.Test;
+
+import fofa.domain.Menu;
+import fofa.store.MenuStore;
+import fofa.store.logic.MenuStoreLogic;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -20,16 +30,15 @@ public class SellerTest {
 	// fail("Not yet implemented");
 	// }
 
-	// @Test
-	// public void testInsert() {
-	// Seller seller = new Seller();
-	// seller.setCertification("12");
-	// seller.setPassword("1");
-	// seller.setPhone("1");
-	// seller.setSellerId("4");
-	// store1.insert(seller);
-	// assertEquals(1, store1.insert(seller));
-//	}
+	 @Test
+	 public void testInsert() {
+	 Seller seller = new Seller();
+	 seller.setCertification("12");
+	 seller.setPassword("1");
+	 seller.setPhone("1");
+	 seller.setSellerId("4");
+	 assertEquals(1, store1.insert(seller));
+	}
 
 	// @Test
 	// public void testUpdate() {
