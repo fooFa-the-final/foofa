@@ -21,6 +21,20 @@
 		<typeAlias type="domain.Survey" alias="Survey" />
 		<typeAlias type="domain.SurveyItem" alias="SurveyItem" />
 		<typeAlias type="domain.SurveyReply" alias="SurveyReply" />
+		<typeAlias type="fofa.domain.Advertise" alias="Advertise" />
+		<typeAlias type="fofa.domain.Favorite" alias="Favorite" />
+		<typeAlias type="fofa.domain.Follow" alias="Follow" />
+		<typeAlias type="fofa.domain.Foodtruck" alias="Foodtruck" />
+		<typeAlias type="fofa.domain.Image" alias="Image" />
+		<typeAlias type="fofa.domain.Member" alias="Member" />
+		<typeAlias type="fofa.domain.Menu" alias="Menu" />
+		<typeAlias type="fofa.domain.Recommand" alias="Recommand" />
+		<typeAlias type="fofa.domain.Report" alias="Report" />
+		<typeAlias type="fofa.domain.Review" alias="Review" />
+		<typeAlias type="fofa.domain.Sale" alias="Sales" />
+		<typeAlias type="fofa.domain.Survey" alias="Survey" />
+		<typeAlias type="fofa.domain.SurveyItem" alias="SurveyItem" />
+		<typeAlias type="fofa.domain.SurveyReply" alias="SurveyReply" />
 	</typeAliases>
 
 	<environments default="development">
@@ -38,6 +52,21 @@
 	<mappers>
 		<mapper resource="store/mapper/MusicMapper.xml"/>
 		<mapper resource="store/mapper/SalesMapper.xml"/>
+		<mapper resource="fofa/store/mapper/AdvertiseMapper.xml"/>
+		<mapper resource="fofa/store/mapper/FavoriteMapper.xml"/>
+		<mapper resource="fofa/store/mapper/FollowMapper.xml"/>
+		<mapper resource="fofa/store/mapper/FoodtruckMapper.xml"/>
+		<mapper resource="fofa/store/mapper/ImageMapper.xml"/>
+		<mapper resource="fofa/store/mapper/MemberMapper.xml"/>
+		<mapper resource="fofa/store/mapper/MenuMapper.xml"/>
+		<mapper resource="fofa/store/mapper/RecommandMapper.xml"/>
+		<mapper resource="fofa/store/mapper/ReportMapper.xml"/>
+		<mapper resource="fofa/store/mapper/ReviewMapper.xml"/>
+		<mapper resource="fofa/store/mapper/SalesMapper.xml"/>
+		<mapper resource="fofa/store/mapper/SellerMapper.xml"/>
+		<mapper resource="fofa/store/mapper/SurveyItemMapper.xml"/>
+		<mapper resource="fofa/store/mapper/SurveyReplyMapper.xml"/>
+		<mapper resource="fofa/store/mapper/SurveyMapper.xml"/>
 	</mappers>
 
 </configuration>

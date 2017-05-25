@@ -1,1 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="store.mapper.FoodtruckMapper">
+  	<resultMap type="Foodtruck" id="foodtruckMap">
+  		<id column="foodtruck_id" property="foodtruckId"/>
+  		<result column="seller_id" property="sellerId"/>
+  		<result column="truckName" property="foodtruckName"/>
+  		<result column="truck_image" property="foodtruckImg"/>
+  		<result column="truckHour" property="operationTime"/>
+  		<result column="area" property="spot"/>
+  		<result column="notice" property="notice"/>
+  		<result column="location" property="location"/>
+  		<result column="category" property="category1"/>
+  		<result column="payment" property="card"/>
+  		<result column="parking" property="parking"/>
+  		<result column="drinking" property="drinking"/>
+  		<result column="catering" property="catering"/>
+  		<result column="operation_state" property="state"/>
+  		<collection property="menus" ofType="Menu" jdbcType="VARCHAR">
+  			<id column="menu_id" property="id"/>
+  			<result column="menu_name" property="menuName"/>
+  			<result column="price" property="price"/>
+  			<result column="menu_state" property="menuState"/>
+  			<result column="foodtruck_id" property="foodtruckId"/>
+  		</collection>
+  	</resultMap>
+  </mapper>
+  
+  

@@ -7,22 +7,23 @@ public class Foodtruck {
 	private String foodtruckId;
 	private String sellerId;
 	private String foodtruckName;
-	private List<Image> images;
-	private List<Menu> menus;
-	private String spot;
+	private String foodtruckImg;
 	private String operationTime;
+	private String spot;
 	private String notice;
+	private String location;
 	private String category1;
 	private String category2;
 	private String categery3;
-	private String location;
-	private boolean state;
 	private boolean card;
-	private boolean drinking;
 	private boolean parking;
+	private boolean drinking;
 	private boolean catering;
-	private List<Review> reviews;
+	private boolean state;
 	private int favoriteCount;
+	private List<Review> reviews;
+	private List<Image> images;
+	private List<Menu> menus;
 	
 	
 	public String getFoodtruckId() {
@@ -43,17 +44,11 @@ public class Foodtruck {
 	public void setFoodtruckName(String foodtruckName) {
 		this.foodtruckName = foodtruckName;
 	}
-	public List<Image> getImages() {
-		return images;
+	public String getProfileImg() {
+		return foodtruckImg;
 	}
-	public void setImages(List<Image> images) {
-		this.images = images;
-	}
-	public List<Menu> getMenus() {
-		return menus;
-	}
-	public void setMenus(List<Menu> menus) {
-		this.menus = menus;
+	public void setProfileImg(String profileImg) {
+		this.foodtruckImg = profileImg;
 	}
 	public String getSpot() {
 		return spot;
@@ -127,27 +122,42 @@ public class Foodtruck {
 	public void setCatering(boolean catering) {
 		this.catering = catering;
 	}
-	public List<Review> getReviews() {
-		return reviews;
-	}
-	public void setReviews(List<Review> reviews) {
-		this.reviews = reviews;
-	}
 	public int getFavoriteCount() {
 		return favoriteCount;
 	}
 	public void setFavoriteCount(int favoriteCount) {
 		this.favoriteCount = favoriteCount;
 	}
+	public List<Review> getReviews() {
+		return reviews;
+	}
+	public void setReviews(List<Review> reviews) {
+		this.reviews = reviews;
+	}
+	public List<Image> getImages() {
+		return images;
+	}
+	public void setImages(List<Image> images) {
+		this.images = images;
+	}
+	public List<Menu> getMenus() {
+		return menus;
+	}
+	public void setMenus(List<Menu> menus) {
+		this.menus = menus;
+	}
 	
-//	public float getReviewScore(){
-//		
-//	}
+	public float getReviewScore(){
+		float score = 0;
+		for(Review r : reviews){
+			score += r.getScore();
+		}
+		
+		return score/reviews.size();
+	}
 	
 	public int getReviewCount(){
 		return reviews.size();
 	}
-	
-	
 
 }

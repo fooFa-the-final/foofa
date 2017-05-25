@@ -1,1 +1,76 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="fofa.store.mapper.SalesMapper">
+
+	<resultMap type="Sale" id="SaleMap">
+		<id column="sale_id" property="saleID" />
+		<result column="foodtruck_id" property="foodtruckId" />
+		<result column="day" property="date" />
+		<result column="location" property="location" />
+		<result column="revenue" property="revenue" />
+	</resultMap>
+
+	<insert id="insert" parameterType="Sale">
+		INSERT INTO
+		sales_tb
+		(sales_id,foodtruck_id,day,location,revenue)
+		VALUES
+		(sales_tb_seq.nextval,#{foodtruckId},#{date},#{location},#{revenue})
+	</insert>
+	<delete id="delete" parameterType="String">
+		DELETE
+		FROM
+		sales_tb
+		WHERE
+		sales_id=#{salesId}
+	</delete>
+	<update id="update" parameterType="Sale">
+		UPDATE
+		sales_tb
+		SET
+		day=#{date},location=#{location},revenue=#{revenue}
+		WHERE
+		sales_id=#{salesId}
+	</update>
+	<select id="selectDaySale" parameterType="Sale" resultType="Sale">
+		SELECT
+		sales_id,foodtruck_id,day,location,revenue
+		FROM sales_tb
+		WHERE
+		day=#{date} AND foodtruck_id=#{foodtruckId}
+	</select>
+
+	<select id="select1MonthSales" parameterType="hashmap"
+		resultType="Sale">
+		SELECT
+		sales_id,foodtruck_id,day,location,revenue
+		FROM
+		sales_tb
+		WHERE #{month}=to_char(day,'yymm') AND
+		foodtruck_id=#{foodtruckId}
+	</select>
+	<select id="select1YearSales" parameterType="String" resultType="Sale">
+		SELECT #{foodtruckId} FOODTRUCK_ID, TO_CHAR(DAY, 'YY-MM') DAY,
+		AVG(REVENUE) REVENUE
+		FROM SALES_TB
+		WHERE FOODTRUCK_ID=#{foodtruckId}
+		AND
+		TO_CHAR(DAY, 'YYYY') = '2016'
+		GROUP BY TO_CHAR(DAY, 'YY-MM')
+	</select>
+
+	<select id="select10DaysSales" parameterType="String"
+		resultType="Sale">
+		SELECT sales_id,foodtruck_id,day,location,revenue
+		From sales_tb
+		WHERE
+		foodtruck_id=#{foodtruckId}
+		AND<![CDATA[ ROWNUM < 11 ]]>
+		order by day DESC
+	</select>
+
+
+</mapper>

@@ -1,4 +1,4 @@
---DROP TABLE member_tb CASCADE CONSTRAINTS;
+DROP TABLE member_tb CASCADE CONSTRAINTS;
 
 CREATE TABLE member_tb (
   member_id varchar2(100),
@@ -20,8 +20,5 @@ insert into member_tb(member_id, password, birth, email, gender, image_src) valu
 insert into member_tb(member_id, password, birth, email, gender, image_src) values ('chaeyeong', '1234', '19950817', 'niconiconi@naver.com','여자','eeee.jpg');
 insert into member_tb(member_id, password, birth, email, gender, image_src) values ('tzuyu', '1234', '19900924', 'red@naver.com','여자','yyyy.jpg');
 insert into member_tb(member_id, password, birth, email, gender, image_src) values ('admin', 'admin', 'admin', 'admin','남자','admin');
-
-
-
 
 commit;

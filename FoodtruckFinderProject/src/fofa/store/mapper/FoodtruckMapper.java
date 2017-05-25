@@ -19,5 +19,6 @@ int insert(Foodtruck foodtruck);
 	List<Foodtruck> selectByFilter(Foodtruck foodtruck);
 	
 	Foodtruck selectBySellerId(String sellerId);
+	
 
 }

@@ -1,1 +1,72 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="fofa.store.mapper.AdvertiseMapper">
+
+	<resultMap type="Advertise" id="ADVmap">
+		<id column="id" property="id" />
+		<result column="ADV_ID" property="advId" />
+		<result column="SELLER_ID" property="sellerId" />
+		<result column="PERIOD" property="period" />
+		<result column="confirm" property="approve" />
+		<result column="start_date" property="startdate" />
+	</resultMap>
+
+
+	<sql id="selectADV">
+		select ADV_ID, FOODTRUCK_ID, PERIOD, CONFIRM, START_DATE
+		from ADV_TB
+	</sql>
+
+	<select id="read" parameterType="String" resultMap="ADVmap">
+		<include refid="selectADV" />
+		where id = #{advId}
+	</select>
+
+	<select id="readNowAd" resultMap="ADVmap">
+		<include refid="selectADV" />
+		where where confirm ='1'
+	</select>
+
+	<select id="updateAdv" parameterType="String" resultMap="ADVmap">
+		update
+		adv_tb set confirm = 1
+		where adv_id = #{adv_id};
+	</select>
+
+	<select id="deleteAdv" parameterType="String" resultMap="ADVmap">
+		DELETE
+		FROM adv_tb
+		WHERE adv_id = #{advId}
+	</select>
+
+	<select id="sortAscCon" resultMap="ADVmap">
+		<include refid="selectADV" />
+		where confirm = '1' ORDER BY start_date ASC
+	</select>
+
+	<select id="sortDescCon" resultMap="ADVmap">
+		<include refid="selectADV" />
+		where confirm = '1' ORDER BY start_date DESC
+	</select>
+
+	<select id="sortAscNotCon" resultMap="ADVmap">
+		<include refid="selectADV" />
+		where confirm = '0' ORDER BY start_date ASC
+	</select>
+
+	<select id="sortDescNotCon" resultMap="ADVmap">
+		<include refid="selectADV" />
+		where confirm = '0' ORDER BY start_date DESC
+	</select>
+
+
+	<insert id="insertAdvertise" parameterType="Advertise">
+
+		insert into adv_tb VALUES ('A'||ADVERTISE_SEQ_ADV.NEXTVAL, #{seller_Id},
+		#{period}, #{start_date}, 0)
+	</insert>
+
+</mapper>

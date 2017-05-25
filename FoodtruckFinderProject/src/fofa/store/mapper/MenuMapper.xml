@@ -1,1 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="fofa.store.mapper.MenuMapper">
+  	
+  	<resultMap type="Menu" id="menuMap">
+  		<id column="menu_id" property="id"/>
+  		<result column="menu_name" property="menuName"/>
+  		<result column="price" property="price"/>
+  		<result column="menu_state" property="menuState"/>
+  		<result column="foodtruck_id" property="foodtruckId"/>
+  	</resultMap>
+  	
+  	<insert id="insert" parameterType="Menu">
+  		INSERT INTO menu_tb (menu_id, menu_name, price, menu_state, foodtruck_id) 
+  		VALUES ('M'||menu_seq.NEXTVAL, #{menuName}, #{price}, #{menuState}, #{foodtruckId})
+  	</insert>
+  	
+  	<update id="update" parameterType="Menu">
+  		UPDATE menu_tb
+  		SET menu_id=#{id}, menu_name=#{menuName}, price=#{price}, menu_state=#{menuState}
+  		WHERE foodtruck_id=#{foodtruckId}
+  	</update>
+  	
+  	<delete id="delete" parameterType="String">
+  		DELETE FROM menu_tb
+  		WHERE menu_id=#{id}
+  	</delete>
+  	
+  	<select id="selectBytruckId" parameterType="String" resultType="Menu" resultMap="menuMap">
+  		SELECT menu_id, menu_name, price, menu_state, foodtruck_id
+  		FROM menu_tb
+  		WHERE foodtruck_id=#{foodtruckId}
+  	</select>
+  	
+  </mapper>

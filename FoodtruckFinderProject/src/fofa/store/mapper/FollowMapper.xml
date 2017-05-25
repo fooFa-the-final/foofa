@@ -1,1 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+	<mapper namespace="fofa.store.mapper.FollowMapper">
+	
+	<resultMap type="Follow" id="FollowMap">
+	<result property="fromId" column="FromId"/>
+	<result property="toId" column="toId"/>
+	</resultMap>	
+    <insert id ="insertFollow" parameterType="Follow">
+    INSERT INTO follow_tb (fromId, toId)
+    VALUES (#{fromId), #{toId})
+    </insert>
+    <delete id="deleteFollow" parameterType="Follow">
+    DELETE
+    FROM follow_tb
+    WHERE toId = #{toId}
+    </delete>
+    
+    <select id="selectByFromId" parameterType="String" resultMap="followMap">
+    select fromId
+    FROM follow_tb
+    WHERE fromId= #{fromId}
+    </select>
+    <select id="selectBytoId" parameterType="String" resultMap="followMap">
+    select toId
+    FROM follow_tb
+    WHERE toId= #{toId}
+	</select>
+	</mapper>    
+    
