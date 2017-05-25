@@ -52,7 +52,7 @@ public class ReviewStoreLogic implements ReviewStore {
 		int delete = 0;
 		try{
 			ReviewMapper mapper = session.getMapper(ReviewMapper.class);
-			delete = mapper.delete(review);
+			delete = mapper.delete(reviewId);
 			session.commit();
 		} finally {
 			session.close();
