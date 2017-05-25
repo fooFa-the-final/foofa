@@ -29,43 +29,59 @@
   	</resultMap>
   	
   	<sql id="selectFoodtrucks">
-  		SELECT foodtruck_id, truckName, truck_image, truckHour, area, notice, location, category, payment, parking, drinking, catering, operation_state
+  		SELECT foodtruck_id, seller_id, truckName, truck_image, truckHour, area, notice, location, category, payment, parking, drinking, catering, operation_state
   		FROM foodtruck_tb
   	</sql>
   	
   	<insert id="insert" parameterType="Foodtruck">
-  		INSERT INTO foodtruck_tb (foodtruck_id, truckName, truck_image, truckHour, area, notice, location, category, payment, parking, drinking, catering, operation_state)
-  		VALUES ('F'||truck_seq.nextval, #{foodtruckName}, #{foodtruckImg}, #{operationTime}, #{spot}, #{notice}, #{location}, #{category1}, #{card}, #{parking}, #{drinking}, #{catering}, #{state})
+  		INSERT INTO foodtruck_tb (foodtruck_id, seller_id, truckName, truck_image, truckHour, area, notice, location, category, payment, parking, drinking, catering, operation_state)
+  		VALUES ('F'||truck_seq.nextval, #{sellerId}, #{foodtruckName}, #{foodtruckImg}, #{operationTime}, #{spot}, #{notice}, #{location}, #{category1}, #{card}, #{parking}, #{drinking}, #{catering}, #{state})
   	</insert>
   	
   	<update id="update" parameterType="Foodtruck">
   		UPDATE foodtruck_tb
-  		SET truckName=#{foodtruckName}, truck_image=#{foodtruckImg}, truckHour=#{operationTime}, area=#{spot}, notice=#{notice}, location=#{location}, category=#{category1}, payment=#{card}, parking=#{parking}, drinking=#{drinking}, catering=#{catering}, operation_state=#{state})
+  		SET truckName=#{foodtruckName}, truck_image=#{foodtruckImg}, truckHour=#{operationTime}, area=#{spot}, notice=#{notice}, location=#{location}, category=#{category1}, payment=#{card}, parking=#{parking}, drinking=#{drinking}, catering=#{catering}, operation_state=#{state}
   		WHERE foodtruck_id=#{foodtruckId} 
   	</update>
   	
-  	<select id="selectById" parameterMap="String" resultMap="foodtruckMap">
+  	<select id="selectById" parameterType="String" resultMap="foodtruckMap">
   		<include refid="selectFoodtrucks"/>
   		WHERE foodtruck_id=#{foodtruckId}
   	</select>
   	
-  	<select id="selectByLoc" parameterType="String">
+  	<select id="selectByLoc" parameterType="String" resultMap="foodtruckMap">
   		<include refid="selectFoodtrucks"/>
-  		WHERE location=#{location}
+  		WHERE location LIKE '%'||#{location}||'%' OR area LIKE '%'||#{location}||'%'
   		
   	</select>
   	
-  	<select id="selectByKeyLoc">
+  	<select id="selectByKeyLoc" resultMap="foodtruckMap">
   		<include refid="selectFoodtrucks"/>
-  		WHERE truckName LIKE '%#{keyword}%' OR category LIKE '%#{keyword}%' AND location LIKE '%#{location}%'
+  		WHERE (truckName LIKE '%'||#{keyword}||'%' OR category LIKE '%'||#{keyword}||'%') AND (location LIKE '%'||#{location}||'%' OR area LIKE '%'||#{location}||'%')
   	</select>
   	
-  	<select id="selectByFilter" parameterType="Foodtruck">
+  	<select id="selectByFilter" parameterType="Foodtruck" resultMap="foodtruckMap">
   		<include refid="selectFoodtrucks"/>
-  		WHERE payment=#{card} AND parking=#{parking} AND drinking=#{drinking} AND catering=#{catering} AND operation_state=#{state}
+  		<where> 
+  		<if test="card">
+  		payment=#{card} 
+  		</if>
+  		<if test="parking">
+  		AND parking=#{parking} 
+  		</if>
+  		<if test="drinking">
+  		AND drinking=#{drinking} 
+  		</if>
+  		<if test="catering">
+  		AND catering=#{catering} 
+  		</if>
+  		<if test="state">
+  		AND operation_state=#{state}
+  		</if>
+  		</where>
   	</select>
   	
-  	<select id="selectBySellerId" parameterType="String">
+  	<select id="selectBySellerId" parameterType="String" resultMap="foodtruckMap">
   		<include refid="selectFoodtrucks"/>
   		WHERE seller_id=#{sellerId}
   	</select>

@@ -44,11 +44,11 @@ public class Foodtruck {
 	public void setFoodtruckName(String foodtruckName) {
 		this.foodtruckName = foodtruckName;
 	}
-	public String getProfileImg() {
+	public String getFoodtruckImg() {
 		return foodtruckImg;
 	}
-	public void setProfileImg(String profileImg) {
-		this.foodtruckImg = profileImg;
+	public void setFoodtruckImg(String FoodtruckImg) {
+		this.foodtruckImg = FoodtruckImg;
 	}
 	public String getSpot() {
 		return spot;
