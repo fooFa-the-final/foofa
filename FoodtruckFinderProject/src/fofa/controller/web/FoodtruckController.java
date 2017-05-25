@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 
 import fofa.domain.Foodtruck;
@@ -11,21 +13,16 @@ import fofa.domain.Menu;
 import fofa.service.AdvertiseService;
 import fofa.service.FavoriteService;
 import fofa.service.FoodtruckService;
-import fofa.service.logic.AdvertiseServiceLogic;
-import fofa.service.logic.FavoriteServiceLogic;
-import fofa.service.logic.FoodtruckServiceLogic;
 
+@Controller
 public class FoodtruckController {
+	@Autowired
 	private FoodtruckService foodtruckService;
+	@Autowired
 	private FavoriteService favoriteService;
+	@Autowired
 	private AdvertiseService advertiseService;
 	
-	public FoodtruckController() {
-		foodtruckService = new FoodtruckServiceLogic();
-		favoriteService = new FavoriteServiceLogic();
-		advertiseService = new AdvertiseServiceLogic();
-	}
-
 	public String create(Foodtruck foodtruck){
 		
 		return null;
