@@ -5,12 +5,14 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
+import org.springframework.stereotype.Repository;
 
 import fofa.domain.SurveyReply;
 import fofa.store.SurveyReplyStore;
 import fofa.store.factory.SqlSessionFactoryProvider;
 import fofa.store.mapper.SurveyReplyMapper;
 
+@Repository
 public class SurveyReplyStoreLogic implements SurveyReplyStore {
 
 	private SqlSessionFactory factory;
@@ -47,4 +49,17 @@ public class SurveyReplyStoreLogic implements SurveyReplyStore {
 		return replies;
 	}
 
+	@Override
+	public List<SurveyReply> selectBySurveyId(String surveyId) {
+		SqlSession session = factory.openSession();
+		List<SurveyReply> replies = new ArrayList<>();
+		try {
+			SurveyReplyMapper mapper = session.getMapper(SurveyReplyMapper.class);
+			replies = mapper.selectBySurveyId(surveyId);
+			session.commit();
+		} finally {
+			session.close();
+		}
+		return replies;
+	}
 }

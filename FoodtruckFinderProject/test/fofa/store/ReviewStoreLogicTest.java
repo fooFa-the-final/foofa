@@ -1,25 +1,48 @@
 package fofa.store;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
+import org.junit.Before;
 import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 
+import fofa.domain.Member;
+import fofa.domain.Review;
 import fofa.store.logic.ReviewStoreLogic;
 
 public class ReviewStoreLogicTest {
 
-	@Autowired
 	private ReviewStore store;
 	
-	
+	@Before
+	public void setUp(){
+		store = new ReviewStoreLogic();
+	}
 	@Test
 	public void testInsert() {
-		fail("Not yet implemented");
+		Review review = new Review();
+		review.setContents("짱짱");
+		review.setFoodtruckId("F11");
+		review.setReviewId("R01");
+		review.setScore(5);
+		Member m = new Member();
+		m.setMemberId("momo");
+		review.setWriter(m);
+		int insert = store.insert(review);
+		assertEquals(1, insert);
 	}
 
 	@Test
 	public void testUpdate() {
-		fail("Not yet implemented");
+		Review review = new Review();
+		review.setContents("사실 맛없는데 맛있다고 해준거");
+		review.setFoodtruckId("F11");
+		review.setReviewId("R01");
+		review.setScore(1);
+		Member m = new Member();
+		m.setMemberId("momo");
+		review.setWriter(m);
+		int insert = store.insert(review);
+		assertEquals(1, insert);
 	}
 
 	@Test

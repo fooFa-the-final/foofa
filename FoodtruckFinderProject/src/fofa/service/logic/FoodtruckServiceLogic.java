@@ -5,66 +5,95 @@ import java.util.List;
 import fofa.domain.Foodtruck;
 import fofa.domain.Menu;
 import fofa.service.FoodtruckService;
+import fofa.store.FoodtruckStore;
+import fofa.store.MenuStore;
+import fofa.store.logic.FoodtruckStoreLogic;
+import fofa.store.logic.MenuStoreLogic;
 
 public class FoodtruckServiceLogic implements FoodtruckService{
+	private FoodtruckStore foodtruckStore;
+	private MenuStore menuStore;
+	
+	public FoodtruckServiceLogic() {
+		foodtruckStore = new FoodtruckStoreLogic();
+		menuStore = new MenuStoreLogic();
+	}
 
 	@Override
 	public boolean register(Foodtruck foodtruck) {
-		// TODO Auto-generated method stub
-		return false;
+		int regTruck = foodtruckStore.insert(foodtruck);
+		List<Menu> menus = foodtruck.getMenus();
+		int regMenu = 0;
+		
+		for(Menu menu : menus){
+			regMenu = menuStore.insert(menu);
+		}
+			
+		return regTruck > 0 && regMenu > 0;
 	}
 
 	@Override
 	public boolean modify(Foodtruck foodtruck) {
-		// TODO Auto-generated method stub
-		return false;
+		int modTruck = foodtruckStore.update(foodtruck);
+		List<Menu> menus = foodtruck.getMenus();
+		int modMenu = 0;
+		
+		for(Menu menu : menus){
+			modMenu = menuStore.update(menu);
+		}
+		
+		return modTruck > 0 && modMenu > 0;
 	}
 
 	@Override
 	public Foodtruck findById(String foodtruckId) {
-		// TODO Auto-generated method stub
-		return null;
+		return foodtruckStore.selectById(foodtruckId);
 	}
 
 	@Override
 	public List<Foodtruck> findByLoc(String location) {
-		// TODO Auto-generated method stub
-		return null;
+		return foodtruckStore.selectByLoc(location);
 	}
 
 	@Override
 	public List<Foodtruck> findByKeyLoc(String keyword, String location) {
-		// TODO Auto-generated method stub
-		return null;
+		return foodtruckStore.selectByKeyLoc(keyword, location);
 	}
 
 	@Override
 	public List<Foodtruck> findByFilter(Foodtruck foodtruck) {
-		// TODO Auto-generated method stub
-		return null;
+		return foodtruckStore.selectByFilter(foodtruck);
 	}
 
 	@Override
 	public Foodtruck findBySeller(String sellerId) {
-		// TODO Auto-generated method stub
-		return null;
+		return foodtruckStore.selectBySellerId(sellerId);
 	}
 
 	@Override
 	public List<Menu> registerMenu(Menu menu) {
-		// TODO Auto-generated method stub
+		int regMenu = menuStore.insert(menu);
+		if(regMenu > 0){
+			return menuStore.selectByTruckId(menu.getFoodtruckId());
+		}
 		return null;
 	}
 
 	@Override
 	public List<Menu> modifyMenu(Menu menu) {
-		// TODO Auto-generated method stub
+		int modMenu = menuStore.update(menu);
+		if(modMenu > 0){
+			return menuStore.selectByTruckId(menu.getFoodtruckId());
+		}
 		return null;
 	}
 
 	@Override
-	public List<Menu> removeMenu(String menuId) {
-		// TODO Auto-generated method stub
+	public List<Menu> removeMenu(String menuId, String foodtruckId) {
+		int remMenu = menuStore.delete(menuId, foodtruckId);
+		if(remMenu > 0){
+			return menuStore.selectByTruckId(foodtruckId);
+		}
 		return null;
 	}
 	

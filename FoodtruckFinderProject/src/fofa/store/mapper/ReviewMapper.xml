@@ -3,7 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   <mapper namespace="fofa.store.mapper.ReviewMapper">
-  	<resultMap type="reivew" id="ReviewMap">
+  	<resultMap type="Review" id="ReviewMap">
   		<id column="review_id" property="reviewId"/>
   		<result column="foodtruck_id" property="foodtruckId"/>
   		<result column="contents" property="contents"/>
@@ -32,17 +32,7 @@
   		FROM review_tb
   		WHERE review_id = #{reviewId}
   	</select>
-  	<select id="selectById" parameterType="String">
-  		SELECT review_id, member_id, foodtruck_id, contents, score, writedate
-  		FROM review_tb
-  		WHERE review_id = #{reviewId}
-  	</select>
-  	<select id="selectById" parameterType="String">
-  		SELECT review_id, member_id, foodtruck_id, contents, score, writedate
-  		FROM review_tb
-  		WHERE review_id = #{reviewId}
-  	</select>
-  	<select id="selectByMemberIdId" parameterType="String">
+  	<select id="selectByMemberId" parameterType="String">
   		SELECT review_id, member_id, foodtruck_id, contents, score, writedate
   		FROM review_tb
   		WHERE member_id = #{writer.memberId}

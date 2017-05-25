@@ -2,12 +2,14 @@ package fofa.store.logic;
 
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
+import org.springframework.stereotype.Repository;
 
 import fofa.domain.Recommand;
 import fofa.store.RecommandStore;
 import fofa.store.factory.SqlSessionFactoryProvider;
 import fofa.store.mapper.RecommandMapper;
 
+@Repository
 public class RecommandStoreLogic implements RecommandStore {
 
 	private SqlSessionFactory factory;
