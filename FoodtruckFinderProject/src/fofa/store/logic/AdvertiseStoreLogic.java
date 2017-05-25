@@ -28,6 +28,7 @@ public class AdvertiseStoreLogic implements AdvertiseStore {
 		try {
 			AdvertiseMapper mapper = session.getMapper(AdvertiseMapper.class);
 			mapper.delete(advid);
+		session.commit();
 		} finally {
 			session.close();
 		}
@@ -40,6 +41,8 @@ public class AdvertiseStoreLogic implements AdvertiseStore {
 		try {
 			AdvertiseMapper mapper = session.getMapper(AdvertiseMapper.class);
 			mapper.insert(advertise);
+			session.commit();
+
 			if (advertise != null) {
 				sucess = 1;
 			} else {
@@ -59,6 +62,8 @@ public class AdvertiseStoreLogic implements AdvertiseStore {
 
 			AdvertiseMapper mapper = session.getMapper(AdvertiseMapper.class);
 			sucess = mapper.update(advertise);
+			session.commit();
+
 			if (adv1 != advertise) {
 				sucess = 1;
 			} else {
@@ -78,6 +83,8 @@ public class AdvertiseStoreLogic implements AdvertiseStore {
 		try {
 			AdvertiseMapper mapper = session.getMapper(AdvertiseMapper.class);
 			list = mapper.selectByAsc(approve);
+			session.commit();
+
 		} finally {
 			session.close();
 		}
@@ -91,6 +98,8 @@ public class AdvertiseStoreLogic implements AdvertiseStore {
 		try {
 			AdvertiseMapper mapper = session.getMapper(AdvertiseMapper.class);
 			list = mapper.selectByDesc(approve);
+			session.commit();
+
 		} finally {
 			session.close();
 		}
@@ -104,6 +113,8 @@ public class AdvertiseStoreLogic implements AdvertiseStore {
 		try {
 			AdvertiseMapper mapper = session.getMapper(AdvertiseMapper.class);
 			list = mapper.selectNowAd();
+			session.commit();
+
 		} finally {
 			session.close();
 		}

@@ -2,33 +2,73 @@ package fofa.store.logic;
 
 import java.util.List;
 
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
+
 import fofa.domain.Follow;
 import fofa.store.FollowStore;
+import fofa.store.factory.SqlSessionFactoryProvider;
+import fofa.store.mapper.FollowMapper;
 
 public class FollowStoreLogic implements FollowStore {
 
+	private SqlSessionFactory factory;
+	
+	public FollowStoreLogic(){
+		factory = SqlSessionFactoryProvider.getSqlSessionFactory();
+	}
+	
 	@Override
 	public int insert(Follow follow) {
-		// TODO Auto-generated method stub
-		return 0;
+		SqlSession session = factory.openSession();
+		int insert = 0;
+		try{
+			FollowMapper mapper = session.getMapper(FollowMapper.class);
+			insert= mapper.insert(follow);
+			session.commit();
+		}finally{
+			session.close();
+		}
+		return insert;
 	}
 
 	@Override
 	public int delete(Follow follow) {
-		// TODO Auto-generated method stub
-		return 0;
+		SqlSession session = factory.openSession();
+		int delete = 0;
+		try{
+			FollowMapper mapper = session.getMapper(FollowMapper.class);
+			delete = mapper.delete(follow);
+			session.commit();
+		}finally{
+			session.close();
+		}
+		return delete;
 	}
 
 	@Override
 	public List<Follow> selectByFromId(String fromId) {
-		// TODO Auto-generated method stub
-		return null;
+		SqlSession session = factory.openSession();
+		List<Follow> list = null;
+		try{
+			FollowMapper mapper = session.getMapper(FollowMapper.class);
+			list = mapper.selectByFromId(fromId);
+		}finally{
+			session.close();
+		}
+		return list;
 	}
 
 	@Override
 	public List<Follow> selectByToId(String toId) {
-		// TODO Auto-generated method stub
-		return null;
+		SqlSession session = factory.openSession();
+		List<Follow> list = null;
+		try{
+			FollowMapper mapper = session.getMapper(FollowMapper.class);
+			list = mapper.selectByToId(toId);
+		}finally{
+			session.close();
+		}
+		return list;
 	}
-
 }

@@ -18,7 +18,7 @@ public interface ReviewService {
 	List<Review> findAllByReported();
 	boolean registerReport(Report report);
 	boolean removeReport(Report report);
-	Report findReport(String reportId);
+	Report findReport(Report report);
 	boolean registerRecommand(Recommand recommand);
 	boolean deleteRecommand(Recommand recommand);
 }

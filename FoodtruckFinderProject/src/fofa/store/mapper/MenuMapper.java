@@ -2,6 +2,8 @@ package fofa.store.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import fofa.domain.Menu;
 
 public interface MenuMapper {
@@ -10,7 +12,7 @@ public interface MenuMapper {
 	
 	int update(Menu menu);
 	
-	int delete(String menuId);
+	int delete(@Param("menuId")String menuId, @Param("foodtruckId")String foodtruckId);
 	
 	List<Menu> selectByTruckId(String foodtruckId);
 	

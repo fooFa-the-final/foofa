@@ -7,7 +7,6 @@ import fofa.domain.Member;
 import fofa.store.MemberStore;
 import fofa.store.factory.SqlSessionFactoryProvider;
 import fofa.store.mapper.MemberMapper;
-import fofa.store.mapper.MenuMapper;
 
 public class MemberStoreLogic implements MemberStore{
 	private SqlSessionFactory factory;

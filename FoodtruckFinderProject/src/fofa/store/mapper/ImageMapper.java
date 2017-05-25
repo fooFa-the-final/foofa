@@ -6,7 +6,7 @@ import fofa.domain.Image;
 
 public interface ImageMapper {
 	List<Image> selectReviewImage(String reviewId);
-	void insertImage(Image image);
-	void updateImage(Image image);
-	void deleteImage(String imageId);
+	int insertImage(Image image);
+	int updateImage(Image image);
+	int deleteImage(String imageId);
 }

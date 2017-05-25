@@ -70,7 +70,7 @@ public class ReviewServiceLogic implements ReviewService {
 	}
 
 	@Override
-	public Report findReport(String reportId) {
+	public Report findReport(Report report) {
 		// TODO Auto-generated method stub
 		return null;
 	}

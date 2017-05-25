@@ -33,4 +33,13 @@ public class ReportStoreLogicTest {
 		int delete = rStore.delete(r);
 		assertEquals(1, delete);
 	}
+	
+	@Test
+	public void selectTest(){
+		Report r = new Report();
+		r.setMemberId("memberid1");
+		r.setReviewId("R01");
+		r = rStore.selectById(r);
+		assertEquals("신기하게 이놈 리뷰만 보면 화가 치밀어오름", r.getReason());
+	}
 }
