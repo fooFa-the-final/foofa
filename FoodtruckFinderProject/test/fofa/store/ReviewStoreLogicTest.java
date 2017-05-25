@@ -33,7 +33,16 @@ public class ReviewStoreLogicTest {
 
 	@Test
 	public void testUpdate() {
-		fail("Not yet implemented");
+		Review review = new Review();
+		review.setContents("사실 맛없는데 맛있다고 해준거");
+		review.setFoodtruckId("F11");
+		review.setReviewId("R01");
+		review.setScore(1);
+		Member m = new Member();
+		m.setMemberId("momo");
+		review.setWriter(m);
+		int insert = store.insert(review);
+		assertEquals(1, insert);
 	}
 
 	@Test

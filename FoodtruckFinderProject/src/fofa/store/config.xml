@@ -17,11 +17,11 @@
 		<typeAlias type="fofa.domain.Report" alias="Report" />
 		<typeAlias type="fofa.domain.Review" alias="Review" />
 		<typeAlias type="fofa.domain.Sale" alias="Sales" />
-		<typeAlias type="fofa.domain.Member" alias="Member" />
-		<typeAlias type="fofa.domain.Seller" alias="Seller" />
 		<typeAlias type="fofa.domain.Survey" alias="Survey" />
 		<typeAlias type="fofa.domain.SurveyItem" alias="SurveyItem" />
 		<typeAlias type="fofa.domain.SurveyReply" alias="SurveyReply" />
+		<typeAlias type="fofa.domain.Member" alias="Member" />
+		<typeAlias type="fofa.domain.Seller" alias="Seller" />
 	</typeAliases>
 
 	<environments default="development">
@@ -37,7 +37,7 @@
 	</environments>
 
 	<mappers>
-<!-- 		 <mapper resource="fofa/store/mapper/AdvertiseMapper.xml"/>
+		<mapper resource="fofa/store/mapper/AdvertiseMapper.xml"/>
 		<mapper resource="fofa/store/mapper/FavoriteMapper.xml"/>
 		<mapper resource="fofa/store/mapper/FollowMapper.xml"/>
 		<mapper resource="fofa/store/mapper/FoodtruckMapper.xml"/>
@@ -48,11 +48,11 @@
 		<mapper resource="fofa/store/mapper/ReportMapper.xml"/>
 		<mapper resource="fofa/store/mapper/ReviewMapper.xml"/>
 		<mapper resource="fofa/store/mapper/SalesMapper.xml"/>
-		<mapper resource="fofa/store/mapper/MemberMapper.xml"/>
-		<mapper resource="fofa/store/mapper/SellerMapper.xml"/> -->
+		<mapper resource="fofa/store/mapper/SellerMapper.xml"/>
 		<mapper resource="fofa/store/mapper/SurveyItemMapper.xml"/>
 		<mapper resource="fofa/store/mapper/SurveyReplyMapper.xml"/>
 		<mapper resource="fofa/store/mapper/SurveyMapper.xml"/>
+		<mapper resource="fofa/store/mapper/MemberMapper.xml"/>
 	</mappers>
 
 </configuration>
