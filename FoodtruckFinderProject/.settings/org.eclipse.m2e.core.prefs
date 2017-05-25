@@ -1,8 +1,7 @@
-<<<<<<< HEAD
-activeProfiles=maven dependencies
-=======
-activeProfiles=Maven Dependencies
->>>>>>> branch '170524' of https://github.com/fooFa-the-final/foofa.git
+=\=\=\=\=\=\=
+<<<<<<<=HEAD
+>>>>>>>=branch '170524' of https\://github.com/fooFa-the-final/foofa.git
+activeProfiles=
 eclipse.preferences.version=1
 resolveWorkspaceProjects=true
 version=1
