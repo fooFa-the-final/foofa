@@ -34,24 +34,30 @@ public class MainController {
 	public String showMain(Model model){
 		return "view/index.jsp";
 	}
-	
+
+	@RequestMapping("/main.do")
 	public String showMainLogin(HttpSession session, Model model){
-		return null;
+		return "view/main.jsp";
 	}
 
+	@RequestMapping("/login.do")
 	public String showLoginForm(){
-		return null;
+		return "view/user/login.jsp";
 	}
-	
+
+	@RequestMapping("/logout.do")
 	public String logout(HttpSession session){
-		return null;
+		session.invalidate();
+		return "redirect:/index.do";
 	}
-	
+
+	@RequestMapping("/login/member.do")
 	public String loginMember(HttpSession session, Member member){
-		return null;
+		return "redirect:/main.do";
 	}
-	
+
+	@RequestMapping("/login/seller.do")
 	public String loginSeller(HttpSession session, Seller seller){
-		return null;
+		return "redirect:/truck/id.do";
 	}
 }
