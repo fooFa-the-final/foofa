@@ -24,23 +24,23 @@
 	</select>
 
 
-	<select id="insert" parameterType="Seller">
+	<insert id="insert" parameterType="Seller">
 		insert into Seller_tb (seller_id, password, certification, phone) VALUES
 		(#{sellerId}, #{password},	#{certification}, #{phone})
-	</select>
+	</insert>
 
-	<select id="update" parameterType="Seller" resultMap="SELmap">
+	<update id="update" parameterType="Seller" >
 		update
 		seller_tb set password= #{password}, certification =#{certification},
-		PHONE=#{PHONE}
+		PHONE=#{phone}
 		WHERE seller_id = #{sellerId}
-	</select>
+	</update>
 
-	<select id="delete" parameterType="String">
+	<delete id="delete" parameterType="String">
 		DELETE
 		FROM Seller_tb
 		WHERE seller_id = #{sellerId}
-	</select>
+	</delete>
 
 
 </mapper>

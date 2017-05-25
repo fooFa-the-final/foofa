@@ -44,12 +44,12 @@
 	</select>
 	
 	
-	<insert id="insert" parameterType="Menu" useGeneratedKeys="true">
+	<insert id="insert" parameterType="Survey" useGeneratedKeys="true">
 	    <selectKey keyProperty="surveyId" resultType="string" order="BEFORE">
-           SELECT S||survey_seq.nextval FROM DUAL
+           SELECT 'S'||survey_seq.nextval FROM DUAL
         </selectKey>
   		INSERT INTO SURVEY_TB (SURVEY_ID, FOODTRUCK_ID, GENDER, AGE_RANGE, OPINION) 
-  		VALUES (surveyId, #{foodtruckId}, #{gender}, #{ages}, #{suggestion})
+  		VALUES (#{surveyId}, #{foodtruckId}, #{gender}, #{ages}, #{suggestion})
   	</insert>
   	
 </mapper>

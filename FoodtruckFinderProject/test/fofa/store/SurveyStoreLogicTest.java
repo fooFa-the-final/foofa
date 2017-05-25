@@ -21,7 +21,7 @@ public class SurveyStoreLogicTest {
 	@Before
 	public void init() {
 		surveyStore = new SurveyStoreLogic();
-		
+		replyStore = new SurveyReplyStoreLogic();
 	}
 
 	@Test
@@ -31,7 +31,7 @@ public class SurveyStoreLogicTest {
 		survey.setFoodtruckId("F1");
 		survey.setAges(20);
 		survey.setGender('F');
-		survey.setSuggestion("음료가 있었으면 좋겠어요.");
+		survey.setSuggestion("음료가 있었으면 좋겠어요.2");
 		
 		String surveyId = surveyStore.insert(survey);
 		
@@ -43,30 +43,31 @@ public class SurveyStoreLogicTest {
 			r.setScore(i);
 			
 			replyStore.insert(r);
+			replies.add(r);
 		}
 		survey.setReplies(replies);
 		
 		assertEquals(4, replies.size());
-		System.out.println(surveyId);
-		
 	}
 
 	@Test
 	public void testSelectByTruckId() {
 		List<Survey> surveies = surveyStore.selectByTruckId("F1");
-		
-		assertEquals(6,surveies.size());
+
+		assertEquals(8, surveies.size());
 	}
 
 	@Test
 	public void testSelectAvgByAges() {
-		surveyStore.selectAvgByAges("F1", "I1");
-		
+		List<Survey> surveies = surveyStore.selectAvgByAges("F1", "I1");
+		assertEquals(4, surveies.size());
 	}
 
 	@Test
 	public void testSelectAvgByGender() {
-		surveyStore.selectAvgByGender("F1", "I1");
+		List<Survey> surveies = surveyStore.selectAvgByGender("F1", "I1");
+		assertEquals(2, surveies.size());
+
 		
 	}
 

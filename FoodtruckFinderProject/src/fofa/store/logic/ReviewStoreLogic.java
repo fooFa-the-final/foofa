@@ -2,12 +2,16 @@ package fofa.store.logic;
 
 import java.util.List;
 
+import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
+import org.springframework.stereotype.Repository;
 
 import fofa.domain.Review;
 import fofa.store.ReviewStore;
 import fofa.store.factory.SqlSessionFactoryProvider;
+import fofa.store.mapper.ReviewMapper;
 
+@Repository
 public class ReviewStoreLogic implements ReviewStore {
 	private SqlSessionFactory factory;
 	
@@ -16,38 +20,86 @@ public class ReviewStoreLogic implements ReviewStore {
 	}
 	@Override
 	public int insert(Review review) {
-		// TODO Auto-generated method stub
-		return 0;
+		SqlSession session = factory.openSession();
+		int insert = 0;
+		try{
+			ReviewMapper mapper = session.getMapper(ReviewMapper.class);
+			insert = mapper.insert(review);
+			session.commit();
+		} finally {
+			session.close();
+		} 
+		return insert;
 	}
 
 	@Override
 	public int update(Review review) {
-		// TODO Auto-generated method stub
-		return 0;
+		SqlSession session = factory.openSession();
+		int update = 0;
+		try{
+			ReviewMapper mapper = session.getMapper(ReviewMapper.class);
+			update = mapper.update(review);
+			session.commit();
+		} finally {
+			session.close();
+		} 
+		return update;
 	}
 
 	@Override
 	public int delete(String reviewId) {
-		// TODO Auto-generated method stub
-		return 0;
+		SqlSession session = factory.openSession();
+		int delete = 0;
+		try{
+			ReviewMapper mapper = session.getMapper(ReviewMapper.class);
+			delete = mapper.delete(reviewId);
+			session.commit();
+		} finally {
+			session.close();
+		} 
+		return delete;
 	}
 
 	@Override
 	public Review selectById(String reviewId) {
-		// TODO Auto-generated method stub
-		return null;
+		SqlSession session = factory.openSession();
+		Review review = null;
+		try{
+			ReviewMapper mapper = session.getMapper(ReviewMapper.class);
+			review = mapper.selectById(reviewId);
+
+		} finally {
+			session.close();
+		} 
+		return review;
 	}
 
 	@Override
 	public List<Review> selectByMemberId(String memberId) {
-		// TODO Auto-generated method stub
-		return null;
+		SqlSession session = factory.openSession();
+		List<Review> review = null;
+		try{
+			ReviewMapper mapper = session.getMapper(ReviewMapper.class);
+			review = mapper.selectByMemberId(memberId);
+
+		} finally {
+			session.close();
+		} 
+		return review;
 	}
 
 	@Override
 	public List<Review> selectByTruckId(String foodtruckId) {
-		// TODO Auto-generated method stub
-		return null;
+		SqlSession session = factory.openSession();
+		List<Review> review = null;
+		try{
+			ReviewMapper mapper = session.getMapper(ReviewMapper.class);
+			review = mapper.selectByTruckId(foodtruckId);
+
+		} finally {
+			session.close();
+		} 
+		return review;
 	}
 
 	@Override
