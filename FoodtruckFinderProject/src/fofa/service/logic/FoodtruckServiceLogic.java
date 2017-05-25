@@ -2,23 +2,22 @@ package fofa.service.logic;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import fofa.domain.Foodtruck;
 import fofa.domain.Menu;
 import fofa.service.FoodtruckService;
 import fofa.store.FoodtruckStore;
 import fofa.store.MenuStore;
-import fofa.store.logic.FoodtruckStoreLogic;
-import fofa.store.logic.MenuStoreLogic;
 
+@Service
 public class FoodtruckServiceLogic implements FoodtruckService{
+	@Autowired
 	private FoodtruckStore foodtruckStore;
+	@Autowired
 	private MenuStore menuStore;
 	
-	public FoodtruckServiceLogic() {
-		foodtruckStore = new FoodtruckStoreLogic();
-		menuStore = new MenuStoreLogic();
-	}
-
 	@Override
 	public boolean register(Foodtruck foodtruck) {
 		int regTruck = foodtruckStore.insert(foodtruck);

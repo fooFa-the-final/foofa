@@ -2,18 +2,18 @@ package fofa.service.logic;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import fofa.domain.Favorite;
 import fofa.service.FavoriteService;
 import fofa.store.FavoriteStore;
-import fofa.store.logic.FavoriteStoreLogic;
 
+@Service
 public class FavoriteServiceLogic implements FavoriteService{
+	@Autowired
 	private FavoriteStore store;
 	
-	public FavoriteServiceLogic() {
-		store = new FavoriteStoreLogic();
-	}
-
 	@Override
 	public boolean register(Favorite favorite) {
 		return store.insert(favorite) > 0;
