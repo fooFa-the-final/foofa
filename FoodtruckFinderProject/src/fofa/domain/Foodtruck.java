@@ -31,7 +31,6 @@ public class Foodtruck {
 	private boolean state;
 	private int favoriteCount;
 	private List<Review> reviews;
-	private List<Image> images;
 	private List<Menu> menus;
 	
 	
@@ -142,12 +141,6 @@ public class Foodtruck {
 	}
 	public void setReviews(List<Review> reviews) {
 		this.reviews = reviews;
-	}
-	public List<Image> getImages() {
-		return images;
-	}
-	public void setImages(List<Image> images) {
-		this.images = images;
 	}
 	public List<Menu> getMenus() {
 		return menus;
