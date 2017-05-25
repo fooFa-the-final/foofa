@@ -5,7 +5,6 @@
 
 <mapper namespace="fofa.store.mapper.SellerMapper">
 
-
 	<resultMap type="Seller" id="SELmap">
 		<id column="SELLER_ID" property="sellerId" />
 		<result column="PASSWORD" property="password" />
@@ -13,33 +12,35 @@
 		<result column="PHONE" property="phone" />
 	</resultMap>
 
-
 	<sql id="selectSEL">
-		select SEller_ID, password, certification, phone 
-		from SELLER_TB;
+		select SEller_ID, password, certification, phone
+		from SELLER_TB
 	</sql>
+
 
 	<select id="select" parameterType="String" resultMap="SELmap">
 		<include refid="selectSEL" />
 		where seller_id = #{sellerId}
 	</select>
 
-	<select id="insertSeller" parameterType="Seller">
-		insert into Seller_tb VALUES (#{sellerId}, #{password},
-		#{certification}, #{phone})
-	</select>
 
-	<select id="updateSeller" parameterType="Seller" resultMap="SELmap">
+	<insert id="insert" parameterType="Seller">
+		insert into Seller_tb (seller_id, password, certification, phone) VALUES
+		(#{sellerId}, #{password},	#{certification}, #{phone})
+	</insert>
+
+	<update id="update" parameterType="Seller" >
 		update
-		seller_tb set password= #{password}, certification =#{certification},  PHONE=#{PHONE}
+		seller_tb set password= #{password}, certification =#{certification},
+		PHONE=#{phone}
 		WHERE seller_id = #{sellerId}
-	</select>
+	</update>
 
-	<select id="deleteSeller" parameterType="String" >
+	<delete id="delete" parameterType="String">
 		DELETE
 		FROM Seller_tb
 		WHERE seller_id = #{sellerId}
-	</select>
+	</delete>
 
 
 </mapper>

@@ -3,6 +3,6 @@ package fofa.store.mapper;
 import fofa.domain.Recommand;
 
 public interface RecommandMapper {
-	void insert(Recommand recommand);
-	void delete(Recommand recommand);
+	int insert(Recommand recommand);
+	int delete(Recommand recommand);
 }

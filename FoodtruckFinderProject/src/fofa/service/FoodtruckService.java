@@ -25,7 +25,7 @@ public interface FoodtruckService {
 	
 	List<Menu> modifyMenu(Menu menu);
 	
-	List<Menu> removeMenu(String menuId);
+	List<Menu> removeMenu(String menuId, String foodtruckId);
 
 }
 

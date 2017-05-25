@@ -3,7 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
-  <mapper namespace="fofa.store.mapper.ImageMapper">
+<mapper namespace="fofa.store.mapper.ImageMapper">
 	
 	<resultMap type="Image" id="ImageMap">
 		<id column="photo_id" property="imageId"/>
@@ -11,29 +11,27 @@
 		<result column="file_name" property="filename"/>
 	</resultMap>
 	
-	<insert id="insertMember" parameterType="Member">
-	INSERT INTO member_tb (member_id, password, birthday, email, gender, profileImg)
- 	VALUES (#{memberId}, #{password}, #{birthday}, #{email}, #{gender}, #{profileImg})	
+	<insert id="insertImage" parameterType="Image">
+		INSERT INTO photo_tb
+	 	VALUES ('P'||photo_seq.NEXTVAL, #{categoryId}, #{filename})	
 	</insert>
 	
-	<update id="updateMember" parameterType="Member">
-	UPDATE member_tb
-	SET member_id = #{memberId}, #{password}, #{birthday}, #{email}, #{gender}, #{profileImg}
-	WHERE member_id = #{memberId}	
+	<update id="updateImage" parameterType="Image">
+		UPDATE photo_tb
+		SET review_id = #{categoryId}, file_name=#{filename}
+		WHERE photo_id = #{imageId}	
 	</update>
 	
-	<delete id="deleteMember" parameterType="Member">
-	DELETE
-	FROM member_tb
-	WHERE member_id = #{memberId}
+	<delete id="deleteImage" parameterType="String">
+		DELETE
+		FROM photo_tb
+		WHERE photo_id = #{imageId}
 	</delete>
 	
-	<select id="selectMember" parameterType="String" resultMap="MemberMap">
-	select member_id, password, birthday, email, gender, profileImg
-	FROM member_tb
-	WHERE member_id = #{memberId]
+	<select id="selectReviewImage" parameterType="String" resultMap="ImageMap">
+		select photo_id, review_id, file_name
+		FROM photo_tb
+		WHERE review_id = #{reviewId}
 	
 	</select>
-	
-	
-	</mapper>
+</mapper>

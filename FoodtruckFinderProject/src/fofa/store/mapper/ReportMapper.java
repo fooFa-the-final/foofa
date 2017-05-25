@@ -5,8 +5,8 @@ import java.util.List;
 import fofa.domain.Report;
 
 public interface ReportMapper {
-	void insert(Report report);
-	void delete(Report report);
-	Report selectById(String reportId);
+	int insert(Report report);
+	int delete(Report report);
+	Report selectById(Report report);
 	List<Report> selectAll();
 }

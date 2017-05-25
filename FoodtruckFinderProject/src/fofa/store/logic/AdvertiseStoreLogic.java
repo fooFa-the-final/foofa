@@ -17,52 +17,103 @@ public class AdvertiseStoreLogic implements AdvertiseStore {
 	private SqlSessionFactory factory;
 
 	int sucess;
-	
+
 	public AdvertiseStoreLogic() {
 		factory = SqlSessionFactoryProvider.getSqlSessionFactory();
 	}
-	
+
 	@Override
 	public int delete(String advid) {
 		SqlSession session = factory.openSession();
+
 		try {
 			AdvertiseMapper mapper = session.getMapper(AdvertiseMapper.class);
-			mapper.delete(advid);
+			sucess = mapper.delete(advid);
+			session.commit();
+
 		} finally {
 			session.close();
 		}
 		return sucess;
 	}
-	
+
 	@Override
 	public int insert(Advertise advertise) {
-		// TODO Auto-generated method stub
+		SqlSession session = factory.openSession();
+		try {
+			AdvertiseMapper mapper = session.getMapper(AdvertiseMapper.class);
+			sucess = mapper.insert(advertise);
+			session.commit();
+
+			if (advertise != null) {
+				sucess = 1;
+			} else {
+				sucess = 0;
+			}
+		} finally {
+			session.close();
+		}
 		return sucess;
 	}
-	
+
 	@Override
-	public List<Advertise> selectByAsc(Boolean approve) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
-	@Override
-	public List<Advertise> selectByDesc(Boolean approve) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
-	@Override
-	public int update(Advertise advertise) {
-		// TODO Auto-generated method stub
+	public int update(String advid) {
+		SqlSession session = factory.openSession();
+		try {
+
+			AdvertiseMapper mapper = session.getMapper(AdvertiseMapper.class);
+			sucess = mapper.update(advid);
+			session.commit();
+
+		} finally {
+			session.close();
+		}
 		return sucess;
 	}
+
+	 @Override
+	 public List<Advertise> selectByAsc(boolean approve) {
+	 List<Advertise> list = null;
+	 SqlSession session = factory.openSession();
+	 try {
+	 AdvertiseMapper mapper = session.getMapper(AdvertiseMapper.class);
+	 list = mapper.selectByAsc(approve);
+	 session.commit();
 	
+	 } finally {
+	 session.close();
+	 }
+	 return list;
+	 }
+
+	 @Override
+	 public List<Advertise> selectByDesc(boolean approve) {
+	 List<Advertise> list = null;
+	 SqlSession session = factory.openSession();
+	 try {
+	 AdvertiseMapper mapper = session.getMapper(AdvertiseMapper.class);
+	 list = mapper.selectByDesc(approve);
+	 session.commit();
+	
+	 } finally {
+	 session.close();
+	 }
+	 return list;
+	 }
 
 	@Override
 	public List<Advertise> selectNowAd() {
-		// TODO Auto-generated method stub
-		return null;
+		List<Advertise> list = null;
+		SqlSession session = factory.openSession();
+		try {
+			AdvertiseMapper mapper = session.getMapper(AdvertiseMapper.class);
+			list = mapper.selectNowAd();
+			session.commit();
+
+		} finally {
+			session.close();
+		}
+		return list;
 	}
-	
+
 }

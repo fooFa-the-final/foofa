@@ -6,7 +6,7 @@ import fofa.domain.Favorite;
 
 public interface FavoriteMapper {
 	
-int insert(Favorite favorite);
+	int insert(Favorite favorite);
 	
 	int delete(Favorite favorite);
 	

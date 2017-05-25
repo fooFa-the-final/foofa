@@ -3,7 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
-  <mapper namespace="store.mapper.FoodtruckMapper">
+  <mapper namespace="fofa.store.mapper.FoodtruckMapper">
   	<resultMap type="Foodtruck" id="foodtruckMap">
   		<id column="foodtruck_id" property="foodtruckId"/>
   		<result column="seller_id" property="sellerId"/>
@@ -27,6 +27,65 @@
   			<result column="foodtruck_id" property="foodtruckId"/>
   		</collection>
   	</resultMap>
+  	
+  	<sql id="selectFoodtrucks">
+  		SELECT foodtruck_id, seller_id, truckName, truck_image, truckHour, area, notice, location, category, payment, parking, drinking, catering, operation_state
+  		FROM foodtruck_tb
+  	</sql>
+  	
+  	<insert id="insert" parameterType="Foodtruck">
+  		INSERT INTO foodtruck_tb (foodtruck_id, seller_id, truckName, truck_image, truckHour, area, notice, location, category, payment, parking, drinking, catering, operation_state)
+  		VALUES ('F'||truck_seq.nextval, #{sellerId}, #{foodtruckName}, #{foodtruckImg}, #{operationTime}, #{spot}, #{notice}, #{location}, #{category1}, #{card}, #{parking}, #{drinking}, #{catering}, #{state})
+  	</insert>
+  	
+  	<update id="update" parameterType="Foodtruck">
+  		UPDATE foodtruck_tb
+  		SET truckName=#{foodtruckName}, truck_image=#{foodtruckImg}, truckHour=#{operationTime}, area=#{spot}, notice=#{notice}, location=#{location}, category=#{category1}, payment=#{card}, parking=#{parking}, drinking=#{drinking}, catering=#{catering}, operation_state=#{state}
+  		WHERE foodtruck_id=#{foodtruckId} 
+  	</update>
+  	
+  	<select id="selectById" parameterType="String" resultMap="foodtruckMap">
+  		<include refid="selectFoodtrucks"/>
+  		WHERE foodtruck_id=#{foodtruckId}
+  	</select>
+  	
+  	<select id="selectByLoc" parameterType="String" resultMap="foodtruckMap">
+  		<include refid="selectFoodtrucks"/>
+  		WHERE location LIKE '%'||#{location}||'%' OR area LIKE '%'||#{location}||'%'
+  		
+  	</select>
+  	
+  	<select id="selectByKeyLoc" resultMap="foodtruckMap">
+  		<include refid="selectFoodtrucks"/>
+  		WHERE (truckName LIKE '%'||#{keyword}||'%' OR category LIKE '%'||#{keyword}||'%') AND (location LIKE '%'||#{location}||'%' OR area LIKE '%'||#{location}||'%')
+  	</select>
+  	
+  	<select id="selectByFilter" parameterType="Foodtruck" resultMap="foodtruckMap">
+  		<include refid="selectFoodtrucks"/>
+  		<where> 
+  		<if test="card">
+  		payment=#{card} 
+  		</if>
+  		<if test="parking">
+  		AND parking=#{parking} 
+  		</if>
+  		<if test="drinking">
+  		AND drinking=#{drinking} 
+  		</if>
+  		<if test="catering">
+  		AND catering=#{catering} 
+  		</if>
+  		<if test="state">
+  		AND operation_state=#{state}
+  		</if>
+  		</where>
+  	</select>
+  	
+  	<select id="selectBySellerId" parameterType="String" resultMap="foodtruckMap">
+  		<include refid="selectFoodtrucks"/>
+  		WHERE seller_id=#{sellerId}
+  	</select>
+  	
   </mapper>
   
   

@@ -7,10 +7,15 @@ import fofa.domain.Advertise;
 public interface AdvertiseMapper {
 
 	int delete(String advid);
+
 	int insert(Advertise advertise);
-	int update(Advertise advertise);
-	List<Advertise> selectByAsc(Boolean approve);
-	List<Advertise> selectByDesc(Boolean approve);
+
+	int update(String advid);
+
 	List<Advertise> selectNowAd();
-	
+
+	List<Advertise> selectByAsc(boolean approve);
+
+	List<Advertise> selectByDesc(boolean approve);
+
 }

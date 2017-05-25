@@ -2,3 +2,35 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="fofa.store.mapper.FavoriteMapper">
+  
+  	<resultMap type="Favorite" id="favoriteMap">
+  		<id column="foodtruck_id" property="foodtruckId"/>
+  		<id column="member_id" property="memberId"/>
+  	</resultMap>
+  	
+  	<insert id="insert" parameterType="Favorite">
+  		INSERT INTO favorite (foodtruck_id, member_id) 
+  		VALUES (#{foodtruckId}, #{memberId})
+  	</insert>
+  	
+  	<delete id="delete" parameterType="Favorite">
+  		DELETE
+    	FROM favorite
+    	WHERE foodtruck_id=#{foodtruckId} AND member_id=#{memberId}
+  	</delete>
+  	
+  	<select id="selectByMemberId" parameterType="String" resultMap="favoriteMap">
+  		SELECT foodtruck_id, member_id
+  		FROM favorite
+  		WHERE member_id=#{memberId}
+  	</select>
+  	
+  	<select id="selectByTruckId" parameterType="String" resultType="int">
+  		SELECT COUNT(member_id)
+  		FROM favorite
+  		WHERE foodtruck_id=#{foodtruckId}
+  	</select>
+  
+  </mapper>

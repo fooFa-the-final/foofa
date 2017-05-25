@@ -5,7 +5,7 @@ public class Advertise {
 	private String advId;
 	private String sellerId;
 	private String period;
-	private Boolean approve;
+	private boolean approve;
 	private String startdate;
 	
 	public String getStartdate() {
@@ -32,10 +32,10 @@ public class Advertise {
 	public void setPeriod(String period) {
 		this.period = period;
 	}
-	public Boolean getApprove() {
+	public boolean getApprove() {
 		return approve;
 	}
-	public void setApprove(Boolean approve) {
+	public void setApprove(boolean approve) {
 		this.approve = approve;
 	}
 	
