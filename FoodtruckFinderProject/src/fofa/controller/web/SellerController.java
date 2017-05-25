@@ -21,7 +21,7 @@ public class SellerController {
 	
 	@RequestMapping(value = "seller/create.do", method = RequestMethod.GET) 
 	public String createForm(){
-		return "user/registerSeller.jsp";
+		return "seller/registerSeller.jsp";
 	}	
 
 
@@ -33,7 +33,7 @@ public class SellerController {
 		} else  {
 
 		}
-		return "user/registerSeller.jsp";
+		return "seller/registerSeller.jsp";
 	
 	}	
 	
@@ -55,19 +55,19 @@ public class SellerController {
 		String sellerId = null;
 		Seller seller = sellerService.findById(sellerId);
 		model.addAttribute(seller);
-		return "user/modifySeller.jsp";
+		return "seller/modifySeller.jsp";
 	}	
 	
 
 	@RequestMapping(value = "seller/modify.do", method = RequestMethod.POST) 
 	public String modify(Seller seller){
 		sellerService.modify(seller);
-		return "user/registerSeller.jsp";
+		return "seller/modifySeller.jsp";
 	}	
 
 	@RequestMapping(value = "seller/remove.do", method = RequestMethod.GET) 
 	public String removeForm(){
-		return "user/checkPassword.jsp";
+		return "seller/checkPassword.jsp";
 	}
 
 	@RequestMapping(value = "seller/remove.do", method = RequestMethod.POST) 
