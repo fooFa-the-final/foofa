@@ -7,20 +7,6 @@
 <configuration>
 
 	<typeAliases>
-		<typeAlias type="domain.Advertise" alias="Advertise" />
-		<typeAlias type="domain.Favorite" alias="Favorite" />
-		<typeAlias type="domain.Follow" alias="Follow" />
-		<typeAlias type="domain.Foodtruck" alias="Foodtruck" />
-		<typeAlias type="domain.Image" alias="Image" />
-		<typeAlias type="domain.Member" alias="Member" />
-		<typeAlias type="domain.Menu" alias="Menu" />
-		<typeAlias type="domain.Recommand" alias="Recommand" />
-		<typeAlias type="domain.Report" alias="Report" />
-		<typeAlias type="domain.Review" alias="Review" />
-		<typeAlias type="domain.Sale" alias="Sale" />
-		<typeAlias type="domain.Survey" alias="Survey" />
-		<typeAlias type="domain.SurveyItem" alias="SurveyItem" />
-		<typeAlias type="domain.SurveyReply" alias="SurveyReply" />
 		<typeAlias type="fofa.domain.Advertise" alias="Advertise" />
 		<typeAlias type="fofa.domain.Member" alias="Member" />
 		<typeAlias type="fofa.domain.Favorite" alias="Favorite" />
@@ -31,7 +17,7 @@
 		<typeAlias type="fofa.domain.Recommand" alias="Recommand" />
 		<typeAlias type="fofa.domain.Report" alias="Report" />
 		<typeAlias type="fofa.domain.Review" alias="Review" />
-		<typeAlias type="fofa.domain.Sale" alias="Sales" />
+		<typeAlias type="fofa.domain.Sale" alias="Sale" />
 		<typeAlias type="fofa.domain.Survey" alias="Survey" />
 		<typeAlias type="fofa.domain.SurveyItem" alias="SurveyItem" />
 		<typeAlias type="fofa.domain.SurveyReply" alias="SurveyReply" />
@@ -53,8 +39,7 @@
 	</environments>
 
 	<mappers>
-		<mapper resource="store/mapper/MusicMapper.xml" />
-		<mapper resource="store/mapper/SalesMapper.xml" />
+		<mapper resource="fofa/store/mapper/SalesMapper.xml" />
 		<mapper resource="fofa/store/mapper/AdvertiseMapper.xml" />
 		<mapper resource="fofa/store/mapper/AdvertiseMapper.xml" />
 		<mapper resource="fofa/store/mapper/FavoriteMapper.xml" />
