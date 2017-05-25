@@ -15,18 +15,18 @@ public class MemberStoreLogicTest {
 	
 private MemberStore store = new MemberStoreLogic();
 
-@Test
-public void testMemberInsert(){
-	Member member = new Member();
-	member.setMemberId("aaaa");
-	member.setPassword("1234");
-	member.setBirthday(null);
-	member.setEmail("1234");
-	member.setProfileImg("1234");
-	member.setGender('m');
-	
-	assertEquals(1, store.insert(member));
-	}
+//@Test
+//public void testMemberInsert(){
+//	Member member = new Member();
+//	member.setMemberId("aaaa");
+//	member.setPassword("1234");
+//	member.setBirthday(null);
+//	member.setEmail("1234");
+//	member.setProfileImg("1234");
+//	member.setGender('m');
+//	
+//	assertEquals(1, store.insert(member));
+//	}
 
 //@Test
 //public void deleteTest() {
@@ -38,11 +38,11 @@ public void testMemberInsert(){
 
 
 
-//@Test
-//public void selectTest(){
-//	Member select = store.select("1");
-//	System.out.println(select);
-//}
-//
+@Test
+public void selectTest(){
+	Member select = store.select("momo");
+	System.out.println(select);
+}
+
 
 }
