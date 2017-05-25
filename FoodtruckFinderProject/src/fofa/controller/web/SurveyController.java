@@ -40,7 +40,7 @@ public class SurveyController {
 
 	@RequestMapping("/itemStat.do")
 	public String searchItemStat(String foodtruckId, String ItemId, Model model){
-		return null;
+		return "foodtruckSurveyDetail.jsp";
 	}
 
 	@RequestMapping("/item/create.do")
