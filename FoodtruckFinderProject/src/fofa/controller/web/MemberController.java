@@ -34,7 +34,7 @@ public class MemberController {
 	}
 	@RequestMapping("member/checkPw.do")
 	public String checkPw(HttpSession session, String password){
-		return "deleteMember.jsp";
+		return "memberDelete.jsp";
 	}
 	@RequestMapping("member/remove.do")
 	public String remove(HttpSession session){
