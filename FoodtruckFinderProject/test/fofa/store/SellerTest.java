@@ -30,37 +30,50 @@ public class SellerTest {
 	// fail("Not yet implemented");
 	// }
 
-	 @Test
-	 public void testInsert() {
-	 Seller seller = new Seller();
-	 seller.setCertification("12");
-	 seller.setPassword("1");
-	 seller.setPhone("1");
-	 seller.setSellerId("4");
-	 assertEquals(1, store1.insert(seller));
-	}
 
-	// @Test
-	// public void testUpdate() {
-	// fail("Not yet implemented");
-	// }
+
+//	 @Test
+//	 public void testUpdate() {
+//
+//		 
+//		 Seller seller = new Seller();
+//		 seller.setCertification("12");
+//		 seller.setPassword("31");
+//		 seller.setPhone("1");
+//		 seller.setSellerId("as");
+//
+//		assertEquals(1, store1.update(seller));
+//	 
+//	 }
+	 
+	 
+//	 @Test
+//	 public void testDelete() {
+//	
+//	
+//	 String as = "as";
+//	
+//	 store1.delete(as);
+//	
+//	 }
 	//
-	 @Test
-	 public void testDelete() {
-	
-	
-	 String as = "as";
-	
-	 store1.delete(as);
-	
-	 }
-	//
-	@Test
-	public void testSelect() {
-		String id = "as";
-		int insert = 0;
-		 store1.delete(id);
+//	@Test
+//	public void testSelect() {
+//		String id = "as";
+//		int insert = 0;
+//		 store1.delete(id);
+//
+//	}
 
-	}
-
+	 
+//	 @Test
+//	 public void testInsert() {
+//	 Seller seller = new Seller();
+//	 seller.setCertification("12");
+//	 seller.setPassword("1");
+//	 seller.setPhone("1");
+//	 seller.setSellerId("dddd4");
+//	 assertEquals(1, store1.insert(seller));
+//	}
+	 
 }

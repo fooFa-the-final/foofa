@@ -25,10 +25,12 @@ public class AdvertiseStoreLogic implements AdvertiseStore {
 	@Override
 	public int delete(String advid) {
 		SqlSession session = factory.openSession();
+
 		try {
 			AdvertiseMapper mapper = session.getMapper(AdvertiseMapper.class);
-			mapper.delete(advid);
-		session.commit();
+			sucess = mapper.delete(advid);
+			session.commit();
+
 		} finally {
 			session.close();
 		}
@@ -40,7 +42,7 @@ public class AdvertiseStoreLogic implements AdvertiseStore {
 		SqlSession session = factory.openSession();
 		try {
 			AdvertiseMapper mapper = session.getMapper(AdvertiseMapper.class);
-			mapper.insert(advertise);
+			sucess = mapper.insert(advertise);
 			session.commit();
 
 			if (advertise != null) {
@@ -55,20 +57,13 @@ public class AdvertiseStoreLogic implements AdvertiseStore {
 	}
 
 	@Override
-	public int update(Advertise advertise) {
+	public int update(String advid) {
 		SqlSession session = factory.openSession();
 		try {
-			Advertise adv1 = advertise;
 
 			AdvertiseMapper mapper = session.getMapper(AdvertiseMapper.class);
-			sucess = mapper.update(advertise);
+			sucess = mapper.update(advid);
 			session.commit();
-
-			if (adv1 != advertise) {
-				sucess = 1;
-			} else {
-				sucess = 0;
-			}
 
 		} finally {
 			session.close();
@@ -76,35 +71,35 @@ public class AdvertiseStoreLogic implements AdvertiseStore {
 		return sucess;
 	}
 
-	@Override
-	public List<Advertise> selectByAsc(Boolean approve) {
-		List<Advertise> list = null;
-		SqlSession session = factory.openSession();
-		try {
-			AdvertiseMapper mapper = session.getMapper(AdvertiseMapper.class);
-			list = mapper.selectByAsc(approve);
-			session.commit();
+	 @Override
+	 public List<Advertise> selectByAsc(boolean approve) {
+	 List<Advertise> list = null;
+	 SqlSession session = factory.openSession();
+	 try {
+	 AdvertiseMapper mapper = session.getMapper(AdvertiseMapper.class);
+	 list = mapper.selectByAsc(approve);
+	 session.commit();
+	
+	 } finally {
+	 session.close();
+	 }
+	 return list;
+	 }
 
-		} finally {
-			session.close();
-		}
-		return list;
-	}
-
-	@Override
-	public List<Advertise> selectByDesc(Boolean approve) {
-		List<Advertise> list = null;
-		SqlSession session = factory.openSession();
-		try {
-			AdvertiseMapper mapper = session.getMapper(AdvertiseMapper.class);
-			list = mapper.selectByDesc(approve);
-			session.commit();
-
-		} finally {
-			session.close();
-		}
-		return list;
-	}
+	 @Override
+	 public List<Advertise> selectByDesc(boolean approve) {
+	 List<Advertise> list = null;
+	 SqlSession session = factory.openSession();
+	 try {
+	 AdvertiseMapper mapper = session.getMapper(AdvertiseMapper.class);
+	 list = mapper.selectByDesc(approve);
+	 session.commit();
+	
+	 } finally {
+	 session.close();
+	 }
+	 return list;
+	 }
 
 	@Override
 	public List<Advertise> selectNowAd() {
@@ -122,24 +117,3 @@ public class AdvertiseStoreLogic implements AdvertiseStore {
 	}
 
 }
-
-// @Override
-// public List<Advertise> selectByDesc(String approve) {
-// // TODO Auto-generated method stub
-// return null;
-// }
-
-// @Override
-// public List<Advertise> selectByAsc(String approve) {
-// List<Advertise> list = null;
-// SqlSession session = factory.openSession();
-// if (approve == "1") {
-// AdvertiseMapper mapper = session.getMapper(AdvertiseMapper.class);
-// list = mapper.selectByAsc(approve);
-// }
-// if (approve == "0") {
-// AdvertiseMapper mapper = session.getMapper(AdvertiseMapper.class);
-// list = mapper.selectByAsc(approve);
-// }
-// return list;
-// }
