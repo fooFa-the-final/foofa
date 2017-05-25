@@ -4,12 +4,14 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
+import org.springframework.stereotype.Repository;
 
 import fofa.domain.Favorite;
 import fofa.store.FavoriteStore;
 import fofa.store.factory.SqlSessionFactoryProvider;
 import fofa.store.mapper.FavoriteMapper;
 
+@Repository
 public class FavoriteStoreLogic implements FavoriteStore{
 	private SqlSessionFactory factory;
 	
