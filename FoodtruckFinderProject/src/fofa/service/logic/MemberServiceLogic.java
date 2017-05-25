@@ -2,43 +2,61 @@ package fofa.service.logic;
 
 import fofa.domain.Member;
 import fofa.service.MemberService;
+import fofa.store.MemberStore;
 
 public class MemberServiceLogic implements MemberService{
-
+	private MemberStore store;
+	
+	
 	@Override
 	public boolean register(Member member) {
-		// TODO Auto-generated method stub
-		return false;
+		return store.insert(member)>0;
+		
+		
 	}
 
 	@Override
 	public boolean modify(Member member) {
-		// TODO Auto-generated method stub
-		return false;
+		int sucess;
+		sucess = store.update(member);
+		if(sucess ==0){
+			return false;
+		} else{
+			return true;
+		}
 	}
 
 	@Override
 	public boolean remove(String memberId) {
-		// TODO Auto-generated method stub
-		return false;
+	
+		return store.delete(memberId) >0;
 	}
 
 	@Override
 	public boolean checkId(String memberId) {
-		// TODO Auto-generated method stub
-		return false;
+		Member member = store.select(memberId);
+		if(member !=null){
+			String memberid = "faile";
+			return false;
+		}else{
+			
+		}
+		return true;
 	}
 
 	@Override
 	public boolean checkPw(String memberId, String password) {
-		// TODO Auto-generated method stub
-		return false;
+		Member member = store.select(memberId);
+		if(member.getPassword() != password){
+			return false;
+		}
+		return true;
 	}
 
 	@Override
 	public Member findById(String memberId) {
-		// TODO Auto-generated method stub
-		return null;
+		Member member =store.select(memberId);
+		return member;
 	}
 
 }

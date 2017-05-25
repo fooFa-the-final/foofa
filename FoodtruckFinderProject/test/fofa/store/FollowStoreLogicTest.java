@@ -34,16 +34,16 @@ public class FollowStoreLogicTest {
 //	}
 //	
 	
-//	@Test
-//	public void testselectFrom(){
-//		List<Follow> m = store.selectByFromId("momo");
-//		assertEquals(2, m.size());
-//	}
-	
 	@Test
-	public void testselectto(){
-		List<Follow> m = store.selectByToId("momo");
-		assertEquals(3, m.size());
+	public void testselectFrom(){
+		List<Follow> m = store.selectByFromId("sana");
+		assertEquals(2, m.size());
 	}
+	
+//	@Test
+//	public void testselectto(){
+//		List<Follow> m = store.selectByToId("momo");
+//		assertEquals(3, m.size());
+//	}
 	
 }

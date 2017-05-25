@@ -10,7 +10,7 @@ public interface ReviewService {
 	boolean register(Review review);
 	boolean modify(Review review);
 	boolean remove(String reviewId);
-	Review findById(String reivewId);
+	Review findById(String reviewId);
 	List<Review> findByMemberId(String memberId);
 	List<Review> findByFromId(String memberId);
 	List<Review> findByTruckId(String foodtruckId);

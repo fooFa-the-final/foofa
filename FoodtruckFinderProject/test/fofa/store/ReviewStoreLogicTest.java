@@ -2,6 +2,8 @@ package fofa.store;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
+import java.util.List;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -60,17 +62,20 @@ public class ReviewStoreLogicTest {
 
 	@Test
 	public void testSelectByMemberId() {
-		fail("Not yet implemented");
+		Review review = store.selectById("R1");
+		List<Review> list = store.selectByMemberId("momo");
+		assertEquals(1, list.size());
 	}
 
 	@Test
 	public void testSelectByTruckId() {
-		fail("Not yet implemented");
+		List<Review> review = store.selectByTruckId("F1");
+		assertEquals(2,review.size());
 	}
 
 	@Test
 	public void testSelectByRecommand() {
-		fail("Not yet implemented");
+		
 	}
 
 }

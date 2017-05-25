@@ -3,7 +3,7 @@
 CREATE TABLE member_tb (
   member_id varchar2(100),
   password varchar2(100),
-  birth date,
+  birth varchar2(100),
   email varchar2(100),
   gender CHAR(1),
   image_src varchar2(300),

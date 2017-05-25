@@ -10,7 +10,7 @@
   		<result column="score" property="score"/>
   		<result column="writedate" property="writeDate"/>
   		<association column="member_id" property="writer" 
-	  	select = "fofa.store.mapper.MemberMapper.selectMemberById"	
+	  	select = "fofa.store.mapper.MemberMapper.select"	
 	  	javaType="Member" jdbcType="VARCHAR"/>
   	</resultMap>
   	
@@ -40,6 +40,6 @@
   	<select id="selectByTruckId" parameterType="String" resultMap="ReviewMap">
   		SELECT review_id, member_id, foodtruck_id, contents, score, writedate
   		FROM review_tb
-  		WHERE foodtruckId = #{foodtruckId}
+  		WHERE foodtruck_Id = #{foodtruckId}
   	</select>
   </mapper>

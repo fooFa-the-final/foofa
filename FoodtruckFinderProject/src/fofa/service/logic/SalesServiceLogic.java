@@ -3,8 +3,6 @@ package fofa.service.logic;
 import java.sql.Date;
 import java.util.List;
 
-import org.apache.catalina.Store;
-
 import fofa.domain.Sale;
 import fofa.service.SalesService;
 import fofa.store.SalesStore;

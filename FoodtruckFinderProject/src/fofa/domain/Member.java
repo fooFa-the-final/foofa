@@ -21,10 +21,10 @@ public class Member {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public Date getBirthday() {
+	public String getBirthday() {
 		return birthday;
 	}
-	public void setBirthday(Date birthday) {
+	public void setBirthday(String birthday) {
 		this.birthday = birthday;
 	}
 	public String getEmail() {

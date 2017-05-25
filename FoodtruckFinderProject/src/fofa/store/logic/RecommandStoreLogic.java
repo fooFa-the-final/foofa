@@ -1,5 +1,7 @@
 package fofa.store.logic;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.stereotype.Repository;
@@ -46,4 +48,11 @@ public class RecommandStoreLogic implements RecommandStore {
 		return delete;
 	}
 
+	@Override
+	public List<Recommand> selectAll() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	
 }

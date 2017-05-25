@@ -1,96 +1,111 @@
 package fofa.service.logic;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import fofa.domain.Follow;
 import fofa.domain.Recommand;
 import fofa.domain.Report;
 import fofa.domain.Review;
 import fofa.service.ReviewService;
+import fofa.store.FollowStore;
+import fofa.store.RecommandStore;
+import fofa.store.ReportStore;
+import fofa.store.ReviewStore;
 
+@Service
 public class ReviewServiceLogic implements ReviewService {
 
+	@Autowired
+	private ReviewStore reviewStore;
+	
+	@Autowired
+	private FollowStore followStore;
+	
+	@Autowired
+	private ReportStore reportStore;
+	
+	private RecommandStore recommandStore;
 	@Override
 	public boolean register(Review review) {
-		// TODO Auto-generated method stub
-		return false;
+		return reviewStore.insert(review) > 0;
 	}
 
 	@Override
 	public boolean modify(Review review) {
-		// TODO Auto-generated method stub
-		return false;
+		return reviewStore.update(review) > 0;
 	}
 
 	@Override
 	public boolean remove(String reviewId) {
-		// TODO Auto-generated method stub
-		return false;
+		return reviewStore.delete(reviewId) > 0;
 	}
 
 	@Override
-	public Review findById(String reivewId) {
-		// TODO Auto-generated method stub
-		return null;
+	public Review findById(String reviewId) {
+		return reviewStore.selectById(reviewId);
 	}
 
 	@Override
 	public List<Review> findByMemberId(String memberId) {
-		// TODO Auto-generated method stub
-		return null;
+		return reviewStore.selectByMemberId(memberId);
 	}
 
 	@Override
 	public List<Review> findByFromId(String memberId) {
-		// TODO Auto-generated method stub
-		return null;
+		List<Follow> list = followStore.selectByFromId(memberId);
+		List<Review> reviewList = new ArrayList<>();
+		for(Follow f : list){
+			reviewList.add(reviewStore.selectById(f.getFromId()));
+		}
+		return reviewList;
 	}
 
 	@Override
 	public List<Review> findByTruckId(String foodtruckId) {
-		// TODO Auto-generated method stub
-		return null;
+		return reviewStore.selectByTruckId(foodtruckId);
 	}
 
 	@Override
 	public List<Review> findByRecommand() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public List<Review> findAllByReported() {
-		// TODO Auto-generated method stub
-		return null;
+		List<Report> reportList = reportStore.selectAll();
+		List<Review> list = new ArrayList<>();
+		for(Report r : reportList){
+			list.add(reviewStore.selectById(r.getReviewId()));
+		}
+		return list;
 	}
 
 	@Override
 	public boolean registerReport(Report report) {
-		// TODO Auto-generated method stub
-		return false;
+		return reportStore.insert(report) > 0;
 	}
 
 	@Override
 	public Report findReport(Report report) {
-		// TODO Auto-generated method stub
-		return null;
+		return reportStore.selectById(report);
 	}
 
 	@Override
 	public boolean registerRecommand(Recommand recommand) {
-		// TODO Auto-generated method stub
-		return false;
+		return recommandStore.insert(recommand) > 0;
 	}
 
 	@Override
 	public boolean deleteRecommand(Recommand recommand) {
-		// TODO Auto-generated method stub
-		return false;
+		return recommandStore.delete(recommand) > 0;
 	}
 
 	@Override
 	public boolean removeReport(Report report) {
-		// TODO Auto-generated method stub
-		return false;
+		return reportStore.delete(report) > 0;
 	}
-
 }
