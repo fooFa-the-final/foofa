@@ -4,12 +4,14 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
+import org.springframework.stereotype.Repository;
 
 import fofa.domain.Report;
 import fofa.store.ReportStore;
 import fofa.store.factory.SqlSessionFactoryProvider;
 import fofa.store.mapper.ReportMapper;
 
+@Repository
 public class ReportStoreLogic implements ReportStore {
 
 	private SqlSessionFactory factory;
