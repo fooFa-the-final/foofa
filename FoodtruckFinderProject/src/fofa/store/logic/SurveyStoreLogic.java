@@ -7,12 +7,14 @@ import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
+import org.springframework.stereotype.Repository;
 
 import fofa.domain.Survey;
 import fofa.store.SurveyStore;
 import fofa.store.factory.SqlSessionFactoryProvider;
 import fofa.store.mapper.SurveyMapper;
 
+@Repository
 public class SurveyStoreLogic implements SurveyStore{
 	
 	private SqlSessionFactory factory;
