@@ -12,7 +12,7 @@ import fofa.service.FavoriteService;
 import fofa.service.FoodtruckService;
 import fofa.service.MemberService;
 
-@RequestMapping("/favorite")
+@RequestMapping("favorite")
 @Controller
 public class FavoriteController {
 	@Autowired
