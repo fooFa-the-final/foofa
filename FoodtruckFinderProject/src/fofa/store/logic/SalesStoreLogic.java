@@ -9,12 +9,14 @@ import java.util.Map;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
+import org.springframework.stereotype.Repository;
 
 import fofa.domain.Sale;
 import fofa.store.SalesStore;
 import fofa.store.factory.SqlSessionFactoryProvider;
 import fofa.store.mapper.SalesMapper;
 
+@Repository
 public class SalesStoreLogic implements SalesStore {
 
 	private SqlSessionFactory factory;
