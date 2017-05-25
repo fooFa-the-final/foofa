@@ -1,5 +1,6 @@
 package fofa.controller.web;
 
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 
 import fofa.domain.Recommand;
@@ -7,6 +8,7 @@ import fofa.domain.Report;
 import fofa.domain.Review;
 import fofa.domain.Survey;
 
+@Controller
 public class ReviewController {
 	public String searchByMemberId(String memberId, Model model){
 		return null;
