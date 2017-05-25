@@ -6,29 +6,31 @@
   
 	<mapper namespace="fofa.store.mapper.FollowMapper">
 	
-	<resultMap type="Follow" id="FollowMap">
-	<id property="fromId" column="FromId"/>
-	<result property="toId" column="toId"/>
+	<resultMap type="Follow" id="followMap">
+		<id column="From_Id" property="fromId" />
+		<id column="To_Id" property="ToId" />
+		
 	</resultMap>	
-    <insert id ="insertFollow" parameterType="Follow">
-    INSERT INTO follow_tb (fromId, toId)
-    VALUES (#{fromId), #{toId})
+	
+    <insert id ="insert" parameterType="Follow">
+    INSERT INTO follow_tb (From_Id, To_Id)
+    VALUES (#{fromId}, #{toId})
     </insert>
-    <delete id="deleteFollow" parameterType="Follow">
+    <delete id="delete" parameterType="Follow">
     DELETE
     FROM follow_tb
-    WHERE toId = #{toId}
+    WHERE to_Id = #{toId} AND from_Id = #{fromId}
     </delete>
     
     <select id="selectByFromId" parameterType="String" resultMap="followMap">
-    select fromId
+    select to_Id
     FROM follow_tb
-    WHERE fromId= #{fromId}
+    WHERE from_Id= #{fromId} AND to_Id =#{toId}
     </select>
-    <select id="selectBytoId" parameterType="String" resultMap="followMap">
-    select toId
+    <select id="selectByToId" parameterType="String" resultMap="followMap">
+    select FROM_Id
     FROM follow_tb
-    WHERE toId= #{toId}
+    WHERE to_Id= #{toId}
 	</select>
 	</mapper>    
     

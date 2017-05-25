@@ -33,9 +33,9 @@
 	</delete>
 	
 	<select id="select" parameterType="String" resultMap="MemberMap">
-	select member_id, password, birthday, email, gender, profileImg
+	select member_id, password, birth, email, gender, image_src
 	FROM member_tb
-	WHERE member_id = #{memberId]
+	WHERE member_id = #{memberId}
 	
 	</select>
 	

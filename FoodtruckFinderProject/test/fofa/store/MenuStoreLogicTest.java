@@ -1,4 +1,4 @@
-package fofa.controller;
+package fofa.store;
 
 import static org.junit.Assert.*;
 
