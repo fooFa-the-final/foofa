@@ -4,12 +4,14 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
+import org.springframework.stereotype.Repository;
 
 import fofa.domain.Foodtruck;
 import fofa.store.FoodtruckStore;
 import fofa.store.factory.SqlSessionFactoryProvider;
 import fofa.store.mapper.FoodtruckMapper;
 
+@Repository
 public class FoodtruckStoreLogic implements FoodtruckStore{
 	private SqlSessionFactory factory;
 	
