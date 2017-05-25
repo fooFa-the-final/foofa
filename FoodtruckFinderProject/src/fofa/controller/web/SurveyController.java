@@ -31,28 +31,39 @@ public class SurveyController {
 		
 	return "redirect:/foodtruck/id.do?foodtruckId="+survey.getFoodtruckId();
 	}
-	
+
+	@RequestMapping("/truckStat.do")
 	public String searchSurveysStat(String foodtruckId, Model model){
 		model.addAttribute("avgItemList", surveyService.findAvgScoreBySurveyItem(foodtruckId));
 		return "foodtruckSurvey.jsp";
 	}
-	
+
+	@RequestMapping("/itemStat.do")
 	public String searchItemStat(String foodtruckId, String ItemId, Model model){
-		return null;
+		return "foodtruckSurveyDetail.jsp";
 	}
-	
+
+	@RequestMapping("/item/create.do")
 	public List<SurveyItem> createItem(String question){
-		return null;
+		surveyItemService.register(question);
+		return surveyItemService.findAll();
 	}
-	
-	public List<SurveyItem> modifyItem(String question){
-		return null;
+
+	@RequestMapping("/item/modify.do")
+	public List<SurveyItem> modifyItem(SurveyItem item){
+		surveyItemService.modify(item);
+		return surveyItemService.findAll();
 	}	
-	public List<SurveyItem> removeItem(String question){
-		return null;
+
+	@RequestMapping("/item/remove.do")
+	public List<SurveyItem> removeItem(String surveyItemId){
+		surveyItemService.remove(surveyItemId);
+		return surveyItemService.findAll();
 	}
 	
-	public String searchAllterms(Model model){
-		return null;
+	@RequestMapping("/item/list.do")
+	public String searchAllItems(Model model){
+		model.addAttribute("items",	surveyItemService.findAll());
+		return "admin/adminSurvey.jsp";
 	}
 }
