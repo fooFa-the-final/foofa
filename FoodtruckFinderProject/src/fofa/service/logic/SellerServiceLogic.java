@@ -14,15 +14,13 @@ public class SellerServiceLogic implements SellerService {
 	public SellerStore sellerStore;
 
 	@Override
-	public String checkId(String sellerId) {
+	public boolean checkId(String sellerId) {
 		Seller seller = sellerStore.select(sellerId);
 		if (seller != null) {
-			String sellerid = "faile";
+			return true;
 		} else {
-
+			return false;
 		}
-		
-		return sellerId;
 	}
 
 	@Override
