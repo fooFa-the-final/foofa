@@ -28,7 +28,7 @@ public class SellerController {
 		return "user/registerSeller.jsp";
 	}	
 
-	@RequestMapping("seller/create.do") 
+	@RequestMapping("seller/creat1e.do") 
 	public String checkId(String sellerId){
 		
 		boolean id = sellerService.checkId(sellerId);
