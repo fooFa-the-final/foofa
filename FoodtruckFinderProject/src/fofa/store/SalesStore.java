@@ -14,7 +14,7 @@ public interface SalesStore {
 
 	int delete(String saleId);
 
-	Sale selectDaySale(Date date, String foodtruckId);
+	Sale selectDaySale(String date, String foodtruckId);
 
 	List<Sale> select1YearSales(String foodtruckId);
 

@@ -72,7 +72,7 @@ public class SalesStoreLogic implements SalesStore {
 	}
 
 	@Override
-	public Sale selectDaySale(Date date, String foodtruckId) {
+	public Sale selectDaySale(String date, String foodtruckId) {
 		SqlSession session = factory.openSession();
 		Sale sale = new Sale();
 		sale.setDate(date);

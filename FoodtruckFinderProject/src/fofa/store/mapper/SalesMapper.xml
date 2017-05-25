@@ -49,17 +49,17 @@
 		sales_id,foodtruck_id,day,location,revenue
 		FROM
 		sales_tb
-		WHERE #{month}=to_char(day,'yymm') AND
+		WHERE #{month}=substr(day,1,6) AND
 		foodtruck_id=#{foodtruckId}
 	</select>
 	<select id="select1YearSales" parameterType="String" resultType="Sale">
-		SELECT #{foodtruckId} FOODTRUCK_ID, TO_CHAR(DAY, 'YY-MM') DAY,
+		SELECT #{foodtruckId} FOODTRUCK_ID, substr(day,1,6) DAY,
 		AVG(REVENUE) REVENUE
 		FROM SALES_TB
 		WHERE FOODTRUCK_ID=#{foodtruckId}
 		AND
-		TO_CHAR(DAY, 'YYYY') = '2016'
-		GROUP BY TO_CHAR(DAY, 'YY-MM')
+		substr(day,1,4) = '2016'
+		GROUP BY substr(day,1,6)
 	</select>
 
 	<select id="select10DaysSales" parameterType="String"

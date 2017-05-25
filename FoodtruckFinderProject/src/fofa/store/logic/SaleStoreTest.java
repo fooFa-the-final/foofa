@@ -22,7 +22,7 @@ public class SaleStoreTest {
 	// SalesStoreLogic saleLogic = new SalesStoreLogic();
 	//
 	// Sale sale = new Sale();
-	// Date date = new Date(15, 12, 12);
+	// String date = new Date(15, 12, 12);
 	// sale.setDate(date);
 	// sale.setFoodtruckId("20");
 	// sale.setLocation("여기rl");
@@ -37,8 +37,8 @@ public class SaleStoreTest {
 	// SalesStoreLogic saleLogic = new SalesStoreLogic();
 	//
 	// Sale sale = new Sale();
-	// Date date = new Date(0);
-	// date.setDate(121212);
+	// 
+	// sale.setDate("111111");
 	// sale.setSalesId("1");
 	// sale.setDate(date);
 	// sale.setFoodtruckId("11");
@@ -61,7 +61,7 @@ public class SaleStoreTest {
 	// public void testSelectDaySale() {
 	// SalesStoreLogic saleLogic = new SalesStoreLogic();
 	//
-	// Date date = new Date(16, 05, 26);
+	// String date = "111111";
 	// String foodtruckId = "1";
 	//
 	// Sale sale = saleLogic.selectDaySale(date, foodtruckId);

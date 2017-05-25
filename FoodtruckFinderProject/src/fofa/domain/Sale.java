@@ -6,7 +6,7 @@ public class Sale {
 
 	private String location;
 	private String foodtruckId;
-	private Date date;
+	private String date;
 	private int revenue;
 	private String salesId;
 
@@ -26,11 +26,11 @@ public class Sale {
 		this.foodtruckId = foodtruckId;
 	}
 
-	public Date getDate() {
+	public String getDate() {
 		return date;
 	}
 
-	public void setDate(Date date) {
+	public void setDate(String date) {
 		this.date = date;
 	}
 

@@ -44,7 +44,7 @@ public class SalesServiceLogic implements SalesService {
 	}
 
 	@Override
-	public Sale findDateSale(Date date, String foodtruckId) {
+	public Sale findDateSale(String date, String foodtruckId) {
 		Sale sale = store.selectDaySale(date, foodtruckId);
 		return sale;
 	}

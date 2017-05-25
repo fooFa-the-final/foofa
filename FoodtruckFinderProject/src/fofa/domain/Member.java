@@ -5,7 +5,7 @@ import java.util.Date;
 public class Member {
 	private String memberId;
 	private String password;
-	private Date birthday;
+	private String birthday;
 	private String email;
 	private Character gender;
 	private String profileImg;
