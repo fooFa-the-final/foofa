@@ -36,13 +36,13 @@ public class FoodtruckController {
 	@RequestMapping(value="/modifyForm.do", method=RequestMethod.GET)
 	public String modifyForm(String foodtruckId, Model model){
 		
-		return "modifyFoodtruck.jsp";
+		return "view/foodtruck/modifyFoodtruck.jsp";
 	}
 	
 	@RequestMapping(value="/modify.do", method=RequestMethod.POST)
 	public String modify(Foodtruck foodtruck){
 		
-		return "foodtruckInfo.jsp";
+		return "view/foodtruck/foodtruckInfo.jsp";
 	}
 	
 	@RequestMapping(value="/modifyPicture.do", method=RequestMethod.GET)
@@ -60,25 +60,25 @@ public class FoodtruckController {
 	@RequestMapping("/searchById.do")
 	public String searchById(String foodtruckId, Model model){
 		
-		return "foodtruckInfo.jsp";
+		return "view/foodtruck/foodtruckInfo.jsp";
 	}
 	
 	@RequestMapping("/searchByLoc.do")
 	public String searchByLoc(String location, Model model){
 		
-		return "listFoodtruck.jsp";
+		return "view/foodtruck/listFoodtruck.jsp";
 	}
 	
 	@RequestMapping("/searchByKeyLoc.do")
 	public String searchByKeyLoc(String keyword, String location, Model model){
 		
-		return "listFoodtruck.jsp";
+		return "view/foodtruck/listFoodtruck.jsp";
 	}
 	
 	@RequestMapping("/searchByFilter.do")
 	public String searchByFilter(HttpServletRequest request, Model model){
 		
-		return "listFoodtruck.jsp";
+		return "view/foodtruck/listFoodtruck.jsp";
 	}
 	
 	@RequestMapping("/createMenu.do")
