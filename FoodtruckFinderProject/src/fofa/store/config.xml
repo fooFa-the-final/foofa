@@ -7,6 +7,20 @@
 <configuration>
 
 	<typeAliases>
+		<typeAlias type="domain.Advertise" alias="Advertise" />
+		<typeAlias type="domain.Favorite" alias="Favorite" />
+		<typeAlias type="domain.Follow" alias="Follow" />
+		<typeAlias type="domain.Foodtruck" alias="Foodtruck" />
+		<typeAlias type="domain.Image" alias="Image" />
+		<typeAlias type="domain.Member" alias="Member" />
+		<typeAlias type="domain.Menu" alias="Menu" />
+		<typeAlias type="domain.Recommand" alias="Recommand" />
+		<typeAlias type="domain.Report" alias="Report" />
+		<typeAlias type="domain.Review" alias="Review" />
+		<typeAlias type="domain.Sale" alias="Sale" />
+		<typeAlias type="domain.Survey" alias="Survey" />
+		<typeAlias type="domain.SurveyItem" alias="SurveyItem" />
+		<typeAlias type="domain.SurveyReply" alias="SurveyReply" />
 		<typeAlias type="fofa.domain.Advertise" alias="Advertise" />
 		<typeAlias type="fofa.domain.Member" alias="Member" />
 		<typeAlias type="fofa.domain.Favorite" alias="Favorite" />
@@ -20,9 +34,13 @@
 		<typeAlias type="fofa.domain.Sale" alias="Sales" />
 		<typeAlias type="fofa.domain.Survey" alias="Survey" />
 		<typeAlias type="fofa.domain.SurveyItem" alias="SurveyItem" />
+<<<<<<< HEAD
+		<typeAlias type="fofa.domain.SurveyReply" alias="SurveyReply" />
+=======
 		<typeAlias type="fofa.domain.SurveyReply" alias="SurveyReply" />
 		<typeAlias type="fofa.domain.Seller" alias="Seller" />
 		<typeAlias type="fofa.domain.Follow" alias="Follow" />
+>>>>>>> branch '170524' of https://github.com/fooFa-the-final/foofa.git
 	</typeAliases>
 
 	<environments default="development">
@@ -37,8 +55,14 @@
 		</environment>
 	</environments>
 
+<<<<<<< HEAD
+	<mappers>
+		<mapper resource="store/mapper/MusicMapper.xml"/>
+		<mapper resource="store/mapper/SalesMapper.xml"/>
+=======
 	<mappers>
    		<mapper resource="fofa/store/mapper/AdvertiseMapper.xml"/>
+>>>>>>> branch '170524' of https://github.com/fooFa-the-final/foofa.git
 		<mapper resource="fofa/store/mapper/AdvertiseMapper.xml"/>
 		<mapper resource="fofa/store/mapper/FavoriteMapper.xml"/>
 		<mapper resource="fofa/store/mapper/FoodtruckMapper.xml"/>
@@ -53,9 +77,13 @@
 		<mapper resource="fofa/store/mapper/SellerMapper.xml"/>
 		<mapper resource="fofa/store/mapper/SurveyItemMapper.xml"/>
 		<mapper resource="fofa/store/mapper/SurveyReplyMapper.xml"/>
+<<<<<<< HEAD
+		<mapper resource="fofa/store/mapper/SurveyMapper.xml"/>
+=======
 		<mapper resource="fofa/store/mapper/MemberMapper.xml"/>
 		<mapper resource="fofa/store/mapper/SurveyMapper.xml"/> 
 		<mapper resource="fofa/store/mapper/FollowMapper.xml"/>
+>>>>>>> branch '170524' of https://github.com/fooFa-the-final/foofa.git
 	</mappers>
 
 </configuration>
