@@ -21,7 +21,7 @@ public class SellerController {
 	
 	@RequestMapping(value = "seller/create.do", method = RequestMethod.GET) 
 	public String createForm(){
-		return "seller/registerSeller.jsp";
+		return "../view/seller/registerSeller.jsp";
 	}	
 
 
@@ -33,20 +33,20 @@ public class SellerController {
 		} else  {
 
 		}
-		return "seller/registerSeller.jsp";
+		return "../view/seller/registerSeller.jsp";
 	
 	}	
 	
 	@RequestMapping("seller/checkPw.do")
 	public String checkPw(HttpSession session, String sellerPw) {
-		return "user/checkPassword.jsp";
+		return "../view/seller/checkPassword.jsp";
 	}
 	
 	@RequestMapping(value = "seller/create.do", method = RequestMethod.POST) 
 	public String create(Seller seller, Model model){
 		sellerService.register(seller);
 		model.addAttribute(seller);
-		return "foodtruck/registerTruck.jsp";
+		return "../view/foodtruck/registerTruck.jsp";
 	}	
 
 	
@@ -55,19 +55,19 @@ public class SellerController {
 		String sellerId = null;
 		Seller seller = sellerService.findById(sellerId);
 		model.addAttribute(seller);
-		return "seller/modifySeller.jsp";
+		return "../view/seller/modifySeller.jsp";
 	}	
 	
 
 	@RequestMapping(value = "seller/modify.do", method = RequestMethod.POST) 
 	public String modify(Seller seller){
 		sellerService.modify(seller);
-		return "seller/modifySeller.jsp";
+		return "../view/seller/modifySeller.jsp";
 	}	
 
 	@RequestMapping(value = "seller/remove.do", method = RequestMethod.GET) 
 	public String removeForm(){
-		return "seller/checkPassword.jsp";
+		return "../view/seller/checkPassword.jsp";
 	}
 
 	@RequestMapping(value = "seller/remove.do", method = RequestMethod.POST) 
