@@ -36,7 +36,7 @@ public class SalesController {
 
 	@RequestMapping("sales/truck.do")
 	public String searchTruckSales(String foodtruckId, Model model) {
-		return "foodtruckSales.jsp";
+		return "/view/foodtruck/foodtruckSales.jsp";
 	}
 
 	@RequestMapping(value = "sales/date.do", method = RequestMethod.POST)
