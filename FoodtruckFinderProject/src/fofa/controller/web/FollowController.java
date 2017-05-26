@@ -20,7 +20,7 @@ public class FollowController {
 	@RequestMapping("follow/list.do")
 	public String search(HttpSession session, Model model){
 		
-		return "memberFollowList.jsp";
+		return "../view/member/memberFollowList.jsp";
 	}
 	@RequestMapping("follow/count.do")
 	public int searchCount(String memberId){
