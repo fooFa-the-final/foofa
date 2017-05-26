@@ -1,5 +1,8 @@
 package fofa.controller.web;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -9,8 +12,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import fofa.domain.Advertise;
+import fofa.domain.Foodtruck;
 import fofa.domain.Member;
-import fofa.domain.Seller;
+import fofa.domain.Review;
 import fofa.service.AdvertiseService;
 import fofa.service.FoodtruckService;
 import fofa.service.MemberService;
@@ -34,11 +39,40 @@ public class MainController {
 
 	@RequestMapping("index.do")
 	public String showMain(Model model){
+		List<Review> allReview = reviewService.findByRecommand();
+		List<Review> reviews = new ArrayList<>();
+		reviews.add(allReview.get(0));
+		reviews.add(allReview.get(1));
+		reviews.add(allReview.get(2));
+		model.addAttribute("reviews", reviews);
+		
+		List<Advertise> allAdv = advertiseService.findNowAd();
+		List<Foodtruck> adTrucks = new ArrayList<>();
+		for(int i=0; i<3; i++){
+			double randomValue = Math.random();
+			int intValue = (int)(randomValue*allAdv.size())+1;
+			String sellerId = allAdv.get(intValue).getSellerId();
+			adTrucks.add(foodtruckService.findBySeller(sellerId));
+		}
+		model.addAttribute("adTrucks", adTrucks);
+		
+		List<Foodtruck> allTrucks = foodtruckService.findByLoc("가산동");
+		List<Foodtruck> nearTrucks = new ArrayList<>();		
+		for(int i=0; i<3; i++){
+			double randomValue = Math.random();
+			int intValue = (int)(randomValue*allTrucks.size())+1;
+			nearTrucks.add(allTrucks.get(intValue));
+		}
+		model.addAttribute("nearTrucks", nearTrucks);		
 		return "view/index.jsp";
 	}
 
 	@RequestMapping("main.do")
 	public String showMainLogin(HttpSession session, Model model){
+		String memberId = (String)session.getAttribute("loginUserId");
+		List<Review> reviews = reviewService.findByFromId(memberId);
+		model.addAttribute("reviews", reviews);
+		
 		return "view/main.jsp";
 	}
 
