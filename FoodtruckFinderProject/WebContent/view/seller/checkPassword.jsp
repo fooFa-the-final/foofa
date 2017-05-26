@@ -33,7 +33,7 @@
 </head>
 <body>
 	<header>
-		<%@ include file="view/user/header.jspf"%>
+		<%@ include file="../header.jspf"%>
 	</header>
 	<div class="col-lg-6">
 		<form role="form">
