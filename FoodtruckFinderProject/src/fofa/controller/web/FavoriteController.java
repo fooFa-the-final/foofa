@@ -37,7 +37,7 @@ public class FavoriteController {
 	@RequestMapping(value="/list.do", method=RequestMethod.GET)
 	public String search(HttpSession session, Model model){
 		
-		return "view/user/memberFavoriteList.jsp";
+		return "../view/user/memberFavoriteList.jsp";
 	}
 	
 }
