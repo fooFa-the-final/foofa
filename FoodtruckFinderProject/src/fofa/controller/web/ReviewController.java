@@ -15,21 +15,21 @@ public class ReviewController {
 	
 	@RequestMapping("/review/list/member.do")
 	public String searchByMemberId(String memberId, Model model){
-		return "memberReviewList.jsp";
+		return "user/memberReviewList.jsp";
 	}
 
 	@RequestMapping("/review/list/follow.do")
 	public String searchByFollower(String memberId, Model model){
-		return "memberNewsfeed.jsp";
+		return "user/memberNewsfeed.jsp";
 	}
 	
 	@RequestMapping("/review/list/truck.do")
 	public String searchByFoodtruckId(String foodtruckId, Model model){
-		return "detailFoodtruck.jsp";
+		return "foodtruck/detailFoodtruck.jsp";
 	}
 	@RequestMapping(value="/review/create.do", method=RequestMethod.GET)
 	public String createReviewForm(String foodtruckId, Model model){
-		return "registerReview.jsp";
+		return "user/registerReview.jsp";
 	}
 	
 	@RequestMapping(value="/review/create.do", method=RequestMethod.POST)
@@ -39,7 +39,7 @@ public class ReviewController {
 	
 	@RequestMapping(value="/review/modify.do", method=RequestMethod.GET)
 	public String modifyReviewForm(String reviewId, Model model){
-		return "registerReview.jsp";
+		return "user/registerReview.jsp";
 	}
 	
 	@RequestMapping(value="/review/modify.do", method=RequestMethod.POST)
@@ -64,7 +64,7 @@ public class ReviewController {
 	
 	@RequestMapping("/review/reported/remove.do")
 	public String removeReivewByReport(String reviewId){
-		return "adminReport.jsp";
+		return "admin/adminReport.jsp";
 	}
 	
 	@RequestMapping("/review/report/remove.do")
