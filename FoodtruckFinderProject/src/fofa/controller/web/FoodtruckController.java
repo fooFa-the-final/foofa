@@ -51,7 +51,7 @@ public class FoodtruckController {
 		return null;
 	}
 	
-	@RequestMapping(value="/modifyPicture.do", method=RequestMethod.GET)
+	@RequestMapping(value="/modifyState.do", method=RequestMethod.GET)
 	public boolean modifyState(String foodtruckId, boolean operation_state){
 		
 		return false;
