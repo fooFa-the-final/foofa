@@ -56,7 +56,7 @@ public class MainController {
 
 	@RequestMapping(value="/login.do", method=RequestMethod.POST)
 	public String login(HttpServletRequest request, Member member){
-		String isSeller = request.getParameter("isSeller");
+		String[] isSeller = request.getParameterValues("isSeller");
 		String id = member.getMemberId();
 		String pw = member.getPassword();
 		HttpSession session = request.getSession();
@@ -65,7 +65,7 @@ public class MainController {
 			session.setAttribute("loginUserId", id);	
 			
 			return "redirect:/review/report/list.do";
-		}else if(isSeller.equals("sellerLogin")){
+		}else if(isSeller != null){
 			if(sellerService.checkPw(id, pw)){
 				session.setAttribute("loginUserId", id);
 				session.setAttribute("isSeller", true);
