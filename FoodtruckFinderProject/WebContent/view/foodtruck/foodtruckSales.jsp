@@ -6,8 +6,7 @@
 
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Bootsrtap Free Admin Template - SIMINTA | Admin Dashboad
-	Template</title>
+<title>매출통계페이지</title>
 <!-- Core CSS - Include with every page -->
 <link href="../../resources/plugins/bootstrap/bootstrap.css"
 	rel="stylesheet" />
@@ -57,6 +56,74 @@ h2 {
 <link rel='stylesheet' href='../../resources/css/Nwagon.css'
 	type='text/css'>
 <script src='../../resources/scripts/Nwagon.js'></script>
+<!--------------------------------------------------------------------------  -->
+<meta charset='utf-8' />
+<link href='../../resources/css/fullcalendar.min.css' rel='stylesheet' />
+<link href='../../resources/css/fullcalendar.print.min.css'
+	rel='stylesheet' media='print' />
+<script src='../../resources/scripts/moment.min.js'></script>
+<script src='../../resources/scripts/jquery.min.js'></script>
+<script src='../../resources/scripts/fullcalendar.min.js'></script>
+<script>
+	$(document).ready(function() {
+
+		$('#calendar').fullCalendar({
+			defaultDate : '2017-05-12',
+			editable : true,
+			eventLimit : true, // allow "more" link when too many events
+			events : [ {
+				title : 'All Day Event',
+				start : '2017-05-01'
+			}, {
+				title : 'Long Event',
+				start : '2017-05-07',
+				end : '2017-05-10'
+			}, {
+				id : 999,
+				title : 'Repeating Event',
+				start : '2017-05-09T16:00:00'
+			}, {
+				id : 999,
+				title : 'Repeating Event',
+				start : '2017-05-16T16:00:00'
+			}, {
+				title : 'Conference',
+				start : '2017-05-11',
+				end : '2017-05-13'
+			}, {
+				title : 'Meeting',
+				start : '2017-05-12T10:30:00',
+				end : '2017-05-12T12:30:00'
+			}, {
+				title : 'Lunch',
+				start : '2017-05-12T12:00:00'
+			}, {
+				title : 'Meeting',
+				start : '2017-05-12T14:30:00'
+			}, {
+				title : 'Happy Hour',
+				start : '2017-05-12T17:30:00'
+			}, {
+				title : 'Dinner',
+				start : '2017-05-12T20:00:00'
+			}, {
+				title : 'Birthday Party',
+				start : '2017-05-13T07:00:00'
+			}, {
+				title : 'Click for Google',
+				url : 'http://google.com/',
+				start : '2017-05-28'
+			} ]
+		});
+
+	});
+</script>
+<style>
+#calendar {
+	max-width: 900px;
+	margin: 0 auto;
+}
+</style>
 
 </head>
 <body>
@@ -86,9 +153,10 @@ h2 {
 		</div>
 		<!-- end sidebar-collapse --> </nav>
 		<!-- end navbar side -->
-		<div id="page-wrapper"><!--매출페이지 시작  -->
+		<div id="page-wrapper">
+			<!--매출페이지 시작  -->
 			<div class="row">
-				<h2>Line Chart with guide line</h2>
+				<h2>매출 그래프</h2>
 				<div id="chart71"></div>
 				<p style='font-size: 12px; padding: 0 0 40px 40px'>** Mouse over
 					the chart area in order to move the guide line</p>
@@ -112,18 +180,21 @@ h2 {
 						'leftOffsetValue' : 40,
 						'bottomOffsetValue' : 60,
 						'chartSize' : {
-							width : 700,
-							height : 300
+							width : 900,
+							height : 400
 						},
 						'minValue' : 0,
-						'maxValue' : 100,
-						'increment' : 20,
+						'maxValue' : 1000000000000,
+						'increment' : 100000,
 						'isGuideLineNeeded' : false
 					//default set to false
 					};
 
 					Nwagon.chart(options);
 				</script>
+			</div>
+			<div class="row">
+				<div id='calendar'></div>
 			</div>
 		</div>
 
