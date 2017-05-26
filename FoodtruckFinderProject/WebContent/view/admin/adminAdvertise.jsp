@@ -39,7 +39,7 @@
                         <a href="${ctx }/survey/item/list.do"><i class="fa fa-flask fa-fw"></i>설문조사 관리</a>
                     </li>
                     <li class="selected">
-                        <a href="${ctx }/advertise/list.do"><i class="fa fa-table fa-fw"></i>광고 관리</a>
+                        <a href="${ctx }/advertise/list/asc.do"><i class="fa fa-table fa-fw"></i>광고 관리</a>
                     </li>
                 </ul>
                 <!-- end side-menu -->
