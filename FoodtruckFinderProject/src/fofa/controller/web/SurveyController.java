@@ -35,12 +35,12 @@ public class SurveyController {
 	@RequestMapping("/truckStat.do")
 	public String searchSurveysStat(String foodtruckId, Model model){
 		model.addAttribute("avgItemList", surveyService.findAvgScoreBySurveyItem(foodtruckId));
-		return "foodtruck/foodtruckSurvey.jsp";
+		return "/view/foodtruck/foodtruckSurvey.jsp";
 	}
 
 	@RequestMapping("/itemStat.do")
 	public String searchItemStat(String foodtruckId, String ItemId, Model model){
-		return "foodtruck/foodtruckSurveyDetail.jsp";
+		return "/view/foodtruck/foodtruckSurveyDetail.jsp";
 	}
 
 	@RequestMapping("/item/create.do")
@@ -64,6 +64,6 @@ public class SurveyController {
 	@RequestMapping("/item/list.do")
 	public String searchAllItems(Model model){
 		model.addAttribute("items",	surveyItemService.findAll());
-		return "admin/adminSurvey.jsp";
+		return "/view/admin/adminSurvey.jsp";
 	}
 }

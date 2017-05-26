@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html>
+<!DOCTYPE>
 <html>
 <c:set value="${pageContext.request.contextPath}" var="ctx" />
 <head>
@@ -33,13 +33,13 @@
                 <!-- side-menu -->
                 <ul class="nav" id="side-menu">
                     <li >
-                        <a href="#"><i class="fa fa-dashboard fa-fw"></i>신고 관리 </a>
+                        <a href="${ctx }/review/report/list.do"><i class="fa fa-dashboard fa-fw"></i>신고 관리 </a>
                     </li>
                      <li>
-                        <a href="#"><i class="fa fa-flask fa-fw"></i>설문조사 관리</a>
+                        <a href="${ctx }/survey/item/list.do"><i class="fa fa-flask fa-fw"></i>설문조사 관리</a>
                     </li>
                     <li class="selected">
-                        <a href="#"><i class="fa fa-table fa-fw"></i>광고 관리</a>
+                        <a href="${ctx }/advertise/list/asc.do"><i class="fa fa-table fa-fw"></i>광고 관리</a>
                     </li>
                 </ul>
                 <!-- end side-menu -->
@@ -77,7 +77,7 @@
 
                                     <div class="panel-body">
                             <div class="table-responsive">
-                                <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                                <table class="table table-striped table-bordered table-hover align-middle" id="dataTables-example">
                                     <thead>
                                         <tr>
                                             <th>Status</th>
