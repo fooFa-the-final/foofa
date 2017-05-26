@@ -9,11 +9,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FooFa Login</title>
     <!-- Core CSS - Include with every page -->
-    <link href="/resources/plugins/bootstrap/bootstrap.css" rel="stylesheet" />
-    <link href="/resources/font-awesome/css/font-awesome.css" rel="stylesheet" />
-    <link href="/resources/plugins/pace/pace-theme-big-counter.css" rel="stylesheet" />
-  <link href="/resources/css/style.css" rel="stylesheet" />
-      <link href="/resources/css/main-style.css" rel="stylesheet" />
+    <link href="${ctx}/resources/plugins/bootstrap/bootstrap.css" rel="stylesheet" />
+    <link href="${ctx}/resources/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <link href="${ctx}/resources/plugins/pace/pace-theme-big-counter.css" rel="stylesheet" />
+  <link href="${ctx}/resources/css/style.css" rel="stylesheet" />
+      <link href="${ctx}/resources/css/main-style.css" rel="stylesheet" />
 
     <!-- Page-Level CSS -->
     <link href="resources/plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet" />
