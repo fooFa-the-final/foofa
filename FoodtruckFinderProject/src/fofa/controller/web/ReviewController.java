@@ -59,7 +59,7 @@ public class ReviewController {
 	
 	@RequestMapping("/review/report/list.do")
 	public String selectReviewByReport(Model model){
-		return null; // ajax
+		return "../../view/admin/adminReport.jsp"; // ajax
 	}
 	
 	@RequestMapping("/review/reported/remove.do")
