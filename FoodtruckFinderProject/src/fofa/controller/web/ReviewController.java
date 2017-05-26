@@ -15,21 +15,21 @@ public class ReviewController {
 	
 	@RequestMapping("/review/list/member.do")
 	public String searchByMemberId(String memberId, Model model){
-		return "user/memberReviewList.jsp";
+		return "../../view/user/memberReviewList.jsp";
 	}
 
 	@RequestMapping("/review/list/follow.do")
 	public String searchByFollower(String memberId, Model model){
-		return "user/memberNewsfeed.jsp";
+		return "../../view/user/memberNewsfeed.jsp";
 	}
 	
 	@RequestMapping("/review/list/truck.do")
 	public String searchByFoodtruckId(String foodtruckId, Model model){
-		return "foodtruck/detailFoodtruck.jsp";
+		return "../../view/foodtruck/detailFoodtruck.jsp";
 	}
 	@RequestMapping(value="/review/create.do", method=RequestMethod.GET)
 	public String createReviewForm(String foodtruckId, Model model){
-		return "user/registerReview.jsp";
+		return "../../view/user/registerReview.jsp";
 	}
 	
 	@RequestMapping(value="/review/create.do", method=RequestMethod.POST)
@@ -39,17 +39,17 @@ public class ReviewController {
 	
 	@RequestMapping(value="/review/modify.do", method=RequestMethod.GET)
 	public String modifyReviewForm(String reviewId, Model model){
-		return "user/registerReview.jsp";
+		return "../../view/user/registerReview.jsp";
 	}
 	
 	@RequestMapping(value="/review/modify.do", method=RequestMethod.POST)
 	public String modifyReview(Review review){
-		return "redirect:review/list/member.do";
+		return "redirect:list/member.do";
 	}
 	
 	@RequestMapping("/review/remove.do")
 	public String removeReview(String reviewId){
-		return "redirect:review/list/truck.do";
+		return "redirect:list/truck.do";
 	}
 	
 	@RequestMapping("/review/report/create.do")
@@ -64,7 +64,7 @@ public class ReviewController {
 	
 	@RequestMapping("/review/reported/remove.do")
 	public String removeReivewByReport(String reviewId){
-		return "admin/adminReport.jsp";
+		return "../view/admin/adminReport.jsp";
 	}
 	
 	@RequestMapping("/review/report/remove.do")
