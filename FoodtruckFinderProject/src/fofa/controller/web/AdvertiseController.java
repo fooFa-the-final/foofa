@@ -45,11 +45,11 @@ public class AdvertiseController {
 	}
 	
 	
-	@RequestMapping("advertise/list/asc.do")
+	@RequestMapping("/advertise/list/asc.do")
 	public String searchByAsc(boolean approve, Model model){
 		approve = true;
 		List<Advertise> list = advertiseService.findByAsc(approve);
-		return "../../view/admin/adminAdvertise.jsp";
+		return "view/admin/adminAdvertise.jsp";
 	}
 
 	@RequestMapping("advertise/list/desc.do")
