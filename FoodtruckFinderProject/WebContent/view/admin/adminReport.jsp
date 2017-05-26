@@ -33,13 +33,13 @@
                 <!-- side-menu -->
                 <ul class="nav" id="side-menu">
                     <li class="selected">
-                        <a href="#"><i class="fa fa-dashboard fa-fw"></i>신고 관리 </a>
+                        <a href="${ctx }/review/report/list.do"><i class="fa fa-dashboard fa-fw"></i>신고 관리 </a>
                     </li>
-                     <li >
-                        <a href="#"><i class="fa fa-flask fa-fw"></i>설문조사 관리</a>
+                     <li>
+                        <a href="${ctx }/survey/item/list.do"><i class="fa fa-flask fa-fw"></i>설문조사 관리</a>
                     </li>
-                    <li>
-                        <a href="#"><i class="fa fa-table fa-fw"></i>광고 관리</a>
+                    <li >
+                        <a href="${ctx }/advertise/list.do"><i class="fa fa-table fa-fw"></i>광고 관리</a>
                     </li>
                 </ul>
                 <!-- end side-menu -->

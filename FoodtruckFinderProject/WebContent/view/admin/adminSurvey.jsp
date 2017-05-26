@@ -33,13 +33,13 @@
                 <!-- side-menu -->
                 <ul class="nav" id="side-menu">
                     <li >
-                        <a href="#"><i class="fa fa-dashboard fa-fw"></i>신고 관리 </a>
+                        <a href="${ctx }/review/report/list.do"><i class="fa fa-dashboard fa-fw"></i>신고 관리 </a>
                     </li>
                      <li class="selected">
-                        <a href="#"><i class="fa fa-flask fa-fw"></i>설문조사 관리</a>
+                        <a href="${ctx }/survey/item/list.do"><i class="fa fa-flask fa-fw"></i>설문조사 관리</a>
                     </li>
                     <li>
-                        <a href="#"><i class="fa fa-table fa-fw"></i>광고 관리</a>
+                        <a href="${ctx }/advertise/list.do"><i class="fa fa-table fa-fw"></i>광고 관리</a>
                     </li>
                 </ul>
                 <!-- end side-menu -->
@@ -63,20 +63,20 @@
                     <div class="panel panel-default">  설문 조사 항목</div>
                     <div class="panel-body">
                             <div class="table-responsive">
-                                <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                                <table class="table table-striped table-bordered table-hover" id="dataTables-example" >
                                     <thead>
                                         <tr>
-                                            <th>Question</th>
-                                            <th>수정</th>
-                                            <th>삭제</th>
+                                            <th class="text-center">Question</th>
+                                            <th class="text-center">수정</th>
+                                            <th class="text-center">삭제</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody style="vertical-align:middle">
                                     	<c:forEach var="item" varStatus="no" items="${items }">
                                           <tr class="odd gradeX">
                                             <td>${item.question }</td>
-                                			<td> <button type="button" class="btn btn-warning">수정</button></td>
-                                            <td class="center"><button type="button" class="btn btn-danger">삭제</button></td>
+                                			<td class="text-center"> <button type="button" class="btn btn-warning">수정</button></td>
+                                            <td class="text-center"><button type="button" class="btn btn-danger">삭제</button></td>
                                         </tr>                                  	
                                     	</c:forEach>
                                     </tbody>
@@ -108,8 +108,6 @@
                         		</div>
                         		</div>
                 </div>
-            </div>
-            
 
         </div>
         <!-- end page-wrapper -->
