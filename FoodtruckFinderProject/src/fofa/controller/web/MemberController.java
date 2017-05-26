@@ -14,11 +14,11 @@ public class MemberController {
 
 	@RequestMapping(value="member/createForm.do", method= RequestMethod.GET)
 	public String createForm(){
-		return "member/registerMember.jsp";
+		return "member/memberRegister.jsp";
 	}		
 	@RequestMapping("member/checkId.do")
 	public String checkId(String memberId){
-		return "member/registerMember.jsp";
+		return "member/MemberRegister.jsp";
 	}
 	@RequestMapping(value="member/create.do", method = RequestMethod.POST)
 	public String create(Member member){
@@ -26,7 +26,7 @@ public class MemberController {
 	}
 	@RequestMapping(value="member/modifyForm.do", method= RequestMethod.GET)
 	public String modifyForm(HttpSession session, Model model){
-		return "memberModify.jsp";
+		return "modifyMember.jsp";
 	}
 	@RequestMapping(value="member/modify.do", method=RequestMethod.POST)
 	public String modify(Member member){
@@ -38,7 +38,7 @@ public class MemberController {
 	}
 	@RequestMapping("member/remove.do")
 	public String remove(HttpSession session){
-		return "member/index.jsp";
+		return "index.jsp";
 	}
 	@RequestMapping("member/modifypic.do")
 	public String modifyPicture(HttpSession session, String img){
