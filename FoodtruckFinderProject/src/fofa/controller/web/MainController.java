@@ -45,6 +45,11 @@ public class MainController {
 		reviews.add(allReview.get(1));
 		reviews.add(allReview.get(2));
 		model.addAttribute("reviews", reviews);
+		double mainRandom = Math.random();
+		int intMain = (int)(mainRandom*allReview.size())+1;
+		Review mainReview = reviewService.findById(allReview.get(intMain).getReviewId());
+		model.addAttribute("mainFoodImg",mainReview.getImages().get(0));
+		model.addAttribute("mainMemberImg", memberService.findById(mainReview.getWriter().getMemberId()));
 		
 		List<Advertise> allAdv = advertiseService.findNowAd();
 		List<Foodtruck> adTrucks = new ArrayList<>();
