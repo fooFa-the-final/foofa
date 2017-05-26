@@ -1,21 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
-
+<c:set value="${pageContext.request.contextPath}" var="ctx" />
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FOODTRUCK FINDER</title>
     <!-- Core CSS - Include with every page -->
-    <link href="resources/plugins/bootstrap/bootstrap.css" rel="stylesheet" />
-    <link href="resources/font-awesome/css/font-awesome.css" rel="stylesheet" />
-    <link href="resources/plugins/pace/pace-theme-big-counter.css" rel="stylesheet" />
-  <link href="resources/css/style.css" rel="stylesheet" />
-      <link href="resources/css/main-style.css" rel="stylesheet" />
+    <link href="${ctx }/resources/plugins/bootstrap/bootstrap.css" rel="stylesheet" />
+    <link href="${ctx}/resources/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <link href="${ctx}/resources/plugins/pace/pace-theme-big-counter.css" rel="stylesheet" />
+  <link href="${ctx}/resources/css/style.css" rel="stylesheet" />
+      <link href="${ctx}/resources/css/main-style.css" rel="stylesheet" />
 
     <!-- Page-Level CSS -->
-    <link href="resources/plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet" />
+    <link href="${ctx}/resources/plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet" />
 
 </head>
 
@@ -186,14 +187,14 @@
     <!-- end wrapper -->
 
     <!-- Core Scripts - Include with every page -->
-    <script src="resources/plugins/jquery-1.10.2.js"></script>
-    <script src="resources/plugins/bootstrap/bootstrap.min.js"></script>
-    <script src="resources/plugins/metisMenu/jquery.metisMenu.js"></script>
-    <script src="resources/plugins/pace/pace.js"></script>
-    <script src="resources/scripts/siminta.js"></script>
+    <script src="${ctx}/resources/plugins/jquery-1.10.2.js"></script>
+    <script src="${ctx}/resources/plugins/bootstrap/bootstrap.min.js"></script>
+    <script src="${ctx}/resources/plugins/metisMenu/jquery.metisMenu.js"></script>
+    <script src="${ctx}/resources/plugins/pace/pace.js"></script>
+    <script src="${ctx}/resources/scripts/siminta.js"></script>
     <!-- Page-Level Plugin Scripts-->
-    <script src="resources/plugins/dataTables/jquery.dataTables.js"></script>
-    <script src="resources/plugins/dataTables/dataTables.bootstrap.js"></script>
+    <script src="${ctx}/resources/plugins/dataTables/jquery.dataTables.js"></script>
+    <script src="${ctx}/resources/plugins/dataTables/dataTables.bootstrap.js"></script>
     <script>
         $(document).ready(function () {
             $('#dataTables-example').dataTable();

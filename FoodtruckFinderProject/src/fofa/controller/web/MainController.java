@@ -32,12 +32,12 @@ public class MainController {
 	private AdvertiseService advertiseService;
 	
 
-	@RequestMapping("/index.do")
+	@RequestMapping("index.do")
 	public String showMain(Model model){
 		return "view/index.jsp";
 	}
 
-	@RequestMapping("/main.do")
+	@RequestMapping("main.do")
 	public String showMainLogin(HttpSession session, Model model){
 		return "view/main.jsp";
 	}
@@ -50,11 +50,11 @@ public class MainController {
 	@RequestMapping("/logout.do")
 	public String logout(HttpSession session){
 		session.invalidate();
-		return "redirect:/index.do";
+		return "redirect:index.do";
 	}
 	
 
-	@RequestMapping(value="/login.do", method=RequestMethod.POST)
+	@RequestMapping(value="login.do", method=RequestMethod.POST)
 	public String login(HttpServletRequest request, Member member){
 		String[] isSeller = request.getParameterValues("isSeller");
 		String id = member.getMemberId();
@@ -64,22 +64,22 @@ public class MainController {
 		if(id.equals("admin") && pw.equals("admin")){
 			session.setAttribute("loginUserId", id);	
 			
-			return "redirect:/review/report/list.do";
+			return "redirect:review/report/list.do";
 		}else if(isSeller != null){
 			if(sellerService.checkPw(id, pw)){
 				session.setAttribute("loginUserId", id);
 				session.setAttribute("isSeller", true);
 				session.setAttribute("truckId",	foodtruckService.findBySeller(id).getFoodtruckId());
-				return "redirect:/truck/id.do";
+				return "redirect:truck/id.do";
 			}
 		}else{
 			if(memberService.checkPw(id, pw)){
 				request.getSession().setAttribute("loginUserId", id);
-				return "redirect:/main.do";
+				return "redirect:main.do";
 			}
 		}
 		
-		return "redirect:/login.do";
+		return "redirect:login.do";
 	}
 
 }

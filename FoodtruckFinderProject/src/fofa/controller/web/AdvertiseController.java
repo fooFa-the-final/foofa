@@ -16,7 +16,7 @@ public class AdvertiseController {
 
 	@Autowired
 	private AdvertiseService advertiseService;
-	
+		
 	
 	@RequestMapping(value = "advertise/reqest.do", method = RequestMethod.GET) 
 	public String requestForm(){
@@ -49,7 +49,8 @@ public class AdvertiseController {
 	public String searchByAsc(boolean approve, Model model){
 		approve = true;
 		List<Advertise> list = advertiseService.findByAsc(approve);
-		return "view/admin/adminAdvertise.jsp";
+		System.out.println(list.size());
+		return "/view/admin/adminAdvertise.jsp";
 	}
 
 	@RequestMapping("advertise/list/desc.do")
