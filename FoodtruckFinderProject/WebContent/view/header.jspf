@@ -4,6 +4,7 @@
           <!-- navbar top -->
         <nav class="navbar navbar-default navbar-fixed-top" role="navigation" id="navbar">
             <!-- navbar-header -->
+            <div class="navbar-header">
              <c:choose>
                  <c:when test="${loginUserId ne null }">
                     <a class="navbar-brand" href="${ctx}/main.do">
@@ -16,11 +17,13 @@
                 	</a>
                  </c:otherwise>
             </c:choose>
+            </div>
+            <!-- end navbar-header -->
+            <!-- end navbar-header -->
             <!-- navbar-top-links -->
             <ul class="nav navbar-top-links navbar-right">
                 <!-- main dropdown -->
                 <li class="row">
-                		<div class="col-xs-10" style="margin-right: 200px">
 	            			<!-- search section-->
 	                        <div class="input-group custom-search-form">
 	                        	<form method="post" action="${ctx }/truck/list/key.do">
@@ -32,7 +35,6 @@
 	                            </form>	
 	                        </div>
 	                		<!--end search section-->
-	            		</div>
                 </li>
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
