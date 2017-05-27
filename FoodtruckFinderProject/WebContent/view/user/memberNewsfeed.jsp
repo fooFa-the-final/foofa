@@ -63,24 +63,31 @@
         <div id="page-wrapper">
             <div class="row">
                 <!-- Page Header -->
-                <div class="col-md-12" style="background-color:white;height:300px">
+                <div class="row" style="height:300px; background-color:#FFFFFF; position:absolute; width:83.5%">
                     <span>
                             <a class="navbar-brand" href="#" style="margin-top:10px; margin-left:20px">
                                 <img src="../../resources/img/waikiki.jpg" style="height:250px; width:250px"/>
                             </a>
-                            <div class="user-info">
-                                <h1>WAIKIKI JEJU</h1><br>
-                                <h5>양식</h5>
-                                <h5>제주시</h5>
+                            <div class="user-info" >
+                                <h1><a style="color:black">트와이스님의 프로필 페이지</a></h1><br>
+                                <h5>twicejjang@chogo</h5>
                                 <h5>144Followers</h5>
                                 <h5>255Reviews</h5>
-                            </div>
+                            </div>  
                     </span>
-                    <span style="float:right; margin-right:50px; margin-top: 30px">
-                        <a href="#"><button type="button" class="btn btn-default">판매자 정보 수정</button></a>
-                        <a href="#"><button type="button" class="btn btn-default">판매자 탈퇴</button></a>
-                    </span>        
+                <span style="float:right; margin-right:50px; margin-down: 30px;  margin-top: 70px;">
+                    <div class="button">    
+                    <a href="#"><button type="button" class="btn btn-default">회원 탈퇴</button></a>
+                        <br>
+                        <br><br><br><br><br><br>
+                        
+                        <a href="#"><button type="button" class="btn btn-default">Make Follow</button></a>
+                    </div>
+                        </span>    
+    
                 </div>
+
+                            </div>
                 <!--End Page Header -->
                 <div class="col-md-12">
                 	<h1 style="font-size:30px">My Followers Review</h1>

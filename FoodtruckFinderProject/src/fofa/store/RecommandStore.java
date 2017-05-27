@@ -7,5 +7,6 @@ import fofa.domain.Recommand;
 public interface RecommandStore {
 	int insert(Recommand recommand);
 	int delete(Recommand recommand);
-	List<Recommand> selectAll();
+	int selectReviewCount(String reviewId);
+	boolean select(Recommand recommand);
 }

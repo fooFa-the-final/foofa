@@ -63,6 +63,10 @@ limitations under the License.*/
  .navbar-top-links li {
     display: inline-block;
 }
+ .navbar-main-links li {
+    display: inline-block;
+    margin: 45px;
+}
 
 .navbar-top-links li:last-child {
     margin-right: 15px;
@@ -371,6 +375,69 @@ h1 { font-size: 1.5em; margin: 10px; }
 .rating > label { 
   color: #ddd; 
  float: right; 
+}
+/** Mainpage Index Page**/
+nav.main-head-top {
+	background-image:url('../img/mainSample.png');
+	height: 550px;
+	width: 100%;
+	margin: -1px;
+}
+
+body.main-body {
+	margin: 0;
+}
+
+.navbar-center {
+  	width: 1020px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+img.main_img_person {
+	margin-top: 90px;
+	width: 50px;
+	height: 50px;
+}
+
+div.main-container{
+	width: 1000px;
+	margin: 0 auto;
+	text-align: center;
+	margin-top: 20px;
+}
+
+div.main-container h3 {
+	color:rgb(130, 7, 9);
+}
+
+div.main-container h4 {
+	color:#d32323;
+	margin: 20px;
+	height: 30px;
+}
+
+div.main-container img {
+	width: 313px;
+	height: 225px;
+}
+
+div.main-container div.row {
+	margin-bottom: 50px;
+}
+
+.main-head-top .top-head-menu button{
+	font-weight: bold;
+	border-width: 2px;
+	color: rgb(130, 7, 9);
+}
+.main-head-top .signUpBtn{
+	border-width: 2px;
+	border-color: rgb(130, 7, 9);
+}
+.main-head-top .searchBtn{
+	font-weight: bold;
+	border-width: 2px;
 }
 
 /***** CSS Magic to Highlight Stars on Hover *****/
