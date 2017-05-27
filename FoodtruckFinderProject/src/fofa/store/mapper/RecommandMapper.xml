@@ -16,7 +16,7 @@
  		DELETE FROM RECOMMAND_TB
  		WHERE review_id=#{reviewId} AND writer_id=#{writerId}
  	</delete>
- 	<select id = "selectReviewCount" resultType = "number" parameterType="String">
+ 	<select id = "selectReviewCount" resultType = "int" parameterType="String">
  		SELECT count(*)
  		FROM RECOMMAND_TB
  		WHERE review_id=#{reviewId}
