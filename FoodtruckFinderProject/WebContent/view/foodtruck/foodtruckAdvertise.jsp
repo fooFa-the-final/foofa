@@ -55,31 +55,47 @@
         <!-- end navbar side -->
         <!--  page-wrapper -->
         <div id="page-wrapper">
-
             <div class="row">
-                <!-- Page Header -->
                 <div class="col-lg-12">
-                    <h1 class="page-header">광고 요청</h1>
-                </div>
-                <!--End Page Header -->
+                    <div class="panel panel-default" style="margin-top:15px; height:320px;">
+                        <div class="panel-body">
+                    <span>
+                            <a class="navbar-brand" href="#" style="margin-top:10px;">
+                                <img src="../../resources/img/waikiki.jpg" style="height:250px; width:250px"/>
+                            </a>
+                    </span>
+                            <div class="user-info">
+                                <h1>WAIKIKI JEJU</h1><br>
+                                <h5>양식</h5>
+                                <h5>제주시</h5>
+                                <h5>144Followers</h5>
+                                <h5>255Reviews</h5>
+                            </div>
+                    <span style="float:right; margin-right:30px; margin-top: 30px">
+                        <a href="#"><button type="button" class="btn btn-default">판매자 정보 수정</button></a>
+                        <a href="#"><button type="button" class="btn btn-default">판매자 탈퇴</button></a>
+                    </span>        
+                		</div>
+                	</div>
+				</div>
             </div>
 			<div class="row">
                 <div class="col-lg-12">
                     <!-- Advanced Tables -->
                     <div class="panel panel-default">
-                        <div class="panel-heading">
-				                             광고는 요청된 기간동안 메인페이지와 검색결과 상단에 무작위로 노출됩니다.
-                        </div>
                         <div class="panel-body">
+                        	<form action="" method="post">
+                    		<h2 style="border-bottom:1px solid #eee">광고 요청</h2>
+				                            <p> 광고는 요청된 기간동안 메인페이지와 검색결과 상단에 무작위로 노출됩니다.</p>
+				                            <br/>
                            	<div class="form-group">
-                            <h4>- 광고 시작일</h4>
-                            	<p>광고 시작일을 선택해주세요. </p>
-                            	<input id="startdate" type="date" data-date-inline-picker="true" />
+                            <h4>- 광고 시작일 <small> 광고 시작일을 선택해주세요.</small> </h4>
+                            	<input id="startdate" type="date" data-date-inline-picker="true" style="margin-left:20px"/>
                             </div>
-                            <h4>- 광고 기간</h4>
+				                            <br/>
+                            <h4>- 광고 기간 <small> 광고 기간을 선택해주세요. </small></h4>
                             	<p></p>
-                           	<div class="form-group">
-                           		<p>광고 기간을 선택해주세요. </p>
+                           	<div class="form-group"  style="margin-left:20px">
                            		<label class="radio-inline">
                            			<input type="radio" name="period" id="period3" value="7">3 일
                            		</label>
@@ -93,15 +109,45 @@
                            			<input type="radio" name="period" id="period30" value="7">30 일
                            		</label>
                            	</div>
-                            
+                           	
+                           	<div class="col-lg-6" style="display:block">
+                           		<div class=" alert alert-warning">
+                           			<p>
+                           			 요청이 많으면 광고가 지연될 수 있습니다. 문의사항은 관리자에게 연락주세요.
+                           			</p>
+                           			<p>
+                           			 항상 최상의 서비스를 선사하는 FOOFA 되겠습니다. 감사합니다.
+                           			</p>
+                           		</div>
+                           	</div> 
+                            <div style="width:100%; height:90px;"></div>
+                          <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+                                결제 
+                            </button>
+                            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                            <h4 class="modal-title" id="myModalLabel">광고 결제</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            결제가 완료되었습니다. 광고가 시작되면 메일이 발송됩니다.
+										</div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            </form>
                         </div>
                     </div>
                     <!--End Advanced Tables -->
                 </div>
             </div>
-            
 
-        </div>
+                </div>
         <!-- end page-wrapper -->
 
     </div>
