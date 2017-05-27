@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var="ctx" value="${pageContext.request.contextPath }"></c:set>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -7,20 +9,20 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>매출통계페이지</title>
 <!-- Core Scripts - Include with every page -->
-<script src="../../resources/plugins/jquery-1.10.2.js"></script>
-<script src="../../resources/plugins/bootstrap/bootstrap.min.js"></script>
-<script src="../../resources/plugins/metisMenu/jquery.metisMenu.js"></script>
-<script src="../../resources/plugins/pace/pace.js"></script>
-<script src="../../resources/scripts/siminta.js"></script>
+<script src="${ctx }/resources/plugins/jquery-1.10.2.js"></script>
+<script src="${ctx }/resources/plugins/bootstrap/bootstrap.min.js"></script>
+<script src="${ctx }/resources/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="${ctx }/resources/plugins/pace/pace.js"></script>
+<script src="${ctx }/resources/scripts/siminta.js"></script>
 <!-- Core CSS - Include with every page -->
-<link href="../../resources/plugins/bootstrap/bootstrap.css"
+<link href="${ctx }/resources/plugins/bootstrap/bootstrap.css"
 	rel="stylesheet" />
-<link href="../../resources/font-awesome/css/font-awesome.css"
+<link href="${ctx }/resources/font-awesome/css/font-awesome.css"
 	rel="stylesheet" />
-<link href="../../resources/plugins/pace/pace-theme-big-counter.css"
+<link href="${ctx }/resources/plugins/pace/pace-theme-big-counter.css"
 	rel="stylesheet" />
-<link href="../../resources/css/style.css" rel="stylesheet" />
-<link href="../../resources/css/main-style.css" rel="stylesheet" />
+<link href="${ctx }/resources/css/style.css" rel="stylesheet" />
+<link href="${ctx }/resources/css/main-style.css" rel="stylesheet" />
 
 <style>/*Graph  */
 * {
@@ -58,16 +60,16 @@ h2 {
 }
 </style>
 
-<link rel='stylesheet' href='../../resources/css/Nwagon.css'
+<link rel='stylesheet' href='${ctx }/resources/css/Nwagon.css'
 	type='text/css'>
-<script src='../../resources/scripts/Nwagon.js'></script>
+<script src='${ctx }/resources/scripts/Nwagon.js'></script>
 <!--------------------------------------------------------------------------  -->
-<link href='../../resources/css/fullcalendar.min.css' rel='stylesheet' />
-<link href='../../resources/css/fullcalendar.print.min.css'
+<link href='${ctx }/resources/css/fullcalendar.min.css' rel='stylesheet' />
+<link href='${ctx }/resources/css/fullcalendar.print.min.css'
 	rel='stylesheet' media='print' />
-<script src='../../resources/scripts/moment.min.js'></script>
-<script src='../../resources/scripts/jquery.min.js'></script>
-<script src='../../resources/scripts/fullcalendar.min.js'></script>
+<script src='${ctx }/resources/scripts/moment.min.js'></script>
+<script src='${ctx }/resources/scripts/jquery.min.js'></script>
+<script src='${ctx }/resources/scripts/fullcalendar.min.js'></script>
 <script>
 	$(document).ready(function() {
 
@@ -125,7 +127,7 @@ h2 {
 <style>
 #calendar {
 	max-width: 500px;
-	margin: 0 auto;
+	margin-left: 0px;
 }
 </style>
 
@@ -150,7 +152,8 @@ h2 {
 						<li><a href="#">트럭정보 수정</a></li>
 					</ul> <!-- second-level-items --></li>
 				<li><a href="#"><i class="fa fa-flask fa-fw"></i>광고요청</a></li>
-				<li class="selected"><a href="#"><i class="fa fa-table fa-fw"></i>매출통계</a></li>
+				<li class="selected"><a href="#"><i
+						class="fa fa-table fa-fw"></i>매출통계</a></li>
 				<li><a href="#"><i class="fa fa-edit fa-fw"></i>설문통계</a></li>
 			</ul>
 			<!-- end side-menu -->
@@ -172,24 +175,23 @@ h2 {
 						},
 						'dataset' : {
 							title : 'Playing time per day',
-							values : [ [ 5600], [ 5800 ], [ 6000 ],
-									[ 5800 ], [ 8500], [ 8600],
-									[ 8200], [ 7700], [ 8700],
-									[ 4900], [ 5800], [ 8500 ] ],
-							colorset : [ '#0072b2'],
+							values : [ [ 5600 ], [ 5800 ], [ 6000 ], [ 5800 ],
+									[ 8500 ], [ 8600 ], [ 8200 ], [ 7700 ],
+									[ 8700 ], [ 4900 ], [ 5800 ], [ 8500 ] ],
+							colorset : [ '#0072b2' ],
 							fields : [ '매출' ]
 						},
 						'chartDiv' : 'chart71',
 						'chartType' : 'line',
-						'leftOffsetValue' : 40,
+						'leftOffsetValue' : 60,
 						'bottomOffsetValue' : 60,
 						'chartSize' : {
-							width : 900,
+							width : 950,
 							height : 400
 						},
 						'minValue' : 0,
-						'maxValue' : 10000,
-						'increment' : 1000,
+						'maxValue' : 100000,
+						'increment' : 10000,
 						'isGuideLineNeeded' : false
 					//default set to false
 					};
@@ -198,6 +200,7 @@ h2 {
 				</script>
 			</div>
 			<div id='calendar' />
+			<div id='map' />
 		</div>
 
 
