@@ -5,18 +5,20 @@
   <mapper namespace="fofa.store.mapper.ReviewMapper">
   	<resultMap type="Review" id="ReviewMap">
   		<id column="review_id" property="reviewId"/>
-  		<result column="foodtruck_id" property="foodtruckId"/>
   		<result column="contents" property="contents"/>
   		<result column="score" property="score"/>
   		<result column="writedate" property="writeDate"/>
   		<association column="member_id" property="writer" 
 	  	select = "fofa.store.mapper.MemberMapper.select"	
 	  	javaType="Member" jdbcType="VARCHAR"/>
+	  	<association column="foodtruck_id" property="foodtruck"
+	  	select = "fofa.store.mapper.FoodtruckMapper.selectById"
+	  	javaType="Foodtruck" jdbcType="VARCHAR"/>
   	</resultMap>
   	
   	<insert id="insert" parameterType="Review">
   		INSERT INTO review_tb
-  		VALUES ('R'||review_seq.nextval, #{writer.memberId}, #{foodtruckId}, #{contents}, #{score}, SYSDATE)
+  		VALUES ('R'||review_seq.nextval, #{writer.memberId}, #{foodtruck.foodtruckId}, #{contents}, #{score}, SYSDATE)
   	</insert>
   	<update id="update" parameterType="Review">
   		UPDATE review_tb
@@ -40,6 +42,6 @@
   	<select id="selectByTruckId" parameterType="String" resultMap="ReviewMap">
   		SELECT review_id, member_id, foodtruck_id, contents, score, writedate
   		FROM review_tb
-  		WHERE foodtruck_Id = #{foodtruckId}
+  		WHERE foodtruck_Id = #{foodtruck.foodtruckId}
   	</select>
   </mapper>

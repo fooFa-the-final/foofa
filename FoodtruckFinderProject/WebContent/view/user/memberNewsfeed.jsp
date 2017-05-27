@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
+<c:set value="${pageContext.request.contextPath}" var="ctx" />
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -20,9 +22,7 @@
     
     <div id="wrapper">
         <!-- navbar top -->
-        <header>
-        	
-        </header>
+        <%@ include file="../header.jspf"%>
         <!-- end navbar top -->
         
         
@@ -82,38 +82,20 @@
                     </span>        
                 </div>
                 <!--End Page Header -->
-                <div class="col-md-12" style="height:500px;">
-                	<h1>My Followers Review</h1>
-                	<div class = "col-md-offset-1 col-md-8" style="height:500px;margin-top:50px">
-                		<span><font class="h3"><a href="#">A 푸드트럭</a></font></span>
+                <div class="col-md-12">
+                	<h1 style="font-size:30px">My Followers Review</h1>
+                	<c:forEach items="${list }" var="Review">
+                		<div class = "col-md-offset-1 col-md-8" style="height:500px;margin-top:50px">
+                		<span><font class="h3"><a href="#">${Review.foodtruck.foodtruckName }</a></font></span>
                 		<span style="float:right"><input type="button" value="follow" class="btn btn-result"> <input type="button" value="!" class="btn btn-result"></span><br>
                 		<img src="../../resources/img/smile.png" width="300px" height="300px"><br><br>
                 		<font size="4px">
-                		<span>★★★★★ 따봉: 155</span>
-                		<span style="float:right">2017-05-21 11:44PM</span><br>
-                		햄버거가 너무 맛있어요.	
+                		<span>점수 : ${Review.score } 따봉: 155</span>
+                		<span style="float:right">${Review.writeDate }</span><br>
+                		${Review.contents }	
                 		</font>
-                	</div>
-                	<div class = "col-md-offset-1 col-md-8" style="height:500px;margin-top:50px">
-                		<span><font class="h3"><a href="#">B 푸드트럭</a></font></span>
-                		<span style="float:right"><input type="button" value="follow" class="btn btn-result"> <input type="button" value="!" class="btn btn-result"></span><br>
-                		<img src="../../resources/img/smile.png" width="300px" height="300px"><br><br>
-                		<font size="4px">
-                		<span>★★★★★ 따봉: 155</span>
-                		<span style="float:right">2017-05-21 11:44PM</span><br>
-                		햄버거가 너무 맛있어요.	
-                		</font>
-                	</div>
-                	<div class = "col-md-offset-1 col-md-8" style="height:500px;margin-top:50px">
-                		<span><font class="h3"><a href="#">C 푸드트럭</a></font></span>
-                		<span style="float:right"><input type="button" value="follow" class="btn btn-result"> <input type="button" value="!" class="btn btn-result"></span><br>
-                		<img src="../../resources/img/smile.png" width="300px" height="300px"><br><br>
-                		<font size="4px">
-                		<span>★★★★★ 따봉: 155</span>
-                		<span style="float:right">2017-05-21 11:44PM</span><br>
-                		햄버거가 너무 맛있어요.	
-                		</font>
-                	</div>
+                		</div>
+                	</c:forEach>
                 </div>
             </div>
         </div>

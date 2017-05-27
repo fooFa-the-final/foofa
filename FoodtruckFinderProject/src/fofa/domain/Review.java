@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class Review {
 	private String reviewId;
-	private String foodtruckId;
+	private Foodtruck foodtruck;
 	private String contents;
 	private int score;
 	private List<Image> images;
@@ -21,11 +21,12 @@ public class Review {
 	public void setReviewId(String reviewId) {
 		this.reviewId = reviewId;
 	}
-	public String getFoodtruckId() {
-		return foodtruckId;
+	
+	public Foodtruck getFoodtruck() {
+		return foodtruck;
 	}
-	public void setFoodtruckId(String foodtruckId) {
-		this.foodtruckId = foodtruckId;
+	public void setFoodtruck(Foodtruck foodtruck) {
+		this.foodtruck = foodtruck;
 	}
 	public String getContents() {
 		return contents;
