@@ -32,20 +32,20 @@
             <div class="sidebar-collapse">
                 <!-- side-menu -->
                 <ul class="nav" id="side-menu">
-                    <li class="selected">
-                        <a href="${ctx }/#"><i class="fa fa-dashboard fa-fw"></i>Truck Info</a>
+                    <li>
+                        <a href="${ctx }/#"><i class="fa fa-files-o fa-fw"></i>Truck Info</a>
                     </li>
                      <li>
-                        <a href="${ctx }/#"><i class="fa fa-flask fa-fw"></i>매출 통계</a>
+                        <a href="${ctx }/#"><i class="fa fa-bar-chart-o fa-fw"></i>매출 통계</a>
                     </li>
                     <li >
-                        <a href="${ctx }/#"><i class="fa fa-table fa-fw"></i>설문 통계</a>
+                        <a href="${ctx }/#"><i class="fa fa-dashboard fa-fw"></i>설문 통계</a>
                     </li>
                     <li >
-                        <a href="${ctx }/#"><i class="fa fa-table fa-fw"></i>정보 수정</a>
+                        <a href="${ctx }/#"><i class="fa fa-wrench fa-fw"></i>정보 수정</a>
                     </li>
-                    <li >
-                        <a href="${ctx }/#"><i class="fa fa-table fa-fw"></i>광고 요청</a>
+                    <li class="selected" >
+                        <a href="${ctx }/#"><i class="fa fa-edit fa-fw"></i>광고 요청</a>
                     </li>
                 </ul>
                 <!-- end side-menu -->
@@ -71,7 +71,28 @@
 				                             광고는 요청된 기간동안 메인페이지와 검색결과 상단에 무작위로 노출됩니다.
                         </div>
                         <div class="panel-body">
-                            
+                           	<div class="form-group">
+                            <h4>- 광고 시작일</h4>
+                            	<p>광고 시작일을 선택해주세요. </p>
+                            	<input id="startdate" type="date" data-date-inline-picker="true" />
+                            </div>
+                            <h4>- 광고 기간</h4>
+                            	<p></p>
+                           	<div class="form-group">
+                           		<p>광고 기간을 선택해주세요. </p>
+                           		<label class="radio-inline">
+                           			<input type="radio" name="period" id="period3" value="7">3 일
+                           		</label>
+                           		<label class="radio-inline">
+                           			<input type="radio" name="period" id="period7" value="7">7 일
+                           		</label>
+                           		<label class="radio-inline">
+                           			<input type="radio" name="period" id="period14" value="7">14 일
+                           		</label>
+                           		<label class="radio-inline">
+                           			<input type="radio" name="period" id="period30" value="7">30 일
+                           		</label>
+                           	</div>
                             
                         </div>
                     </div>

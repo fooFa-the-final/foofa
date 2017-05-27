@@ -19,13 +19,12 @@
             </c:choose>
             </div>
             <!-- end navbar-header -->
-            <!-- end navbar-header -->
             <!-- navbar-top-links -->
             <ul class="nav navbar-top-links navbar-right">
                 <!-- main dropdown -->
-                <li class="row">
+                <li class="row" style="width:850px; margin-right:200px;">
 	            			<!-- search section-->
-	                        <div class="input-group custom-search-form">
+	                        <div class="input-group custom-search-form"  >
 	                        	<form method="post" action="/truck/list/key.do">
 	                        	<input type="text" class="form-control" name="keyword" placeholder="Search" style="width: 400px">
 	                            <input type="text" class="form-control" name="location" placeholder="Location" style="width: 400px">
