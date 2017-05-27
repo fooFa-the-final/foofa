@@ -5,6 +5,9 @@ import java.util.List;
 
 import org.springframework.stereotype.Component;
 
+import fofa.store.RecommandStore;
+import fofa.store.logic.RecommandStoreLogic;
+
 @Component
 public class Review {
 	private String reviewId;
@@ -13,7 +16,7 @@ public class Review {
 	private int score;
 	private List<Image> images;
 	private Member writer;
-	private int recommand;
+	private List<Recommand> recommand;
 	private Date writeDate;
 	public String getReviewId() {
 		return reviewId;
@@ -52,13 +55,12 @@ public class Review {
 	public void setWriter(Member writer) {
 		this.writer = writer;
 	}
-	public int getRecommand() {
+	public List<Recommand> getRecommand() {
 		return recommand;
 	}
-	public void setRecommand(int recommand) {
+	public void setRecommand(List<Recommand> recommand) {
 		this.recommand = recommand;
 	}
-	
 	public Date getWriteDate() {
 		return writeDate;
 	}
@@ -67,7 +69,7 @@ public class Review {
 	}
 	@Override
 	public String toString() {
-		return "Review [reviewId=" + reviewId + ", foodtruckId=" + foodtruckId + ", contents=" + contents + ", score="
+		return "Review [reviewId=" + reviewId + ", foodtruck=" + foodtruck + ", contents=" + contents + ", score="
 				+ score + ", images=" + images + ", writer=" + writer + ", recommand=" + recommand + "]";
 	}
 	

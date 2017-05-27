@@ -36,7 +36,7 @@ public class FollowStoreLogicTest {
 	
 	@Test
 	public void testselectFrom(){
-		List<Follow> m = store.selectByFromId("sana");
+		List<Follow> m = store.selectByFromId("momo");
 		assertEquals(2, m.size());
 	}
 	

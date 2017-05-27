@@ -49,10 +49,15 @@ public class RecommandStoreLogic implements RecommandStore {
 	}
 
 	@Override
-	public List<Recommand> selectAll() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Recommand> selectAll(String reviewId) {
+		SqlSession session = factory.openSession();
+		List<Recommand> list = null;
+		try{
+			RecommandMapper mapper = session.getMapper(RecommandMapper.class);
+			list = mapper.selectAll(reviewId);
+		} finally {
+			session.close();
+		} 
+		return list;
 	}
-
-	
 }

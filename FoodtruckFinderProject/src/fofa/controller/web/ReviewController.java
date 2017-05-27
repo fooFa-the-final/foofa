@@ -28,6 +28,7 @@ public class ReviewController {
 	@RequestMapping("/review/list/follow.do")
 	public String searchByFollower(String memberId, Model model){
 		List<Review> list = service.findByFromId(memberId);
+		System.out.println(list.size());
 		for(Review r : list){
 			System.out.println(r.getFoodtruck().getFoodtruckName());
 		}
