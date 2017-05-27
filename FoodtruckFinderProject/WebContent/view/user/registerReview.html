@@ -6,11 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>registerReview</title>
     <!-- Core CSS - Include with every page -->
-    <link href="../resources/plugins/bootstrap/bootstrap.css" rel="stylesheet" />
-    <link href="../resources/font-awesome/css/font-awesome.css" rel="stylesheet" />
-    <link href="../resources/plugins/pace/pace-theme-big-counter.css" rel="stylesheet" />
-    <link href="../resources/css/style.css" rel="stylesheet" />
-      <link href="../resources/css/main-style.css" rel="stylesheet" />
+    <link href="../../resources/plugins/bootstrap/bootstrap.css" rel="stylesheet" />
+    <link href="../../resources/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <link href="../../resources/plugins/pace/pace-theme-big-counter.css" rel="stylesheet" />
+    <link href="../../resources/css/style.css" rel="stylesheet" />
+      <link href="../../resources/css/main-style.css" rel="stylesheet" />
 
 </head>
 
@@ -21,7 +21,7 @@
         <nav class="navbar navbar-default navbar-fixed-top" role="navigation" id="navbar">
             <!-- navbar-header -->
                 <a class="navbar-brand" href="index.html">
-                    <img src="../resources/img/logo.png" alt="" />
+                    <img src="../../resources/img/logo.png" alt="" />
                 </a>
             <!-- navbar-top-links -->
             <ul class="nav navbar-top-links navbar-right">
@@ -63,18 +63,19 @@
         <!-- end navbar top -->
 
         <!--  page-wrapper -->
-	<div class="container">
+	<div class="container" style="color: white;">
 		<h2>Write Review</h2>
 		<div class="row">
 			<div class="col-md-1 col-lg-1"></div>
 			<div class="col-md-3 col-lg-3">
 				<div class="blog-stripe">
-					<img width="50px" height="50px" src="../resources/img/user.jpg" >
+					<img width="200x" height="200px" src="../../resources/img/pizzahut.png" >
 				</div>
 			</div>
 			<div class="col-md-1 col-lg-1"></div>
-			<div class="col-md-7 col-lg-7">
-				<ul class="all-blogs">
+			<div class="col-md-7 col-lg-7" >
+				
+                <ul class="all-blogs">
 					<li class="media">
 						<div class="media-body">
 							<h4 class="media-heading">정찬기의 피자집</h4>
@@ -96,7 +97,7 @@
 			</div>
 			<div class="text-right">
 				<a href="">
-					<button type="button" class="btn btn btn-warning">Add
+					<button type="button" class="btn btn-primary">Add
 						photo</button>
 				</a>
 			</div>
@@ -109,13 +110,13 @@
 			rows=15></textarea>
 
 
-<a style="color:red" onclick="this.nextSibling.style.display=(this.nextSibling.style.display=='none')?'block':'none';" href="javascript:void(0)"> 
+<a style="color:white" onclick="this.nextSibling.style.display=(this.nextSibling.style.display=='none')?'block':'none';" href="javascript:void(0)"> 
 푸드트럭 설문조사 항목
 </a><div style="DISPLAY: none">
         
         
 <div class="form-group">
-                                            <label>음식의 신선도에 만족하십니까?</label>
+                                            <h4>음식의 가격에 만족하십니까?</h4>
                                             <label class="radio-inline">
                                                 <input type="radio" name="optionsRadiosInline" id="optionsRadiosInline1" value="option1" >매우만족
                                             </label>
@@ -135,7 +136,7 @@
                                         
     
     <br>
-                                                <label>음식의 가격에 만족하십니까?</label>
+                                                <h4>음식의 품질에 만족하십니까?</h4>
                                             <label class="radio-inline">
                                                 <input type="radio" name="optionsRadiosInline" id="optionsRadiosInline1" value="option1" >매우만족
                                             </label>
@@ -154,7 +155,7 @@
                                             </label>
     
     <br>
-                                                <label>푸드트럭의 서비스에 만족하십니까?</label>
+                                                <h4>푸드트럭커의 서비스에 만족하십니까? </h4>
                                             <label class="radio-inline">
                                                 <input type="radio" name="optionsRadiosInline" id="optionsRadiosInline1" value="option1" >매우만족
                                             </label>
@@ -174,7 +175,8 @@
     
         
     <textarea name="ourtext" style="width:100%;border:1;overflow:visible;text-overflow:ellipsis;" rows=3 placeholder="기타의견사항"></textarea>
-
+<br>
+    
     
     
         </div>       
@@ -184,9 +186,15 @@
         
         
         </div>
-	<center><button type="button" class="btn btn btn-warning" >리뷰등록</button></center>
-	</div>
+
+    
+    
+    </div>
         <!-- end page-wrapper -->
+
+    	<center><button type="button" class="btn btn-success" onclick="submit">리뷰등록</button></center>
+
+    
     </div>
     <!-- end wrapper -->
     <!-- Core Scripts - Include with every page -->

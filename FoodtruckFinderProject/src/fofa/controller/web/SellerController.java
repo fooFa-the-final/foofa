@@ -26,6 +26,7 @@ public class SellerController {
 
 
 	@RequestMapping(value = "seller/checkId.do") 
+	
 	public String checkId(String sellerId){
 		boolean id = sellerService.checkId(sellerId);
 		if(id == true) {
