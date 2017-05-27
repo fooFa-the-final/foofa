@@ -103,8 +103,8 @@
 								<h5>144Followers</h5>
 								<h5>255Reviews</h5>
 						</div>
-						<span style="float: right; margin-right: 50px; margin-top: 30px">
-							<a href="#"><button type="button" class="btn btn-default">회원
+						<span style="float: right; margin-right: 100px; margin-top: 30px">
+							<a href="#"><button type="button" class="btn btn-default" style="margin-right:20px" >회원
 									탈퇴</button></a> <br> <br> <br> <br> <br> <br>
 							<br> <a href="#"><button type="button"
 									class="btn btn-default">Make Follow</button></a>

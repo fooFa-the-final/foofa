@@ -127,14 +127,14 @@
 			<div class="form-group">
 				<div class="text-right">
 					<a href="">
-						<button type="button" class="btn btn-primary">Add photo</button>
+						<button type="button" class="btn btn-primary" >Add photo</button>
 					</a>
 				</div>
 
 				<br> <br>
 				<div class="col-lg-12">
 					<div class="col-lg-8" style="float: left">
-						<table width="1200px">
+						<table width="1150px">
 							<thead>
 								<tr>
 									<th width="150px"></th>
@@ -251,7 +251,7 @@
 			<div class="show">
 			<div class="in">
 				<button type="button" class="btn btn-success" onclick="submit"
-					style="margin-left:600px">리뷰등록</button>
+					style="margin-left:570px">리뷰등록</button>
 			</div>
 </div>
 		</div>

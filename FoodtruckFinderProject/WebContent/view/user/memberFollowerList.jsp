@@ -96,13 +96,14 @@
 								src="../../resources/img/waikiki.jpg"
 								style="height: 250px; width: 250px" />
 						</a>
+						<div class="user-info">
 								<h1>트와이스님의 프로필 페이지</h1>
 								<br>
 								<h5>twicejjang@chogo</h5>
 								<h5>144Followers</h5>
 								<h5>255Reviews</h5>
-						
-						<span style="float: right; margin-right: 50px; margin-top: 30px">
+						</div>
+						<span style="float: right; margin-right: 90px; margin-top: 30px">
 							<a href="#"><button type="button" class="btn btn-default">회원
 									탈퇴</button></a> <br> <br> <br> <br> <br> <br>
 							<br> <a href="#"><button type="button"
@@ -134,19 +135,19 @@
 						<div class="user-info">
 							<h5><a href="" style="color:black">파이리</a></h5>
 							<br>
-							<text>144Followers</text>
-							<text>255Reviews</text>
+							<h5>144Followers</h5>
+							<h5>255Reviews</h5>
 							<br>
 						</div>
 						<div style="float: right;">
 							<br> <br> <br>
-							<button type="button" class="btn btn-default" style="inlince-bolck; margin-right: 20px;">UNFOLLOW</button>
+							<button type="button" class="btn btn-default" style="inlince-bolck; margin-left: 350px;">UNFOLLOW</button>
 						</div>
 						<br>
 					</div>
 				
 	
-		<div name="follwer" style="margin-bottom:50px">
+			<div id="follwer" style="margin-bottom:50px">
 
 						<a class="navbar-brand" href="#"
 							style="margin-top: 10px; margin-left: 20px"> <img
@@ -154,21 +155,21 @@
 							style="height: 70px; width: 70px" />
 						</a>
 						<div class="user-info">
-							<text><a href="" style="color:black">꼬부기</a></text>
+							<h5><a href="" style="color:black">파이리</a></h5>
 							<br>
-							<text>144Followers</text>
-							<text>255Reviews</text>
+							<h5>144Followers</h5>
+							<h5>255Reviews</h5>
 							<br>
 						</div>
 						<div style="float: right;">
 							<br> <br> <br>
-							<button type="button" class="btn btn-default" style="inlince-bolck; margin-right: 20px;">UNFOLLOW</button>
+							<button type="button" class="btn btn-default" style="inlince-bolck; margin-left: 350px;">UNFOLLOW</button>
 						</div>
 						<br>
 					</div>
 				
                     
-                    		<div name="follwer" style="margin-bottom:50px">
+                    	<div id="follwer" style="margin-bottom:50px">
 
 						<a class="navbar-brand" href="#"
 							style="margin-top: 10px; margin-left: 20px"> <img
@@ -176,15 +177,15 @@
 							style="height: 70px; width: 70px" />
 						</a>
 						<div class="user-info">
-							<text><a href="" style="color:black">이상해씨</a></text>
+							<h5><a href="" style="color:black">파이리</a></h5>
 							<br>
-							<text>144Followers</text>
-							<text>255Reviews</text>
+							<h5>144Followers</h5>
+							<h5>255Reviews</h5>
 							<br>
 						</div>
 						<div style="float: right;">
 							<br> <br> <br>
-							<button type="button" class="btn btn-default" style="inlince-bolck; margin-right: 20px;">UNFOLLOW</button>
+							<button type="button" class="btn btn-default" style="inlince-bolck; margin-left: 350px;">UNFOLLOW</button>
 						</div>
 						<br>
 					</div>
