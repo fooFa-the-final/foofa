@@ -1,8 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!DOCTYPE>
 <html>
-
+<c:set value="${pageContext.request.contextPath}" var="ctx" />
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -35,7 +36,7 @@
 			<li class="row">
 				<div class="col-lg-12">
 					<a class="navbar-brand" style="align: center"
-						href="${ctx }/index.do"> <img src="../resources/img/logo.png"
+						href="${ctx }/index.do"> <img src="../resources/img/mainLogo.png"
 						alt="" />
 					</a>
 				</div>
@@ -178,14 +179,12 @@
 		</div>
 	</div>
 	<!-- end main-container -->
-
-<!-- Core Scripts - Include with every page -->
-
-<script src="assets/plugins/jquery-1.10.2.js"></script>
-<script src="assets/plugins/bootstrap/bootstrap.min.js"></script>
-<script src="assets/plugins/metisMenu/jquery.metisMenu.js"></script>
-<script src="assets/plugins/pace/pace.js"></script>
-<script src="assets/scripts/siminta.js"></script>
+    <!-- Core Scripts - Include with every page -->
+    <script src="${ctx}/resources/plugins/jquery-1.10.2.js"></script>
+    <script src="${ctx}/resources/plugins/bootstrap/bootstrap.min.js"></script>
+    <script src="${ctx}/resources/plugins/metisMenu/jquery.metisMenu.js"></script>
+    <script src="${ctx}/resources/plugins/pace/pace.js"></script>
+    <script src="${ctx}/resources/scripts/siminta.js"></script>
 
 </body>
 </html>
