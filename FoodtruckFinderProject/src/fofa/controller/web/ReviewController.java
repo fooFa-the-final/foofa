@@ -15,7 +15,7 @@ public class ReviewController {
 	
 	@RequestMapping("/review/list/member.do")
 	public String searchByMemberId(String memberId, Model model){
-		return "user/memberReviewList.jsp";
+		return "../view/user/memberReviewList.jsp";
 	}
 
 	@RequestMapping("/review/list/follow.do")

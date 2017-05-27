@@ -55,7 +55,7 @@ public class AdvertiseController {
 	@RequestMapping("advertise/list/desc.do")
 	public String searchByDesc(boolean approve, Model model){
 		approve = true;
-		List<Advertise> list = advertiseService.findByDesc(approve);
+//		List<Advertise> list = advertiseService.findByDesc(approve);
 		return "../view/admin/adminAdvertise.jsp";
 	}
 	

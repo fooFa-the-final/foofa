@@ -16,7 +16,7 @@ import fofa.service.AdvertiseService;
 import fofa.service.FavoriteService;
 import fofa.service.FoodtruckService;
 
-@RequestMapping("foodtruck")
+@RequestMapping("/foodtruck")
 @Controller
 public class FoodtruckController {
 	@Autowired
@@ -30,7 +30,7 @@ public class FoodtruckController {
 	@RequestMapping(value="/create.do", method=RequestMethod.GET)
 	public String create(Foodtruck foodtruck){
 		
-		return "../view/user/login.jsp";
+		return "view/user/login.jsp";
 	}
 	
 	@RequestMapping(value="/modifyForm.do", method=RequestMethod.GET)
