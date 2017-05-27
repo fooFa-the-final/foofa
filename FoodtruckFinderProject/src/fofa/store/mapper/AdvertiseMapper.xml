@@ -41,7 +41,13 @@
 	<select id="selectByAsc" parameterType="Boolean" resultMap="ADVmap">
 		<include refid="selectADV" />
 		where confirm = #{confirm} ORDER BY start_date ASC
-	</select>
+
+<!-- 푸드트럭 조인? 		
+		select a.adv_id, a.PERIOD, a.START_DATE, f.TRUCKNAME
+from adv_tb a, foodtruck_tb f
+where a.seller_id = f.seller_id and
+		
+ -->	</select>
 
 	<select id="selectByDesc" parameterType="Boolean" resultMap="ADVmap">
 		<include refid="selectADV" />

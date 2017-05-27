@@ -1,5 +1,10 @@
 package fofa.controller.web;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,7 +54,30 @@ public class AdvertiseController {
 	public String searchByAsc(boolean approve, Model model){
 		approve = true;
 		List<Advertise> list = advertiseService.findByAsc(approve);
-		System.out.println(list.size());
+		
+		
+		
+		String from1 = null;
+		for(int k = 0 ; k < list.size() ; k++) {
+			SimpleDateFormat transFormat1 = new SimpleDateFormat("yyyyMMdd");
+			try {
+				from1 = list.get(k).getStartdate();
+				Date to1 = transFormat1.parse(from1);
+				list.get(k).setSt(to1);
+				Calendar cal = Calendar.getInstance();
+				cal.setTime(to1);
+				cal.add(Calendar.DATE, Integer.parseInt(list.get(k).getPeriod()));
+				Date to2 = cal.getTime();
+				list.get(k).setEnd(to2);
+			} catch (ParseException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		}
+	
+
+		model.addAttribute("advertise", list);
+		
 		return "/view/admin/adminAdvertise.jsp";
 	}
 

@@ -17,9 +17,42 @@
 
     <!-- Page-Level CSS -->
     <link href="${ctx}/resources/plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet" />
-
 </head>
 
+<script>
+/* 
+function stringToDate(_date,_format,_delimiter)
+{
+            var formatLowerCase=_format.toLowerCase();
+            var formatItems=formatLowerCase.split(_delimiter);
+            var dateItems=_date.split(_delimiter);
+            var monthIndex=formatItems.indexOf("mm");
+            var dayIndex=formatItems.indexOf("dd");
+            var yearIndex=formatItems.indexOf("yyyy");
+            var month=parseInt(dateItems[monthIndex]);
+            month-=1;
+            var formatedDate = new Date(dateItems[yearIndex],month,dateItems[dayIndex]);
+            return formatedDate;
+}
+ */
+
+$(function(){
+	var yyyy = string.substring(0,3)
+	var mm = string.substring(4,5)
+	var dd = string.substring(6,7)
+
+	
+	<c:forEach items = "${advertise.startdate}" var = "date" varStatus="status">
+	yyyy.push("${date.yyyy}");
+	mm.push("${date.mm}");
+	dd.push("${date.mm}")
+	</c:forEach>
+});
+
+
+
+
+</script>
 <body>
     <!--  wrapper -->
     <div id="wrapper">
@@ -87,21 +120,17 @@
                                             <th>Days</th>
                                         </tr>
                                     </thead>
+                                                   <c:forEach var="advertise" items="${advertise}"
+                                   varStatus="sts">
                                     <tbody>
                                         <tr class="odd gradeX">
-                                            <td>1</td>
-                                            <td>효지니의 온니온니핏</td>
-                                            <td>17/03/04</td>
-                                            <td>17/06/04</td>
-                                			<td>90</td>
+                                            <td>${sts.count}</td>
+                                            <td>${advertise.sellerId }</td>
+                                            <td>${date.yyyy }-${date.mm }-${date.dd }</td>
+                                            <td>${advertise.startdate }</td>
+                                			<td>${advertise.period }</td>
                                         </tr>
-                                        <tr class="odd gradeX">
-                                            <td>2</td>
-                                            <td>주희의 은혜로운 컵밥 </td>
-                                            <td>17/06/01</td>
-                                            <td>17/06/08</td>
-                                			<td>7</td>
-                                            </tr>
+                                        </c:forEach>
                                         <tr class="odd gradeX">
                                             <td>3</td>
                                             <td>승거니의 라멘달인</td>
