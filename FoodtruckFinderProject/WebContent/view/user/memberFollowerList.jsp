@@ -96,13 +96,12 @@
 								src="../../resources/img/waikiki.jpg"
 								style="height: 250px; width: 250px" />
 						</a>
-						<div class="user-info">
 								<h1>트와이스님의 프로필 페이지</h1>
 								<br>
 								<h5>twicejjang@chogo</h5>
 								<h5>144Followers</h5>
 								<h5>255Reviews</h5>
-						</div>
+						
 						<span style="float: right; margin-right: 50px; margin-top: 30px">
 							<a href="#"><button type="button" class="btn btn-default">회원
 									탈퇴</button></a> <br> <br> <br> <br> <br> <br>
@@ -113,115 +112,87 @@
 					</div>
 
 				</div>
-
-		<div class="review" style="margin-top:200px">
-			<div class="row">
-
-
-
-
-                <div id="foodtruck" style="margin-top:100px"></div>
-                <div id="review" style="margin-top:80px">	
-                <table>
-							<tr>
-								<th rowspan="3"><img width="100px" height="100px"
-									src="../../resources/img/pizzahut.png"></th>
-								<th width="250px"><a href="" style="color: black">정찬기의
-										피자집</a>
-								<th>피자</th>
-							</tr>
-							<tr>
-								<td>단골 144명</td>
-
-							</tr>
-							<tr>
-								<td>225리뷰</td>
-							</tr>
-                        </table>
-          		<span
-						style="float: right; margin-right: 6px; margin-down: 30px; margin-top: 70px;">
-						<a href="#"><button type="button" class="btn btn-default">수정</button></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#"><button type="button" class="btn btn-default">삭제</button></a>
-					</span>
-						<br>
-						
-                        <h5>★★★★★</h5>
-						
-						<h5>정말로 맛있다.</h5>
-
-						<br>
-						<div id="pic" style="margin-top:30px">
-							<div style="float: left; width: 33%">
-								<img src="../../resources/img/pizzare.jpg">
-							</div>
-							<div style="float: left; width: 33%">
-								<img src="../../resources/img/pizzare.jpg">
-							</div>
-							<div style="float: left; width: 33%">
-								<img src="../../resources/img/pizzare.jpg">
-							</div>
-						</div>
-						<img style="margin-top:3px" width="20px" height="20px"
-							src="../../resources/img/recom.jpg"><b>123</b> 
-						<div style="float: right; margin-right: 200px;">
-
-							<h5 align="right">2017-05-25 16:44:40</h5>
-						</div>
-					</div>
-
-                
-                <div id="review" style="margin-top:80px">	
-                <table>
-							<tr>
-								<th rowspan="3"><img width="100px" height="100px"
-									src="../../resources/img/pizzahut.png"></th>
-								<th width="250px"><a href="" style="color: black">정찬기의
-										피자집</a>
-								<th>피자</th>
-							</tr>
-							<tr>
-								<td>단골 144명</td>
-
-							</tr>
-							<tr>
-								<td>225리뷰</td>
-							</tr>
-                        </table>
-          		<span
-						style="float: right; margin-right: 6px; margin-down: 30px; margin-top: 70px;">
-						<a href="#"><button type="button" class="btn btn-default">수정</button></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#"><button type="button" class="btn btn-default">삭제</button></a>
-					</span>
-						<br>
-						
-                        <h5>★</h5>
-						
-						<h5>정말로 맛이 없다.</h5>
-
-						<br>
-						<div id="pic" style="margin-top:30px">
-							<div style="float: left; width: 33%">
-								<img src="../../resources/img/pizzare.jpg">
-							</div>
-							<div style="float: left; width: 33%">
-								<img src="../../resources/img/pizzare.jpg">
-							</div>
-							<div style="float: left; width: 33%">
-								<img src="../../resources/img/pizzare.jpg">
-							</div>
-						</div>
-						<img style="margin-top:3px" width="20px" height="20px"
-							src="../../resources/img/recom.jpg"><b>123</b> 
-						<div style="float: right; margin-right: 200px;">
-
-							<h5 align="right">2017-05-25 16:44:40</h5>
-						</div>
-					</div>
-
-                
-</div>
-
+				<!--End Page Header -->
 			</div>
 
-				<!--End Page Header -->
+			<div class="row">
+				<br> <br> <br> <br> <br> <br> <br>
+				<br> <br> <br> <br> <br> <br> <br>
+				<br>
+
+				<div class="container">
+
+					<h1>Follwer List</h1>
+					<br>
+					<div id="follwer" style="margin-bottom:50px">
+
+						<a class="navbar-brand" href="#"
+							style="margin-top: 10px; margin-left: 20px"> <img
+							src="../../resources/img/waikiki.jpg"
+							style="height: 70px; width: 70px" />
+						</a>
+						<div class="user-info">
+							<h5><a href="" style="color:black">파이리</a></h5>
+							<br>
+							<text>144Followers</text>
+							<text>255Reviews</text>
+							<br>
+						</div>
+						<div style="float: right;">
+							<br> <br> <br>
+							<button type="button" class="btn btn-default" style="inlince-bolck; margin-right: 20px;">UNFOLLOW</button>
+						</div>
+						<br>
+					</div>
+				
+	
+		<div name="follwer" style="margin-bottom:50px">
+
+						<a class="navbar-brand" href="#"
+							style="margin-top: 10px; margin-left: 20px"> <img
+							src="../../resources/img/waikiki.jpg"
+							style="height: 70px; width: 70px" />
+						</a>
+						<div class="user-info">
+							<text><a href="" style="color:black">꼬부기</a></text>
+							<br>
+							<text>144Followers</text>
+							<text>255Reviews</text>
+							<br>
+						</div>
+						<div style="float: right;">
+							<br> <br> <br>
+							<button type="button" class="btn btn-default" style="inlince-bolck; margin-right: 20px;">UNFOLLOW</button>
+						</div>
+						<br>
+					</div>
+				
+                    
+                    		<div name="follwer" style="margin-bottom:50px">
+
+						<a class="navbar-brand" href="#"
+							style="margin-top: 10px; margin-left: 20px"> <img
+							src="../../resources/img/waikiki.jpg"
+							style="height: 70px; width: 70px" />
+						</a>
+						<div class="user-info">
+							<text><a href="" style="color:black">이상해씨</a></text>
+							<br>
+							<text>144Followers</text>
+							<text>255Reviews</text>
+							<br>
+						</div>
+						<div style="float: right;">
+							<br> <br> <br>
+							<button type="button" class="btn btn-default" style="inlince-bolck; margin-right: 20px;">UNFOLLOW</button>
+						</div>
+						<br>
+					</div>
+				
+
+				</div>
+				<!-- end page-wrapper -->
+
 			</div>
 			<!-- end wrapper -->
 
