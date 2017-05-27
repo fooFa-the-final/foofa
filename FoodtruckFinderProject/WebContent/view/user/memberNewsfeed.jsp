@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
+<c:set value="${pageContext.request.contextPath}" var="ctx" />
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -20,9 +22,7 @@
     
     <div id="wrapper">
         <!-- navbar top -->
-        <header>
-        	
-        </header>
+        <%@ include file="../header.jspf"%>
         <!-- end navbar top -->
         
         
@@ -63,57 +63,46 @@
         <div id="page-wrapper">
             <div class="row">
                 <!-- Page Header -->
-                <div class="col-md-12" style="background-color:white;height:300px">
+                <div class="row" style="height:300px; background-color:#FFFFFF; position:absolute; width:83.5%">
                     <span>
                             <a class="navbar-brand" href="#" style="margin-top:10px; margin-left:20px">
                                 <img src="../../resources/img/waikiki.jpg" style="height:250px; width:250px"/>
                             </a>
-                            <div class="user-info">
-                                <h1>WAIKIKI JEJU</h1><br>
-                                <h5>양식</h5>
-                                <h5>제주시</h5>
+                            <div class="user-info" >
+                                <h1><a style="color:black">트와이스님의 프로필 페이지</a></h1><br>
+                                <h5>twicejjang@chogo</h5>
                                 <h5>144Followers</h5>
                                 <h5>255Reviews</h5>
-                            </div>
+                            </div>  
                     </span>
-                    <span style="float:right; margin-right:50px; margin-top: 30px">
-                        <a href="#"><button type="button" class="btn btn-default">판매자 정보 수정</button></a>
-                        <a href="#"><button type="button" class="btn btn-default">판매자 탈퇴</button></a>
-                    </span>        
+                <span style="float:right; margin-right:50px; margin-down: 30px;  margin-top: 70px;">
+                    <div class="button">    
+                    <a href="#"><button type="button" class="btn btn-default">회원 탈퇴</button></a>
+                        <br>
+                        <br><br><br><br><br><br>
+                        
+                        <a href="#"><button type="button" class="btn btn-default">Make Follow</button></a>
+                    </div>
+                        </span>    
+    
                 </div>
+
+                            </div>
                 <!--End Page Header -->
-                <div class="col-md-12" style="height:500px;">
-                	<h1>My Followers Review</h1>
-                	<div class = "col-md-offset-1 col-md-8" style="height:500px;margin-top:50px">
-                		<span><font class="h3"><a href="#">A 푸드트럭</a></font></span>
+                <div class="col-md-12">
+                	<h1 style="font-size:30px">My Followers Review</h1>
+                	<c:forEach items="${list }" var="Review">
+                		<div class = "col-md-offset-1 col-md-8" style="height:500px;margin-top:50px">
+                		<span><font class="h3"><a href="#">${Review.foodtruck.foodtruckName }</a></font></span>
                 		<span style="float:right"><input type="button" value="follow" class="btn btn-result"> <input type="button" value="!" class="btn btn-result"></span><br>
                 		<img src="../../resources/img/smile.png" width="300px" height="300px"><br><br>
                 		<font size="4px">
-                		<span>★★★★★ 따봉: 155</span>
-                		<span style="float:right">2017-05-21 11:44PM</span><br>
-                		햄버거가 너무 맛있어요.	
+                		<span>점수 : ${Review.score } 따봉: 155</span>
+                		<span style="float:right">${Review.writeDate }</span><br>
+                		${Review.contents }	
                 		</font>
-                	</div>
-                	<div class = "col-md-offset-1 col-md-8" style="height:500px;margin-top:50px">
-                		<span><font class="h3"><a href="#">B 푸드트럭</a></font></span>
-                		<span style="float:right"><input type="button" value="follow" class="btn btn-result"> <input type="button" value="!" class="btn btn-result"></span><br>
-                		<img src="../../resources/img/smile.png" width="300px" height="300px"><br><br>
-                		<font size="4px">
-                		<span>★★★★★ 따봉: 155</span>
-                		<span style="float:right">2017-05-21 11:44PM</span><br>
-                		햄버거가 너무 맛있어요.	
-                		</font>
-                	</div>
-                	<div class = "col-md-offset-1 col-md-8" style="height:500px;margin-top:50px">
-                		<span><font class="h3"><a href="#">C 푸드트럭</a></font></span>
-                		<span style="float:right"><input type="button" value="follow" class="btn btn-result"> <input type="button" value="!" class="btn btn-result"></span><br>
-                		<img src="../../resources/img/smile.png" width="300px" height="300px"><br><br>
-                		<font size="4px">
-                		<span>★★★★★ 따봉: 155</span>
-                		<span style="float:right">2017-05-21 11:44PM</span><br>
-                		햄버거가 너무 맛있어요.	
-                		</font>
-                	</div>
+                		</div>
+                	</c:forEach>
                 </div>
             </div>
         </div>

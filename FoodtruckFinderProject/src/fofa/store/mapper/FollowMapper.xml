@@ -8,7 +8,7 @@
 	
 	<resultMap type="Follow" id="followMap">
 		<id column="From_Id" property="fromId" />
-		<id column="To_Id" property="ToId" />
+		<id column="To_Id" property="toId" />
 		
 	</resultMap>	
 	
@@ -23,12 +23,12 @@
     </delete>
     
     <select id="selectByFromId" parameterType="String" resultMap="followMap">
-    select to_Id
+    select from_id, to_Id
     FROM follow_tb
-    WHERE from_Id= #{fromId} AND to_Id =#{toId}
+    WHERE from_Id= #{fromId}
     </select>
     <select id="selectByToId" parameterType="String" resultMap="followMap">
-    select FROM_Id
+    select FROM_Id, to_Id
     FROM follow_tb
     WHERE to_Id= #{toId}
 	</select>

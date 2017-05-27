@@ -49,10 +49,21 @@ public class RecommandStoreLogic implements RecommandStore {
 	}
 
 	@Override
-	public List<Recommand> selectAll() {
-		// TODO Auto-generated method stub
-		return null;
+	public int selectReviewCount(String reviewId) {
+		SqlSession session = factory.openSession();
+		int count = 0;
+		try{
+			RecommandMapper mapper = session.getMapper(RecommandMapper.class);
+			count = mapper.selectReviewCount(reviewId);
+		} finally {
+			session.close();
+		} 
+		return count;
 	}
 
-	
+	@Override
+	public boolean select(Recommand recommand) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }

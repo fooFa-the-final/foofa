@@ -59,10 +59,12 @@ public class ReviewServiceLogic implements ReviewService {
 	@Override
 	public List<Review> findByFromId(String memberId) {
 		List<Follow> list = followStore.selectByFromId(memberId);
+		System.out.println("follow list : " + list.size());
 		List<Review> reviewList = new ArrayList<>();
 		for(Follow f : list){
-			reviewList.add(reviewStore.selectById(f.getFromId()));
+			reviewList.addAll(reviewStore.selectByMemberId(f.getToId()));
 		}
+		System.out.println(reviewList.size());
 		return reviewList;
 	}
 

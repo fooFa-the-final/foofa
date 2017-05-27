@@ -1,5 +1,8 @@
 package fofa.controller.web;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -9,9 +12,13 @@ import fofa.domain.Recommand;
 import fofa.domain.Report;
 import fofa.domain.Review;
 import fofa.domain.Survey;
+import fofa.service.ReviewService;
 
 @Controller
 public class ReviewController {
+	
+	@Autowired
+	private ReviewService service;
 	
 	@RequestMapping("/review/list/member.do")
 	public String searchByMemberId(String memberId, Model model){
@@ -20,6 +27,12 @@ public class ReviewController {
 
 	@RequestMapping("/review/list/follow.do")
 	public String searchByFollower(String memberId, Model model){
+		List<Review> list = service.findByFromId(memberId);
+		System.out.println(list.size());
+		for(Review r : list){
+			System.out.println(r.getFoodtruck().getFoodtruckName());
+		}
+		model.addAttribute("list", list);
 		return "../../view/user/memberNewsfeed.jsp";
 	}
 	
