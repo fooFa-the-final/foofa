@@ -1,5 +1,7 @@
 package fofa.controller.web;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +19,6 @@ public class SalesController {
 
 	@Autowired
 	private SalesServiceLogic service;
-
 
 	@RequestMapping(value = "sales/create.do", method = RequestMethod.POST)
 	public String create(HttpSession session, Sale sale) {
@@ -43,16 +44,23 @@ public class SalesController {
 	public void searchDateSale(Sale sale, Model model) {
 
 	}
+
 	@RequestMapping(value = "sales/year.do")
-	public void search1YearSales(String foodtruckId, Model model) {
+	public void search1YearSales(String foodtruckId) {
+		List<Sale> list = service.find1YearSales(foodtruckId);
 
 	}
+
 	@RequestMapping(value = "sales/10days.do")
-	public void search10DaysSales(String foodtruckId, Model model) {
+	public void search10DaysSales(String foodtruckId) {
+		List<Sale> list = service.find10DaysSales(foodtruckId);
 
 	}
+
 	@RequestMapping(value = "sales/month.do")
 	public void search1MonthSales(String foodtruckId, String month) {
+
+		List<Sale> list = service.find1MonthSales(foodtruckId, month);
 
 	}
 }

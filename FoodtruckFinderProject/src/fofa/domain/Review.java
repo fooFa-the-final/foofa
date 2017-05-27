@@ -15,61 +15,76 @@ public class Review {
 	private Member writer;
 	private int recommand;
 	private Date writeDate;
+
 	public String getReviewId() {
 		return reviewId;
 	}
+
 	public void setReviewId(String reviewId) {
 		this.reviewId = reviewId;
 	}
-	
+
 	public Foodtruck getFoodtruck() {
 		return foodtruck;
 	}
+
 	public void setFoodtruck(Foodtruck foodtruck) {
 		this.foodtruck = foodtruck;
 	}
+
 	public String getContents() {
 		return contents;
 	}
+
 	public void setContents(String contents) {
 		this.contents = contents;
 	}
+
 	public int getScore() {
 		return score;
 	}
+
 	public void setScore(int score) {
 		this.score = score;
 	}
+
 	public List<Image> getImages() {
 		return images;
 	}
+
 	public void setImages(List<Image> images) {
 		this.images = images;
 	}
+
 	public Member getWriter() {
 		return writer;
 	}
+
 	public void setWriter(Member writer) {
 		this.writer = writer;
 	}
+
 	public int getRecommand() {
 		return recommand;
 	}
+
 	public void setRecommand(int recommand) {
 		this.recommand = recommand;
 	}
-	
+
 	public Date getWriteDate() {
 		return writeDate;
 	}
+
 	public void setWriteDate(Date writeDate) {
 		this.writeDate = writeDate;
 	}
+
 	@Override
 	public String toString() {
-		return "Review [reviewId=" + reviewId + ", foodtruckId=" + foodtruckId + ", contents=" + contents + ", score="
-				+ score + ", images=" + images + ", writer=" + writer + ", recommand=" + recommand + "]";
+		return "Review [reviewId=" + reviewId + ", foodtruck=" + foodtruck + ", contents=" + contents + ", score="
+				+ score + ", images=" + images + ", writer=" + writer + ", recommand=" + recommand + ", writeDate="
+				+ writeDate + "]";
 	}
-	
-	
+
 }
