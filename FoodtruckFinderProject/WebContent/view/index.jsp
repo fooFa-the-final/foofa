@@ -9,14 +9,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>FoodtruckMain</title>
 <!-- Core CSS - Include with every page -->
-<link href="../resources/plugins/bootstrap/bootstrap.css"
+<link href="${ctx}/resources/plugins/bootstrap/bootstrap.css"
 	rel="stylesheet" />
-<link href="../resources/font-awesome/css/font-awesome.css"
+<link href="${ctx}/resources/font-awesome/css/font-awesome.css"
 	rel="stylesheet" />
-<link href="../resources/plugins/pace/pace-theme-big-counter.css"
+<link href="${ctx}/resources/plugins/pace/pace-theme-big-counter.css"
 	rel="stylesheet" />
-<link href="../resources/css/style.css" rel="stylesheet" />
-<link href="../resources/css/main-style.css" rel="stylesheet" />
+<link href="${ctx}/resources/css/style.css" rel="stylesheet" />
+<link href="${ctx}/resources/css/main-style.css" rel="stylesheet" />
 
 </head>
 
@@ -36,8 +36,7 @@
 			<li class="row">
 				<div class="col-lg-12">
 					<a class="navbar-brand" style="align: center"
-						href="${ctx }/index.do"> <img src="../resources/img/mainLogo.png"
-						alt="" />
+						href="${ctx }/index.do"> <img style="height:60px;" src="${ctx}/resources/img/mainLogo.png" alt="" />
 					</a>
 				</div>
 			</li>
@@ -57,7 +56,7 @@
 			</li>
 			<li class="row" style="display: block; float: bottom">
 				<div id="col-lg-12">
-					<img class="main_img_person" src="../resources/img/user.jpg" />
+					<img class="main_img_person" src="${ctx}/resources/img/user.jpg" />
 				</div>
 			</li>
 
@@ -74,7 +73,7 @@
 				<div class="col-lg-4">
 					<div class="panel panel-danger">
 						<div class="panel-header">
-							<img src="../resources/img/waikiki.jpg" />
+							<img src="${ctx}/resources/img/waikiki.jpg" />
 						</div>
 						<div class="panel-body">
 							푸드트럭 이름 <br> 평점 별별별 <br> 리뷰수 : 144
@@ -85,7 +84,7 @@
 				<div class="col-lg-4">
 					<div class="panel panel-danger">
 						<div class="panel-header">
-							<img src="../resources/img/twiceprofile.jpg" />
+							<img src="${ctx}/resources/img/twiceprofile.jpg" />
 						</div>
 						<div class="panel-body">
 							푸드트럭 이름 <br> 평점 별별별 <br> 리뷰수 : 144
@@ -96,7 +95,7 @@
 				<div class="col-lg-4">
 					<div class="panel panel-danger">
 						<div class="panel-header">
-							<img src="../resources/img/waikiki.jpg" />
+							<img src="${ctx}/resources/img/waikiki.jpg" />
 						</div>
 						<div class="panel-body">
 							푸드트럭 이름 <br> 평점 별별별 <br> 리뷰수 : 144
@@ -110,7 +109,7 @@
 				<div class="col-lg-4">
 					<div class="panel panel-danger">
 						<div class="panel-header">
-							<img src="../resources/img/waikiki.jpg" />
+							<img src="${ctx}/resources/img/waikiki.jpg" />
 						</div>
 						<div class="panel-body">
 							푸드트럭 이름 <br> 평점 별별별 <br> 리뷰수 : 144
@@ -121,7 +120,7 @@
 				<div class="col-lg-4">
 					<div class="panel panel-danger">
 						<div class="panel-header">
-							<img src="../resources/img/twiceprofile.jpg" />
+							<img src="${ctx}/resources/img/twiceprofile.jpg" />
 						</div>
 						<div class="panel-body">
 							푸드트럭 이름 <br> 평점 별별별 <br> 리뷰수 : 144
@@ -132,7 +131,7 @@
 				<div class="col-lg-4">
 					<div class="panel panel-danger">
 						<div class="panel-header">
-							<img src="../resources/img/waikiki.jpg" />
+							<img src="${ctx}/resources/img/waikiki.jpg" />
 						</div>
 						<div class="panel-body">
 							푸드트럭 이름 <br> 평점 별별별 <br> 리뷰수 : 144
@@ -146,7 +145,7 @@
 				<div class="col-lg-4">
 					<div class="panel panel-danger">
 						<div class="panel-header">
-							<img src="../resources/img/waikiki.jpg" />
+							<img src="${ctx}/resources/img/waikiki.jpg" />
 						</div>
 						<div class="panel-body">
 							푸드트럭 이름 <br> 평점 별별별 <br> 리뷰수 : 144
@@ -157,7 +156,7 @@
 				<div class="col-lg-4">
 					<div class="panel panel-danger">
 						<div class="panel-header">
-							<img src="../resources/img/twiceprofile.jpg" />
+							<img src="${ctx}/resources/img/twiceprofile.jpg" />
 						</div>
 						<div class="panel-body">
 							푸드트럭 이름 <br> 평점 별별별 <br> 리뷰수 : 144
@@ -168,7 +167,7 @@
 				<div class="col-lg-4">
 					<div class="panel panel-danger">
 						<div class="panel-header">
-							<img src="../resources/img/waikiki.jpg" />
+							<img src="${ctx}/resources/img/waikiki.jpg" />
 						</div>
 						<div class="panel-body">
 							푸드트럭 이름 <br> 평점 별별별 <br> 리뷰수 : 144
