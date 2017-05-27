@@ -16,7 +16,7 @@ public class Review {
 	private int score;
 	private List<Image> images;
 	private Member writer;
-	private List<Recommand> recommand;
+	private int recommand;
 	private Date writeDate;
 	public String getReviewId() {
 		return reviewId;
@@ -55,12 +55,14 @@ public class Review {
 	public void setWriter(Member writer) {
 		this.writer = writer;
 	}
-	public List<Recommand> getRecommand() {
-		return recommand;
+	public int getRecommand() {
+		RecommandStore store = new RecommandStoreLogic();
+		return store.selectReviewCount(reviewId);
 	}
-	public void setRecommand(List<Recommand> recommand) {
+	public void setRecommand(int recommand) {
 		this.recommand = recommand;
 	}
+	
 	public Date getWriteDate() {
 		return writeDate;
 	}

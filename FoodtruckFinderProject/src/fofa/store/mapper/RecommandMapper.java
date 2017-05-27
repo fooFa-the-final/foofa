@@ -7,5 +7,6 @@ import fofa.domain.Recommand;
 public interface RecommandMapper {
 	int insert(Recommand recommand);
 	int delete(Recommand recommand);
-	List<Recommand> selectAll(String reviewId);
+	int selectReviewCount(String reviewId);
+	boolean select(Recommand recommand);
 }
