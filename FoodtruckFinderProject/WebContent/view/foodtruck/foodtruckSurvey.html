@@ -1,10 +1,290 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<meta charset="EUC-KR">
-<title>Insert title here</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bootsrtap Free Admin Template - SIMINTA | Admin Dashboad Template</title>
+    <!-- Core CSS - Include with every page -->
+    <link href="../../resources/plugins/bootstrap/bootstrap.css" rel="stylesheet" />
+    <link href="../../resources/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <link href="../../resources/plugins/pace/pace-theme-big-counter.css" rel="stylesheet" />
+    <link href="../../resources/css/style.css" rel="stylesheet" />
+    <link href="../../resources/css/main-style.css" rel="stylesheet" />
+    
+    <!-- Page-Level CSS -->
+    <link href="../../resources/plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet" />
+    
+
 </head>
+
 <body>
-����� ��ȿ��
+    <!--  wrapper -->
+    
+    <div id="wrapper">
+        <!-- navbar top -->
+        <nav class="navbar navbar-default navbar-fixed-top" role="navigation" id="navbar">
+            <!-- navbar-header -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="index.html">
+                    <img src="../../resources/img/logo.png" alt="" />
+                </a>
+            </div>
+            <!-- end navbar-header -->
+            <!-- navbar-top-links -->
+            <ul class="nav navbar-top-links navbar-right">
+               
+               <li class="row">
+                    <!-- search section-->
+                    <div class="input-group custom-search-form" style="width:800px; margin-right:200px">
+                        <input type="text" class="form-control" placeholder="Search" style="width: 45%">
+                        <input type="text" class="form-control" placeholder="Location" style="width: 45%">
+                            <button class="btn btn-default" type="button">
+                                <i class="fa fa-search"></i>
+                            </button>
+                    </div>
+                    <!--end search section-->
+                </li>
+               
+                <!-- main dropdown -->
+                    <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-user fa-3x"></i>
+                    </a>
+                    <!-- dropdown user-->
+                    <ul class="dropdown-menu dropdown-user">
+                        <li><a href="#"><i class="fa fa-user fa-fw"></i>User Profile</a>
+                        </li>
+                        <li><a href="#"><i class="fa fa-gear fa-fw"></i>Settings</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i>Logout</a>
+                        </li>
+                    </ul>
+                    <!-- end dropdown-user -->
+                </li>
+                <!-- end main dropdown -->
+            </ul>
+            <!-- end navbar-top-links -->
+
+        </nav>
+        <!-- end navbar top -->
+        
+        
+        <!-- navbar side -->
+        <nav class="navbar-default navbar-static-side" role="navigation" >
+            <!-- sidebar-collapse -->
+            <div class="sidebar-collapse">
+                <!-- side-menu -->
+                <ul class="nav" id="side-menu">
+                    <li class="active">
+                        <a href="#"><i class="fa fa-files-o fa-fw"></i>Truck Info<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="#">Truck Info</a>
+                            </li>
+                            <li>
+                                <a href="#">트럭정보 수정</a>
+                            </li>
+                        </ul>
+                        <!-- second-level-items -->
+                    </li>
+                     <li>
+                        <a href="#"><i class="fa fa-flask fa-fw"></i>광고요청</a>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa fa-table fa-fw"></i>매출통계</a>
+                    </li>
+                    <li  class="selected">
+                        <a href="#"><i class="fa fa-edit fa-fw"></i>설문통계</a>
+                    </li>
+                </ul>
+                <!-- end side-menu -->
+            </div>
+            <!-- end sidebar-collapse -->
+        </nav>
+        <!-- end navbar side -->
+        <!--  page-wrapper -->
+        <div id="page-wrapper" style="margin-top:80px">
+            <div class="row">
+                <!-- Page Header -->
+                <div class="col-md-12" style="background-color:white; height:300px">
+                    <span>
+                            <a class="navbar-brand" href="#" style="margin-top:10px;">
+                                <img src="../../resources/img/waikiki.jpg" style="height:250px; width:250px"/>
+                            </a>
+                            <div class="user-info">
+                                <h1>WAIKIKI JEJU</h1><br>
+                                <h5>양식</h5>
+                                <h5>제주시</h5>
+                                <h5>144Followers</h5>
+                                <h5>255Reviews</h5>
+                            </div>
+                    </span>
+                    <span style="float:right; margin-right:30px; margin-top: 30px">
+                        <a href="#"><button type="button" class="btn btn-default">판매자 정보 수정</button></a>
+                        <a href="#"><button type="button" class="btn btn-default">판매자 탈퇴</button></a>
+                    </span>        
+                </div>
+                <!--End Page Header -->
+                
+                <div class="col-md-12" style="margin-bottom:50px">
+                      <div class="col-lg-8">
+                            <h1>Survey</h1>
+                      </div>                    
+                   <div class="col-md-8">
+                       
+                      <div class="col-lg-12">
+                          <h2>Score</h2>
+                          <div class="col-lg-8" style="float: left">
+                              <table>
+                              <thead>
+                                  <tr>
+                                      <th width="150px"></th>
+                                      <th></th>
+                                  </tr>
+                              </thead>
+                               <tbody>
+                                   <tr>
+                                       <td><a href="#">Food</a></td>
+                                        <td>
+                                         <fieldset class="rating" disabled>
+                                                    
+                                                    <label class = "full" for="star5" title="Awesome - 5 stars"></label>
+                                                    <input type="radio" id="star3" name="rating1" value="3" checked/>
+                                                    <label class="half" for="star4half" title="Pretty good - 4.5 stars"></label>
+                                                    <label class = "full" for="star4" title="Pretty good - 4 stars"></label>
+                                                    <label class="half" for="star3half" title="Meh - 3.5 stars"></label>
+                                                    <label class = "full" for="star3" title="Meh - 3 stars"></label>
+                                                    <label class="half" for="star2half" title="Kinda bad - 2.5 stars"></label>
+                                                    <label class = "full" for="star2" title="Kinda bad - 2 stars"></label>
+                                                    <label class="half" for="star1half" title="Meh - 1.5 stars"></label>
+                                                    <label class = "full" for="star1" title="Sucks big time - 1 star"></label>
+                                                    <label class="half" for="starhalf" title="Sucks big time - 0.5 stars"></label>
+                                            </fieldset>   
+                                        </td>
+                                   </tr>
+                                   <tr>
+                                       <td><a href="#">Price</a></td>
+                                       <td>
+                                         <fieldset class="rating" disabled>
+                                                    
+                                                    <label class = "full" for="star5" title="Awesome - 5 stars"></label>
+                                                    <label class="half" for="star4half" title="Pretty good - 4.5 stars"></label>
+                                                    <label class = "full" for="star4" title="Pretty good - 4 stars"></label>
+                                                    <label class="half" for="star3half" title="Meh - 3.5 stars"></label>
+                                                    <input type="radio" id="star3" name="rating2" value="3" checked/>
+                                                    <label class = "full" for="star3" title="Meh - 3 stars"></label>
+                                                    <label class="half" for="star2half" title="Kinda bad - 2.5 stars"></label>
+                                                    <label class = "full" for="star2" title="Kinda bad - 2 stars"></label>
+                                                    <label class="half" for="star1half" title="Meh - 1.5 stars"></label>
+                                                    <label class = "full" for="star1" title="Sucks big time - 1 star"></label>
+                                                    <label class="half" for="starhalf" title="Sucks big time - 0.5 stars"></label>
+                                                    
+                                            </fieldset>   
+                                        </td>
+                                   </tr>
+                                   <tr>
+                                       <td><a href="#">Service</a></td>
+                                       <td>
+                                         <fieldset class="rating" disabled>
+                                                    
+                                                    <label class = "full" for="star5" title="Awesome - 5 stars"></label>
+                                                    <label class="half" for="star4half" title="Pretty good - 4.5 stars"></label>
+                                                    <label class = "full" for="star4" title="Pretty good - 4 stars"></label>
+                                                    <label class="half" for="star3half" title="Meh - 3.5 stars"></label>
+                                                    <label class = "full" for="star3" title="Meh - 3 stars"></label>
+                                                    <input type="radio" id="star2half" name="rating3" value="2.5" checked/>
+                                                    <label class="half" for="star2half" title="Kinda bad - 2.5 stars"></label>
+                                                    <label class = "full" for="star2" title="Kinda bad - 2 stars"></label>
+                                                    <label class="half" for="star1half" title="Meh - 1.5 stars"></label>
+                                                    <label class = "full" for="star1" title="Sucks big time - 1 star"></label>
+                                                    <label class="half" for="starhalf" title="Sucks big time - 0.5 stars"></label>
+                                            </fieldset>   
+                                        </td>
+                                   </tr>
+                               </tbody>
+                           </table>
+                          </div>
+                      </div>
+                   
+                   </div>
+                                    
+                                     
+                
+                <div class="col-lg-12">
+                     <div class="col-lg-8">
+                          <h2>Comment</h2>
+                     </div>
+                <div class="col-lg-10">
+                      <!--    Striped Rows Table  -->
+                    <div class="panel panel-default">
+                        
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <table class="table table-striped" id="dataTables-example">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>User Id</th>
+                                            <th>Content</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>Mark</td>
+                                            <td>코멘트 내용 코멘트 내용 코멘트 내용 코멘트 내용</td>
+                                        </tr>
+                                        <tr>
+                                            <td>2</td>
+                                            <td>Jacob</td>
+                                            <td>코멘트 내용 코멘트 내용 코멘트 내용 코멘트 내용</td>
+                                        </tr>
+                                        <tr>
+                                            <td>3</td>
+                                            <td>Larry</td>
+                                            <td>코멘트 내용 코멘트 내용 코멘트 내용 코멘트 내용</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <!--  End  Striped Rows Table  -->
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+        <!-- end page-wrapper -->
+        
+    </div>
+    <!-- end wrapper -->
+
+    <!-- Core Scripts - Include with every page -->
+    <script src="../resources/plugins/jquery-1.10.2.js"></script>
+    <script src="../resources/plugins/bootstrap/bootstrap.min.js"></script>
+    <script src="../resources/plugins/metisMenu/jquery.metisMenu.js"></script>
+    <script src="../resources/plugins/pace/pace.js"></script>
+    <script src="../resources/scripts/siminta.js"></script>
+    <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+    
+    <!-- Page-Level Plugin Scripts-->
+    <script src="../../resources/plugins/dataTables/jquery.dataTables.js"></script>
+    <script src="../../resources/plugins/dataTables/dataTables.bootstrap.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#dataTables-example').dataTable();
+        });
+    </script>
+    
 </body>
+
 </html>
