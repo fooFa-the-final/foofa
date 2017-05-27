@@ -177,74 +177,76 @@
 
 
 
-				<div style="margin-left: 30px">
-					<a style="color: black"
-						onclick="this.nextSibling.style.display=(this.nextSibling.style.display=='none')?'block':'none';"
-						href="javascript:void(0)"> 푸드트럭 설문조사 항목 </a>
-					<div style="DISPLAY: none">
-
-
-						<h4>음식의 가격에 만족하십니까?</h4>
-						<label class="radio-inline"> <input type="radio"
-							name="optionsRadiosInline" id="optionsRadiosInline1"
-							value="option1">매우만족
-						</label> <label class="radio-inline"> <input type="radio"
-							name="optionsRadiosInline" id="optionsRadiosInline2"
-							value="option2">만족
-						</label> <label class="radio-inline"> <input type="radio"
-							name="optionsRadiosInline" id="optionsRadiosInline3"
-							value="option3">보통
-						</label> <label class="radio-inline"> <input type="radio"
-							name="optionsRadiosInline" id="optionsRadiosInline3"
-							value="option3">불만
-						</label> <label class="radio-inline"> <input type="radio"
-							name="optionsRadiosInline" id="optionsRadiosInline3"
-							value="option3">매우불만
-						</label> <br>
-						<h4>음식의 품질에 만족하십니까?</h4>
-						<label class="radio-inline"> <input type="radio"
-							name="optionsRadiosInline" id="optionsRadiosInline1"
-							value="option1">매우만족
-						</label> <label class="radio-inline"> <input type="radio"
-							name="optionsRadiosInline" id="optionsRadiosInline2"
-							value="option2">만족
-						</label> <label class="radio-inline"> <input type="radio"
-							name="optionsRadiosInline" id="optionsRadiosInline3"
-							value="option3">보통
-						</label> <label class="radio-inline"> <input type="radio"
-							name="optionsRadiosInline" id="optionsRadiosInline3"
-							value="option3">불만
-						</label> <label class="radio-inline"> <input type="radio"
-							name="optionsRadiosInline" id="optionsRadiosInline3"
-							value="option3">매우불만
-						</label> <br>
-						<h4>푸드트럭커의 서비스에 만족하십니까?</h4>
-						<label class="radio-inline"> <input type="radio"
-							name="optionsRadiosInline" id="optionsRadiosInline1"
-							value="option1">매우만족
-						</label> <label class="radio-inline"> <input type="radio"
-							name="optionsRadiosInline" id="optionsRadiosInline2"
-							value="option2">만족
-						</label> <label class="radio-inline"> <input type="radio"
-							name="optionsRadiosInline" id="optionsRadiosInline3"
-							value="option3">보통
-						</label> <label class="radio-inline"> <input type="radio"
-							name="optionsRadiosInline" id="optionsRadiosInline3"
-							value="option3">불만
-						</label> <label class="radio-inline"> <input type="radio"
-							name="optionsRadiosInline" id="optionsRadiosInline3"
-							value="option3">매우불만
-						</label>
-
-
-						<textarea name="ourtext"
-							style="width: 100%; border: 1; overflow: visible; text-overflow: ellipsis;"
-							rows=3 placeholder="기타의견사항"></textarea>
-						<br>
-					</div>
-
-
-				</div>
+			            <div style="margin-left:30px">
+<a style="color:black" onclick="this.nextSibling.style.display=(this.nextSibling.style.display=='none')?'block':'none';" href="javascript:void(0)"> 
+푸드트럭 설문조사 항목
+</a><div style="DISPLAY: none">
+        
+        
+                                            <h4>음식의 가격에 만족하십니까?</h4>
+                                            <label class="radio-inline">
+                                                <input type="radio" name="optionsRadiosInline" id="optionsRadiosInline1" value="option1" >매우만족
+                                            </label>
+                                            <label class="radio-inline">
+                                                <input type="radio" name="optionsRadiosInline" id="optionsRadiosInline2" value="option2">만족
+                                            </label>
+                                            <label class="radio-inline">
+                                                <input type="radio" name="optionsRadiosInline" id="optionsRadiosInline3" value="option3">보통
+                                            </label>
+                                        
+                                        <label class="radio-inline">
+                                                <input type="radio" name="optionsRadiosInline" id="optionsRadiosInline3" value="option3">불만
+                                            </label>
+                                              <label class="radio-inline">
+                                                <input type="radio" name="optionsRadiosInline" id="optionsRadiosInline3" value="option3">매우불만
+                                            </label>
+                                        
+    
+    <br>
+                                                <h4>음식의 품질에 만족하십니까?</h4>
+                                            <label class="radio-inline">
+                                                <input type="radio" name="optionsRadiosInline" id="optionsRadiosInline1" value="option1" >매우만족
+                                            </label>
+                                            <label class="radio-inline">
+                                                <input type="radio" name="optionsRadiosInline" id="optionsRadiosInline2" value="option2">만족
+                                            </label>
+                                            <label class="radio-inline">
+                                                <input type="radio" name="optionsRadiosInline" id="optionsRadiosInline3" value="option3">보통
+                                            </label>
+                                        
+                                        <label class="radio-inline">
+                                                <input type="radio" name="optionsRadiosInline" id="optionsRadiosInline3" value="option3">불만
+                                            </label>
+                                              <label class="radio-inline">
+                                                <input type="radio" name="optionsRadiosInline" id="optionsRadiosInline3" value="option3">매우불만
+                                            </label>
+    
+    <br>
+                                                <h4>푸드트럭커의 서비스에 만족하십니까? </h4>
+                                            <label class="radio-inline">
+                                                <input type="radio" name="optionsRadiosInline" id="optionsRadiosInline1" value="option1" >매우만족
+                                            </label>
+                                            <label class="radio-inline">
+                                                <input type="radio" name="optionsRadiosInline" id="optionsRadiosInline2" value="option2">만족
+                                            </label>
+                                            <label class="radio-inline">
+                                                <input type="radio" name="optionsRadiosInline" id="optionsRadiosInline3" value="option3">보통
+                                            </label>
+                                        
+                                        <label class="radio-inline">
+                                                <input type="radio" name="optionsRadiosInline" id="optionsRadiosInline3" value="option3">불만
+                                            </label>
+                                              <label class="radio-inline">
+                                                <input type="radio" name="optionsRadiosInline" id="optionsRadiosInline3" value="option3">매우불만
+                                            </label>
+    
+        
+    <textarea name="ourtext" style="width:100%;border:1;overflow:visible;text-overflow:ellipsis;" rows=3 placeholder="기타의견사항"></textarea>
+<br>
+    </div>
+    
+    
+        </div>    
 
 
 			</div>

@@ -7,7 +7,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>admin Advertiset</title>
+    <title>팔로우 리스트</title>
     <!-- Core CSS - Include with every page -->
     <link href="../../resources/plugins/bootstrap/bootstrap.css" rel="stylesheet" />
     <link href="../../resources/font-awesome/css/font-awesome.css" rel="stylesheet" />

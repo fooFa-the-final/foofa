@@ -19,7 +19,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>admin Advertiset</title>
+    <title>푸드트럭 검색결과</title>
     <!-- Core CSS - Include with every page -->
     <link href="../../resources/plugins/bootstrap/bootstrap.css" rel="stylesheet" />
     <link href="../../resources/font-awesome/css/font-awesome.css" rel="stylesheet" />
@@ -144,7 +144,7 @@
             <div class="find">
             <table>
           <tr>
-          <th rowspan="3"><img width="100px" height="100px" src="../../resources/img/pizzahut.png" style="margin-right:10px"></th>
+          <th rowspan="3"><img width="200px" height="200px" src="../../resources/img/pizzahut.png" style="margin-right:10px"></th>
         <th width="200px"> <a href="" style="color:black">정찬기의 피자집</a>
         &nbsp;&nbsp;<th>피자</th>
         </tr>
@@ -160,7 +160,7 @@
             <div class="find" style="maring-bottom:20px">
             <table>
           <tr>
-          <th rowspan="3"><img width="100px" height="100px" src="../../resources/img/pizzahut.png" style="margin-right:10px"></th>
+          <th rowspan="3"><img width="200px" height="200px" src="../../resources/img/pizzahut.png" style="margin-right:10px"></th>
         <th width="200px" > <a href="" style="color:black; font-weight:bold">이승건의 삐따기</a>
         &nbsp;&nbsp;<th>핫도그</th>
         </tr>
@@ -175,7 +175,7 @@
             <div class="find" style="maring-bottom:20px">
             <table>
           <tr>
-          <th rowspan="3"><img width="100px" height="100px" src="../../resources/img/pizzahut.png" style="margin-right:10px"></th>
+          <th rowspan="3"><img width="200px" height="200px" src="../../resources/img/pizzahut.png" style="margin-right:10px"></th>
         <th width="200px" > <a href="" style="color:black; font-weight:bold">이승건의 삐따기</a>
         &nbsp;&nbsp;<th>핫도그</th>
         </tr>
@@ -190,7 +190,7 @@
             <div class="find" style="maring-bottom:20px">
             <table>
           <tr>
-          <th rowspan="3"><img width="100px" height="100px" src="../../resources/img/pizzahut.png" style="margin-right:10px"></th>
+          <th rowspan="3"><img width="200px" height="200px" src="../../resources/img/pizzahut.png" style="margin-right:10px"></th>
         <th width="200px" > <a href="" style="color:black; font-weight:bold">이승건의 삐따기</a>
         &nbsp;&nbsp;<th>핫도그</th>
         </tr>
@@ -205,7 +205,7 @@
             <div class="find" style="maring-bottom:20px">
             <table>
           <tr>
-          <th rowspan="3"><img width="100px" height="100px" src="../../resources/img/pizzahut.png" style="margin-right:10px"></th>
+          <th rowspan="3"><img width="200px" height="200px" src="../../resources/img/pizzahut.png" style="margin-right:10px"></th>
         <th width="200px" > <a href="" style="color:black; font-weight:bold">이승건의 삐따기</a>
         &nbsp;&nbsp;<th>핫도그</th>
         </tr>
