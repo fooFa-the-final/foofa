@@ -64,7 +64,6 @@ public class AdvertiseStoreLogic implements AdvertiseStore {
 			AdvertiseMapper mapper = session.getMapper(AdvertiseMapper.class);
 			sucess = mapper.update(advid);
 			session.commit();
-
 		} finally {
 			session.close();
 		}

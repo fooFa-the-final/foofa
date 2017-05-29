@@ -7,10 +7,20 @@ public class Advertise {
 
 	private String advId;
 	private String sellerId;
-	private String period;
+	private int period;
 	private boolean approve;
 	private String startdate;
+	private String enddate;
 	
+	
+	
+	
+	public String getEnddate() {
+		return enddate;
+	}
+	public void setEnddate(String edndate) {
+		this.enddate = edndate;
+	}
 	public String getStartdate() {
 		return startdate;
 	}
@@ -29,10 +39,10 @@ public class Advertise {
 	public void setSellerId(String sellerId) {
 		this.sellerId = sellerId;
 	}
-	public String getPeriod() {
+	public int getPeriod() {
 		return period;
 	}
-	public void setPeriod(String period) {
+	public void setPeriod(int period) {
 		this.period = period;
 	}
 	public boolean getApprove() {
