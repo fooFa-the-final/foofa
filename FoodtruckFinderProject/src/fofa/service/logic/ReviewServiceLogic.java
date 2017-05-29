@@ -74,7 +74,7 @@ public class ReviewServiceLogic implements ReviewService {
 	}
 
 	@Override
-	public List<Review> findByRecommand(String reviewId) {
+	public List<Review> findByRecommand() {
 		return reviewStore.selectByRecommand();
 	}
 
