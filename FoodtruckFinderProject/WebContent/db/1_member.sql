@@ -5,7 +5,7 @@ CREATE TABLE member_tb (
   password varchar2(100),
   birth varchar2(100),
   email varchar2(100),
-  gender CHAR(1),
+  gender varchar2(50),
   image_src varchar2(300),
   PRIMARY KEY (member_id)
 );

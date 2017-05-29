@@ -25,8 +25,61 @@
 </head>
 
 <script>
-	
+	/* 	
+	 function approve(){
+	 var f=document.formName;
+	 f.action = "${ctx }/advertise/approve.ajax";
+	 // 파일 전송이 필요할 경우만 씀.
+	 f.submit();
+	 }
+	 function remove(){
+	 var f=document.formName;
+	 f.action = "${ctx }/advertise/remove.do";
+	 f.submit();
+	 }
+	 폼안에 2개의 submit 만들기
+	 */
+
+	var registComment = function() {
+		 
+	        var postData = { "para1": "para1", "advId": para2 };
+
+	        
+	        var para2 = [];
+	        $("input[name='advId']:checked").each(function(i) {
+	        para2.push($(this).val());
+	        });
+		 
+		$.ajax({
+			url : "${ctx }/advertise/approve.ajax",
+			type : "post",
+			data:{
+	postData
+			},
+			traditional: true,
+			success :alert(p111ostData), //ajax성공시에 수행되는 기능,
+			error : alert("실패")
+		// 에러발생시 수행되는 기능
+		});
+	};
 </script>
+
+
+<%-- 	
+function approve(){
+
+	var f=document.formName;
+	f.action = "${ctx }/advertise/approve.do";
+	f.submit();
+	}
+}
+function remove(){
+var f=document.formName;
+f.action = "111.jsp";
+f.submit();
+};
+
+ --%>
 <body>
 	<!--  wrapper -->
 	<div id="wrapper">
@@ -113,7 +166,10 @@
 								</div>
 								<div class="tab-pane fade" id="unapproved">
 									<h4>미승인된 광고 목록</h4>
-									<Form method="post">
+									<!-- 
+									<Form method="post" name="formName">
+									 -->
+									<Form onsubmit="registComment(); return false;">
 										<div class="panel-body">
 											<div class="table-responsive">
 
@@ -126,7 +182,7 @@
 															<th>Name</th>
 															<th>Start-Date</th>
 															<th>End-Date</th>
-																<th>Days</th>
+															<th>Days</th>
 															<th>Select</th>
 														</tr>
 													</thead>
@@ -139,8 +195,8 @@
 																<td>${advertise1.startdate }</td>
 																<td>${advertise1.enddate }</td>
 																<td>${advertise1.period }</td>
-																<td><input type="checkbox" name="advId" value="${advertise1.advId}">
-																</td>
+																<td><input type="checkbox" name="advId"
+																	value="${advertise1.advId}"></td>
 															</tr>
 														</c:forEach>
 													</tbody>
@@ -149,8 +205,10 @@
 											<!--End Advanced Tables -->
 										</div>
 										<div style="text-align: right">
-											<button type="submit" value="approve"class="btn btn-primary" onclick="approve()">Approve</button>
-											<button type="button" value="pass" class="btn btn-success" onclick="remove()">Pass</button>
+											<button type="submit" value="approve" class="btn btn-primary"
+												onclick="registComment">Approve</button>
+											<button type="button" value="pass" class="btn btn-success"
+												onclick="remove();">Pass</button>
 										</div>
 									</Form>
 								</div>
