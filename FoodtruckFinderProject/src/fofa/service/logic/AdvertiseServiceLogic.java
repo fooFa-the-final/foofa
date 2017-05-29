@@ -17,14 +17,14 @@ public class AdvertiseServiceLogic implements AdvertiseService {
 	private AdvertiseStore advertiseStore;
 
 	@Override
-	public List<Advertise> findByAsc(Boolean approve) {
+	public List<Advertise> findByAsc(int approve) {
 		List<Advertise> list = new ArrayList<>();
 		list = advertiseStore.selectByAsc(approve);
 		return list;
 	}
 
 	@Override
-	public List<Advertise> findByDesc(Boolean approve) {
+	public List<Advertise> findByDesc(int approve) {
 		List<Advertise> list = new ArrayList<>();
 		list = advertiseStore.selectByDesc(approve);
 		return list;
@@ -38,14 +38,9 @@ public class AdvertiseServiceLogic implements AdvertiseService {
 	}
 
 	@Override
-	public boolean modify(String advertiseId) {
-		int sucess;
-		sucess = advertiseStore.update(advertiseId);
-		if (sucess == 0) {
-			return false;
-		} else {
-			return true;
-		}
+	public boolean modify(Advertise advertise) {
+		int sucess = advertiseStore.update(advertise);
+		return sucess > 0;
 	}
 
 	@Override
@@ -70,4 +65,10 @@ public class AdvertiseServiceLogic implements AdvertiseService {
 		}
 	}
 
+	@Override
+	public List<Advertise> findExpired() {
+		return advertiseStore.selectExpired();
+	}
+
+	
 }

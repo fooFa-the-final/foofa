@@ -57,12 +57,12 @@ public class AdvertiseStoreLogic implements AdvertiseStore {
 	}
 
 	@Override
-	public int update(String advid) {
+	public int update(Advertise advertise) {
 		SqlSession session = factory.openSession();
+		int sucess = 0;
 		try {
-
 			AdvertiseMapper mapper = session.getMapper(AdvertiseMapper.class);
-			sucess = mapper.update(advid);
+			sucess = mapper.update(advertise);
 			session.commit();
 		} finally {
 			session.close();
@@ -71,7 +71,7 @@ public class AdvertiseStoreLogic implements AdvertiseStore {
 	}
 
 	 @Override
-	 public List<Advertise> selectByAsc(boolean approve) {
+	 public List<Advertise> selectByAsc(int approve) {
 	 List<Advertise> list = null;
 	 SqlSession session = factory.openSession();
 	 try {
@@ -86,7 +86,7 @@ public class AdvertiseStoreLogic implements AdvertiseStore {
 	 }
 
 	 @Override
-	 public List<Advertise> selectByDesc(boolean approve) {
+	 public List<Advertise> selectByDesc(int approve) {
 	 List<Advertise> list = null;
 	 SqlSession session = factory.openSession();
 	 try {
@@ -109,6 +109,20 @@ public class AdvertiseStoreLogic implements AdvertiseStore {
 			list = mapper.selectNowAd();
 			session.commit();
 
+		} finally {
+			session.close();
+		}
+		return list;
+	}
+
+
+	@Override
+	public List<Advertise> selectExpired() {
+		SqlSession session = factory.openSession();
+		List<Advertise> list = null;
+		try{
+			AdvertiseMapper mapper = session.getMapper(AdvertiseMapper.class);
+			list = mapper.selectExpired();
 		} finally {
 			session.close();
 		}

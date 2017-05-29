@@ -33,14 +33,12 @@ public class AdvertiseStoreTest {
 	// }
 
 	//
-	 @Test
-	 public void testSelectByAsc() {
-
-	boolean approve1 = true;
-	String approve = "0";
-	assertEquals(4, store1.selectByAsc(approve1).size());
-
-	 }
+//	 @Test
+//	 public void testSelectByAsc() {
+//
+//		 assertEquals(4, store1.selectByAsc(1).size());
+//
+//	 }
 	
 
 //	@Test
@@ -78,12 +76,16 @@ public class AdvertiseStoreTest {
 	// assertEquals(1, store1.delete("A24"));
 	// }
 
-	// @Test
-	// public void testUpdate() {
-	//
-	// Advertise advertise = new Advertise();
-	// advertise.setAdvId("A23");
-	// assertEquals(1, store1.update("A23"));
-	//
-	// }
+	 @Test
+	 public void testUpdate() {
+		 Advertise advertise = new Advertise();
+		 advertise.setAdvId("A10");
+		 advertise.setApprove(2);
+		 assertEquals(1, store1.update(advertise));
+	 }
+	
+	@Test
+	public void testSelectExpired(){
+		assertEquals(5, store1.selectExpired().size());
+	}
 }

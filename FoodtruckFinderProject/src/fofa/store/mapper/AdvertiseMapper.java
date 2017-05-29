@@ -10,12 +10,14 @@ public interface AdvertiseMapper {
 
 	int insert(Advertise advertise);
 
-	int update(String advid);
+	int update(Advertise advertise);
 
 	List<Advertise> selectNowAd();
 
-	List<Advertise> selectByAsc(boolean approve);
+	List<Advertise> selectByAsc(int approve);
 
-	List<Advertise> selectByDesc(boolean approve);
+	List<Advertise> selectByDesc(int approve);
+	
+	List<Advertise> selectExpired();
 
 }

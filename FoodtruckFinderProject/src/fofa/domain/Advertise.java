@@ -1,5 +1,7 @@
 package fofa.domain;
 
+import java.sql.Date;
+
 import org.springframework.stereotype.Component;
 
 @Component
@@ -8,11 +10,9 @@ public class Advertise {
 	private String advId;
 	private String sellerId;
 	private int period;
-	private boolean approve;
-	private String startdate;
+	private int approve;
+	private Date startdate;
 	private String enddate;
-	
-	
 	
 	
 	public String getEnddate() {
@@ -21,10 +21,10 @@ public class Advertise {
 	public void setEnddate(String edndate) {
 		this.enddate = edndate;
 	}
-	public String getStartdate() {
+	public Date getStartdate() {
 		return startdate;
 	}
-	public void setStartdate(String startdate) {
+	public void setStartdate(Date startdate) {
 		this.startdate = startdate;
 	}
 	public String getAdvId() {
@@ -45,10 +45,10 @@ public class Advertise {
 	public void setPeriod(int period) {
 		this.period = period;
 	}
-	public boolean getApprove() {
+	public int getApprove() {
 		return approve;
 	}
-	public void setApprove(boolean approve) {
+	public void setApprove(int approve) {
 		this.approve = approve;
 	}
 	

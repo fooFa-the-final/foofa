@@ -45,9 +45,9 @@ public class AdvertiseController {
 
 	@RequestMapping("approve.ajax")
 	@ResponseBody
-	public String approve(@RequestParam(value="advId", required=false) String advId) {
-		System.out.println(advId);
-		advertiseService.modify(advId);
+//	public String approve(@RequestParam(value="advId", required=false) String advId) {
+	public String approve(Advertise advertise) {
+		advertiseService.modify(advertise);
 		return "../view/admin/adminAdvertise.jsp";
 	}
 
@@ -58,8 +58,8 @@ public class AdvertiseController {
 	}
 
 	@RequestMapping("/advertise/list/asc.do")
-	public String searchByAsc(boolean approve, Model model) {
-		List<Advertise> list1 = advertiseService.findByAsc(true);
+	public String searchByAsc(int approve, Model model) {
+		List<Advertise> list1 = advertiseService.findByAsc(approve);
 		
 		
 //폐기될지도 모르는 코드 if varchr2 => date		
@@ -138,8 +138,8 @@ public class AdvertiseController {
 	}
 
 	@RequestMapping("advertise/list/desc.do")
-	public String searchByDesc(boolean approve, Model model) {
-		approve = true;
+	public String searchByDesc(int approve, Model model) {
+//		approve = true;
 		List<Advertise> list = advertiseService.findByDesc(approve);
 		return "../../view/admin/adminAdvertise.jsp";
 	}
