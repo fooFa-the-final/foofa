@@ -20,8 +20,9 @@
 
 <!-- Page CSS -->
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-     <!-- Page Level CSS -->
-    <link href="${ctx}/resources/plugins/timeline/timeline.css" rel="stylesheet" />
+<link href="${ctx}/resources/plugins/timeline/timeline.css" rel="stylesheet" />
+<link href="${ctx}/resources/plugins/morris/morris-0.4.3.min.css" rel="stylesheet" />
+    
 
 
 <style>
@@ -38,7 +39,7 @@
 	<nav class=" main-head-top effect" role="navigation" id="navbar" style=" background-color: rgba(0, 0, 0, .8);">
 		<!-- navbar-header -->
 		<br>
-		<div class="col-lg-8 top-head-menu" style="">
+		<div class="col-lg-12 top-head-menu" style="">
 			<span style="float: right; margin: 20px 30px 0 0;">
 			<button type="button" class="btn btn-link loginBtn">Log in</button>
 			<button type="button" class="btn btn-outline btn-danger signUpBtn">Sign up</button>
@@ -82,129 +83,119 @@
 				<h3 class="page-header">Foodtruck Finder</h3>
 		<div class="row">
 				<h4>Recent Activity</h4>
-                <div class="page-wrapper col-lg-12">
-                    <!--Timeline -->
-                    <div class="panel panel-primary">
-                        <div class="panel-heading">
-                            <i class="fa fa-clock-o fa-fw"></i>Timeline
-                        </div>
+				<div class="sub-container">
+				<div class="col-lg-9">
+					<div class="panel panel-primary text-left">
+						<div class="review-heading padding-10">
+							
+							<img class="somenail" src="${ctx }/resources/img/sampleUser.jpg"/>
+							<div style="float:left; width:80%;">
+							<ul>
+								<li><a>Dennis W.</a></li>
+								<li> <span class="sub-li-follow">684 </span>
+									<span class="sub-li-favorite">71 </span>
+								</li>
+								<li> <a>효지니의 핏짜핏짜</a> 에 대한 리뷰 
+								</li>
+								</ul></div>
 
-                        <div class="panel-body">
-                            <ul class="timeline">
-                                <li>
-                                    <div class="timeline-badge">
-                                        <i class="fa fa-check"></i>
-                                    </div>
-                                    <div class="timeline-panel">
-                                        <div class="timeline-heading">
-                                            <h4 class="timeline-title">Timeline Event</h4>
-                                            <p>
-                                                <small class="text-muted"><i class="fa fa-time"></i>11 hours ago via Twitter</small>
-                                            </p>
-                                        </div>
-                                        <div class="timeline-body">
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin vel justo eu mi scelerisque vulputate. Aliquam in metus eu lectus aliquet egestas.</p>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="timeline-inverted">
-                                    <div class="timeline-badge warning">
-                                        <i class="fa fa-credit-card"></i>
-                                    </div>
-                                    <div class="timeline-panel">
-                                        <div class="timeline-heading">
-                                            <h4 class="timeline-title">Timeline Event</h4>
-                                        </div>
-                                        <div class="timeline-body">
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin vel justo eu mi scelerisque vulputate. Aliquam in metus eu lectus aliquet egestas.</p>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin vel justo eu mi scelerisque vulputate. Aliquam in metus eu lectus aliquet egestas.</p>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="timeline-badge danger">
-                                        <i class="fa fa-credit-card"></i>
-                                    </div>
-                                    <div class="timeline-panel">
-                                        <div class="timeline-heading">
-                                            <h4 class="timeline-title">Timeline Event</h4>
-                                        </div>
-                                        <div class="timeline-body">
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin vel justo eu mi scelerisque vulputate. Aliquam in metus eu lectus aliquet egestas.</p>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="timeline-inverted">
-                                    <div class="timeline-panel">
-                                        <div class="timeline-heading">
-                                            <h4 class="timeline-title">Timeline Event</h4>
-                                        </div>
-                                        <div class="timeline-body">
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin vel justo eu mi scelerisque vulputate. Aliquam in metus eu lectus aliquet egestas.</p>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="timeline-badge info">
-                                        <i class="fa fa-save"></i>
-                                    </div>
-                                    <div class="timeline-panel">
-                                        <div class="timeline-heading">
-                                            <h4 class="timeline-title">Timeline Event</h4>
-                                        </div>
-                                        <div class="timeline-body">
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin vel justo eu mi scelerisque vulputate. Aliquam in metus eu lectus aliquet egestas.</p>
-                                            <hr>
-                                            <div class="btn-group">
-                                                <button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown">
-                                                    <i class="fa fa-cog"></i>
-                                                    <span class="caret"></span>
-                                                </button>
-                                                <ul class="dropdown-menu" role="menu">
-                                                    <li><a href="#">Action</a>
-                                                    </li>
-                                                    <li><a href="#">Another action</a>
-                                                    </li>
-                                                    <li><a href="#">Something else here</a>
-                                                    </li>
-                                                    <li class="divider"></li>
-                                                    <li><a href="#">Separated link</a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="timeline-panel">
-                                        <div class="timeline-heading">
-                                            <h4 class="timeline-title">Timeline Event</h4>
-                                        </div>
-                                        <div class="timeline-body">
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin vel justo eu mi scelerisque vulputate. Aliquam in metus eu lectus aliquet egestas.</p>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="timeline-inverted">
-                                    <div class="timeline-badge success">
-                                        <i class="fa fa-thumbs-up"></i>
-                                    </div>
-                                    <div class="timeline-panel">
-                                        <div class="timeline-heading">
-                                            <h4 class="timeline-title">Timeline Event</h4>
-                                        </div>
-                                        <div class="timeline-body">
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin vel justo eu mi scelerisque vulputate. Aliquam in metus eu lectus aliquet egestas.</p>
-                                        </div>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
+						</div>
+						<div class="panel-body ">
+							<div style="display:block;width:500px; float:right;">
+								<span class="starRating" style="text-align:left;"><span style="width: 40%">2.5점</span></span> 05/01/2017
+								<p class="reviewContent">
+								 엄청난 리스펙트를 보낸다! Art while it is subjective and at times difficult to comprehend or even relate to, it is often not within a stone's throw of our daily lives. The SF MoMa is in fact relatively accessible from most anywhere in the Bay Area and provides its visitors 7 floors of conscious altering, psychologically intriguing, puzzling and sometimes downright spectacular visual forms of subjective interpretation.
+								</p>
+							</div>
+						<div style="float:left; width:180px">
+							<img id="r1" src="${ctx }/resources/img/sample1.jpg" style="width: 160px; height:160px; margin:10px"/>
+							<div class="somenail-list">
+								<img src="${ctx }/resources/img/sample1.jpg" onclick="previewImage(this.src, 'r1');"/>
+								<img src="${ctx }/resources/img/sample2.jpg" onclick="previewImage(this.src, 'r1');"/>
+								<img src="${ctx }/resources/img/sample3.jpg" onclick="previewImage(this.src, 'r1');"/>
+							</div>
+						</div>							
+						</div>
 
-                    </div>
-                    <!--End Timeline -->
-                </div>
-				
+					</div>
+					
+
+					<div class="panel panel-primary text-left">
+						<div class="review-heading padding-10">
+							
+							<img class="somenail" src="${ctx }/resources/img/sampleUser.jpg"/>
+							<div style="float:left; width:80%;">
+							<ul>
+								<li><a>Dennis W.</a></li>
+								<li> <span class="sub-li-follow">684 </span>
+									<span class="sub-li-favorite">71 </span>
+								</li>
+								<li> <a>효지니의 핏짜핏짜</a> 에 대한 리뷰 
+								</li>
+								</ul></div>
+
+						</div>
+						<div class="panel-body ">
+							<div style="display:block;">
+								<span class="starRating" style="text-align:left;"><span style="width: 40%">2.5점</span></span> 05/01/2017
+								<p class="reviewContent">
+								 엄청난 리스펙트를 보낸다! Art while it is subjective and at times difficult to comprehend or even relate to, it is often not within a stone's throw of our daily lives. The SF MoMa is in fact relatively accessible from most anywhere in the Bay Area and provides its visitors 7 floors of conscious altering, psychologically intriguing, puzzling and sometimes downright spectacular visual forms of subjective interpretation.
+								</p>
+							</div>
+						</div>
+					</div>
+					
+					
+					<div class="panel panel-primary text-left">
+						<div class="review-heading padding-10">
+							
+							<img class="somenail" src="${ctx }/resources/img/sampleUser.jpg"/>
+							<div style="float:left; width:80%;">
+							<ul>
+								<li><a>Dennis W.</a></li>
+								<li> <span class="sub-li-follow">684 </span>
+									<span class="sub-li-favorite">71 </span>
+								</li>
+								<li> <a>효지니의 핏짜핏짜</a> 에 대한 리뷰 
+								</li>
+								</ul></div>
+
+						</div>
+						<div class="panel-body ">
+							<div style="display:block;">
+								<span class="starRating" style="text-align:left;"><span style="width: 40%">2.5점</span></span> 05/01/2017
+								<p class="reviewContent">
+								 엄청난 리스펙트를 보낸다! Art while it is subjective and at times difficult to comprehend or even relate to, it is often not within a stone's throw of our daily lives. The SF MoMa is in fact relatively accessible from most anywhere in the Bay Area and provides its visitors 7 floors of conscious altering, psychologically intriguing, puzzling and sometimes downright spectacular visual forms of subjective interpretation.
+								</p>
+							</div>
+						</div>
+					</div>
+					
+				</div>
+
+				<div class="col-lg-3">
+					<div class="alert alert-warning text-center">
+						<i class="fa fa-thumbs-up fa-2x"></i>
+						<b>500</b> 단골 <br/>
+						<i class="fa fa-twitter fa-2x"></i>
+						<b>500</b> 팔로우   <br/>
+						<i class="fa fa-pencil fa-2x"></i>
+						<b>500</b> 리뷰  <br/>
+					</div>				
+					<div class="alert alert-success text-center">
+						<i class="fa fa-thumbs-up fa-1x"></i>
+						<b>500</b> 팔로우  
+					</div>		
+					<div class="alert alert-info text-center">
+						<i class="fa fa-tumbs-up fa-1x"></i>
+						<b>2000</b> 단골 
+					</div>				
+					<div class="alert alert-danger text-center">
+						<i class="fa fa-tumbs-up fa-1x"></i>
+						<b>500</b> 팔로우  
+					</div>		
+				</div>	
+			</div>
 		</div>
 	</div>
 	<!-- end main-container -->
@@ -214,8 +205,16 @@
     <script src="${ctx}/resources/plugins/metisMenu/jquery.metisMenu.js"></script>
     <script src="${ctx}/resources/plugins/pace/pace.js"></script>
     <script src="${ctx}/resources/scripts/siminta.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
 	<!--  Page Script  -->
+	<script>
+	var previewImage = function(target, idNo){
+		$("#"+idNo).attr('src', target);
+		var targetDiv = document.getElementById(idNo);
+		var src = target;
+	};	   	
+	</script>
 
 </body>
 </html>

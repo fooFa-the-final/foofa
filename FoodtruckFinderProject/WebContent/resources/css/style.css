@@ -442,10 +442,19 @@ div.main-container div.row {
 	height: 34px;
 }
 
+div.somenail-list {
+	margin: 0 10px;
+}
+
+div.somenail-list img {
+	width: 30px;
+	height: 30px;
+}
+
 img.somenail {
 	width: 60px;
 	height: 60px;
-	float: left;
+	float:left;
 }
 
 .padding-10 {
