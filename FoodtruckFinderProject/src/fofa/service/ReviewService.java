@@ -14,7 +14,7 @@ public interface ReviewService {
 	List<Review> findByMemberId(String memberId);
 	List<Review> findByFromId(String memberId);
 	List<Review> findByTruckId(String foodtruckId);
-	List<Review> findByRecommand();
+	int findByRecommand(String reviewId);
 	List<Review> findAllByReported();
 	boolean registerReport(Report report);
 	boolean removeReport(Report report);
