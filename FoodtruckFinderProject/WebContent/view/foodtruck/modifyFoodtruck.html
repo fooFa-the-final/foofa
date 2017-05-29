@@ -12,12 +12,57 @@
     <link href="../../resources/plugins/pace/pace-theme-big-counter.css" rel="stylesheet" />
     <link href="../../resources/css/style.css" rel="stylesheet" />
     <link href="../../resources/css/main-style.css" rel="stylesheet" />
-    <link rel="stylesheet" type="text/css" href="../../resources/plugins/timepicker/jquery.timepicker.css">
+    <link rel="stylesheet" type="text/css" href="../../resources/css/jquery.timepicker.css"/>
     <script src="../../resources/plugins/timepicker/jquery.timepicker.js"></script>
+     <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=noUvsaR702FX6WH5un5h&submodules=geocoder"></script>
     <script>
-        $(function(){
-            $('#basicExample').timepicker();
-        })
+        $(document).ready(function(){
+            $('#startTime').timepicker();
+            $('#endTime').timepicker();
+            var position = new naver.maps.LatLng(37.4795169, 126.8824995);
+            var map = new naver.maps.Map('map', {
+			    center: position,
+			    zoom: 10
+			});
+            var marker = new naver.maps.Marker({
+				position: position,
+				map: map
+			});
+            var infoWindow = new naver.maps.InfoWindow({
+                anchorSkew: true
+            });
+            
+            var address = "";
+            function searchCoordinateToAddress(latlng) {
+                var tm128 = naver.maps.TransCoord.fromLatLngToTM128(latlng);
+                infoWindow.close();
+
+                naver.maps.Service.reverseGeocode({
+                    location: tm128,
+                    coordType: naver.maps.Service.CoordType.TM128
+                }, function(status, response) {
+                    if (status === naver.maps.Service.Status.ERROR) {
+                        return alert('Something Wrong!');
+                    }
+
+                    var items = response.result.items,
+                    address = items[0].address;
+                    
+                    console.log(address);
+
+                    infoWindow.setContent([
+                            '<div style="padding:10px;min-width:200px;line-height:150%;">',
+                            '<h4 style="margin-top:5px;">검색 좌표 : '+ address +'</h4></div>'
+                        ].join('\n'));
+
+                    infoWindow.open(map, latlng);
+                });
+            }
+            naver.maps.Event.addListener(map, 'click', function(e){
+            	marker.setPosition(e.coord);
+            	searchCoordinateToAddress(e.coord);
+            });
+        });
     </script>
 </head>
 
@@ -36,7 +81,7 @@
                     <span class="icon-bar"></span>
                 </button>
                 <a class="navbar-brand" href="index.html">
-                    <img src="../resources/img/logo.png" alt="" />
+                    <img src="../../resources/img/logo.png" alt="" />
                 </a>
             </div>
             <!-- end navbar-header -->
@@ -120,7 +165,7 @@
                 <div class="col-md-12" style="background-color:white; height:300px">
                     <span>
                             <a class="navbar-brand" href="#" style="margin-top:10px;">
-                                <img src="../resources/img/waikiki.jpg" style="height:250px; width:250px"/>
+                                <img src="../../resources/img/waikiki.jpg" style="height:250px; width:250px"/>
                             </a>
                             <div class="user-info">
                                 <h1>WAIKIKI JEJU</h1><br>
@@ -265,7 +310,8 @@
                                 <h3>Truck Hour</h3>
                             </div>
                             <div class="panel-body">
-                                 <input id="basicExample" type="text" class="time ui-timepicker-input" autocomplete="off">
+                                 <input id="startTime" type="text" class="time ui-timepicker-input" autocomplete="off" size="8"> 부터 
+                                 <input id="endTime" type="text" class="time ui-timepicker-input" autocomplete="off" size="8"> 까지
                                 <!--Time Picker 사용하는 방법 알아보고 적용할 것-->
                             </div>
                           </div>
@@ -287,7 +333,7 @@
                    
                    
                    </div>
-                   <div class="col-md-4" style="background-color: white; height:350px">
+                   <div class="col-md-4" style="background-color: white; height:350px" id="map">
                        <h2>Map</h2>
                        
                    </div>
