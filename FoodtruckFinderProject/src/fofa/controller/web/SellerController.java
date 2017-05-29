@@ -45,6 +45,7 @@ public class SellerController {
 	
 	@RequestMapping(value = "seller/create.do", method = RequestMethod.POST) 
 	public String create(Seller seller, Model model){
+		
 		sellerService.register(seller);
 		model.addAttribute(seller);
 		return "../view/foodtruck/registerTruck.jsp";

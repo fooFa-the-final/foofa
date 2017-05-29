@@ -123,30 +123,35 @@
 <div class="container">
 	<div class="row" id="Truck">
 
-<form action="seller/create.do" method="post">
-		<u> <font size="4">ID</font></u> <br> <input id="sellerId"
-			type="text">
+<form action="${ctx }/seller/create.do" method="post">
+		<b> <font size="4">ID</font></b> <br> 
+		<input id="sellerId1" type="text">
 		<button type="button" id="idCheck">아이디중복체크</button>
 		<div id="idmessage">
+		
+	<input id="sellerId"  name="sellerId" class="form-control" type="text" value="" placeholder="ID를 입력해주세요.">
+		
+		
 			<br>
 		</div>
-		<u> 
-		<font size="4">Password</font></u> <br> 
-		<input id="password" type="password" name="ps1"> 
+		<div>
+		<b> 
+		<font size="4">Password</font></b> <br> 
+		<input id="password" name="password" class="form-control" type="password" name="ps1"> 
 		<br> <br> 
-		<u>
-		<font size="4">Confirm Password</font></u> <br> 
-		<input id="password1" type="password" name="ps2"><u><font size="4"></font></u> <br>
+		<b>
+		<font size="4">Confirm Password</font></b> <br> 
+		<input id="password1"  type="password" name="ps2"><b><font size="4"></font></b> <br>
 		<br>
-		 <u><font size="4">Business Registration Number</font></u> <br>
-		<input id="certification" type="text" name="number"> <br> <br>
-		<u><font size="4">Phone</font></u> <br> <input id="phone"
-			type="text" name="phone"> <br> <br>
+		 <b><font size="4">Business Registration Number</font></b> <br>
+		<input id="certification" name="certification" class="form-control" type="text" name="ps1"> 
+		<br> <br>
+		<b><font size="4">Phone</font></b> <br> 
+		<input id="phone" name="phone" type="text"  class="form-control" name="phone"> <br> <br>
 		<div class="col-md-offset-5 col-sm-25 col-lg-25">
 			<input type="submit" value="등록" class="btn btn-primary">
 		</div>
-
-
+		</div>
 </form>
 	</div>
 
