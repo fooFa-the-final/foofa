@@ -26,9 +26,9 @@
 	</header>
 	<div class="col-lg-6">
 		<h2>Modify your Info</h2>
-		<form role="form">
+		<form role="form" action="${ctx }/seller/modify.do" method="post">
 			<div class="form-group">
-				<label>ID</label> <input class="form-control" placeholder="Requered">
+				<label>ID</label> <input class="form-control" placeholder="${seller.sellerId }">
 			</div>
 			<div class="form-group">
 				<label>Password</label>
@@ -36,13 +36,13 @@
 			</div>
 
 			<div class="form-group">
-				<label>Business Registration Number</label> <input type=number
-					class="form-control" placeholder="Requered">
+				<label>Business Registration Number</label> <input type="number"
+					class="form-control" placeholder="">
 			</div>
 
 			<div class="form-group">
-				<label>Phone</label> <input type=tel class="form-control"
-					placeholder="Requered">
+				<label>Phone</label> 
+				<input id="phone" name="phone" type="number" class="form-control" placeholder="">
 			</div>
 
 			<button type="submit" class="btn btn-primary">Modify</button>

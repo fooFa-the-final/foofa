@@ -50,6 +50,27 @@
 }
 </style>
 
+<script>
+
+//아이디 ajax
+
+//비밀번호 일치 확인 
+	function checkPwd() {
+		var f1 = document.forms[0];
+		var pw1 = f1.password.value;
+		var pw2 = f1.password1.value;
+		if (pw1 != '' && pw2 != '') {
+			if (pw1 != pw2) {
+				document.getElementById('checkPwd').style.color = "red";
+				document.getElementById('checkPwd').innerHTML = "동일한 암호를 입력하세요.";
+			} else {
+				document.getElementById('checkPwd').style.color = "black";
+				document.getElementById('checkPwd').innerHTML = "암호가 확인 되었습니다.";
+			}
+		}
+	}
+</script>
+
 <body>
 
 	<!--  wrapper -->
@@ -111,7 +132,7 @@
 <br>
 <br>
 <div id="Register">
-	<u><font size="6">Join With us as Seller</font></u>
+	<b><font size="6">Join With us as Seller</font></b>
 </div>
 <div id="indexbody" class="col-lg-12">
 	<h5>
@@ -123,36 +144,33 @@
 <div class="container">
 	<div class="row" id="Truck">
 
-<form action="${ctx }/seller/create.do" method="post">
-		<b> <font size="4">ID</font></b> <br> 
-		<input id="sellerId1" type="text">
-		<button type="button" id="idCheck">아이디중복체크</button>
-		<div id="idmessage">
-		
-	<input id="sellerId"  name="sellerId" class="form-control" type="text" value="" placeholder="ID를 입력해주세요.">
-		
-		
-			<br>
-		</div>
-		<div>
-		<b> 
-		<font size="4">Password</font></b> <br> 
-		<input id="password" name="password" class="form-control" type="password" name="ps1"> 
-		<br> <br> 
-		<b>
-		<font size="4">Confirm Password</font></b> <br> 
-		<input id="password1"  type="password" name="ps2"><b><font size="4"></font></b> <br>
-		<br>
-		 <b><font size="4">Business Registration Number</font></b> <br>
-		<input id="certification" name="certification" class="form-control" type="text" name="ps1"> 
-		<br> <br>
-		<b><font size="4">Phone</font></b> <br> 
-		<input id="phone" name="phone" type="text"  class="form-control" name="phone"> <br> <br>
-		<div class="col-md-offset-5 col-sm-25 col-lg-25">
-			<input type="submit" value="등록" class="btn btn-primary">
-		</div>
-		</div>
-</form>
+		<form action="${ctx }/seller/create.do" method="post">
+			<b> <font size="4">ID</font></b> <br>
+			<div id="idmessage">
+				<input id="sellerId" name="sellerId" class="form-control"
+					type="text" value="" placeholder="ID를 입력해주세요.">
+					 <button type="button" id="chdckId" onclick="checkId();" value="">중복확인</button>
+					 <br>
+			</div>
+			<div>
+				<b> <font size="4">Password</font></b> <br> <input
+					id="password" name="password" class="form-control" type="password">
+				<br> <br> <b> <font size="4">Confirm Password</font></b> <br>
+				<input id="password1" name="password1" class="form-control"
+					type="password" onkeyup="checkPwd()"> 
+					<div id="checkPwd">동일한
+					암호를 입력해주세요</div> 
+					<br> <b><font size="4">Business
+						Registration Number</font></b> <br> <input id="certification"
+					name="certification" class="form-control" type="text"> <br>
+				<br> <b><font size="4">Phone</font></b> <br> <input
+					id="phone" name="phone" type="text" class="form-control"
+					name="phone"> <br> <br>
+				<div class="col-md-offset-5 col-sm-25 col-lg-25">
+					<input type="submit" value="등록" class="btn btn-primary">
+				</div>
+			</div>
+		</form>
 	</div>
 
 
