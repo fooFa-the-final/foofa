@@ -75,12 +75,6 @@
                     <!--Timeline -->
                    <!-- Chat Panel Example-->
                     <div class="chat-panel panel panel-primary">
-                        <div class="panel-heading">
-                            <i class="fa fa-comments fa-fw"></i>
-                            Chat
-                        </div>
-
-                        <div class="panel-body">
                             <ul class="chat">
                                 <li class="left clearfix">
                                     <span class="chat-img pull-left">
@@ -144,18 +138,6 @@
                                     </div>
                                 </li>
                             </ul>
-                        </div>
-
-                        <div class="panel-footer">
-                            <div class="input-group">
-                                <input id="btn-input" type="text" class="form-control input-sm" placeholder="Type your message here..." />
-                                <span class="input-group-btn">
-                                    <button class="btn btn-warning btn-sm" id="btn-chat">
-                                        Send
-                                    </button>
-                                </span>
-                            </div>
-                        </div>
 
                     </div>
                     <!--End Chat Panel Example-->
