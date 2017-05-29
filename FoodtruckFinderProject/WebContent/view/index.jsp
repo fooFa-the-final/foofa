@@ -82,7 +82,7 @@
 
 
 <div class="w3-content w3-display-container text-center">
-	<div class="mySlides" style="width:90%">
+	<div class="mySlides">
 				<div class="col-lg-4">
 					<div class="panel panel-danger">
 						<div class="panel-header">
@@ -150,7 +150,7 @@
 					</div>	
 				</div>
 		</div>
-	<div class="mySlides"style="width:90%">
+	<div class="mySlides "style="width:90%">
 				<div class="col-lg-4">
 					<div class="panel panel-danger">
 						<div class="panel-header">
@@ -194,8 +194,9 @@
 </div>
 				
 		</div>
-				<div class="row">
+				<div class="row div-gray">
 				<h4>Hot Reviews</h4>
+				<div class="sub-container">
 				<div class="col-lg-8">
 					<div class="panel panel-primary text-left">
 						<div class="review-heading padding-10">
@@ -244,10 +245,13 @@
 						</div>
 					</div>	
 					<a> Read more list</a>					
-				</div>			
+				</div>	
+				</div>		
 		</div>
 				<div class="row">
 				<h4>Nearlest Foodtrucks</h4>
+				
+				<div class="sub-container">
 				<div class="col-lg-4">
 					<div class="panel panel-danger">
 						<div class="panel-header">
@@ -280,7 +284,7 @@
 						</div>
 					</div>
 				
-				</div>
+				</div></div>
 		</div>
 	</div>
 	<!-- end main-container -->

@@ -389,7 +389,6 @@ img.main_img_person {
 }
 
 div.main-container {
-	width: 1000px;
 	margin: 0 auto;
 	text-align: center;
 	padding: 20px;
@@ -406,6 +405,15 @@ div.main-container h4 {
 	margin: 5px;
 	height: 30px;
 	font-weight: bold;
+}
+
+div.main-container div.sub-container {
+	width: 1000px;
+	margin: 0 auto;
+}
+
+div.div-gray{
+	background-color: #eee;
 }
 
 img.main-truck-img {
