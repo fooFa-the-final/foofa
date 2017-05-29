@@ -38,9 +38,9 @@ public class AdvertiseServiceLogic implements AdvertiseService {
 	}
 
 	@Override
-	public boolean modify(Advertise advertise) {
+	public boolean modify(String advertiseId) {
 		int sucess;
-		sucess = advertiseStore.update(advertise.getAdvId());
+		sucess = advertiseStore.update(advertiseId);
 		if (sucess == 0) {
 			return false;
 		} else {
