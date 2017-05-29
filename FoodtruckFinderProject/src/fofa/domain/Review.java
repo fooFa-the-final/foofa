@@ -68,12 +68,12 @@ public class Review {
 	}
 
 	public int getRecommand() {
-		RecommandStore store = new RecommandStoreLogic();
-		return store.selectReviewCount(reviewId);
+		return recommand;
 	}
 
 	public void setRecommand(int recommand) {
-		this.recommand = recommand;
+		RecommandStore store = new RecommandStoreLogic();
+		this.recommand = store.selectReviewCount(reviewId);
 	}
 
 	public Date getWriteDate() {
