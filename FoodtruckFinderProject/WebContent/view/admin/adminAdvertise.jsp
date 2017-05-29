@@ -35,23 +35,18 @@ function stringToDate(_date,_format,_delimiter)
             return formatedDate;
 }
  */
+/* 
 
-$(function(){
-	var yyyy = string.substring(0,3)
-	var mm = string.substring(4,5)
-	var dd = string.substring(6,7)
+ */
 
-	
-	<c:forEach items = "${advertise.startdate}" var = "date" varStatus="status">
-	yyyy.push("${date.yyyy}");
-	mm.push("${date.mm}");
-	dd.push("${date.mm}")
-	</c:forEach>
-});
+
+ $(function(){
 
 
 
+ });
 
+ 
 </script>
 <body>
     <!--  wrapper -->
@@ -126,7 +121,7 @@ $(function(){
                                         <tr class="odd gradeX">
                                             <td>${sts.count}</td>
                                             <td>${advertise.sellerId }</td>
-                                            <td>${date.yyyy }-${date.mm }-${date.dd }</td>
+                                            <td>${date1.yyyy }-${date1.mm }-${date1.dd }</td>
                                             <td>${advertise.startdate }</td>
                                 			<td>${advertise.period }</td>
                                         </tr>
