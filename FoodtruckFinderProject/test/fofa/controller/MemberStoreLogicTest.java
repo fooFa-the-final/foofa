@@ -22,7 +22,6 @@ public void testMemberInsert(){
 	member.setPassword("1234");
 	member.setBirthday("19930212");
 	member.setEmail("1234");
-	member.setGender('m');
 	member.setProfileImg("1234");
 	
 	assertEquals(1, store.insert(member));

@@ -1,35 +1,88 @@
 package fofa.controller.web;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import fofa.domain.Member;
+import fofa.service.MemberService;
 
 @Controller
 public class MemberController {
 
+	@Autowired
+	private MemberService service;
+	
+	
 	@RequestMapping(value="member/createForm.do", method= RequestMethod.GET)
 	public String createForm(){
 		return "../view/member/registerMember.jsp";
 	}		
-	@RequestMapping("member/checkId.do")
-	public String checkId(String memberId){
-		return "../view/member/memberRegister.jsp";
+	@RequestMapping(value="member/checkId.do", method=RequestMethod.POST)
+	public String checkId(HttpServletRequest req, HttpServletResponse res) throws IOException{
+		String memberId = req.getParameter("id");
+		boolean result;
+		result = service.checkId(memberId);
+		
+		PrintWriter out = res.getWriter();
+		
+		if(result == true){
+			out.print("no");
+		}else{
+			out.print("yes");
+
+
+		}
+		
+		return "../view/member/registerMember.jsp";
 	}
 	@RequestMapping(value="member/create.do", method = RequestMethod.POST)
-	public String create(Member member){
+	public String create(HttpServletRequest request,Member member){
+		String memberId = request.getParameter("memberId");
+		String password = request.getParameter("password");
+		String birth = request.getParameter("birth");
+		String gender = request.getParameter("gender");
+		member = new Member();
+		member.setMemberId(memberId);
+		member.setPassword(password);
+		member.setBirthday(birth);
+		member.setGender(gender);
+		
+		service.register(member);
+		
 		return "../view/user/login.jsp";
 	}
 	@RequestMapping(value="member/modifyForm.do", method= RequestMethod.GET)
-	public String modifyForm(HttpSession session, Model model){
+	public String modifyForm(HttpServletRequest request, HttpSession session, Model model){
+		String id = request.getParameter("memberId");
+		Member member = service.findById(id);
+		request.setAttribute("member", member);
 		return "../view/member/modifyMember.jsp";
 	}
 	@RequestMapping(value="member/modify.do", method=RequestMethod.POST)
-	public String modify(Member member){
+	public String modify(HttpServletRequest request,Member member){
+		String id = request.getParameter("memberId");
+		String password = request.getParameter("password");
+		String birth = request.getParameter("birth");
+		String gender = request.getParameter("gender");
+
+		member.setMemberId(id);
+		member.setPassword(password);
+		member.setBirthday(birth);
+		member.setGender(gender);
+		service.modify(member);
+		
+		
 		return "redirect:review/list/member.do";
 	}
 	@RequestMapping("member/checkPw.do")
@@ -37,11 +90,18 @@ public class MemberController {
 		return "../view/member/deleteMember.jsp";
 	}
 	@RequestMapping("member/remove.do")
-	public String remove(HttpSession session){
+	public String remove(HttpServletRequest request,HttpSession session){
+		session = request.getSession();
+		String memberId =(String) session.getAttribute("memberId");
+		service.remove(memberId);
+		
+		
 		return "../view/member/index.jsp";
 	}
 	@RequestMapping("member/modifypic.do")
 	public String modifyPicture(HttpSession session, String img){
+		
+		
 		return "redirect:review/list/member.do";
 	}
 }

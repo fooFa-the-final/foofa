@@ -1,19 +1,26 @@
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 
 <head>
-    <meta charset="utf-8">
+<c:set value="${pageContext.request.contextPath}" var="ctx" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FoodtruckMain</title>
+    <title>FooFa Login</title>
     <!-- Core CSS - Include with every page -->
-    <link href="../../resources/plugins/bootstrap/bootstrap.css" rel="stylesheet" />
-    <link href="../../resources/font-awesome/css/font-awesome.css" rel="stylesheet" />
-    <link href="../../resources/plugins/pace/pace-theme-big-counter.css" rel="stylesheet" />
-    <link href="../../resources/css/style.css" rel="stylesheet" />
-      <link href="../../resources/css/main-style.css" rel="stylesheet" />
+    <link href="${ctx}/resources/plugins/bootstrap/bootstrap.css" rel="stylesheet" />
+    <link href="${ctx}/resources/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <link href="${ctx}/resources/plugins/pace/pace-theme-big-counter.css" rel="stylesheet" />
+  <link href="${ctx}/resources/css/style.css" rel="stylesheet" />
+      <link href="${ctx}/resources/css/main-style.css" rel="stylesheet" />
 
+    <!-- Page-Level CSS -->
+    <link href="resources/plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet" />
+
+<c:set var="ctx">${pageContext.request.contextPath }</c:set>
 </head>
-    
     <style>
         #indexMain{ margin:60px;}
         #indexbody{margin-left: 350px;}
@@ -39,7 +46,7 @@
             <ul class="nav navbar-top-links navbar-right">	
             <div class="col-xs-10" style="margin-right: 550px" >
             <a class="navbar-brand" style="float:center" href="index.html">
-                    <img src="../../resources/img/MainLogo.png" alt="" />
+                    <img src="${ctx }/resources/img/logo.png" alt="" />
                 </a>
             </div>
             </ul>
@@ -94,6 +101,34 @@
         <u><font size="6">Join With us</font></u>
     </div>
     <br><br>
+    <script
+				src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+			<script>
+					//아이디  중복 확인 버튼 클릭
+					$("#idCheck").click(function() {
+						var id = $("#id").val();
+						$.ajax({
+							type : 'POST',
+							url : "${ctx }/member/checkId.do",
+							data : {
+								id : id
+							},
+							success : function(data) {
+								console.log(data);
+								$("#result").html(data);
+								if ($.trim(data) == 'yes') {
+									$('#idmessage').html("사용 가능한 ID 입니다.");
+								} else {
+									$('#idmessage').html("사용중인 ID 입니다.");
+
+								}
+
+							}
+
+						});
+					});
+			</script>
+			<form action="${ctx }/member/create.do" method="post">
        <div class="container">
                         <div class="row" id="Truck">
                             
@@ -109,12 +144,13 @@
                             <u><font size="4">Confirm Password</font></u> <br>
                             <input id="password" type="password" name="ps2"><u><font size="4"></font></u> <br>
                            <br>
-<u><font size="4">Name</font></u> <br>
-                           <input id="name" type="text" name="name">
-                            <br><br>
-<u><font size="4">Email</font></u> <br>
+							<u><font size="4">Email</font></u> <br>
                            <input id="email" type="text" name="email">
                             <br><br>
+							<u><font size="4">birthDay</font></u> <br>
+                           <input id="birth" type="text" name="birth">
+                            <br><br>
+                                            
                             				<div>
 					     <label>성별</label><br>
                     <label class="radio-inline">
@@ -129,16 +165,7 @@
                     
                     <input type="submit" value="register" class="btn btn-primary">
 				</div>                                               
-                            
-
-                            
-                            
     </div>
-
-
-           
- 
-    <br>
-    <br>
     </div>
+    </form>
 </html>

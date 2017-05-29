@@ -14,7 +14,7 @@ public class Member {
 	private String password;
 	private String birthday;
 	private String email;
-	private Character gender;
+	private String gender;
 	private String profileImg;
 	public String getMemberId() {
 		return memberId;
@@ -40,10 +40,10 @@ public class Member {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public Character getGender() {
+	public String getGender() {
 		return gender;
 	}
-	public void setGender(Character gender) {
+	public void setGender(String gender) {
 		this.gender = gender;
 	}
 	public String getProfileImg() {
@@ -57,5 +57,8 @@ public class Member {
 		return "Member [memberId=" + memberId + ", password=" + password + ", birthday=" + birthday + ", email=" + email
 				+ ", gender=" + gender + ", profileImg=" + profileImg + "]";
 	}
+
+	
+	
 
 }

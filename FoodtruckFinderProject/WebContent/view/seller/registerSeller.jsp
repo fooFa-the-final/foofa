@@ -1,17 +1,26 @@
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FoodtruckMain</title>
-    <!-- Core CSS - Include with every page -->
-    <link href="../../resources/plugins/bootstrap/bootstrap.css" rel="stylesheet" />
-    <link href="../../resources/font-awesome/css/font-awesome.css" rel="stylesheet" />
-    <link href="../../resources/plugins/pace/pace-theme-big-counter.css" rel="stylesheet" />
-    <link href="../../resources/css/style.css" rel="stylesheet" />
-      <link href="../../resources/css/main-style.css" rel="stylesheet" />
 
+<head>
+<c:set value="${pageContext.request.contextPath}" var="ctx" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FooFa Login</title>
+    <!-- Core CSS - Include with every page -->
+    <link href="${ctx}/resources/plugins/bootstrap/bootstrap.css" rel="stylesheet" />
+    <link href="${ctx}/resources/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <link href="${ctx}/resources/plugins/pace/pace-theme-big-counter.css" rel="stylesheet" />
+  <link href="${ctx}/resources/css/style.css" rel="stylesheet" />
+      <link href="${ctx}/resources/css/main-style.css" rel="stylesheet" />
+
+    <!-- Page-Level CSS -->
+    <link href="resources/plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet" />
+
+<c:set var="ctx">${pageContext.request.contextPath }</c:set>
 </head>
     
     <style>
@@ -91,7 +100,7 @@
         <u><font size="6">Join With us as Seller</font></u>
     </div>
          <div id="indexbody"class="col-lg-12">
-            <text/>판매자가입페이지 입니다 <a href="url" target="_blank">일반회원 가입</a>
+            <text/>판매자 가입페이지입니다. <a href="url" target="_blank">일반회원 가입</a>
         </div>
     <br><br>
        <div class="container">
@@ -99,7 +108,7 @@
                             
                             <u><font size="4">Id</font></u> <br>
                            <input id="id" type="text" name="memberId">
-					<button type="button" id="idCheck">중복확인</button>
+					<button type="button" id="idCheck">아이디중복체크</button>
 					<div id="idmessage">
                           <br>
                             </div>
