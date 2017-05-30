@@ -36,7 +36,7 @@
 <body class="main-body">
 	<!-- navbar top -->
 
-	<nav id="mainNav" class=" main-head-top effect" role="navigation" id="navbar" style=" background-color: rgba(0, 0, 0, .8);">
+	<nav class=" main-head-top effect" role="navigation" id="navbar" style=" background-color: rgba(0, 0, 0, .8);">
 		<!-- navbar-header -->
 		<br>
 		<div class="col-lg-12 top-head-menu" style="">
@@ -56,10 +56,10 @@
 				<div class="col-lg-12">
 					<!-- search section-->
 					<div class="input-group custom-search-form">
-						<input id="searchKey" type="text" class="form-control" placeholder="Search"
-							style="width: 400px"> <input id="searchLoc" type="text"
+						<input type="text" class="form-control" placeholder="Search"
+							style="width: 400px"> <input type="text"
 							class="form-control" placeholder="Location" style="width: 400px">
-						<button class="btn btn-danger searchBtn" type="button" onclick="searchTruck()">
+						<button class="btn btn-danger searchBtn" type="button">
 							<i class="fa fa-search"></i>
 						</button>
 					</div>
@@ -154,37 +154,11 @@
 
 	<!--  Page Script  -->
 	<script>
-	
-	$( document ).ready(function() {
-		var mainImgSrc = "${mainFoodImg}";
-		var mainMemberSrc = "${mainMember.profileImg}";
-		
-		console.log("mainImgSrc : "+mainImgSrc+" mainMemberSrc : "+mainMemberSrc);
-		${"#mainNav"}.css("background-img", "url('"+mainImgSrc+"')");
-	});
-	
 	var previewImage = function(target, idNo){
 		$("#"+idNo).attr('src', target);
 		var targetDiv = document.getElementById(idNo);
 		var src = target;
 	};	   	
-	
-	var searchTruck = function(){
-		var keyword = $("#searchKey").val();
-		var loc = $("#searchLoc").val();
-		
-		console.log("keyword : "+keyword+" loc : "+loc);
-		
- 		if(loc == '') {
- 			loc="서울";
- 		}
-
-		if(keyword == ''){
-			window.location.href = "${ctx}/searchByLoc.do?location="+loc;
-		}else {
-			window.location.href = "${ctx}/searchByKeyLoc.do?location="+loc+'&keyword='+keyword;
-		}
-	};
 	</script>
 
 </body>

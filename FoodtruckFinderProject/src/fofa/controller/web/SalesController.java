@@ -46,68 +46,8 @@ public class SalesController {
 	}
 
 	@RequestMapping(value = "sales/year.do")
-<<<<<<< HEAD
-	public @ResponseBody JSONArray search1YearSales(HttpServletRequest req) {
-		/*
-		 * HttpSession session = req.getSession(); String foodtruckId = (String)
-		 * session.getAttribute("loginTruckId");
-		 */
-		List<Sale> list = new ArrayList<>();
-
-		for (int i = 0; i < 12; i++) {
-			Sale sale = new Sale();
-			sale.setRevenue(0);
-			list.add(i, sale);
-		}
-
-		for (int i = 0; i < 12; i++) {
-			for (int j = 0; j < service.find1YearSales("1").size(); j++) {
-				if ("0".equals(service.find1YearSales("1").get(j).getDate().substring(5))) {
-					list.remove(9);
-					list.add(9, service.find1YearSales("1").get(j));
-				} else if ("1".equals(service.find1YearSales("1").get(j).getDate().substring(5))) {
-					if ("01".equals(service.find1YearSales("1").get(j).getDate().substring(4))) {
-						list.remove(0);
-						list.add(0, service.find1YearSales("1").get(j));
-					}
-					if ("11".equals(service.find1YearSales("1").get(j).getDate().substring(4))) {
-						list.remove(10);
-						list.add(10, service.find1YearSales("1").get(j));
-					}
-				} else if ("2".equals(service.find1YearSales("1").get(j).getDate().substring(5))) {
-					if ("02".equals(service.find1YearSales("1").get(j).getDate().substring(4))) {
-						list.remove(1);
-						list.add(1, service.find1YearSales("1").get(j));
-					}
-					if ("12".equals(service.find1YearSales("1").get(j).getDate().substring(4))) {
-						list.remove(11);
-						list.add(11, service.find1YearSales("1").get(j));
-					}
-				}
-
-				else if (Integer.toString(i + 1).equals(service.find1YearSales("1").get(j).getDate().substring(5))) {
-					list.remove(i);
-					list.add(i, service.find1YearSales("1").get(j));
-				}
-			}
-		}
-
-		JSONArray jsonArray = new JSONArray();
-
-		for (int i = 0; i < list.size(); i++) {
-
-			JSONObject obj = new JSONObject();
-			obj.put("re", list.get(i).getRevenue());
-			jsonArray.add(obj);
-
-		}
-
-		System.out.println(jsonArray);
-		return jsonArray;
-=======
 	public void search1YearSales(String foodtruckId) {
 		List<Sale> list = service.find1YearSales(foodtruckId);
->>>>>>> branch '170524' of https://github.com/fooFa-the-final/foofa.git
 
 	}
 
