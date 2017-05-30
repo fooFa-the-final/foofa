@@ -2,11 +2,14 @@ package fofa.controller.web;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import fofa.domain.Foodtruck;
 import fofa.domain.Member;
@@ -40,7 +43,8 @@ public class ReviewController {
 	}
 
 	@RequestMapping("/review/list/follow.do")
-	public String searchByFollower(String memberId, Model model){
+	public String searchByFollower(HttpSession session, Model model){
+		String memberId = (String)session.getAttribute("loginUserId");
 		List<Review> list = reviewService.findByFromId(memberId);
 		System.out.println(list.size());
 		for(Review r : list){
@@ -54,7 +58,6 @@ public class ReviewController {
 	public String searchByFoodtruckId(String foodtruckId, Model model){
 		Foodtruck truck = truckService.findById(foodtruckId);
 		List<Review> reviewList = reviewService.findByTruckId(foodtruckId);
-		System.out.println(reviewList.get(0).getImages().size());
 		model.addAttribute("truck", truck);
 		model.addAttribute("reviewList", reviewList);
 		return "../../view/foodtruck/detailFoodtruck.jsp";
@@ -107,16 +110,21 @@ public class ReviewController {
 	}
 	
 	@RequestMapping("/review/recommand.do")
-	public String createRecommand(Recommand recommand){
+	@ResponseBody
+	public String createRecommand(String reviewId, HttpSession session){
+		Recommand recommand = new Recommand();
+		recommand.setReviewId(reviewId);
+		recommand.setWriterId((String)session.getAttribute("loginUserId"));
 		boolean reg = reviewService.registerRecommand(recommand);
 		if(!reg){
+			reviewService.deleteRecommand(recommand);
 			return "false";
 		}
 		return "true"; // ajax
 	}
 	
 	@RequestMapping("/review/removerecommand.do")
-	public String removeRecommand(Recommand recommand){
+	public String removeRecommand(String reviewId, HttpSession session){
 		return null; // ajax
 	}
 	

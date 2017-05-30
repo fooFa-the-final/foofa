@@ -10,11 +10,11 @@
  	</resultMap>
  	<insert id = "insert" parameterType="Recommand">
  		INSERT INTO RECOMMAND_TB 
- 		VALUES(#{review_Id}, #{writer_Id});
+ 		VALUES(#{reviewId}, #{writerId})
  	</insert>
  	<delete id = "delete" parameterType="Recommand">
  		DELETE FROM RECOMMAND_TB
- 		WHERE review_id=#{reviewId} AND writer_id=#{writerId}
+ 		WHERE review_id=#{reviewId} AND member_id=#{writerId}
  	</delete>
  	<select id = "selectReviewCount" resultType = "int" parameterType="String">
  		SELECT count(*)

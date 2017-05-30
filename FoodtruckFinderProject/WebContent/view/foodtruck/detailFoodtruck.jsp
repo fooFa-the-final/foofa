@@ -56,22 +56,39 @@
 				});
 		 		
 	 		}
-	 		)
-	 		
-	 		$("#rec").click(function(){
-	 		$.ajax({
-	 			type : 'GET',
-	 			url : "${ctx}/review/recommand.do",
-	 			data : {
-	 				review_id : ${review.review_id}
-	 			},
-	 			var recCount = eval($("#recVal").val());
-		 		   $("#recVal").val("");
-		 		   $("#recVal").val(recCount+1);
-		 		});
-	 		})
-	 		   
+	 		)   
 	 	});
+	 	var recReview = function(reviewId){
+	 		$.ajax({
+	 			type:'get',
+	 			url : "${ctx }/review/recommand.do",
+	 			data:{
+	 				reviewId : reviewId
+	 			},
+	 			success : function(data){
+	 				var revId = "#rec" + reviewId;
+ 					var recCount = eval($(revId).val());
+ 					$(revId).val("");
+	 				if ($.trim(data) == 'true') {
+	 					$(revId).val(recCount+1);
+						alert("리뷰를 추천하셨습니다.");
+					} else if ($.trim(data) == 'false') {
+	 					$(revId).val(recCount-1);
+						alert("리뷰를 추천 해제 하셨습니다.")
+					}
+	 			}
+	 		});
+	 	}
+	 	
+	 	var report = function(reviewId){
+	 		$.ajax({
+	 			type:'POST',
+	 			url : "${ctx}/review/report/create.do",
+	 			data:{
+	 				reviewId : reviewId, reason : 
+	 			}
+	 		});
+	 	}
 	 </script>
 </head>
 
@@ -187,14 +204,39 @@
                 		<span style="float:right"><input type="button" value="+ Add my review" class="btn btn-default"></span>
                 		<c:forEach items="${reviewList }" var="Review">
 	                		<div class = "col-md-offset-1 col-md-11" style="margin-top:50px">
-		                		<span><font class="h3"><a href="#">${Review.foodtruck.foodtruckName }</a></font></span>
-		                		<span style="float:right"><input type="button" value="follow" class="btn btn-result"> <input type="button" value="!" class="btn btn-result"></span><br>
+		                		<span><font class="h3"><a href="${ctx }/review/list/member.do?memberId=${Review.writer.memberId}">${Review.writer.memberId}</a></font></span>
+		                		<span style="float:right"><input type="button" value="follow" class="btn btn-result"> <input type="button" value="!" class="btn btn-result" data-toggle="modal" data-target="#myModal${Review.reviewId }"></span><br>
 		                		<img src="../../resources/img/smile.png" width="300px" height="300px"><br><br>
 		                		<font size="4px">
-		                		<span>점수 : ${Review.score } <i class="fa fa-thumbs-up" id="rec"></i>: <input type="text" id="recVal" value="${Review.recommand }" style="border: 0px;" size=1 readonly></span>
+		                		<span>점수 : ${Review.score } <button style="border:0;background-color:white" onClick="recReview('${Review.reviewId}')"><i class="fa fa-thumbs-up" id="rec" ></i></button>: 
+		                		<input type="text" id="rec${Review.reviewId}" value="${Review.recommand }" style="border: 0px;" size=1 readonly></span>
 		                		<span style="float:right">${Review.writeDate }</span><br>
 		                		${Review.contents }	
 		                		</font>
+		                		<!-- Modal -->
+								  <div class="modal fade" id="myModal${Review.reviewId }" role="dialog">
+								    <div class="modal-dialog">
+								    
+								      <!-- Modal content-->
+								      <div class="modal-content">
+								        <div class="modal-header">
+								          <button type="button" class="close" data-dismiss="modal">&times;</button>
+								          <h4 class="modal-title">신고창</h4>
+								        </div>
+								        
+								        <div class="modal-body">
+								           	<h4>신고 내용 : ${Review.contents }</h4>
+								           		
+								          <input type="text" class="form-control" placeholder="신고 사유를 적어주세요" id="reason" name="reason">
+								        </div>
+								        <div class="modal-footer">
+								          <input type="button" class="btn btn-default" data-dismiss="modal" value="신고" onClick="report('${Review.reviewId}')">
+								          <input type="button" class="btn btn-default" data-dismiss="modal" value="신고 취소">
+								        </div>
+								      </div>
+								      
+								    </div>
+								  </div>
 	                		</div>
                 		</c:forEach>
                 	</div>
