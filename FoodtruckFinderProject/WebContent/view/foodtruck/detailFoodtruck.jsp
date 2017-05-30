@@ -179,7 +179,7 @@
 		                		<span style="float:right"><input type="button" value="follow" class="btn btn-result"> <input type="button" value="!" class="btn btn-result"></span><br>
 		                		<img src="../../resources/img/smile.png" width="300px" height="300px"><br><br>
 		                		<font size="4px">
-		                		<span>점수 : ${Review.score } <i class="fa fa-thumbs-up"></i>: ${Review.recommand }</span>
+		                		<span>점수 : ${Review.score } <i class="fa fa-thumbs-up" id="rec"></i>: <input type="text" name="" value="${Review.recommand }" style="border: 0px;" size=3></span>
 		                		<span style="float:right">${Review.writeDate }</span><br>
 		                		${Review.contents }	
 		                		</font>

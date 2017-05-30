@@ -9,11 +9,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import fofa.domain.Foodtruck;
+import fofa.domain.Member;
 import fofa.domain.Recommand;
 import fofa.domain.Report;
 import fofa.domain.Review;
 import fofa.domain.Survey;
 import fofa.service.FoodtruckService;
+import fofa.service.MemberService;
 import fofa.service.ReviewService;
 
 @Controller
@@ -25,8 +27,15 @@ public class ReviewController {
 	@Autowired
 	private FoodtruckService truckService;
 	
+	@Autowired
+	private MemberService memberService;
+	
 	@RequestMapping("/review/list/member.do")
 	public String searchByMemberId(String memberId, Model model){
+		Member member = memberService.findById(memberId);
+		model.addAttribute("member", member);
+		List<Review> list = reviewService.findByMemberId(memberId);
+		model.addAttribute("list", list);
 		return "../../view/user/memberReviewList.jsp";
 	}
 
@@ -58,7 +67,7 @@ public class ReviewController {
 	
 	@RequestMapping(value="/review/create.do", method=RequestMethod.POST)
 	public String createReview(Review review, Survey survey, Model model){
-		return "redirect:review/list/truck.do";
+		return "redirect:review/list/truck.do?foodtruckid="+review.getFoodtruck().getFoodtruckId();
 	}
 	
 	@RequestMapping(value="/review/modify.do", method=RequestMethod.GET)
@@ -98,7 +107,11 @@ public class ReviewController {
 	
 	@RequestMapping("/review/recommand.do")
 	public String createRecommand(Recommand recommand){
-		return null; // ajax
+		boolean reg = reviewService.registerRecommand(recommand);
+		if(!reg){
+			return "false";
+		}
+		return "true"; // ajax
 	}
 	
 	@RequestMapping("/review/removerecommand.do")
