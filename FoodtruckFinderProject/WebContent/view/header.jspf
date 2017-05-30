@@ -28,7 +28,7 @@
 	                        	<form method="post" action="/truck/list/key.do">
 	                        	<input type="text" class="form-control" name="keyword" placeholder="Search" style="width: 400px">
 	                            <input type="text" class="form-control" name="location" placeholder="Location" style="width: 400px">
-	                                <button class="btn btn-default" type="submit">
+	                                <button class="btn btn-default" type="submit" style="height:34px">
 	                                    <i class="fa fa-search"></i>
 	                                </button>
 	                            </form>	

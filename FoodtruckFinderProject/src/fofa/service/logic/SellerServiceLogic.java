@@ -25,9 +25,7 @@ public class SellerServiceLogic implements SellerService {
 
 	@Override
 	public boolean checkPw(String sellerId, String password) {
-
 		Seller seller = sellerStore.select(sellerId);
-
 		if (seller.getPassword() != password) {
 			return false;
 		} else {
@@ -37,8 +35,7 @@ public class SellerServiceLogic implements SellerService {
 
 	@Override
 	public Seller findById(String sellerId) {
-		Seller seller = sellerStore.select(sellerId);
-		return seller;
+		return sellerStore.select(sellerId);
 	}
 
 	@Override
@@ -53,34 +50,16 @@ public class SellerServiceLogic implements SellerService {
 
 	@Override
 	public boolean modify(Seller seller) {
-		int sucess;
-		sucess = sellerStore.update(seller);
-		if (sucess == 0) {
-			return false;
-		} else {
-			return true;
-		}
+		return sellerStore.update(seller) > 0;
 	}
 
 	@Override
 	public boolean register(Seller seller) {
-		int sucess;
-		sucess = sellerStore.insert(seller);
-		if (sucess == 0) {
-			return false;
-		} else {
-			return true;
-		}
+		return sellerStore.insert(seller) > 0;
 	}
 
 	@Override
 	public boolean remove(String sellerId) {
-		int sucess;
-		sucess = sellerStore.delete(sellerId);
-		if (sucess == 0) {
-			return false;
-		} else {
-			return true;
-		}
+		return sellerStore.delete(sellerId) > 0;
 	}
 }

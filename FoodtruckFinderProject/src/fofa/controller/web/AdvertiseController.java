@@ -58,9 +58,13 @@ public class AdvertiseController {
 	}
 
 	@RequestMapping("/advertise/list/asc.do")
-	public String searchByAsc(int approve, Model model) {
-		List<Advertise> list1 = advertiseService.findByAsc(approve);
-		
+	public String searchByAsc(Model model) {
+		List<Advertise> list1 = advertiseService.findByAsc(0);
+		List<Advertise> list = advertiseService.findByAsc(1);
+
+		model.addAttribute("advertise1", list1);
+		model.addAttribute("advertise", list);
+		return "/view/admin/adminAdvertise.jsp";		
 		
 //폐기될지도 모르는 코드 if varchr2 => date		
 //		String yyyy;
@@ -133,14 +137,14 @@ public class AdvertiseController {
 //			list1.get(i).setStartdate(yyyy + "-" + mm + "-" + dd);
 //		}		
 		
-		model.addAttribute("advertise1", list1);
-		return "/view/admin/adminAdvertise.jsp";
+
 	}
 
 	@RequestMapping("advertise/list/desc.do")
-	public String searchByDesc(int approve, Model model) {
+	public String searchByDesc(Model model) {
 //		approve = true;
-		List<Advertise> list = advertiseService.findByDesc(approve);
+//		System.out.println(approve);
+//		List<Advertise> list = advertiseService.findByDesc(approve);
 		return "../../view/admin/adminAdvertise.jsp";
 	}
 	
