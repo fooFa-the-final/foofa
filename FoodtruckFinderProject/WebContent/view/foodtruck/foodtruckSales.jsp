@@ -204,15 +204,15 @@ h2 {
 											},
 											'chartDiv' : 'chart71',
 											'chartType' : 'line',
-											'leftOffsetValue' : 50,
+											'leftOffsetValue' : 90,
 											'bottomOffsetValue' : 70,
 											'chartSize' : {
-												width : 700,
-												height : 300
+												width : 1100,
+												height : 500
 											},
 											'minValue' : 0,
-											'maxValue' : 10000,
-											'increment' : 1000,
+											'maxValue' : 1000000,
+											'increment' : 100000,
 											'isGuideLineNeeded' : false
 										//default set to false
 										};
@@ -262,15 +262,15 @@ h2 {
 											},
 											'chartDiv' : 'chart71',
 											'chartType' : 'line',
-											'leftOffsetValue' : 50,
+											'leftOffsetValue' : 90,
 											'bottomOffsetValue' : 70,
 											'chartSize' : {
-												width : 700,
-												height : 300
+												width : 1100,
+												height : 500
 											},
 											'minValue' : 0,
-											'maxValue' : 10000,
-											'increment' : 1000,
+											'maxValue' : 1000000,
+											'increment' : 100000,
 											'isGuideLineNeeded' : false
 										//default set to false
 										};
