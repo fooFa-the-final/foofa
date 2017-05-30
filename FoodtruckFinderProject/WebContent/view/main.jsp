@@ -89,7 +89,7 @@
 			</li>
 			<li class="row" style="display: block; float: bottom">
 				<div id="col-lg-12">
-					<img id="mainMemberImg"  class="main_img_person" src="${ctx}/resources/img/user.jpg" />
+					<img id="mainMemberImg"  class="main_img_person" src="${ctx}/resources/img/user.jpg" onclick="location.href='${ctx}/review/list/member.do?memberId=${mainMember.memberId}'" />
 				</div>
 			</li>
 
