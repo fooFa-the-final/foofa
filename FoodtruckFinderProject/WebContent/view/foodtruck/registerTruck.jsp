@@ -103,9 +103,9 @@ var removeMenu = function(obj){
 
 	</div>
 	<!--  page-wrapper -->
-	<div class="wrap-center container"  style="margin-top:120px">
+	<div class="wrap-center container"  style="margin-top:110px">
 				<form action="${ctx }/foodtruck/create.do" method="post">
-                      <div class="col-lg-12">
+                      <div class="col-lg-12" style="line-height:2.8em">
                           <div class="panel panel-default">
                             <div class="panel-heading">
                                 <h1>푸드트럭 등록</h1>
@@ -137,8 +137,8 @@ var removeMenu = function(obj){
                                 		<label>Location</label> 
                                 		<input type="text" class="form-control" placeholder="Required" style="width:500px">
                                 	</div>
-                                	<div class="form-group">
-                                		<label>Payment</label>&nbsp;
+                                	<div class="form-group" style="margin-top:10px">
+                                		<label>Payment</label>&nbsp;<br>
                                 		<label class="radio-inline">
                                 			<input type="radio" name="paymentMethod" id="takesCard" value="true">Takes Card
                                 		</label>
@@ -146,7 +146,7 @@ var removeMenu = function(obj){
                                 			<input type="radio" name="paymentMethod" id="onlyCash" value="false">Only Cash
                                 		</label>
                                 	</div>
-                                	<div class="form-group">
+                                	<div class="form-group" style="margin-top:10px">
 		                                <table class="table table-striped table-bordered table-hover" id="menus" style="width:900px">
 		                                    <thead>
 		                                        <tr>
@@ -180,13 +180,11 @@ var removeMenu = function(obj){
                             </div>
                           </div>
                       </div>
-                     <div class="col-lg-12" align="center" style="margin-top:100px">
+                     <div class="col-lg-12" align="center" style="margin-top:50px">
 						<button type="submit" class="btn btn-primary">ADD</button>
 					</div>
 				</form>
 			</div>
-		</div>
-	</div>
 
 	<!-- Core Scripts - Include with every page -->
 	
