@@ -14,9 +14,9 @@
 	  	<association column="foodtruck_id" property="foodtruck"
 	  	select = "fofa.store.mapper.FoodtruckMapper.selectById"
 	  	javaType="Foodtruck" jdbcType="VARCHAR"/>
-	  	<collection property="images" column="review_id"
+	  	<collection property="images" column="review_id" ofType="Image"
 	  	select = "fofa.store.mapper.ImageMapper.selectReviewImage"
-	  	javaType="Image" jdbcType="VARCHAR"/>
+	  	javaType="ArrayList" jdbcType="VARCHAR"/>
   	</resultMap>
   	
   	<insert id="insert" parameterType="Review">
