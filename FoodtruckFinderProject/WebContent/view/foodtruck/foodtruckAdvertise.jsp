@@ -61,15 +61,15 @@
                         <div class="panel-body">
                     <span>
                             <a class="navbar-brand" href="#" style="margin-top:10px;">
-                                <img src="../../resources/img/waikiki.jpg" style="height:250px; width:250px"/>
+                                <img src="${ctx }/resources/img/${truck.foodtruckImg}" style="height:250px; width:250px"/>
                             </a>
                     </span>
                             <div class="user-info">
-                                <h1>WAIKIKI JEJU</h1><br>
-                                <h5>양식</h5>
-                                <h5>제주시</h5>
-                                <h5>144Followers</h5>
-                                <h5>255Reviews</h5>
+                                <h1>${truck.foodtruckName }</h1><br>
+                                <h5>${truck.category1 }</h5>
+                                <h5>${truck.location }</h5>
+                                <h5>${truck.reviewScore }</h5>
+                                <h5>${truck.reviewCount }</h5>
                             </div>
                     <span style="float:right; margin-right:30px; margin-top: 30px">
                         <a href="#"><button type="button" class="btn btn-default">판매자 정보 수정</button></a>
@@ -90,7 +90,7 @@
 				                            <br/>
                            	<div class="form-group">
                             <h4>- 광고 시작일 <small> 광고 시작일을 선택해주세요.</small> </h4>
-                            	<input id="startdate" type="date" data-date-inline-picker="true" style="margin-left:20px"/>
+                            	<input id="startdate" name="startdate" type="date" data-date-inline-picker="true" style="margin-left:20px"/>
                             </div>
 				                            <br/>
                             <h4>- 광고 기간 <small> 광고 기간을 선택해주세요. </small></h4>

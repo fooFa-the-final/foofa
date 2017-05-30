@@ -65,8 +65,12 @@ where a.seller_id = f.seller_id and
 		('A'||ADVERTISE_SEQ_ADV.NEXTVAL, 
 		#{sellerId},
 		#{period}, 
-		#{startdate}, 
-		#{approve} )
+		#{startdate},
+		#{approve})
+		<!-- 
+		to_date(#{startdate},'yyyy-mm-dd'), 
+		 -->
+		
 	</insert>
 
 </mapper>
