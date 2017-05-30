@@ -90,9 +90,17 @@ public class ReviewController {
 	}
 	
 	@RequestMapping("/review/report/create.do")
-	public void createReport(Report report){
-		
+	@ResponseBody
+	public String createReport(Report report, HttpSession session){
+		report.setMemberId((String)session.getAttribute("loginUserId"));
+		System.out.println(report.toString());
+		boolean reg = reviewService.registerReport(report);
+		if(!reg){
+			return "false";
+		}
+		return "true"; // ajax
 	}
+	
 	
 	@RequestMapping("/review/report/list.do")
 	public String selectReviewByReport(Model model){

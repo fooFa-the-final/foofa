@@ -81,11 +81,19 @@
 	 	}
 	 	
 	 	var report = function(reviewId){
+	 		var reaId = "#reason" + reviewId;
 	 		$.ajax({
 	 			type:'POST',
 	 			url : "${ctx}/review/report/create.do",
 	 			data:{
-	 				reviewId : reviewId, reason : 
+	 				reviewId : reviewId, reason : $(reaId).val()
+	 			},
+	 			success : function(data){
+	 				if ($.trim(data) == 'true') {
+						alert("신고 처리가 완료되었습니다.");
+					} else if ($.trim(data) == 'false') {
+						alert("이미 신고된 리뷰입니다.");
+					}
 	 			}
 	 		});
 	 	}
@@ -227,7 +235,7 @@
 								        <div class="modal-body">
 								           	<h4>신고 내용 : ${Review.contents }</h4>
 								           		
-								          <input type="text" class="form-control" placeholder="신고 사유를 적어주세요" id="reason" name="reason">
+								          <input type="text" class="form-control" placeholder="신고 사유를 적어주세요" id="reason${Review.reviewId}" name="reason">
 								        </div>
 								        <div class="modal-footer">
 								          <input type="button" class="btn btn-default" data-dismiss="modal" value="신고" onClick="report('${Review.reviewId}')">
