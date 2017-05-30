@@ -63,7 +63,7 @@
 	 			type : 'GET',
 	 			url : "${ctx}/review/recommand.do",
 	 			data : {
-	 				bool :
+	 				review_id : ${review.review_id}
 	 			},
 	 			var recCount = eval($("#recVal").val());
 		 		   $("#recVal").val("");
