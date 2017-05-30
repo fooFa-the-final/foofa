@@ -54,17 +54,15 @@ public class MemberController {
 		return "../view/user/login.jsp";
 	}
 	@RequestMapping(value="member/modifyForm.do", method= RequestMethod.GET)
-	public String modifyForm(HttpServletRequest request, HttpSession session, Model model){
-		String id = request.getParameter("memberId");
-		Member member = service.findById(id);
-		request.setAttribute("member", member);
+	public String modifyForm(HttpSession session, Model model){
+		Member member=service.findById(session.getId());
+		System.out.println(member);
+		model.addAttribute(member);
 		return "../view/member/modifyMember.jsp";
 	}
 	@RequestMapping(value="member/modify.do", method=RequestMethod.POST)
 	public String modify(Member member){
 		service.modify(member);
-		
-		
 		return "redirect:review/list/member.do";
 	}
 	@RequestMapping("member/checkPw.do")
@@ -75,12 +73,8 @@ public class MemberController {
 		return "../view/member/deleteMember.jsp";
 	}
 	@RequestMapping("member/remove.do")
-	public String remove(HttpServletRequest request,HttpSession session){
-		session = request.getSession();
-		String memberId =(String) session.getAttribute("memberId");
-		service.remove(memberId);
-		
-		
+	public String remove(HttpSession session){
+		service.remove(session.getId());
 		return "../view/member/index.jsp";
 	}
 	@RequestMapping("member/modifypic.do")

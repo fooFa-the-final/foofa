@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import fofa.domain.Member;
+import fofa.domain.Seller;
 import fofa.service.MemberService;
 import fofa.store.MemberStore;
 
@@ -54,11 +55,11 @@ public class MemberServiceLogic implements MemberService{
 	@Override
 	public boolean checkPw(String memberId, String password) {
 		Member member = store.select(memberId);
-		
-		if(member == null){
+		if (member.getPassword().equals(password)) {
 			return true;
+		} else {
+			return false;
 		}
-		return false;
 	}
 
 	@Override
