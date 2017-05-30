@@ -66,7 +66,7 @@ public class ReviewController {
 	public String createReviewForm(String foodtruckId, Model model){
 		Foodtruck truck = truckService.findById(foodtruckId);
 		model.addAttribute("truck", truck);
-		return "../../view/user/registerReview.jsp";
+		return "/view/user/registerReview.jsp";
 	}
 	
 	@RequestMapping(value="/review/create.do", method=RequestMethod.POST)
