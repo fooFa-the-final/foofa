@@ -31,7 +31,7 @@ public class MemberServiceLogic implements MemberService{
 
 	@Override
 	public boolean remove(String memberId) {
-	
+	System.out.println(memberId);
 		return store.delete(memberId) >0;
 	}
 
@@ -42,9 +42,8 @@ public class MemberServiceLogic implements MemberService{
 		
 			return true;
 		}else{
-			
+			return false;
 		}
-		return false;
 	}
 
 	@Override
