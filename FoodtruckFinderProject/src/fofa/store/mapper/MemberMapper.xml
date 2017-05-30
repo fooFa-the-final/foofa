@@ -8,7 +8,7 @@
 	<resultMap type="Member" id="MemberMap">
 		<id column="member_id" property="memberId"/>
 		<result column="password" property="password"/>
-		<result column="birth" property="birthday"/>
+		<result column="birthday" property="birthday"/>
 		<result column="email" property="email"/>
 		<result column="gender" property="gender"/>
 		<result column="image_src" property="profileImg"/>
@@ -16,8 +16,8 @@
 	</resultMap> 
 	
 	<insert id="insert" parameterType="Member">
-	INSERT INTO member_tb (member_id, password, birth, email, gender, image_src)
- 	VALUES (#{memberId}, #{password}, #{birthday}, #{email}, #{gender}, #{profileImg})	
+	INSERT INTO member_tb (member_id, password, birthday, email, gender)
+ 	VALUES (#{memberId}, #{password}, #{birthday}, #{email}, #{gender})	
 	</insert>
 	
 	<update id="update" parameterType="Member">
@@ -33,7 +33,7 @@
 	</delete>
 	
 	<select id="select" parameterType="String" resultMap="MemberMap">
-	select member_id, password, birth, email, gender, image_src
+	select member_id, password, birthday, email, gender, image_src
 	FROM member_tb
 	WHERE member_id = #{memberId}
 	
