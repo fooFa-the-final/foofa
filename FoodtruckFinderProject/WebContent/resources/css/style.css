@@ -386,6 +386,8 @@ img.main_img_person {
 	margin-top: 90px;
 	width: 50px;
 	height: 50px;
+	overflow: hidden;
+	border-radius: 5px;
 }
 
 div.main-container {
@@ -425,6 +427,11 @@ div.main-container div.row {
 	margin-bottom: 50px;
 }
 
+.top-head-menu {
+	height:40px;
+	margin-right:20px;
+}
+
 .main-head-top .top-head-menu button {
 	font-weight: bold;
 	border-width: 2px;
@@ -455,6 +462,7 @@ img.somenail {
 	width: 60px;
 	height: 60px;
 	float:left;
+	border-radius: 5px;
 }
 
 .padding-10 {
@@ -486,6 +494,7 @@ img.somenail {
 .review-heading {
 	background-color: #d9edf7;
 	height: 90px;
+	border-radius: 4px 4px 0px 0px;
 }
 
 .review-heading a {

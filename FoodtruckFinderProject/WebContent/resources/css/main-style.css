@@ -16,6 +16,7 @@ nav.main-head-top {
 	position: relative;
 	background-repeat:no-repeat;
 	background-size: cover;
+	overflow: hidden;
 }
 
 nav.main-head-top:after {	
