@@ -25,7 +25,6 @@
 </head>
 
 <script>
-	/* 	
 	 function approve(){
 	 var f=document.formName;
 	 f.action = "${ctx }/advertise/approve.ajax";
@@ -37,9 +36,7 @@
 	 f.action = "${ctx }/advertise/remove.do";
 	 f.submit();
 	 }
-	 폼안에 2개의 submit 만들기
-	 */
-
+/* 
 	var registComment = function() {
 		 
 	        var postData = { "para1": "para1", "advId": para2 };
@@ -62,24 +59,8 @@
 		// 에러발생시 수행되는 기능
 		});
 	};
-</script>
-
-
-<%-- 	
-function approve(){
-
-	var f=document.formName;
-	f.action = "${ctx }/advertise/approve.do";
-	f.submit();
-	}
-}
-function remove(){
-var f=document.formName;
-f.action = "111.jsp";
-f.submit();
-};
-
- --%>
+ */
+	</script>
 <body>
 	<!--  wrapper -->
 	<div id="wrapper">
@@ -151,10 +132,10 @@ f.submit();
 													<tbody>
 														<tr class="odd gradeX">
 															<td>${sts.count}</td>
-															<td>${advertise.sellerId }</td>
-															<td>${advertise.startdate }</td>
-															<td>${advertise.enddate }</td>
-															<td>${advertise.period }</td>
+															<td>${advertise.sellerId}</td>
+															<td>${advertise.startdate}</td>
+															<td>fff</td>
+															<td>${advertise.period}</td>
 														</tr>
 												</c:forEach>
 												</tbody>
@@ -193,7 +174,7 @@ f.submit();
 																<td>${sts.count}</td>
 																<td>${advertise1.sellerId }</td>
 																<td>${advertise1.startdate }</td>
-																<td>${advertise1.enddate }</td>
+																<td>aaa</td>
 																<td>${advertise1.period }</td>
 																<td><input type="checkbox" name="advId"
 																	value="${advertise1.advId}"></td>

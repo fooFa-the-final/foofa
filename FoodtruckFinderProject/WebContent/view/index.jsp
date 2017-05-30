@@ -24,7 +24,7 @@
 <style>
 .mySlides {display:none; width: 900px; margin: 0 auto;}
 .w3-left, .w3-right, .w3-badge {cursor:pointer}
-.w3-badge {height:13px;width:13px;padding:0}
+.w3-badge {height:13px;width:13px;padding:0}	
 
 </style>
 </head>
@@ -37,8 +37,8 @@
 		<br>
 		<div class="col-lg-12 top-head-menu" style="">
 			<span style="float: right; margin: 20px 30px 0 0;">
-			<button type="button" class="btn btn-link loginBtn">Log in</button>
-			<button type="button" class="btn btn-outline btn-danger signUpBtn">Sign up</button>
+			<button type="button" class="btn btn-link loginBtn" onclick="location.href='${ctx}/login.do'">Log in</button>
+			<button type="button" class="btn btn-outline btn-danger signUpBtn"  onclick="location.href='${ctx}/member/createForm.do'">Sign up</button>
 			</span>
 		</div>
 		<ul class="nav navbar-top-links navbar-main-links navbar-center">

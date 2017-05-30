@@ -95,13 +95,11 @@
                         <div class="panel-body">
                         	  <div class="row">
                                 <div class="col-lg-6">
-                                    <form role="form">
                                         <div class="form-group">
-                                            <input class="form-control size80"> <button type="button" class="btn btn-danger btn-circle"><i class="fa fa-check"></i>
-                            </button>
+                                            <input name="question" class="form-control size80"> <button type="button" class="btn btn-danger btn-circle" onclick="registerItem()"><i class="fa fa-check"></i>
+                          				  </button>
                                             <p class="help-block">새로 추가할 항목을 입력하세요!</p>
                                         </div>
-                        		</form>
                         		</div>
                         		</div>
                         		<!--  End Add Item -->
@@ -127,7 +125,41 @@
     <script>
         $(document).ready(function () {
             $('#dataTables-example').dataTable();
+            
+            var registerItem = function(){
+            	var question = $("input[name=question]").attr("value");
+            	
+    			$.ajax({
+    				url:"${ctx}/survey/item/create.do"
+    				,type:"get"
+    				,data:{question:question}
+    				,success:displayItems
+    				,error:errorCallback
+    			});
+            	
+            };
+            
+            var displayItems = function(resultData){
+            	var itemsHtml = "";
+    			$.each(resultData, function(index, item){
+    				commentHtml += '<table class="table" style="font-size:13px; padding:20px;">';
+    				commentHtml += '<tr>';
+    				commentHtml += '<td><strong>'+comment.authorName+'</strong></td>';
+         			commentHtml += '<td class="text-right">'+comment.regDate;
+         			commentHtml += '<a class="glyphicon glyphicon-trash" href="javascript:removeComment('+comment.commentId+');"></a>';
+         			commentHtml += '</td></tr>';
+         			commentHtml += '<tr><td colspan="2">';
+         			commentHtml += '<p class="txt">'+comment.comment+'</p>';
+         			commentHtml += '</td></tr></table>';
+    			});
+    			
+    			$("#commenArea").empty();
+    			$("#commenArea").append(commentHtml);
+    			$("#comment").val("");           	
+            	
+            };
         });
+        
     </script>
 
 </body>

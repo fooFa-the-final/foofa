@@ -14,6 +14,9 @@
 	  	<association column="foodtruck_id" property="foodtruck"
 	  	select = "fofa.store.mapper.FoodtruckMapper.selectById"
 	  	javaType="Foodtruck" jdbcType="VARCHAR"/>
+	  	<collection property="images" column="review_id" ofType="Image"
+	  	select = "fofa.store.mapper.ImageMapper.selectReviewImage"
+	  	javaType="ArrayList" jdbcType="VARCHAR"/>
   	</resultMap>
   	
   	<insert id="insert" parameterType="Review">
@@ -48,6 +51,6 @@
   		select r.review_id review_id, member_id, foodtruck_id, contents, score, writedate 
   		from review_tb r, (select review_id, count(*) recommand from recommand_tb group by review_id) d 
 		where d.review_id = r.review_id
-		order by recommand desc;
+		order by recommand desc
   	</select>
   </mapper>

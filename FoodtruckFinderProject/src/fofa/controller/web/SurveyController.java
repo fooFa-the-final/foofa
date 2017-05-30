@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import fofa.domain.Survey;
 import fofa.domain.SurveyItem;
@@ -44,18 +45,22 @@ public class SurveyController {
 	}
 
 	@RequestMapping("/item/create.do")
+	@ResponseBody
 	public List<SurveyItem> createItem(String question){
 		surveyItemService.register(question);
+		System.out.println("꺼져");
 		return surveyItemService.findAll();
 	}
 
 	@RequestMapping("/item/modify.do")
+	@ResponseBody
 	public List<SurveyItem> modifyItem(SurveyItem item){
 		surveyItemService.modify(item);
 		return surveyItemService.findAll();
 	}	
 
 	@RequestMapping("/item/remove.do")
+	@ResponseBody
 	public List<SurveyItem> removeItem(String surveyItemId){
 		surveyItemService.remove(surveyItemId);
 		return surveyItemService.findAll();

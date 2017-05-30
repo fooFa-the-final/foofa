@@ -9,7 +9,7 @@
 <head>
 <c:set value="${pageContext.request.contextPath}" var="ctx" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FooFa Login</title>
+<title>FooFa Register Seller</title>
 <!-- Core CSS - Include with every page -->
 <link href="${ctx}/resources/plugins/bootstrap/bootstrap.css"
 	rel="stylesheet" />
@@ -21,38 +21,71 @@
 <link href="${ctx}/resources/css/main-style.css" rel="stylesheet" />
 
 <!-- Page-Level CSS -->
-<link href="resources/plugins/dataTables/dataTables.bootstrap.css"
+<link href="${ctx}/resources/plugins/dataTables/dataTables.bootstrap.css"
 	rel="stylesheet" />
 
 <c:set var="ctx">${pageContext.request.contextPath }</c:set>
 </head>
 
 <style>
-#indexMain {
-	margin: 60px;
-}
-
-#indexbody {
-	margin-left: 350px;
-}
-
-#Register {
-	margin-left: 330px;
-}
-
-#Truck {
-	margin-left: 200px;
-}
-
-#Location {
-	margin-left: 700px;
-}
-}
 </style>
 
 <script>
 
+$(document).ready(function(){
+    $("form").submit(function(){
+        if($("input[name='sellerId']").val() == ""){
+            $("input[name='sellerId']").css("border", "1px solid red").after("<span>아이디를 입력해주세요</span>");
+            $("span").css("color", "red").fadeOut(3000);
+            return false;
+        }
+    });   
+    $(":input").focus(function(){
+        $(this).css("border", "4px red solid");
+    }).blur(function(){
+        $(this).css("border", "");
+    });       
+    
+    $(":text").focus(function(){
+        $(this).after("<strong>필수 항목입니다.</strong>");
+    }).blur(function(){
+    $("strong").remove();
+    })
+    
+
+	$(":radio").click(function(){
+   		$("label").css("font-weight", "");
+    	$("label[for='" + $(this).attr("id") + "']").css("font-weight", "bold");
+	});
+});
+
+
+
 //아이디 ajax
+
+		$("#sellerId").keyup(function() {
+			$.ajax({
+				url : "${ctx}/seller/checkId.do",
+				type : "post",
+				data : $("form").serialize(),
+				success : function(data) {
+					if (data.length > 0) {
+					document.getElementById('duplicateResult').value = "이미 해당 아이디로 가입된 회원가 있습니다.";
+					} else {
+						if ($("#sellerId").val().length < 5) {
+						document.getElementById('duplicateResult').value = "아이디를 5자 이상 입력해주세요.";
+						} else {
+							document.getElementById('duplicateResult').value = "사용 가능한 아이디입니다.";
+						}
+					}
+				},
+				error : function(error) {
+					alert(error.statusText);
+				}
+			});
+
+			return false;
+		});
 
 //비밀번호 일치 확인 
 	function checkPwd() {
@@ -132,23 +165,17 @@
 <br>
 <br>
 <div id="Register">
-	<b><font size="6">Join With us as Seller</font></b>
-</div>
-<div id="indexbody" class="col-lg-12">
-	<h5>
-		판매자 가입페이지입니다. <a href="">회원가입페이지</a>
-	</h5>
+	<b style="margin-left: 157px"><font size="6">Join With us as Seller</font></b>
 </div>
 <br>
 <br>
 <div class="container">
 	<div class="row" id="Truck">
-
 		<form action="${ctx }/seller/create.do" method="post">
 			<b> <font size="4">ID</font></b> <br>
 			<div id="idmessage">
-				<input id="sellerId" name="sellerId" class="form-control"
-					type="text" value="" placeholder="ID를 입력해주세요.">
+				<input id="sellerId" name="sellerId" class="form-control" onkeyup="checkId()" type="text" placeholder="ID를 입력해주세요.">
+					 <div id="duplicateResult"></div>
 					 <button type="button" id="chdckId" onclick="checkId();" value="">중복확인</button>
 					 <br>
 			</div>
@@ -158,8 +185,7 @@
 				<br> <br> <b> <font size="4">Confirm Password</font></b> <br>
 				<input id="password1" name="password1" class="form-control"
 					type="password" onkeyup="checkPwd()"> 
-					<div id="checkPwd">동일한
-					암호를 입력해주세요</div> 
+					<div id="checkPwd"></div> 
 					<br> <b><font size="4">Business
 						Registration Number</font></b> <br> <input id="certification"
 					name="certification" class="form-control" type="text"> <br>
@@ -172,10 +198,6 @@
 			</div>
 		</form>
 	</div>
-
-
-
-
 	<br> <br>
 </div>
 </html>
