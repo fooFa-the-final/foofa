@@ -27,39 +27,17 @@
 <script>
 	 function approve(){
 	 var f=document.formName;
-	 f.action = "${ctx }/advertise/approve.ajax";
+	 f.action = "${ctx }/advertise/approve.do";
 	 // 파일 전송이 필요할 경우만 씀.
 	 f.submit();
 	 }
+	 
+	 
 	 function remove(){
 	 var f=document.formName;
 	 f.action = "${ctx }/advertise/remove.do";
 	 f.submit();
 	 }
-/* 
-	var registComment = function() {
-		 
-	        var postData = { "para1": "para1", "advId": para2 };
-
-	        
-	        var para2 = [];
-	        $("input[name='advId']:checked").each(function(i) {
-	        para2.push($(this).val());
-	        });
-		 
-		$.ajax({
-			url : "${ctx }/advertise/approve.ajax",
-			type : "post",
-			data:{
-	postData
-			},
-			traditional: true,
-			success :alert(p111ostData), //ajax성공시에 수행되는 기능,
-			error : alert("실패")
-		// 에러발생시 수행되는 기능
-		});
-	};
- */
 	</script>
 <body>
 	<!--  wrapper -->
@@ -134,7 +112,7 @@
 															<td>${sts.count}</td>
 															<td>${advertise.sellerId}</td>
 															<td>${advertise.startdate}</td>
-															<td>fff</td>
+															<td>${advertise.endofdate}</td>
 															<td>${advertise.period}</td>
 														</tr>
 												</c:forEach>
@@ -147,10 +125,7 @@
 								</div>
 								<div class="tab-pane fade" id="unapproved">
 									<h4>미승인된 광고 목록</h4>
-									<!-- 
 									<Form method="post" name="formName">
-									 -->
-									<Form onsubmit="registComment(); return false;">
 										<div class="panel-body">
 											<div class="table-responsive">
 
@@ -172,10 +147,10 @@
 															varStatus="sts">
 															<tr class="odd gradeX">
 																<td>${sts.count}</td>
-																<td>${advertise1.sellerId }</td>
-																<td>${advertise1.startdate }</td>
-																<td>aaa</td>
-																<td>${advertise1.period }</td>
+																<td>${advertise1.sellerId}</td>
+																<td>${advertise1.startdate}</td>
+																<td>${advertise1.endofdate}</td>
+																<td>${advertise1.period}</td>
 																<td><input type="checkbox" name="advId"
 																	value="${advertise1.advId}"></td>
 															</tr>
