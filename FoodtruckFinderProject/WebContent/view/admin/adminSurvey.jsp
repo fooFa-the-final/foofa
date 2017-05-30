@@ -60,10 +60,11 @@
 			<div class="row">
                 <div class="col-lg-12">
                     <!-- Advanced Tables -->
-                    <div class="panel panel-default">  설문 조사 항목</div>
-                    <div class="panel-body">
-                            <div class="table-responsive">
-                                <table class="table table-striped table-bordered table-hover" id="dataTables-example" >
+                    <div class="panel panel-default">  
+                    	<div class="panel-heading">  설문 조사 항목</div>
+                 	    <div class="panel-body">
+                            <div id="itemTableDiv" class="table-responsive">
+                                <table class="table table-striped table-bordered table-hover" id="itemTable" >
                                     <thead>
                                         <tr>
                                             <th class="text-center">Question</th>
@@ -75,9 +76,9 @@
                                     	<c:forEach var="item" varStatus="no" items="${items }">
                                           <tr class="odd gradeX">
                                             <td>${item.question }</td>
-                                			<td class="text-center"> <button type="button" class="btn btn-warning">수정</button></td>
-                                            <td class="text-center"><button type="button" class="btn btn-danger">삭제</button></td>
-                                        </tr>                                  	
+                							<td class="text-center"> <button type="button" class="btn btn-warning" onclick="modifyItem('${item.itemId}', '${item.question}');">수정</button></td>
+                   					         <td class="text-center"><button type="button" class="btn btn-danger" onclick="deleteItem('${item.itemId}');">삭제</button></td>
+                                           </tr>                                  	
                                     	</c:forEach>
                                     </tbody>
                                 </table>
@@ -96,7 +97,7 @@
                         	  <div class="row">
                                 <div class="col-lg-6">
                                         <div class="form-group">
-                                            <input name="question" class="form-control size80"> <button type="button" class="btn btn-danger btn-circle" onclick="registerItem()"><i class="fa fa-check"></i>
+                                            <input name="question" class="form-control size80"> <button type="button" class="btn btn-danger btn-circle" onclick="registerItem();"><i class="fa fa-check"></i>
                           				  </button>
                                             <p class="help-block">새로 추가할 항목을 입력하세요!</p>
                                         </div>
@@ -106,7 +107,7 @@
                         		</div>
                         		</div>
                 </div>
-
+			</div>
         </div>
         <!-- end page-wrapper -->
 
@@ -124,42 +125,69 @@
     <script src="${ctx }/resources/plugins/dataTables/dataTables.bootstrap.js"></script>
     <script>
         $(document).ready(function () {
-            $('#dataTables-example').dataTable();
-            
-            var registerItem = function(){
-            	var question = $("input[name=question]").attr("value");
-            	
-    			$.ajax({
-    				url:"${ctx}/survey/item/create.do"
-    				,type:"get"
-    				,data:{question:question}
-    				,success:displayItems
-    				,error:errorCallback
-    			});
-            	
-            };
-            
-            var displayItems = function(resultData){
-            	var itemsHtml = "";
-    			$.each(resultData, function(index, item){
-    				commentHtml += '<table class="table" style="font-size:13px; padding:20px;">';
-    				commentHtml += '<tr>';
-    				commentHtml += '<td><strong>'+comment.authorName+'</strong></td>';
-         			commentHtml += '<td class="text-right">'+comment.regDate;
-         			commentHtml += '<a class="glyphicon glyphicon-trash" href="javascript:removeComment('+comment.commentId+');"></a>';
-         			commentHtml += '</td></tr>';
-         			commentHtml += '<tr><td colspan="2">';
-         			commentHtml += '<p class="txt">'+comment.comment+'</p>';
-         			commentHtml += '</td></tr></table>';
-    			});
-    			
-    			$("#commenArea").empty();
-    			$("#commenArea").append(commentHtml);
-    			$("#comment").val("");           	
-            	
-            };
+            $('#itemTable').dataTable();
+
         });
         
+        var setDataTable = function(){
+        	 $('#itemTable').dataTable();
+        };
+        var registerItem = function(){
+        	var question = $("input[name=question]").val();
+        	
+			$.ajax({
+				url:"${ctx}/survey/item/create.do"
+				,type:"get"
+				,data:{question:question}
+				,success:displayItems
+				,error:errorCallback
+			});
+        	
+        };  
+        var modifyItem = function(itemId, question){
+			$.ajax({
+				url:"${ctx}/survey/item/remove.do"
+				,type:"get"
+				,data:{itemId:itemId,question:question }
+				,success:displayItems
+				,error:errorCallback
+			});       	
+        };       
+        var deleteItem = function(surveyItemId){
+			$.ajax({
+				url:"${ctx}/survey/item/remove.do"
+				,type:"get"
+				,data:{surveyItemId:surveyItemId}
+				,success:displayItems
+				,error:errorCallback
+			});       	
+        };
+        
+        
+        var displayItems = function(resultData){
+            
+        	var itemsHtml = "";    				
+        	itemsHtml += '<table class="table table-striped table-bordered table-hover" id="itemTable" ><thead><tr><th class="text-center">Question</th><th class="text-center">수정</th><th class="text-center">삭제</th></tr></thead> <tbody style="vertical-align:middle">';
+
+			$.each(resultData, function(index, item){
+				itemsHtml += '<tr class="odd gradeX">';
+				itemsHtml += '<td>'+item.question+'</td>';
+				itemsHtml += '<td class="text-center"> <button type="button" class="btn btn-warning" onclick="modifyItem(';
+				itemsHtml += "'"+item.itemId+"', '"+item.question+"');"+'">수정</button></td>';
+				itemsHtml += '<td class="text-center"><button type="button" class="btn btn-danger" onclick="deleteItem('+"'"+item.itemId+"'"+');">삭제</button></td>';
+				itemsHtml += '</tr>';
+			});
+			itemsHtml += '</tbody></table>';
+			
+			$("#itemTableDiv").empty();
+			$("#itemTableDiv").append(itemsHtml);
+			$("input[name=question]").val("");   
+			setDataTable();
+        };
+        
+		var errorCallback = function() {
+			alert("수행중 오류가 발생했습니다.");
+		};
     </script>
 
 </body>
