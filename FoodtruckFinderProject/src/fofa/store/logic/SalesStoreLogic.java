@@ -127,6 +127,7 @@ public class SalesStoreLogic implements SalesStore {
 		try {
 			SalesMapper mapper = session.getMapper(SalesMapper.class);
 			list = mapper.select10DaysSales(foodtruckId);
+
 		} finally {
 			session.close();
 		}

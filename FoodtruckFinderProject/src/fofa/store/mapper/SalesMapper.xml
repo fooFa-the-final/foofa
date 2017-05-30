@@ -6,7 +6,7 @@
 <mapper namespace="fofa.store.mapper.SalesMapper">
 
 	<resultMap type="Sale" id="SaleMap">
-		<id column="sale_id" property="saleID" />
+		<id column="sales_id" property="salesId" />
 		<result column="foodtruck_id" property="foodtruckId" />
 		<result column="day" property="date" />
 		<result column="location" property="location" />
@@ -52,9 +52,10 @@
 		WHERE #{month}=substr(day,1,6) AND
 		foodtruck_id=#{foodtruckId}
 	</select>
-	<select id="select1YearSales" parameterType="String" resultType="Sale">
+	<select id="select1YearSales" parameterType="String" resultMap="SaleMap">
 		SELECT #{foodtruckId} FOODTRUCK_ID, substr(day,1,6) DAY,
-		AVG(REVENUE) REVENUE
+		AVG(REVENUE)
+		REVENUE
 		FROM SALES_TB
 		WHERE FOODTRUCK_ID=#{foodtruckId}
 		AND
@@ -62,12 +63,11 @@
 		GROUP BY substr(day,1,6)
 	</select>
 
-	<select id="select10DaysSales" parameterType="String"
-		resultType="Sale">
+	<select id="select10DaysSales" parameterType="String" resultMap="SaleMap">
 		SELECT sales_id,foodtruck_id,day,location,revenue
 		From sales_tb
 		WHERE
-		foodtruck_id=#{foodtruckId}
+		FOODTRUCK_ID=#{foodtruckId}
 		AND<![CDATA[ ROWNUM < 11 ]]>
 		order by day DESC
 	</select>

@@ -103,6 +103,7 @@ var Nwagon = {
         var chartDiv = document.getElementById(parentSVG);
         var textArea = document.createElement('ul');
         textArea.className = 'accessibility';
+        textArea.id = 'gimozzi';
         chartDiv.appendChild(textArea);
         var attr = {'version':'1.1', 'width':width, 'height':height, 'viewBox':viewbox, 'class':'Nwagon_' + chartType, 'aria-hidden':'true'};
         var svg = Nwagon.createSvgElem('svg', attr);
