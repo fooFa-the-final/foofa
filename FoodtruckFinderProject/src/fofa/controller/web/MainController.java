@@ -80,10 +80,10 @@ public class MainController {
 
 		List<Review> allReview = reviewService.findByRecommand();
 		double mainRandom = Math.random();
-		int intMain = (int)(mainRandom*allReview.size())+1;
+		int intMain = (int)(mainRandom*allReview.size());
 		Review mainReview = reviewService.findById(allReview.get(intMain).getReviewId());
-		model.addAttribute("mainFoodImg",mainReview.getImages().get(0).getFilename());
-		model.addAttribute("mainMember", memberService.findById(mainReview.getWriter().getMemberId()));
+//		model.addAttribute("mainFoodImg",mainReview.getImages().get(0).getFilename());
+//		model.addAttribute("mainMember", memberService.findById(mainReview.getWriter().getMemberId()));
 		
 		return "view/main.jsp";
 	}
