@@ -140,6 +140,22 @@
             };
             
             var displayItems = function(resultData){
+            	var itemsHtml = "";
+    			$.each(resultData, function(index, item){
+    				commentHtml += '<table class="table" style="font-size:13px; padding:20px;">';
+    				commentHtml += '<tr>';
+    				commentHtml += '<td><strong>'+comment.authorName+'</strong></td>';
+         			commentHtml += '<td class="text-right">'+comment.regDate;
+         			commentHtml += '<a class="glyphicon glyphicon-trash" href="javascript:removeComment('+comment.commentId+');"></a>';
+         			commentHtml += '</td></tr>';
+         			commentHtml += '<tr><td colspan="2">';
+         			commentHtml += '<p class="txt">'+comment.comment+'</p>';
+         			commentHtml += '</td></tr></table>';
+    			});
+    			
+    			$("#commenArea").empty();
+    			$("#commenArea").append(commentHtml);
+    			$("#comment").val("");           	
             	
             };
         });
