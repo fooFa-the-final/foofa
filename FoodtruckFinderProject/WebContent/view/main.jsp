@@ -67,7 +67,7 @@
 			</li>
 			<li class="row" style="display: block; float: bottom">
 				<div id="col-lg-12">
-					<img class="main_img_person" src="${ctx}/resources/img/user.jpg" />
+					<img id="mainMemberImg"  class="main_img_person" src="${ctx}/resources/img/user.jpg" />
 				</div>
 			</li>
 
@@ -159,7 +159,9 @@
 		var mainMemberSrc = "${mainMember.profileImg}";
 		
 		console.log("mainImgSrc : "+mainImgSrc+" mainMemberSrc : "+mainMemberSrc);
-		${"#mainNav"}.css("background-img", "url('"+mainImgSrc+"')");
+		$("#mainNav").css("background-image", "url('${ctx}/resources/img/"+mainImgSrc+"')");
+		$("#mainMemberImg").attr("src","${ctx}/resources/img/${mainMember.profileImg}");
+		
 	});
 	
 	var previewImage = function(target, idNo){
