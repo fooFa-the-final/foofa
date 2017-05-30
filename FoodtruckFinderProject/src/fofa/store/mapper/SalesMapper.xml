@@ -52,7 +52,7 @@
 		WHERE #{month}=substr(day,1,6) AND
 		foodtruck_id=#{foodtruckId}
 	</select>
-	<select id="select1YearSales" parameterType="String" resultType="Sale">
+	<select id="select1YearSales" parameterType="String" resultMap="SaleMap">
 		SELECT #{foodtruckId} FOODTRUCK_ID, substr(day,1,6) DAY,
 		AVG(REVENUE) REVENUE
 		FROM SALES_TB
@@ -63,7 +63,7 @@
 	</select>
 
 	<select id="select10DaysSales" parameterType="String"
-		resultType="Sale">
+		resultMap="SaleMap">
 		SELECT sales_id,foodtruck_id,day,location,revenue
 		From sales_tb
 		WHERE

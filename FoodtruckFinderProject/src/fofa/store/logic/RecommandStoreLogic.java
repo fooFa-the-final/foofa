@@ -26,9 +26,9 @@ public class RecommandStoreLogic implements RecommandStore {
 			RecommandMapper mapper = session.getMapper(RecommandMapper.class);
 			insert = mapper.insert(recommand);
 			session.commit();
-		} catch(Exception e) {
+		}catch(Exception e){
 			return 0;
-		}finally {
+		} finally {
 			session.close();
 		} 
 		return insert;
