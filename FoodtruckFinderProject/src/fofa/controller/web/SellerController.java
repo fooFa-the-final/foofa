@@ -54,7 +54,7 @@ public class SellerController {
 	
 	@RequestMapping(value = "seller/modify.do", method = RequestMethod.GET) 
 	public String modifyForm(HttpSession session, Model model){
-		String sellerId = null;
+		String sellerId = "dd";
 		Seller seller = sellerService.findById(sellerId);
 		model.addAttribute(seller);
 		return "../view/seller/modifySeller.jsp";
@@ -63,6 +63,7 @@ public class SellerController {
 
 	@RequestMapping(value = "seller/modify.do", method = RequestMethod.POST) 
 	public String modify(Seller seller){
+		seller.setSellerId("dd");
 		sellerService.modify(seller);
 		return "../view/seller/modifySeller.jsp";
 	}	

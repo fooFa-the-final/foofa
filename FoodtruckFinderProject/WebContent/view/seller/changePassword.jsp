@@ -7,7 +7,7 @@
 <head>
 <c:set value="${pageContext.request.contextPath}" var="ctx" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>판매자 수정</title>
+<title>비밀번호 변경</title>
 <!-- Core CSS - Include with every page -->
 <link href="${ctx}/resources/plugins/bootstrap/bootstrap.css"
 	rel="stylesheet" />
@@ -17,41 +17,36 @@
 	rel="stylesheet" />
 <link href="${ctx}/resources/css/style.css" rel="stylesheet" />
 <link href="${ctx}/resources/css/main-style.css" rel="stylesheet" />
+<style type="text/css">
+.col-lg-6 {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 300px;
+	height: 500px;
+	overflow: hidden;
+	margin-top: -150px;
+	margin-left: -100px;
+}
+</style>
+
 </head>
 <body>
-
 	<header>
 		<%@ include file="../header.jspf"%>
 	</header>
 	<div class="col-lg-6">
-		<h2>Modify your Info</h2>
-		<form role="form" action="${ctx }/seller/modify.do" method="post">
+		<form role="form" action="${ctx }/seller/checkPw.do" method="post">
 			<div class="form-group">
-				<label>ID</label> <b class="form-control">${seller.sellerId }</b>
-			</div>
-			<div class="form-group">
-				<label>비밀번호 변경</label> <input class="form-control" id="password" name="password"
-				type="password"	placeholder="비밀번호를 입력해 주세요"> 
-				<br> 
-				<input
-					class="form-control" id="password1" placeholder="변경하실 비밀번호를 입력해주세요">
+				<label>비밀번호 변경</label> <input class="form-control" id="password"
+					placeholder="비밀번호를 입력해 주세요"> <br> <input
+					class="form-control" id="password1" placeholder="비밀번호를 입력해 주세요">
 
-				<br> 
-				<input type="password" class="form-control" id="password" placeholder="변경하실 비밀번호를 입력해주세요"> 
+				<br> <input class="form-control" id="password"
+					placeholder="비밀번호를 입력해 주세요"> 
 					<br>
+				<button type="submit" class="btn btn-primary">submit</button>
 			</div>
-
-			<div class="form-group">
-				<label>Business Registration Number</label> <input type="number" name="certification"
-				id="certification"	class="form-control" placeholder="">
-			</div>
-
-			<div class="form-group">
-				<label>Phone</label> <input id="phone" name="phone" type="number" name="phone"
-		id="phone"			class="form-control" placeholder="">
-			</div>
-
-			<button type="submit" class="btn btn-primary">Modify</button>
 		</form>
 	</div>
 	<!-- Core Scripts - Include with every page -->

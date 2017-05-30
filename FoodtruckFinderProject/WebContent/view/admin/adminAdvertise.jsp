@@ -25,7 +25,6 @@
 </head>
 
 <script>
-	/* 	
 	 function approve(){
 	 var f=document.formName;
 	 f.action = "${ctx }/advertise/approve.ajax";
@@ -37,9 +36,7 @@
 	 f.action = "${ctx }/advertise/remove.do";
 	 f.submit();
 	 }
-	 폼안에 2개의 submit 만들기
-	 */
-
+/* 
 	var registComment = function() {
 		 
 	        var postData = { "para1": "para1", "advId": para2 };
@@ -62,24 +59,8 @@
 		// 에러발생시 수행되는 기능
 		});
 	};
-</script>
-
-
-<%-- 	
-function approve(){
-
-	var f=document.formName;
-	f.action = "${ctx }/advertise/approve.do";
-	f.submit();
-	}
-}
-function remove(){
-var f=document.formName;
-f.action = "111.jsp";
-f.submit();
-};
-
- --%>
+ */
+	</script>
 <body>
 	<!--  wrapper -->
 	<div id="wrapper">

@@ -41,14 +41,14 @@ public class AdvertiseStoreTest {
 //	 }
 	
 
-//	@Test
-//	public void testSelectByDesc() {
-//		boolean approve1 = true;
-//		String approve = "0";
-//		List<Advertise> list = store1.selectByDesc(approve);
-//		assertEquals(4, store1.selectByDesc(approve).size());
-//
-//	}
+	@Test
+	public void testSelectByDesc() {
+		boolean approve1 = true;
+		String approve = "0";
+		List<Advertise> list = store1.selectByDesc(0);
+		assertEquals(4, store1.selectByDesc(0).size());
+
+	}
 
 	// @Test
 	// public void testSelectNowAd() {
@@ -76,16 +76,16 @@ public class AdvertiseStoreTest {
 	// assertEquals(1, store1.delete("A24"));
 	// }
 
-	 @Test
-	 public void testUpdate() {
-		 Advertise advertise = new Advertise();
-		 advertise.setAdvId("A10");
-		 advertise.setApprove(2);
-		 assertEquals(1, store1.update(advertise));
-	 }
-	
-	@Test
-	public void testSelectExpired(){
-		assertEquals(5, store1.selectExpired().size());
-	}
+//	 @Test
+//	 public void testUpdate() {
+//		 Advertise advertise = new Advertise();
+//		 advertise.setAdvId("A10");
+//		 advertise.setApprove(2);
+//		 assertEquals(1, store1.update(advertise));
+//	 }
+//	
+//	@Test
+//	public void testSelectExpired(){
+//		assertEquals(5, store1.selectExpired().size());
+//	}
 }
