@@ -71,6 +71,7 @@ public class ReviewController {
 	
 	@RequestMapping(value="/review/create.do", method=RequestMethod.POST)
 	public String createReview(Review review, Survey survey, Model model){
+		System.out.println(review.toString());
 		return "redirect:review/list/truck.do?foodtruckid="+review.getFoodtruck().getFoodtruckId();
 	}
 	
