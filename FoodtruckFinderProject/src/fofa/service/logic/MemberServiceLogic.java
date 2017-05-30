@@ -54,7 +54,8 @@ public class MemberServiceLogic implements MemberService{
 	@Override
 	public boolean checkPw(String memberId, String password) {
 		Member member = store.select(memberId);
-		if(member != null){
+		
+		if(member == null){
 			return true;
 		}
 		return false;

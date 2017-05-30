@@ -132,10 +132,10 @@
 													<tbody>
 														<tr class="odd gradeX">
 															<td>${sts.count}</td>
-															<td>${advertise.sellerId }</td>
-															<td>${advertise.startdate }</td>
-															<td>${advertise.enddate }</td>
-															<td>${advertise.period }</td>
+															<td>${advertise.sellerId}</td>
+															<td>${advertise.startdate}</td>
+															<td>fff</td>
+															<td>${advertise.period}</td>
 														</tr>
 												</c:forEach>
 												</tbody>
@@ -174,7 +174,7 @@
 																<td>${sts.count}</td>
 																<td>${advertise1.sellerId }</td>
 																<td>${advertise1.startdate }</td>
-																<td>${advertise1.enddate }</td>
+																<td>aaa</td>
 																<td>${advertise1.period }</td>
 																<td><input type="checkbox" name="advId"
 																	value="${advertise1.advId}"></td>

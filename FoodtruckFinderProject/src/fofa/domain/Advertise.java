@@ -1,6 +1,7 @@
 package fofa.domain;
 
 import java.sql.Date;
+import java.util.Calendar;
 
 import org.springframework.stereotype.Component;
 
@@ -12,15 +13,21 @@ public class Advertise {
 	private int period;
 	private int approve;
 	private Date startdate;
-	private String enddate;
 	
 	
-	public String getEnddate() {
-		return enddate;
-	}
-	public void setEnddate(String edndate) {
-		this.enddate = edndate;
-	}
+//	public Date enddate(){
+//		Date date = null;
+//		
+//		Calendar cal = Calendar.getInstance();
+//		cal.setTime(startdate);
+//		cal.add(Calendar.DATE, period);
+//		date = (Date) cal.getTime();
+//		return date;
+//	}
+	
+	
+	
+	
 	public Date getStartdate() {
 		return startdate;
 	}

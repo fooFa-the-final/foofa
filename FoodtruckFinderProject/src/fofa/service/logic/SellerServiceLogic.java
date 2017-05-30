@@ -16,7 +16,7 @@ public class SellerServiceLogic implements SellerService {
 	@Override
 	public boolean checkId(String sellerId) {
 		Seller seller = sellerStore.select(sellerId);
-		if (seller != null) {
+		if (seller.getSellerId().equals(sellerId)) {
 			return true;
 		} else {
 			return false;
@@ -26,10 +26,10 @@ public class SellerServiceLogic implements SellerService {
 	@Override
 	public boolean checkPw(String sellerId, String password) {
 		Seller seller = sellerStore.select(sellerId);
-		if (seller.getPassword() != password) {
-			return false;
-		} else {
+		if (seller.getPassword().equals(password)) {
 			return true;
+		} else {
+			return false;
 		}
 	}
 
@@ -41,7 +41,7 @@ public class SellerServiceLogic implements SellerService {
 	@Override
 	public boolean login(Seller seller) {
 		Seller seller1 = sellerStore.select(seller.getSellerId());
-		if (seller1.getPassword() != seller.getPassword()) {
+		if (seller1 != seller) {
 			return false;
 		} else {
 			return true;

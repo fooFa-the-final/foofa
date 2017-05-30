@@ -12,7 +12,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import fofa.domain.Member;
 import fofa.service.MemberService;
@@ -28,38 +27,30 @@ public class MemberController {
 	public String createForm(){
 		return "../view/member/registerMember.jsp";
 	}		
+	
 	@RequestMapping(value="member/checkId.do", method=RequestMethod.POST)
 	public String checkId(HttpServletRequest req, HttpServletResponse res) throws IOException{
 		String memberId = req.getParameter("id");
 		boolean result;
 		result = service.checkId(memberId);
+		System.out.println(result);
 		
 		PrintWriter out = res.getWriter();
 		
 		if(result == true){
 			out.print("no");
+			System.out.println("사용불가능");
+			return "result";
 		}else{
 			out.print("yes");
-
-
+			System.out.println("사용가능");
+			return "result";
 		}
-		
-		return "../view/member/registerMember.jsp";
 	}
 	@RequestMapping(value="member/create.do", method = RequestMethod.POST)
-	public String create(HttpServletRequest request,Member member){
-		String memberId = request.getParameter("memberId");
-		String password = request.getParameter("password");
-		String birth = request.getParameter("birth");
-		String gender = request.getParameter("gender");
-		member = new Member();
-		member.setMemberId(memberId);
-		member.setPassword(password);
-		member.setBirthday(birth);
-		member.setGender(gender);
-		
+	public String create(Model model,Member member){
 		service.register(member);
-		
+		model.addAttribute(member);
 		return "../view/user/login.jsp";
 	}
 	@RequestMapping(value="member/modifyForm.do", method= RequestMethod.GET)
@@ -70,16 +61,7 @@ public class MemberController {
 		return "../view/member/modifyMember.jsp";
 	}
 	@RequestMapping(value="member/modify.do", method=RequestMethod.POST)
-	public String modify(HttpServletRequest request,Member member){
-		String id = request.getParameter("memberId");
-		String password = request.getParameter("password");
-		String birth = request.getParameter("birth");
-		String gender = request.getParameter("gender");
-
-		member.setMemberId(id);
-		member.setPassword(password);
-		member.setBirthday(birth);
-		member.setGender(gender);
+	public String modify(Member member){
 		service.modify(member);
 		
 		
@@ -87,6 +69,9 @@ public class MemberController {
 	}
 	@RequestMapping("member/checkPw.do")
 	public String checkPw(HttpSession session, String password){
+		
+		
+		
 		return "../view/member/deleteMember.jsp";
 	}
 	@RequestMapping("member/remove.do")
