@@ -16,4 +16,31 @@
 	<context:component-scan base-package="fofa.controller"/>
 	<context:component-scan base-package="fofa.service.logic"/>
 	<context:component-scan base-package="fofa.store.logic"/>
+	
+	<bean id="advertiseServiceLogic" class="fofa.service.logic.AdvertiseServiceLogic"/>
+ 
+    <bean name="ApproveAdJob" class="org.springframework.scheduling.quartz.JobDetailFactoryBean"
+          p:jobClass="fofa.scheduler.ApproveAdJobBean"
+          p:applicationContextJobDataKey="applicationContext"
+          p:durability="true">
+        <property name="jobDataAsMap">
+            <map>
+                <entry key="advertiseService" value-ref="advertiseServiceLogic"/>
+            </map>
+        </property>
+    </bean>
+              
+    <bean id="cronTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean"
+          p:jobDetail-ref="ApproveAdJob"
+          p:startDelay="1000"
+          p:cronExpression="0 0 0 1/1 * ? *"/>
+ 
+    <bean id="schedulerFactoryBean" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+        <property name="triggers">
+            <list>
+                <ref bean="cronTrigger"/>
+            </list>
+        </property>
+    </bean>
+	
 </beans>

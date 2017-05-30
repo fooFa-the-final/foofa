@@ -1,7 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 <!DOCTYPE html>
 <html>
+<c:set value="${pageContext.request.contextPath}" var="ctx" />
+<c:set value="${truck.operationTime }" var="time"/>
+<c:set value="${fn:substring(time, 0, 2)}" var="startHour"/>
+<c:set value="${fn:substring(time, 2, 4)}" var="startMin"/>
+<c:set value="${fn:substring(time, 4, 6)}" var="endHour"/>
+<c:set value="${fn:substring(time, 6, 8)}" var="endMin"/>
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,12 +24,40 @@
     <script src="../../resources/plugins/jquery-1.10.2.js"></script>
 	 <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=noUvsaR702FX6WH5un5h&submodules=geocoder"></script>
 	 <script>
-	 	$(document).ready(function(){
-	 		var position = new naver.maps.LatLng(37.4813516, 126.8748611);
-	 		var map = new naver.maps.Map('map', {
-			    center: position,
-			    zoom: 10
+	 	var newMarker = function(position){
+			var marker = new naver.maps.Marker({
+				position: position,
+				map: map
 			});
+			
+			markers.push(marker);
+		    console.log(position + "length : " +markers.length);
+		}
+	 	$(document).ready(function(){
+	 		
+	 		naver.maps.Service.geocode({
+	 			address: "${truck.location}"
+	 		}, function(status, response){
+	 			if (status === naver.maps.Service.Status.ERROR) {
+		            return alert('잘못 입력 되어있는 주소입니다. 기본 좌표를 찍어주겠습니다.');
+		        }
+	 			
+	 			var item = response.result.items[0],
+	 				point = new naver.maps.Point(item.point.x, item.point.y);
+	 		
+	 			var map = new naver.maps.Map('map', {
+				    center: point,
+				    zoom: 10
+				});
+	 			
+	 			var marker = new naver.maps.Marker({
+					position: point,
+					map: map
+				});
+		 		
+	 		}
+	 		)
+	 		
 	 		
 	 	});
 	 </script>
@@ -87,11 +124,11 @@
                                 <img src="../../resources/img/waikiki.jpg" style="height:250px; width:250px"/>
                             </a>
                             <div class="user-info">
-                                <h1>WAIKIKI JEJU</h1><br>
-                                <h5>양식</h5>
-                                <h5>제주시</h5>
-                                <h5>144Followers</h5>
-                                <h5>255Reviews</h5>
+                                <h1>${truck.foodtruckName }</h1><br>
+                                <h5>${truck.category1 }양식</h5>
+                                <h5>${truck.spot }</h5>
+                                <h5>144 Followers</h5>
+                                <h5>${fn:length(reviewList)} Reviews</h5>
                             </div>
                     </span>
                     <span style="float:right; margin-right:50px; margin-top: 30px">
@@ -109,11 +146,9 @@
 							 <fieldset class="truck-border">
 							  <legend class="truck-border">Menu</legend>
 							  <font size = "4">
-							    메뉴1 <span style="float:right">7000원</span><br>
-							    메뉴2 <span style="float:right">7000원</span><br>
-							    메뉴3 <span style="float:right">7000원</span><br>
-							    메뉴4 <span style="float:right">7000원</span><br>
-							    메뉴5 <span style="float:right">7000원</span><br>
+							  <c:forEach items="${truck.menus }" var="menu">
+							  	${menu.menuName } <span style="float:right">${menu.price }원</span><br>
+							  </c:forEach>
 							 </font>
 							 </fieldset>
 							</form>
@@ -123,9 +158,9 @@
 							 <fieldset class="truck-border">
 							  <legend class="truck-border">Today</legend>
 							  <font size = "4">
-								  Today's Hour: 17:30~22:00<br>
-								  Today's Location: 서울시 용산구<br>
-								  Today's Issue<br><br> 날씨가 추우니 몸 따뜻하게 하고 오세요.
+								  Today's Hour: ${startHour }:${startMin }~${endHour }:${endMin }<br>
+								  Today's Location: ${truck.spot }<br>
+								  Today's Issue<br><br> ${truck.notice }
 							  </font>
 							 </fieldset>
 							</form>
@@ -138,42 +173,21 @@
                 		<div class="col-md-7" style="margin-top:20px">
                 		<font size="6">Reviews</font>
                 		<span style="float:right"><input type="button" value="+ Add my review" class="btn btn-default"></span>
+                		<c:forEach items="${reviewList }" var="Review">
 	                		<div class = "col-md-offset-1 col-md-11" style="margin-top:50px">
-		                		<span><font class="h3"><a href="#">이승건1</a></font></span>
-		                		<span style="float:right"><input type="button" value="follow" class="btn btn-default"> <input type="button" value="!" class="btn btn-default"></span><br>
-		                		<img src="../../resources/img/smile.png" width="200px" height="200px"><br><br>
-		                		<font size="3px">
-		                		<span>★★★★★ 따봉: 155</span>
-		                		<span style="float:right">2017-05-21 11:44PM</span><br>
-		                		햄버거가 너무 맛있어요.	
+		                		<span><font class="h3"><a href="#">${Review.foodtruck.foodtruckName }</a></font></span>
+		                		<span style="float:right"><input type="button" value="follow" class="btn btn-result"> <input type="button" value="!" class="btn btn-result"></span><br>
+		                		<img src="../../resources/img/smile.png" width="300px" height="300px"><br><br>
+		                		<font size="4px">
+		                		<span>점수 : ${Review.score } <i class="fa fa-thumbs-up"></i>: ${Review.recommand }</span>
+		                		<span style="float:right">${Review.writeDate }</span><br>
+		                		${Review.contents }	
 		                		</font>
 	                		</div>
-	                		<div class = "col-md-offset-1 col-md-11" style="margin-top:50px">
-		                		<span><font class="h3"><a href="#">이승건2</a></font></span>
-		                		<span style="float:right"><input type="button" value="follow" class="btn btn-default"> <input type="button" value="!" class="btn btn-default"></span><br>
-		                		<img src="../../resources/img/smile.png" width="200px" height="200px"><br><br>
-		                		<font size="3px">
-		                		<span>★★★★★ 따봉: 155</span>
-		                		<span style="float:right">2017-05-21 11:44PM</span><br>
-		                		햄버거가 너무 맛있어요.	
-		                		</font>
-	                		</div>
-                		</div>
-                		<div class="col-md-2 col-md-offset-1">
-                			<form>
-							  <legend style="font-size:30px">More Info</legend>
-							  <font size = "4">
-	                        	Accept Card <span style="float:right">Yes</span><br>
-	                        	Alchol <span style="float:right">Yes</span><br>
-	                        	Parking <span style="float:right">Yes</span><br>
-	                        	Catering <span style="float:right">Yes</span><br>
-                        	  </font>
-							</form>
-                		</div>
+                		</c:forEach>
                 	</div>
                 </div>
             </div>
-			
         </div>
         <!-- end page-wrapper -->
         

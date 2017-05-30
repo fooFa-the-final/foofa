@@ -44,4 +44,10 @@
   		FROM review_tb
   		WHERE foodtruck_Id = #{foodtruck.foodtruckId}
   	</select>
+  	<select id="selectByRecommand" resultMap="ReviewMap">
+  		select r.review_id review_id, member_id, foodtruck_id, contents, score, writedate 
+  		from review_tb r, (select review_id, count(*) recommand from recommand_tb group by review_id) d 
+		where d.review_id = r.review_id
+		order by recommand desc;
+  	</select>
   </mapper>

@@ -103,8 +103,16 @@ public class ReviewStoreLogic implements ReviewStore {
 
 	@Override
 	public List<Review> selectByRecommand() {
-		// TODO Auto-generated method stub
-		return null;
+		SqlSession session = factory.openSession();
+		List<Review> review = null;
+		try{
+			ReviewMapper mapper = session.getMapper(ReviewMapper.class);
+			review = mapper.selectByRecommand();
+
+		} finally {
+			session.close();
+		} 
+		return review;
 	}
 
 }

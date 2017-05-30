@@ -84,7 +84,7 @@
                     <!-- Advanced Tables -->
                     <div class="panel panel-default">
                         <div class="panel-body">
-                        	<form action="" method="post">
+                        	<form action="${ctx }/advertise/reqest.do" method="post">
                     		<h2 style="border-bottom:1px solid #eee">광고 요청</h2>
 				                            <p> 광고는 요청된 기간동안 메인페이지와 검색결과 상단에 무작위로 노출됩니다.</p>
 				                            <br/>
@@ -97,16 +97,16 @@
                             	<p></p>
                            	<div class="form-group"  style="margin-left:20px">
                            		<label class="radio-inline">
-                           			<input type="radio" name="period" id="period3" value="7">3 일
+                           			<input type="radio" name="period" value="3">3 일
                            		</label>
                            		<label class="radio-inline">
-                           			<input type="radio" name="period" id="period7" value="7">7 일
+                           			<input type="radio" name="period" value="7">7 일
                            		</label>
                            		<label class="radio-inline">
-                           			<input type="radio" name="period" id="period14" value="7">14 일
+                           			<input type="radio" name="period" value="14">14 일
                            		</label>
                            		<label class="radio-inline">
-                           			<input type="radio" name="period" id="period30" value="7">30 일
+                           			<input type="radio" name="period" value="30">30 일
                            		</label>
                            	</div>
                            	
@@ -121,7 +121,7 @@
                            		</div>
                            	</div> 
                             <div style="width:100%; height:90px;"></div>
-                          <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+                          <button type="submit" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
                                 결제 
                             </button>
                             <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

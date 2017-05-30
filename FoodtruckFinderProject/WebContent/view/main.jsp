@@ -17,21 +17,31 @@
 	rel="stylesheet" />
 <link href="${ctx}/resources/css/style.css" rel="stylesheet" />
 <link href="${ctx}/resources/css/main-style.css" rel="stylesheet" />
-     <!-- Page Level CSS -->
-    <link href="${ctx}/resources/plugins/timeline/timeline.css" rel="stylesheet" />
+
+<!-- Page CSS -->
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link href="${ctx}/resources/plugins/timeline/timeline.css" rel="stylesheet" />
+<link href="${ctx}/resources/plugins/morris/morris-0.4.3.min.css" rel="stylesheet" />
+    
 
 
+<style>
+.mySlides {display:none; width: 900px; margin: 0 auto;}
+.w3-left, .w3-right, .w3-badge {cursor:pointer}
+.w3-badge {height:13px;width:13px;padding:0}
+
+</style>
 </head>
 
 <body class="main-body">
 	<!-- navbar top -->
 
-	<nav class=" main-head-top" role="navigation" id="navbar">
+	<nav class=" main-head-top effect" role="navigation" id="navbar" style=" background-color: rgba(0, 0, 0, .8);">
 		<!-- navbar-header -->
+		<br>
 		<div class="col-lg-12 top-head-menu" style="">
 			<span style="float: right; margin: 20px 30px 0 0;">
-			<button type="button" class="btn btn-link loginBtn">Log in</button>
-			<button type="button" class="btn btn-outline btn-danger signUpBtn">Sign up</button>
+			<button type="button" onclick="location.href='${ctx}/logout.do'" class="btn btn-link loginBtn">Log out</button>
 			</span>
 		</div>
 		<ul class="nav navbar-top-links navbar-main-links navbar-center">
@@ -69,98 +79,68 @@
 
 	<!--  main-container -->
 	<div class="main-container">
-				<h3 class="page-header">Foodtruck Finder</h3>
+		<h3 class="page-header">Foodtruck Finder</h3>
 		<div class="row">
-				<h4>My Following's Reviews</h4>
-                    <!--Timeline -->
-                   <!-- Chat Panel Example-->
-                    <div class="chat-panel panel panel-primary">
-                        <div class="panel-heading">
-                            <i class="fa fa-comments fa-fw"></i>
-                            Chat
-                        </div>
+			<h4>Recent Activity</h4>
+			<div class="sub-container">
+				<div class="col-lg-9">
+					<c:forEach var="review" varStatus="reviewNo" items="${reviews }">
+						<div class="panel panel-primary text-left">
+							<div class="review-heading padding-10">
+								<img class="somenail" src="${ctx }/resources/img/sampleUser.jpg"/>
+								<div style="float:left; width:80%;">
+									<ul>
+										<li><a>${review.writer.memberId }</a></li>
+										<li> <span class="sub-li-follow">${review.recommand } </span>
+											 <span class="sub-li-favorite">71 </span>
+										</li>
+										<li> <a href="${ctx }/">${review.foodtruck.foodtruckName }</a> 에 대한 리뷰 </li>
+									</ul>
+								</div>
+							</div>
+							<div class="panel-body ">
+								<div style="display:block;width:500px; float:right;">
+									<span class="starRating" style="text-align:left;"><span style="width: ${review.score *20}%">${review.score }점</span></span> ${review.writeDate}
+									<p class="reviewContent">
+								 		${review.contents }
+									</p>
+								</div>
+								<div style="float:left; width:180px">
+									<img id="${review.reviewId}" src="${ctx }/resources/img/sample1.jpg" style="width: 160px; height:160px; margin:10px"/>
+									<div class="somenail-list">
+									<c:forEach var="image" varStatus="imageNo" items="${review.images }">
+										<img src="${ctx }/resources/img/${image.filename}" onclick="previewImage(this.src, '${review.reviewId}');"/>
+									</c:forEach>
+									</div>
+								</div>							
+							</div>
+						</div>					
+					</c:forEach>
+				</div>
 
-                        <div class="panel-body">
-                            <ul class="chat">
-                                <li class="left clearfix">
-                                    <span class="chat-img pull-left">
-                                        <img src="http://placehold.it/50/55C1E7/fff" alt="User Avatar" class="img-circle" />
-                                    </span>
-                                    <div class="chat-body clearfix">
-                                        <div class="header">
-                                            <strong class="primary-font">Jack Sparrow</strong>
-                                            <small class="pull-right text-muted">
-                                                <i class="fa fa-clock-o fa-fw"></i>12 mins ago
-                                            </small>
-                                        </div>
-                                        <p>
-                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare dolor, quis ullamcorper ligula sodales.
-                                        </p>
-                                    </div>
-                                </li>
-                                <li class="right clearfix">
-                                    <span class="chat-img pull-right">
-                                        <img src="http://placehold.it/50/FA6F57/fff" alt="User Avatar" class="img-circle" />
-                                    </span>
-                                    <div class="chat-body clearfix">
-                                        <div class="header">
-                                            <small class=" text-muted">
-                                                <i class="fa fa-clock-o fa-fw"></i>13 mins ago</small>
-                                            <strong class="pull-right primary-font">Bhaumik Patel</strong>
-                                        </div>
-                                        <p>
-                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare dolor, quis ullamcorper ligula sodales.
-                                        </p>
-                                    </div>
-                                </li>
-                                <li class="left clearfix">
-                                    <span class="chat-img pull-left">
-                                        <img src="http://placehold.it/50/55C1E7/fff" alt="User Avatar" class="img-circle" />
-                                    </span>
-                                    <div class="chat-body clearfix">
-                                        <div class="header">
-                                            <strong class="primary-font">Jack Sparrow</strong>
-                                            <small class="pull-right text-muted">
-                                                <i class="fa fa-clock-o fa-fw"></i>14 mins ago</small>
-                                        </div>
-                                        <p>
-                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare dolor, quis ullamcorper ligula sodales.
-                                        </p>
-                                    </div>
-                                </li>
-                                <li class="right clearfix">
-                                    <span class="chat-img pull-right">
-                                        <img src="http://placehold.it/50/FA6F57/fff" alt="User Avatar" class="img-circle" />
-                                    </span>
-                                    <div class="chat-body clearfix">
-                                        <div class="header">
-                                            <small class=" text-muted">
-                                                <i class="fa fa-clock-o fa-fw"></i>15 mins ago</small>
-                                            <strong class="pull-right primary-font">Bhaumik Patel</strong>
-                                        </div>
-                                        <p>
-                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare dolor, quis ullamcorper ligula sodales.
-                                        </p>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-
-                        <div class="panel-footer">
-                            <div class="input-group">
-                                <input id="btn-input" type="text" class="form-control input-sm" placeholder="Type your message here..." />
-                                <span class="input-group-btn">
-                                    <button class="btn btn-warning btn-sm" id="btn-chat">
-                                        Send
-                                    </button>
-                                </span>
-                            </div>
-                        </div>
-
-                    </div>
-                    <!--End Chat Panel Example-->
-
-
+				<div class="col-lg-3">
+					<div class="alert alert-warning text-center">
+						<i class="fa fa-thumbs-up fa-2x"></i>
+						<b>500</b> 단골 <br/>
+						<i class="fa fa-twitter fa-2x"></i>
+						<b>500</b> 팔로우   <br/>
+						<i class="fa fa-pencil fa-2x"></i>
+						<b>500</b> 리뷰  <br/>
+					</div>				
+					<div class="alert alert-success text-center">
+						<i class="fa fa-thumbs-up fa-1x"></i>
+						<b>500</b> 팔로우  
+					</div>		
+					<div class="alert alert-info text-center">
+						<i class="fa fa-tumbs-up fa-1x"></i>
+						<b>2000</b> 단골 
+					</div>				
+					<div class="alert alert-danger text-center">
+						<i class="fa fa-tumbs-up fa-1x"></i>
+						<b>500</b> 팔로우  
+					</div>		
+				</div>	
+			</div>
 		</div>
 	</div>
 	<!-- end main-container -->
@@ -170,6 +150,16 @@
     <script src="${ctx}/resources/plugins/metisMenu/jquery.metisMenu.js"></script>
     <script src="${ctx}/resources/plugins/pace/pace.js"></script>
     <script src="${ctx}/resources/scripts/siminta.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+	<!--  Page Script  -->
+	<script>
+	var previewImage = function(target, idNo){
+		$("#"+idNo).attr('src', target);
+		var targetDiv = document.getElementById(idNo);
+		var src = target;
+	};	   	
+	</script>
 
 </body>
 </html>

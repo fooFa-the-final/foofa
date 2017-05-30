@@ -1,7 +1,5 @@
 package fofa.store.logic;
 
-import java.util.List;
-
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.stereotype.Repository;
@@ -28,7 +26,9 @@ public class RecommandStoreLogic implements RecommandStore {
 			RecommandMapper mapper = session.getMapper(RecommandMapper.class);
 			insert = mapper.insert(recommand);
 			session.commit();
-		} finally {
+		} catch(Exception e) {
+			return 0;
+		}finally {
 			session.close();
 		} 
 		return insert;
@@ -63,7 +63,6 @@ public class RecommandStoreLogic implements RecommandStore {
 
 	@Override
 	public boolean select(Recommand recommand) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 }

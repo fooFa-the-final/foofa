@@ -9,8 +9,9 @@ public interface AdvertiseService {
 	boolean register(Advertise advertise);
 	boolean modify(Advertise advertise);
 	boolean remove(String advertiseId);
-	List<Advertise> findByAsc(Boolean approve);
-	List<Advertise> findByDesc(Boolean approve);
+	List<Advertise> findByAsc(int approve);
+	List<Advertise> findByDesc(int approve);
 	List<Advertise> findNowAd();
+	List<Advertise> findExpired();
 	
 }

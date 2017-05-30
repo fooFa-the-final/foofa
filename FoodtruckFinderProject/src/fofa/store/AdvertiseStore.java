@@ -9,10 +9,11 @@ public interface AdvertiseStore {
 	
 	int delete(String advid);
 	int insert(Advertise advertise);
-	int update(String advid);
-	List<Advertise> selectByAsc(boolean approve);
-	List<Advertise> selectByDesc(boolean approve);
+	int update(Advertise advertise);
+	List<Advertise> selectByAsc(int approve);
+	List<Advertise> selectByDesc(int approve);
 	List<Advertise> selectNowAd();
+	List<Advertise> selectExpired();
 
 	
 	

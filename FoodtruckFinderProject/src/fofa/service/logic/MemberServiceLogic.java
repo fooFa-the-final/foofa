@@ -43,18 +43,18 @@ public class MemberServiceLogic implements MemberService{
 	public boolean checkId(String memberId) {
 		Member member = store.select(memberId);
 		if(member !=null){
-			String memberid = "faile";
-			return false;
+		
+			return true;
 		}else{
 			
 		}
-		return true;
+		return false;
 	}
 
 	@Override
 	public boolean checkPw(String memberId, String password) {
 		Member member = store.select(memberId);
-		if(member.getPassword().equals(password)){
+		if(member != null){
 			return true;
 		}
 		return false;
