@@ -51,11 +51,11 @@
                     console.log(address);
 
                     infoWindow.setContent([
-                            '<div style="padding:10px;min-width:200px">',
+                            '<div style="padding:10px;min-width:200px;line-height:150%;">',
                             '<h4 style="margin-top:5px;">검색 좌표 : '+ address +'</h4></div>'
                         ].join('\n'));
 
-                    infoWindow.open(map, marker);
+                    infoWindow.open(map, marker)
                 });
             }
             naver.maps.Event.addListener(map, 'click', function(e){

@@ -10,6 +10,7 @@ import fofa.service.SalesService;
 import fofa.store.SalesStore;
 import fofa.store.logic.SalesStoreLogic;
 
+
 @Service
 public class SalesServiceLogic implements SalesService {
 	SalesStore store = null;

@@ -62,7 +62,7 @@ h2 {
 
 <link rel='stylesheet' href='${ctx }/resources/css/Nwagon.css'
 	type='text/css'>
-<script src='${ctx }/resources/scripts/Nwagon.js?ver=2'></script>
+<script src='${ctx }/resources/scripts/Nwagon.js'></script>
 <!--------------------------------------------------------------------------  -->
 <link href='${ctx }/resources/css/fullcalendar.min.css' rel='stylesheet' />
 <link href='${ctx }/resources/css/fullcalendar.print.min.css'
@@ -164,16 +164,23 @@ h2 {
 			<!--매출페이지 시작  -->
 			<div>
 				<h2>매출 그래프</h2>
+<<<<<<< HEAD
 				<input type="button" class="btn btn-primary" value="연별매출"
 					onclick="year()"> <input type="button"
 					class="btn btn-primary" onclick="days()" value="최근 10일매출">
+=======
+>>>>>>> branch '170524' of https://github.com/fooFa-the-final/foofa.git
 				<div id="chart71"></div>
 				<p style='font-size: 12px; padding: 0 0 40px 40px'>** Mouse over
 					the chart area in order to move the guide line</p>
+<<<<<<< HEAD
 
 
 
+=======
+>>>>>>> branch '170524' of https://github.com/fooFa-the-final/foofa.git
 				<script>
+<<<<<<< HEAD
 					function year() {
 						$(".accessibility").remove();
 						$(".Nwagon_line").remove();
@@ -220,7 +227,37 @@ h2 {
 											'isGuideLineNeeded' : false
 										//default set to false
 										};
+=======
+					var options = {
+						'legend' : {
+							names : [ '1', '2', '3', '4', '5', '6', '7', '8',
+									'9', '10', '11', '12' ]
+						},
+						'dataset' : {
+							title : 'Playing time per day',
+							values : [ [ 5600 ], [ 5800 ], [ 6000 ], [ 5800 ],
+									[ 8500 ], [ 8600 ], [ 8200 ], [ 7700 ],
+									[ 8700 ], [ 4900 ], [ 5800 ], [ 8500 ] ],
+							colorset : [ '#0072b2' ],
+							fields : [ '매출' ]
+						},
+						'chartDiv' : 'chart71',
+						'chartType' : 'line',
+						'leftOffsetValue' : 60,
+						'bottomOffsetValue' : 60,
+						'chartSize' : {
+							width : 950,
+							height : 400
+						},
+						'minValue' : 0,
+						'maxValue' : 100000,
+						'increment' : 10000,
+						'isGuideLineNeeded' : false
+					//default set to false
+					};
+>>>>>>> branch '170524' of https://github.com/fooFa-the-final/foofa.git
 
+<<<<<<< HEAD
 										Nwagon.chart(options);
 									}
 								});
@@ -284,6 +321,9 @@ h2 {
 					$(document).ready(function() {
 						year();
 					});
+=======
+					Nwagon.chart(options);
+>>>>>>> branch '170524' of https://github.com/fooFa-the-final/foofa.git
 				</script>
 			</div>
 			<div id='calendar' />
