@@ -121,14 +121,17 @@ public class SalesController {
 
 		for (int i = 0; i < 10; i++) {
 			Sale sale = new Sale();
-			sale.setDate("0");
+			sale.setDate("NONE");
 			sale.setRevenue(0);
 			list.add(i, sale);
 		}
 
 		int k = 0;
 		for (Sale sale : service.find10DaysSales("1")) {
-			list.add(9 - k, service.find10DaysSales("1").get(k));
+			String date = sale.getDate().substring(4);
+			sale.setDate(date);
+			list.remove(9 - k);
+			list.add(9 - k, sale);
 			k++;
 		}
 
@@ -138,7 +141,7 @@ public class SalesController {
 
 			JSONObject obj = new JSONObject();
 			obj.put("re", list.get(i).getRevenue());
-			obj.put("da", list.get(i).getDate().substring(4));
+			obj.put("da", list.get(i).getDate());
 			jsonArray.add(obj);
 
 		}

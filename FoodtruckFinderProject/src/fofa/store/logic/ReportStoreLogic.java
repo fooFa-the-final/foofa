@@ -28,9 +28,12 @@ public class ReportStoreLogic implements ReportStore {
 			ReportMapper mapper = session.getMapper(ReportMapper.class);
 			insert = mapper.insert(report);
 			session.commit();
-		} finally {
+		} catch(Exception e){
+			return 0;
+		}finally {
 			session.close();
-		} return insert;
+		} 
+		return insert;
 	}
 
 	@Override
