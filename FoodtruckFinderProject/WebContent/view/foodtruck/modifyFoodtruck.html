@@ -55,7 +55,7 @@
                             '<h4 style="margin-top:5px;">검색 좌표 : '+ address +'</h4></div>'
                         ].join('\n'));
 
-                    infoWindow.open(map, marker)
+                    infoWindow.open(map, latlng);
                 });
             }
             naver.maps.Event.addListener(map, 'click', function(e){
@@ -168,7 +168,7 @@
                                 <img src="../../resources/img/waikiki.jpg" style="height:250px; width:250px"/>
                             </a>
                             <div class="user-info">
-                                <font size = "8">WAIKIKI JEJU</font><br>
+                                <h1>WAIKIKI JEJU</h1><br>
                                 <h5>양식</h5>
                                 <h5>제주시</h5>
                                 <h5>144Followers</h5>

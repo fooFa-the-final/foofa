@@ -29,7 +29,6 @@
 .mySlides {display:none; width: 900px; margin: 0 auto;}
 .w3-left, .w3-right, .w3-badge {cursor:pointer}
 .w3-badge {height:13px;width:13px;padding:0}
-
 </style>
 </head>
 
@@ -178,7 +177,6 @@
  		if(loc == '') {
  			loc="서울";
  		}
-
 		if(keyword == ''){
 			window.location.href = "${ctx}/searchByLoc.do?location="+loc;
 		}else {
