@@ -25,13 +25,8 @@ public class MemberServiceLogic implements MemberService{
 
 	@Override
 	public boolean modify(Member member) {
-		int sucess;
-		sucess = store.update(member);
-		if(sucess ==0){
-			return false;
-		} else{
-			return true;
-		}
+
+		return store.update(member)>0;
 	}
 
 	@Override

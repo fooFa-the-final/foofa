@@ -53,10 +53,10 @@ public class MemberController {
 		model.addAttribute(member);
 		return "../view/user/login.jsp";
 	}
-	@RequestMapping(value="member/modifyForm.do", method= RequestMethod.GET)
+	@RequestMapping(value="member/modify.do", method= RequestMethod.GET)
 	public String modifyForm(HttpSession session, Model model){
-		Member member=service.findById(session.getId());
-		System.out.println(member);
+		Member member = service.findById((String)(session.getAttribute("loginUserId")));
+		System.out.println(member.toString());
 		model.addAttribute(member);
 		return "../view/member/modifyMember.jsp";
 	}

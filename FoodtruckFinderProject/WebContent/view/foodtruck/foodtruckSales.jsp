@@ -164,39 +164,126 @@ h2 {
 			<!--매출페이지 시작  -->
 			<div>
 				<h2>매출 그래프</h2>
+				<input type="button" value="연간 매출" onclick="year()"> <input
+					type="button" value="10일간 매출" onclick="days()">
 				<div id="chart71"></div>
 				<p style='font-size: 12px; padding: 0 0 40px 40px'>** Mouse over
 					the chart area in order to move the guide line</p>
 				<script>
-					var options = {
-						'legend' : {
-							names : [ '1', '2', '3', '4', '5', '6', '7', '8',
-									'9', '10', '11', '12' ]
-						},
-						'dataset' : {
-							title : 'Playing time per day',
-							values : [ [ 5600 ], [ 5800 ], [ 6000 ], [ 5800 ],
-									[ 8500 ], [ 8600 ], [ 8200 ], [ 7700 ],
-									[ 8700 ], [ 4900 ], [ 5800 ], [ 8500 ] ],
-							colorset : [ '#0072b2' ],
-							fields : [ '매출' ]
-						},
-						'chartDiv' : 'chart71',
-						'chartType' : 'line',
-						'leftOffsetValue' : 60,
-						'bottomOffsetValue' : 60,
-						'chartSize' : {
-							width : 950,
-							height : 400
-						},
-						'minValue' : 0,
-						'maxValue' : 100000,
-						'increment' : 10000,
-						'isGuideLineNeeded' : false
-					//default set to false
-					};
+					function year() {
+						$(".accessibility").remove();
+						$(".Nwagon_line").remove();
+						$
+								.ajax({
+									url : "${pageContext.request.contextPath}/sales/year.do",
+									type : 'GET',
+									dataType : 'json',
+									success : function(data) {
+										var options = {
+											'legend' : {
+												names : [ '1', '2', '3', '4',
+														'5', '6', '7', '8',
+														'9', '10', '11', '12' ]
+											},
+											'dataset' : {
+												title : 'Playing time per day',
+												values : [ [ data[0].re ],
+														[ data[1].re ],
+														[ data[2].re ],
+														[ data[3].re ],
+														[ data[4].re ],
+														[ data[5].re ],
+														[ data[6].re ],
+														[ data[7].re ],
+														[ data[8].re ],
+														[ data[9].re ],
+														[ data[10].re ],
+														[ data[11].re ] ],
+												colorset : [ '#0072b2' ],
+												fields : [ '매출' ]
+											},
+											'chartDiv' : 'chart71',
+											'chartType' : 'line',
+											'leftOffsetValue' : 50,
+											'bottomOffsetValue' : 70,
+											'chartSize' : {
+												width : 700,
+												height : 300
+											},
+											'minValue' : 0,
+											'maxValue' : 10000,
+											'increment' : 1000,
+											'isGuideLineNeeded' : false
+										//default set to false
+										};
 
-					Nwagon.chart(options);
+										Nwagon.chart(options);
+									}
+								});
+					}
+				</script>
+				<script>
+					function days() {
+						$(".accessibility").remove();
+						$(".Nwagon_line").remove();
+						$
+								.ajax({
+									url : "${pageContext.request.contextPath}/sales/10days.do",
+									type : 'GET',
+									dataType : 'json',
+									success : function(data) {
+										var options = {
+											'legend' : {
+												names : [ [ data[0].da ],
+														[ data[1].da ],
+														[ data[2].da ],
+														[ data[3].da ],
+														[ data[4].da ],
+														[ data[5].da ],
+														[ data[6].da ],
+														[ data[7].da ],
+														[ data[8].da ],
+														[ data[9].da ] ]
+											},
+											'dataset' : {
+												title : 'Playing time per day',
+												values : [ [ data[0].re ],
+														[ data[1].re ],
+														[ data[2].re ],
+														[ data[3].re ],
+														[ data[4].re ],
+														[ data[5].re ],
+														[ data[6].re ],
+														[ data[7].re ],
+														[ data[8].re ],
+														[ data[9].re ] ],
+												colorset : [ '#0072b2' ],
+												fields : [ '매출' ]
+											},
+											'chartDiv' : 'chart71',
+											'chartType' : 'line',
+											'leftOffsetValue' : 50,
+											'bottomOffsetValue' : 70,
+											'chartSize' : {
+												width : 700,
+												height : 300
+											},
+											'minValue' : 0,
+											'maxValue' : 10000,
+											'increment' : 1000,
+											'isGuideLineNeeded' : false
+										//default set to false
+										};
+
+										Nwagon.chart(options);
+									}
+								});
+					}
+				</script>
+				<script>
+					$(document).ready(function() {
+						year();
+					})
 				</script>
 			</div>
 			<div id='calendar' />
