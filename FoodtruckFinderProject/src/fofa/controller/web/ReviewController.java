@@ -54,6 +54,7 @@ public class ReviewController {
 	public String searchByFoodtruckId(String foodtruckId, Model model){
 		Foodtruck truck = truckService.findById(foodtruckId);
 		List<Review> reviewList = reviewService.findByTruckId(foodtruckId);
+		System.out.println(reviewList.get(0).getImages().size());
 		model.addAttribute("truck", truck);
 		model.addAttribute("reviewList", reviewList);
 		return "../../view/foodtruck/detailFoodtruck.jsp";

@@ -39,36 +39,36 @@ public class MainController {
 
 	@RequestMapping("index.do")
 	public String showMain(Model model){
-		List<Review> allReview = reviewService.findByRecommand();
-		List<Review> reviews = new ArrayList<>();
-		reviews.add(allReview.get(0));
-		reviews.add(allReview.get(1));
-		reviews.add(allReview.get(2));
-		model.addAttribute("reviews", reviews);
-		double mainRandom = Math.random();
-		int intMain = (int)(mainRandom*allReview.size())+1;
-		Review mainReview = reviewService.findById(allReview.get(intMain).getReviewId());
-		model.addAttribute("mainFoodImg",mainReview.getImages().get(0));
-		model.addAttribute("mainMember", memberService.findById(mainReview.getWriter().getMemberId()));
-		
-		List<Advertise> allAdv = advertiseService.findNowAd();
-		List<Foodtruck> adTrucks = new ArrayList<>();
-		for(int i=0; i<3; i++){
-			double randomValue = Math.random();
-			int intValue = (int)(randomValue*allAdv.size())+1;
-			String sellerId = allAdv.get(intValue).getSellerId();
-			adTrucks.add(foodtruckService.findBySeller(sellerId));
-		}
-		model.addAttribute("adTrucks", adTrucks);
-		
-		List<Foodtruck> allTrucks = foodtruckService.findByLoc("가산동");
-		List<Foodtruck> nearTrucks = new ArrayList<>();		
-		for(int i=0; i<3; i++){
-			double randomValue = Math.random();
-			int intValue = (int)(randomValue*allTrucks.size())+1;
-			nearTrucks.add(allTrucks.get(intValue));
-		}
-		model.addAttribute("nearTrucks", nearTrucks);		
+//		List<Review> allReview = reviewService.findByRecommand();
+//		List<Review> reviews = new ArrayList<>();
+//		reviews.add(allReview.get(0));
+//		reviews.add(allReview.get(1));
+//		reviews.add(allReview.get(2));
+//		model.addAttribute("reviews", reviews);
+//		double mainRandom = Math.random();
+//		int intMain = (int)(mainRandom*allReview.size())+1;
+//		Review mainReview = reviewService.findById(allReview.get(intMain).getReviewId());
+//		model.addAttribute("mainFoodImg",mainReview.getImages().get(0));
+//		model.addAttribute("mainMember", memberService.findById(mainReview.getWriter().getMemberId()));
+//		
+//		List<Advertise> allAdv = advertiseService.findNowAd();
+//		List<Foodtruck> adTrucks = new ArrayList<>();
+//		for(int i=0; i<3; i++){
+//			double randomValue = Math.random();
+//			int intValue = (int)(randomValue*allAdv.size())+1;
+//			String sellerId = allAdv.get(intValue).getSellerId();
+//			adTrucks.add(foodtruckService.findBySeller(sellerId));
+//		}
+//		model.addAttribute("adTrucks", adTrucks);
+//		
+//		List<Foodtruck> allTrucks = foodtruckService.findByLoc("가산동");
+//		List<Foodtruck> nearTrucks = new ArrayList<>();		
+//		for(int i=0; i<3; i++){
+//			double randomValue = Math.random();
+//			int intValue = (int)(randomValue*allTrucks.size())+1;
+//			nearTrucks.add(allTrucks.get(intValue));
+//		}
+//		model.addAttribute("nearTrucks", nearTrucks);		
 		return "view/index.jsp";
 	}
 
@@ -80,10 +80,10 @@ public class MainController {
 
 		List<Review> allReview = reviewService.findByRecommand();
 		double mainRandom = Math.random();
-		int intMain = (int)(mainRandom*allReview.size())+1;
+		int intMain = (int)(mainRandom*allReview.size());
 		Review mainReview = reviewService.findById(allReview.get(intMain).getReviewId());
-		model.addAttribute("mainFoodImg",mainReview.getImages().get(0).getFilename());
-		model.addAttribute("mainMember", memberService.findById(mainReview.getWriter().getMemberId()));
+//		model.addAttribute("mainFoodImg",mainReview.getImages().get(0).getFilename());
+//		model.addAttribute("mainMember", memberService.findById(mainReview.getWriter().getMemberId()));
 		
 		return "view/main.jsp";
 	}
