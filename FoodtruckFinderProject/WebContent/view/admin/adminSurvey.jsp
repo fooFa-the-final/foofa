@@ -134,24 +134,32 @@
         };
         var registerItem = function(){
         	var question = $("input[name=question]").val();
+        	var id = $("input[name=question]").attr('id');
         	
-			$.ajax({
+        	if(id == "" || id == "undefined"){
+        		$.ajax({
 				url:"${ctx}/survey/item/create.do"
-				,type:"get"
-				,data:{question:question}
-				,success:displayItems
-				,error:errorCallback
-			});
+					,type:"get"
+					,data:{question:question}
+					,success:displayItems
+					,error:errorCallback
+				});
+        		
+        	}else {
+        		$.ajax({
+    				url:"${ctx}/survey/item/modify.do"
+    					,type:"get"
+    					,data:{itemId:id, question:question}
+    					,success:displayItems
+    					,error:errorCallback
+    				});
+        	}
         	
         };  
         var modifyItem = function(itemId, question){
-			$.ajax({
-				url:"${ctx}/survey/item/remove.do"
-				,type:"get"
-				,data:{itemId:itemId,question:question }
-				,success:displayItems
-				,error:errorCallback
-			});       	
+        	$("input[name=question]").val(question);
+        	$("input[name=question]").attr("id",itemId);
+   	
         };       
         var deleteItem = function(surveyItemId){
 			$.ajax({
