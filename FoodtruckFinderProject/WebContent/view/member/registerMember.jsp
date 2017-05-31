@@ -170,11 +170,6 @@
 			<b><font size="4">BirthDay</font></b> <br> 
 			<input id="birthday" type="text" name="birthday"><br>
 			<br>
-			<b> <font size="4">Email</font></b> <br> 
-			<input id="email" type="text" name="email"> <br>
-
-<br>
-<br>
 			<div>
 				<label>성별</label><br> <label class="radio-inline"> <input
 					type="radio" name="gender" id="gender" value="F">F

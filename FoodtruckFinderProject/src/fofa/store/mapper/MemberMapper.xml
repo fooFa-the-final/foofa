@@ -17,7 +17,7 @@
 	
 	<insert id="insert" parameterType="Member">
 	INSERT INTO member_tb (member_id, password, birthday, email, gender)
- 	VALUES (#{memberId}, #{password}, #{birthday}, #{email}, #{gender)	
+ 	VALUES (#{memberId}, #{password}, #{birthday}, #{email}, #{gender})	
 	</insert>
 	
 	<update id="update" parameterType="Member">
