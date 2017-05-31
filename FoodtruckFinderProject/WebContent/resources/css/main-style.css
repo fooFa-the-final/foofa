@@ -74,7 +74,7 @@ margin-bottom: 0px
     background-color:rgba(74, 72, 126, 0);
 }
 .navbar-top-links  .open > a, .nav .open > a:hover, .nav .open > a:focus {
-    background-color: #75C5B8;
+    background-color:rgba(0, 0, 0, 0);
 }
 .navbar-top-links > li > a {
 color: #FFFFFF;
