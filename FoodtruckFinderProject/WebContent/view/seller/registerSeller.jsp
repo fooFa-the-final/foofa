@@ -108,62 +108,11 @@ $(document).ready(function(){
 
 	<!--  wrapper -->
 	<div id="wrapper">
+	
+	
+		<%@ include file="../header.jspf"%>
 		<!-- navbar top -->
-
-		<nav class="navbar navbar-default navbar-fixed-top" role="navigation"
-			id="navbar">
-			<!-- navbar-header -->
-			<br>
-
-			<ul class="nav navbar-top-links navbar-right">
-				<div class="col-xs-10" style="margin-right: 550px">
-					<a class="navbar-brand" style="float: center" href="index.html">
-						<img src="../../resources/img/MainLogo.png" alt="" />
-					</a>
-				</div>
-			</ul>
-			<!-- navbar-top-links -->
-			<ul class="nav navbar-top-links navbar-right">
-				<li class="row">
-					<div class="col-xs-10" style="margin-right: 350px">
-						<!-- search section-->
-						<div class="input-group custom-search-form">
-							<input type="text" class="form-control" placeholder="Search"
-								style="width: 400px"> <input type="text"
-								class="form-control" placeholder="Location" style="width: 400px">
-							<button class="btn btn-default" type="button">
-								<i class="fa fa-search"></i>
-							</button>
-						</div>
-						<!--end search section-->
-					</div>
-				</li>
-			</ul>
-		</nav>
-		<!-- end navbar top -->
-
-		<!-- Core Scripts - Include with every page -->
-
-
-		<!-- end page-wrapper -->
-
 	</div>
-	<!-- end wrapper -->
-
-	<!-- Core Scripts - Include with every page -->
-
-	<script src="assets/plugins/jquery-1.10.2.js"></script>
-	<script src="assets/plugins/bootstrap/bootstrap.min.js"></script>
-	<script src="assets/plugins/metisMenu/jquery.metisMenu.js"></script>
-	<script src="assets/plugins/pace/pace.js"></script>
-	<script src="assets/scripts/siminta.js"></script>
-
-</body>
-<br>
-<br>
-<br>
-<br>
-<br>
 <div id="Register">
 	<b style="margin-left: 157px"><font size="6">Join With us as Seller</font></b>
 </div>
@@ -171,6 +120,7 @@ $(document).ready(function(){
 <br>
 <div class="container">
 	<div class="row" id="Truck">
+		<div class="col-lg-12">
 		<form action="${ctx }/seller/create.do" method="post">
 			<b> <font size="4">ID</font></b> <br>
 			<div id="idmessage">
@@ -197,7 +147,19 @@ $(document).ready(function(){
 				</div>
 			</div>
 		</form>
+		</div>
 	</div>
 	<br> <br>
 </div>
+
+	<!-- end wrapper -->
+
+	<!-- Core Scripts - Include with every page -->
+
+	<script src="assets/plugins/jquery-1.10.2.js"></script>
+	<script src="assets/plugins/bootstrap/bootstrap.min.js"></script>
+	<script src="assets/plugins/metisMenu/jquery.metisMenu.js"></script>
+	<script src="assets/plugins/pace/pace.js"></script>
+	<script src="assets/scripts/siminta.js"></script>
+</body>
 </html>

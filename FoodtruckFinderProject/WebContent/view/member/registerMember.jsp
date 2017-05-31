@@ -120,7 +120,6 @@
 				id : id
 			},
 			success : function(data) {
-				console.log(data);
 				$("#result").html(data);
 				if ($.trim(data) == 'no') {
 					$('#idmessage').html("사용 가능한 ID 입니다.");
@@ -170,16 +169,11 @@
 			<b><font size="4">BirthDay</font></b> <br> 
 			<input id="birthday" type="text" name="birthday"><br>
 			<br>
-			<b> <font size="4">Email</font></b> <br> 
-			<input id="email" type="text" name="email"> <br>
-
-<br>
-<br>
 			<div>
 				<label>성별</label><br> <label class="radio-inline"> <input
 					type="radio" name="gender" id="gender" value="F">F
 				</label> <label class="radio-inline"> <input type="radio"
-					name="gender" id="gender" value="T">T
+					name="gender" id="gender" value="M">M
 				</label>
 			</div>
 			<div class="col-md-offset-5 col-sm-25 col-lg-25">
