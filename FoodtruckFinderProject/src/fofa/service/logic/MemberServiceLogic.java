@@ -48,9 +48,14 @@ public class MemberServiceLogic implements MemberService{
 
 	@Override
 	public boolean checkPw(String memberId, String password) {
+
 		Member member = store.select(memberId);
-		System.out.println(member);
-		System.out.println(password);
+		if(member ==null){
+			String back;
+			back ="../view/user/login.jsp";
+			return false;
+		}
+		
 		if (member.getPassword().equals(password)) {
 			return true;
 		} else {
@@ -58,6 +63,7 @@ public class MemberServiceLogic implements MemberService{
 		}
 	}
 
+	
 	@Override
 	public Member findById(String memberId) {
 		Member member =store.select(memberId);
