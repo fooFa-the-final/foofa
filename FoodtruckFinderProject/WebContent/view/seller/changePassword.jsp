@@ -39,12 +39,7 @@
 		<form role="form" action="${ctx }/seller/checkPw.do" method="post">
 			<div class="form-group">
 				<label>비밀번호 변경</label> <input class="form-control" id="password"
-					placeholder="비밀번호를 입력해 주세요"> <br> <input
-					class="form-control" id="password1" placeholder="비밀번호를 입력해 주세요">
-
-				<br> <input class="form-control" id="password"
-					placeholder="비밀번호를 입력해 주세요"> 
-					<br>
+					placeholder="비밀번호를 입력해 주세요"> <br>
 				<button type="submit" class="btn btn-primary">submit</button>
 			</div>
 		</form>

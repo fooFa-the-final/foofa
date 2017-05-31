@@ -16,28 +16,38 @@
 
 	<sql id="selectADV">
 		select ADV_ID, SELLER_ID, PERIOD, CONFIRM, START_DATE
-		from ADV_TB
+		from
+		ADV_TB
 	</sql>
 
 	<select id="selectNowAd" resultMap="ADVmap">
-		<include refid="selectADV" />
-	
-		where confirm = 1
-	
-	</select>
-	
-	<select id="selectExpired" resultMap="ADVmap">
-		<include refid="selectADV"/>
-		WHERE (START_DATE + PERIOD) <![CDATA[ <= ]]> SYSDATE
+<!-- oracle 3개 값 가져오기 	
+	select * from (
+	<include refid="selectADV"></include>
+		where confirm = '1'
+		    order by DBMS_RANDOM.RANDOM 
+	) where rownum <![CDATA[ <= ]]> 3 
+ -->
+ 		<include refid="selectADV" />
+ 		<where> confirm = 1</where>
+ 
+ 
 	</select>
 
-	<update id="update" parameterType="Advertise" >
+	<select id="selectExpired" resultMap="ADVmap">
+		<include refid="selectADV" />
+		WHERE (START_DATE + PERIOD) <![CDATA[ <= ]]>
+		SYSDATE
+	</select>
+
+	<update id="update" parameterType="String">
 		update
-		adv_tb set confirm = #{approve}
+		adv_tb set
+		confirm = #{approve}
 		where adv_id = #{advId}
 	</update>
-	
-	<delete id="delete" parameterType="String" >
+
+	<delete id="delete" parameterType="String">
 		DELETE
 		FROM adv_tb
 		WHERE adv_id = #{advId}
@@ -47,12 +57,9 @@
 		<include refid="selectADV" />
 		where confirm = #{approve} ORDER BY start_date ASC
 
-<!-- 푸드트럭 조인? 		
-		select a.adv_id, a.PERIOD, a.START_DATE, f.TRUCKNAME
-from adv_tb a, foodtruck_tb f
-where a.seller_id = f.seller_id and
-		
- -->	</select>
+		<!-- 푸드트럭 조인? select a.adv_id, a.PERIOD, a.START_DATE, f.TRUCKNAME from 
+			adv_tb a, foodtruck_tb f where a.seller_id = f.seller_id and -->
+	</select>
 
 	<select id="selectByDesc" parameterType="int" resultMap="ADVmap">
 		<include refid="selectADV" />
@@ -60,13 +67,15 @@ where a.seller_id = f.seller_id and
 	</select>
 
 
-	<insert id="insert" parameterType="Advertise" >
-		insert into adv_tb VALUES 
-		('A'||ADVERTISE_SEQ_ADV.NEXTVAL, 
+	<insert id="insert" parameterType="Advertise">
+		insert into adv_tb VALUES
+		('A'||ADVERTISE_SEQ_ADV.NEXTVAL,
 		#{sellerId},
-		#{period}, 
-		#{startdate}, 
-		#{approve} )
+		#{period},
+		#{startdate},
+		#{approve})
+		<!-- to_date(#{startdate},'yyyy-mm-dd'), -->
+
 	</insert>
 
 </mapper>

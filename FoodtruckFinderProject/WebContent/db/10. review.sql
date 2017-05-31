@@ -26,9 +26,21 @@ ADD FOREIGN KEY(foodtruck_id) REFERENCES foodtruck_tb(foodtruck_id) ON DELETE CA
 INSERT INTO REVIEW_TB
 VALUES ('R'||REVIEW_SEQ.nextVal, 'momo', 'F1', '진짜 맛있는 푸드트럭(푸드트럭이 맛있는거 아님)0', 5, SYSDATE);
 INSERT INTO REVIEW_TB
-VALUES ('R'||REVIEW_SEQ.nextVal, 'sana', 'F1', '진짜 맛없는 푸드트럭(푸드트럭이 맛없는거 아님)1', 5, SYSDATE);
+VALUES ('R'||REVIEW_SEQ.nextVal, 'sana', 'F1', '맛있었어요', 2, SYSDATE);
 INSERT INTO REVIEW_TB
-VALUES ('R'||REVIEW_SEQ.nextVal, 'mina', 'F2', '너네도 가봐라', 5, SYSDATE);
+VALUES ('R'||REVIEW_SEQ.nextVal, 'mina', 'F2', '너네도 가봐라', 3, SYSDATE);
+INSERT INTO REVIEW_TB
+VALUES ('R'||REVIEW_SEQ.nextVal, 'nayeon', 'F2', '진짜 맛있는 푸드트럭(푸드트럭이 맛있는거 아님)0', 4, SYSDATE);
+INSERT INTO REVIEW_TB
+VALUES ('R'||REVIEW_SEQ.nextVal, 'sana', 'F2', '진짜 맛없는 푸드트럭(푸드트럭이 맛없는거 아님)1', 1, SYSDATE);
+INSERT INTO REVIEW_TB
+VALUES ('R'||REVIEW_SEQ.nextVal, 'mina', 'F3', '너네도 가봐라', 2, SYSDATE);
+INSERT INTO REVIEW_TB
+VALUES ('R'||REVIEW_SEQ.nextVal, 'jihyo', 'F3', '진짜 맛있는 푸드트럭(푸드트럭이 맛있는거 아님)0', 5, SYSDATE);
+INSERT INTO REVIEW_TB
+VALUES ('R'||REVIEW_SEQ.nextVal, 'jeongyeon', 'F4', '진짜 맛없는 푸드트럭(푸드트럭이 맛없는거 아님)1', 5, SYSDATE);
+INSERT INTO REVIEW_TB
+VALUES ('R'||REVIEW_SEQ.nextVal, 'nayeon', 'F5', '너네도 가봐라', 5, SYSDATE);
 
 CREATE TABLE RECOMMAND_TB(
     review_id VARCHAR2(100),
@@ -73,6 +85,17 @@ CREATE TABLE PHOTO_TB(
 
 ALTER TABLE PHOTO_TB
 ADD FOREIGN KEY(review_id) REFERENCES review_tb(review_id) ON DELETE CASCADE;
+
+INSERT INTO PHOTO_TB VALUES(PHOTO_SEQ.NEXTVAL,'R1','food01.jpg');
+INSERT INTO PHOTO_TB VALUES(PHOTO_SEQ.NEXTVAL,'R2','food02.jpg');
+INSERT INTO PHOTO_TB VALUES(PHOTO_SEQ.NEXTVAL,'R3','food03.jpg');
+INSERT INTO PHOTO_TB VALUES(PHOTO_SEQ.NEXTVAL,'R4','food04.jpg');
+INSERT INTO PHOTO_TB VALUES(PHOTO_SEQ.NEXTVAL,'R5','food05.jpeg');
+INSERT INTO PHOTO_TB VALUES(PHOTO_SEQ.NEXTVAL,'R6','food06.jpg');
+INSERT INTO PHOTO_TB VALUES(PHOTO_SEQ.NEXTVAL,'R7','food07.jpg');
+INSERT INTO PHOTO_TB VALUES(PHOTO_SEQ.NEXTVAL,'R8','food08.jpg');
+INSERT INTO PHOTO_TB VALUES(PHOTO_SEQ.NEXTVAL,'R1','food08.jpg');
+INSERT INTO PHOTO_TB VALUES(PHOTO_SEQ.NEXTVAL,'R1','food07.jpg');
 
 
 commit;

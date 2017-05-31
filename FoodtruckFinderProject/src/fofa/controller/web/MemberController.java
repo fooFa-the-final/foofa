@@ -53,10 +53,9 @@ public class MemberController {
 		model.addAttribute(member);
 		return "../view/user/login.jsp";
 	}
-	@RequestMapping(value="member/modifyForm.do", method= RequestMethod.GET)
+	@RequestMapping(value="member/modify.do", method= RequestMethod.GET)
 	public String modifyForm(HttpSession session, Model model){
-		Member member=service.findById(session.getId());
-		System.out.println(member);
+		Member member = service.findById((String)(session.getAttribute("loginUserId")));
 		model.addAttribute(member);
 		return "../view/member/modifyMember.jsp";
 	}
@@ -65,17 +64,30 @@ public class MemberController {
 		service.modify(member);
 		return "redirect:review/list/member.do";
 	}
-	@RequestMapping("member/checkPw.do")
-	public String checkPw(HttpSession session, String password){
+	@RequestMapping(value="member/checkPw.do", method=RequestMethod.GET)
+	public String checkPwForm(HttpSession session, Model model){
 		
-		
-		
-		return "../view/member/deleteMember.jsp";
+		return "../view/member/checkPassword.jsp";
 	}
-	@RequestMapping("member/remove.do")
+	
+	@RequestMapping(value="member/checkPw.do", method=RequestMethod.POST)
+	public String checkPw(HttpSession session, String password){
+		Member member = service.findById((String)(session.getAttribute("loginUserId")));
+		String memberId = member.getMemberId();
+		service.checkPw(memberId, password);
+		System.out.println(memberId);
+		return "redirect:remove.do";
+	}
+	@RequestMapping(value="member/remove.do", method= RequestMethod.GET)
+	public String removeForm(HttpSession session, Model model){
+		Member member = service.findById((String)(session.getAttribute("loginUserId")));
+		return "../view/member/removeMember.jsp";
+	}
+	
+	@RequestMapping(value= "member/remove.do", method=RequestMethod.POST)
 	public String remove(HttpSession session){
-		service.remove(session.getId());
-		return "../view/member/index.jsp";
+		 service.remove((String)(session.getAttribute("loginUserId")));
+		return "../view/index.jsp";
 	}
 	@RequestMapping("member/modifypic.do")
 	public String modifyPicture(HttpSession session, String img){

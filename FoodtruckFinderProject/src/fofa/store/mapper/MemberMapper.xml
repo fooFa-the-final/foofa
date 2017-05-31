@@ -17,12 +17,12 @@
 	
 	<insert id="insert" parameterType="Member">
 	INSERT INTO member_tb (member_id, password, birthday, email, gender)
- 	VALUES (#{memberId}, #{password}, #{birthday}, #{email}, #{gender})	
+ 	VALUES (#{memberId}, #{password}, #{birthday}, #{email}, #{gender)	
 	</insert>
 	
 	<update id="update" parameterType="Member">
 	UPDATE member_tb
-	SET member_id = #{memberId}, #{password}, #{birthday}, #{email}, #{gender}, #{image_src}
+	SET password=#{password}, birthday = #{birthday}, email= #{email}, gender= #{gender}
 	WHERE member_id = #{memberId}	
 	</update>
 	

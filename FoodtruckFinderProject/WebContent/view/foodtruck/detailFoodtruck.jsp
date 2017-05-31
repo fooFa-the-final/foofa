@@ -10,7 +10,6 @@
 <c:set value="${fn:substring(time, 2, 4)}" var="startMin"/>
 <c:set value="${fn:substring(time, 4, 6)}" var="endHour"/>
 <c:set value="${fn:substring(time, 6, 8)}" var="endMin"/>
-
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -56,22 +55,47 @@
 				});
 		 		
 	 		}
-	 		)
-	 		
-	 		$("#rec").click(function(){
-	 		$.ajax({
-	 			type : 'GET',
-	 			url : "${ctx}/review/recommand.do",
-	 			data : {
-	 				review_id : ${review.review_id}
-	 			},
-	 			var recCount = eval($("#recVal").val());
-		 		   $("#recVal").val("");
-		 		   $("#recVal").val(recCount+1);
-		 		});
-	 		})
-	 		   
+	 		)   
 	 	});
+	 	var recReview = function(reviewId){
+	 		$.ajax({
+	 			type:'get',
+	 			url : "${ctx }/review/recommand.do",
+	 			data:{
+	 				reviewId : reviewId
+	 			},
+	 			success : function(data){
+	 				var revId = "#rec" + reviewId;
+ 					var recCount = eval($(revId).val());
+ 					$(revId).val("");
+	 				if ($.trim(data) == 'true') {
+	 					$(revId).val(recCount+1);
+						alert("리뷰를 추천하셨습니다.");
+					} else if ($.trim(data) == 'false') {
+	 					$(revId).val(recCount-1);
+						alert("리뷰를 추천 해제 하셨습니다.")
+					}
+	 			}
+	 		});
+	 	}
+	 	
+	 	var report = function(reviewId){
+	 		var reaId = "#reason" + reviewId;
+	 		$.ajax({
+	 			type:'POST',
+	 			url : "${ctx}/review/report/create.do",
+	 			data:{
+	 				reviewId : reviewId, reason : $(reaId).val()
+	 			},
+	 			success : function(data){
+	 				if ($.trim(data) == 'true') {
+						alert("신고 처리가 완료되었습니다.");
+					} else if ($.trim(data) == 'false') {
+						alert("이미 신고된 리뷰입니다.");
+					}
+	 			}
+	 		});
+	 	}
 	 </script>
 </head>
 
@@ -184,17 +208,42 @@
                 	<div class="col-md-12" style="margin-top:30px; margin-bottom:20px;display:inline-block">
                 		<div class="col-md-7" style="margin-top:20px">
                 		<font size="6">Reviews</font>
-                		<span style="float:right"><input type="button" value="+ Add my review" class="btn btn-default"></span>
+                		<span style="float:right"><a href="${ctx }/review/create.do?foodtruckId=${truck.foodtruckId}" class="btn btn-default">+ Add my review</a></span>
                 		<c:forEach items="${reviewList }" var="Review">
 	                		<div class = "col-md-offset-1 col-md-11" style="margin-top:50px">
-		                		<span><font class="h3"><a href="#">${Review.foodtruck.foodtruckName }</a></font></span>
-		                		<span style="float:right"><input type="button" value="follow" class="btn btn-result"> <input type="button" value="!" class="btn btn-result"></span><br>
+		                		<span><font class="h3"><a href="${ctx }/review/list/member.do?memberId=${Review.writer.memberId}">${Review.writer.memberId}</a></font></span>
+		                		<span style="float:right"><input type="button" value="follow" class="btn btn-result"> <input type="button" value="!" class="btn btn-result" data-toggle="modal" data-target="#myModal${Review.reviewId }"></span><br>
 		                		<img src="../../resources/img/smile.png" width="300px" height="300px"><br><br>
 		                		<font size="4px">
-		                		<span>점수 : ${Review.score } <i class="fa fa-thumbs-up" id="rec"></i>: <input type="text" id="recVal" value="${Review.recommand }" style="border: 0px;" size=1 readonly></span>
+		                		<span>점수 : ${Review.score } <button style="border:0;background-color:white" onClick="recReview('${Review.reviewId}')"><i class="fa fa-thumbs-up" id="rec" ></i></button>: 
+		                		<input type="text" id="rec${Review.reviewId}" value="${Review.recommand }" style="border: 0px;" size=1 readonly></span>
 		                		<span style="float:right">${Review.writeDate }</span><br>
 		                		${Review.contents }	
 		                		</font>
+		                		<!-- Modal -->
+								  <div class="modal fade" id="myModal${Review.reviewId }" role="dialog">
+								    <div class="modal-dialog">
+								    
+								      <!-- Modal content-->
+								      <div class="modal-content">
+								        <div class="modal-header">
+								          <button type="button" class="close" data-dismiss="modal">&times;</button>
+								          <h4 class="modal-title">신고창</h4>
+								        </div>
+								        
+								        <div class="modal-body">
+								           	<h4>신고 내용 : ${Review.contents }</h4>
+								           		
+								          <input type="text" class="form-control" placeholder="신고 사유를 적어주세요" id="reason${Review.reviewId}" name="reason">
+								        </div>
+								        <div class="modal-footer">
+								          <input type="button" class="btn btn-default" data-dismiss="modal" value="신고" onClick="report('${Review.reviewId}')">
+								          <input type="button" class="btn btn-default" data-dismiss="modal" value="신고 취소">
+								        </div>
+								      </div>
+								      
+								    </div>
+								  </div>
 	                		</div>
                 		</c:forEach>
                 	</div>

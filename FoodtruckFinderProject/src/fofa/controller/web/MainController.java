@@ -39,17 +39,17 @@ public class MainController {
 
 	@RequestMapping("index.do")
 	public String showMain(Model model){
-//		List<Review> allReview = reviewService.findByRecommand();
-//		List<Review> reviews = new ArrayList<>();
-//		reviews.add(allReview.get(0));
-//		reviews.add(allReview.get(1));
-//		reviews.add(allReview.get(2));
-//		model.addAttribute("reviews", reviews);
-//		double mainRandom = Math.random();
-//		int intMain = (int)(mainRandom*allReview.size())+1;
-//		Review mainReview = reviewService.findById(allReview.get(intMain).getReviewId());
-//		model.addAttribute("mainFoodImg",mainReview.getImages().get(0));
-//		model.addAttribute("mainMember", memberService.findById(mainReview.getWriter().getMemberId()));
+		List<Review> allReview = reviewService.findByRecommand();
+		List<Review> reviews = new ArrayList<>();
+		reviews.add(allReview.get(0));
+		reviews.add(allReview.get(1));
+		reviews.add(allReview.get(2));
+		model.addAttribute("reviews", reviews);
+		double mainRandom = Math.random();
+		int intMain = (int)(mainRandom*allReview.size());
+		Review mainReview = reviewService.findById(allReview.get(intMain).getReviewId());
+		model.addAttribute("mainFoodImg",mainReview.getImages().get(0).getFilename());
+		model.addAttribute("mainMember", memberService.findById(mainReview.getWriter().getMemberId()));
 //		
 //		List<Advertise> allAdv = advertiseService.findNowAd();
 //		List<Foodtruck> adTrucks = new ArrayList<>();
@@ -82,8 +82,8 @@ public class MainController {
 		double mainRandom = Math.random();
 		int intMain = (int)(mainRandom*allReview.size());
 		Review mainReview = reviewService.findById(allReview.get(intMain).getReviewId());
-//		model.addAttribute("mainFoodImg",mainReview.getImages().get(0).getFilename());
-//		model.addAttribute("mainMember", memberService.findById(mainReview.getWriter().getMemberId()));
+		model.addAttribute("mainFoodImg",mainReview.getImages().get(0).getFilename());
+		model.addAttribute("mainMember", memberService.findById(mainReview.getWriter().getMemberId()));
 		
 		return "view/main.jsp";
 	}

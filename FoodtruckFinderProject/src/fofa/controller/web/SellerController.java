@@ -47,7 +47,7 @@ public class SellerController {
 	public String create(Seller seller, Model model){
 		
 		sellerService.register(seller);
-		model.addAttribute(seller);
+		model.addAttribute("sellerId", seller.getSellerId());
 		return "../view/foodtruck/registerTruck.jsp";
 	}	
 

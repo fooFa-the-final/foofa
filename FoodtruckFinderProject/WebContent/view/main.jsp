@@ -39,9 +39,31 @@
 		<!-- navbar-header -->
 		<br>
 		<div class="col-lg-12 top-head-menu" style="">
-			<span style="float: right; margin: 20px 30px 0 0;">
-			<button type="button" onclick="location.href='${ctx}/logout.do'" class="btn btn-link loginBtn">Log out</button>
-			</span>
+		            <ul class="nav navbar-top-links navbar-right">
+		            <li class="dropdown"  style="padding:0px;">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-user fa-2x"></i>
+                    </a>
+                    <!-- dropdown user-->
+                    
+                    <ul class="dropdown-menu dropdown-user">
+                        <li><a href="${ctx }/review/list/member.do"><i class="fa fa-user fa-fw"></i>${loginUserId } Profile</a>
+                        </li>
+                        <li><a href="${ctx }/member/modify.do"><i class="fa fa-gear fa-fw"></i>Info Modify</a>
+                        </li>
+                        <li class="divider"></li>
+                        <c:choose>
+                        	<c:when test="${loginUserId ne null }">
+                        		<li><a href="${ctx }/logout.do"><i class="fa fa-sign-out fa-fw"></i>Logout</a></li>
+                        	</c:when>
+                        	<c:otherwise>
+                      		  	<li><a href="${ctx }/login.do"><i class="fa fa-sign-out fa-fw"></i>Login</a></li>
+                        	</c:otherwise>
+                        </c:choose>
+                    </ul>
+                    <!-- end dropdown-user -->
+                </li>
+		            </ul>
 		</div>
 		<ul class="nav navbar-top-links navbar-main-links navbar-center">
 			<li class="row">
@@ -67,7 +89,7 @@
 			</li>
 			<li class="row" style="display: block; float: bottom">
 				<div id="col-lg-12">
-					<img class="main_img_person" src="${ctx}/resources/img/user.jpg" />
+					<img id="mainMemberImg"  class="main_img_person" src="${ctx}/resources/img/user.jpg" onclick="location.href='${ctx}/review/list/member.do?memberId=${mainMember.memberId}'" />
 				</div>
 			</li>
 
@@ -159,7 +181,9 @@
 		var mainMemberSrc = "${mainMember.profileImg}";
 		
 		console.log("mainImgSrc : "+mainImgSrc+" mainMemberSrc : "+mainMemberSrc);
-		${"#mainNav"}.css("background-img", "url('"+mainImgSrc+"')");
+		$("#mainNav").css("background-image", "url('${ctx}/resources/img/"+mainImgSrc+"')");
+		$("#mainMemberImg").attr("src","${ctx}/resources/img/${mainMember.profileImg}");
+		
 	});
 	
 	var previewImage = function(target, idNo){

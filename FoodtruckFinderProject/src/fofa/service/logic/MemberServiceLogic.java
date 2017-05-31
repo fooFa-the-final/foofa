@@ -25,18 +25,13 @@ public class MemberServiceLogic implements MemberService{
 
 	@Override
 	public boolean modify(Member member) {
-		int sucess;
-		sucess = store.update(member);
-		if(sucess ==0){
-			return false;
-		} else{
-			return true;
-		}
+
+		return store.update(member)>0;
 	}
 
 	@Override
 	public boolean remove(String memberId) {
-	
+	System.out.println(memberId);
 		return store.delete(memberId) >0;
 	}
 
@@ -47,9 +42,8 @@ public class MemberServiceLogic implements MemberService{
 		
 			return true;
 		}else{
-			
+			return false;
 		}
-		return false;
 	}
 
 	@Override
