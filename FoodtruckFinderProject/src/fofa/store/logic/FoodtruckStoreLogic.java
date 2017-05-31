@@ -20,17 +20,19 @@ public class FoodtruckStoreLogic implements FoodtruckStore{
 	}
 
 	@Override
-	public int insert(Foodtruck foodtruck) {
+	public String insert(Foodtruck foodtruck) {
 		SqlSession session = factory.openSession();
+		String foodtruckId = null;
 		int insert = 0;
 		try{
 			FoodtruckMapper mapper = session.getMapper(FoodtruckMapper.class);
 			insert = mapper.insert(foodtruck);
+			foodtruckId = foodtruck.getFoodtruckId();
 			session.commit();
 		} finally {
 			session.close();
 		}
-		return insert;
+		return foodtruckId;
 	}
 
 	@Override

@@ -1,5 +1,6 @@
 package fofa.controller.web;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -28,9 +29,30 @@ public class FoodtruckController {
 	
 	
 	@RequestMapping(value="/create.do", method=RequestMethod.POST)
-	public String create(Foodtruck foodtruck){
+	public String create(Foodtruck foodtruck, HttpServletRequest request){
+		foodtruck.setOperationTime((String)request.getParameter("startTime")+ "/" +(String)request.getParameter("endTime"));	
+		foodtruck.setCategory1(foodtruck.getCategory1() + "/" + foodtruck.getCategory2() + "/" + foodtruck.getCategory3());
+		foodtruck.setSpot(foodtruck.getLocation());
+		
+		foodtruck.setFoodtruckImg("user.jsp");
+		
+		List<Menu> menus = new ArrayList<>();
+		
+		String[] menuNames = request.getParameterValues("menuName");
+		String[] menuPrices = request.getParameterValues("menuPrice");
+		String[] menuStates = request.getParameterValues("menuState");
+		
+		for(int i = 0; i< menuNames.length; i++){
+			Menu menu = new Menu();
+			menu.setMenuName(menuNames[i]);
+			menu.setPrice(Integer.parseInt(menuPrices[i]));
+			menu.setMenuState(Boolean.parseBoolean(menuStates[i]));
+			menus.add(menu);
+		}
+		foodtruck.setMenus(menus);
+		
 		foodtruckService.register(foodtruck);
-		return "view/user/login.jsp";
+		return "redirect: ../view/user/login.jsp";
 	}
 	
 	@RequestMapping(value="/modifyForm.do", method=RequestMethod.GET)
@@ -64,7 +86,7 @@ public class FoodtruckController {
 		String[] category = foodtruck.getCategory1().split("/");
 		foodtruck.setCategory1(category[0]);
 		foodtruck.setCategory2(category[1]);
-		foodtruck.setCategery3(category[2]);
+		foodtruck.setCategory3(category[2]);
 		model.addAttribute("foodtruck", foodtruck);
 		return "../view/foodtruck/foodtruckInfo.jsp";
 	}
