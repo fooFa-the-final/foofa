@@ -61,19 +61,27 @@ public class MemberController {
 		return "redirect:review/list/member.do";
 	}
 	@RequestMapping(value="member/checkPw.do", method=RequestMethod.GET)
-	public String checkPwForm(HttpSession session, Model model){
+	public String checkPwForm(HttpSession session){
+		
 		
 		return "../view/member/checkPassword.jsp";
 	}
 	
+	@ResponseBody
 	@RequestMapping(value="member/checkPw.do", method=RequestMethod.POST)
 	public String checkPw(HttpSession session, String password){
 		Member member = service.findById((String)(session.getAttribute("loginUserId")));
 		String memberId = member.getMemberId();
-		service.checkPw(memberId, password);
-		System.out.println(memberId);
-		return "redirect:remove.do";
-	}
+		boolean result;
+		result = service.checkPw(memberId, password);
+		System.out.println(result);
+		
+		if(result == true){
+			return "yes";
+		}
+			
+			return "no";
+		}
 	@RequestMapping(value="member/remove.do", method= RequestMethod.GET)
 	public String removeForm(HttpSession session, Model model){
 		Member member = service.findById((String)(session.getAttribute("loginUserId")));

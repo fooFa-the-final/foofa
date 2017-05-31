@@ -112,7 +112,6 @@ public class MainController {
 			
 			return "redirect:review/report/list.do";
 		}else if(isSeller!=null && isSeller[0] != null){
-			System.out.println("seller");
 			if(sellerService.checkPw(id, pw)){
 				session.setAttribute("loginUserId", id);
 				session.setAttribute("isSeller", true);
