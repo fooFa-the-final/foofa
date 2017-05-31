@@ -44,7 +44,7 @@
 	</select>
 
 	<select id="select1MonthSales" parameterType="hashmap"
-		resultType="Sale">
+		resultMap="SaleMap">
 		SELECT
 		sales_id,foodtruck_id,day,location,revenue
 		FROM

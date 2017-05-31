@@ -152,9 +152,25 @@ public class SalesController {
 	}
 
 	@RequestMapping(value = "sales/month.do")
-	public void search1MonthSales(String foodtruckId, String month) {
+	public @ResponseBody JSONArray search1MonthSales(HttpServletRequest req, String month) {
+		/*
+		 * HttpSession session = req.getSession(); String foodtruckId = (String)
+		 * session.getAttribute("loginTruckId");
+		 */
+		List<Sale> list = service.find1MonthSales("1", "201601");
+		JSONArray jsonArray = new JSONArray();
 
-		List<Sale> list = service.find1MonthSales(foodtruckId, month);
+		for (int i = 0; i < list.size(); i++) {
+
+			JSONObject obj = new JSONObject();
+			obj.put("re", list.get(i).getRevenue());
+			obj.put("da", list.get(i).getDate());
+			jsonArray.add(obj);
+
+		}
+
+		System.out.println(jsonArray);
+		return jsonArray;
 
 	}
 }

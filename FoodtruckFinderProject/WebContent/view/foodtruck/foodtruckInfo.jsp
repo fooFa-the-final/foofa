@@ -8,7 +8,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bootsrtap Free Admin Template - SIMINTA | Admin Dashboad Template</title>
+    <title>Foodtruck Finder</title>
     <!-- Core CSS - Include with every page -->
     <link href="${ctx }/resources/plugins/bootstrap/bootstrap.css" rel="stylesheet" />
     <link href="${ctx }/resources/font-awesome/css/font-awesome.css" rel="stylesheet" />
@@ -117,14 +117,14 @@
                 <div class="col-md-12" style="background-color:white; height:300px">
                     <span>
                             <a class="navbar-brand" href="#" style="margin-top:10px;">
-                                <img src="../../resources/img/waikiki.jpg" style="height:250px; width:250px"/>
+                                <img src="${ctx }/resources/img/${truck.foodtruckImg }" style="height:250px; width:250px"/>
                             </a>
                             <div class="user-info">
                                 <h1>${truck.foodtruckName }</h1><br>
                                 <h5>${truck.category1 }</h5>
                                 <h5>${truck.spot }</h5>
-                                <h5>144Followers</h5>
-                                <h5>255Reviews</h5>
+                                <h5>${truck.favoriteCount }Followers</h5>
+                                <h5>Reviews</h5>
                             </div>
                     </span>
                     <span style="float:right; margin-right:30px; margin-top: 30px">
@@ -159,35 +159,14 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                    	<c:forEach items="${truck.menus }" var="menus" varStatus="status">
                                         <tr class="odd gradeX">
-                                            <td>1</td>
-                                            <td>큐브 스테이크</td>
-                                            <td>7000</td>
-                                            <td class="center">판매중</td>
+                                            <td>${status.count }</td>
+                                            <td>${menu.menuName }</td>
+                                            <td>${menu.price }</td>
+                                            <td class="center">${menu.menuState }</td>
                                         </tr>
-                                        <tr class="odd gradeX">
-                                            <td>2</td>
-                                            <td>슈림프 파스타</td>
-                                            <td>8000</td>
-                                            <td class="center">판매중</td>
-                                        <tr class="odd gradeX">
-                                            <td>3</td>
-                                            <td>로제 파스타</td>
-                                            <td>10000</td>
-                                            <td class="center">매진</td>
-                                		</tr>
-                                       <tr class="odd gradeX">
-                                            <td>4</td>
-                                            <td>음료</td>
-                                            <td>6000</td>
-                                            <td class="center">판매중</td>
-                                        </tr>
-                                        <tr class="odd gradeX">
-                                            <td>5</td>
-                                            <td>맥주</td>
-                                            <td>6000</td>
-                                            <td class="center">매진</td>
-                                        </tr>
+                                        </c:forEach>
                                     </tbody>
                                 </table>
                             </div>
@@ -217,7 +196,7 @@
                                 <h3>Truck Hour</h3>
                             </div>
                             <div class="panel-body">
-                                <h4>17:00 ~ 20:00</h4>
+                                <h4>${startTime } 부터  ${endTime } 까지 영업합니다.</h4>
                             </div>
                           </div>
                       </div>
@@ -255,7 +234,11 @@
                                <tbody>
                                    <tr>
                                        <td>Accept Card</td>
-                                       <td>YES</td>
+<%--                                        <c:choose> --%>
+<%--                                        	<c:if test="${truck.card }"> --%>
+                                       		<td>YES</td>
+<%--                                        	</c:if> --%>
+<%--                                        </c:choose> --%>
                                    </tr>
                                    <tr>
                                        <td>Alcohol</td>
