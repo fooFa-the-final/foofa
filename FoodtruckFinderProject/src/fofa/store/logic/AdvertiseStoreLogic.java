@@ -57,12 +57,12 @@ public class AdvertiseStoreLogic implements AdvertiseStore {
 	}
 
 	@Override
-	public int update(Advertise advertise) {
+	public int update(String advid) {
 		SqlSession session = factory.openSession();
 		int sucess = 0;
 		try {
 			AdvertiseMapper mapper = session.getMapper(AdvertiseMapper.class);
-			sucess = mapper.update(advertise);
+			sucess = mapper.update(advid);
 			session.commit();
 		} finally {
 			session.close();

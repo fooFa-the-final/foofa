@@ -22,7 +22,7 @@
 	
 	<update id="update" parameterType="Member">
 	UPDATE member_tb
-	SET member_id = #{password}, #{birthday}, #{email}, #{gender}
+	SET password=#{password}, birthday = #{birthday}, email= #{email}, gender= #{gender}
 	WHERE member_id = #{memberId}	
 	</update>
 	

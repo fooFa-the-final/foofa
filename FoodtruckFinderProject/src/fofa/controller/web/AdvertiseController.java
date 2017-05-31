@@ -49,15 +49,14 @@ public class AdvertiseController {
 	}
 
 	@RequestMapping("advertise/approve.do")
-	public String approve(Advertise advertise) {
-		advertiseService.modify(advertise);
+	public String approve(String advId) {
+		advertiseService.modify(advId);
 		return "../view/admin/adminAdvertise.jsp";
 	}
 
 	@RequestMapping("advertise/remove.do")
 	public String remove(String advId) {
 		// List<String> mlist = Arrays.asasList();
-
 		String[] Adv = advId.split(",");
 		for (int i = 0; i < Adv.length; i++) {
 			System.out.println(Adv[i]);

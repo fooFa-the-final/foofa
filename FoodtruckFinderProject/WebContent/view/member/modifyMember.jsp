@@ -26,8 +26,11 @@
 	<div class="col-lg-6">
 		<h2>Modify your Info</h2>
 
+		
 			<div class="form-group">
 		<form role="form" action="${ctx }/member/modify.do" method="post">
+		<input type="hidden" value="${member.memberId }" name="memberId">
+		
 			<div class="form-group">
 				<label>ID</label> <b class="form-control">${member.memberId }</b>
 			</div>

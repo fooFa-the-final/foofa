@@ -41,24 +41,24 @@ public class AdvertiseStoreTest {
 //	 }
 	
 
-	@Test
-	public void testSelectByDesc() {
-		boolean approve1 = true;
-		String approve = "0";
-		List<Advertise> list = store1.selectByDesc(0);
-		assertEquals(4, store1.selectByDesc(0).size());
+//	@Test
+//	public void testSelectByDesc() {
+//		boolean approve1 = true;
+//		String approve = "0";
+//		List<Advertise> list = store1.selectByDesc(0);
+//		assertEquals(4, store1.selectByDesc(0).size());
+//
+//	}
 
-	}
-
-	// @Test
-	// public void testSelectNowAd() {
-	//
-	// List<Advertise> list = store1.selectNowAd();
-	//
-	// assertEquals(6, list.size());
-	// //광고 불러오기 테스트 완료
-	//
-	// }
+	 @Test
+	 public void testSelectNowAd() {
+	
+	 List<Advertise> list = store1.selectNowAd();
+	
+	 assertEquals(4, list.size());
+	 //광고 불러오기 테스트 완료
+	
+	 }
 
 	// @Test
 	// public void testInsert() {

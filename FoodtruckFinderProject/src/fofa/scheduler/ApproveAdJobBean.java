@@ -27,7 +27,7 @@ public class ApproveAdJobBean extends QuartzJobBean{
 		for(Advertise ad : list){
 			ad.setAdvId(ad.getAdvId());
 			ad.setApprove(2);
-			service.modify(ad);
+			service.modify(ad.getAdvId());
 		}
 		
 	}
