@@ -22,7 +22,7 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
 <style>
-.mySlides {display:none; width: 900px; margin: 0 auto;}
+.mySlides {display:none; width: 900px; margin: 0 auto; width:90%;}
 .w3-left, .w3-right, .w3-badge {cursor:pointer}
 .w3-badge {height:13px;width:13px;padding:0}	
 
@@ -34,7 +34,6 @@
 
 	<nav id="mainNav" class=" main-head-top effect" role="navigation" id="navbar" style=" background-color: rgba(0, 0, 0, .8);">
 		<!-- navbar-header -->
-		<br>
 		<div class="col-lg-12 top-head-menu" style="">
 			<span style="float: right; margin: 20px 30px 0 0;">
 			<button type="button" class="btn btn-link loginBtn" onclick="location.href='${ctx}/login.do'">Log in</button>
@@ -116,7 +115,7 @@
 					</div>	
 				</div>
 		</div>
-	<div class="mySlides"style="width:90%">
+	<div class="mySlides">
 				<div class="col-lg-4">
 					<div class="panel panel-danger">
 						<div class="panel-header">
@@ -150,7 +149,7 @@
 					</div>	
 				</div>
 		</div>
-	<div class="mySlides "style="width:90%">
+	<div class="mySlides">
 				<div class="col-lg-4">
 					<div class="panel panel-danger">
 						<div class="panel-header">
