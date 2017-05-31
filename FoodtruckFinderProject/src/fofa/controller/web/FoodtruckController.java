@@ -82,12 +82,18 @@ public class FoodtruckController {
 	
 	@RequestMapping("/searchById.do")
 	public String searchById(String foodtruckId, Model model){
-		Foodtruck foodtruck = foodtruckService.findById(foodtruckId);
+//		Foodtruck foodtruck = foodtruckService.findById(foodtruckId);
+		Foodtruck foodtruck = foodtruckService.findById("F40");
 		String[] category = foodtruck.getCategory1().split("/");
 		foodtruck.setCategory1(category[0]);
 		foodtruck.setCategory2(category[1]);
 		foodtruck.setCategory3(category[2]);
-		model.addAttribute("foodtruck", foodtruck);
+		String[] operationTime = foodtruck.getOperationTime().split("/");
+		String startTime = operationTime[0];
+		String endTime = operationTime[1];
+		model.addAttribute("startTime", startTime);
+		model.addAttribute("endTime", endTime);
+		model.addAttribute("truck", foodtruck);
 		return "../view/foodtruck/foodtruckInfo.jsp";
 	}
 	
