@@ -27,21 +27,22 @@ public class FoodtruckController {
 	private AdvertiseService advertiseService;
 	
 	
-	@RequestMapping(value="/create.do", method=RequestMethod.GET)
+	@RequestMapping(value="/create.do", method=RequestMethod.POST)
 	public String create(Foodtruck foodtruck){
-		
+		foodtruckService.register(foodtruck);
 		return "view/user/login.jsp";
 	}
 	
 	@RequestMapping(value="/modifyForm.do", method=RequestMethod.GET)
 	public String modifyForm(String foodtruckId, Model model){
-		
+		Foodtruck foodtruck = foodtruckService.findById(foodtruckId);
+		model.addAttribute("truck", foodtruck);
 		return "../view/foodtruck/modifyFoodtruck.jsp";
 	}
 	
 	@RequestMapping(value="/modify.do", method=RequestMethod.POST)
 	public String modify(Foodtruck foodtruck){
-		
+		foodtruckService.modify(foodtruck);
 		return "../view/foodtruck/foodtruckInfo.jsp";
 	}
 	
@@ -59,13 +60,19 @@ public class FoodtruckController {
 	
 	@RequestMapping("/searchById.do")
 	public String searchById(String foodtruckId, Model model){
-		
+		Foodtruck foodtruck = foodtruckService.findById(foodtruckId);
+		String[] category = foodtruck.getCategory1().split("/");
+		foodtruck.setCategory1(category[0]);
+		foodtruck.setCategory2(category[1]);
+		foodtruck.setCategery3(category[2]);
+		model.addAttribute("foodtruck", foodtruck);
 		return "../view/foodtruck/foodtruckInfo.jsp";
 	}
 	
 	@RequestMapping("/searchByLoc.do")
 	public String searchByLoc(String location, Model model){
-		
+		List<Foodtruck> foodtrucks = foodtruckService.findByLoc(location);
+		model.addAttribute("trucks", foodtrucks);
 		return "../view/foodtruck/listFoodtruck.jsp";
 	}
 	

@@ -9,7 +9,7 @@ public interface AdvertiseStore {
 	
 	int delete(String advid);
 	int insert(Advertise advertise);
-	int update(Advertise advertise);
+	int update(String advid);
 	List<Advertise> selectByAsc(int approve);
 	List<Advertise> selectByDesc(int approve);
 	List<Advertise> selectNowAd();

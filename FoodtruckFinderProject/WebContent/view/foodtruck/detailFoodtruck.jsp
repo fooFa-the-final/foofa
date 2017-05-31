@@ -10,7 +10,6 @@
 <c:set value="${fn:substring(time, 2, 4)}" var="startMin"/>
 <c:set value="${fn:substring(time, 4, 6)}" var="endHour"/>
 <c:set value="${fn:substring(time, 6, 8)}" var="endMin"/>
-
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -209,7 +208,7 @@
                 	<div class="col-md-12" style="margin-top:30px; margin-bottom:20px;display:inline-block">
                 		<div class="col-md-7" style="margin-top:20px">
                 		<font size="6">Reviews</font>
-                		<span style="float:right"><input type="button" value="+ Add my review" class="btn btn-default"></span>
+                		<span style="float:right"><a href="${ctx }/review/create.do?foodtruckId=${truck.foodtruckId}" class="btn btn-default">+ Add my review</a></span>
                 		<c:forEach items="${reviewList }" var="Review">
 	                		<div class = "col-md-offset-1 col-md-11" style="margin-top:50px">
 		                		<span><font class="h3"><a href="${ctx }/review/list/member.do?memberId=${Review.writer.memberId}">${Review.writer.memberId}</a></font></span>

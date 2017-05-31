@@ -38,6 +38,25 @@
 	 f.action = "${ctx }/advertise/remove.do";
 	 f.submit();
 	 }
+	 
+	  	var registComment = function() {		
+	  	        var postData = { "para1": "para1", "advId": para2 };		
+	  	        var para2 = [];		
+	  	        $("input[name='advId']:checked").each(function(i) {		
+	  	        para2.push($(this).val());		
+	  	        });		
+	  		$.ajax({		
+	  			url : "${ctx }/advertise/approve.do",		
+	  			type : "post",		
+	  			data:{	postData		
+	  			},		
+	  			traditional: true,		
+	  			success :alert("성공"), //ajax성공시에 수행되는 기능,		
+	  			error : alert("실패")		
+	  		// 에러발생시 수행되는 기능		
+	  		});		
+	  	};		
+
 	</script>
 <body>
 	<!--  wrapper -->
