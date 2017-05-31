@@ -71,13 +71,14 @@ h2 {
 <script src='${ctx }/resources/scripts/jquery.min.js'></script>
 <script src='${ctx }/resources/scripts/fullcalendar.min.js'></script>
 <script>
-	$(document).ready(function() {
-	
-		          $('#calendar').fullCalendar({
-                      dayClick: function(date, jsEvent, view) {
+	$(document).ready(
+			function() {
 
-                        convertDate(date.format());
-                    },
+				$('#calendar').fullCalendar({
+					dayClick : function(date, jsEvent, view) {
+
+						convertDate(date.format());
+					},
 					defaultDate : '2017-05-12',
 					editable : true,
 					eventLimit : true, // allow "more" link when too many events
@@ -87,19 +88,44 @@ h2 {
 						start : '2017-05-28'
 					} ]
 				});
+				jQuery("button.fc-prev-button").click(function() {
+					var date = jQuery("#calendar").fullCalendar("getDate");
+					convertMonth(date);
+				});
+				jQuery("button.fc-next-button").click(function() {
+					var date = jQuery("#calendar").fullCalendar("getDate");
+					convertMonth(date);
+				});
 				function convertDate(date) {
 					var date = new Date(date);
-					alert(date.yyyymmdd());
+					date = date.yyyymmdd();
+					alert(date);
 				}
 				Date.prototype.yyyymmdd = function() {
 					var yyyy = this.getFullYear().toString();
 					var mm = (this.getMonth() + 1).toString();
 					var dd = this.getDate().toString();
-					return yyyy +  (mm[1] ? mm : "0" + mm[0]) 
+					return yyyy + (mm[1] ? mm : "0" + mm[0])
 							+ (dd[1] ? dd : "0" + dd[0]);
 				}
-		
-	});
+				function convertMonth(date) {
+					var date = new Date(date);
+
+					date = date.yyyymm();
+					var allData = {
+						"month" : date
+					};
+					alert(date);
+
+				}
+				Date.prototype.yyyymm = function() {
+					var yyyy = this.getFullYear().toString();
+					var mm = (this.getMonth() + 1).toString();
+					return yyyy + (mm[1] ? mm : "0" + mm[0]);
+				}
+
+			});
+	
 
 </script>
 <style>
