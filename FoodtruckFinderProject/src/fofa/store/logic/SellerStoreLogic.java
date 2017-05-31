@@ -66,16 +66,8 @@ public class SellerStoreLogic implements SellerStore {
 			SellerMapper mapper = session.getMapper(SellerMapper.class);
 			mapper.delete(id);
 			session.commit();
-
-//			Seller seller = mapper.select(id);
 			sucess = mapper.delete(id);
 			session.commit();
-
-//			if (seller != null) {
-//				sucess = 1;
-//			} else {
-//				sucess = 0;
-//			}
 		} finally {
 			session.close();
 		}
