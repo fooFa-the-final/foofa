@@ -2,6 +2,7 @@ package fofa.controller.web;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,9 +71,15 @@ public class ReviewController {
 	}
 	
 	@RequestMapping(value="/review/create.do", method=RequestMethod.POST)
-	public String createReview(Review review, Survey survey, Model model){
-		System.out.println(review.toString());
-		return "redirect:review/list/truck.do?foodtruckid="+review.getFoodtruck().getFoodtruckId();
+	public String createReview(Review review, Survey survey, HttpServletRequest req, Model model){
+		Foodtruck truck = truckService.findById((String)req.getParameter("foodtruckId"));
+		review.setFoodtruck(truck);
+		HttpSession session = req.getSession();
+		Member member = memberService.findById((String)session.getAttribute("loginUserId"));
+		review.setWriter(member);
+		boolean insert = reviewService.register(review);
+		System.out.println(insert);
+		return req.getContextPath() + "/review/list/truck.do?foodtruckid="+review.getFoodtruck().getFoodtruckId();
 	}
 	
 	@RequestMapping(value="/review/modify.do", method=RequestMethod.GET)
