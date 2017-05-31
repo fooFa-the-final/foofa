@@ -6,7 +6,7 @@
  <mapper namespace="fofa.store.mapper.RecommandMapper">
  	<resultMap type="Recommand" id="RecommandMap">
  		<id column = "review_id" property="reviewId"/>
- 		<id column = "member_id" property="MemberId"/>
+ 		<id column = "member_id" property="writerId"/>
  	</resultMap>
  	<insert id = "insert" parameterType="Recommand">
  		INSERT INTO RECOMMAND_TB 
