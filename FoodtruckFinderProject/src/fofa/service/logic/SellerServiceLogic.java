@@ -16,7 +16,7 @@ public class SellerServiceLogic implements SellerService {
 	@Override
 	public boolean checkId(String sellerId) {
 		Seller seller = sellerStore.select(sellerId);
-		if (seller.getSellerId().equals(sellerId)) {
+		if (seller!= null) {
 			return true;
 		} else {
 			return false;
