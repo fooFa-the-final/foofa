@@ -132,7 +132,7 @@
 
 						<div id="foodtruck" style="margin-top: 100px"></div>
 						<div id="review" style="margin-top: 80px">
-							<table>
+							<table border=1>
 								<tr>
 									<th rowspan="3"><img width="100px" height="100px"
 										src="../../resources/img/pizzahut.png"></th>
@@ -150,8 +150,8 @@
 							</table>
 							<span
 								style="float: right; margin-right: 6px; margin-down: 30px; margin-top: 70px;">
-								<a href="#"><button type="button" class="btn btn-default">수정</button></a>&nbsp;&nbsp;&nbsp;&nbsp;<a
-								href="#"><button type="button" class="btn btn-default">삭제</button></a>
+								<a href="#"><button type="button" class="btn btn-default">수정</button></a>&nbsp;&nbsp;&nbsp;&nbsp;
+								<input type="button" class="btn btn-default" value="삭제">
 							</span>
 							 <br>
 

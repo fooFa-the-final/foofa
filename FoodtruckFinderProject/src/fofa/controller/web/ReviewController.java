@@ -79,7 +79,7 @@ public class ReviewController {
 		review.setWriter(member);
 		boolean insert = reviewService.register(review);
 		System.out.println(insert);
-		return req.getContextPath() + "/review/list/truck.do?foodtruckid="+review.getFoodtruck().getFoodtruckId();
+		return "redirect:/review/list/truck.do?foodtruckId="+review.getFoodtruck().getFoodtruckId();
 	}
 	
 	@RequestMapping(value="/review/modify.do", method=RequestMethod.GET)
@@ -93,8 +93,10 @@ public class ReviewController {
 	}
 	
 	@RequestMapping("/review/remove.do")
+	@ResponseBody
 	public String removeReview(String reviewId){
-		return "redirect:list/truck.do";
+		boolean rem = reviewService.remove(reviewId);
+		return "true";
 	}
 	
 	@RequestMapping("/review/report/create.do")
