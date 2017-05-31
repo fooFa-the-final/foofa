@@ -1,6 +1,7 @@
 package fofa.controller.web;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -53,10 +54,17 @@ public class MainController {
 		
 		List<Advertise> allAdv = advertiseService.findNowAd();
 		List<Foodtruck> adTrucks = new ArrayList<>();
-		for(int i=0; i<3; i++){
-			double randomValue = Math.random();
-			int intValue = (int)(randomValue*allAdv.size());
-			String sellerId = allAdv.get(intValue).getSellerId();
+		
+		ArrayList<Integer> ranNumber = new ArrayList<Integer>();
+		for(int i=0; i <allAdv.size();i++){
+			ranNumber.add(i);
+		}
+		Collections.shuffle(ranNumber);
+		
+		
+		for(int i=0; i<9; i++){
+			System.out.println(ranNumber.get(i));
+			String sellerId = allAdv.get(ranNumber.get(i)).getSellerId();
 			adTrucks.add(foodtruckService.findBySeller(sellerId));
 		}
 		model.addAttribute("adTrucks", adTrucks);

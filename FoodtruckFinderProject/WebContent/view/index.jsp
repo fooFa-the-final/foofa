@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt" %>
 <!DOCTYPE>
 <html>
 <c:set value="${pageContext.request.contextPath}" var="ctx" />
@@ -81,108 +82,51 @@
 
 
 <div class="w3-content w3-display-container text-center">
-	<div class="mySlides">
+
+		<c:forEach varStatus="no" var="truck" items="${adTrucks }">
+			<c:choose>	
+				<c:when test="${(no.count mod 3) == 1 }">
+				<div class="mySlides">	
+					<div class="col-lg-4">
+						<div class="panel panel-danger">
+							<div class="panel-header">
+								<img src="${ctx}/resources/img/waikiki.jpg" class="main-truck-img" />
+							</div>
+							<div class="panel-body text-left">
+								<b>${truck.foodtruckName }</b> <br> <p > 평점 :<span class="starRating" style="text-align:left;"><span style="width: ${truck.reviewScore*20 }%">${truck.reviewScore }점</span></span></p>리뷰수 : ${truck.reviewCount }
+							</div>
+						</div>
+					</div>		
+				</c:when>
+				<c:when test="${(no.count mod 3) == 0 }">
 				<div class="col-lg-4">
 					<div class="panel panel-danger">
 						<div class="panel-header">
 							<img src="${ctx}/resources/img/waikiki.jpg" class="main-truck-img" />
 						</div>
 						<div class="panel-body text-left">
-							푸드트럭 이름 <br> <p > 평점 :<span class="starRating" style="text-align:left;"><span style="width: 40%">2.5점</span></span></p>리뷰수 : 144
+							<b>${truck.foodtruckName }</b> <br> <p > 평점 :<span class="starRating" style="text-align:left;"><span style="width: ${truck.reviewScore*20 }%">${truck.reviewScore }점</span></span></p>리뷰수 : ${truck.reviewCount }
 						</div>
-					</div>
-				
+					</div>	
 				</div>
+		</div>
+				</c:when>
+				<c:otherwise>
 				<div class="col-lg-4">
 					<div class="panel panel-danger">
 						<div class="panel-header">
 							<img src="${ctx}/resources/img/twiceprofile.jpg" class="main-truck-img" />
 						</div>
 						<div class="panel-body text-left">
-							푸드트럭 이름 <br> <p > 평점 :<span class="starRating" style="text-align:left;"><span style="width: 40%">2.5점</span></span></p>리뷰수 : 144
+							<b>${truck.foodtruckName }</b> <br> <p > 평점 :<span class="starRating" style="text-align:left;"><span style="width: ${truck.reviewScore*20 }%">${truck.reviewScore }점</span></span></p>리뷰수 : ${truck.reviewCount }						
 						</div>
 					</div>
 				
-				</div>
-				<div class="col-lg-4">
-					<div class="panel panel-danger">
-						<div class="panel-header">
-							<img src="${ctx}/resources/img/waikiki.jpg" class="main-truck-img" />
-						</div>
-						<div class="panel-body text-left">
-							푸드트럭 이름 <br> <p > 평점 :<span class="starRating" style="text-align:left;"><span style="width: 40%">2.5점</span></span></p>리뷰수 : 144
-						</div>
-					</div>	
-				</div>
-		</div>
-	<div class="mySlides">
-				<div class="col-lg-4">
-					<div class="panel panel-danger">
-						<div class="panel-header">
-							<img src="${ctx}/resources/img/waikiki.jpg" class="main-truck-img" />
-						</div>
-						<div class="panel-body text-left">
-							푸드트럭2 이름 <br> <p > 평점 :<span class="starRating" style="text-align:left;"><span style="width: 40%">2.5점</span></span></p>리뷰수 : 144
-						</div>
-					</div>
-				
-				</div>
-				<div class="col-lg-4">
-					<div class="panel panel-danger">
-						<div class="panel-header">
-							<img src="${ctx}/resources/img/twiceprofile.jpg" class="main-truck-img" />
-						</div>
-						<div class="panel-body text-left">
-							푸드트럭2 이름 <br> <p > 평점 :<span class="starRating" style="text-align:left;"><span style="width: 40%">2.5점</span></span></p>리뷰수 : 144
-						</div>
-					</div>
-				
-				</div>
-				<div class="col-lg-4">
-					<div class="panel panel-danger">
-						<div class="panel-header">
-							<img src="${ctx}/resources/img/waikiki.jpg" class="main-truck-img" />
-						</div>
-						<div class="panel-body text-left">
-							푸드트럭 이름 <br> <p > 평점 :<span class="starRating" style="text-align:left;"><span style="width: 40%">2.5점</span></span></p>리뷰수 : 144
-						</div>
-					</div>	
-				</div>
-		</div>
-	<div class="mySlides">
-				<div class="col-lg-4">
-					<div class="panel panel-danger">
-						<div class="panel-header">
-							<img src="${ctx}/resources/img/waikiki.jpg" class="main-truck-img" />
-						</div>
-						<div class="panel-body text-left">
-							푸드트럭1 이름 <br> <p > 평점 :<span class="starRating" style="text-align:left;"><span style="width: 40%">2.5점</span></span></p>리뷰수 : 144
-						</div>
-					</div>
-				
-				</div>
-				<div class="col-lg-4">
-					<div class="panel panel-danger">
-						<div class="panel-header">
-							<img src="${ctx}/resources/img/twiceprofile.jpg" class="main-truck-img" />
-						</div>
-						<div class="panel-body text-left">
-							푸드트럭 이름 <br> <p > 평점 :<span class="starRating" style="text-align:left;"><span style="width: 40%">2.5점</span></span></p>리뷰수 : 144
-						</div>
-					</div>
-				
-				</div>
-				<div class="col-lg-4">
-					<div class="panel panel-danger">
-						<div class="panel-header">
-							<img src="${ctx}/resources/img/waikiki.jpg" class="main-truck-img" />
-						</div>
-						<div class="panel-body text-left">
-							푸드트럭 이름 <br> <p > 평점 :<span class="starRating" style="text-align:left;"><span style="width: 40%">2.5점</span></span></p>리뷰수 : 144
-						</div>
-					</div>	
-				</div>
-		</div>
+				</div>				
+				</c:otherwise>
+			</c:choose>
+		
+		</c:forEach>
 		  <button class="w3-button w3-white w3-display-left" onclick="plusDivs(-1)">&#10094;</button>
  		 <button class="w3-button w3-white w3-display-right" onclick="plusDivs(1)">&#10095;</button>
   <div class="w3-center w3-container w3-section w3-large w3-text-gray" style="width:100%">
