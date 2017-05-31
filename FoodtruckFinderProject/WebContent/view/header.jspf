@@ -7,12 +7,12 @@
             <div class="navbar-header">
              <c:choose>
                  <c:when test="${loginUserId ne null }">
-                    <a class="navbar-brand" href="/main.do">
+                    <a class="navbar-brand" href="${ctx }/main.do">
                     <img src="${ctx }/resources/img/logo.png" alt="" />
                 	</a>
                  </c:when>
                  <c:otherwise>
-                    <a class="navbar-brand" href="/index.do">
+                    <a class="navbar-brand" href="${ctx }/index.do">
                     <img src="${ctx }/resources/img/logo.png" alt="" />
                 	</a>
                  </c:otherwise>
