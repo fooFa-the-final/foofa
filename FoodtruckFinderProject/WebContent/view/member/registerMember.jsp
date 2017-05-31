@@ -124,11 +124,8 @@
 				$("#result").html(data);
 				if ($.trim(data) == 'no') {
 					$('#idmessage').html("사용 가능한 ID 입니다.");
-					 alert("성공 ");
 				} else {
 					$('#idmessage').html("사용중인 ID 입니다.");
-					 alert("실패");
-
 				}
 
 			}
