@@ -20,15 +20,16 @@ public class FoodtruckServiceLogic implements FoodtruckService{
 	
 	@Override
 	public boolean register(Foodtruck foodtruck) {
-		int regTruck = foodtruckStore.insert(foodtruck);
+		String foodtruckId = foodtruckStore.insert(foodtruck);
 		List<Menu> menus = foodtruck.getMenus();
 		int regMenu = 0;
-		
-		for(Menu menu : menus){
-			regMenu = menuStore.insert(menu);
+		if(menus!=null){
+			for(Menu menu : menus){
+				menu.setFoodtruckId(foodtruckId);
+				regMenu = menuStore.insert(menu);
+			}
 		}
-			
-		return regTruck > 0 && regMenu > 0;
+		return regMenu > 0;
 	}
 
 	@Override
