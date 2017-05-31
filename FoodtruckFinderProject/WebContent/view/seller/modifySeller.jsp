@@ -43,12 +43,12 @@
 
 			<div class="form-group">
 				<label>Business Registration Number</label> <input type="number" name="certification"
-				id="certification"	class="form-control" placeholder="">
+				id="certification"	class="form-control" placeholder="${seller.certification }">
 			</div>
 
 			<div class="form-group">
 				<label>Phone</label> <input id="phone" name="phone" type="number" name="phone"
-		id="phone"			class="form-control" placeholder="">
+		id="phone"	class="form-control" placeholder="${seller.phone }">
 			</div>
 
 			<button type="submit" class="btn btn-primary">Modify</button>
