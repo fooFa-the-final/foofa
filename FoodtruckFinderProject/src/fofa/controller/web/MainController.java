@@ -50,22 +50,22 @@ public class MainController {
 		Review mainReview = reviewService.findById(allReview.get(intMain).getReviewId());
 		model.addAttribute("mainFoodImg",mainReview.getImages().get(0).getFilename());
 		model.addAttribute("mainMember", memberService.findById(mainReview.getWriter().getMemberId()));
-//		
-//		List<Advertise> allAdv = advertiseService.findNowAd();
-//		List<Foodtruck> adTrucks = new ArrayList<>();
-//		for(int i=0; i<3; i++){
-//			double randomValue = Math.random();
-//			int intValue = (int)(randomValue*allAdv.size())+1;
-//			String sellerId = allAdv.get(intValue).getSellerId();
-//			adTrucks.add(foodtruckService.findBySeller(sellerId));
-//		}
-//		model.addAttribute("adTrucks", adTrucks);
-//		
+		
+		List<Advertise> allAdv = advertiseService.findNowAd();
+		List<Foodtruck> adTrucks = new ArrayList<>();
+		for(int i=0; i<3; i++){
+			double randomValue = Math.random();
+			int intValue = (int)(randomValue*allAdv.size());
+			String sellerId = allAdv.get(intValue).getSellerId();
+			adTrucks.add(foodtruckService.findBySeller(sellerId));
+		}
+		model.addAttribute("adTrucks", adTrucks);
+		
 //		List<Foodtruck> allTrucks = foodtruckService.findByLoc("가산동");
-//		List<Foodtruck> nearTrucks = new ArrayList<>();		
+//		List<Foodtruck> nearTrucks = new ArrayList<>();
 //		for(int i=0; i<3; i++){
 //			double randomValue = Math.random();
-//			int intValue = (int)(randomValue*allTrucks.size())+1;
+//			int intValue = (int)(randomValue*allTrucks.size());
 //			nearTrucks.add(allTrucks.get(intValue));
 //		}
 //		model.addAttribute("nearTrucks", nearTrucks);		
