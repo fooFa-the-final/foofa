@@ -134,6 +134,7 @@
 				<br> <br>
 				<div class="col-lg-12">
 				<form method="post" action="${ctx }/review/create.do">
+					<input type="hidden" name="foodtruckId" value="${truck.foodtruckId}">
 					<div class="col-lg-8" style="float: left">
 						<table width="1150px">
 							<thead>
@@ -168,7 +169,7 @@
 								</tr>
 							</tbody>
 							<tr>
-								<td colspan="2"><textarea name="review"
+								<td colspan="2"><textarea name="contents"
 										style="width: 100%; border: 1; overflow: visible; text-overflow: ellipsis;"
 										rows=15></textarea></td>
 							</tr>
