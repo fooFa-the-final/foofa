@@ -31,8 +31,11 @@
   	</sql>
   	
   	<insert id="insert" parameterType="Foodtruck">
+  		<selectKey keyProperty="foodtruckId" resultType="String" order="BEFORE">
+         select 'F'||truck_seq.nextval FROM DUAL
+      	</selectKey>
   		INSERT INTO foodtruck_tb (foodtruck_id, seller_id, truckName, truck_image, truckHour, area, notice, location, category, payment, parking, drinking, catering, operation_state)
-  		VALUES ('F'||truck_seq.nextval, #{sellerId}, #{foodtruckName}, #{foodtruckImg}, #{operationTime}, #{spot}, #{notice}, #{location}, #{category1}, #{card}, #{parking}, #{drinking}, #{catering}, #{state})
+  		VALUES (#{foodtruckId}, #{sellerId}, #{foodtruckName}, #{foodtruckImg}, #{operationTime}, #{spot}, #{notice}, #{location}, #{category1}, #{card}, #{parking}, #{drinking}, #{catering}, #{state})
   	</insert>
   	
   	<update id="update" parameterType="Foodtruck">

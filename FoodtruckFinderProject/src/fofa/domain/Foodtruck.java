@@ -23,7 +23,7 @@ public class Foodtruck {
 	private String location;
 	private String category1;
 	private String category2;
-	private String categery3;
+	private String category3;
 	private boolean card;
 	private boolean parking;
 	private boolean drinking;
@@ -88,11 +88,11 @@ public class Foodtruck {
 	public void setCategory2(String category2) {
 		this.category2 = category2;
 	}
-	public String getCategery3() {
-		return categery3;
+	public String getCategory3() {
+		return category3;
 	}
-	public void setCategery3(String categery3) {
-		this.categery3 = categery3;
+	public void setCategory3(String category3) {
+		this.category3 = category3;
 	}
 	public String getLocation() {
 		return location;
@@ -161,5 +161,16 @@ public class Foodtruck {
 	public int getReviewCount(){
 		return reviews.size();
 	}
+	@Override
+	public String toString() {
+		return "Foodtruck [foodtruckId=" + foodtruckId + ", sellerId=" + sellerId + ", foodtruckName=" + foodtruckName
+				+ ", foodtruckImg=" + foodtruckImg + ", operationTime=" + operationTime + ", spot=" + spot + ", notice="
+				+ notice + ", location=" + location + ", category1=" + category1 + ", category2=" + category2
+				+ ", category3=" + category3 + ", card=" + card + ", parking=" + parking + ", drinking=" + drinking
+				+ ", catering=" + catering + ", state=" + state + ", favoriteCount=" + favoriteCount + ", reviews="
+				+ reviews + ", menus=" + menus + "]";
+	}
+	
+	
 
 }

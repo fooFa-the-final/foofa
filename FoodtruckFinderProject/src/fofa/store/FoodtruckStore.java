@@ -6,7 +6,7 @@ import fofa.domain.Foodtruck;
 
 public interface FoodtruckStore {
 	
-	int insert(Foodtruck foodtruck);
+	String insert(Foodtruck foodtruck);
 	
 	int update(Foodtruck foodtruck);
 	
