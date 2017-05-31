@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import fofa.domain.Member;
 import fofa.service.MemberService;
@@ -28,25 +29,20 @@ public class MemberController {
 		return "../view/member/registerMember.jsp";
 	}		
 	
+	@ResponseBody
 	@RequestMapping(value="member/checkId.do", method=RequestMethod.POST)
-	public String checkId(HttpServletRequest req, HttpServletResponse res) throws IOException{
+	public String checkId(HttpServletRequest req){
 		String memberId = req.getParameter("id");
 		boolean result;
 		result = service.checkId(memberId);
 		System.out.println(result);
 		
-		PrintWriter out = res.getWriter();
 		
 		if(result == true){
-			out.print("no");
-			System.out.println("사용불가능");
-			return "result";
-		}else{
-			out.print("yes");
-			System.out.println("사용가능");
-			return "result";
+			return "yes";
 		}
-	}
+			return "no";
+		}
 	@RequestMapping(value="member/create.do", method = RequestMethod.POST)
 	public String create(Model model,Member member){
 		service.register(member);
