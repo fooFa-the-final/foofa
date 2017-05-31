@@ -29,9 +29,10 @@ public class AdvertiseController {
 
 	@RequestMapping(value = "advertise/reqest.do", method = RequestMethod.GET)
 	public String requestForm(HttpSession session, Model model) {
-// 세션가능시
-//		Foodtruck foody = foodtruckService.findBySeller((String)session.getAttribute("loginUserId"));
-	
+		// 세션가능시
+		// Foodtruck foody =
+		// foodtruckService.findBySeller((String)session.getAttribute("loginUserId"));
+
 		Foodtruck foody = foodtruckService.findBySeller("nacho");
 		model.addAttribute("truck", foody);
 		return "../view/foodtruck/foodtruckAdvertise.jsp";
@@ -40,9 +41,9 @@ public class AdvertiseController {
 	@RequestMapping(value = "advertise/reqest.do", method = RequestMethod.POST)
 	public String request(HttpSession session, Advertise advertise) {
 
-//		 세션수행 불가시 코드 
-		 advertise.setSellerId("nacho");
-//		advertise.setSellerId((String) session.getAttribute(""));
+		// 세션수행 불가시 코드
+		advertise.setSellerId("nacho");
+		// advertise.setSellerId((String) session.getAttribute(""));
 		advertiseService.register(advertise);
 		return "../view/foodtruck/foodtruckInfo.jsp";
 	}
@@ -54,11 +55,16 @@ public class AdvertiseController {
 	}
 
 	@RequestMapping("advertise/remove.do")
-	public String remove(String[] advId) {
-//		List<String> mlist = Arrays.asasList();
-//		
-//		advertiseService.remove(advId);
-//		System.out.println();
+	public String remove(String advId) {
+		// List<String> mlist = Arrays.asasList();
+
+		String[] Adv = advId.split(",");
+		for (int i = 0; i < Adv.length; i++) {
+			System.out.println(Adv[i]);
+			advertiseService.remove(Adv[i]);
+		}
+
+		System.out.println(Adv);
 		return "asc.do";
 	}
 
@@ -84,7 +90,7 @@ public class AdvertiseController {
 
 	@RequestMapping("advertise/list/desc.do")
 	public String searchByDesc(Model model) {
-		
+
 		return "../../view/admin/adminAdvertise.jsp";
 	}
 

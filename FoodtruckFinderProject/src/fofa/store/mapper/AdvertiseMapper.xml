@@ -31,7 +31,7 @@
 		WHERE (START_DATE + PERIOD) <![CDATA[ <= ]]> SYSDATE
 	</select>
 
-	<update id="update" parameterType="Advertise" >
+	<update id="update" parameterType="String" >
 		update
 		adv_tb set confirm = #{approve}
 		where adv_id = #{advId}
