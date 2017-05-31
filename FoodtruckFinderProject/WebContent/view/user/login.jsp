@@ -63,7 +63,7 @@
                 </div>
             	<span>아직 회원이 아니신가요? 가입해보세요!</span>  
             	 <div style="text-align:right; display:inline; float:right">
-				<button type="submit" class="btn btn-primary" onclick="location.href='${ctx}/member/create.do'">회원 가입</button>
+				<button type="submit" class="btn btn-primary" onclick="location.href='${ctx}/member/createForm.do'">회원 가입</button>
 				<button type="button" class="btn btn-default"onclick="location.href='${ctx}/seller/create.do'">판매자 가입</button>
 				</div>
             </div>

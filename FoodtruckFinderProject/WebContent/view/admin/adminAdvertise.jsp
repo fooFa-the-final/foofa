@@ -38,25 +38,6 @@
 	 f.action = "${ctx }/advertise/remove.do";
 	 f.submit();
 	 }
-	 
-	  	var registComment = function() {		
-	  	        var postData = { "para1": "para1", "advId": para2 };		
-	  	        var para2 = [];		
-	  	        $("input[name='advId']:checked").each(function(i) {		
-	  	        para2.push($(this).val());		
-	  	        });		
-	  		$.ajax({		
-	  			url : "${ctx }/advertise/approve.do",		
-	  			type : "post",		
-	  			data:{	postData		
-	  			},		
-	  			traditional: true,		
-	  			success :alert("성공"), //ajax성공시에 수행되는 기능,		
-	  			error : alert("실패")		
-	  		// 에러발생시 수행되는 기능		
-	  		});		
-	  	};		
-
 	</script>
 <body>
 	<!--  wrapper -->
@@ -145,6 +126,7 @@
 								<div class="tab-pane fade" id="unapproved">
 									<h4>미승인된 광고 목록</h4>
 									<Form method="post" name="formName">
+										<input type="hidden" name="approve" value=1> 
 										<div class="panel-body">
 											<div class="table-responsive">
 
@@ -180,8 +162,8 @@
 											<!--End Advanced Tables -->
 										</div>
 										<div style="text-align: right">
-											<button type="submit" value="approve" class="btn btn-primary"
-												onclick="registComment">Approve</button>
+											<button type="button" value="approve" class="btn btn-success"
+												onclick="approve();">Approve</button>
 											<button type="button" value="pass" class="btn btn-success"
 												onclick="remove();">Pass</button>
 										</div>

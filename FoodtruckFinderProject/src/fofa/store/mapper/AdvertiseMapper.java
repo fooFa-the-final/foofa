@@ -10,7 +10,7 @@ public interface AdvertiseMapper {
 
 	int insert(Advertise advertise);
 
-	int update(String advid);
+	int update(Advertise advertise);
 
 	List<Advertise> selectNowAd();
 
