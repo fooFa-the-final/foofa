@@ -21,12 +21,17 @@
 	</sql>
 
 	<select id="selectNowAd" resultMap="ADVmap">
+<!-- oracle 3개 값 가져오기 	
 	select * from (
 	<include refid="selectADV"></include>
 		where confirm = '1'
 		    order by DBMS_RANDOM.RANDOM 
 	) where rownum <![CDATA[ <= ]]> 3 
-
+ -->
+ 		<include refid="selectADV" />
+ 		<where> confirm = 1</where>
+ 
+ 
 	</select>
 
 	<select id="selectExpired" resultMap="ADVmap">

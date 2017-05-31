@@ -49,22 +49,27 @@ public class AdvertiseController {
 	}
 
 	@RequestMapping("advertise/approve.do")
-	public String approve(String advId) {
-		advertiseService.modify(advId);
-		return "../view/admin/adminAdvertise.jsp";
+	@ResponseBody
+	public List<Advertise>  approve(String advId) {
+		
+		
+		String[] Adv = advId.split(",");
+		for (int i = 0; i < Adv.length; i++) {
+			System.out.println(Adv[i]);
+			advertiseService.modify(Adv[i]);
+		}
+		return advertiseService.findByAsc(1);
 	}
 
 	@RequestMapping("advertise/remove.do")
-	public String remove(String advId) {
-		// List<String> mlist = Arrays.asasList();
+	@ResponseBody
+	public void remove(String advId) {
 		String[] Adv = advId.split(",");
 		for (int i = 0; i < Adv.length; i++) {
 			System.out.println(Adv[i]);
 			advertiseService.remove(Adv[i]);
 		}
-
 		System.out.println(Adv);
-		return "asc.do";
 	}
 
 	@RequestMapping("/advertise/list/asc.do")
