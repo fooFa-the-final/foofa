@@ -27,7 +27,7 @@
 		<h2>Modify your Info</h2>
 		<form role="form" action="${ctx }/seller/modify.do" method="post">
 			<div class="form-group">
-				<label>ID</label> <b class="form-control">${seller.sellerId }</b>
+				<label>ID</label> <b class="form-control"><input type="hidden" name="sellerId" value="${seller.sellerId }">${seller.sellerId }</b>
 			</div>
 			<div class="form-group">
 				<label>비밀번호 변경</label> <input class="form-control" id="password" name="password"

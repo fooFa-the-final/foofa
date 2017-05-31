@@ -40,7 +40,7 @@
 		SYSDATE
 	</select>
 
-	<update id="update" parameterType="String">
+	<update id="update" parameterType="Advertise">
 		update
 		adv_tb set
 		confirm = #{approve}

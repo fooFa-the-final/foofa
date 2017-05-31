@@ -25,20 +25,18 @@
 </head>
 
 <script>
-	 function approve(){
-	 var f=document.formName;
-	 f.action = "${ctx }/advertise/approve.do";
-	 // 파일 전송이 필요할 경우만 씀.
-	 f.submit();
-	 }
-	 
-	 
-	 function remove(){
-	 var f=document.formName;
-	 f.action = "${ctx }/advertise/remove.do";
-	 f.submit();
-	 }
-	</script>
+	function remove() {
+		var f = document.formName;
+		f.action = "${ctx }/advertise/remove.do";
+		f.submit();
+	}
+
+	function okay() {
+		var f = document.formName;
+		f.action = "${ctx }/advertise/approve.do";
+		f.submit();
+	}
+</script>
 <body>
 	<!--  wrapper -->
 	<div id="wrapper">
@@ -105,9 +103,10 @@
 														<th>Days</th>
 													</tr>
 												</thead>
-												<c:forEach var="advertise" items="${advertise}"
-													varStatus="sts">
+									
 													<tbody>
+													<c:forEach var="advertise" items="${advertise}"
+													varStatus="sts">
 														<tr class="odd gradeX">
 															<td>${sts.count}</td>
 															<td>${advertise.sellerId}</td>
@@ -116,20 +115,20 @@
 															<td>${advertise.period}</td>
 														</tr>
 												</c:forEach>
-												</tbody>
+
+													</tbody>
+
 											</table>
 										</div>
 										<!--End Advanced Tables -->
-
 									</div>
 								</div>
 								<div class="tab-pane fade" id="unapproved">
 									<h4>미승인된 광고 목록</h4>
 									<Form method="post" name="formName">
-										<input type="hidden" name="approve" value=1> 
+										<input type="hidden" name="approve" value=1>
 										<div class="panel-body">
 											<div class="table-responsive">
-
 												<table
 													class="table table-striped table-bordered table-hover"
 													id="dataTables-example">
@@ -163,7 +162,7 @@
 										</div>
 										<div style="text-align: right">
 											<button type="button" value="approve" class="btn btn-success"
-												onclick="approve();">Approve</button>
+												onclick="okay();">Approve</button>
 											<button type="button" value="pass" class="btn btn-success"
 												onclick="remove();">Pass</button>
 										</div>
@@ -191,7 +190,6 @@
 	<script src="${ctx}/resources/plugins/metisMenu/jquery.metisMenu.js"></script>
 	<script src="${ctx}/resources/plugins/pace/pace.js"></script>
 	<script src="${ctx}/resources/scripts/siminta.js"></script>
-	<!-- Page-Level Plugin Scripts-->
 	<script src="${ctx}/resources/plugins/dataTables/jquery.dataTables.js"></script>
 	<script
 		src="${ctx}/resources/plugins/dataTables/dataTables.bootstrap.js"></script>
