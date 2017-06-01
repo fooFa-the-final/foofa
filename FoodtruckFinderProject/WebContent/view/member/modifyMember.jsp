@@ -21,15 +21,6 @@
 </head>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-
-	<script>
-	$(document).ready(function() {
-       $('#password').val(${member.password});
-       $('#password1').val(${member.password});
-       $('#email').val(${member.email});
-       $('#birthday').val(${member.birthday});
-   });
-    </script>
 <body>
 
 	<header>
@@ -48,18 +39,18 @@
 					<label>ID</label> <b class="form-control">${member.memberId }</b>
 				</div>
 				<div class="form-group">
-					<br> <input class="form-control" id="password" type="password" name="password">
-					<br> <input class="form-control" id="password1" type="password"> <br>
+					<br> <input class="form-control" id="password" type="password" name="password" value="${member.password}">
+					<br> <input class="form-control" id="password1" type="password" value="${member.password}"> <br>
 				</div>
 
 				<div class="form-group">
 					<label>Email</label> <input class="form-control" id="email"
-						type="text" name="email"> <br>
+						type="text" name="email" value="${member.email}"> <br>
 
 				</div>
 				<div class="form-group">
 					<label>Birthday</label> <input class="form-control" id="birthday"
-						type="text" name="birthday"> <br>
+						type="text" name="birthday" value="${member.birthday}"> <br>
 
 				</div>
 

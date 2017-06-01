@@ -39,10 +39,9 @@ public class FollowController {
 		Follow follow = new Follow();
 		follow.setToId(toId);
 		follow.setFromId(fromId);
-		System.out.println(follow.getFromId());
-		System.out.println(follow.getToId());
 		boolean result;
 		result = followService.remove(follow);
+		System.out.println(result);
 		return true;
 	}
 	@RequestMapping("follow/list.do")
@@ -51,7 +50,6 @@ public class FollowController {
 		model.addAttribute(member);
 		String toId = member.getMemberId();
 		List<Follow> follow =  followService.findFollow(toId);
-		
 		model.addAttribute("follow", follow);
 		
 		return "../view/user/memberFollowerList.jsp";
