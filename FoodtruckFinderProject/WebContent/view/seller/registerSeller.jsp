@@ -65,37 +65,24 @@ function fn_press_han(obj)
 }
 
 
-출처: http://houki.tistory.com/71 [아이고 어렵다]
 
 
 
-var idReg = /^[a-z]+[a-z0-9]{3,16}$/g;
+var idReg = /^[a-z]+[a-z0-9]{3,17}$/g;
 
 
 $(document).ready(function(){
     $("form").submit(function()
     		{
         if(!idReg.test($("input[name='sellerId']").	val())){
-            $("input[name='sellerId']").css("border", "1px solid red").after("<span>아이디3글자 이상 16글자 이하 영문자 숫자의 조합입니다.</span>");
+        	if($("input[name='sellerId']").val() == ""){
+            $("input[name='sellerId']").css("border", "1px solid red").after("<span>아이디4글자 이상 16글자 이하 영문자 숫자의 조합입니다.</span>");
             $("span").css("color", "red").fadeOut(3000);
             return false;
-        }
-    	
-    	
-    	
-        else if($("input[name='sellerId']").val() == ""){
-            $("input[name='sellerId']").css("border", "1px solid red").after("<span>아이디를 입력해주세요</span>");
-            $("span").css("color", "red").fadeOut(3000);
-            return false;
-        } 
-        
-       /*  else if ($("button[name='checking']").val() == "t"){
-            $("input[name='checking']").css("border", "1px solid red").after("<span>아이디중복검사를 실행해주세요</span>");
-            $("span").css("color", "red").fadeOut(3000);
-            return false;
-        } 
- */        
-        else if ($("input[name='password']").val() == ""){
+        	} else {
+        		return false
+        	}
+        } else if ($("input[name='password']").val() == ""){
             $("input[name='password']").css("border", "1px solid red").after("<span>비밀번호를 입력해주세요</span>");
             $("span").css("color", "red").fadeOut(3000);
             return false;
@@ -103,11 +90,13 @@ $(document).ready(function(){
             $("input[name='password1']").css("border", "1px solid red").after("<span>비밀번호를 한번더 입력해주세요</span>");
             $("span").css("color", "red").fadeOut(3000);
             return false;
-        } else if ($("input[name='certification']").val().length > 9){
+        } 
+         else if ($("input[name='certification']").val().length < 10){
             $("input[name='certification']").css("border", "1px solid red").after("<span>사업자등록번호를 입력해주세요</span>");
             $("span").css("color", "red").fadeOut(3000);
             return false;
-        } else if ($("input[name='phone']").val() == ""){
+        } 
+        else if ($("input[name='phone']").val() == ""){
             $("input[name='phone']").css("border", "1px solid red").after("<span>핸드폰번호를 입력해주세요</span>");
             $("span").css("color", "red").fadeOut(3000);
             return false;
@@ -131,6 +120,8 @@ function onlyNumber(str) {
     if ((event.keyCode < 48) || (event.keyCode > 57))
     	event.returnValue = false;
 	}
+	
+	
 	//아이디 ajax
 $(document).ready(function() {
 $("#idCheck").click(function() {
@@ -157,16 +148,16 @@ $("#idCheck").click(function() {
 	});
 	//비밀번호 일치 확인 
 	function checkPwd() {
-		var f1 = document.forms[0];
-		var pw1 = f1.password.value;
-		var pw2 = f1.password1.value;
+		var pw1 = document.getElementById("password").value;
+		
+		var pw2 = document.getElementById("password1").value;
 		if (pw1 != '' && pw2 != '') {
 			if (pw1 != pw2) {
 				document.getElementById('checkPwd').style.color = "red";
-				document.getElementById('checkPwd').innerHTML = "동일한 암호를 입력하세요.";
+				document.getElementById('checkPwd').innerHTML = "암호가 일치하지 않습니다..";
 			} else {
 				document.getElementById('checkPwd').style.color = "black";
-				document.getElementById('checkPwd').innerHTML = "암호가 확인 되었습니다.";
+				document.getElementById('checkPwd').innerHTML = "암호가 일치합니다.";
 			}
 		}
 	}
@@ -211,10 +202,10 @@ $("#idCheck").click(function() {
 						<div id="checkPwd"></div>
 						<br> <b><font size="4">Business Registration
 								Number</font></b> <br> <input id="certification" name="certification"
-							type="text" onkeypress="onlyNumber()" maxlength="10"> -은
-						입력하지 않으셔도 됩니다. <br> <br> <b><font size="4">Phone</font></b>
+							type="text" onkeypress="onlyNumber()" maxlength="10"> -(하이픈)입력하지 않으셔도 됩니다. <br> <br> <b><font size="4">Phone</font></b>
 						<br> <input id="phone" name="phone" type="text" name="phone"
-							onkeypress="onlyNumber();" maxlength="11"> <br> <br>
+							onkeypress="onlyNumber();" maxlength="11"> <br> 
+							<br>
 						<div class="col-md-offset-5 col-sm-25 col-lg-25">
 							<input type="submit" value="등록" class="btn btn-primary">
 						</div>
@@ -228,11 +219,10 @@ $("#idCheck").click(function() {
 	<!-- end wrapper -->
 
 	<!-- Core Scripts - Include with every page -->
-
-	<script src="assets/plugins/jquery-1.10.2.js"></script>
-	<script src="assets/plugins/bootstrap/bootstrap.min.js"></script>
-	<script src="assets/plugins/metisMenu/jquery.metisMenu.js"></script>
-	<script src="assets/plugins/pace/pace.js"></script>
-	<script src="assets/scripts/siminta.js"></script>
+	<script src="${ctx}/resources/plugins/jquery-1.10.2.js"></script>
+	<script src="${ctx}/resources/plugins/bootstrap/bootstrap.min.js"></script>
+	<script src="${ctx}/resources/plugins/metisMenu/jquery.metisMenu.js"></script>
+	<script src="${ctx}/resources/plugins/pace/pace.js"></script>
+	<script src="${ctx}/resources/scripts/siminta.js"></script>
 </body>
 </html>

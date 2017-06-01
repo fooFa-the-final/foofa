@@ -132,7 +132,7 @@ public class MainController {
 				session.setAttribute("loginUserId", id);
 				session.setAttribute("isSeller", true);
 				session.setAttribute("loginTruckId",	foodtruckService.findBySeller(id).getFoodtruckId());
-				return "redirect:truck/id.do";
+				return "redirect:foodtruck/searchById.do";
 			}
 		}else{
 			if(memberService.checkPw(id, pw)){

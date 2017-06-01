@@ -86,7 +86,7 @@ public class SellerController {
 	@RequestMapping(value = "seller/modify.do", method = RequestMethod.POST)
 	public String modify(Seller seller) {
 		sellerService.modify(seller);
-		return "../view/foodtruck/foodtruckInfo.jsp";
+		return "redirect:/foodtruck/searchById.do";
 	}
 
 

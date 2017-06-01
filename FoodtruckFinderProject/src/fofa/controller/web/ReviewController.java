@@ -119,8 +119,19 @@ public class ReviewController {
 	
 	@RequestMapping("/review/report/list.do")
 	public String selectReviewByReport(Model model){
+		List<Review> list = reviewService.findAllByReported();
+		System.out.println(list.size());
+		model.addAttribute("list", list);
 		return "../../view/admin/adminReport.jsp"; // ajax
 	}
+	
+	@RequestMapping("/report/list.do")
+	@ResponseBody
+	public List<Report> selectReportByReviewId(String reviewId){
+		List<Report> list = reviewService.findReport(reviewId);
+		return null;
+	}
+	
 	
 	@RequestMapping("/review/reported/remove.do")
 	public String removeReivewByReport(String reviewId){
