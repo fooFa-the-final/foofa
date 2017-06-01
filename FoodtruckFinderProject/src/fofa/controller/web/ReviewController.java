@@ -86,8 +86,9 @@ public class ReviewController {
 	
 	@RequestMapping(value="/review/modify.do", method=RequestMethod.GET)
 	public String modifyReviewForm(String reviewId, Model model){
-		//Review review = reviewService.findById(reviewId);
-		model.addAttribute("review", "review");
+		Review review = reviewService.findById(reviewId);
+		System.out.println(review.toString());
+		model.addAttribute("review", review);
 		return "/view/user/registerReview.jsp";
 	}
 	
@@ -99,7 +100,7 @@ public class ReviewController {
 	@RequestMapping("/review/remove.do")
 	@ResponseBody
 	public String removeReview(String reviewId){
-		boolean rem = reviewService.remove(reviewId);
+		reviewService.remove(reviewId);
 		return "true";
 	}
 	

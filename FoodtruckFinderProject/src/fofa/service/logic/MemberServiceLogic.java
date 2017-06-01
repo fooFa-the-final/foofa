@@ -49,13 +49,7 @@ public class MemberServiceLogic implements MemberService{
 	public boolean checkPw(String memberId, String password) {
 
 		Member member = store.select(memberId);
-		if(member ==null){
-			String back;
-			back ="../view/user/login.jsp";
-			return false;
-		}
-		
-		if (member.getPassword().equals(password)) {
+		if (member!=null && member.getPassword().equals(password)) {
 			return true;
 		} else {
 			return false;

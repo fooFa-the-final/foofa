@@ -154,8 +154,8 @@
                             </div>
                     </span>
                     <span style="float:right; margin-right:50px; margin-top: 30px">
-                        <a href="#"><button type="button" class="btn btn-default">판매자 정보 수정</button></a>
-                        <a href="#"><button type="button" class="btn btn-default">판매자 탈퇴</button></a>
+                        <a href="#"><button type="button" class="btn btn-default">Make Follow</button></a>
+                        <a href="#"><button type="button" class="btn btn-default">회원 탈퇴</button></a>
                     </span>        
                 </div>
                 <!--End Page Header -->
@@ -164,25 +164,40 @@
                 	<div class = "col-md-9">
                 		<c:forEach items="${list }" var="review">
                 		<div class="col-md-10" style="margin-top:30px" id="rev${review.reviewId }">
-                			<font size="6">${review.foodtruck.foodtruckName }</font>
-                			<c:set value="${review.writer.memberId }" var="writerId"/>
-                			<c:if test="${nowId eq writerId}">
-                				<span style="float:right"><a href = "${ctx }/review/modify.do?reviewId=${review.reviewId}" class="btn btn-default">modify</a><input type="button" class="btn btn-default" value="delete" onClick="revDel('${review.reviewId}')"></span>
-                			</c:if><br>
-                			${review.foodtruck.category1 }
-                			<div class="col-md-12" style="display:inline-block;margin-top:30px">
+                			<div class="col-md-11" style="display:inline-block">
+                				<div class="col-md-9">
+                					<font size="6">${review.foodtruck.foodtruckName }</font><br>
+                					<h4>${review.foodtruck.category1 }</h4>
+                				</div>
+                				<div class="col-md-3">
+	                			<c:set value="${review.writer.memberId }" var="writerId"/>
+	                			<c:if test="${nowId eq writerId}">
+	                				<span style="float:right"><a href = "${ctx }/review/modify.do?reviewId=${review.reviewId}" class="btn btn-default">modify</a><input type="button" class="btn btn-default" value="delete" onClick="revDel('${review.reviewId}')"></span>
+	                			</c:if><br>
+	                			</div>
+                			</div>
+                			<div class="col-md-12" style="display:inline-block">
                 				<div class="col-md-4">
                 					<img src="../../resources/img/food01.jpg" alt="" style="width:320px;height:300px"/>
                 				</div>
                 				<div class="col-md-4">
                 					<img src="../../resources/img/food02.jpg" alt="" style="width:320px;height:300px"/>
                 				</div>
-                				<div class="col-md-4">
-                					<img src="../../resources/img/food03.jpg" alt="" style="width:320px;height:300px"/>
-                				</div>
                 			</div>
+                			<div class="col-md-11" style="display:inline-block;margin-top:30px">
+                			<font size="4">
+                				<div class="col-md-10">
+                					<i class="fa fa-thumbs-up" ></i> : ${review.recommand }
+                				</div>
+                				<div class="col-md-2">
+                					${review.writeDate }
+                				</div>
+                			</font>
+                			</div>
+                			
                 		</div>
                 		</c:forEach>
+                	</div>	
                 	</div>
                 	
             	</div>

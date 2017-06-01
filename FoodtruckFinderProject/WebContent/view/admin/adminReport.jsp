@@ -69,8 +69,8 @@
                                 <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                                     <thead>
                                         <tr>
-                                            <th>Status</th>
-                                            <th>Comments</th>
+                                            <th>Contents</th>
+                                            <th>Reason</th>
                                             <th>Writer</th>
                                             <th>Count</th>
                                             <th>Delete</th>
@@ -78,15 +78,17 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr class="odd gradeX">
-                                            <td>1</td>
-                                            <td>음식이 아니라 쓰레기에요.</td>
-                                            <td>외로운 키보드워리</td>
-                                            <td class="center">100</td>
-                                            <td class="center"><button type="button" class="btn btn-danger">DELETE</button></td>
-                                			<td><button type="button" class="btn btn-primary">PASS</button></td>
-                                        </tr>
-                                        <tr class="odd gradeX">
+                                    	<c:forEach items="${list }" var = "report">
+	                                        <tr class="odd gradeX">
+	                                            <td>음식이 아니라 쓰레기에요.</td>
+	                                            <td>막말이 기가막힘</td>
+	                                            <td>외로운 키보드워리</td>
+	                                            <td class="center">100</td>
+	                                            <td class="center"><button type="button" class="btn btn-danger">DELETE</button></td>
+	                                			<td><button type="button" class="btn btn-primary">PASS</button></td>
+	                                        </tr>
+                                        </c:forEach>
+                                       <!--  <tr class="odd gradeX">
                                             <td>2</td>
                                             <td>서대현 바보 .</td>
                                             <td>이승건 </td>
@@ -100,7 +102,7 @@
                                             <td class="center">190</td>
                                             <td class="center"><button type="button" class="btn btn-danger">DELETE</button></td>
                                 			<td><button type="button" class="btn btn-primary">PASS</button></td>
-                                		</tr>
+                                		</tr> -->
                                     </tbody>
                                 </table>
                             </div>
