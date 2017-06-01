@@ -83,6 +83,7 @@ public class AdvertiseController {
 		String truckname;
 		for (int k = 0; k < list.size(); k++) {
 			Foodtruck food = foodtruckService.findBySeller(list.get(k).getSellerId());
+			System.out.println(list.get(k).getSellerId());
 			truckname = food.getFoodtruckName();
 			list.get(k).setSellerId(truckname);
 		}
