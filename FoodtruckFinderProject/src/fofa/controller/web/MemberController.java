@@ -94,12 +94,13 @@ public class MemberController {
 		return "../view/index.jsp";
 	}
 	
-	
+	@ResponseBody
     @RequestMapping(value = "member/ajaxUpload.do")
     public String ajaxUpload() {
-        return "ajaxUpload";
+        return "../view/user/memberFollowerList.jsp";
     }
      
+    @ResponseBody
     @RequestMapping(value = "member/fileUpload.do")
     public String fileUp(MultipartHttpServletRequest multi) {
          
@@ -123,14 +124,16 @@ public class MemberController {
             System.out.println("실제 파일 이름 : " +fileName);
             newFileName = System.currentTimeMillis()+"."
                     +fileName.substring(fileName.lastIndexOf(".")+1);
+            System.out.println(newFileName);
              
             try {
                 mFile.transferTo(new File(path+newFileName));
+                System.out.println(mFile);
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
-        return "ajaxUpload";
+        return "member/ajaxUpload.do";
     }
 }
 
