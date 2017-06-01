@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -56,8 +57,8 @@ public class FoodtruckController {
 	}
 	
 	@RequestMapping(value="/modifyForm.do", method=RequestMethod.GET)
-	public String modifyForm(String foodtruckId, Model model){
-		Foodtruck foodtruck = foodtruckService.findById(foodtruckId);
+	public String modifyForm(String sellerId, Model model, HttpSession session){
+		Foodtruck foodtruck = foodtruckService.findById((String)session.getAttribute("loginUserId"));
 		String[] category = foodtruck.getCategory1().split("/");
 		foodtruck.setCategory1(category[0]);
 		if(category.length == 2){
@@ -114,9 +115,8 @@ public class FoodtruckController {
 	}
 	
 	@RequestMapping("/searchById.do")
-	public String searchById(String foodtruckId, Model model){
-		Foodtruck foodtruck = foodtruckService.findById(foodtruckId);
-//		Foodtruck foodtruck = foodtruckService.findById("F40");
+	public String searchById(Model model, HttpSession session){
+		Foodtruck foodtruck = foodtruckService.findById((String)session.getAttribute("loginUserId"));
 		String[] category = foodtruck.getCategory1().split("/");
 		foodtruck.setCategory1(category[0]);
 			if(category.length >= 2){

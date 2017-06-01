@@ -81,10 +81,10 @@
                         <a href="#"><i class="fa fa-files-o fa-fw"></i>Truck Info<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li class="selected">
-                                <a href="${ctx }/foodtruck/searchById.do?foodtruckId=${truck.foodtruckId }">Truck Info</a>
+                                <a href="${ctx }/foodtruck/searchById.do">Truck Info</a>
                             </li>
                             <li>
-                                <a href="${ctx }/foodtruck/modifyForm.do?foodtruckId=${truck.foodtruckId }">트럭정보 수정</a>
+                                <a href="${ctx }/foodtruck/modifyForm.do">트럭정보 수정</a>
                             </li>
                         </ul>
                         <!-- second-level-items -->
@@ -110,7 +110,7 @@
                 <!-- Page Header -->
                 <div class="col-md-12" style="background-color:white; height:300px">
                     <div class="col-md-8">
-                            <a class="navbar-brand" href="#" style="margin-top:30px;">
+                            <a class="navbar-brand" href="#" style="margin-top:10px;">
                                 <img src="${ctx }/resources/img/${truck.foodtruckImg }" style="height:250px; width:250px"/>
                             </a>
                             <div class="user-info" style="margin-top:30px;">
@@ -122,8 +122,8 @@
                             </div>
                     </div>
                     <div class="col-md-3" style="float:right; margin-right:30px; margin-top: 30px">
-                        <a href="#"><button type="button" class="btn btn-default">판매자 정보 수정</button></a>
-                        <a href="#"><button type="button" class="btn btn-default">판매자 탈퇴</button></a>
+                        <a href="${ctx }/seller/modify.do"><button type="button" class="btn btn-default">판매자 정보 수정</button></a>
+                        <a href="${ctx }/seller/checkPw.do"><button type="button" class="btn btn-default">판매자 탈퇴</button></a>
                     </div>        
                 </div>
                 <!--End Page Header -->
@@ -165,7 +165,7 @@
                                 <h4>Truck Hour</h4>
                             </div>
                             <div class="panel-body">
-                                <h5>${startTime } 부터  ${endTime } 까지 영업합니다.</h5>
+                                <h5>${startTime } 부터    ${endTime } 까지 영업합니다.</h5>
                             </div>
                           </div>
                       </div>
