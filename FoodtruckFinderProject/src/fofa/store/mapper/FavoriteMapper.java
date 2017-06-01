@@ -13,5 +13,7 @@ public interface FavoriteMapper {
 	List<Favorite> selectByMemberId(String memberId);
 	
 	int selectByTruckId(String foodtruckId);
+	
+	int select(Favorite favorite);
 
 }

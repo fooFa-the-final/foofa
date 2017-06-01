@@ -13,7 +13,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bootsrtap Free Admin Template - SIMINTA | Admin Dashboad Template</title>
+    <title>Foodtruck Finder</title>
     <!-- Core CSS - Include with every page -->
     <link href="../../resources/plugins/bootstrap/bootstrap.css" rel="stylesheet" />
     <link href="../../resources/font-awesome/css/font-awesome.css" rel="stylesheet" />
@@ -89,7 +89,7 @@
 	 			},
 	 			success : function(data){
 	 				if ($.trim(data) == 'true') {
-						alert("신고 처리가 완료되었습니다.");
+						alert("신고 등록이 완료되었습니다.");
 					} else if ($.trim(data) == 'false') {
 						alert("이미 신고된 리뷰입니다.");
 					}
@@ -106,6 +106,33 @@
 	 		 $("input[name=reasonContents]").attr("readonly",false).attr("disabled", false);
 	 		 //$("input[name=reasonContents]").attr("disabled",true);
 	 	}
+	 	
+	 	var favorite = function(truckId){
+	 		var btn = $("#favoriteBtn");
+	 		var classN = btn.attr('class');
+	 		var url ="";
+	 		
+	 		if(classN == "btn btn-default btn-circle btn-lg"){
+	 			url = "${ctx}/favorite/create.do";
+	 			classN = "btn btn-danger btn-circle btn-lg";
+	 		} else {
+	 			url = "${ctx}/favorite/remove.do";
+	 			classN = "btn btn-default btn-circle btn-lg";
+	 		}
+	 		
+	 		$.ajax({
+	 			type:'GET',
+	 			url : url,
+	 			data:{
+	 				foodtruckId : truckId
+	 			},
+	 			success : function(data){
+	 				if (data) {
+	 					btn.attr("class", classN);
+					} 
+	 			}
+	 		});
+	 	};
 	 </script>
 </head>
 
@@ -113,54 +140,8 @@
     <!--  wrapper -->
     
     <div id="wrapper">
-        <!-- navbar top -->
-        <nav class="navbar navbar-default navbar-fixed-top" role="navigation" id="navbar">
-            <!-- navbar-header -->
-            <div class="navbar-header">
-                <a class="navbar-brand" href="index.html">
-                    <img src="../../resources/img/logo.png" alt="" />
-                </a>
-            </div>
-            <!-- end navbar-header -->
-            <!-- navbar-top-links -->
-            <ul class="nav navbar-top-links navbar-right">
-               
-               <li class="row">
-                    <!-- search section-->
-                    <div class="input-group custom-search-form" style="width:800px; margin-right:200px">
-                        <input type="text" class="form-control" placeholder="Search" style="width: 45%">
-                        <input type="text" class="form-control" placeholder="Location" style="width: 45%">
-                            <button class="btn btn-default" type="button">
-                                <i class="fa fa-search"></i>
-                            </button>
-                    </div>
-                    <!--end search section-->
-                </li>
-               
-                <!-- main dropdown -->
-                    <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-user fa-3x"></i>
-                    </a>
-                    <!-- dropdown user-->
-                    <ul class="dropdown-menu dropdown-user">
-                        <li><a href="#"><i class="fa fa-user fa-fw"></i>User Profile</a>
-                        </li>
-                        <li><a href="#"><i class="fa fa-gear fa-fw"></i>Settings</a>
-                        </li>
-                        <li class="divider"></li>
-                        <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i>Logout</a>
-                        </li>
-                    </ul>
-                    <!-- end dropdown-user -->
-                </li>
-                <!-- end main dropdown -->
-            </ul>
-            <!-- end navbar-top-links -->
 
-        </nav>
-        <!-- end navbar top -->
-        
+		<%@ include file="../header.jspf"%>
         <!--  page-wrapper -->
             <div class="row">
                 <!-- Page Header -->
@@ -178,8 +159,8 @@
                             </div>
                     </span>
                     <span style="float:right; margin-right:50px; margin-top: 30px">
-                        <a href="#"><button type="button" class="btn btn-default">판매자 정보 수정</button></a>
-                        <a href="#"><button type="button" class="btn btn-default">판매자 탈퇴</button></a>
+                        <button id="favoriteBtn" type="button" class="btn btn-default btn-circle btn-lg" onclick="favorite('${truck.foodtruckId }');"><i class="fa fa-heart"></i></button>
+                        <a href="#"><button type="button" class="btn btn-danger">리뷰 작성</button></a>
                     </span>        
                 </div>
                 <!--End Page Header -->
@@ -266,7 +247,7 @@
 			
         </div>
         <!-- end page-wrapper -->
-        
+       </div>
     <!-- end wrapper -->
 
     <!-- Core Scripts - Include with every page -->

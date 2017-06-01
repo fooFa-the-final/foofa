@@ -34,4 +34,11 @@ public class FavoriteServiceLogic implements FavoriteService{
 		return store.selectByTruckId(foodtruckId);
 	}
 
+	@Override
+	public boolean alreadyFavorite(Favorite favorite) {
+		return store.select(favorite) > 0;
+	}
+	
+	
+
 }

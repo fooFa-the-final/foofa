@@ -40,6 +40,8 @@
 			}
 		});
 	}
+	
+
 </script>
 
 
@@ -154,7 +156,7 @@
                             </div>
                     </span>
                     <span style="float:right; margin-right:50px; margin-top: 30px">
-                        <a href="#"><button type="button" class="btn btn-default">Make Follow</button></a>
+                        <a href="follow(${member.memberId});"><button id="followBtn" type="button" class="btn btn-default">Make Follow</button></a>
                         <a href="#"><button type="button" class="btn btn-default">회원 탈퇴</button></a>
                     </span>        
                 </div>
