@@ -60,6 +60,7 @@ public class SellerServiceLogic implements SellerService {
 
 	@Override
 	public boolean remove(String sellerId) {
+		System.out.println(sellerId);
 		return sellerStore.delete(sellerId) > 0;
 	}
 }

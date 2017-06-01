@@ -62,16 +62,19 @@ public class SellerStoreLogic implements SellerStore {
 	@Override
 	public int delete(String id) {
 		SqlSession session = factory.openSession();
+		int asd = 0;
+
 		try {
+			System.out.println(sucess);
+			System.out.println(id);
 			SellerMapper mapper = session.getMapper(SellerMapper.class);
-			mapper.delete(id);
-			session.commit();
-			sucess = mapper.delete(id);
+			asd = mapper.delete(id);
+			System.out.println(sucess);
 			session.commit();
 		} finally {
 			session.close();
 		}
-		return sucess;
+		return asd;
 	}
 
 	@Override

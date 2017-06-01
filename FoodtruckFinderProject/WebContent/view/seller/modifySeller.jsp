@@ -30,12 +30,10 @@
 				<label>ID</label> <b class="form-control"><input type="hidden" name="sellerId" value="${seller.sellerId }">${seller.sellerId }</b>
 			</div>
 			<div class="form-group">
-				<label>비밀번호 변경</label> <input class="form-control" id="password" name="password"
-				type="password"	placeholder="비밀번호를 입력해 주세요"> 
+				<label>비밀번호 변경</label> 
+				<input class="form-control" id="password" name="password" type="password" placeholder="비밀번호를 입력해 주세요"> 
 				<br> 
-				<input
-					class="form-control" id="password1" placeholder="변경하실 비밀번호를 입력해주세요">
-
+				<input class="form-control" id="password1" placeholder="변경하실 비밀번호를 입력해주세요">
 				<br> 
 				<input type="password" class="form-control" id="password" placeholder="변경하실 비밀번호를 입력해주세요"> 
 					<br>

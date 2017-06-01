@@ -74,7 +74,7 @@
 		<form role="form" action="${ctx }/seller/remove.do" method="GET">
 			<div class="form-group">
 				<label>비밀번호 변경</label> <input class="form-control" id="password" name="password"
-					placeholder="비밀번호를 입력해 주세요">
+				type="password"	placeholder="비밀번호를 입력해 주세요">
 					<br> 
 					<p id = "passwordResult"></p>
 				<button type="button" class="btn btn-primary" id="pwCheck">submit</button>

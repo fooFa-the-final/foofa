@@ -26,8 +26,7 @@
 </head>
 
 <style>
-<
-style>#indexMain {
+#indexMain {
 	margin: 60px;
 }
 
@@ -53,15 +52,57 @@ style>#indexMain {
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script>
+$(document).ready(function(){
+    $("form").submit(function()
+    		{
+        if($("input[name='sellerId']").val() == ""){
+            $("input[name='sellerId']").css("border", "1px solid red").after("<span>아이디를 입력해주세요</span>");
+            $("span").css("color", "red").fadeOut(3000);
+            return false;
+        } else if ($("button[name='checking']").val() == "t"){
+            $("input[name='checking']").css("border", "1px solid red").after("<span>아이디중복검사를 실행해주세요</span>");
+            $("span").css("color", "red").fadeOut(3000);
+            return false;
+        } else if ($("input[name='password']").val() == ""){
+            $("input[name='password']").css("border", "1px solid red").after("<span>비밀번호를 입력해주세요</span>");
+            $("span").css("color", "red").fadeOut(3000);
+            return false;
+        } else if ($("input[name='password1']").val() == ""){
+            $("input[name='password1']").css("border", "1px solid red").after("<span>비밀번호를 한번더 입력해주세요</span>");
+            $("span").css("color", "red").fadeOut(3000);
+            return false;
+        } else if ($("input[name='certification']").val().length > 9){
+            $("input[name='certification']").css("border", "1px solid red").after("<span>사업자등록번호를 입력해주세요</span>");
+            $("span").css("color", "red").fadeOut(3000);
+            return false;
+        } else if ($("input[name='phone']").val() == ""){
+            $("input[name='phone']").css("border", "1px solid red").after("<span>핸드폰번호를 입력해주세요</span>");
+            $("span").css("color", "red").fadeOut(3000);
+            return false;
+        } 
+        
+        
+        
+        
+    });   
+    $(":input").focus(function(){
+        $(this).css("border", "4px red solid");
+    }).blur(function(){
+        $(this).css("border", "");
+    });       
+    
+    $(":text").focus(function(){
+        $(this).after("<strong>필수 항목입니다.</strong>");
+    }).blur(function(){
+    $("strong").remove();
+    })
+    
+});
 
-function onlyNumber() {
-    if ((event.keyCode < 48) || (event.keyCode > 57))
-        event.returnValue = false;
-}
-
-var str;
+/* 
+하이픈 넣기인데 할 필요가 있을까나...
 function autoHypenPhone(str){
-	str = str.replace(/[^0-9]/g, '');
+	var str = str.replace(/[^0-9]/g, '');
 	var tmp = '';
 	if( str.length < 4){
 		return str;
@@ -88,15 +129,25 @@ function autoHypenPhone(str){
 	return str;
 }
 
+ */
+
+
+function onlyNumber(str) {
+    if ((event.keyCode < 48) || (event.keyCode > 57))
+    	event.returnValue = false;
+	}
+
+
 	//아이디 ajax
-	$(document).ready(function() {
-	$("#idCheck").click(function() {
+$(document).ready(function() {
+$("#idCheck").click(function() {
 		var id = $("#id").val();
 		$.ajax({
 			type : 'POST',
-			url : "${ctx }/member/checkId.do",
+			url : "${ctx }/seller/checkId.do",
 			data : {
-				id : id
+				sellerId : id
+			/* sellerId => 넘어가는 parameter이름 : id 넘기는 var id */
 			},
 			success : function(data) {
 				$("#result").html(data);
@@ -111,7 +162,6 @@ function autoHypenPhone(str){
 		});
 	});
 	});
-
 	//비밀번호 일치 확인 
 	function checkPwd() {
 		var f1 = document.forms[0];
@@ -147,12 +197,18 @@ function autoHypenPhone(str){
 	<div class="container">
 		<div class="row" id="Truck">
 			<div class="col-lg-12">
+
 				<form action="${ctx }/seller/create.do" method="post">
-					<b> <font size="4">ID</font></b> <br>
-						<input id="id" name="sellerId" type="text" placeholder="ID를 입력해주세요.">
-						<button type="button" id="idCheck">중복확인</button>
-						<div id="idmessage"><br></div>
+
+
+
+					<b> <font size="4">ID</font></b> <br> <input id="id"
+						name="sellerId" type="text" placeholder="ID를 입력해주세요.">
+					<button type="button" name="checking" id="idCheck" value="t">중복확인</button>
+					<div id="idmessage">
 						<br>
+					</div>
+					<br>
 					<div>
 						<b> <font size="4">Password</font></b> <br> <input
 							id="password" name="password" type="password"> <br>
@@ -162,12 +218,10 @@ function autoHypenPhone(str){
 						<div id="checkPwd"></div>
 						<br> <b><font size="4">Business Registration
 								Number</font></b> <br> <input id="certification" name="certification"
-							type="text" onkeypress="onlyNumber()" maxlength="10"> -은 입력하지 않으셔도 됩니다. 
-							<br> <br> <b><font size="4">Phone</font></b>
-						<br> <input id="phone" name="phone" type="text" name="phone" onkeypress="autoHypenPhone();" onkeypress="onlyNumber();" maxlength="13">
-						
-						
-						<br> <br>
+							type="text" onkeypress="onlyNumber()" maxlength="10"> -은
+						입력하지 않으셔도 됩니다. <br> <br> <b><font size="4">Phone</font></b>
+						<br> <input id="phone" name="phone" type="text" name="phone"
+							onkeypress="onlyNumber();" maxlength="11"> <br> <br>
 						<div class="col-md-offset-5 col-sm-25 col-lg-25">
 							<input type="submit" value="등록" class="btn btn-primary">
 						</div>

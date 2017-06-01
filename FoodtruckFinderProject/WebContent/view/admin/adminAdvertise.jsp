@@ -30,7 +30,6 @@
 		f.action = "${ctx }/advertise/remove.do";
 		f.submit();
 	}
-
 	function okay() {
 		var f = document.formName;
 		f.action = "${ctx }/advertise/approve.do";
