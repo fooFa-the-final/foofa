@@ -51,6 +51,6 @@
   		select r.review_id review_id, member_id, foodtruck_id, contents, score, writedate 
   		from review_tb r LEFT OUTER JOIN (select review_id, count(*) recommand from recommand_tb group by review_id) d 
   		ON d.review_id = r.review_id
-		order by recommand desc
+		order by recommand desc nulls last
   	</select>
   </mapper>

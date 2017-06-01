@@ -167,7 +167,7 @@
                 			<font size="6">${review.foodtruck.foodtruckName }</font>
                 			<c:set value="${review.writer.memberId }" var="writerId"/>
                 			<c:if test="${nowId eq writerId}">
-                				<span style="float:right"><input type="button" class = "btn btn-default" value="Modify"> <input type="button" class="btn btn-default" value="delete" onClick="revDel('${review.reviewId}')"></span>
+                				<span style="float:right"><a href = "${ctx }/review/modify.do?reviewId=${review.reviewId}" class="btn btn-default">modify</a><input type="button" class="btn btn-default" value="delete" onClick="revDel('${review.reviewId}')"></span>
                 			</c:if><br>
                 			${review.foodtruck.category1 }
                 			<div class="col-md-12" style="display:inline-block;margin-top:30px">

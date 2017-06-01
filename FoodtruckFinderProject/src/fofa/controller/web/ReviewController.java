@@ -67,6 +67,7 @@ public class ReviewController {
 	@RequestMapping(value="/review/create.do", method=RequestMethod.GET)
 	public String createReviewForm(String foodtruckId, Model model){
 		Foodtruck truck = truckService.findById(foodtruckId);
+		model.addAttribute("review", "null");
 		model.addAttribute("truck", truck);
 		return "/view/user/registerReview.jsp";
 	}
@@ -85,7 +86,8 @@ public class ReviewController {
 	
 	@RequestMapping(value="/review/modify.do", method=RequestMethod.GET)
 	public String modifyReviewForm(String reviewId, Model model){
-		return "../../view/user/registerReview.jsp";
+		model.addAttribute("review", reviewService.findById(reviewId));
+		return "/view/user/registerReview.jsp";
 	}
 	
 	@RequestMapping(value="/review/modify.do", method=RequestMethod.POST)

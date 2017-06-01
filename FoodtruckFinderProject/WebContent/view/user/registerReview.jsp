@@ -254,7 +254,14 @@
 			</div>
 			<div class="show">
 			<div class="in" align="center">
-				<input type="submit" class="btn btn-success" value="리뷰 등록">
+			<c:choose>
+				<c:when test="${review eq 'null'}">
+					<input type="submit" class="btn btn-success" value="리뷰 등록">
+				</c:when>
+				<c:otherwise>
+					<input type="submit" class="btn btn-primary" value="리뷰 수정">	
+				</c:otherwise>
+			</c:choose>
 			</div>
 			
 </div>
