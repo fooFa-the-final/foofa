@@ -58,14 +58,47 @@ public class FoodtruckController {
 	@RequestMapping(value="/modifyForm.do", method=RequestMethod.GET)
 	public String modifyForm(String foodtruckId, Model model){
 		Foodtruck foodtruck = foodtruckService.findById(foodtruckId);
+		String[] category = foodtruck.getCategory1().split("/");
+		foodtruck.setCategory1(category[0]);
+		if(category.length == 2){
+			foodtruck.setCategory2(category[1]);
+		}
+		if(category.length == 3){
+			foodtruck.setCategory2(category[1]);
+			foodtruck.setCategory3(category[2]);
+		}
 		model.addAttribute("truck", foodtruck);
+		
+		String[] operationTime = foodtruck.getOperationTime().split("/");
+		String startTime = operationTime[0];
+		String endTime = operationTime[1];
+		model.addAttribute("startTime", startTime);
+		model.addAttribute("endTime", endTime);
+		
 		return "../view/foodtruck/modifyFoodtruck.jsp";
 	}
 	
 	@RequestMapping(value="/modify.do", method=RequestMethod.POST)
-	public String modify(Foodtruck foodtruck){
+	public String modify(Foodtruck foodtruck, HttpServletRequest request){
+		foodtruck.setOperationTime((String)request.getParameter("startTime") + "/" + (String)request.getParameter("endTime"));
+		List<Menu> menus = new ArrayList<>();
+		
+		String[] menuId = request.getParameterValues("menuId");
+		String[] menuNames = request.getParameterValues("menuName");
+		String[] menuPrices = request.getParameterValues("menuPrice");
+		String[] menuStates = request.getParameterValues("menuState");
+		
+		for(int i = 0; i< menuNames.length; i++){
+			Menu menu = new Menu();
+			menu.setMenuId(menuId[i]);
+			menu.setMenuName(menuNames[i]);
+			menu.setPrice(Integer.parseInt(menuPrices[i]));
+			menu.setMenuState(Boolean.parseBoolean(menuStates[i]));
+			menus.add(menu);
+		}
+		foodtruck.setMenus(menus);
 		foodtruckService.modify(foodtruck);
-		return "../view/foodtruck/foodtruckInfo.jsp";
+		return "redirect:/foodtruck/searchById.do?foodtruckId="+foodtruck.getFoodtruckId();
 	}
 	
 	@RequestMapping(value="/modifyPicture.do", method=RequestMethod.GET)
@@ -82,12 +115,17 @@ public class FoodtruckController {
 	
 	@RequestMapping("/searchById.do")
 	public String searchById(String foodtruckId, Model model){
-//		Foodtruck foodtruck = foodtruckService.findById(foodtruckId);
-		Foodtruck foodtruck = foodtruckService.findById("F40");
+		Foodtruck foodtruck = foodtruckService.findById(foodtruckId);
+//		Foodtruck foodtruck = foodtruckService.findById("F40");
 		String[] category = foodtruck.getCategory1().split("/");
 		foodtruck.setCategory1(category[0]);
-		foodtruck.setCategory2(category[1]);
-		foodtruck.setCategory3(category[2]);
+			if(category.length >= 2){
+				foodtruck.setCategory2(category[1]);
+			}
+			if(category.length >= 3){
+				foodtruck.setCategory2(category[1]);
+				foodtruck.setCategory3(category[2]);
+			}
 		String[] operationTime = foodtruck.getOperationTime().split("/");
 		String startTime = operationTime[0];
 		String endTime = operationTime[1];

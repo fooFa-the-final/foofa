@@ -26,14 +26,8 @@
         <nav class="navbar navbar-default navbar-fixed-top" role="navigation" id="navbar">
             <!-- navbar-header -->
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
                 <a class="navbar-brand" href="index.html">
-                    <img src="../../resources/img/logo.png" alt="" />
+                    <img src="${ctx }/resources/img/logo.png" alt="" />
                 </a>
             </div>
             <!-- end navbar-header -->
@@ -87,10 +81,10 @@
                         <a href="#"><i class="fa fa-files-o fa-fw"></i>Truck Info<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li class="selected">
-                                <a href="#">Truck Info</a>
+                                <a href="${ctx }/foodtruck/searchById.do?foodtruckId=${truck.foodtruckId }">Truck Info</a>
                             </li>
                             <li>
-                                <a href="#">트럭정보 수정</a>
+                                <a href="${ctx }/foodtruck/modifyForm.do?foodtruckId=${truck.foodtruckId }">트럭정보 수정</a>
                             </li>
                         </ul>
                         <!-- second-level-items -->
@@ -115,37 +109,74 @@
             <div class="row">
                 <!-- Page Header -->
                 <div class="col-md-12" style="background-color:white; height:300px">
-                    <span>
-                            <a class="navbar-brand" href="#" style="margin-top:10px;">
+                    <div class="col-md-8">
+                            <a class="navbar-brand" href="#" style="margin-top:30px;">
                                 <img src="${ctx }/resources/img/${truck.foodtruckImg }" style="height:250px; width:250px"/>
                             </a>
-                            <div class="user-info">
+                            <div class="user-info" style="margin-top:30px;">
                                 <h1>${truck.foodtruckName }</h1><br>
                                 <h5>${truck.category1 }</h5>
                                 <h5>${truck.spot }</h5>
                                 <h5>${truck.favoriteCount }Followers</h5>
                                 <h5>Reviews</h5>
                             </div>
-                    </span>
-                    <span style="float:right; margin-right:30px; margin-top: 30px">
+                    </div>
+                    <div class="col-md-3" style="float:right; margin-right:30px; margin-top: 30px">
                         <a href="#"><button type="button" class="btn btn-default">판매자 정보 수정</button></a>
                         <a href="#"><button type="button" class="btn btn-default">판매자 탈퇴</button></a>
-                    </span>        
+                    </div>        
                 </div>
                 <!--End Page Header -->
                 
-                <div class="col-md-12">
-                      <div class="col-lg-8">
-                            <h1>Foodtruck Info</h1>
-                          </div>                    
+                <div class="col-md-12" style="margin-top:30px; margin-bottom:50px">
                    <div class="col-md-8">
-                                                
+                   
+                   <!--Truck Location Section-->
+                      <div class="col-lg-12">
+                          <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4>Truck Location</h4>
+                            </div>
+                            <div class="panel-body">
+                                <h5>${truck.location }</h5>
+                            </div>
+                          </div>
+                      </div>
+                  <!--End of Truck Location-->
+                   
+                   
+                 <!--Notice Section-->
+                      <div class="col-lg-12">
+                          <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4>Notice</h4>
+                            </div>
+                            <div class="panel-body">
+                                <h5>${truck.notice }</h5>
+                            </div>
+                          </div>
+                      </div>
+                  <!--End of Notice-->
+                  
+                  <!--Truck Hour Section-->
+                      <div class="col-lg-12">
+                          <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4>Truck Hour</h4>
+                            </div>
+                            <div class="panel-body">
+                                <h5>${startTime } 부터  ${endTime } 까지 영업합니다.</h5>
+                            </div>
+                          </div>
+                      </div>
+                  <!--End of Foodtruck Hour-->
+                  
                        <div class="col-lg-12">                       
                        
                     <!-- Advanced Tables -->
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                             <h3>Menu</h3> 
+                             <h4>Menu</h4> 
                         </div>
                         <div class="panel-body">
                             <div class="table-responsive">
@@ -153,19 +184,29 @@
                                     <thead>
                                         <tr>
                                             <th></th>
-                                            <th> Menu </th>
-                                            <th> Price </th>
-                                            <th> State </th>
+                                            <th style="text-align:center"> Menu </th>
+                                            <th style="text-align:center"> Price </th>
+                                            <th style="text-align:center"> State </th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                    	<c:forEach items="${truck.menus }" var="menus" varStatus="status">
-                                        <tr class="odd gradeX">
-                                            <td>${status.count }</td>
-                                            <td>${menu.menuName }</td>
-                                            <td>${menu.price }</td>
-                                            <td class="center">${menu.menuState }</td>
-                                        </tr>
+                                    	<c:forEach items="${truck.menus }" var="menu" varStatus="status">
+                                        	<c:if test="${menu.menuState eq true }">
+		                                        <tr class="odd gradeX">
+		                                            <td style="text-align:center">${status.count }</td>
+		                                            <td style="text-align:center">${menu.menuName }</td>
+		                                            <td style="text-align:center">${menu.price }</td>
+		                                           	<td style="text-align:center">판매중</td>
+		                                        </tr>
+                                        	</c:if>
+                                        	<c:if test="${menu.menuState eq false }">
+	                                        	<tr class="odd gradeX" >
+		                                            <td style="text-align:center"><font color="gray">${status.count }</font></td>
+		                                            <td style="text-align:center"><font color="lightgray">${menu.menuName }</font></td>
+		                                            <td style="text-align:center"><font color="lightgray">${menu.price }</font></td>
+		                                           	<td style="text-align:center"><font color="red">매진</font></td>
+	                                       		</tr>
+                                        	</c:if>
                                         </c:forEach>
                                     </tbody>
                                 </table>
@@ -176,46 +217,6 @@
                     <!--End Advanced Tables -->
                 </div>
                  
-                 <!--Notice Section-->
-                      <div class="col-lg-12">
-                          <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h3>Notice</h3>
-                            </div>
-                            <div class="panel-body">
-                                <h4>${truck.notice }</h4>
-                            </div>
-                          </div>
-                      </div>
-                  <!--End of Notice-->
-                  
-                  <!--Truck Hour Section-->
-                      <div class="col-lg-12">
-                          <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h3>Truck Hour</h3>
-                            </div>
-                            <div class="panel-body">
-                                <h4>${startTime } 부터  ${endTime } 까지 영업합니다.</h4>
-                            </div>
-                          </div>
-                      </div>
-                  <!--End of Foodtruck Hour-->
-                  
-                  <!--Truck Location Section-->
-                      <div class="col-lg-12">
-                          <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h3>Truck Location</h3>
-                            </div>
-                            <div class="panel-body">
-                                <h4>${truck.location }</h4>
-                            </div>
-                          </div>
-                      </div>
-                  <!--End of Truck Location-->
-                   
-                   
                    </div>
                    <div class="col-md-4" style="background-color: white; height:350px">
                        <h2>Map</h2>
@@ -234,23 +235,39 @@
                                <tbody>
                                    <tr>
                                        <td>Accept Card</td>
-<%--                                        <c:choose> --%>
-<%--                                        	<c:if test="${truck.card }"> --%>
+                                       	<c:if test="${truck.card eq true}">
                                        		<td>YES</td>
-<%--                                        	</c:if> --%>
-<%--                                        </c:choose> --%>
+                                       	</c:if>
+										<c:if test="${truck.card eq false}">
+											<td>NO</td>
+										</c:if>                                       	
                                    </tr>
                                    <tr>
                                        <td>Alcohol</td>
-                                       <td>YES</td>
+                                       <c:if test="${truck.drinking eq true}">
+                                       		<td>YES</td>
+                                       	</c:if>
+										<c:if test="${truck.drinking eq false}">
+											<td>NO</td>
+										</c:if>
                                    </tr>
                                    <tr>
                                        <td>Parking</td>
-                                       <td>YES</td>
+                                       <c:if test="${truck.parking eq true}">
+                                       		<td>YES</td>
+                                       	</c:if>
+										<c:if test="${truck.parking eq false}">
+											<td>NO</td>
+										</c:if>
                                    </tr>
                                    <tr> 
                                        <td>Catering</td>
-                                       <td>YES</td>
+                                       <c:if test="${truck.catering eq true}">
+                                       		<td>YES</td>
+                                       	</c:if>
+										<c:if test="${truck.catering eq false}">
+											<td>NO</td>
+										</c:if>
                                    </tr>
                                </tbody>
                            </table>
