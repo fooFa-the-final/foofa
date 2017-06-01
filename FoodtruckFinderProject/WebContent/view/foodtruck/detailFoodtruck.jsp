@@ -96,6 +96,16 @@
 	 			}
 	 		});
 	 	}
+	 	
+	 	var untype = function(){
+	 		 $("input[name=reasonContents]").attr("readonly",true).attr("disabled", true);
+	 		 //$("input[name=reasonContents]").attr("disabled",true);
+	 	}
+	 	
+	 	var availableType = function(){
+	 		 $("input[name=reasonContents]").attr("readonly",false).attr("disabled", false);
+	 		 //$("input[name=reasonContents]").attr("disabled",true);
+	 	}
 	 </script>
 </head>
 
@@ -232,9 +242,13 @@
 								        </div>
 								        
 								        <div class="modal-body">
-								           	<h4>신고 내용 : ${Review.contents }</h4>
-								           		
-								          <input type="text" class="form-control" placeholder="신고 사유를 적어주세요" id="reason${Review.reviewId}" name="reason">
+								           	<h4>리뷰 내용 : ${Review.contents }</h4>
+								          <input type="radio" name = "reason" value="설" onClick="untype()"> 설<br>
+								          <input type="radio" name = "reason" value="레" onClick="untype()"> 레<br>
+								          <input type="radio" name = "reason" value="여" onClick="untype()"> 여<br>
+								          <input type="radio" name = "reason" value="라" onClick="untype()"> 라<br>
+								          <input type="radio" name = "reason" value="direct" onClick="availableType()"> 얍<br>
+								          <input type="text" class="form-control" placeholder="신고 사유를 적어주세요" id="reason${Review.reviewId}" name="reasonContents">
 								        </div>
 								        <div class="modal-footer">
 								          <input type="button" class="btn btn-default" data-dismiss="modal" value="신고" onClick="report('${Review.reviewId}')">
