@@ -6,6 +6,12 @@
 
 <configuration>
 
+<properties resource="fofa/store/datasource.properties">
+	<property name="driver" value="driver" />
+	<property name="url" value="url" />
+	<property name="username" value="username" />
+	<property name="password" value="password" />
+</properties>
 	<typeAliases>
 		<typeAlias type="fofa.domain.Advertise" alias="Advertise" />
 		<typeAlias type="fofa.domain.Member" alias="Member" />
@@ -26,15 +32,18 @@
 		<typeAlias type="fofa.domain.Follow" alias="Follow" />
 	</typeAliases>
 
+
 	<environments default="development">
 		<environment id="development">
 			<transactionManager type="JDBC"></transactionManager>
 			<dataSource type="POOLED">
-				<property name="driver" value="oracle.jdbc.driver.OracleDriver" />
-				<property name="url" value="jdbc:oracle:thin:@localhost:1521:xe" />
-				<property name="username" value="hr" />
-				<property name="password" value="hr" />
+
+				<property name="driver" value="${driver}" />
+				<property name="url" value="${url}" />
+				<property name="username" value="${username}" />
+				<property name="password" value="${password}" />
 			</dataSource>
+
 		</environment>
 	</environments>
 
