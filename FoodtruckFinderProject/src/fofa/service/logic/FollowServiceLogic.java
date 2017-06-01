@@ -1,5 +1,6 @@
 package fofa.service.logic;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +34,11 @@ public class FollowServiceLogic implements FollowService{
 
 	@Override
 	public int findFollowsCount(String toId) {
-		return findFollowsCount(toId);
+		int num;
+		List<Follow> list = new ArrayList<>();
+		list = store.selectByToId(toId);
+		num = list.size();
+		return num;
 	}
 
 }

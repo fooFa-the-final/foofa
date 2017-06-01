@@ -29,7 +29,6 @@
        $('#email').val(${member.email});
        $('#birthday').val(${member.birthday});
    });
-    
     </script>
 <body>
 

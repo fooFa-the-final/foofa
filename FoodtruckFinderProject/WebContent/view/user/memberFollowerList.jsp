@@ -1,25 +1,26 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 
 <head>
-    <meta charset="utf-8">
+<c:set value="${pageContext.request.contextPath}" var="ctx" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>팔로우 리스트</title>
+    <title>팔로우리스트</title>
     <!-- Core CSS - Include with every page -->
-    <link href="../../resources/plugins/bootstrap/bootstrap.css" rel="stylesheet" />
-    <link href="../../resources/font-awesome/css/font-awesome.css" rel="stylesheet" />
-    <link href="../../resources/plugins/pace/pace-theme-big-counter.css" rel="stylesheet" />
-  <link href="../../resources/css/style.css" rel="stylesheet" />
-      <link href="../../resources/css/main-style.css" rel="stylesheet" />
+    <link href="${ctx}/resources/plugins/bootstrap/bootstrap.css" rel="stylesheet" />
+    <link href="${ctx}/resources/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <link href="${ctx}/resources/plugins/pace/pace-theme-big-counter.css" rel="stylesheet" />
+  <link href="${ctx}/resources/css/style.css" rel="stylesheet" />
+      <link href="${ctx}/resources/css/main-style.css" rel="stylesheet" />
 
     <!-- Page-Level CSS -->
-    <link href="../../resources/plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet" />
+    <link href="resources/plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet" />
 
+<c:set var="ctx">${pageContext.request.contextPath }</c:set>
 </head>
-
 <body>
     <!--  wrapper -->
     <div id="wrapper">
@@ -65,6 +66,41 @@
 		<!-- end navbar top -->
        
 		<!-- navbar side -->
+		<script>
+    function fileSubmit() {
+        var formData = new FormData($("#fileForm")[0]);
+        $.ajax({
+            type : 'post',
+            url : '${ctx }/member/fileUpload.do',
+            data : formData,
+            processData : false,
+            contentType : false,
+            success : function(html) {
+                alert("파일 업로드하였습니다.");
+            },
+            error : function(error) {
+                alert("파일 업로드에 실패하였습니다.");
+                console.log(error);
+                console.log(error.status);
+            }
+        });
+    }
+    
+    
+    $(document).ready(function(){
+    $("#remove").click(function(){
+    	var id = $("#").val();
+    	$.ajax({
+    		type : 'POST',
+    		url : '${ctx }/follow/remove.do',
+    		data : {
+    			id : id
+    		},
+    		success:displayComment
+    	});
+    });
+    });
+    </script>
 		<nav class="navbar-default navbar-static-side" role="navigation">
 			<!-- sidebar-collapse -->
 			<div class="sidebar-collapse">
@@ -92,19 +128,30 @@
 					<div class="row"
 						style="height: 300px; background-color: #FFFFFF; position: absolute; width: 83.5%">
 						<a class="navbar-brand" href="#"
-							style="margin-top: 10px; margin-left: 20px"> <img
-								src="../../resources/img/waikiki.jpg"
+							style="margin-top: 10px; margin-left: 20px">
+							 <img
+	src="../../resources/img/waikiki.jpg"
 								style="height: 250px; width: 250px" />
+								<br>
+
+    <form id="fileForm" action="fileUpload" method="post"
+        enctype="multipart/form-data">
+        <input type="file" id="fileUp" name="fileUp"/>
+        <input type="button" value="전송하기" onClick="fileSubmit();">
+    </form>
+
+
+								
 						</a>
 						<div class="user-info">
-								<h1>트와이스님의 프로필 페이지</h1>
+								<h1>"${member.memberId }"님의 프로필 페이지</h1>
 								<br>
 								<h5>twicejjang@chogo</h5>
 								<h5>144Followers</h5>
 								<h5>255Reviews</h5>
 						</div>
 						<span style="float: right; margin-right: 90px; margin-top: 30px">
-							<a href="#"><button type="button" class="btn btn-default">회원
+							<a href="${ctx }/member/checkPw.do"><button type="button" class="btn btn-default">회원
 									탈퇴</button></a> <br> <br> <br> <br> <br> <br>
 							<br> <a href="#"><button type="button"
 									class="btn btn-default">Make Follow</button></a>
@@ -122,9 +169,10 @@
 				<br>
 
 				<div class="container">
-
+<br><br>
 					<h1>Follwer List</h1>
 					<br>
+					<c:forEach var="follow" items="${follow}" varStatus="sts">
 					<div id="follwer" style="margin-bottom:50px">
 
 						<a class="navbar-brand" href="#"
@@ -133,65 +181,22 @@
 							style="height: 70px; width: 70px" />
 						</a>
 						<div class="user-info">
-							<h5><a href="" style="color:black">파이리</a></h5>
+						<tr class="odd gradeX">
+						<td>${follow.fromId }</td>
+							</tr>
 							<br>
 							<h5>144Followers</h5>
 							<h5>255Reviews</h5>
 							<br>
-						</div>
-						<div style="float: right;">
+							</div><div style="float: right;">
 							<br> <br> <br>
-							<button type="button" class="btn btn-default" style="inlince-bolck; margin-left: 350px;">UNFOLLOW</button>
+							<button id="remove" type="button" class="btn btn-default" style="inlince-bolck; margin-left: 350px;"value="${follow.fromId}" >UNFOLLOW</button>
+							
 						</div>
-						<br>
+							</c:forEach>
+						</div>
 					</div>
-				
-	
-			<div id="follwer" style="margin-bottom:50px">
-
-						<a class="navbar-brand" href="#"
-							style="margin-top: 10px; margin-left: 20px"> <img
-							src="../../resources/img/waikiki.jpg"
-							style="height: 70px; width: 70px" />
-						</a>
-						<div class="user-info">
-							<h5><a href="" style="color:black">파이리</a></h5>
-							<br>
-							<h5>144Followers</h5>
-							<h5>255Reviews</h5>
-							<br>
-						</div>
-						<div style="float: right;">
-							<br> <br> <br>
-							<button type="button" class="btn btn-default" style="inlince-bolck; margin-left: 350px;">UNFOLLOW</button>
-						</div>
-						<br>
-					</div>
-				
-                    
-                    	<div id="follwer" style="margin-bottom:50px">
-
-						<a class="navbar-brand" href="#"
-							style="margin-top: 10px; margin-left: 20px"> <img
-							src="../../resources/img/waikiki.jpg"
-							style="height: 70px; width: 70px" />
-						</a>
-						<div class="user-info">
-							<h5><a href="" style="color:black">파이리</a></h5>
-							<br>
-							<h5>144Followers</h5>
-							<h5>255Reviews</h5>
-							<br>
-						</div>
-						<div style="float: right;">
-							<br> <br> <br>
-							<button type="button" class="btn btn-default" style="inlince-bolck; margin-left: 350px;">UNFOLLOW</button>
-						</div>
-						<br>
-					</div>
-				
-
-				</div>
+</div>
 				<!-- end page-wrapper -->
 
 			</div>
