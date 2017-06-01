@@ -51,19 +51,51 @@
 
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
 <script>
+
+
+function fn_press_han(obj)
+{
+    //좌우 방향키, 백스페이스, 딜리트, 탭키에 대한 예외
+    if(event.keyCode == 8 || event.keyCode == 9 || event.keyCode == 37 || event.keyCode == 39
+    || event.keyCode == 46 ) return;
+    //obj.value = obj.value.replace(/[\a-zㄱ-ㅎㅏ-ㅣ가-힣]/g, '');
+    obj.value = obj.value.replace(/[\ㄱ-ㅎㅏ-ㅣ가-힣]/g, '');
+}
+
+
+출처: http://houki.tistory.com/71 [아이고 어렵다]
+
+
+
+var idReg = /^[a-z]+[a-z0-9]{3,16}$/g;
+
+
 $(document).ready(function(){
     $("form").submit(function()
     		{
-        if($("input[name='sellerId']").val() == ""){
+        if(!idReg.test($("input[name='sellerId']").	val())){
+            $("input[name='sellerId']").css("border", "1px solid red").after("<span>아이디3글자 이상 16글자 이하 영문자 숫자의 조합입니다.</span>");
+            $("span").css("color", "red").fadeOut(3000);
+            return false;
+        }
+    	
+    	
+    	
+        else if($("input[name='sellerId']").val() == ""){
             $("input[name='sellerId']").css("border", "1px solid red").after("<span>아이디를 입력해주세요</span>");
             $("span").css("color", "red").fadeOut(3000);
             return false;
-        } else if ($("button[name='checking']").val() == "t"){
+        } 
+        
+       /*  else if ($("button[name='checking']").val() == "t"){
             $("input[name='checking']").css("border", "1px solid red").after("<span>아이디중복검사를 실행해주세요</span>");
             $("span").css("color", "red").fadeOut(3000);
             return false;
-        } else if ($("input[name='password']").val() == ""){
+        } 
+ */        
+        else if ($("input[name='password']").val() == ""){
             $("input[name='password']").css("border", "1px solid red").after("<span>비밀번호를 입력해주세요</span>");
             $("span").css("color", "red").fadeOut(3000);
             return false;
@@ -80,10 +112,6 @@ $(document).ready(function(){
             $("span").css("color", "red").fadeOut(3000);
             return false;
         } 
-        
-        
-        
-        
     });   
     $(":input").focus(function(){
         $(this).css("border", "4px red solid");
@@ -99,45 +127,10 @@ $(document).ready(function(){
     
 });
 
-/* 
-하이픈 넣기인데 할 필요가 있을까나...
-function autoHypenPhone(str){
-	var str = str.replace(/[^0-9]/g, '');
-	var tmp = '';
-	if( str.length < 4){
-		return str;
-	}else if(str.length < 7){
-		tmp += str.substr(0, 3);
-		tmp += '-';
-		tmp += str.substr(3);
-		return tmp;
-	}else if(str.length < 11){
-		tmp += str.substr(0, 3);
-		tmp += '-';
-		tmp += str.substr(3, 3);
-		tmp += '-';
-		tmp += str.substr(6);
-		return tmp;
-	}else{				
-		tmp += str.substr(0, 3);
-		tmp += '-';
-		tmp += str.substr(3, 4);
-		tmp += '-';
-		tmp += str.substr(7);
-		return tmp;
-	}
-	return str;
-}
-
- */
-
-
 function onlyNumber(str) {
     if ((event.keyCode < 48) || (event.keyCode > 57))
     	event.returnValue = false;
 	}
-
-
 	//아이디 ajax
 $(document).ready(function() {
 $("#idCheck").click(function() {
@@ -203,7 +196,7 @@ $("#idCheck").click(function() {
 
 
 					<b> <font size="4">ID</font></b> <br> <input id="id"
-						name="sellerId" type="text" placeholder="ID를 입력해주세요.">
+						name="sellerId" type="text" placeholder="ID를 입력해주세요." onkeydown="fn_press_han(this);"	>
 					<button type="button" name="checking" id="idCheck" value="t">중복확인</button>
 					<div id="idmessage">
 						<br>
