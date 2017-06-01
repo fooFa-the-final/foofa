@@ -90,7 +90,7 @@
 					<div class="col-lg-4">
 						<div class="panel panel-danger">
 							<div class="panel-header">
-								<img src="${ctx}/resources/img/waikiki.jpg" class="main-truck-img" />
+								<img src="${ctx}/resources/img/${truck.foodtruckImg }" class="main-truck-img" />
 							</div>
 							<div class="panel-body text-left">
 								<b>${truck.foodtruckName }</b> <br> <p > 평점 :<span class="starRating" style="text-align:left;"><span style="width: ${truck.reviewScore*20 }%">${truck.reviewScore }점</span></span></p>리뷰수 : ${truck.reviewCount }
@@ -102,7 +102,7 @@
 				<div class="col-lg-4">
 					<div class="panel panel-danger">
 						<div class="panel-header">
-							<img src="${ctx}/resources/img/waikiki.jpg" class="main-truck-img" />
+							<img src="${ctx}/resources/img/${truck.foodtruckImg }" class="main-truck-img" />
 						</div>
 						<div class="panel-body text-left">
 							<b>${truck.foodtruckName }</b> <br> <p > 평점 :<span class="starRating" style="text-align:left;"><span style="width: ${truck.reviewScore*20 }%">${truck.reviewScore }점</span></span></p>리뷰수 : ${truck.reviewCount }
@@ -115,7 +115,7 @@
 				<div class="col-lg-4">
 					<div class="panel panel-danger">
 						<div class="panel-header">
-							<img src="${ctx}/resources/img/twiceprofile.jpg" class="main-truck-img" />
+							<img src="${ctx}/resources/img/${truck.foodtruckImg }" class="main-truck-img" />
 						</div>
 						<div class="panel-body text-left">
 							<b>${truck.foodtruckName }</b> <br> <p > 평점 :<span class="starRating" style="text-align:left;"><span style="width: ${truck.reviewScore*20 }%">${truck.reviewScore }점</span></span></p>리뷰수 : ${truck.reviewCount }						
@@ -140,56 +140,53 @@
 				<div class="row div-gray">
 				<h4>Hot Reviews</h4>
 				<div class="sub-container">
-				<div class="col-lg-8">
-					<div class="panel panel-primary text-left">
-						<div class="review-heading padding-10">
-							
-							<img class="somenail" src="${ctx }/resources/img/sampleUser.jpg"/>
-							<div style="float:left; width:80%;">
-							<ul>
-								<li><a>Dennis W.</a></li>
-								<li> <span class="sub-li-follow">684 </span>
-									<span class="sub-li-favorite">71 </span>
-								</li>
-								<li> <a>효지니의 핏짜핏짜</a> 에 대한 리뷰 
-								</li>
-								</ul></div>
-
-						</div>
-						<div class="panel-body ">
-							<div style="display:block;">
-								<span class="starRating" style="text-align:left;"><span style="width: 40%">2.5점</span></span> 05/01/2017
-								<p class="reviewContent">
-								 엄청난 리스펙트를 보낸다! Art while it is subjective and at times difficult to comprehend or even relate to, it is often not within a stone's throw of our daily lives. The SF MoMa is in fact relatively accessible from most anywhere in the Bay Area and provides its visitors 7 floors of conscious altering, psychologically intriguing, puzzling and sometimes downright spectacular visual forms of subjective interpretation.
-								</p>
+				<div class="col-lg-9">
+						<div class="panel panel-primary text-left" style="height:327px">
+							<div class="review-heading padding-10">
+								<img class="somenail" src="${ctx }/resources/img/sampleUser.jpg"/>
+								<div style="float:left; width:80%;">
+									<ul>
+										<li><a>${hotReview.writer.memberId }</a></li>
+										<li> <span class="sub-li-follow"><i class="fa fa-thumbs-up fa-1x"></i>${hotReview.recommand } </span>
+											 <span class="sub-li-favorite"><i class="fa fa-twitter fa-1x"></i>${hotReview.recommand } </span>
+										</li>
+										<li> <a href="${ctx }/">${hotReview.foodtruck.foodtruckName }</a> 에 대한 리뷰 </li>
+									</ul>
+								</div>
 							</div>
-						</div>
-					</div>
-					<a>Read another top review...</a>
+							<div class="panel-body ">
+								<div style="display:block;width:500px; float:right;">
+									<span class="starRating" style="text-align:left;"><span style="width: ${hotReview.score *20}%">${hotReview.score }점</span></span> ${review.writeDate}
+									<p class="reviewContent">
+								 		${hotReview.contents }
+									</p>
+								</div>
+								<div style="float:left; width:180px">
+									<img id="${hotReview.reviewId}" src="${ctx }/resources/img/${hotReview.mainImage.filename }" style="width: 160px; height:160px; margin:10px"/>
+									<div class="somenail-list">
+									<c:forEach var="image" varStatus="imageNo" items="${hotReview.images }">
+										<img src="${ctx }/resources/img/${image.filename}" onclick="previewImage(this.src, '${review.reviewId}');"/>
+									</c:forEach>
+									</div>
+								</div>							
+							</div>
+						</div>		
 				</div>
-				<div class="col-lg-4">
-					<div class="panel panel-primary text-left">
-						<div class="panel-body">
-							<img class="somenail" src="${ctx }/resources/img/sampleUser.jpg"/>
-							 <a>효지니의 핏짜핏짜</a><br>
-							By <a>Dennis W.</a>
-						</div>
-						<hr style="margin:5px 20px;">
-						<div class="panel-body">
-							<img class="somenail" src="${ctx }/resources/img/sampleUser.jpg"/>
-							 <a>효지니의 핏짜핏짜</a><br>
-							By <a>Dennis W.</a>
-						</div>
-						<hr style="margin:5px 20px;">
-												<div class="panel-body">
-							<img class="somenail" src="${ctx }/resources/img/sampleUser.jpg"/>
-							 <a>효지니의 핏짜핏짜</a><br>
-							By <a>Dennis W.</a>
-						</div>
-					</div>	
+				<div class="col-lg-3">
+					<div class="panel panel-primary text-center" style="height:327px">
+						<c:forEach var="review" varStatus="no" items="${reviews}"> 
+							<div class="panel-body">
+								<img class="somenail" src="${ctx }/resources/img/${review.mainImage.filename}"/>
+								 <a>${review.foodtruck.foodtruckName }</a><br>
+								By <a>${review.writer.memberId }</a>
+							</div>
+						<hr style="margin:5px 20px;">						
+						
+						</c:forEach>
+
 					<a> Read more list</a>					
 				</div>	
-				</div>		
+				</div></div>
 		</div>
 				<div class="row">
 				<h4>Nearlest Foodtrucks</h4>

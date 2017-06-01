@@ -84,6 +84,10 @@ public class Review {
 	public void setWriteDate(Date writeDate) {
 		this.writeDate = writeDate;
 	}
+	
+	public Image getMainImage(){
+		return this.images.get(0);
+	}
 
 	@Override
 	public String toString() {

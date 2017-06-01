@@ -112,7 +112,7 @@
 								<div style="float:left; width:80%;">
 									<ul>
 										<li><a>${review.writer.memberId }</a></li>
-										<li> <span class="sub-li-follow">${review.recommand } </span>
+										<li> <span class="sub-li-follow"><i class="fa fa-thumbs-up"></i> ${review.recommand } </span>
 											 <span class="sub-li-favorite">71 </span>
 										</li>
 										<li> <a href="${ctx }/">${review.foodtruck.foodtruckName }</a> 에 대한 리뷰 </li>
@@ -127,7 +127,7 @@
 									</p>
 								</div>
 								<div style="float:left; width:180px">
-									<img id="${review.reviewId}" src="${ctx }/resources/img/sample1.jpg" style="width: 160px; height:160px; margin:10px"/>
+									<img id="${review.reviewId}" src="${ctx }/resources/img/${review.mainImage.filename }" style="width: 160px; height:160px; margin:10px"/>
 									<div class="somenail-list">
 									<c:forEach var="image" varStatus="imageNo" items="${review.images }">
 										<img src="${ctx }/resources/img/${image.filename}" onclick="previewImage(this.src, '${review.reviewId}');"/>

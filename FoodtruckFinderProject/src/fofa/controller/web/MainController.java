@@ -42,10 +42,11 @@ public class MainController {
 	public String showMain(Model model){
 		List<Review> allReview = reviewService.findByRecommand();
 		List<Review> reviews = new ArrayList<>();
-		reviews.add(allReview.get(0));
 		reviews.add(allReview.get(1));
 		reviews.add(allReview.get(2));
+		reviews.add(allReview.get(3));
 		model.addAttribute("reviews", reviews);
+		model.addAttribute("hotReview", allReview.get(0));
 		double mainRandom = Math.random();
 		int intMain = (int)(mainRandom*allReview.size());
 		Review mainReview = reviewService.findById(allReview.get(intMain).getReviewId());
@@ -63,7 +64,6 @@ public class MainController {
 		
 		
 		for(int i=0; i<9; i++){
-			System.out.println(ranNumber.get(i));
 			String sellerId = allAdv.get(ranNumber.get(i)).getSellerId();
 			adTrucks.add(foodtruckService.findBySeller(sellerId));
 		}
@@ -83,7 +83,12 @@ public class MainController {
 	@RequestMapping("main.do")
 	public String showMainLogin(HttpSession session, Model model){
 		String memberId = (String)session.getAttribute("loginUserId");
-		List<Review> reviews = reviewService.findByFromId(memberId);
+		List<Review> followReviews = reviewService.findByFromId(memberId);
+		List<Review> reviews = new ArrayList<>();
+		for(int i = 0; i < 20; i++){
+			reviews.add(followReviews.get(i));
+		}
+		
 		model.addAttribute("reviews", reviews);
 
 		List<Review> allReview = reviewService.findByRecommand();
