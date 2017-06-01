@@ -86,7 +86,8 @@ public class ReviewController {
 	
 	@RequestMapping(value="/review/modify.do", method=RequestMethod.GET)
 	public String modifyReviewForm(String reviewId, Model model){
-		model.addAttribute("review", reviewService.findById(reviewId));
+		//Review review = reviewService.findById(reviewId);
+		model.addAttribute("review", "review");
 		return "/view/user/registerReview.jsp";
 	}
 	
