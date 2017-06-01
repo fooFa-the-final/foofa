@@ -1,9 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 <!DOCTYPE html>
 <html>
-
+<c:set value="${pageContext.request.contextPath}" var="ctx" />
+<c:set value="${nowId }" var="nowId"/>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,13 +19,28 @@
 	rel="stylesheet" />
 <link href="../../resources/css/style.css" rel="stylesheet" />
 <link href="../../resources/css/main-style.css" rel="stylesheet" />
-
+<script src="../../resources/plugins/jquery-1.10.2.js"></script>
 <!-- Page-Level CSS -->
 <link href="../../resources/plugins/dataTables/dataTables.bootstrap.css"
 	rel="stylesheet" />
 
-<style>
-</style>
+<script>
+	var revDel = function(reviewId){
+		$.ajax({
+			type:'get',
+			url : "${ctx}/review/remove.do",
+			data:{
+				reviewId : reviewId
+			},
+			success : function(data){
+				var divId = "#rev"+reviewId;
+				console.log(divId)
+				$(divId).remove();
+				alert("리뷰가 삭제되었습니다.");
+			}
+		});
+	}
+</script>
 
 
 </head>
@@ -130,7 +147,7 @@
                                 <img src="../../resources/img/waikiki.jpg" style="height:250px; width:250px"/>
                             </a>
                             <div class="user-info">
-                                <h1>${member.memberId }</h1><br>
+                                <h1>${member.memberId}</h1><br>
                                 <h5>${member.email }</h5>
                                 <h5>144 Followers</h5>
                                 <h5>255 Reviews</h5>
@@ -142,25 +159,30 @@
                     </span>        
                 </div>
                 <!--End Page Header -->
-                <div class="col-md-12">
-                	<h1>Favorite</h1>
-                	<div class = "col-md-8" style="height:150px;margin-top:20px;margin-left:50px;background-color:white">
-                		<div class="col-md-10">
-                			<font size="6"><span style="float:left">트럭 이름 그리고 별 다섯개</span></font>
-                			<span style="float:right"><input type="button" value="Modify"> <input type="button" value="delete"></span><br>
-                			Food Category
-                			<div class="col-md-12" style="display:inline-block;height:300px">
-                				<div class="col-md-4" style="height:300px">
-                					<img src="../../resources/img/smile.png" alt=""/>
+                <div class="col-md-12" style="background-color:white;padding:30px">
+                	<h1><font size="8">Favorite</font></h1>
+                	<div class = "col-md-9">
+                		<c:forEach items="${list }" var="review">
+                		<div class="col-md-10" style="margin-top:30px" id="rev${review.reviewId }">
+                			<font size="6">${review.foodtruck.foodtruckName }</font>
+                			<c:set value="${review.writer.memberId }" var="writerId"/>
+                			<c:if test="${nowId eq writerId}">
+                				<span style="float:right"><input type="button" class = "btn btn-default" value="Modify"> <input type="button" class="btn btn-default" value="delete" onClick="revDel('${review.reviewId}')"></span>
+                			</c:if><br>
+                			${review.foodtruck.category1 }
+                			<div class="col-md-12" style="display:inline-block;margin-top:30px">
+                				<div class="col-md-4">
+                					<img src="../../resources/img/food01.jpg" alt="" style="width:320px;height:300px"/>
                 				</div>
-                				<div class="col-md-4" style="height:300px">
-                					<img src="../../resources/img/smile.png" alt="" />
+                				<div class="col-md-4">
+                					<img src="../../resources/img/food02.jpg" alt="" style="width:320px;height:300px"/>
                 				</div>
-                				<div class="col-md-4" style="height:300px">
-                					<img src="../../resources/img/smile.png" alt="" />
+                				<div class="col-md-4">
+                					<img src="../../resources/img/food03.jpg" alt="" style="width:320px;height:300px"/>
                 				</div>
-                			</div>0
+                			</div>
                 		</div>
+                		</c:forEach>
                 	</div>
                 	
             	</div>

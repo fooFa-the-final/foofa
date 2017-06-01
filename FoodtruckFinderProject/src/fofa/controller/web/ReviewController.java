@@ -35,9 +35,10 @@ public class ReviewController {
 	private MemberService memberService;
 	
 	@RequestMapping("/review/list/member.do")
-	public String searchByMemberId(String memberId, Model model){
+	public String searchByMemberId(String memberId, HttpSession session, Model model){
 		Member member = memberService.findById(memberId);
 		model.addAttribute("member", member);
+		model.addAttribute("nowId", (String)session.getAttribute("loginUserId"));
 		List<Review> list = reviewService.findByMemberId(memberId);
 		model.addAttribute("list", list);
 		return "../../view/user/memberReviewList.jsp";
