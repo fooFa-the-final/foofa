@@ -62,30 +62,28 @@
                     <!-- Advanced Tables -->
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                             신고 리뷰 목록 
+                             	신고 리뷰 목록 
                         </div>
                         <div class="panel-body">
                             <div class="table-responsive">
                                 <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                                     <thead>
                                         <tr>
-                                            <th>Contents</th>
-                                            <th>Reason</th>
-                                            <th>Writer</th>
+                                        	<th>Status</th>
+                                            <th>Comments</th>
+                                            <th>ID</th>
                                             <th>Count</th>
-                                            <th>Delete</th>
-                                            <th>Pass</th>
+                                            <th>P/D</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                    	<c:forEach items="${list }" var = "report">
+                                    	<c:forEach items="${list }" var = "review" varStatus="status">
 	                                        <tr class="odd gradeX">
-	                                            <td>음식이 아니라 쓰레기에요.</td>
-	                                            <td>막말이 기가막힘</td>
-	                                            <td>외로운 키보드워리</td>
-	                                            <td class="center">100</td>
-	                                            <td class="center"><button type="button" class="btn btn-danger">DELETE</button></td>
-	                                			<td><button type="button" class="btn btn-primary">PASS</button></td>
+	                                            <td>${status.count }</td>
+	                                            <td><input type="button" class="btn btn-default" value="리뷰 내용"></td>
+	                                            <td class="center">${review.writer.memberId }</td>
+	                                            <td class="center">5</td>
+	                                			<td><button type="button" class="btn btn-primary">PASS</button><button type="button" class="btn btn-danger">DELETE</button></td>
 	                                        </tr>
                                         </c:forEach>
                                        <!--  <tr class="odd gradeX">

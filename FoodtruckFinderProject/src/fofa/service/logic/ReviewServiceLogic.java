@@ -1,6 +1,7 @@
 package fofa.service.logic;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -81,10 +82,15 @@ public class ReviewServiceLogic implements ReviewService {
 	@Override
 	public List<Review> findAllByReported() {
 		List<Report> reportList = reportStore.selectAll();
-		List<Review> list = new ArrayList<>();
-		for(Report r : reportList){
-			list.add(reviewStore.selectById(r.getReviewId()));
+		HashSet<String> hs = new HashSet<>();
+		for(Report r: reportList){
+			hs.add(r.getReviewId());
 		}
+		List<Review> list = new ArrayList<>();
+		for(String r : hs){
+			list.add(reviewStore.selectById(r));
+		}
+		
 		return list;
 	}
 
@@ -94,8 +100,8 @@ public class ReviewServiceLogic implements ReviewService {
 	}
 
 	@Override
-	public Report findReport(Report report) {
-		return reportStore.selectById(report);
+	public List<Report> findReport(String reviewId) {
+		return reportStore.selectById(reviewId);
 	}
 
 	@Override
