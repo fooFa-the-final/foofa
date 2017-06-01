@@ -133,7 +133,15 @@
 
 				<br> <br>
 				<div class="col-lg-12">
-				<form method="post" action="${ctx }/review/create.do">
+				<c:choose>
+				<c:when test="${review eq 'null'}">
+					<form method="post" action="${ctx }/review/create.do">
+				</c:when>
+				<c:otherwise>
+					<form method="post" action="${ctx }/review/modify.do">
+				</c:otherwise>
+				</c:choose>
+				
 					<input type="hidden" name="foodtruckId" value="${truck.foodtruckId}">
 					<div class="col-lg-8" style="float: left">
 						<table width="1150px">
