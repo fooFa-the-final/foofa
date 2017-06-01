@@ -143,7 +143,7 @@
 				<div class="col-lg-9">
 						<div class="panel panel-primary text-left" style="height:327px">
 							<div class="review-heading padding-10">
-								<img class="somenail" src="${ctx }/resources/img/sampleUser.jpg"/>
+								<img class="somenail" src="${ctx }/resources/img/${review.writer.profileImg }"/>
 								<div style="float:left; width:80%;">
 									<ul>
 										<li><a>${hotReview.writer.memberId }</a></li>

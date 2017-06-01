@@ -84,10 +84,13 @@ public class MainController {
 	public String showMainLogin(HttpSession session, Model model){
 		String memberId = (String)session.getAttribute("loginUserId");
 		List<Review> followReviews = reviewService.findByFromId(memberId);
+
 		List<Review> reviews = new ArrayList<>();
-		for(int i = 0; i < 20; i++){
+		if(followReviews.size()!=0){
+			for(int i = 0; i < 20; i++){
 			reviews.add(followReviews.get(i));
-		}
+				}
+			}
 		
 		model.addAttribute("reviews", reviews);
 

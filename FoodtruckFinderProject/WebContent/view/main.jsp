@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 <!DOCTYPE>
 <html>
 <c:set value="${pageContext.request.contextPath}" var="ctx" />
@@ -39,7 +40,7 @@
 		<!-- navbar-header -->
 		<br>
 		<div class="col-lg-12 top-head-menu" style="">
-		            <ul class="nav navbar-top-links navbar-right">
+		     <ul class="nav navbar-top-links navbar-right">
 		            <li class="dropdown"  style="padding:0px;">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                         <i class="fa fa-user fa-2x"></i>
@@ -63,7 +64,7 @@
                     </ul>
                     <!-- end dropdown-user -->
                 </li>
-		            </ul>
+		    </ul>
 		</div>
 		<ul class="nav navbar-top-links navbar-main-links navbar-center">
 			<li class="row">
@@ -105,38 +106,48 @@
 			<h4>Recent Activity</h4>
 			<div class="sub-container">
 				<div class="col-lg-9">
-					<c:forEach var="review" varStatus="reviewNo" items="${reviews }">
-						<div class="panel panel-primary text-left">
-							<div class="review-heading padding-10">
-								<img class="somenail" src="${ctx }/resources/img/sampleUser.jpg"/>
-								<div style="float:left; width:80%;">
-									<ul>
-										<li><a>${review.writer.memberId }</a></li>
-										<li> <span class="sub-li-follow"><i class="fa fa-thumbs-up"></i> ${review.recommand } </span>
-											 <span class="sub-li-favorite">71 </span>
-										</li>
-										<li> <a href="${ctx }/">${review.foodtruck.foodtruckName }</a> 에 대한 리뷰 </li>
-									</ul>
-								</div>
-							</div>
-							<div class="panel-body ">
-								<div style="display:block;width:500px; float:right;">
-									<span class="starRating" style="text-align:left;"><span style="width: ${review.score *20}%">${review.score }점</span></span> ${review.writeDate}
-									<p class="reviewContent">
-								 		${review.contents }
-									</p>
-								</div>
-								<div style="float:left; width:180px">
-									<img id="${review.reviewId}" src="${ctx }/resources/img/${review.mainImage.filename }" style="width: 160px; height:160px; margin:10px"/>
-									<div class="somenail-list">
-									<c:forEach var="image" varStatus="imageNo" items="${review.images }">
-										<img src="${ctx }/resources/img/${image.filename}" onclick="previewImage(this.src, '${review.reviewId}');"/>
-									</c:forEach>
-									</div>
+					<c:choose>
+						<c:when test="${fn:length(reviews) == 0 }">
+								<div class="panel panel-primary text-left">
+									등록된 팔로우들의 리뷰가 없습니다.
 								</div>							
-							</div>
-						</div>					
-					</c:forEach>
+						</c:when>
+						<c:otherwise>
+							<c:forEach var="review" varStatus="reviewNo" items="${reviews }">
+								<div class="panel panel-primary text-left">
+									<div class="review-heading padding-10">
+										<img class="somenail" src="${ctx }/resources/img/${review.writer.profileImg }"/>
+										<div style="float:left; width:80%;">
+											<ul>
+												<li><a>${review.writer.memberId }</a></li>
+												<li> <span class="sub-li-follow"><i class="fa fa-thumbs-up"></i> ${review.recommand } </span>
+													 <span class="sub-li-favorite">71 </span>
+												</li>
+												<li> <a href="${ctx }/">${review.foodtruck.foodtruckName }</a> 에 대한 리뷰 </li>
+											</ul>
+										</div>
+									</div>
+									<div class="panel-body ">
+										<div style="display:block;width:500px; float:right;">
+											<span class="starRating" style="text-align:left;"><span style="width: ${review.score *20}%">${review.score }점</span></span> ${review.writeDate}
+											<p class="reviewContent">${review.contents }
+											</p>
+										</div>
+										<div style="float:left; width:180px">
+											<img id="${review.reviewId}" src="${ctx }/resources/img/${review.mainImage.filename }" style="width: 160px; height:160px; margin:10px"/>
+											<div class="somenail-list">
+												<c:forEach var="image" varStatus="imageNo" items="${review.images }">
+													<img src="${ctx }/resources/img/${image.filename}" onclick="previewImage(this.src, '${review.reviewId}');"/>
+												</c:forEach>
+											</div>
+										</div>							
+									</div>
+								</div>					
+							</c:forEach>						
+						</c:otherwise>
+					</c:choose>
+					
+
 				</div>
 
 				<div class="col-lg-3">
