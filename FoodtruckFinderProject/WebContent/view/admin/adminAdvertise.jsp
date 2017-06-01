@@ -41,25 +41,8 @@
 	<div id="wrapper">
 
 		<%@ include file="../header.jspf"%>
-
-		<!-- navbar side -->
-		<nav class="navbar-default navbar-static-side" role="navigation">
-			<!-- sidebar-collapse -->
-			<div class="sidebar-collapse">
-				<!-- side-menu -->
-				<ul class="nav" id="side-menu">
-					<li><a href="${ctx }/review/report/list.do"><i
-							class="fa fa-dashboard fa-fw"></i>신고 관리 </a></li>
-					<li><a href="${ctx }/survey/item/list.do"><i
-							class="fa fa-flask fa-fw"></i>설문조사 관리</a></li>
-					<li class="selected"><a href="${ctx }/advertise/list/asc.do"><i
-							class="fa fa-table fa-fw"></i>광고 관리</a></li>
-				</ul>
-				<!-- end side-menu -->
-			</div>
-			<!-- end sidebar-collapse -->
-		</nav>
-		<!-- end navbar side -->
+		<%@ include file="../left/adminLeft.jspf"%>
+		
 		<!--  page-wrapper -->
 		<div id="page-wrapper">
 
@@ -195,6 +178,7 @@
 	<script>
 		$(document).ready(function() {
 			$('#dataTables-example').dataTable();
+			$('#side-advertise').attr('class', 'selected');
 		});
 	</script>
 

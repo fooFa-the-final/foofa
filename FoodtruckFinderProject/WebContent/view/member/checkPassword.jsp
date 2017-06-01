@@ -38,48 +38,60 @@
 }
 </style>
 
-		<script
-			src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-		<script>
-			$(document).ready(function() {
-				//비밀번호  확인 버튼 클릭
-				$("#pwCheck").click(function() {
-					var password = $("#password").val();
-					$.ajax({
-						type : 'POST',
-						url : "${ctx }/member/checkPw.do",
-						data : {
-							password : password
-						},
-						success : function(data) {
-							$("#result").html(data);
-							if ($.trim(data) == 'yes') {
-								$("form").submit();
-								return true;
-							} else if($.trim(data) == 'no'){
-								$("#passwordResult").html("비밀번호가 일치하지않습니다");
-							}
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script>
+	$(document).ready(function() {
+		$('#side-remove').attr('class', 'selected');
 
-						}
+		//비밀번호  확인 버튼 클릭
+		$("#pwCheck").click(function() {
+			var password = $("#password").val();
+			$.ajax({
+				type : 'POST',
+				url : "${ctx }/member/checkPw.do",
+				data : {
+					password : password
+				},
+				success : function(data) {
+					$("#result").html(data);
+					if ($.trim(data) == 'yes') {
+						$("form").submit();
+						return true;
+					} else if ($.trim(data) == 'no') {
+						$("#passwordResult").html("비밀번호가 일치하지않습니다");
+					}
 
-					});
-				});
+				}
+
 			});
-		</script>
+		});
+	});
+</script>
 <body>
-	<header>
-		<%@ include file="../header.jspf"%>
-	</header>
-	<div class="col-lg-6">
-		<form role="form" action="${ctx }/member/remove.do" method="GET">
-			<div class="form-group">
-				<label>비밀번호 변경</label> <input class="form-control" id="password" name="password"
-					placeholder="비밀번호를 입력해 주세요">
-					<br> 
-					<p id = "passwordResult"></p>
-				<button type="button" class="btn btn-primary" id="pwCheck">submit</button>
+
+	<div id="wrapper">
+		<header>
+			<%@ include file="../header.jspf"%>
+		</header>
+
+		<%@ include file="../left/memberLeft.jspf"%>
+
+		<!--  page-wrapper -->
+		<div id="page-wrapper">
+			<div class="row">
+				<div class="col-lg-12">
+					<form role="form" action="${ctx }/member/remove.do" method="GET">
+						<div class="form-group">
+							<label>회원 탈퇴</label> <input class="form-control" id="password"
+								name="password" placeholder="비밀번호를 입력해 주세요"> <br>
+							<p id="passwordResult"></p>
+							<button type="button" class="btn btn-primary" id="pwCheck">submit</button>
+						</div>
+					</form>
+				</div>
 			</div>
-		</form>
+		</div>
 	</div>
 	<!-- Core Scripts - Include with every page -->
 	<script src="${ctx}/resources/plugins/jquery-1.10.2.js"></script>
@@ -87,6 +99,5 @@
 	<script src="${ctx}/resources/plugins/metisMenu/jquery.metisMenu.js"></script>
 	<script src="${ctx}/resources/plugins/pace/pace.js"></script>
 	<script src="${ctx}/resources/scripts/siminta.js"></script>
-
 </body>
 </html>

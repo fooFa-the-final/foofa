@@ -33,48 +33,9 @@
 <body>
     <!--  wrapper -->
     <div id="wrapper" style="color:#FFFFFF">
-        <!-- navbar top -->
-        <nav class="navbar navbar-default navbar-fixed-top" role="navigation" id="navbar">
-            <!-- navbar-header -->
-                <a class="navbar-brand" href="index.html">
-                    <img src="${ctx }/resources/img/logo.png" alt="" />
-                </a>
-            <!-- navbar-top-links -->
-            <ul class="nav navbar-top-links navbar-right">
-                <!-- main dropdown -->
-                <li class="row">
-                		<div class="col-xs-10" style="margin-right: 200px">
-	            			<!-- search section-->
-	                        <div class="input-group custom-search-form">
-	                        	<input type="text" class="form-control" placeholder="Search" style="width: 400px">
-	                            <input type="text" class="form-control" placeholder="Location" style="width: 400px">
-	                            <button class="btn btn-default" type="button"><i class="fa fa-search"></i></button>
-	                        </div>
-	                		<!--end search section-->
-	            		</div>
-                </li>
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-user fa-3x"></i>
-                    </a>
-                    <!-- dropdown user-->
-                    
-                    <ul class="dropdown-menu dropdown-user">
-                        <li><a href="#"><i class="fa fa-user fa-fw"></i>User Profile</a>
-                        </li>
-                        <li><a href="#"><i class="fa fa-gear fa-fw"></i>Settings</a>
-                        </li>
-                        <li class="divider"></li>
-                        <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i>Logout</a>
-                        </li>
-                    </ul>
-                    <!-- end dropdown-user -->
-                </li>
-                <!-- end main dropdown -->
-            </ul>
-            <!-- end navbar-top-links -->
-        </nav>
-        <!-- end navbar top -->
+
+
+		<%@ include file="../header.jspf"%>
 
         <!--  page-wrapper -->
 
