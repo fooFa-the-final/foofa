@@ -89,20 +89,21 @@
         });
     }
     
-    
-    $(document).ready(function(){
-    $("#remove").click(function(){
-    	var id = $("#").val();
-    	$.ajax({
-    		type : 'POST',
-    		url : '${ctx }/follow/remove.do',
-    		data : {
-    			id : id
-    		},
-    		success:displayComment
-    	});
-    });
-    });
+	var revDel = function(reviewId){
+		$.ajax({
+			type:'get',
+			url : "${ctx }/follow/remove.do",
+			data:{
+				reviewId : reviewId
+			},
+			success : function(data){
+				var divId = "#rev"+reviewId;
+				console.log(divId)
+				$(divId).remove();
+				alert("리뷰가 삭제되었습니다.");
+			}
+		});
+	}
     </script>
 		<nav class="navbar-default navbar-static-side" role="navigation">
 			<!-- sidebar-collapse -->
@@ -193,7 +194,8 @@
 							<br>
 							</div><div style="float: right;">
 							<br> <br> <br>
-							<button id="remove" type="button" class="btn btn-default" style="inlince-bolck; margin-left: 350px;"value="${follow.fromId}" >UNFOLLOW</button>
+							<button id="remove" name="remove" type="button" class="btn btn-default" onclick= "remove" style="inlince-bolck; margin-left: 350px;"value="${follow.fromId}" >UNFOLLOW</button>
+						
 							
 						</div>
 							</c:forEach>
