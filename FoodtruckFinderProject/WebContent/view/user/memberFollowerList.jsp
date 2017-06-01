@@ -89,18 +89,18 @@
         });
     }
     
-	var revDel = function(reviewId){
+	var fowDel = function(fromId){
 		$.ajax({
 			type:'get',
 			url : "${ctx }/follow/remove.do",
 			data:{
-				reviewId : reviewId
+				fromId : fromId
 			},
 			success : function(data){
-				var divId = "#rev"+reviewId;
-				console.log(divId)
-				$(divId).remove();
-				alert("리뷰가 삭제되었습니다.");
+				var fromId= "#member"+memberId;
+				console.log(fromId)
+				$(fromId).remove();
+				alert("언-팔");
 			}
 		});
 	}
@@ -194,7 +194,7 @@
 							<br>
 							</div><div style="float: right;">
 							<br> <br> <br>
-							<button id="remove" name="remove" type="button" class="btn btn-default" onclick= "remove" style="inlince-bolck; margin-left: 350px;"value="${follow.fromId}" >UNFOLLOW</button>
+							<button type="button" class="btn btn-default" onclick= "fowDel('${follow.fromId}')" style="inlince-bolck; margin-left: 350px;"value="delete" >UNFOLLOW</button>
 						
 							
 						</div>

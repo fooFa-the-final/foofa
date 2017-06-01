@@ -10,7 +10,7 @@ public interface FoodtruckStore {
 	
 	int update(Foodtruck foodtruck);
 	
-	Foodtruck selectById(String foodtruckId);
+	Foodtruck selectById(String sellerId);
 	
 	List<Foodtruck> selectByLoc(String location);
 	

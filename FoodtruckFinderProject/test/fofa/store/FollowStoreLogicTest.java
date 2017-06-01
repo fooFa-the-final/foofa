@@ -14,31 +14,29 @@ public class FollowStoreLogicTest {
 	private FollowStore store= new FollowStoreLogic();
 	
 	
-//	@Test
-//	public void testinset(){
-//		Follow follow = new Follow();
-//		follow.setFromId("mina");
-//		follow.setToId("momo");
-//		
-//		assertEquals(1, store.insert(follow));
-//		
-//	}
+	@Test
+	public void testinset(){
+		Follow follow = new Follow();
+		follow.setFromId("mina");
+		follow.setToId("sana");
+		
+		assertEquals(1, store.insert(follow));
+		
+	}
 
 //	@Test
 //	public void deleteTest() {
 //		Follow m = new Follow();
-//		m.setToId("momo");
-//		m.setFromId("mina");
+//		m.setToId("sana");
+//		m.setFromId("momo");
 //		int delete = store.delete(m);
 //		assertEquals(1, delete);
 //	}
-//	
-	
-	@Test
-	public void testselectFrom(){
-		List<Follow> m = store.selectByFromId("momo");
-		assertEquals(2, m.size());
-	}
+//	@Test
+//	public void testselectFrom(){
+//		List<Follow> m = store.selectByFromId("momo");
+//		assertEquals(2, m.size());
+//	}
 	
 //	@Test
 //	public void testselectto(){

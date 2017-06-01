@@ -50,12 +50,12 @@ public class FoodtruckStoreLogic implements FoodtruckStore{
 	}
 
 	@Override
-	public Foodtruck selectById(String foodtruckId) {
+	public Foodtruck selectById(String sellerId) {
 		SqlSession session = factory.openSession();
 		Foodtruck foodtruck = null;
 		try{
 			FoodtruckMapper mapper = session.getMapper(FoodtruckMapper.class);
-			foodtruck = mapper.selectById(foodtruckId);
+			foodtruck = mapper.selectById(sellerId);
 		} finally {
 			session.close();
 		}

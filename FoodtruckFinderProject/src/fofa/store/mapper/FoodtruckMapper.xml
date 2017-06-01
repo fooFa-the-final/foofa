@@ -46,7 +46,7 @@
   	
   	<select id="selectById" parameterType="String" resultMap="foodtruckMap">
   		<include refid="selectFoodtrucks"/>
-  		WHERE foodtruck_id=#{foodtruckId}
+  		WHERE seller_id=#{sellerId}
   	</select>
   	
   	<select id="selectByLoc" parameterType="String" resultMap="foodtruckMap">

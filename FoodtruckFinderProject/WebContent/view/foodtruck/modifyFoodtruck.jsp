@@ -67,6 +67,31 @@
             	searchCoordinateToAddress(e.coord);
             });
         });
+        
+        var c = 0;
+        var registMenu = function(){
+        	var comHtml = "";
+        	var count = c++;
+        	comHtml += '<tr class="odd gradeX">';
+        	comHtml += '<td></td><td align="left"><input type="text" id="menuName'+(count)+'" name="menuName" value="'+$("#inputMenuName").val()+'" style="border:0px; background-color:transparent" readonly></td>';
+        	comHtml += '<td align="left"><input type="text" id="menuPrice'+(count)+'" name="menuPrice" value="'+$("#inputMenuPrice").val()+'" style="border:0px; background-color:transparent" readonly></td>';
+        	comHtml += '<td ><input type="text" id="menuState'+(count)+'" name="menuState" value="'+ $("#inputMenuState").val() +'" style="border:0px; background-color:transparent" readonly></td>';
+        	comHtml += '<td>';
+        	comHtml += '<button type="button" class="btn btn-default btn-circle" onClick="modifyMenu(this)"><i class="fa fa-pencil"></i></button>';
+            comHtml += '<button type="button" class="btn btn-danger btn-circle" onClick="removeMenu(this)"><i class="fa fa-times"></i></button>';
+            comHtml += '</td>';
+            comHtml += '</tr>';
+        	$('#menus tr:last').before(comHtml);
+        	
+        	$('#menus tr:last').find("input[name^=inputMenuName]").val("").end();
+        	$('#menus tr:last').find("input[name^=inputMenuPrice]").val("").end();
+        	$('#menus tr:last').find("select[name^=inputMenuState]").val("판매중").end();
+        }
+
+        var removeMenu = function(obj){
+        	var removeThis = $(obj).parent().parent();
+            removeThis.remove();
+        }
     </script>
 </head>
 
@@ -140,10 +165,10 @@
                         <a href="#"><i class="fa fa-files-o fa-fw"></i>Truck Info<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="${ctx }/foodtruck/searchById.do?foodtruckId=${truck.foodtruckId }">Truck Info</a>
+                                <a href="${ctx }/foodtruck/searchById.do?">Truck Info</a>
                             </li>
                             <li class="selected">
-                                <a href="${ctx }/foodtruck/modifyForm.do?foodtruckId=${truck.foodtruckId }">트럭정보 수정</a>
+                                <a href="${ctx }/foodtruck/modifyForm.do">트럭정보 수정</a>
                             </li>
                         </ul>
                         <!-- second-level-items -->
@@ -186,10 +211,6 @@
                            	  </h5>
                               <h5><input class="form-control" type="text" name="location" value="${truck.location }" style="width:61.5%"></h5>
                         </div>
-<!--                     <div class="col-md-3" style="float:right; margin-right:30px; margin-top: 30px"> -->
-<!--                         <a href="#"><button type="button" class="btn btn-default">판매자 정보 수정</button></a> -->
-<!--                         <a href="#"><button type="button" class="btn btn-default">판매자 탈퇴</button></a> -->
-<!--                     </div>         -->
                 </div>
                 <!--End Page Header -->
                 
