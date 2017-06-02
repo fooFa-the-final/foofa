@@ -88,6 +88,19 @@ public class ReviewStoreLogic implements ReviewStore {
 	}
 
 	@Override
+	public List<Review> selectByFromId(String fromId) {
+		SqlSession session = factory.openSession();
+		List<Review> review = null;
+		try{
+			ReviewMapper mapper = session.getMapper(ReviewMapper.class);
+			review = mapper.selectByFromId(fromId);
+
+		} finally {
+			session.close();
+		} 
+		return review;
+	}
+	@Override
 	public List<Review> selectByTruckId(String foodtruckId) {
 		SqlSession session = factory.openSession();
 		List<Review> review = null;
