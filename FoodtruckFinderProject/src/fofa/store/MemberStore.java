@@ -8,6 +8,6 @@ public interface MemberStore {
 	int update(Member member);
 	int delete(String memberId);
 	Member select(String memberId);
-
+	int imgupdate(Member member);
 }
 

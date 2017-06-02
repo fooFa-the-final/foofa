@@ -59,13 +59,7 @@ public class ReviewServiceLogic implements ReviewService {
 
 	@Override
 	public List<Review> findByFromId(String memberId) {
-		List<Follow> list = followStore.selectByFromId(memberId);
-		System.out.println("follow list : " + list.size());
-		List<Review> reviewList = new ArrayList<>();
-		for(Follow f : list){
-			reviewList.addAll(reviewStore.selectByMemberId(f.getToId()));
-		}
-		System.out.println(reviewList.size());
+		List<Review> reviewList = reviewStore.selectByFromId(memberId);
 		return reviewList;
 	}
 
@@ -115,7 +109,7 @@ public class ReviewServiceLogic implements ReviewService {
 	}
 
 	@Override
-	public boolean removeReport(Report report) {
-		return reportStore.delete(report) > 0;
+	public boolean removeReport(String reviewId) {
+		return reportStore.delete(reviewId) > 0;
 	}
 }

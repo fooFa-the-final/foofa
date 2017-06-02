@@ -63,4 +63,11 @@ public class MemberServiceLogic implements MemberService{
 		return member;
 	}
 
+	@Override
+	public boolean modifyImg(Member member) {
+		return store.imgupdate(member)>0;
+	}
+	
+	
+
 }

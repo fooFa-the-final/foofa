@@ -152,12 +152,13 @@ public class SalesController {
 	}
 
 	@RequestMapping(value = "sales/month.do")
-	public @ResponseBody JSONArray search1MonthSales(HttpServletRequest req, String month) {
+	public @ResponseBody JSONArray search1MonthSales(HttpServletRequest req) {
 		/*
 		 * HttpSession session = req.getSession(); String foodtruckId = (String)
 		 * session.getAttribute("loginTruckId");
 		 */
-		List<Sale> list = service.find1MonthSales("F1", "201601");
+
+		List<Sale> list = service.find1MonthSales("1");
 		JSONArray jsonArray = new JSONArray();
 
 		for (int i = 0; i < list.size(); i++) {

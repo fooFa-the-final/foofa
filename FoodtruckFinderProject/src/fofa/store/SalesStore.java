@@ -4,6 +4,8 @@ import java.sql.Date;
 import java.util.HashMap;
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import fofa.domain.Sale;
 
 public interface SalesStore {
@@ -20,6 +22,6 @@ public interface SalesStore {
 
 	List<Sale> select10DaysSales(String foodtruckId);
 
-	List<Sale> select1MonthSales(String foodtruckId, String month);
+	List<Sale> select1MonthSales(String foodtruckId);
 
 }

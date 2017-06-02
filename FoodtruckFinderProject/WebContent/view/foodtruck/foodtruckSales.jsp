@@ -71,63 +71,44 @@ h2 {
 <script src='${ctx }/resources/scripts/jquery.min.js'></script>
 <script src='${ctx }/resources/scripts/fullcalendar.min.js'></script>
 <script>
-	$(document).ready(
-			function() {
-				$('#side-sales').attr('class', 'selected');
+	$(document).ready(function() {
+		$('#side-sales').attr('class', 'selected');
+		$('#calendar').fullCalendar({
+			
+			dayClick : function(date, jsEvent, view) {
 
-				$('#calendar').fullCalendar({
-					dayClick : function(date, jsEvent, view) {
-
-						convertDate(date.format());
-					},
-					defaultDate : '2017-05-12',
-					editable : true,
-					eventLimit : true, // allow "more" link when too many events
-					events : [ {
-						title : 'Click for Google',
-						url : 'http://google.com/',
-						start : '2017-05-28'
-					} ]
+				convertDate(date.format());
+			},
+			events : function(start, end, timezone, callback) {
+				$.ajax({
+					url : '${ctx}/sales/month.do',
+					dataType : 'json',
+					success : function(data) {
+						var events = [];
+						$.each(data,function(i,item) {
+							events.push({
+								title : item.re,
+								start : item.da
+							});
+						});
+						callback(events);
+					}
 				});
-				jQuery("button.fc-prev-button").click(function() {
-					var date = jQuery("#calendar").fullCalendar("getDate");
-					convertMonth(date);
-				});
-				jQuery("button.fc-next-button").click(function() {
-					var date = jQuery("#calendar").fullCalendar("getDate");
-					convertMonth(date);
-				});
-				function convertDate(date) {
-					var date = new Date(date);
-					date = date.yyyymmdd();
-					alert(date);
-				}
-				Date.prototype.yyyymmdd = function() {
-					var yyyy = this.getFullYear().toString();
-					var mm = (this.getMonth() + 1).toString();
-					var dd = this.getDate().toString();
-					return yyyy + (mm[1] ? mm : "0" + mm[0])
-							+ (dd[1] ? dd : "0" + dd[0]);
-				}
-				function convertMonth(date) {
-					var date = new Date(date);
-
-					date = date.yyyymm();
-					var allData = {
-						"month" : date
-					};
-					alert(date);
-
-				}
-				Date.prototype.yyyymm = function() {
-					var yyyy = this.getFullYear().toString();
-					var mm = (this.getMonth() + 1).toString();
-					return yyyy + (mm[1] ? mm : "0" + mm[0]);
-				}
-
-			});
-	
-
+			}
+		});
+		function convertDate(date) {
+			var date = new Date(date);
+			date = date.yyyymmdd();
+			alert(date);
+		}
+		Date.prototype.yyyymmdd = function() {
+			var yyyy = this.getFullYear().toString();
+			var mm = (this.getMonth() + 1).toString();
+			var dd = this.getDate().toString();
+			return yyyy + (mm[1] ? mm : "0" + mm[0])
+					+ (dd[1] ? dd : "0" + dd[0]);
+		}
+	})
 </script>
 <style>
 #calendar {
@@ -141,8 +122,8 @@ h2 {
 	<div id="wrapper">
 		<!-- navbar top -->
 		<%@ include file="../header.jspf"%>
-		
-        <%@ include file="../left/sellerLeft.jspf"%>
+
+		<%@ include file="../left/sellerLeft.jspf"%>
 		<div id="page-wrapper">
 			<!--매출페이지 시작  -->
 			<div>

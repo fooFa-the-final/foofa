@@ -6,7 +6,7 @@ import fofa.domain.Report;
 
 public interface ReportStore {
 	int insert(Report report);
-	int delete(Report report);
+	int delete(String reviewId);
 	List<Report> selectById(String reviewId);
 	List<Report> selectAll();
 }

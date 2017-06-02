@@ -62,15 +62,15 @@ public class FollowStoreLogic implements FollowStore {
 	}
 
 	@Override
-	public List<Follow> selectByToId(String toId) {
+	public int selectByToId(String memberId) {
 		SqlSession session = factory.openSession();
-		List<Follow> list = null;
+		int count = 0;
 		try{
 			FollowMapper mapper = session.getMapper(FollowMapper.class);
-			list = mapper.selectByToId(toId);
+			count = mapper.selectByToId(memberId);
 		}finally{
 			session.close();
 		}
-		return list;
+		return count;
 	}
 }
