@@ -29,7 +29,6 @@
    <div id="wrapper">
 		<%@ include file="../header.jspf"%>
 		<%@ include file="../left/memberLeft.jspf"%>
-	</div>
 		<!--  page-wrapper -->
 		<div id="page-wrapper" style="background-color: #FFFFFF">
 		

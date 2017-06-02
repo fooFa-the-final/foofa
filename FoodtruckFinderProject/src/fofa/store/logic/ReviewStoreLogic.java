@@ -153,4 +153,17 @@ public class ReviewStoreLogic implements ReviewStore {
 		} 
 		return count;
 	}
+	@Override
+	public int selectMemberCount(String foodtruckId) {
+		SqlSession session = factory.openSession();
+		int count = 0;
+		try{
+			ReviewMapper mapper = session.getMapper(ReviewMapper.class);
+			count = mapper.selectMemberCount(foodtruckId);
+
+		} finally {
+			session.close();
+		} 
+		return count;
+	}
 }

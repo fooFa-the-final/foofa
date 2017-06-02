@@ -34,11 +34,8 @@ public class FollowServiceLogic implements FollowService{
 
 	@Override
 	public int findFollowsCount(String toId) {
-		int num;
-		List<Follow> list = new ArrayList<>();
-		list = store.selectByToId(toId);
-		num = list.size();
-		return num;
+
+		return store.selectByToId(toId);
 	}
 
 }

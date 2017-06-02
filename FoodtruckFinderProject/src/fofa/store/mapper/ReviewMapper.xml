@@ -67,4 +67,7 @@
   	<select id = "selectTruckCount" resultType="int" parameterType="String">
   		select count(*) from review_tb where foodtruck_Id = #{foodtruckId}
   	</select>
+  	  	<select id = "selectMemberCount" resultType="int" parameterType="String">
+  		select count(*) from review_tb where member_id = #{memberId}
+  	</select>
   </mapper>
