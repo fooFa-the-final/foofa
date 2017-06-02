@@ -114,5 +114,30 @@ public class ReviewStoreLogic implements ReviewStore {
 		} 
 		return review;
 	}
+	@Override
+	public double avgScore(String foodtruckId) {
+		SqlSession session = factory.openSession();
+		double score = 0;
+		try{
+			ReviewMapper mapper = session.getMapper(ReviewMapper.class);
+			score = mapper.avgScore(foodtruckId);
 
+		} finally {
+			session.close();
+		} 
+		return score;
+	}
+	@Override
+	public int selectTruckCount(String foodtruckId) {
+		SqlSession session = factory.openSession();
+		int count = 0;
+		try{
+			ReviewMapper mapper = session.getMapper(ReviewMapper.class);
+			count = mapper.selectTruckCount(foodtruckId);
+
+		} finally {
+			session.close();
+		} 
+		return count;
+	}
 }

@@ -11,7 +11,7 @@ public interface FoodtruckService {
 	
 	boolean modify(Foodtruck foodtruck);
 	
-	Foodtruck findById(String sellerId);
+	Foodtruck findById(String foodtruckId);
 	
 	List<Foodtruck> findByLoc(String location);
 	

@@ -6,6 +6,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -116,7 +117,7 @@ public class FoodtruckController {
 	
 	@RequestMapping("/searchById.do")
 	public String searchById(Model model, HttpSession session){
-		Foodtruck foodtruck = foodtruckService.findById((String)session.getAttribute("loginUserId"));
+		Foodtruck foodtruck = foodtruckService.findBySeller((String)session.getAttribute("loginUserId"));
 		String[] category = foodtruck.getCategory1().split("/");
 		foodtruck.setCategory1(category[0]);
 			if(category.length >= 2){
@@ -135,8 +136,11 @@ public class FoodtruckController {
 		return "../view/foodtruck/foodtruckInfo.jsp";
 	}
 	
+	
 	@RequestMapping("/searchByKeyLoc.do")
-	public String searchByKeyLoc(String keyword, String location, Model model){
+	public String searchByKeyLoc(int pageNum, String keyword, String location, Model model){
+		
+		
 		List<Foodtruck> trucks;
 		if(keyword.isEmpty()){
 			trucks = foodtruckService.findByLoc(location);

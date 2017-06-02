@@ -53,4 +53,10 @@
   		ON d.review_id = r.review_id
 		order by recommand desc nulls last
   	</select>
+  	<select id = "avgScore" resultType="Double" parameterType="String">
+  		select avg(score) from review_tb where foodtruck_Id = #{foodtruckId}
+  	</select>
+  	<select id = "selectTruckCount" resultType="int" parameterType="String">
+  		select count from review_tb where foodtruck_Id = #{foodtruckId}
+  	</select>
   </mapper>

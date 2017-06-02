@@ -48,7 +48,6 @@ public class ReviewController {
 	public String searchByFollower(HttpSession session, Model model){
 		String memberId = (String)session.getAttribute("loginUserId");
 		List<Review> list = reviewService.findByFromId(memberId);
-		System.out.println(list.size());
 		for(Review r : list){
 			System.out.println(r.getFoodtruck().getFoodtruckName());
 		}
@@ -130,7 +129,8 @@ public class ReviewController {
 	@ResponseBody
 	public List<Report> selectReportByReviewId(String reviewId){
 		List<Report> list = reviewService.findReport(reviewId);
-		return null;
+		System.out.println("신고 테이블 개수 : " + list.size());
+		return list;
 	}
 	
 	

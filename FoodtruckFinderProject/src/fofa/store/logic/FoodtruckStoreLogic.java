@@ -23,10 +23,9 @@ public class FoodtruckStoreLogic implements FoodtruckStore{
 	public String insert(Foodtruck foodtruck) {
 		SqlSession session = factory.openSession();
 		String foodtruckId = null;
-		int insert = 0;
 		try{
 			FoodtruckMapper mapper = session.getMapper(FoodtruckMapper.class);
-			insert = mapper.insert(foodtruck);
+			mapper.insert(foodtruck);
 			foodtruckId = foodtruck.getFoodtruckId();
 			session.commit();
 		} finally {
@@ -50,12 +49,12 @@ public class FoodtruckStoreLogic implements FoodtruckStore{
 	}
 
 	@Override
-	public Foodtruck selectById(String sellerId) {
+	public Foodtruck selectById(String foodtruckId) {
 		SqlSession session = factory.openSession();
 		Foodtruck foodtruck = null;
 		try{
 			FoodtruckMapper mapper = session.getMapper(FoodtruckMapper.class);
-			foodtruck = mapper.selectById(sellerId);
+			foodtruck = mapper.selectById(foodtruckId);
 		} finally {
 			session.close();
 		}
