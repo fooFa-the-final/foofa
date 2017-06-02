@@ -144,12 +144,6 @@ public class Foodtruck {
 	public void setMenus(List<Menu> menus) {
 		this.menus = menus;
 	}
-	public int getReviewCount() {
-		return reviewCount;
-	}
-	public void setReviewCount(int reviewCount) {
-		this.reviewCount = reviewCount;
-	}
 	public double getScore() {
 		return score;
 	}
