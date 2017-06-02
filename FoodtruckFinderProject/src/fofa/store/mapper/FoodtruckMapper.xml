@@ -33,15 +33,15 @@
   	</sql>
   	
   	<sql id="pagingTrucks">
-  		SELECT foodtruck_id, truckName, truck_image, category, area
+  		SELECT foodtruck_id, truckName, truck_image, category, area, location
   		FROM foodtruck_tb
   	</sql>
   	
   	<sql id="pagingPre">
   		<![CDATA[
-  			SELECT X.rnum, X.foodtruck_id, X.truckName, X.truck_image, X.category, X.area
+  			SELECT X.rnum, X.foodtruck_id, X.truckName, X.truck_image, X.category, X.area, X.location
 			FROM ( 
-    		SELECT rownum AS rnum, A.foodtruck_id, A.truckName, A.truck_image, A.category, A.area
+    		SELECT rownum AS rnum, A.foodtruck_id, A.truckName, A.truck_image, A.category, A.area, A.location
     		FROM (
   		]]>
   	</sql>
