@@ -58,11 +58,9 @@ public class FollowController {
 	}
 	@RequestMapping("follow/count.do")
 	public int searchCount(String memberId,HttpSession session, Model model){
-		Member member = memberService.findById((String)(session.getAttribute("loginUserId")));
-		model.addAttribute(member);
-		String toId = member.getMemberId();
-		List<Follow> follow =  followService.findFollow(toId);
-		
+		memberId = ((String)(session.getAttribute("loginUserId")));
+		List<Follow> follow =  followService.findFollow(memberId);
+		follow.size();
 		return 0;
 	}
 	

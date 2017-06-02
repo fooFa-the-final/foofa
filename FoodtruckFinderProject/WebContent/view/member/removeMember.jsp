@@ -21,7 +21,19 @@
 
 <c:set var="ctx">${pageContext.request.contextPath }</c:set>
 </head>
-
+<script type="text/javascript">
+	function pass() {
+		req = document.getElementsByName("bye");
+		if (req[0].checked) {
+			var f = document.forName;
+			f.action = "${ctx }/member/remove.do";
+			f.submit();
+		} else {
+			var msg = "약관동의에 체크해 주세요";
+			alert(msg);
+		}
+	}	
+</script>
 <body class="body-Login-back">
  <!--  wrapper -->
     <div id="wrapper">
@@ -31,7 +43,7 @@
 		<!--  page-wrapper -->
 		<div id="page-wrapper">
 			<div class="row">
-       			 <form method="post" action="${ctx }/member/remove.do">
+       			 <form method="post" name="forName">
 				<div class="col-lg-12">
            			 <div class="col-md-8 col-md-offset-2 text-center logo-margin ">
           			  	<h1>회원탈퇴</h1>  
@@ -46,12 +58,11 @@
                       
 		                   	  <h1>탈퇴 후 회원정보 및 개인형 서비스 이용기록은 모두 삭제됩니다.</h1>
 		                     		 <h1>사용하고 계신 아이디는 탈퇴할 경우 재사용 및 복구가 불가능합니다.</h1>
-							<input type="checkbox" name="bye" value="yes"><b>안내 사항을 모두 확인하였으며, 이에 동의합니다.</b>
-                          
+							<input type="checkbox" id="bye" name="bye" value="yes"><b>안내 사항을 모두 확인하였으며, 이에 동의합니다.</b>
                     	</div>
                		 </div>
             		<span>우린 친구라고 믿었는대...잘가...</span>  
-            		<button type="submit" class="btn btn-primary">Delete</button>
+            		<button type="button" onclick="pass();" class="btn btn-primary">Delete</button>
             		</div>		
 				</div>
             	</form>
@@ -70,9 +81,7 @@
 	<script src="${ctx}/resources/plugins/pace/pace.js"></script>
 	<script src="${ctx}/resources/scripts/siminta.js"></script>
 	<script>
-	$(document).ready(function() {
-		$('#side-remove').attr('class', 'selected');
-	})
+
 	</script>
 
 </body>

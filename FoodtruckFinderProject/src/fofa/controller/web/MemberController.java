@@ -71,8 +71,8 @@ public class MemberController {
 	@ResponseBody
 	@RequestMapping(value="member/checkPw.do", method=RequestMethod.POST)
 	public String checkPw(HttpSession session, String password){
-		Member member = service.findById((String)(session.getAttribute("loginUserId")));
-		String memberId = member.getMemberId();
+		String memberId = ((String)(session.getAttribute("loginUserId")));
+		
 		boolean result;
 		result = service.checkPw(memberId, password);
 		
