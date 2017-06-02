@@ -18,10 +18,17 @@
 	rel="stylesheet" />
 <link href="${ctx }/resources/css/style.css" rel="stylesheet" />
 <link href="${ctx }/resources/css/main-style.css" rel="stylesheet" />
-<!-- Page-Level CSS -->
-<link href="../../resources/plugins/dataTables/dataTables.bootstrap.css"
-	rel="stylesheet" />
 
+<script src="${ctx }/resources/plugins/jquery-1.10.2.js"></script>
+<!-- Page-Level CSS -->
+<script>
+	$(document).ready(function(){
+		<c:if test="${review ne 'null'}">
+			$('input:radio[name=score]:input[value='+${review.score}+']').attr("checked", true);
+			$('#contents').val("${review.contents}");
+		</c:if>
+	});
+</script>
 </head>
 
 <style>
@@ -97,13 +104,14 @@
 				<c:choose>
 				<c:when test="${review eq 'null'}">
 					<form method="post" action="${ctx }/review/create.do">
+					<input type="hidden" name="foodtruckId" value="${truck.foodtruckId}">
 				</c:when>
 				<c:otherwise>
 					<form method="post" action="${ctx }/review/modify.do">
 				</c:otherwise>
 				</c:choose>
 				
-					<input type="hidden" name="foodtruckId" value="${truck.foodtruckId}">
+					
 					<div class="col-lg-8" style="float: left">
 						<table width="1150px">
 							<thead>
@@ -138,7 +146,7 @@
 								</tr>
 							</tbody>
 							<tr>
-								<td colspan="2"><textarea name="contents"
+								<td colspan="2"><textarea name="contents" id="contents"
 										style="width: 100%; border: 1; overflow: visible; text-overflow: ellipsis;"
 										rows=15></textarea></td>
 							</tr>
@@ -239,7 +247,6 @@
 	</div>
 	<!-- end wrapper -->
 	<!-- Core Scripts - Include with every page -->
-	<script src="${ctx }/resources/plugins/jquery-1.10.2.js"></script>
 	<script src="${ctx }/resources/plugins/bootstrap/bootstrap.min.js"></script>
 	<script src="${ctx }/resources/plugins/metisMenu/jquery.metisMenu.js"></script>
 	<script src="${ctx }/resources/plugins/pace/pace.js"></script>
