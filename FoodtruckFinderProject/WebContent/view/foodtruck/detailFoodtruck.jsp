@@ -32,7 +32,33 @@
 			markers.push(marker);
 		    console.log(position + "length : " +markers.length);
 		}
+	 	//favorite 수 반환
 	 	$(document).ready(function(){
+	 		$.ajax({
+	 			type:'get',
+	 			url : "${ctx }/favorite/count.do",
+	 			data:{
+	 				foodtruckId : '${truck.foodtruckId}'
+	 			},
+	 			success : function(data){
+					$("#followCount").html(data);
+	 			}
+	 		});	 		
+		 //버튼 서식 지정 
+		 		$.ajax({
+		 			type:'get',
+		 			url : "${ctx }/favorite/exist.do",
+		 			data:{
+		 				foodtruckId : '${truck.foodtruckId}'
+		 			},
+		 			success : function(data){
+						if(data){
+							 $("#favoriteBtn").attr('class', 'btn btn-danger btn-circle btn-lg');
+						}else {
+							 $("#favoriteBtn").attr('class', 'btn btn-default btn-circle btn-lg');
+						}
+		 			}
+		 		});	 	 		
 	 		
 	 		naver.maps.Service.geocode({
 	 			address: "${truck.location}"
@@ -152,9 +178,9 @@
                             </a>
                             <div class="user-info">
                                 <h1>${truck.foodtruckName }</h1><br>
-                                <h5>${truck.category1 }양식</h5>
+                                <h5>${truck.category1 }</h5>
                                 <h5>${truck.spot }</h5>
-                                <h5>144 Followers</h5>
+                                <h5><span id="followCount"></span>이 이푸드트럭을 단골로 등록했습니다.</h5>
                                 <h5>${fn:length(reviewList)} Reviews</h5>
                             </div>
                     </span>

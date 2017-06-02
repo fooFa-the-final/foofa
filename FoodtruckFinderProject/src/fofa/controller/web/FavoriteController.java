@@ -66,7 +66,18 @@ public class FavoriteController {
 	}
 	
 	@RequestMapping(value="/count.do", method=RequestMethod.GET)
+	@ResponseBody
 	public int searchCount(String foodtruckId){
 		return favoriteService.foodtruckCount(foodtruckId);
+	}	
+	@RequestMapping(value="/exist.do", method=RequestMethod.GET)
+	@ResponseBody
+	public boolean exist(String foodtruckId, HttpSession session){
+		Favorite favorite = new Favorite();
+		favorite.setFoodtruckId(foodtruckId);
+		favorite.setMemberId((String)session.getAttribute("loginUserId"));
+		
+	System.out.println(favorite.getMemberId()+":"+favorite.getFoodtruckId());
+		return favoriteService.alreadyFavorite(favorite);
 	}	
 }
