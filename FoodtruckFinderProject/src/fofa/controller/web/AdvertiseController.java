@@ -37,12 +37,9 @@ public class AdvertiseController {
 	@RequestMapping(value = "foodtruck/reqest.do", method = RequestMethod.POST)
 	public String request(HttpSession session, Advertise advertise) {
 
-		// 세션수행 불가시 코드
-//		advertise.setSellerId("jelly");
 		String sellerId = ((String) session.getAttribute("loginUserId"));
-		// advertise.setSellerId((String) session.getAttribute(""));
 		advertiseService.register(advertise);
-		return "../view/foodtruck/foodtruckInfo.jsp";
+		return "redirect:searchById.do";
 	
 	}
 
