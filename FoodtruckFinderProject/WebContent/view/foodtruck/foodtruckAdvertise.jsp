@@ -31,28 +31,7 @@
 
 		<%@ include file="../header.jspf"%>
 
-		<!-- navbar side -->
-		<nav class="navbar-default navbar-static-side" role="navigation">
-			<!-- sidebar-collapse -->
-			<div class="sidebar-collapse">
-				<!-- side-menu -->
-				<ul class="nav" id="side-menu">
-					<li><a href="${ctx }/#"><i class="fa fa-files-o fa-fw"></i>Truck
-							Info</a></li>
-					<li><a href="${ctx }/#"><i class="fa fa-bar-chart-o fa-fw"></i>매출
-							통계</a></li>
-					<li><a href="${ctx }/#"><i class="fa fa-dashboard fa-fw"></i>설문
-							통계</a></li>
-					<li><a href="${ctx }/#"><i class="fa fa-wrench fa-fw"></i>정보
-							수정</a></li>
-					<li class="selected"><a href="${ctx }/#"><i
-							class="fa fa-edit fa-fw"></i>광고 요청</a></li>
-				</ul>
-				<!-- end side-menu -->
-			</div>
-			<!-- end sidebar-collapse -->
-		</nav>
-		<!-- end navbar side -->
+		<%@ include file="../left/sellerLeft.jspf"%>
 		<!--  page-wrapper -->
 		<div id="page-wrapper">
 			<div class="row">
@@ -170,6 +149,7 @@
 	<script>
 		$(document).ready(function() {
 			$('#dataTables-example').dataTable();
+			$('#side-adv').attr('class', 'selected');
 		});
 	</script>
 

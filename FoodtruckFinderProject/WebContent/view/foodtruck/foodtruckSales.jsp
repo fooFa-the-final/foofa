@@ -73,6 +73,7 @@ h2 {
 <script>
 	$(document).ready(
 			function() {
+				$('#side-sales').attr('class', 'selected');
 
 				$('#calendar').fullCalendar({
 					dayClick : function(date, jsEvent, view) {
@@ -140,30 +141,8 @@ h2 {
 	<div id="wrapper">
 		<!-- navbar top -->
 		<%@ include file="../header.jspf"%>
-		<!-- end navbar top -->
-
-
-		<!-- navbar side -->
-		<nav class="navbar-default navbar-static-side" role="navigation">
-		<!-- sidebar-collapse -->
-		<div class="sidebar-collapse">
-			<!-- side-menu -->
-			<ul class="nav" id="side-menu">
-				<li class="active"><a href="#"><i
-						class="fa fa-files-o fa-fw"></i>Truck Info<span class="fa arrow"></span></a>
-					<ul class="nav nav-second-level">
-						<li><a href="#">Truck Info</a></li>
-						<li><a href="#">트럭정보 수정</a></li>
-					</ul> <!-- second-level-items --></li>
-				<li><a href="#"><i class="fa fa-flask fa-fw"></i>광고요청</a></li>
-				<li class="selected"><a href="#"><i
-						class="fa fa-table fa-fw"></i>매출통계</a></li>
-				<li><a href="#"><i class="fa fa-edit fa-fw"></i>설문통계</a></li>
-			</ul>
-			<!-- end side-menu -->
-		</div>
-		<!-- end sidebar-collapse --> </nav>
-		<!-- end navbar side -->
+		
+        <%@ include file="../left/sellerLeft.jspf"%>
 		<div id="page-wrapper">
 			<!--매출페이지 시작  -->
 			<div>

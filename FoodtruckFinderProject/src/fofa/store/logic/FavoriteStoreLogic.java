@@ -87,4 +87,17 @@ public class FavoriteStoreLogic implements FavoriteStore{
 		return count;
 	}
 
+	@Override
+	public int selectCount(String foodtruckId) {
+		SqlSession session = factory.openSession();
+		int count = 0;
+		try{
+			FavoriteMapper mapper = session.getMapper(FavoriteMapper.class);
+			count = mapper.selectCount(foodtruckId);
+		}finally{
+			session.close();
+		}
+		return count;
+	}
+
 }

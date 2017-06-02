@@ -16,4 +16,5 @@ public interface FavoriteService {
 	
 	boolean alreadyFavorite(Favorite favorite);
 
+	int foodtruckCount(String foodtruckId);
 }

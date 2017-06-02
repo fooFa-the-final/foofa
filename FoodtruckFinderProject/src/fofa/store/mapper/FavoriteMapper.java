@@ -16,4 +16,6 @@ public interface FavoriteMapper {
 	
 	int select(Favorite favorite);
 
+	int selectCount(String foodtruckId);
+
 }

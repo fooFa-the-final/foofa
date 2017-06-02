@@ -24,7 +24,7 @@
     <link href="${ctx }/resources/plugins/pace/pace-theme-big-counter.css" rel="stylesheet" />
   	<link href="${ctx }/resources/css/style.css" rel="stylesheet" />
     <link href="${ctx }/resources/css/main-style.css" rel="stylesheet" />
-
+	<script src="${ctx }/resources/plugins/jquery-1.10.2.js"></script>
     <!-- Page-Level CSS -->
     <link href="${ctx }/resources/plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet" />
 
@@ -33,72 +33,28 @@
 <body>
     <!--  wrapper -->
     <div id="wrapper" style="color:#FFFFFF">
-        <!-- navbar top -->
-        <nav class="navbar navbar-default navbar-fixed-top" role="navigation" id="navbar">
-            <!-- navbar-header -->
-                <a class="navbar-brand" href="index.html">
-                    <img src="${ctx }/resources/img/logo.png" alt="" />
-                </a>
-            <!-- navbar-top-links -->
-            <ul class="nav navbar-top-links navbar-right">
-                <!-- main dropdown -->
-                <li class="row">
-                		<div class="col-xs-10" style="margin-right: 200px">
-	            			<!-- search section-->
-	                        <div class="input-group custom-search-form">
-	                        	<input type="text" class="form-control" placeholder="Search" style="width: 400px">
-	                            <input type="text" class="form-control" placeholder="Location" style="width: 400px">
-	                            <button class="btn btn-default" type="button"><i class="fa fa-search"></i></button>
-	                        </div>
-	                		<!--end search section-->
-	            		</div>
-                </li>
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-user fa-3x"></i>
-                    </a>
-                    <!-- dropdown user-->
-                    
-                    <ul class="dropdown-menu dropdown-user">
-                        <li><a href="#"><i class="fa fa-user fa-fw"></i>User Profile</a>
-                        </li>
-                        <li><a href="#"><i class="fa fa-gear fa-fw"></i>Settings</a>
-                        </li>
-                        <li class="divider"></li>
-                        <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i>Logout</a>
-                        </li>
-                    </ul>
-                    <!-- end dropdown-user -->
-                </li>
-                <!-- end main dropdown -->
-            </ul>
-            <!-- end navbar-top-links -->
-        </nav>
-        <!-- end navbar top -->
-
+		<%@ include file="../header.jspf"%>
         <!--  page-wrapper -->
-
-                <!--End Page Header -->
-            </div>
+    </div>
 
             <div class="row" style="margin-left:25%">
                 <!-- Page Header -->
                 <div class="col-lg-10" style="margin-top:6%; margin-bottom:4%">
                     <div class="col-sm-2">
-                    	<button type="button" class="btn btn btn-warning">OPEN NOW</button>
+                    	<button type="button" class="btn btn-outline btn-default" onClick="stateBtn(this)">OPEN NOW</button>
                 	</div>    
                 	<div class="col-md-6"> 
                     <label class="checkbox-inline">
-                     <input type="checkbox">카드 결제
+                     <input type="checkbox" id="checkCard">카드 결제
                     </label>
                     <label class="checkbox-inline">
-                     <input type="checkbox">알콜 판매
+                     <input type="checkbox" id="checkDrinking">알콜 판매
                     </label>
                     <label class="checkbox-inline">
-                     <input type="checkbox">주차 가능
+                     <input type="checkbox" id="checkParking">주차 가능
                     </label>
                     <label class="checkbox-inline">
-                     <input type="checkbox">케이터링
+                     <input type="checkbox" id="checkCatering">케이터링
                     </label>
                     </div>
                     <div class="cil-md-3">               
@@ -114,7 +70,7 @@
     <div class="row">
     <div class="col-sm-2"></div>
     <div class="col-md-6">
-            <table>
+            <table style="width:100%" id="dataTables-example">
             	<colgroup>
             		<col width="30%"/>
             		<col width="70%"/>
@@ -124,22 +80,29 @@
             		<tr></tr>
             	</thead>
           		<tbody>
+          		<c:forEach items="${trucks }" var="truck">
           			<tr>
-	          			<td rowspan="3">
-	          				<img width="150px" height="150px" src="../../resources/img/pizzahut.png" style="margin-right:10px">
+	          			<td rowspan="2" style="padding:10px;" align="right">
+	          				<img width="130px" height="130px" src="${ctx }/resources/img/${truck.foodtruckImg }" style="margin-right:10px">
+	          			</td>
+	          			<td style="height:60px">
+	          				<a href="${ctx }/foodtruck/"><font size="5px" color="black">${truck.foodtruckName }</font></a>&nbsp;
+	          				<font size="2px">${truck.category1 }  ${truck.category2 }  ${truck.category3 }</font>
 	          			</td>
           			</tr>
           			<tr>
-          				<td rowspan="1">a</td>
-          				<td rowspan="1">a</td>
-          				<td rowspan="1">a</td>
+          				<td valign="top">
+          					<i class="fa fa-heart"></i> ${truck.favoriteCount } Fans<br>
+          					<i class="fa fa-comment fa-fw"></i> 100 Reviews
+          				</td>
           			</tr>
+          		</c:forEach>	
           		</tbody>
           </table>
         </div>
 
        <div class="col-md-2">
-			<img width="300px" height="300px" src="../../resources/img/map.jpg" >
+			<img width="300px" height="300px" src="${ctx }/resources/img/map.jpg" >
         </div>
         <div class="col-sm-2"></div>
 </div>
@@ -152,28 +115,34 @@
     <a style="color:white; font-size: 30px;">5</a>
 
     </div></center> -->
-    <div style="float: left; margin:auto" >
-         <div style="margin-left: 700px; margin-right: auto; margin-bottom: 50px">
-        
-             
-           <a href="" >1&nbsp;</a><a href="">2&nbsp;</a><a href="">3&nbsp;</a><a href="">4&nbsp;</a><a href="">5&nbsp;</a><a href="">6&nbsp;</a>
-        </div>
-        </div>
     <!-- end wrapper -->
 
     <!-- Core Scripts - Include with every page -->
-    <script src="../../resources/plugins/jquery-1.10.2.js"></script>
-    <script src="../../resources/plugins/bootstrap/bootstrap.min.js"></script>
-    <script src="../../resources/plugins/metisMenu/jquery.metisMenu.js"></script>
-    <script src="../../resources/plugins/pace/pace.js"></script>
-    <script src="../../resources/scripts/siminta.js"></script>
+    <script src="${ctx }/resources/plugins/jquery-1.10.2.js"></script>
+    <script src="${ctx }/resources/plugins/bootstrap/bootstrap.min.js"></script>
+    <script src="${ctx }/resources/plugins/metisMenu/jquery.metisMenu.js"></script>
+    <script src="${ctx }/resources/plugins/pace/pace.js"></script>
+    <script src="${ctx }/resources/scripts/siminta.js"></script>
     <!-- Page-Level Plugin Scripts-->
-    <script src="../../resources/plugins/dataTables/jquery.dataTables.js"></script>
-    <script src="../../resources/plugins/dataTables/dataTables.bootstrap.js"></script>
+    <script src="${ctx }/resources/plugins/dataTables/jquery.dataTables.js"></script>
+    <script src="${ctx }/resources/plugins/dataTables/dataTables.bootstrap.js"></script>
     <script>
         $(document).ready(function () {
             $('#dataTables-example').dataTable();
         });
+        
+$("input:checkbox").on('click', function() {
+      if ( $(this).prop('checked') ) {
+    	  
+      } else {
+    	  
+      }
+    });
+    
+var stateBtn = function(obj){
+	$(obj).removeClass("btn btn-outline btn-default").addClass("btn btn-success");
+}
+
     </script>
 
 </body>

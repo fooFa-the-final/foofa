@@ -65,4 +65,8 @@ public class FavoriteController {
 		return "../view/user/memberFavoriteList.jsp";
 	}
 	
+	@RequestMapping(value="/count.do", method=RequestMethod.GET)
+	public int searchCount(String foodtruckId){
+		return favoriteService.foodtruckCount(foodtruckId);
+	}	
 }

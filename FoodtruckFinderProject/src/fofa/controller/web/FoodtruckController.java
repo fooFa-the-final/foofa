@@ -135,16 +135,15 @@ public class FoodtruckController {
 		return "../view/foodtruck/foodtruckInfo.jsp";
 	}
 	
-	@RequestMapping("/searchByLoc.do")
-	public String searchByLoc(String location, Model model){
-		List<Foodtruck> foodtrucks = foodtruckService.findByLoc(location);
-		model.addAttribute("trucks", foodtrucks);
-		return "../view/foodtruck/listFoodtruck.jsp";
-	}
-	
 	@RequestMapping("/searchByKeyLoc.do")
 	public String searchByKeyLoc(String keyword, String location, Model model){
-		
+		List<Foodtruck> trucks;
+		if(keyword.isEmpty()){
+			trucks = foodtruckService.findByLoc(location);
+		} else {
+			trucks = foodtruckService.findByKeyLoc(keyword, location);
+		}
+		model.addAttribute("trucks", trucks);
 		return "../view/foodtruck/listFoodtruck.jsp";
 	}
 	
