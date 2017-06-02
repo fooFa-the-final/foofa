@@ -61,74 +61,35 @@
 		//obj.value = obj.value.replace(/[\a-zㄱ-ㅎㅏ-ㅣ가-힣]/g, '');
 		obj.value = obj.value.replace(/[\ㄱ-ㅎㅏ-ㅣ가-힣]/g, '');
 	}
+	var ds = document.getElementById('sucessCheck');
 
 	var idReg = /^[a-z]+[a-z0-9]{3,17}$/g;
 
-	$(document)
-			.ready(
-					function() {
-						$("form")
-								.submit(
+	$(document).ready(function() {$("form").submit(
 										function() {
-											if (!idReg.test($(
-													"input[name='sellerId']")
-													.val())) {
-												if ($("input[name='sellerId']")
-														.val() == "") {
-													$("input[name='sellerId']")
-															.css("border",
-																	"1px solid red")
-															.after(
-																	"<span>아이디4글자 이상 16글자 이하 영문자 숫자의 조합입니다.</span>");
-													$("span").css("color",
-															"red")
-															.fadeOut(3000);
+											alert()
+											if (!idReg.test($("input[name='sellerId']").val())) {
+												if ($("input[name='sellerId']").val() == "") {
+													$("input[name='sellerId']").css("border","1px solid red").after("<span>아이디4글자 이상 16글자 이하 영문자 숫자의 조합입니다.</span>");
+													$("span").css("color","red").fadeOut(3000);
 													return false;
 												} else {
 													return false
 												}
 											} else if ($(
-													"input[name='password']")
-													.val() == "") {
-												$("input[name='password']")
-														.css("border",
-																"1px solid red")
-														.after(
-																"<span>비밀번호를 입력해주세요</span>");
-												$("span").css("color", "red")
-														.fadeOut(3000);
+													"input[name='password']").val() == "") {$("input[name='password']").css("border","1px solid red").after("<span>비밀번호를 입력해주세요</span>");
+												$("span").css("color", "red").fadeOut(3000);
 												return false;
-											} else if ($(
-													"input[name='password1']")
-													.val() == "") {
-												$("input[name='password1']")
-														.css("border",
-																"1px solid red")
-														.after(
-																"<span>비밀번호를 한번더 입력해주세요</span>");
-												$("span").css("color", "red")
-														.fadeOut(3000);
+											} else if ($("input[name='password1']")
+													.val() == "") {$("input[name='password1']").css("border","1px solid red").after("<span>비밀번호를 한번더 입력해주세요</span>");
+												$("span").css("color", "red").fadeOut(3000);
 												return false;
-											} else if ($(
-													"input[name='certification']")
-													.val().length < 10) {
-												$("input[name='certification']")
-														.css("border",
-																"1px solid red")
-														.after(
-																"<span>사업자등록번호를 입력해주세요</span>");
-												$("span").css("color", "red")
-														.fadeOut(3000);
+											} else if ($("input[name='certification']").val().length < 10) {
+												$("input[name='certification']").css("border","1px solid red").after("<span>사업자등록번호를 입력해주세요</span>");
+												$("span").css("color", "red").fadeOut(3000);
 												return false;
-											} else if ($("input[name='phone']")
-													.val() == "") {
-												$("input[name='phone']")
-														.css("border",
-																"1px solid red")
-														.after(
-																"<span>핸드폰번호를 입력해주세요</span>");
-												$("span").css("color", "red")
-														.fadeOut(3000);
+											} else if ($("input[name='phone']").val() == "") {$("input[name='phone']").css("border","1px solid red").after("<span>핸드폰번호를 입력해주세요</span>");
+												$("span").css("color", "red").fadeOut(3000);
 												return false;
 											}
 										});
@@ -154,13 +115,25 @@
 								/* sellerId => 넘어가는 parameter이름 : id 넘기는 var id */
 								},
 								success : function(data) {
+									var suc = "suc";
+									var fail = "fa"
 									$("#result").html(data);
 									if ($.trim(data) == 'no') {
 										$('#idmessage').html("사용 가능한 ID 입니다.");
+										$('#sucessCheck').val(data);
+										var ds = document.getElementById('idmessage');
+										alert(data);
+										alert(ds);
+										
 									} else {
 										$('#idmessage').html("사용중인 ID 입니다.");
+										$('#sucessCheck').val(data); 
+										alert(data);
+										var ds = document.getElementById('sucessCheck');
+										
+										alert(ds);
 									}
-
+									
 								}
 
 							});
@@ -217,6 +190,7 @@
 					<button type="button" name="checking" id="idCheck" value="t">중복확인</button>
 					<div id="idmessage">
 						<br>
+					<input type="hidden" id="sucessCheck" name="sucessCheck" value="">
 					</div>
 					<br>
 					<div>
