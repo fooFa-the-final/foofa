@@ -1,6 +1,8 @@
 package fofa.controller.web;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -61,7 +63,7 @@ public class FoodtruckController {
 	
 	@RequestMapping(value="/modifyForm.do", method=RequestMethod.GET)
 	public String modifyForm(String sellerId, Model model, HttpSession session){
-		Foodtruck foodtruck = foodtruckService.findById((String)session.getAttribute("loginUserId"));
+		Foodtruck foodtruck = foodtruckService.findBySeller((String)session.getAttribute("loginUserId"));
 		String[] category = foodtruck.getCategory1().split("/");
 		foodtruck.setCategory1(category[0]);
 		if(category.length == 2){
@@ -102,7 +104,7 @@ public class FoodtruckController {
 		}
 		foodtruck.setMenus(menus);
 		foodtruckService.modify(foodtruck);
-		return "redirect:/foodtruck/searchById.do?foodtruckId="+foodtruck.getFoodtruckId();
+		return "redirect:/foodtruck/searchById.do";
 	}
 	
 	@RequestMapping(value="/modifyPicture.do", method=RequestMethod.GET)
@@ -120,15 +122,7 @@ public class FoodtruckController {
 	@RequestMapping("/searchById.do")
 	public String searchById(Model model, HttpSession session){
 		Foodtruck foodtruck = foodtruckService.findBySeller((String)session.getAttribute("loginUserId"));
-		String[] category = foodtruck.getCategory1().split("/");
-		foodtruck.setCategory1(category[0]);
-			if(category.length >= 2){
-				foodtruck.setCategory2(category[1]);
-			}
-			if(category.length >= 3){
-				foodtruck.setCategory2(category[1]);
-				foodtruck.setCategory3(category[2]);
-			}
+		
 		String[] operationTime = foodtruck.getOperationTime().split("/");
 		String startTime = operationTime[0];
 		String endTime = operationTime[1];
@@ -139,22 +133,68 @@ public class FoodtruckController {
 	}
 	
 	
-	@RequestMapping("/searchByKeyLoc.do")
+	@RequestMapping(value="/searchByKeyLoc.do", method=RequestMethod.POST)
 	public String searchByKeyLoc(int pageNum, String keyword, String location, Model model){
-		List<Foodtruck> trucks;
-		if(keyword.isEmpty()){
-			trucks = foodtruckService.findByLoc(1, location);
-		} else {
-			trucks = foodtruckService.findByKeyLoc(1, keyword, location);
+		if(pageNum==0){
+			pageNum++;
 		}
+		List<HashMap<String, String>> sqlMap;
+		List<Foodtruck> trucks = new ArrayList<>();
+		int allCount = 0;
+		if(keyword.isEmpty()){
+			sqlMap = foodtruckService.findByLoc(pageNum, location);
+			
+		} else {
+			sqlMap = foodtruckService.findByKeyLoc(pageNum, keyword, location);
+		}
+		
+		for(int i = 0; i < sqlMap.size(); i++){
+			Foodtruck t = new Foodtruck();
+			t.setFoodtruckId(sqlMap.get(i).get("foodtruckId"));
+			t.setFoodtruckName(sqlMap.get(i).get("foodtruckName"));
+			t.setFoodtruckImg(sqlMap.get(i).get("foodtruckImg"));
+			t.setCategory1(sqlMap.get(i).get("category1"));
+			t.setSpot(sqlMap.get(i).get("spot"));
+			t.setLocation(sqlMap.get(i).get("location"));
+			trucks.add(t);
+		}
+		if(!sqlMap.isEmpty()){
+			allCount = Integer.parseInt(sqlMap.get(0).get("allCount"));
+		}
+
+		model.addAttribute("allCount", allCount);
 		model.addAttribute("trucks", trucks);
 		model.addAttribute("keyword", keyword);
 		model.addAttribute("location", location);
 		return "../view/foodtruck/listFoodtruck.jsp";
 	}
 	
+	
 	@RequestMapping("/searchByFilter.do")
 	public String searchByFilter(HttpServletRequest request, Model model){
+		boolean state = Boolean.parseBoolean(request.getParameter("state"));
+		boolean card = Boolean.parseBoolean(request.getParameter("checkCard"));
+		boolean drinking = Boolean.parseBoolean(request.getParameter("checkDrinking"));
+		boolean parking = Boolean.parseBoolean(request.getParameter("checkParking"));
+		boolean catering = Boolean.parseBoolean(request.getParameter("checkCatering"));
+		Foodtruck foodtruck = new Foodtruck();
+		
+		if(state==true || state==false){
+			foodtruck.setState(state);
+		}
+		if(card==true || card==false){
+			foodtruck.setCard(card);
+		}
+		if(drinking==true || drinking==false){
+			foodtruck.setDrinking(drinking);
+		}
+		if(parking==true || parking==false){
+			foodtruck.setParking(parking);
+		}
+		if(catering==true || catering==false){
+			foodtruck.setCatering(catering);
+		}
+		foodtruckService.findByFilter(Integer.parseInt(request.getParameter("pageNum")), foodtruck);
 		
 		return "../view/foodtruck/listFoodtruck.jsp";
 	}

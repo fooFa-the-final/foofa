@@ -24,7 +24,16 @@
   		<association column="foodtruck_id" property="score" javaType="double" jdbcType="DOUBLE" select="fofa.store.mapper.ReviewMapper.avgScore"/>
   		<collection column="foodtruck_id" property="menus" ofType="Menu" jdbcType="VARCHAR"
   					select="fofa.store.mapper.MenuMapper.selectByTruckId"/>
-
+  	</resultMap>
+  	<resultMap type="java.util.HashMap" id="searchMap">
+  		<result javaType="java.lang.String" column="foodtruck_id" property="foodtruckId"/>
+  		<result javaType="java.lang.String" column="truckName" property="foodtruckName"/>
+  		<result javaType="java.lang.String" column="truck_image" property="foodtruckImg"/>
+  		<result javaType="java.lang.String" column="category" property="category1"/>
+  		<result javaType="java.lang.String" column="area" property="spot"/>
+  		<result javaType="java.lang.String" column="location" property="location"/>
+  		<result javaType="java.lang.String" column="allCount" property="allCount"/>
+<!--   		<result javaType="데이터타입" column="db컬럼명" property="맵에서 키값"/> -->
   	</resultMap>
   	
   	<sql id="selectFoodtrucks">
@@ -33,15 +42,15 @@
   	</sql>
   	
   	<sql id="pagingTrucks">
-  		SELECT foodtruck_id, truckName, truck_image, category, area, location
+  		SELECT foodtruck_id, truckName, truck_image, category, area, location, count(*)over() AS allCount
   		FROM foodtruck_tb
   	</sql>
   	
   	<sql id="pagingPre">
   		<![CDATA[
-  			SELECT X.rnum, X.foodtruck_id, X.truckName, X.truck_image, X.category, X.area, X.location
+  			SELECT X.rnum, X.foodtruck_id, X.truckName, X.truck_image, X.category, X.area, X.location, allCount
 			FROM ( 
-    		SELECT rownum AS rnum, A.foodtruck_id, A.truckName, A.truck_image, A.category, A.area, A.location
+    		SELECT rownum AS rnum, A.foodtruck_id, A.truckName, A.truck_image, A.category, A.area, A.location, allCount
     		FROM (
   		]]>
   	</sql>
@@ -73,21 +82,21 @@
   		WHERE foodtruck_id=#{foodtruckId}
   	</select>
   	
-  	<select id="selectByLoc" parameterType="hashmap" resultMap="foodtruckMap">
+  	<select id="selectByLoc" parameterType="Hashmap" resultMap="searchMap">
   		<include refid="pagingPre"/>
   		<include refid="pagingTrucks"/>
   		WHERE location LIKE '%'||#{location}||'%' OR area LIKE '%'||#{location}||'%'
   		<include refid="pagingPost"/>
   	</select>
   	
-  	<select id="selectByKeyLoc" parameterType="hashmap" resultMap="foodtruckMap">
+  	<select id="selectByKeyLoc" parameterType="Hashmap" resultMap="searchMap">
   		<include refid="pagingPre"/>
   		<include refid="pagingTrucks"/>
   		WHERE (truckName LIKE '%'||#{keyword}||'%' OR category LIKE '%'||#{keyword}||'%') AND (location LIKE '%'||#{location}||'%' OR area LIKE '%'||#{location}||'%')
   		<include refid="pagingPost"/>
   	</select>
   	
-  	<select id="selectByFilter" parameterType="Foodtruck" resultMap="foodtruckMap">
+  	<select id="selectByFilter" parameterType="Foodtruck" resultMap="searchMap">
   		<include refid="selectFoodtrucks"/>
   		<where> 
   		<if test="card">

@@ -64,7 +64,7 @@ public class FoodtruckStoreLogic implements FoodtruckStore{
 	}
 
 	@Override
-	public List<Foodtruck> selectByLoc(int pageNum, String location) {
+	public List<HashMap<String, String>> selectByLoc(int pageNum, String location) {
 		SqlSession session = factory.openSession();
 		List<Foodtruck> list = null;
 		
@@ -79,17 +79,18 @@ public class FoodtruckStoreLogic implements FoodtruckStore{
 		map.put("START", (nPageIndex * nPageRow) + 1);
 		map.put("END", (nPageIndex * nPageRow) + nPageRow);
 		map.put("location", location);
+		List<HashMap<String, String>> sqlMap;
 		try{
 			FoodtruckMapper mapper = session.getMapper(FoodtruckMapper.class);
-			list = mapper.selectByLoc(map);
+			sqlMap = mapper.selectByLoc(map);
 		} finally {
 			session.close();
 		}
-		return list;
+		return sqlMap;
 	}
 
 	@Override
-	public List<Foodtruck> selectByKeyLoc(int pageNum, String keyword, String location) {
+	public List<HashMap<String, String>> selectByKeyLoc(int pageNum, String keyword, String location) {
 		SqlSession session = factory.openSession();
 		List<Foodtruck> list = null;
 		
@@ -101,13 +102,16 @@ public class FoodtruckStoreLogic implements FoodtruckStore{
 		map.put("END", (nPageIndex * nPageRow) + nPageRow);
 		map.put("keyword", keyword);
 		map.put("location", location);
+		
+		List<HashMap<String, String>> sqlMap;
 		try{
 			FoodtruckMapper mapper = session.getMapper(FoodtruckMapper.class);
-			list = mapper.selectByKeyLoc(map);
+//			list = mapper.selectByKeyLoc(map);
+			sqlMap = mapper.selectByKeyLoc(map);
 		} finally {
 			session.close();
 		}
-		return list;
+		return sqlMap;
 	}
 
 	@Override
@@ -122,9 +126,12 @@ public class FoodtruckStoreLogic implements FoodtruckStore{
 		map.put("START", (nPageIndex * nPageRow) + 1);
 		map.put("END", (nPageIndex * nPageRow) + nPageRow);
 		map.put("foodtruck", foodtruck);
+		
+		Map<String, Object> sMap = new HashMap<>();
 		try{
 			FoodtruckMapper mapper = session.getMapper(FoodtruckMapper.class);
-			list = mapper.selectByFilter(map);
+//			list = mapper.selectByFilter(map);
+			sMap = mapper.selectByFilter(map);
 		} finally {
 			session.close();
 		}

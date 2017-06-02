@@ -1,5 +1,6 @@
 package fofa.store.mapper;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -13,11 +14,11 @@ public interface FoodtruckMapper {
 	
 	Foodtruck selectById(String foodtruckId);
 	
-	List<Foodtruck> selectByLoc(Map<String, Object> map);
+	List<HashMap<String, String>> selectByLoc(Map<String, Object> map);
 	
-	List<Foodtruck> selectByKeyLoc(Map<String, Object> map);
+	List<HashMap<String, String>> selectByKeyLoc(Map<String, Object> map);
 	
-	List<Foodtruck> selectByFilter(Map<String, Object> map);
+	HashMap<String, Object> selectByFilter(Map<String, Object> map);
 	
 	Foodtruck selectBySellerId(String sellerId);
 	
