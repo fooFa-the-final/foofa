@@ -44,14 +44,16 @@ public class FoodtruckController {
 		String[] menuPrices = request.getParameterValues("menuPrice");
 		String[] menuStates = request.getParameterValues("menuState");
 		
-		for(int i = 0; i< menuNames.length; i++){
-			Menu menu = new Menu();
-			menu.setMenuName(menuNames[i]);
-			menu.setPrice(Integer.parseInt(menuPrices[i]));
-			menu.setMenuState(Boolean.parseBoolean(menuStates[i]));
-			menus.add(menu);
+		if(menuNames!=null){
+			for(int i = 0; i< menuNames.length; i++){
+				Menu menu = new Menu();
+				menu.setMenuName(menuNames[i]);
+				menu.setPrice(Integer.parseInt(menuPrices[i]));
+				menu.setMenuState(Boolean.parseBoolean(menuStates[i]));
+				menus.add(menu);
+			}
+			foodtruck.setMenus(menus);
 		}
-		foodtruck.setMenus(menus);
 		
 		foodtruckService.register(foodtruck);
 		return "redirect: ../view/user/login.jsp";
@@ -146,6 +148,8 @@ public class FoodtruckController {
 			trucks = foodtruckService.findByKeyLoc(1, keyword, location);
 		}
 		model.addAttribute("trucks", trucks);
+		model.addAttribute("keyword", keyword);
+		model.addAttribute("location", location);
 		return "../view/foodtruck/listFoodtruck.jsp";
 	}
 	
