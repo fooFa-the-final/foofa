@@ -15,4 +15,6 @@ public interface FavoriteStore {
 	int selectByTruckId(String foodtruckId);
 
 	int select(Favorite favorite);
+
+	int selectCount(String foodtruckId);
 }

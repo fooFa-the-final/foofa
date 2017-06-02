@@ -67,7 +67,6 @@ public class FavoriteController {
 	
 	@RequestMapping(value="/count.do", method=RequestMethod.GET)
 	public int searchCount(String foodtruckId){
-
-		return 0;
+		return favoriteService.foodtruckCount(foodtruckId);
 	}	
 }
