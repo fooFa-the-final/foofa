@@ -93,7 +93,7 @@ public class FavoriteStoreLogic implements FavoriteStore{
 		int count = 0;
 		try{
 			FavoriteMapper mapper = session.getMapper(FavoriteMapper.class);
-			count = mapper.selectCount(foodtruckId);
+			count = mapper.selectByTruckId(foodtruckId);
 		}finally{
 			session.close();
 		}

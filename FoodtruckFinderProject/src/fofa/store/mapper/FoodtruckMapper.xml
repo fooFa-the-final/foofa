@@ -19,10 +19,12 @@
   		<result column="drinking" property="drinking"/>
   		<result column="catering" property="catering"/>
   		<result column="operation_state" property="state"/>
+  		<association column="foodtruck_id" property="favoriteCount" javaType="int" jdbcType="INTEGER" select="fofa.store.mapper.FavoriteMapper.selectByTruckId" />
+  		<association column="foodtruck_id" property="reviewCount" javaType="int" jdbcType="INTEGER" select="fofa.store.mapper.ReviewMapper.selectTruckCount" />
+  		<association column="foodtruck_id" property="score" javaType="double" jdbcType="DOUBLE" select="fofa.store.mapper.ReviewMapper.avgScore"/>
   		<collection column="foodtruck_id" property="menus" ofType="Menu" jdbcType="VARCHAR"
   					select="fofa.store.mapper.MenuMapper.selectByTruckId"/>
-  		<collection column="foodtruck_id" property="reviews" ofType="Review" jdbcType="VARCHAR"
-  					select="fofa.store.mapper.ReviewMapper.selectByTruckId"/>
+
   	</resultMap>
   	
   	<sql id="selectFoodtrucks">
