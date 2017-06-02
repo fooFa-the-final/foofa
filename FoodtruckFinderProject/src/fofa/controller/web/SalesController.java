@@ -152,7 +152,7 @@ public class SalesController {
 	}
 
 	@RequestMapping(value = "sales/month.do")
-	public @ResponseBody JSONArray search1MonthSales(HttpServletRequest req, String month) {
+	public @ResponseBody JSONArray search1MonthSales(HttpServletRequest req) {
 		/*
 		 * HttpSession session = req.getSession(); String foodtruckId = (String)
 		 * session.getAttribute("loginTruckId");
@@ -169,7 +169,7 @@ public class SalesController {
 			jsonArray.add(obj);
 
 		}
-
+		System.out.println(list.size());
 		System.out.println(jsonArray);
 		return jsonArray;
 

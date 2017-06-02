@@ -138,17 +138,17 @@ public class Foodtruck {
 		this.favoriteCount = favoriteCount;
 	}
 
-	public List<Menu> getMenus() {
-		return menus;
-	}
-	public void setMenus(List<Menu> menus) {
-		this.menus = menus;
-	}
 	public int getReviewCount() {
 		return reviewCount;
 	}
 	public void setReviewCount(int reviewCount) {
 		this.reviewCount = reviewCount;
+	}
+	public List<Menu> getMenus() {
+		return menus;
+	}
+	public void setMenus(List<Menu> menus) {
+		this.menus = menus;
 	}
 	public double getScore() {
 		return score;

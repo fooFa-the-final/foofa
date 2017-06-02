@@ -13,11 +13,11 @@ public interface FoodtruckService {
 	
 	Foodtruck findById(String foodtruckId);
 	
-	List<Foodtruck> findByLoc(String location);
+	List<Foodtruck> findByLoc(int pageNum, String location);
 	
-	List<Foodtruck> findByKeyLoc(String keyword, String location);
+	List<Foodtruck> findByKeyLoc(int pageNum, String keyword, String location);
 	
-	List<Foodtruck> findByFilter(Foodtruck foodtruck);
+	List<Foodtruck> findByFilter(int pageNum, Foodtruck foodtruck);
 	
 	Foodtruck findBySeller(String sellerId);
 	

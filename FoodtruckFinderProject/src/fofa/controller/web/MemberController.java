@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Iterator;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -59,7 +60,7 @@ public class MemberController {
 	@RequestMapping(value="member/modify.do", method=RequestMethod.POST)
 	public String modify(Member member){
 		service.modify(member);
-		return "redirect:review/list/member.do";
+		return "redirect:/review/list/member.do";
 	}
 	@RequestMapping(value="member/checkPw.do", method=RequestMethod.GET)
 	public String checkPwForm(HttpSession session){
@@ -71,8 +72,8 @@ public class MemberController {
 	@ResponseBody
 	@RequestMapping(value="member/checkPw.do", method=RequestMethod.POST)
 	public String checkPw(HttpSession session, String password){
-		Member member = service.findById((String)(session.getAttribute("loginUserId")));
-		String memberId = member.getMemberId();
+		String memberId = ((String)(session.getAttribute("loginUserId")));
+		
 		boolean result;
 		result = service.checkPw(memberId, password);
 		
@@ -95,14 +96,20 @@ public class MemberController {
 	}
 	
 	@ResponseBody
-    @RequestMapping(value = "member/ajaxUpload.do")
-    public String ajaxUpload() {
+    @RequestMapping(value = "member/ajaxUpload.do", method=RequestMethod.GET)
+    public String ajaxUpload(MultipartHttpServletRequest multi, HttpSession session,Model model) {
+		 String root = multi.getSession().getServletContext().getRealPath("/");
+	     String path = root+"resources/upload/";
+	     Member member = service.findById((String)(session.getAttribute("loginUserId")));
+	     member.getProfileImg();
+	     String img =path+member;
+	     System.out.println(img);
         return "../view/user/memberFollowerList.jsp";
     }
      
     @ResponseBody
-    @RequestMapping(value = "member/fileUpload.do")
-    public String fileUp(MultipartHttpServletRequest multi) {
+    @RequestMapping(value = "member/fileUpload.do", method=RequestMethod.POST)
+    public String fileUp(MultipartHttpServletRequest multi, HttpSession session) {
          
         // 저장 경로 설정
         String root = multi.getSession().getServletContext().getRealPath("/");
@@ -121,19 +128,19 @@ public class MemberController {
                          
             MultipartFile mFile = multi.getFile(uploadFile);
             String fileName = mFile.getOriginalFilename();
-            System.out.println("실제 파일 이름 : " +fileName);
             newFileName = System.currentTimeMillis()+"."
                     +fileName.substring(fileName.lastIndexOf(".")+1);
-            System.out.println(newFileName);
-             
+            Member member = service.findById((String)(session.getAttribute("loginUserId")));
+            member.setProfileImg(newFileName);
+            service.modifyImg(member);
+            System.out.println(member.toString());
             try {
                 mFile.transferTo(new File(path+newFileName));
-                System.out.println(mFile);
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
-        return "member/ajaxUpload.do";
+        return "redirect:/member/ajaxUpload.do";
     }
 }
 

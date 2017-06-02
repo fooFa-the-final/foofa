@@ -16,6 +16,21 @@ public class Member {
 	private String email;
 	private String gender;
 	private String profileImg;
+	private int followCount;
+	private int reviewCount;
+	
+	public int getFollowCount() {
+		return followCount;
+	}
+	public void setFollowCount(int followCount) {
+		this.followCount = followCount;
+	}
+	public int getReviewCount() {
+		return reviewCount;
+	}
+	public void setReviewCount(int reviewCount) {
+		this.reviewCount = reviewCount;
+	}
 	public String getMemberId() {
 		return memberId;
 	}

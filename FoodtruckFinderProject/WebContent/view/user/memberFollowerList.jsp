@@ -28,12 +28,13 @@
 <body>
    <div id="wrapper">
 		<%@ include file="../header.jspf"%>
+<<<<<<< HEAD
 	</div>
 
 		<!-- navbar side -->
 		<script
 			src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-
+<script src="resources/js/jquery-3.1.1.min.js"></script>
 		<script>
 			function fileSubmit() {
 				var formData = new FormData($("#fileForm")[0]);
@@ -54,17 +55,18 @@
 				});
 			}
 
-			var follow = function(fromId) {
+			var follow = function(toId) {
 				$(document).ready(function() {
 					var btn = $("#delete");
 					$.ajax({
 						type : 'GET',
 						url : "${ctx }/follow/remove.do",
 						data : {
-							fromId : fromId
+							toId : toId
 						},
 						success : function(data) {
-							$("#follwer").remove();
+							var fowId = "#follwer"+toId;
+							$(fowId).remove();
 							
 						}
 					});
@@ -89,8 +91,11 @@
 		</div>
 		<!-- end sidebar-collapse --> </nav>
 		<!-- end navbar side -->
+		<%@ include file="../left/memberLeft.jspf"%>
 		<!--  page-wrapper -->
 		<div id="page-wrapper" style="background-color: #FFFFFF">
+		
+		
 			<div class="container">
 				<div class="row">
 					<!-- Page Header -->
@@ -98,7 +103,7 @@
 						style="height: 300px; background-color: #FFFFFF; position: absolute; width: 83.5%">
 						<a class="navbar-brand" href="#"
 							style="margin-top: 10px; margin-left: 20px"> <img
-							src="../../resources/img/waikiki.jpg"
+							src="${member.profileImg }"
 							style="height: 250px; width: 250px" /> <br>
 
 							<form id="fileForm" action="fileUpload" method="post"
@@ -106,8 +111,6 @@
 								<input type="file" id="fileUp" name="fileUp" /> <input
 									type="button" value="전송하기" onClick="fileSubmit();">
 							</form>
-
-
 
 						</a>
 						<div class="user-info">
@@ -123,11 +126,8 @@
 							<br> <br> <br> <br> <a href="#"><button
 									type="button" class="btn btn-default">Make Follow</button></a>
 						</span>
-
 					</div>
-
 				</div>
-				<!--End Page Header -->
 			</div>
 
 			<div class="row">
@@ -140,7 +140,7 @@
 					<h1>Follwer List</h1>
 					<br>
 					<c:forEach var="follow" items="${follow}" varStatus="sts">
-						<div id="follwer" style="margin-bottom: 50px">
+						<div id="follwer${follow.toId }" style="margin-bottom: 50px">
 							<a class="navbar-brand" href="#"
 								style="margin-top: 10px; margin-left: 20px"> <img
 								src="../resources/img/waikiki.jpg"
@@ -148,7 +148,7 @@
 							</a>
 							<div class="user-info">
 								<tr class="odd gradeX">
-									<td>${follow.fromId }</td>
+									<td>${follow.toId }</td>
 								</tr>
 								<br>
 								<h5>144Followers</h5>
@@ -158,7 +158,7 @@
 							<div style="float: right;">
 								<br> <br> <br>
 								<button type="button" class="btn btn-default"
-									onclick="follow('${follow.fromId}');">UNFOLLOW</button>
+									onclick="follow('${follow.toId}');">UNFOLLOW</button>
 							</div>
 							</div>
 					</c:forEach>
@@ -180,10 +180,50 @@
 	<script src="../../resources/plugins/dataTables/jquery.dataTables.js"></script>
 	<script
 		src="../../resources/plugins/dataTables/dataTables.bootstrap.js"></script>
+		<script
+			src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 	<script>
 		$(document).ready(function() {
 			$('#dataTables-example').dataTable();
 		});
+		
+
+			function fileSubmit() {
+				var formData = new FormData($("#fileForm")[0]);
+				$.ajax({
+					type : 'post',
+					url : '${ctx }/member/fileUpload.do',
+					data : formData,
+					processData : false,
+					contentType : false,
+					success : function(html) {
+						alert("파일 업로드하였습니다.");
+					},
+					error : function(error) {
+						alert("파일 업로드에 실패하였습니다.");
+						console.log(error);
+						console.log(error.status);
+					}
+				});
+			}
+
+			var follow = function(toId) {
+				$(document).ready(function() {
+					var btn = $("#delete");
+					$.ajax({
+						type : 'GET',
+						url : "${ctx }/follow/remove.do",
+						data : {
+							toId : toId
+						},
+						success : function(data) {
+							var fowId = "#follwer"+toId;
+							$(fowId).remove();
+							
+						}
+					});
+				});
+			}
 	</script>
 
 </body>

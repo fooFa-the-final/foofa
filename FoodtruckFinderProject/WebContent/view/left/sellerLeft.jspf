@@ -25,9 +25,9 @@
                     <li id="side-sales" >
                         <a href="#"><i class="fa fa-table fa-fw"></i>매출통계</a>
                     </li>
-                    <li id="side-survey" >
-                        <a href="#"><i class="fa fa-edit fa-fw"></i>설문통계</a>
-                    </li>
+                    <li id="side-survey" ><a href="#"><i class="fa fa-edit fa-fw"></i>설문통계</a></li>
+                    <li id="side-modify-seller" ><a href="#"><i class="fa fa-edit fa-fw"></i>판매자 정보 수정</a></li>
+                    <li id="side-remove-seller" ><a href="#"><i class="fa fa-edit fa-fw"></i>판매자 탈퇴</a></li>
                 </ul>
                 <!-- end side-menu -->
             </div>

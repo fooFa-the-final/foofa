@@ -15,12 +15,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Foodtruck Finder</title>
     <!-- Core CSS - Include with every page -->
-    <link href="../../resources/plugins/bootstrap/bootstrap.css" rel="stylesheet" />
-    <link href="../../resources/font-awesome/css/font-awesome.css" rel="stylesheet" />
-    <link href="../../resources/plugins/pace/pace-theme-big-counter.css" rel="stylesheet" />
-    <link href="../../resources/css/style.css" rel="stylesheet" />
-    <link href="../../resources/css/main-style.css" rel="stylesheet" />
-    <script src="../../resources/plugins/jquery-1.10.2.js"></script>
+    <link href="${ctx }/resources/plugins/bootstrap/bootstrap.css" rel="stylesheet" />
+    <link href="${ctx }/resources/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <link href="${ctx }/resources/plugins/pace/pace-theme-big-counter.css" rel="stylesheet" />
+    <link href="${ctx }/resources/css/style.css" rel="stylesheet" />
+    <link href="${ctx }/resources/css/main-style.css" rel="stylesheet" />
+    <script src="${ctx }/resources/plugins/jquery-1.10.2.js"></script>
 	 <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=noUvsaR702FX6WH5un5h&submodules=geocoder"></script>
 	 <script>
 	 	var newMarker = function(position){
@@ -32,7 +32,33 @@
 			markers.push(marker);
 		    console.log(position + "length : " +markers.length);
 		}
+	 	//favorite 수 반환
 	 	$(document).ready(function(){
+	 		$.ajax({
+	 			type:'get',
+	 			url : "${ctx }/favorite/count.do",
+	 			data:{
+	 				foodtruckId : '${truck.foodtruckId}'
+	 			},
+	 			success : function(data){
+					$("#followCount").html(data);
+	 			}
+	 		});	 		
+		 //버튼 서식 지정 
+		 		$.ajax({
+		 			type:'get',
+		 			url : "${ctx }/favorite/exist.do",
+		 			data:{
+		 				foodtruckId : '${truck.foodtruckId}'
+		 			},
+		 			success : function(data){
+						if(data){
+							 $("#favoriteBtn").attr('class', 'btn btn-danger btn-circle btn-lg');
+						}else {
+							 $("#favoriteBtn").attr('class', 'btn btn-default btn-circle btn-lg');
+						}
+		 			}
+		 		});	 	 		
 	 		
 	 		naver.maps.Service.geocode({
 	 			address: "${truck.location}"
@@ -152,9 +178,9 @@
                             </a>
                             <div class="user-info">
                                 <h1>${truck.foodtruckName }</h1><br>
-                                <h5>${truck.category1 }양식</h5>
+                                <h5>${truck.category1 }</h5>
                                 <h5>${truck.spot }</h5>
-                                <h5>144 Followers</h5>
+                                <h5><span id="followCount"></span>이 이푸드트럭을 단골로 등록했습니다.</h5>
                                 <h5>${fn:length(reviewList)} Reviews</h5>
                             </div>
                     </span>
@@ -185,7 +211,7 @@
 							 <fieldset class="truck-border">
 							  <legend class="truck-border">Today</legend>
 							  <font size = "4">
-								  Today's Hour: ${startHour }:${startMin }~${endHour }:${endMin }<br>
+								  Today's Hour: ${startTime } ~ ${endTime }<br>
 								  Today's Location: ${truck.spot }<br>
 								  Today's Issue<br><br> ${truck.notice }
 							  </font>
@@ -252,10 +278,10 @@
 
     <!-- Core Scripts - Include with every page -->
     
-    <script src="../../resources/plugins/bootstrap/bootstrap.min.js"></script>
-    <script src="../../resources/plugins/metisMenu/jquery.metisMenu.js"></script>
-    <script src="../../resources/plugins/pace/pace.js"></script>
-    <script src="../../resources/scripts/siminta.js"></script>
+    <script src="${ctx }/resources/plugins/bootstrap/bootstrap.min.js"></script>
+    <script src="${ctx }/resources/plugins/metisMenu/jquery.metisMenu.js"></script>
+    <script src="${ctx }/resources/plugins/pace/pace.js"></script>
+    <script src="${ctx }/resources/scripts/siminta.js"></script>
 
 </body>
 </html>

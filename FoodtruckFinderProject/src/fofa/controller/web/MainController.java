@@ -88,10 +88,18 @@ public class MainController {
 		model.addAttribute("reviews", reviews);
 
 		List<Review> allReview = reviewService.findByRecommand();
-		double mainRandom = Math.random();
-		int intMain = (int)(mainRandom*allReview.size());
-		Review mainReview = reviewService.findById(allReview.get(intMain).getReviewId());
-		model.addAttribute("mainFoodImg",mainReview.getImages().get(0).getFilename());
+		Review mainReview = new Review();
+		while(true){
+			double mainRandom = Math.random();
+			int intMain = (int)(mainRandom*allReview.size());
+			Review randomReview = reviewService.findById(allReview.get(intMain).getReviewId());
+			if(!randomReview.getImages().isEmpty()){
+				mainReview = randomReview;
+				break;
+			}
+		}
+		
+		model.addAttribute("mainFoodImg", mainReview.getImages().get(0).getFilename());
 		model.addAttribute("mainMember", memberService.findById(mainReview.getWriter().getMemberId()));
 		
 		return "view/main.jsp";

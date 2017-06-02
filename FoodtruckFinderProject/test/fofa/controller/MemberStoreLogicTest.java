@@ -15,17 +15,17 @@ public class MemberStoreLogicTest {
 	
 private MemberStore store = new MemberStoreLogic();
 
-@Test
-public void testMemberInsert(){
-	Member member = new Member();
-	member.setMemberId("3232");
-	member.setPassword("1234");
-	member.setBirthday("19930212");
-	member.setEmail("1234");
-	member.setProfileImg("1234");
-	
-	assertEquals(1, store.insert(member));
-	}
+//@Test
+//public void testMemberInsert(){
+//	Member member = new Member();
+//	member.setMemberId("3232");
+//	member.setPassword("1234");
+//	member.setBirthday("19930212");
+//	member.setEmail("1234");
+//	member.setProfileImg("1234");
+//	
+//	assertEquals(1, store.insert(member));
+//	}
 
 //@Test
 //public void deleteTest() {

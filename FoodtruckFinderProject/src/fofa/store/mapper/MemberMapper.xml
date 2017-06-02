@@ -12,7 +12,15 @@
 		<result column="email" property="email"/>
 		<result column="gender" property="gender"/>
 		<result column="image_src" property="profileImg"/>
-		
+
+	  	<association column="member_id" property="followCount"
+	  	select = "fofa.store.mapper.FollowMapper.selectByToId"
+	  	javaType="int" jdbcType="INTEGER"/>
+	  		  	
+	  	<association column="member_id" property="reviewCount"
+	  	select = "fofa.store.mapper.ReviewMapper.selectMemberCount"
+	  	javaType="int" jdbcType="INTEGER"/>
+	  	
 	</resultMap> 
 	
 	<insert id="insert" parameterType="Member">
@@ -38,6 +46,12 @@
 	WHERE member_id = #{memberId}
 	
 	</select>
+	<update id="imgupdate" parameterType="Member">
+	update member_tb
+	SET  image_src= #{profileImg}
+	WHERE member_id = #{memberId}
+	
+	</update>
 	
 	
 	</mapper>
