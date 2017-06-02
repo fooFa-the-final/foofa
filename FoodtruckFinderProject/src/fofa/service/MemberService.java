@@ -11,5 +11,6 @@ public interface MemberService {
 	boolean checkId(String memberId);
 	boolean checkPw(String memberId, String password);
 	Member findById(String memberId);
+	boolean modifyImg(Member member);
 	
 }

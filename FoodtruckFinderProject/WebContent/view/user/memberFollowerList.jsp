@@ -33,7 +33,7 @@
 		<!-- navbar side -->
 		<script
 			src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-
+<script src="resources/js/jquery-3.1.1.min.js"></script>
 		<script>
 			function fileSubmit() {
 				var formData = new FormData($("#fileForm")[0]);
@@ -99,7 +99,7 @@
 						style="height: 300px; background-color: #FFFFFF; position: absolute; width: 83.5%">
 						<a class="navbar-brand" href="#"
 							style="margin-top: 10px; margin-left: 20px"> <img
-							src="../../resources/img/waikiki.jpg"
+							src="${member.profileImg }"
 							style="height: 250px; width: 250px" /> <br>
 
 							<form id="fileForm" action="fileUpload" method="post"

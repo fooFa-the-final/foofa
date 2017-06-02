@@ -61,7 +61,11 @@ public class FollowController {
 		memberId = ((String)(session.getAttribute("loginUserId")));
 		List<Follow> follow =  followService.findFollow(memberId);
 		follow.size();
-		return 0;
+		System.out.println(follow.size());
+		int count;
+		count=follow.size();
+		model.addAttribute("followCount", count);
+		return count;
 	}
 	
 }

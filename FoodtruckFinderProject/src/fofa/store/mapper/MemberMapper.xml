@@ -38,6 +38,12 @@
 	WHERE member_id = #{memberId}
 	
 	</select>
+	<update id="imgupdate" parameterType="Member">
+	update member_tb
+	SET  image_src= #{profileImg}
+	WHERE member_id = #{memberId}
+	
+	</update>
 	
 	
 	</mapper>
