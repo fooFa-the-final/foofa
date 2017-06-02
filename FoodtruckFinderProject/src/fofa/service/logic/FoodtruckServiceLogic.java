@@ -46,8 +46,8 @@ public class FoodtruckServiceLogic implements FoodtruckService{
 	}
 
 	@Override
-	public Foodtruck findById(String sellerId) {
-		return foodtruckStore.selectById(sellerId);
+	public Foodtruck findById(String foodtruckId) {
+		return foodtruckStore.selectById(foodtruckId);
 	}
 
 	@Override

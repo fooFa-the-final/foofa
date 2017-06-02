@@ -56,15 +56,8 @@ public class MainController {
 		List<Advertise> allAdv = advertiseService.findNowAd();
 		List<Foodtruck> adTrucks = new ArrayList<>();
 		
-		ArrayList<Integer> ranNumber = new ArrayList<Integer>();
-		for(int i=0; i <allAdv.size();i++){
-			ranNumber.add(i);
-		}
-		Collections.shuffle(ranNumber);
-		
-		
 		for(int i=0; i<9; i++){
-			String sellerId = allAdv.get(ranNumber.get(i)).getSellerId();
+			String sellerId = allAdv.get(i).getSellerId();
 			adTrucks.add(foodtruckService.findBySeller(sellerId));
 		}
 		model.addAttribute("adTrucks", adTrucks);
