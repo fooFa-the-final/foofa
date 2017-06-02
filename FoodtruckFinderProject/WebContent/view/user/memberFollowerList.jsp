@@ -54,17 +54,18 @@
 				});
 			}
 
-			var follow = function(fromId) {
+			var follow = function(toId) {
 				$(document).ready(function() {
 					var btn = $("#delete");
 					$.ajax({
 						type : 'GET',
 						url : "${ctx }/follow/remove.do",
 						data : {
-							fromId : fromId
+							toId : toId
 						},
 						success : function(data) {
-							$("#follwer").remove();
+							var fowId = "#follwer"+toId;
+							$(fowId).remove();
 							
 						}
 					});
@@ -140,7 +141,7 @@
 					<h1>Follwer List</h1>
 					<br>
 					<c:forEach var="follow" items="${follow}" varStatus="sts">
-						<div id="follwer" style="margin-bottom: 50px">
+						<div id="follwer${follow.toId }" style="margin-bottom: 50px">
 							<a class="navbar-brand" href="#"
 								style="margin-top: 10px; margin-left: 20px"> <img
 								src="../resources/img/waikiki.jpg"
@@ -148,7 +149,7 @@
 							</a>
 							<div class="user-info">
 								<tr class="odd gradeX">
-									<td>${follow.fromId }</td>
+									<td>${follow.toId }</td>
 								</tr>
 								<br>
 								<h5>144Followers</h5>
@@ -158,7 +159,7 @@
 							<div style="float: right;">
 								<br> <br> <br>
 								<button type="button" class="btn btn-default"
-									onclick="follow('${follow.fromId}');">UNFOLLOW</button>
+									onclick="follow('${follow.toId}');">UNFOLLOW</button>
 							</div>
 							</div>
 					</c:forEach>
