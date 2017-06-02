@@ -130,7 +130,7 @@
                             </div>
                     </span>
                     <span style="float:right; margin-right:50px; margin-top: 30px">
-                        <a href="follow(${member.memberId});"><button id="followBtn" type="button" class="btn btn-default btn-circle btn-lg" onclick="follow('${ member.memberId}');"><i class="fa fa-heart"></i></</button></a>
+                        <button id="followBtn" type="button" class="btn btn-default btn-circle btn-lg" onclick="follow('${ member.memberId}');"><i class="fa fa-heart"></i></</button>
                         <a href="#"><button type="button" class="btn btn-default">회원 탈퇴</button></a>
                     </span>        
                 </div>
