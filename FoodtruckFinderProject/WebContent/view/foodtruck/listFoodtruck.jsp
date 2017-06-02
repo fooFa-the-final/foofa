@@ -33,6 +33,7 @@
 <body>
     <!--  wrapper -->
     <div id="wrapper" style="color:#FFFFFF">
+<<<<<<< HEAD
         <!-- navbar top -->
         <nav class="navbar navbar-default navbar-fixed-top" role="navigation" id="navbar">
             <!-- navbar-header -->
@@ -77,6 +78,11 @@
             <!-- end navbar-top-links -->
         </nav>
         <!-- end navbar top -->
+=======
+
+
+		<%@ include file="../header.jspf"%>
+>>>>>>> branch '170524' of https://github.com/fooFa-the-final/foofa.git
 
         <!--  page-wrapper -->
 
