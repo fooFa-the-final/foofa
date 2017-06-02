@@ -19,6 +19,6 @@ public interface SalesService {
 
 	List<Sale> find10DaysSales(String foodtruckId);
 
-	List<Sale> find1MonthSales(String foodtruckId, String month);
+	List<Sale> find1MonthSales(String foodtruckId);
 
 }

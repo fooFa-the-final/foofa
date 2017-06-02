@@ -69,15 +69,15 @@ public class SaleStoreTest {
 	//
 	// }
 
-	//
-	// @Test
-	// public void testSelect1MonthSales() {
-	// SalesStoreLogic saleLogic = new SalesStoreLogic();
-	//
-	// List<Sale> list = saleLogic.select1MonthSales("1", "1601");
-	//
-	// assertNotNull(list);
-	//
+	
+//	 @Test
+//	 public void testSelect1MonthSales() {
+//	 SalesStoreLogic saleLogic = new SalesStoreLogic();
+//	
+//	 List<Sale> list = saleLogic.select1MonthSales("1", "1601");
+//	
+//	 assertNotNull(list);
+//	
 	//
 	// }
 	// @Test

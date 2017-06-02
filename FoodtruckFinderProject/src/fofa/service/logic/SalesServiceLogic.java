@@ -10,7 +10,6 @@ import fofa.service.SalesService;
 import fofa.store.SalesStore;
 import fofa.store.logic.SalesStoreLogic;
 
-
 @Service
 public class SalesServiceLogic implements SalesService {
 	SalesStore store = null;
@@ -64,8 +63,8 @@ public class SalesServiceLogic implements SalesService {
 	}
 
 	@Override
-	public List<Sale> find1MonthSales(String foodtruckId, String month) {
-		List<Sale> list = store.select1MonthSales(foodtruckId, month);
+	public List<Sale> find1MonthSales(String foodtruckId) {
+		List<Sale> list = store.select1MonthSales(foodtruckId);
 		return list;
 	}
 
