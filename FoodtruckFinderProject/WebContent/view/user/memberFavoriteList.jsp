@@ -8,7 +8,7 @@
 <head>
 <c:set value="${pageContext.request.contextPath}" var="ctx" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>단골 푸드트럭 리스트</title>
+<title>팔로우리스트</title>
 <!-- Core CSS - Include with every page -->
 <link href="${ctx}/resources/plugins/bootstrap/bootstrap.css"
 	rel="stylesheet" />
@@ -28,42 +28,70 @@
 <body>
    <div id="wrapper">
 		<%@ include file="../header.jspf"%>
-		
-	<%@ include file="../left/memberLeft.jspf"%>
-
+		<%@ include file="../left/memberLeft.jspf"%>
 		<!--  page-wrapper -->
 		<div id="page-wrapper" style="background-color: #FFFFFF">
 		
-		
-			<div class="container">
 				<div class="row">
 					<!-- Page Header -->
-					<div class="row"
-						style="height: 300px; background-color: #FFFFFF; position: absolute; width: 83.5%">
+					<div class="col-lg-12 div-profile"
+						style="height: 350px; background-color: #FFFFFF; ">
 						<a class="navbar-brand" href="#"
 							style="margin-top: 10px; margin-left: 20px"> <img
 							src="../../resources/img/waikiki.jpg"
 							style="height: 250px; width: 250px" /> <br>
 
+							<form id="fileForm" action="fileUpload" method="post"
+								enctype="multipart/form-data">
+								<input type="file" id="fileUp" name="fileUp" /> <input
+									type="button" value="전송하기" onClick="fileSubmit();">
+							</form>
+
 						</a>
 						<div class="user-info">
-							<h1><b>${member.memberId }</b></h1>
+							<h1>"${member.memberId }"님의 프로필 페이지</h1>
 							<br>
 							<h5>${member.email }</h5>
-							<h5>144 Followers</h5>
-							<h5>255 Reviews</h5>
+							<h5>${member.followCount } Followers</h5>
+							<h5>${member.reviewCount } Reviews</h5>
 						</div>
 						<span style="float: right; margin-right: 90px; margin-top: 30px">
 							<a href="${ctx }/member/checkPw.do"><button type="button"
-									class="btn btn-default">회원 탈퇴</button></a> <br> <br> <br>
-							<br> <br> <br> <br> <a href="#"><button
+									class="btn btn-default">회원 탈퇴</button></a>
+						 <a href="#"><button
 									type="button" class="btn btn-default">Make Follow</button></a>
 						</span>
 					</div>
 				</div>
-			</div>
 
-		
+			<div class="row">
+					<div class="col-lg-12">
+					<h1>Favorite List</h1>
+					<c:forEach var="truck" items="${trucks}" varStatus="sts">
+						<div id="${truck.foodtruckId }" style="margin-bottom: 50px">
+							<a class="navbar-brand" href="#"
+								style="margin-top: 10px; margin-left: 20px"> <img
+								src="../resources/img/waikiki.jpg"
+								style="height: 70px; width: 70px" />
+							</a>
+							<div class="user-info">
+								<tr class="odd gradeX">
+									<td>${truck.foodtruckName }</td>
+								</tr>
+								<br>
+								<h5>${truck.favoriteCount } Favorite</h5>
+								<h5>${truck.reviewCount } Reviews</h5>
+								<br>
+							</div>
+							<div style="float: right;">
+								<br> <br> <br>
+								<button type="button" class="btn btn-default"
+									onclick="favorite('${truck.foodtruckId }');">UNfavorite</button>
+							</div>
+							</div>
+					</c:forEach>
+				</div>
+			</div>
 		</div>
 		<!-- end page-wrapper -->
 
@@ -80,7 +108,8 @@
 	<script src="../../resources/plugins/dataTables/jquery.dataTables.js"></script>
 	<script
 		src="../../resources/plugins/dataTables/dataTables.bootstrap.js"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+		<script
+			src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 	<script>
 		$(document).ready(function() {
 			$('#dataTables-example').dataTable();
@@ -106,12 +135,12 @@
 				});
 			}
 
-			var follow = function(toId) {
+			var favorite = function(toId) {
 				$(document).ready(function() {
 					var btn = $("#delete");
 					$.ajax({
 						type : 'GET',
-						url : "${ctx }/follow/remove.do",
+						url : "${ctx }/favorite/remove.do",
 						data : {
 							toId : toId
 						},

@@ -26,7 +26,6 @@
 .mySlides {display:none; width: 900px; margin: 0 auto; width:90%;}
 .w3-left, .w3-right, .w3-badge {cursor:pointer}
 .w3-badge {height:13px;width:13px;padding:0}	
-.index-overflow {overflow:hidden; text-overflow:ellipsis; width:120px; white-space:normal; line-height:1.3; height:3.6em; word-wrap: break-word; display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient: vertical; font-size: 0.9em; }
 a.link {font-size: 0.7em; color:blue;}
 
 </style>

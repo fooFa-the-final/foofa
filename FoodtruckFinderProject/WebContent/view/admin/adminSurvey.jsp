@@ -116,7 +116,9 @@
         	var question = $("input[name=question]").val();
         	var id = $("input[name=question]").attr('id');
         	
-        	if(id == "" || id == "undefined"){
+        	console.log(question); console.log(id);
+        	
+        	if(id == "" || id == "undefined" || id == undefined){
         		$.ajax({
 				url:"${ctx}/survey/item/create.do"
 					,type:"get"
