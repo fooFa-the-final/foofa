@@ -6,10 +6,10 @@ to_id varchar(100),
   PRIMARY KEY (from_id,to_id)
 );
 
-alter table follow_tb
-add CONSTRAINT sales_tb_fk FOREIGN KEY (from_id) REFERENCES MEMBER_TB(MEMBER_ID) on DELETE CASCADE;
-alter table follow_tb
-add CONSTRAINT sales_tb_fk1 FOREIGN KEY (to_id) REFERENCES MEMBER_TB(MEMBER_ID) on DELETE CASCADE;
+ALTER TABLE follow_tb
+ADD FOREIGN KEY(from_id) REFERENCES member_tb(member_id)  ON DELETE CASCADE;
+ALTER TABLE follow_tb
+ADD FOREIGN KEY(to_id) REFERENCES member_tb(member_id) ON DELETE CASCADE;
 insert into follow_tb(from_id, to_id) values ('momo', 'mina');
 insert into follow_tb(from_id, to_id) values ('dahyun', 'momo');
 insert into follow_tb(from_id, to_id) values ('mina', 'dahyun');

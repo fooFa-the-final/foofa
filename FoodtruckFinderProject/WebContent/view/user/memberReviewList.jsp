@@ -23,7 +23,7 @@
 <!-- Page-Level CSS -->
 <link href="../../resources/plugins/dataTables/dataTables.bootstrap.css"
 	rel="stylesheet" />
-
+	 <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=noUvsaR702FX6WH5un5h&submodules=geocoder"></script>
 <script>
 	var revDel = function(reviewId){
 		$.ajax({
@@ -41,7 +41,32 @@
 		});
 	}
 	
-
+	var follow = function(memberId){
+ 		var btn = $("#followBtn");
+ 		var classN = btn.attr('class');
+ 		var url ="";
+ 		
+ 		if(classN == "btn btn-default btn-circle btn-lg"){
+ 			url = "${ctx}/follow/create.do";
+ 			classN = "btn btn-danger btn-circle btn-lg";
+ 		} else {
+ 			url = "${ctx}/follow/remove.do";
+ 			classN = "btn btn-default btn-circle btn-lg";
+ 		}
+ 		
+ 		$.ajax({
+ 			type:'GET',
+ 			url : url,
+ 			data:{
+ 				memberId : memberId
+ 			},
+ 			success : function(data){
+ 				if (data) {
+ 					btn.attr("class", classN);
+				} 
+ 			}
+ 		});
+ 	};
 </script>
 
 
@@ -49,62 +74,11 @@
 
 <body>
 	<!--  wrapper -->
-    
-    <div id="wrapper">
-        <!-- navbar top -->
-        <nav class="navbar navbar-default navbar-fixed-top" role="navigation" id="navbar">
-            <!-- navbar-header -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="index.html">
-                    <img src="../../resources/img/logo.png" alt="" />
-                </a>
-            </div>
-            <!-- end navbar-header -->
-            <!-- navbar-top-links -->
-            <ul class="nav navbar-top-links navbar-right">
-               
-               <li class="row">
-                    <!-- search section-->
-                    <div class="input-group custom-search-form" style="width:800px; margin-right:200px">
-                        <input type="text" class="form-control" placeholder="Search" style="width: 45%">
-                        <input type="text" class="form-control" placeholder="Location" style="width: 45%">
-                            <button class="btn btn-default" type="button">
-                                <i class="fa fa-search"></i>
-                            </button>
-                    </div>
-                    <!--end search section-->
-                </li>
-               
-                <!-- main dropdown -->
-                    <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-user fa-3x"></i>
-                    </a>
-                    <!-- dropdown user-->
-                    <ul class="dropdown-menu dropdown-user">
-                        <li><a href="#"><i class="fa fa-user fa-fw"></i>User Profile</a>
-                        </li>
-                        <li><a href="#"><i class="fa fa-gear fa-fw"></i>Settings</a>
-                        </li>
-                        <li class="divider"></li>
-                        <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i>Logout</a>
-                        </li>
-                    </ul>
-                    <!-- end dropdown-user -->
-                </li>
-                <!-- end main dropdown -->
-            </ul>
-            <!-- end navbar-top-links -->
+       <div id="wrapper">
+		<%@ include file="../header.jspf"%>
+	</div>
 
-        </nav>
-        <!-- end navbar top -->
-        
+
         
         <!-- navbar side -->
         <nav class="navbar-default navbar-static-side" role="navigation" >
@@ -156,7 +130,7 @@
                             </div>
                     </span>
                     <span style="float:right; margin-right:50px; margin-top: 30px">
-                        <a href="follow(${member.memberId});"><button id="followBtn" type="button" class="btn btn-default">Make Follow</button></a>
+                        <a href="follow(${member.memberId});"><button id="followBtn" type="button" class="btn btn-default btn-circle btn-lg" onclick="follow('${ member.memberId}');"><i class="fa fa-heart"></i></</button></a>
                         <a href="#"><button type="button" class="btn btn-default">회원 탈퇴</button></a>
                     </span>        
                 </div>
