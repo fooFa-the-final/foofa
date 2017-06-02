@@ -51,95 +51,14 @@
 
 	<!--  wrapper -->
 	<div id="wrapper">
-		<!-- navbar top -->
+		<header>
+			<%@ include file="../header.jspf"%>
+		</header>
 
-		<nav class="navbar navbar-default navbar-fixed-top" role="navigation"
-			id="navbar">
-			<!-- navbar-header -->
-			<br>
-
-			<ul class="nav navbar-top-links navbar-right">
-				<div class="col-xs-10" style="margin-right: 550px">
-					<a class="navbar-brand" style="float: center" href="index.html">
-						<img src="${ctx }/resources/img/logo.png" alt="" />
-					</a>
-				</div>
-			</ul>
-			<!-- navbar-top-links -->
-			<ul class="nav navbar-top-links navbar-right">
-				<li class="row">
-					<div class="col-xs-10" style="margin-right: 350px">
-						<!-- search section-->
-						<div class="input-group custom-search-form">
-							<input type="text" class="form-control" placeholder="Search"
-								style="width: 400px"> <input type="text"
-								class="form-control" placeholder="Location" style="width: 400px">
-							<button class="btn btn-default" type="button">
-								<i class="fa fa-search"></i>
-							</button>
-						</div>
-						<!--end search section-->
-					</div>
-				</li>
-				<br>
-				<br>
-
-
-			</ul>
-
-		</nav>
-		<!-- end navbar top -->
-
-		<!-- Core Scripts - Include with every page -->
-
-
-		<!-- end page-wrapper -->
-
+		<!-- container -->
 	</div>
 	<!-- end wrapper -->
-
-	<!-- Core Scripts - Include with every page -->
-
-	<script src="assets/plugins/jquery-1.10.2.js"></script>
-	<script src="assets/plugins/bootstrap/bootstrap.min.js"></script>
-	<script src="assets/plugins/metisMenu/jquery.metisMenu.js"></script>
-	<script src="assets/plugins/pace/pace.js"></script>
-	<script src="assets/scripts/siminta.js"></script>
-
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<script>
-	//아이디  중복 확인 버튼 클릭
-	$(document).ready(function() {
-	$("#idCheck").click(function() {
-		var id = $("#id").val();
-		$.ajax({
-			type : 'POST',
-			url : "${ctx }/member/checkId.do",
-			data : {
-				id : id
-			},
-			success : function(data) {
-				$("#result").html(data);
-				if ($.trim(data) == 'no') {
-					$('#idmessage').html("사용 가능한 ID 입니다.");
-				} else {
-					$('#idmessage').html("사용중인 ID 입니다.");
-				}
-
-			}
-
-		});
-	});
-	});
-	
-</script>
-</body>
-<br>
-<br>
-<br>
 <div class="col-lg-12">
-	<br>
 	<text style="float: right;" />
 	판매자로 가입하고싶으세요?? <a href="${ctx }/seller/create.do" target="_blank">판매자가입</a>
 </div>
@@ -152,8 +71,8 @@
 	<div class="container">
 		<div class="row" id="Truck">
 
-			<b><font size="4">ID</font></b> <br> <input id="id"
-				type="text" name="memberId">
+			<b><font size="4">ID</font></b> <br> <input id="id" type="text"
+				name="memberId">
 			<button type="button" id="idCheck">중복확인</button>
 			<div id="idmessage">
 				<br>
@@ -161,14 +80,11 @@
 			<b><font size="4">Password</font></b> <br> <input id="password"
 				type="password" name="password"> <br> <br> <b><font
 				size="4">Confirm Password</font></b> <br> <input id="password1"
-				type="password" name="ps2"> <br><br>
-		    <b><font size="4">Email</font></b>
-			<br> 
-			<input id="email" type="text" name="email"> <br>
-			<br> 
-			<b><font size="4">BirthDay</font></b> <br> 
-			<input id="birthday" type="text" name="birthday"><br>
-			<br>
+				type="password" name="ps2"> <br>
+			<br> <b><font size="4">Email</font></b> <br> <input
+				id="email" type="text" name="email"> <br> <br> <b><font
+				size="4">BirthDay</font></b> <br> <input id="birthday" type="text"
+				name="birthday"><br> <br>
 			<div>
 				<label>성별</label><br> <label class="radio-inline"> <input
 					type="radio" name="gender" id="gender" value="F">F
@@ -184,4 +100,43 @@
 		</div>
 	</div>
 </form>
+
+
+	<!-- Core Scripts - Include with every page -->
+
+	<script src="assets/plugins/jquery-1.10.2.js"></script>
+	<script src="assets/plugins/bootstrap/bootstrap.min.js"></script>
+	<script src="assets/plugins/metisMenu/jquery.metisMenu.js"></script>
+	<script src="assets/plugins/pace/pace.js"></script>
+	<script src="assets/scripts/siminta.js"></script>
+
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script>
+		//아이디  중복 확인 버튼 클릭
+		$(document).ready(function() {
+
+			$("#idCheck").click(function() {
+				var id = $("#id").val();
+				$.ajax({
+					type : 'POST',
+					url : "${ctx }/member/checkId.do",
+					data : {
+						id : id
+					},
+					success : function(data) {
+						$("#result").html(data);
+						if ($.trim(data) == 'no') {
+							$('#idmessage').html("사용 가능한 ID 입니다.");
+						} else {
+							$('#idmessage').html("사용중인 ID 입니다.");
+						}
+
+					}
+
+				});
+			});
+		});
+	</script>
+</body>
 </html>

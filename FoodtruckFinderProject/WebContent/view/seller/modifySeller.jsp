@@ -21,44 +21,12 @@
 <body>
     <!--  wrapper -->
     
-    <div id="wrapper">
+	<div id="wrapper">
+		<header>
+			<%@ include file="../header.jspf"%>
+		</header>
 
-		<%@ include file="../header.jspf"%>
-        
-        
-        <!-- navbar side -->
-        <nav class="navbar-default navbar-static-side" role="navigation" >
-            <!-- sidebar-collapse -->
-            <div class="sidebar-collapse">
-                <!-- side-menu -->
-                <ul class="nav" id="side-menu">
-                    <li class="active">
-                        <a href="#"><i class="fa fa-files-o fa-fw"></i>Truck Info<span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li class="selected">
-                                <a href="${ctx }/foodtruck/searchById.do">Truck Info</a>
-                            </li>
-                            <li>
-                                <a href="${ctx }/foodtruck/modifyForm.do">트럭정보 수정</a>
-                            </li>
-                        </ul>
-                        <!-- second-level-items -->
-                    </li>
-                     <li>
-                        <a href="#"><i class="fa fa-flask fa-fw"></i>광고요청</a>
-                    </li>
-                    <li>
-                        <a href="#"><i class="fa fa-table fa-fw"></i>매출통계</a>
-                    </li>
-                    <li>
-                        <a href="#"><i class="fa fa-edit fa-fw"></i>설문통계</a>
-                    </li>
-                </ul>
-                <!-- end side-menu -->
-            </div>
-            <!-- end sidebar-collapse -->
-        </nav>
-        <!-- end navbar side -->
+		<%@ include file="../left/sellerLeft.jspf"%>
         <!--  page-wrapper -->
         <div id="page-wrapper" style="margin-top:80px">
            	<div class="col-lg-6">
@@ -99,7 +67,11 @@
     <script src="${ctx }/resources/plugins/metisMenu/jquery.metisMenu.js"></script>
     <script src="${ctx }/resources/plugins/pace/pace.js"></script>
     <script src="${ctx }/resources/scripts/siminta.js"></script>
-
+	<script>
+		$(document).ready(function() {
+			$('#side-modify-seller').attr('class', 'selected');
+		})
+	</script>
 </body>
 
 </html>

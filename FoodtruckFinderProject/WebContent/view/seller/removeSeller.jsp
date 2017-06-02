@@ -36,7 +36,10 @@
 			var msg = "약관동의에 체크해 주세요";
 			alert(msg);
 		}
-	}
+	}	
+	$(document).ready(function() {
+		$('#side-remove-seller').attr('class', 'selected');
+	})
 </script>
 
 <body class="body-Login-back">
@@ -44,6 +47,7 @@
 	<div id="wrapper">
 		<%@ include file="../header.jspf"%>
 	</div>
+		<%@ include file="../left/sellerLeft.jspf"%>
 	<!--  end wrapper -->
 	<div class="container">
 		<form method="post" name="forName" method="post">
