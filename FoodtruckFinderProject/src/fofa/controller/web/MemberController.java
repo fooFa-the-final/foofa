@@ -124,11 +124,10 @@ public class MemberController {
             System.out.println("실제 파일 이름 : " +fileName);
             newFileName = System.currentTimeMillis()+"."
                     +fileName.substring(fileName.lastIndexOf(".")+1);
-            System.out.println(newFileName);
+            System.out.println("새로운 파일 이름 : " + newFileName);
              
             try {
                 mFile.transferTo(new File(path+newFileName));
-                System.out.println(mFile);
             } catch (Exception e) {
                 e.printStackTrace();
             }

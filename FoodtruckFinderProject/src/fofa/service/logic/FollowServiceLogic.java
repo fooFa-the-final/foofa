@@ -28,8 +28,8 @@ public class FollowServiceLogic implements FollowService{
 	}
 
 	@Override
-	public List<Follow> findFollow(String toId) {
-		return store.selectByToId(toId);
+	public List<Follow> findFollow(String fromId) {
+		return store.selectByFromId(fromId);
 	}
 
 	@Override

@@ -19,7 +19,7 @@
     <delete id="delete" parameterType="Follow">
     DELETE
     FROM follow_tb
-    WHERE to_Id = #{toId} AND from_Id = #{fromId}
+    WHERE from_Id = #{fromId} AND  to_Id = #{toId}
     </delete>
     
     <select id="selectByFromId" parameterType="String" resultMap="followMap">
