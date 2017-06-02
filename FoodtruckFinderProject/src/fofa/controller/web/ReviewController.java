@@ -62,6 +62,7 @@ public class ReviewController {
 		List<Review> reviewList = reviewService.findByTruckId(foodtruckId);
 		model.addAttribute("truck", truck);
 		model.addAttribute("reviewList", reviewList);
+		System.out.println(truck.getFoodtruckId());
 		return "../../view/foodtruck/detailFoodtruck.jsp";
 	}
 	@RequestMapping(value="/review/create.do", method=RequestMethod.GET)
