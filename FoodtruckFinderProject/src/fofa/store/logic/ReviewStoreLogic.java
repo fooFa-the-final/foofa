@@ -88,6 +88,19 @@ public class ReviewStoreLogic implements ReviewStore {
 	}
 
 	@Override
+	public List<Review> selectByFromId(String fromId) {
+		SqlSession session = factory.openSession();
+		List<Review> review = null;
+		try{
+			ReviewMapper mapper = session.getMapper(ReviewMapper.class);
+			review = mapper.selectByFromId(fromId);
+
+		} finally {
+			session.close();
+		} 
+		return review;
+	}
+	@Override
 	public List<Review> selectByTruckId(String foodtruckId) {
 		SqlSession session = factory.openSession();
 		List<Review> review = null;
@@ -134,6 +147,19 @@ public class ReviewStoreLogic implements ReviewStore {
 		try{
 			ReviewMapper mapper = session.getMapper(ReviewMapper.class);
 			count = mapper.selectTruckCount(foodtruckId);
+
+		} finally {
+			session.close();
+		} 
+		return count;
+	}
+	@Override
+	public int selectMemberCount(String foodtruckId) {
+		SqlSession session = factory.openSession();
+		int count = 0;
+		try{
+			ReviewMapper mapper = session.getMapper(ReviewMapper.class);
+			count = mapper.selectMemberCount(foodtruckId);
 
 		} finally {
 			session.close();

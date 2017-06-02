@@ -11,6 +11,8 @@
   		<result column="price" property="price"/>
   		<result column="menu_state" property="menuState"/>
   		<result column="foodtruck_id" property="foodtruckId"/>
+  		
+  		
   	</resultMap>
   	
   	<insert id="insert" parameterType="Menu">

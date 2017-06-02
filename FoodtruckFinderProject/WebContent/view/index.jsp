@@ -95,7 +95,7 @@ a.link {font-size: 0.7em; color:blue;}
 								<img src="${ctx}/resources/img/${truck.foodtruckImg }" class="main-truck-img" />
 							</div>
 							<div class="panel-body text-left">
-								<b>${truck.foodtruckName }</b> <br> <p > 평점 :<span class="starRating" style="text-align:left;"><span style="width: ${truck.reviewScore*20 }%">${truck.reviewScore }점</span></span></p>리뷰수 : ${truck.reviewCount }
+								<b>${truck.foodtruckName }</b> <br> <p > 평점 :<span class="starRating" style="text-align:left;"><span style="width: ${truck.score*20 }%">${truck.score }점</span></span></p>리뷰수 : ${truck.reviewCount }
 							</div>
 						</div>
 					</div>		
@@ -107,7 +107,7 @@ a.link {font-size: 0.7em; color:blue;}
 							<img src="${ctx}/resources/img/${truck.foodtruckImg }" class="main-truck-img" />
 						</div>
 						<div class="panel-body text-left">
-							<b>${truck.foodtruckName }</b> <br> <p > 평점 :<span class="starRating" style="text-align:left;"><span style="width: ${truck.reviewScore*20 }%">${truck.reviewScore }점</span></span></p>리뷰수 : ${truck.reviewCount }
+							<b>${truck.foodtruckName }</b> <br> <p > 평점 :<span class="starRating" style="text-align:left;"><span style="width: ${truck.score*20 }%">${truck.score }점</span></span></p>리뷰수 : ${truck.reviewCount }
 						</div>
 					</div>	
 				</div>
@@ -120,7 +120,7 @@ a.link {font-size: 0.7em; color:blue;}
 							<img src="${ctx}/resources/img/${truck.foodtruckImg }" class="main-truck-img" />
 						</div>
 						<div class="panel-body text-left">
-							<b>${truck.foodtruckName }</b> <br> <p > 평점 :<span class="starRating" style="text-align:left;"><span style="width: ${truck.reviewScore*20 }%">${truck.reviewScore }점</span></span></p>리뷰수 : ${truck.reviewCount }						
+							<b>${truck.foodtruckName }</b> <br> <p > 평점 :<span class="starRating" style="text-align:left;"><span style="width: ${truck.score*20 }%">${truck.score }점</span></span></p>리뷰수 : ${truck.reviewCount }						
 						</div>
 					</div>
 				

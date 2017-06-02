@@ -1,0 +1,21 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+		<nav class="navbar-default navbar-static-side" role="navigation">
+		<!-- sidebar-collapse -->
+		<div class="sidebar-collapse">
+			<!-- side-menu -->
+			<ul class="nav" id="side-menu">
+
+				<li class="selected"><a href="#"><i
+						class="fa fa-flask fa-fw"></i>My Reviews</a>
+				<li><a href="#"><i class="fa fa-flask fa-fw"></i>Followers</a>
+				<li><a href="${ctx}/review/list/member.do"><i class="fa fa-flask fa-fw"></i>My
+						Followers Review</a></li>
+				<li><a href="#"><i class="fa fa-table fa-fw"></i>단골</a></li>
+				<li><a href="${ctx}/member/modify.do"><i class="fa fa-edit fa-fw"></i>회원정보수정</a></li>
+			</ul>
+			<!-- end side-menu -->
+		</div>
+		<!-- end sidebar-collapse --> </nav>

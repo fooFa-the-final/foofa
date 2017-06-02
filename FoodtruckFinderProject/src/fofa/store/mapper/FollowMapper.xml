@@ -27,10 +27,10 @@
     FROM follow_tb
     WHERE from_Id= #{fromId}
     </select>
-    <select id="selectByToId" parameterType="String" resultMap="followMap">
-    select FROM_Id, to_Id
+    <select id="selectByToId" parameterType="String" resultType="int">
+    select count(*) followCount
     FROM follow_tb
-    WHERE to_Id= #{toId}
+    WHERE to_Id= #{memberId}
 	</select>
 	</mapper>    
     

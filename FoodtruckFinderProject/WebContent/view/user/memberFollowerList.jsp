@@ -28,6 +28,7 @@
 <body>
    <div id="wrapper">
 		<%@ include file="../header.jspf"%>
+<<<<<<< HEAD
 	</div>
 
 		<!-- navbar side -->
@@ -90,8 +91,11 @@
 		</div>
 		<!-- end sidebar-collapse --> </nav>
 		<!-- end navbar side -->
+		<%@ include file="../left/memberLeft.jspf"%>
 		<!--  page-wrapper -->
 		<div id="page-wrapper" style="background-color: #FFFFFF">
+		
+		
 			<div class="container">
 				<div class="row">
 					<!-- Page Header -->
@@ -108,8 +112,6 @@
 									type="button" value="전송하기" onClick="fileSubmit();">
 							</form>
 
-
-
 						</a>
 						<div class="user-info">
 							<h1>"${member.memberId }"님의 프로필 페이지</h1>
@@ -124,11 +126,8 @@
 							<br> <br> <br> <br> <a href="#"><button
 									type="button" class="btn btn-default">Make Follow</button></a>
 						</span>
-
 					</div>
-
 				</div>
-				<!--End Page Header -->
 			</div>
 
 			<div class="row">
@@ -181,10 +180,50 @@
 	<script src="../../resources/plugins/dataTables/jquery.dataTables.js"></script>
 	<script
 		src="../../resources/plugins/dataTables/dataTables.bootstrap.js"></script>
+		<script
+			src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 	<script>
 		$(document).ready(function() {
 			$('#dataTables-example').dataTable();
 		});
+		
+
+			function fileSubmit() {
+				var formData = new FormData($("#fileForm")[0]);
+				$.ajax({
+					type : 'post',
+					url : '${ctx }/member/fileUpload.do',
+					data : formData,
+					processData : false,
+					contentType : false,
+					success : function(html) {
+						alert("파일 업로드하였습니다.");
+					},
+					error : function(error) {
+						alert("파일 업로드에 실패하였습니다.");
+						console.log(error);
+						console.log(error.status);
+					}
+				});
+			}
+
+			var follow = function(toId) {
+				$(document).ready(function() {
+					var btn = $("#delete");
+					$.ajax({
+						type : 'GET',
+						url : "${ctx }/follow/remove.do",
+						data : {
+							toId : toId
+						},
+						success : function(data) {
+							var fowId = "#follwer"+toId;
+							$(fowId).remove();
+							
+						}
+					});
+				});
+			}
 	</script>
 
 </body>
