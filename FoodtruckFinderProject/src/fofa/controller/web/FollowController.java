@@ -8,8 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import fofa.domain.Favorite;
 import fofa.domain.Follow;
 import fofa.domain.Member;
 import fofa.service.FollowService;
@@ -26,23 +28,23 @@ public class FollowController {
 	@Autowired
 	private ReviewService reviewService;
 	
-	@RequestMapping("follow/create.do")
-	public boolean create(String followingId, HttpSession session){
-		
-		return true;
+	@ResponseBody
+	@RequestMapping(value="follow/create.do", method=RequestMethod.GET)
+	public boolean create(String memberId, HttpSession session){
+		Follow follow = new Follow();
+		follow.setFromId((String)session.getAttribute("loginUserId"));
+		follow.setToId(memberId);
+		return followService.register(follow);
 	}
 	@ResponseBody
-	@RequestMapping("follow/remove.do")
+	@RequestMapping(value="follow/remove.do", method=RequestMethod.GET)
 	public boolean remove(String fromId, HttpSession session){
 		Member member = memberService.findById((String)(session.getAttribute("loginUserId")));
 		String toId = member.getMemberId();
 		Follow follow = new Follow();
 		follow.setToId(toId);
 		follow.setFromId(fromId);
-		boolean result;
-		result = followService.remove(follow);
-		System.out.println(result);
-		return true;
+		return followService.remove(follow);
 	}
 	@RequestMapping("follow/list.do")
 	public String search(HttpSession session, Model model){

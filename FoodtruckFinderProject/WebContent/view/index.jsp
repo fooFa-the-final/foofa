@@ -26,6 +26,8 @@
 .mySlides {display:none; width: 900px; margin: 0 auto; width:90%;}
 .w3-left, .w3-right, .w3-badge {cursor:pointer}
 .w3-badge {height:13px;width:13px;padding:0}	
+.index-overflow {overflow:hidden; text-overflow:ellipsis; width:120px; white-space:normal; line-height:1.3; height:3.6em; word-wrap: break-word; display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient: vertical; font-size: 0.9em; }
+a.link {font-size: 0.7em; color:blue;}
 
 </style>
 </head>
@@ -165,7 +167,7 @@
 									<img id="${hotReview.reviewId}" src="${ctx }/resources/img/${hotReview.mainImage.filename }" style="width: 160px; height:160px; margin:10px"/>
 									<div class="somenail-list">
 									<c:forEach var="image" varStatus="imageNo" items="${hotReview.images }">
-										<img src="${ctx }/resources/img/${image.filename}" onclick="previewImage(this.src, '${review.reviewId}');"/>
+										<img src="${ctx }/resources/img/${image.filename}" onclick="previewImage(this.src, '${hotReview.reviewId}');"/>
 									</c:forEach>
 									</div>
 								</div>							
@@ -175,16 +177,17 @@
 				<div class="col-lg-3">
 					<div class="panel panel-primary text-center" style="height:327px">
 						<c:forEach var="review" varStatus="no" items="${reviews}"> 
-							<div class="panel-body">
+							<div class="panel-body" style="padding:5px;">
 								<img class="somenail" src="${ctx }/resources/img/${review.mainImage.filename}"/>
-								 <a>${review.foodtruck.foodtruckName }</a><br>
+								 <a>${review.foodtruck.foodtruckName }</a>
+								 <p class="index-overflow">${review.contents }</p>
 								By <a>${review.writer.memberId }</a>
 							</div>
 						<hr style="margin:5px 20px;">						
 						
 						</c:forEach>
 
-					<a> Read more list</a>					
+					<a class="link"> Read more list</a>					
 				</div>	
 				</div></div>
 		</div>

@@ -25,6 +25,43 @@
 
 </head>
 
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+<script>
+var date = new Date();
+
+var year = date.getFullYear();
+var month = date.getMonth()+1;
+var day = date.getDate();
+
+if ((day+"").length < 2) {
+    day = "0" + day;
+}
+
+
+
+var getDate = year + month + day;
+$(document).ready(function(){
+    $("form").submit(function()
+    		{ alert("222");
+        if(eval(getDate) >= $("input[name='startdate']").val()){
+            $("input[name='startdate']").css("border", "1px solid red").after("<span>오늘 이전의 날짜를 입력해주세요.</span>");
+            $("span").css("color", "red").fadeOut(3000);
+            return false;
+        	} else if ($("input[name='period']").val() == ""){
+                $("input[name='startdate']").css("border", "1px solid red").after("<span>오늘 이전의 날짜를 입력해주세요.</span>");
+                $("span").css("color", "red").fadeOut(3000);
+			return false;
+        	}
+    });   
+});
+
+
+</script>
+
+
+
 <body>
 	<!--  wrapper -->
 	<div id="wrapper">
