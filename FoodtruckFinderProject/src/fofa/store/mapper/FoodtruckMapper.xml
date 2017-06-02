@@ -32,9 +32,31 @@
   		FROM foodtruck_tb
   	</sql>
   	
+  	<sql id="pagingTrucks">
+  		SELECT foodtruck_id, truckName, truck_image, category, area
+  		FROM foodtruck_tb
+  	</sql>
+  	
+  	<sql id="pagingPre">
+  		<![CDATA[
+  			SELECT X.rnum, X.foodtruck_id, X.truckName, X.truck_image, X.category, X.area
+			FROM ( 
+    		SELECT rownum AS rnum, A.foodtruck_id, A.truckName, A.truck_image, A.category, A.area
+    		FROM (
+  		]]>
+  	</sql>
+  	
+  	<sql id="pagingPost">
+  		<![CDATA[
+  			) A
+    		WHERE rownum <= ${END}) X
+			WHERE X.rnum >= ${START}
+		]]>	
+  	</sql>
+  	
   	<insert id="insert" parameterType="Foodtruck">
   		<selectKey keyProperty="foodtruckId" resultType="String" order="BEFORE">
-         select 'F'||truck_seq.nextval FROM DUAL
+         SELECT 'F'||truck_seq.nextval FROM DUAL
       	</selectKey>
   		INSERT INTO foodtruck_tb (foodtruck_id, seller_id, truckName, truck_image, truckHour, area, notice, location, category, payment, parking, drinking, catering, operation_state)
   		VALUES (#{foodtruckId}, #{sellerId}, #{foodtruckName}, #{foodtruckImg}, #{operationTime}, #{spot}, #{notice}, #{location}, #{category1}, #{card}, #{parking}, #{drinking}, #{catering}, #{state})
@@ -51,15 +73,18 @@
   		WHERE foodtruck_id=#{foodtruckId}
   	</select>
   	
-  	<select id="selectByLoc" parameterType="String" resultMap="foodtruckMap">
-  		<include refid="selectFoodtrucks"/>
+  	<select id="selectByLoc" parameterType="hashmap" resultMap="foodtruckMap">
+  		<include refid="pagingPre"/>
+  		<include refid="pagingTrucks"/>
   		WHERE location LIKE '%'||#{location}||'%' OR area LIKE '%'||#{location}||'%'
-  		
+  		<include refid="pagingPost"/>
   	</select>
   	
-  	<select id="selectByKeyLoc" resultMap="foodtruckMap">
-  		<include refid="selectFoodtrucks"/>
+  	<select id="selectByKeyLoc" parameterType="hashmap" resultMap="foodtruckMap">
+  		<include refid="pagingPre"/>
+  		<include refid="pagingTrucks"/>
   		WHERE (truckName LIKE '%'||#{keyword}||'%' OR category LIKE '%'||#{keyword}||'%') AND (location LIKE '%'||#{location}||'%' OR area LIKE '%'||#{location}||'%')
+  		<include refid="pagingPost"/>
   	</select>
   	
   	<select id="selectByFilter" parameterType="Foodtruck" resultMap="foodtruckMap">

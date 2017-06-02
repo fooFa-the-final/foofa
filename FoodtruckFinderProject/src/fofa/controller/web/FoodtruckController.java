@@ -139,13 +139,11 @@ public class FoodtruckController {
 	
 	@RequestMapping("/searchByKeyLoc.do")
 	public String searchByKeyLoc(int pageNum, String keyword, String location, Model model){
-		
-		
 		List<Foodtruck> trucks;
 		if(keyword.isEmpty()){
-			trucks = foodtruckService.findByLoc(location);
+			trucks = foodtruckService.findByLoc(1, location);
 		} else {
-			trucks = foodtruckService.findByKeyLoc(keyword, location);
+			trucks = foodtruckService.findByKeyLoc(1, keyword, location);
 		}
 		model.addAttribute("trucks", trucks);
 		return "../view/foodtruck/listFoodtruck.jsp";

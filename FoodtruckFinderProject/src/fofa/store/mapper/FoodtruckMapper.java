@@ -1,8 +1,7 @@
 package fofa.store.mapper;
 
 import java.util.List;
-
-import org.apache.ibatis.annotations.Param;
+import java.util.Map;
 
 import fofa.domain.Foodtruck;
 
@@ -14,11 +13,11 @@ public interface FoodtruckMapper {
 	
 	Foodtruck selectById(String foodtruckId);
 	
-	List<Foodtruck> selectByLoc(String location);
+	List<Foodtruck> selectByLoc(Map<String, Object> map);
 	
-	List<Foodtruck> selectByKeyLoc(@Param("keyword")String keyword, @Param("location")String location);
+	List<Foodtruck> selectByKeyLoc(Map<String, Object> map);
 	
-	List<Foodtruck> selectByFilter(Foodtruck foodtruck);
+	List<Foodtruck> selectByFilter(Map<String, Object> map);
 	
 	Foodtruck selectBySellerId(String sellerId);
 	
