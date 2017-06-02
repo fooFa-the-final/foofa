@@ -1,10 +1,15 @@
 package fofa.controller.web;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -132,20 +137,35 @@ public class ReviewController {
 	
 	@RequestMapping("/report/list.do")
 	@ResponseBody
-	public List<Report> selectReportByReviewId(String reviewId){
+	public List<Report> selectReportByReviewId(String reviewId, HttpServletResponse resp){
 		List<Report> list = reviewService.findReport(reviewId);
+		
 		System.out.println("신고 테이블 개수 : " + list.size());
+		/*JSONArray js = new JSONArray();
+		JSONObject jso = new JSONObject();
+		jso.put("data", list);
+		resp.setContentType("text/html;charset=utf-8");
+		
+		try {
+			PrintWriter out = resp.getWriter();
+			out.print(jso.toString());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}*/
 		return list;
 	}
 	
 	
 	@RequestMapping("/review/reported/remove.do")
+	@ResponseBody
 	public String removeReivewByReport(String reviewId){
-		return "../view/admin/adminReport.jsp";
+		reviewService.remove(reviewId);
+		return null;
 	}
 	
 	@RequestMapping("/review/report/remove.do")
-	public String removeReport(String reportId){
+	public String removeReport(String reviewId){
 		return "redirect:report/list.do";
 	}
 	

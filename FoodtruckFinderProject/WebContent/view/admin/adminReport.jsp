@@ -18,13 +18,66 @@
     <script src="${ctx}/resources/plugins/jquery-1.10.2.js"></script>
     <!-- Page-Level CSS -->
     <link href="${ctx}/resources/plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet" />
-	<script>
-		$(document).ready(function(){
-			
-		});
+	<script>		
 		
-		var getCount = function(reviewId){
-			console.log(reviewId);
+		var reportList = function(reviewId){
+			$.ajax({
+    			type: 'get',
+    			url: "${ctx}/report/list.do",
+    			data: {
+    				reviewId : reviewId
+    			},
+    			success : function(data){
+    				/* var id = "#report" + reviewId;
+    				for(var i=0;i<data.length;i++){
+    					console.log(data[i].reviewId);
+    				} */
+    				var contents = data;
+    				var modalId = "#myModal" + reviewId;
+    				var mContentId = "#modalCons" + reviewId;
+    				var reportHtml = "<input type='button' id = 'rep"+reviewId+"' value='" + data.length + "' + style='border:0;background-color:transparent'>"
+    				$("#report" + reviewId).html(reportHtml);
+    				var reportContents = "";
+    				for(var i=0;i<contents.length;i++)
+    					reportContents += contents[i].memberId + " : " + contents[i].reason + "<br>";
+    				$(mContentId).append(reportContents);
+    				$("#rep"+reviewId).click(function(){
+    					$(modalId).modal();
+    				});
+    			}
+    		});	
+		}
+
+		var pass = function(){
+			$.ajax({
+    			type: 'get',
+    			url: "${ctx}/report/list.do",
+    			data: {
+    				reviewId : reviewId
+    			},
+    			success : function(data){
+    				/* var id = "#report" + reviewId;
+    				for(var i=0;i<data.length;i++){
+    					console.log(data[i].reviewId);
+    				} */
+    				var contents = data;
+    				var modalId = "#myModal" + reviewId;
+    				var mContentId = "#modalCons" + reviewId;
+    				var reportHtml = "<input type='button' id = 'rep"+reviewId+"' value='" + data.length + "' + style='border:0;background-color:transparent'>"
+    				$("#report" + reviewId).html(reportHtml);
+    				var reportContents = "";
+    				for(var i=0;i<contents.length;i++)
+    					reportContents += contents[i].memberId + " : " + contents[i].reason + "<br>";
+    				$(mContentId).append(reportContents);
+    				$("#rep"+reviewId).click(function(){
+    					$(modalId).modal();
+    				});
+    			}
+    		});	
+		}
+		
+		var del = function(){
+			
 		}
 	</script>
 </head>
@@ -74,40 +127,34 @@
 	                                            <td class="center">${review.writer.memberId }</td>
 	                                            <td class="center" id="report${review.reviewId }">
 	                                            	<script>
-	                                            		$.ajax({
-	                                            			type: 'get',
-	                                            			url: "${ctx}/report/list.do",
-	                                            			data: {
-	                                            				reviewId : "${review.reviewId}"
-	                                            			},
-	                                            			success : function(data){
-	                                            				/* var id = "#report" + "${review.reviewId}";
-	                                            				for(var i=0;i<data.length;i++){
-	                                            					console.log(data[i].reviewId);
-	                                            				} */
-	                                            				console.log(data);
-	                                            			}
-	                                            		});
+		                                            	reportList("${review.reviewId}");
 	                                            	</script>
 	                                            </td>
-	                                			<td><button type="button" class="btn btn-primary">PASS</button><button type="button" class="btn btn-danger">DELETE</button></td>
+	                                			<td><button type="button" class="btn btn-primary" onclick = "pass('${review.reviewId}')">PASS</button><button type="button" class="btn btn-danger" onclick="del('${review.reviewId}')">DELETE</button></td>
 	                                        </tr>
+	                                       <!-- Modal -->
+								  	<div class="modal fade" id="myModal${review.reviewId }" role="dialog">
+								    <div class="modal-dialog">
+								      <!-- Modal content-->
+								      <div class="modal-content">
+								        <div class="modal-header">
+								          <button type="button" class="close" data-dismiss="modal">&times;</button>
+								          <h4 class="modal-title">접수된 신고 이유</h4>
+								        </div>
+								        
+								        <div class="modal-body" id = "modalCons${review.reviewId }">
+								           	<h4>신고 된 리뷰 내용 : ${review.contents }</h4>
+								          
+								        </div>
+								        <div class="modal-footer">
+								          <input type="button" class="btn btn-default" data-dismiss="modal" value="닫기">
+								        </div>
+								      </div>
+								      
+								    </div>
+								  </div>
                                         </c:forEach>
-                                       <!--  <tr class="odd gradeX">
-                                            <td>2</td>
-                                            <td>서대현 바보 .</td>
-                                            <td>이승건 </td>
-                                            <td class="center">1</td>
-                                            <td class="center"><button type="button" class="btn btn-danger">DELETE</button></td>
-                                			<td><button type="button" class="btn btn-primary">PASS</button></td>
-                                        <tr class="odd gradeX">
-                                            <td>3</td>
-                                            <td>골드까지올려주실분구함 .</td>
-                                            <td>서대현 </td>
-                                            <td class="center">190</td>
-                                            <td class="center"><button type="button" class="btn btn-danger">DELETE</button></td>
-                                			<td><button type="button" class="btn btn-primary">PASS</button></td>
-                                		</tr> -->
+                                        
                                     </tbody>
                                 </table>
                             </div>
