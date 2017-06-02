@@ -27,8 +27,8 @@
     FROM follow_tb
     WHERE from_Id= #{fromId}
     </select>
-    <select id="selectByToId" parameterType="String" resultType="Int">
-    select count(*)
+    <select id="selectByToId" parameterType="String" resultType="int">
+    select count(*) followCount
     FROM follow_tb
     WHERE to_Id= #{memberId}
 	</select>
