@@ -57,6 +57,6 @@
   		select avg(score) from review_tb where foodtruck_Id = #{foodtruckId}
   	</select>
   	<select id = "selectTruckCount" resultType="int" parameterType="String">
-  		select count from review_tb where foodtruck_Id = #{foodtruckId}
+  		select count(*) from review_tb where foodtruck_Id = #{foodtruckId}
   	</select>
   </mapper>
