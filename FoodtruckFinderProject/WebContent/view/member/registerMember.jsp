@@ -3,11 +3,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
-
 <head>
 <c:set value="${pageContext.request.contextPath}" var="ctx" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FooFa Login</title>
+<title>FooFa Register Seller</title>
 <!-- Core CSS - Include with every page -->
 <link href="${ctx}/resources/plugins/bootstrap/bootstrap.css"
 	rel="stylesheet" />
@@ -19,11 +18,13 @@
 <link href="${ctx}/resources/css/main-style.css" rel="stylesheet" />
 
 <!-- Page-Level CSS -->
-<link href="resources/plugins/dataTables/dataTables.bootstrap.css"
+<link
+	href="${ctx}/resources/plugins/dataTables/dataTables.bootstrap.css"
 	rel="stylesheet" />
 
 <c:set var="ctx">${pageContext.request.contextPath }</c:set>
 </head>
+
 <style>
 #indexMain {
 	margin: 60px;
@@ -47,96 +48,208 @@
 }
 </style>
 
+
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+<script>
+	function fn_press_han(obj) {
+		//좌우 방향키, 백스페이스, 딜리트, 탭키에 대한 예외
+		if (event.keyCode == 8 || event.keyCode == 9 || event.keyCode == 37
+				|| event.keyCode == 39 || event.keyCode == 46)
+			return;
+		//obj.value = obj.value.replace(/[\a-zㄱ-ㅎㅏ-ㅣ가-힣]/g, '');
+		obj.value = obj.value.replace(/[\ㄱ-ㅎㅏ-ㅣ가-힣]/g, '');
+	}
+
+	var idReg = /^[a-z]+[a-z0-9]{3,17}$/g;
+
+	$(document)
+			.ready(
+					function() {
+						$("form")
+								.submit(
+										function() {
+											if (!idReg.test($(
+													"input[name='memberId']")
+													.val())) {
+												if ($("input[name='memberId']")
+														.val() == "") {
+													$("input[name='memberId']")
+															.css("border",
+																	"1px solid red")
+															.after(
+																	"<span>아이디4글자 이상 16글자 이하 영문자 숫자의 조합입니다.</span>");
+													$("span").css("color",
+															"red")
+															.fadeOut(3000);
+													return false;
+												} else {
+													return false
+												}
+											} else if ($(
+													"input[name='password']")
+													.val() == "") {
+												$("input[name='password']")
+														.css("border",
+																"1px solid red")
+														.after(
+																"<span>비밀번호를 입력해주세요</span>");
+												$("span").css("color", "red")
+														.fadeOut(3000);
+												return false;
+											} else if ($(
+													"input[name='password1']")
+													.val() == "") {
+												$("input[name='password1']")
+														.css("border",
+																"1px solid red")
+														.after(
+																"<span>비밀번호를 한번더 입력해주세요</span>");
+												$("span").css("color", "red")
+														.fadeOut(3000);
+												return false;
+											} else if ($(
+													"input[name='email']")
+													.val().length < 10) {
+												$("input[name='email']")
+														.css("border",
+																"1px solid red")
+														.after(
+																"<span>이메일을 입력해주세요</span>");
+												$("span").css("color", "red")
+														.fadeOut(3000);
+												return false;
+											} else if ($("input[name='birthday']")
+													.val() == "") {
+												$("input[name='birthday']")
+														.css("border",
+																"1px solid red")
+														.after(
+																"<span>생년월일 입력해주세요</span>");
+												$("span").css("color", "red")
+														.fadeOut(3000);
+												return false;
+											}
+										});
+						$(":input").focus(function() {
+							$(this).css("border", "4px red solid");
+						}).blur(function() {
+							$(this).css("border", "");
+						});
+
+						$(":text").focus(function() {
+							$(this).after("<strong>필수 항목입니다.</strong>");
+						}).blur(function() {
+							$("strong").remove();
+						})
+
+						$("#idCheck").click(function() {
+							var id = $("#id").val();
+							$.ajax({
+								type : 'POST',
+								url : "${ctx }/member/checkId.do",
+								data : {
+									id : id
+								},
+								success : function(data) {
+									$("#result").html(data);
+									if ($.trim(data) == 'no') {
+										$('#idmessage').html("사용 가능한 ID 입니다.");
+									} else {
+										$('#idmessage').html("사용중인 ID 입니다.");
+									}
+
+								}
+
+							});
+						});
+					});
+
+	function onlyNumber(str) {
+		if ((event.keyCode < 48) || (event.keyCode > 57))
+			event.returnValue = false;
+	}
+
+	//비밀번호 일치 확인 
+	function checkPwd() {
+		var pw1 = document.getElementById("password").value;
+
+		var pw2 = document.getElementById("password1").value;
+		if (pw1 != '' && pw2 != '') {
+			if (pw1 != pw2) {
+				document.getElementById('checkPwd').style.color = "red";
+				document.getElementById('checkPwd').innerHTML = "암호가 일치하지 않습니다..";
+			} else {
+				document.getElementById('checkPwd').style.color = "black";
+				document.getElementById('checkPwd').innerHTML = "암호가 일치합니다.";
+			}
+		}
+	}
+</script>
+
 <body>
 
 	<!--  wrapper -->
 	<div id="wrapper">
-		<header>
-			<%@ include file="../header.jspf"%>
-		</header>
 
-		<!-- container -->
+		<%@ include file="../header.jspf"%>
+		<!-- navbar top -->
 	</div>
-	<!-- end wrapper -->
-<div class="col-lg-12">
-	<text style="float: right;" />
-	판매자로 가입하고싶으세요?? <a href="${ctx }/seller/create.do" target="_blank">판매자가입</a>
-</div>
-<div id="Register">
-	<b><font size="6">Join With us</font></b>
-</div>
-<br>
-<br>
-<form action="${ctx }/member/create.do" method="post">
+	<div id="Register">
+		<b style="margin-left: 157px"><font size="6">Join With us
+				</font></b>
+	</div>
+	<br>
+	<br>
 	<div class="container">
 		<div class="row" id="Truck">
+			<div class="col-lg-12">
 
-			<b><font size="4">ID</font></b> <br> <input id="id" type="text"
-				name="memberId">
-			<button type="button" id="idCheck">중복확인</button>
-			<div id="idmessage">
-				<br>
-			</div>
-			<b><font size="4">Password</font></b> <br> <input id="password"
-				type="password" name="password"> <br> <br> <b><font
-				size="4">Confirm Password</font></b> <br> <input id="password1"
-				type="password" name="ps2"> <br>
-			<br> <b><font size="4">Email</font></b> <br> <input
-				id="email" type="text" name="email"> <br> <br> <b><font
-				size="4">BirthDay</font></b> <br> <input id="birthday" type="text"
-				name="birthday"><br> <br>
-			<div>
-				<label>성별</label><br> <label class="radio-inline"> <input
-					type="radio" name="gender" id="gender" value="F">F
-				</label> <label class="radio-inline"> <input type="radio"
-					name="gender" id="gender" value="M">M
-				</label>
-			</div>
-			<div class="col-md-offset-5 col-sm-25 col-lg-25">
+				<form action="${ctx }/member/create.do" method="post">
 
 
-				<input type="submit" value="register" class="btn btn-primary">
+
+					<b> <font size="4">ID</font></b> <br> <input id="id"
+						name="memberId" type="text" placeholder="ID를 입력해주세요."
+						onkeydown="fn_press_han(this);">
+					<button type="button" name="checking" id="idCheck" value="t">중복확인</button>
+					<div id="idmessage">
+						<br>
+					</div>
+					<br>
+					<div>
+						<b> <font size="4">Password</font></b> <br> <input
+							id="password" name="password" type="password"> <br>
+						<br> <b> <font size="4">Confirm Password</font></b> <br>
+						<input id="password1" name="password1" type="password"
+							onkeyup="checkPwd();">
+						<div id="checkPwd"></div>
+						<br> <b><font size="4">Email</font></b> <br> <input id="email" name="email"
+							type="text" onkeypress="fn_press_han">
+						<br> <br> <b><font size="4">birthday</font></b>
+						<br> <input id="birthday" name="birthday" type="text"
+							onkeypress="onlyNumber();" maxlength="8"> -(하이픈)입력하지 않으셔도 됩니다. <br> <br>
+								  <b><font size="4">Gender</font></b><br>
+								 <input type="radio" name="gender" id="gender" value="F">F
+									<input type="radio" name="gender" id="gender" value="M">M
+									<br><br>
+							<input type="submit" value="등록" class="btn btn-primary">
+						</div>
+					</div>
+				</form>
 			</div>
 		</div>
+		<br> <br>
 	</div>
-</form>
 
+	<!-- end wrapper -->
 
 	<!-- Core Scripts - Include with every page -->
-
-	<script src="assets/plugins/jquery-1.10.2.js"></script>
-	<script src="assets/plugins/bootstrap/bootstrap.min.js"></script>
-	<script src="assets/plugins/metisMenu/jquery.metisMenu.js"></script>
-	<script src="assets/plugins/pace/pace.js"></script>
-	<script src="assets/scripts/siminta.js"></script>
-
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-	<script>
-		//아이디  중복 확인 버튼 클릭
-		$(document).ready(function() {
-
-			$("#idCheck").click(function() {
-				var id = $("#id").val();
-				$.ajax({
-					type : 'POST',
-					url : "${ctx }/member/checkId.do",
-					data : {
-						id : id
-					},
-					success : function(data) {
-						$("#result").html(data);
-						if ($.trim(data) == 'no') {
-							$('#idmessage').html("사용 가능한 ID 입니다.");
-						} else {
-							$('#idmessage').html("사용중인 ID 입니다.");
-						}
-
-					}
-
-				});
-			});
-		});
-	</script>
+	<script src="${ctx}/resources/plugins/jquery-1.10.2.js"></script>
+	<script src="${ctx}/resources/plugins/bootstrap/bootstrap.min.js"></script>
+	<script src="${ctx}/resources/plugins/metisMenu/jquery.metisMenu.js"></script>
+	<script src="${ctx}/resources/plugins/pace/pace.js"></script>
+	<script src="${ctx}/resources/scripts/siminta.js"></script>
 </body>
 </html>

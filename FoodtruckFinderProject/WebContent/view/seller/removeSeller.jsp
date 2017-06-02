@@ -50,7 +50,7 @@
 		<%@ include file="../left/sellerLeft.jspf"%>
 	<!--  end wrapper -->
 	<div class="container">
-		<form method="post" name="forName" method="post">
+		<form method="post" name="forName">
 			<div class="row">
 				<div class="col-md-8 col-md-offset-2 text-center logo-margin ">
 					<h1>회원탈퇴</h1>
