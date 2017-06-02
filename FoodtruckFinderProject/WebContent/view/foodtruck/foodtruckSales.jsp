@@ -247,6 +247,11 @@ h2 {
 				<script>
 					$(document).ready(function() {
 						year();
+						var position = new naver.maps.LatLng(37.4795169, 126.8824995);
+						var map = new naver.maps.Map('map', {
+						center: position,
+						zoom: 10
+				});
 					})
 				</script>
 			</div>
