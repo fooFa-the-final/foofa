@@ -127,22 +127,17 @@
     <script src="${ctx }/resources/plugins/dataTables/jquery.dataTables.js"></script>
     <script src="${ctx }/resources/plugins/dataTables/dataTables.bootstrap.js"></script>
     <script>
-        $(document).ready(function () {
-            $('#dataTables-example').dataTable();
-        });
-        
-$("input:checkbox").on('click', function() {
-      if ( $(this).prop('checked') ) {
-    	  
-      } else {
-    	  
-      }
-    });
-    
-var stateBtn = function(obj){
-	$(obj).removeClass("btn btn-outline btn-default").addClass("btn btn-success");
-}
-
+	$("input:checkbox").on('click', function() {
+	      if ( $(this).prop('checked') ) {
+	    	  
+	      } else {
+	    	  
+	      }
+	    });
+	    
+	var stateBtn = function(obj){
+		$(obj).removeClass("btn btn-outline btn-default").addClass("btn btn-success");
+	}
     </script>
 
 </body>
