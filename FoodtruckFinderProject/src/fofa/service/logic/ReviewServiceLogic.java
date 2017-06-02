@@ -109,7 +109,7 @@ public class ReviewServiceLogic implements ReviewService {
 	}
 
 	@Override
-	public boolean removeReport(Report report) {
-		return reportStore.delete(report) > 0;
+	public boolean removeReport(String reviewId) {
+		return reportStore.delete(reviewId) > 0;
 	}
 }

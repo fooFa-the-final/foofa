@@ -48,36 +48,38 @@
     		});	
 		}
 
-		var pass = function(){
+		var pass = function(reviewId){
 			$.ajax({
     			type: 'get',
-    			url: "${ctx}/report/list.do",
+    			url: "${ctx}/review/report/remove.do",
     			data: {
     				reviewId : reviewId
     			},
     			success : function(data){
-    				/* var id = "#report" + reviewId;
-    				for(var i=0;i<data.length;i++){
-    					console.log(data[i].reviewId);
-    				} */
-    				var contents = data;
-    				var modalId = "#myModal" + reviewId;
-    				var mContentId = "#modalCons" + reviewId;
-    				var reportHtml = "<input type='button' id = 'rep"+reviewId+"' value='" + data.length + "' + style='border:0;background-color:transparent'>"
-    				$("#report" + reviewId).html(reportHtml);
-    				var reportContents = "";
-    				for(var i=0;i<contents.length;i++)
-    					reportContents += contents[i].memberId + " : " + contents[i].reason + "<br>";
-    				$(mContentId).append(reportContents);
-    				$("#rep"+reviewId).click(function(){
-    					$(modalId).modal();
-    				});
+    				var trId = "#tr" + reviewId;
+    				console.log(trId);
+    				$(trId).remove();
+    				alert("신고처리가 완료되었습니다.");
     			}
     		});	
+			$('#dataTables-example').dataTable();
 		}
 		
-		var del = function(){
-			
+		var del = function(reviewId){
+			$.ajax({
+    			type: 'get',
+    			url: "${ctx}/review/reported/remove.do",
+    			data: {
+    				reviewId : reviewId
+    			},
+    			success : function(data){
+    				var trId = "#tr" + reviewId;
+    				console.log(trId);
+    				$(trId).remove();
+    				alert("신고처리가 완료되었습니다.");
+    			}
+    		});
+			$('#dataTables-example').dataTable();
 		}
 	</script>
 </head>
@@ -121,9 +123,9 @@
                                     </thead>
                                     <tbody>
                                     	<c:forEach items="${list }" var = "review" varStatus="status">
-	                                        <tr class="odd gradeX">
+	                                        <tr class="odd gradeX" id = "tr${review.reviewId }">
 	                                            <td>${status.count }</td>
-	                                            <td><input type="button" class="btn btn-default" value="리뷰 내용"></td>
+	                                            <td>ddddddddddddddddddddd</td>
 	                                            <td class="center">${review.writer.memberId }</td>
 	                                            <td class="center" id="report${review.reviewId }">
 	                                            	<script>
@@ -154,7 +156,6 @@
 								    </div>
 								  </div>
                                         </c:forEach>
-                                        
                                     </tbody>
                                 </table>
                             </div>

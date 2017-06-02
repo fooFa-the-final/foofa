@@ -160,13 +160,21 @@ public class ReviewController {
 	@RequestMapping("/review/reported/remove.do")
 	@ResponseBody
 	public String removeReivewByReport(String reviewId){
-		reviewService.remove(reviewId);
-		return null;
+		boolean rem = reviewService.removeReport(reviewId);
+		if(rem)
+			reviewService.remove(reviewId);
+			
+		return "true";
 	}
 	
 	@RequestMapping("/review/report/remove.do")
+	@ResponseBody
 	public String removeReport(String reviewId){
-		return "redirect:report/list.do";
+		boolean rem = reviewService.removeReport(reviewId);
+		if(rem)
+			return "true";
+		
+		return "false";
 	}
 	
 	@RequestMapping("/review/recommand.do")
