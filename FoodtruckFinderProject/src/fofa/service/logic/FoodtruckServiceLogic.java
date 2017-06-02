@@ -51,18 +51,18 @@ public class FoodtruckServiceLogic implements FoodtruckService{
 	}
 
 	@Override
-	public List<Foodtruck> findByLoc(String location) {
-		return foodtruckStore.selectByLoc(location);
+	public List<Foodtruck> findByLoc(int pageNum, String location) {
+		return foodtruckStore.selectByLoc(pageNum, location);
 	}
 
 	@Override
-	public List<Foodtruck> findByKeyLoc(String keyword, String location) {
-		return foodtruckStore.selectByKeyLoc(keyword, location);
+	public List<Foodtruck> findByKeyLoc(int pageNum, String keyword, String location) {
+		return foodtruckStore.selectByKeyLoc(pageNum, keyword, location);
 	}
 
 	@Override
-	public List<Foodtruck> findByFilter(Foodtruck foodtruck) {
-		return foodtruckStore.selectByFilter(foodtruck);
+	public List<Foodtruck> findByFilter(int pageNum, Foodtruck foodtruck) {
+		return foodtruckStore.selectByFilter(pageNum, foodtruck);
 	}
 
 	@Override

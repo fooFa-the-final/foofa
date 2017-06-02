@@ -89,7 +89,7 @@
 	<script>
 	$(document).ready(function() {
 		$('#side-modify').attr('class', 'selected');
-	}
+	})
 	</script>
 </body>
 </html>

@@ -12,6 +12,12 @@
 		<result column="email" property="email"/>
 		<result column="gender" property="gender"/>
 		<result column="image_src" property="profileImg"/>
+	  	<association column="member_id" property="followCount"
+	  	select = "fofa.store.mapper.FollowMappper.selectByToId"
+	  	javaType="int" jdbcType="INTEGER"/>
+	  	<association column="member_id" property="reviewCount"
+	  	select = "fofa.store.mapper.ReviewMapper.selectMemberCount"
+	  	javaType="int" jdbcType="INTEGER"/>
 		
 	</resultMap> 
 	

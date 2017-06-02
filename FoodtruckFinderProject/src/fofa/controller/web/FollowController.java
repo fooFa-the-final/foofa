@@ -30,17 +30,17 @@ public class FollowController {
 	
 	@ResponseBody
 	@RequestMapping(value="follow/create.do", method=RequestMethod.GET)
-	public boolean create(String memberId, HttpSession session){
+	public boolean create(String toId, HttpSession session){
 		Follow follow = new Follow();
 		follow.setFromId((String)session.getAttribute("loginUserId"));
-		follow.setToId(memberId);
+		follow.setToId(toId);
 		return followService.register(follow);
 	}
 	@ResponseBody
 	@RequestMapping(value="follow/remove.do", method=RequestMethod.GET)
-	public boolean remove(String fromId, HttpSession session){
+	public boolean remove(String toId, HttpSession session){
 		Member member = memberService.findById((String)(session.getAttribute("loginUserId")));
-		String toId = member.getMemberId();
+		String fromId = member.getMemberId();
 		Follow follow = new Follow();
 		follow.setToId(toId);
 		follow.setFromId(fromId);
@@ -50,19 +50,17 @@ public class FollowController {
 	public String search(HttpSession session, Model model){
 		Member member = memberService.findById((String)(session.getAttribute("loginUserId")));
 		model.addAttribute(member);
-		String toId = member.getMemberId();
-		List<Follow> follow =  followService.findFollow(toId);
+		String fromId = member.getMemberId();
+		List<Follow> follow =  followService.findFollow(fromId);
 		model.addAttribute("follow", follow);
 		
 		return "../view/user/memberFollowerList.jsp";
 	}
 	@RequestMapping("follow/count.do")
 	public int searchCount(String memberId,HttpSession session, Model model){
-		Member member = memberService.findById((String)(session.getAttribute("loginUserId")));
-		model.addAttribute(member);
-		String toId = member.getMemberId();
-		List<Follow> follow =  followService.findFollow(toId);
-		
+		memberId = ((String)(session.getAttribute("loginUserId")));
+		List<Follow> follow =  followService.findFollow(memberId);
+		follow.size();
 		return 0;
 	}
 	

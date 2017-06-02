@@ -1,6 +1,8 @@
 package fofa.store.logic;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -62,12 +64,24 @@ public class FoodtruckStoreLogic implements FoodtruckStore{
 	}
 
 	@Override
-	public List<Foodtruck> selectByLoc(String location) {
+	public List<Foodtruck> selectByLoc(int pageNum, String location) {
 		SqlSession session = factory.openSession();
 		List<Foodtruck> list = null;
+		
+		int nPageIndex = 0;
+		int nPageRow = 10;
+		
+		if(pageNum != 0){
+			nPageIndex = pageNum - 1;
+		}
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("START", (nPageIndex * nPageRow) + 1);
+		map.put("END", (nPageIndex * nPageRow) + nPageRow);
+		map.put("location", location);
 		try{
 			FoodtruckMapper mapper = session.getMapper(FoodtruckMapper.class);
-			list = mapper.selectByLoc(location);
+			list = mapper.selectByLoc(map);
 		} finally {
 			session.close();
 		}
@@ -75,12 +89,21 @@ public class FoodtruckStoreLogic implements FoodtruckStore{
 	}
 
 	@Override
-	public List<Foodtruck> selectByKeyLoc(String keyword, String location) {
+	public List<Foodtruck> selectByKeyLoc(int pageNum, String keyword, String location) {
 		SqlSession session = factory.openSession();
 		List<Foodtruck> list = null;
+		
+		int nPageIndex = 0;
+		int nPageRow = 10;
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("START", (nPageIndex * nPageRow) + 1);
+		map.put("END", (nPageIndex * nPageRow) + nPageRow);
+		map.put("keyword", keyword);
+		map.put("location", location);
 		try{
 			FoodtruckMapper mapper = session.getMapper(FoodtruckMapper.class);
-			list = mapper.selectByKeyLoc(keyword, location);
+			list = mapper.selectByKeyLoc(map);
 		} finally {
 			session.close();
 		}
@@ -88,12 +111,20 @@ public class FoodtruckStoreLogic implements FoodtruckStore{
 	}
 
 	@Override
-	public List<Foodtruck> selectByFilter(Foodtruck foodtruck) {
+	public List<Foodtruck> selectByFilter(int pageNum, Foodtruck foodtruck) {
 		SqlSession session = factory.openSession();
 		List<Foodtruck> list = null;
+		
+		int nPageIndex = 0;
+		int nPageRow = 10;
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("START", (nPageIndex * nPageRow) + 1);
+		map.put("END", (nPageIndex * nPageRow) + nPageRow);
+		map.put("foodtruck", foodtruck);
 		try{
 			FoodtruckMapper mapper = session.getMapper(FoodtruckMapper.class);
-			list = mapper.selectByFilter(foodtruck);
+			list = mapper.selectByFilter(map);
 		} finally {
 			session.close();
 		}

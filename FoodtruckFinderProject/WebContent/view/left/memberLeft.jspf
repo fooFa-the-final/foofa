@@ -14,13 +14,13 @@
                         <a href="${ctx }/survey/item/list.do"><i class="fa fa-flask fa-fw"></i>팔로우 목록</a>
                     </li>
                     <li id="side-news" >
-                        <a href="${ctx }/advertise/list/asc.do"><i class="fa fa-table fa-fw"></i>팔로우 뉴스피드</a>
+                        <a href="${ctx }/advertise/list/asc.do"><i class="fa fa-flask fa-fw"></i>팔로우 뉴스피드</a>
                     </li>
                     <li id="side-favorite" >
                         <a href="${ctx }/advertise/list/asc.do"><i class="fa fa-table fa-fw"></i>단골 목록</a>
                     </li>
                     <li id="side-modify" >
-                        <a href="${ctx }/advertise/list/asc.do"><i class="fa fa-table fa-fw"></i>회원 정보 수정</a>
+                        <a href="${ctx }/advertise/list/asc.do"><i class="fa fa-edit fa-fw"></i>회원 정보 수정</a>
                     </li>
                     <li id="side-remove" >
                         <a href="${ctx }/advertise/list/asc.do"><i class="fa fa-table fa-fw"></i>회원 탈퇴</a>

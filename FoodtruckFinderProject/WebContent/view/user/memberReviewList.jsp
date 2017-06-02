@@ -58,7 +58,7 @@
  			type:'GET',
  			url : url,
  			data:{
- 				memberId : memberId
+ 				toId : memberId
  			},
  			success : function(data){
  				if (data) {

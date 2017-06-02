@@ -9,6 +9,6 @@ public interface FollowMapper {
 	int insert(Follow follow);
 	int delete(Follow follow);
 	List<Follow> selectByFromId(String fromId);
-	List<Follow> selectByToId(String toId);
+	int selectByToId(String toId);
 	
 }

@@ -64,6 +64,11 @@ public class ReviewController {
 	public String searchByFoodtruckId(String foodtruckId, Model model){
 		Foodtruck truck = truckService.findById(foodtruckId);
 		List<Review> reviewList = reviewService.findByTruckId(foodtruckId);
+		String[] operationTime = truck.getOperationTime().split("/");
+		String startTime = operationTime[0];
+		String endTime = operationTime[1];
+		model.addAttribute("startTime", startTime);
+		model.addAttribute("endTime", endTime);
 		model.addAttribute("truck", truck);
 		model.addAttribute("reviewList", reviewList);
 		System.out.println(truck.getFoodtruckId());

@@ -38,9 +38,4 @@
   		FROM favorite
   		WHERE foodtruck_id=#{foodtruckId} and member_id=#{memberId}
   	</select> 
-  	<select id="selectCount" parameterType="String" resultType="int">
-  		SELECT COUNT(*)
-  		FROM favorite
-  		WHERE foodtruck_id=#{foodtruckId}
-  	</select> 
   </mapper>
