@@ -157,7 +157,7 @@ public class SalesController {
 		 * HttpSession session = req.getSession(); String foodtruckId = (String)
 		 * session.getAttribute("loginTruckId");
 		 */
-		List<Sale> list = service.find1MonthSales("1", "201601");
+		List<Sale> list = service.find1MonthSales("F1", "201601");
 		JSONArray jsonArray = new JSONArray();
 
 		for (int i = 0; i < list.size(); i++) {
@@ -168,7 +168,7 @@ public class SalesController {
 			jsonArray.add(obj);
 
 		}
-
+		System.out.println(list.size());
 		System.out.println(jsonArray);
 		return jsonArray;
 
