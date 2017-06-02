@@ -15,9 +15,18 @@
   <link href="${ctx}/resources/css/style.css" rel="stylesheet" />
       <link href="${ctx}/resources/css/main-style.css" rel="stylesheet" />
 
+    <script src="${ctx}/resources/plugins/jquery-1.10.2.js"></script>
     <!-- Page-Level CSS -->
     <link href="${ctx}/resources/plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet" />
-
+	<script>
+		$(document).ready(function(){
+			
+		});
+		
+		var getCount = function(reviewId){
+			console.log(reviewId);
+		}
+	</script>
 </head>
 
 <body>
@@ -63,7 +72,24 @@
 	                                            <td>${status.count }</td>
 	                                            <td><input type="button" class="btn btn-default" value="리뷰 내용"></td>
 	                                            <td class="center">${review.writer.memberId }</td>
-	                                            <td class="center">5</td>
+	                                            <td class="center" id="report${review.reviewId }">
+	                                            	<script>
+	                                            		$.ajax({
+	                                            			type: 'get',
+	                                            			url: "${ctx}/report/list.do",
+	                                            			data: {
+	                                            				reviewId : "${review.reviewId}"
+	                                            			},
+	                                            			success : function(data){
+	                                            				/* var id = "#report" + "${review.reviewId}";
+	                                            				for(var i=0;i<data.length;i++){
+	                                            					console.log(data[i].reviewId);
+	                                            				} */
+	                                            				console.log(data);
+	                                            			}
+	                                            		});
+	                                            	</script>
+	                                            </td>
 	                                			<td><button type="button" class="btn btn-primary">PASS</button><button type="button" class="btn btn-danger">DELETE</button></td>
 	                                        </tr>
                                         </c:forEach>
@@ -100,7 +126,6 @@
     <!-- end wrapper -->
 
     <!-- Core Scripts - Include with every page -->
-    <script src="${ctx}/resources/plugins/jquery-1.10.2.js"></script>
     <script src="${ctx}/resources/plugins/bootstrap/bootstrap.min.js"></script>
     <script src="${ctx}/resources/plugins/metisMenu/jquery.metisMenu.js"></script>
     <script src="${ctx}/resources/plugins/pace/pace.js"></script>

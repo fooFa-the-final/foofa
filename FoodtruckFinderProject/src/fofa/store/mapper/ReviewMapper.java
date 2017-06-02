@@ -12,4 +12,6 @@ public interface ReviewMapper {
 	List<Review> selectByMemberId(String memberId);
 	List<Review> selectByTruckId(String foodtruckId);
 	List<Review> selectByRecommand();
+	double avgScore(String foodtruckId);
+	int selectTruckCount(String foodtruckId);
 }
