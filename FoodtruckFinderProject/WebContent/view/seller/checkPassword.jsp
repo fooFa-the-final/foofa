@@ -61,7 +61,6 @@
 					}
 
 				}
-
 			});
 		});
 	});
@@ -78,11 +77,17 @@
 					<div class="col-lg-10">
 						<form role="form" action="${ctx }/seller/remove.do" method="GET">
 							<div class="form-group">
+																												<div class="col-md-6 col-md-offset-3 text-center logo-margin">
+							
 								<label>비밀번호 변경</label> <input class="form-control" id="password"
 									name="password" type="password" placeholder="비밀번호를 입력해 주세요">
 								<br>
 								<p id="passwordResult"></p>
+							</div>
+																					<div class="col-md-6 col-md-offset-3 text-center logo-margin">
+								
 								<button type="button" class="btn btn-primary" id="pwCheck">submit</button>
+						</div>
 							</div>
 						</form>
 					</div>

@@ -45,9 +45,9 @@
 								<label>ID</label> <b class="form-control">${member.memberId }</b>
 							</div>
 							<div class="form-group">
-								<br> <input class="form-control" id="password"
+								<br><label>Password</label> <input class="form-control" id="password"
 									type="password" name="password" value="${member.password}">
-								<br> <input class="form-control" id="password1"
+								<br> <label>Password Check</label><input class="form-control" id="password1"
 									type="password" value="${member.password}"> <br>
 							</div>
 

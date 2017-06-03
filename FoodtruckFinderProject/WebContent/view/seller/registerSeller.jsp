@@ -64,16 +64,12 @@
 		obj.value = obj.value.replace(/[\ㄱ-ㅎㅏ-ㅣ가-힣]/g, '');
 	}
 	var idReg = /^[a-z]+[a-z0-9]{3,17}$/g;
-	
-	
-	
 	$(document).ready(function() {$("form").submit(function() {
 		$(document).ready(function(){
 		    $('#id').keyup(function(){
 		        if ( $('#id').val().length > 4) {
 		            var id = $(this).val();
                     console.log(id);
-		            alert(id);
 		            // ajax 실행
 		            $.ajax({
 		                type : 'POST',
@@ -95,8 +91,6 @@
 		    }); // end keyup
 		});		
 		
-		
-		
 											if (!idReg.test($("input[name='sellerId']").val())) {
 												if ($("input[name='sellerId']").val() == "") {
 													$("input[name='sellerId']").css("border","1px solid red").after("<span>아이디4글자 이상 16글자 이하 영문자 숫자의 조합입니다.</span>");
@@ -115,11 +109,11 @@
 												document.getElementById('checkPwd').style.color = "red";
 												document.getElementById('checkPwd').innerHTML = "암호가 일치하지 않습니다..";
 												return false;
-											} else if ($("input[name='certification']").val().length < 10) {
-												$("input[name='certification']").css("border","1px solid red").after("<span>사업자등록번호를 입력해주세요</span>");
+											} else if ($("input[name='certification']").val().length != 10) {
+												$("input[name='certification']").css("border","1px solid red").after("<span>사업자등록번호를 10자리를 입력해주세요</span>");
 												$("span").css("color", "red").fadeOut(3000);
 												return false;
-											} else if ($("input[name='phone']").val() == "") {$("input[name='phone']").css("border","1px solid red").after("<span>핸드폰번호를 입력해주세요</span>");
+											} else if ($("input[name='phone']").val().length != 11) {$("input[name='phone']").css("border","1px solid red").after("<span>휴대폰 번호 11자리를 입력해주세요</span>");
 												$("span").css("color", "red").fadeOut(3000);
 												return false;
 											}
@@ -153,20 +147,12 @@
 										$('#idmessage').html("사용 가능한 ID 입니다.");
 										$('#sucessCheck').val(data);
 										var ds = document.getElementById('idmessage');
-										alert(data);
-										alert(ds);
-										
 									} else {
 										$('#idmessage').html("사용중인 ID 입니다.");
 										$('#sucessCheck').val(data); 
-										alert(data);
 										var ds = document.getElementById('sucessCheck');
-										
-										alert(ds);
 									}
-									
 								}
-
 							});
 						});
 					});

@@ -29,26 +29,24 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
 <script>
-var date = new Date();
 
-var year = date.getFullYear();
-var month = date.getMonth()+1;
-var day = date.getDate();
-
-if ((day+"").length < 2) {
-    day = "0" + day;
-}
-
-
-var getDate = year + month + day;
 $(document).ready(function(){
     $("form").submit(function(){
-    		var st = $(":input:radio[name=period]:checked").val();
-	        if(eval(getDate) >= $("input[name='startdate']").val()){
-            $("input[name='startdate']").css("border", "1px solid red").after("<span>유효한 날짜를 입력해주세요.</span>");
+    	var today = new Date();  
+    	var dateString =  $("input[name='startdate']").val();
+    	var dateArray = dateString.split("-");  
+    	var dateObj = new Date(dateArray[0], Number(dateArray[1])-1, dateArray[2]);  
+    	var betweenDay = (today.getTime() - dateObj.getTime());  
+	        if($("input[name='startdate']").val() == ""){
+            $("input[name='startdate']").css("border", "1px solid red").after("<span>날짜를 입력해주세요.</span>");
             $("span").css("color", "red").fadeOut(3000);
             return false;
-        	} else if (st == null){
+        	} else if(betweenDay > 0){
+                $("input[name='startdate']").css("border", "1px solid red").after("<span>광고시작 날짜는 지난 날짜를 선택할 수 없습니다.</span>");
+                $("span").css("color", "red").fadeOut(3000); 				
+ 				return false;       		
+        	}
+	        else if (st == null){
             	var sel_type = null;
             	var chk_radio = document.getElementsByName('period');
             	for(var i=0;i<chk_radio.length;i++){
@@ -64,9 +62,16 @@ $(document).ready(function(){
         	} 
     });   
 });
+
+function checkDay(){
+	var today = new Date();  
+	var dateString =  $("input[name='startdate']").val();
+	var dateArray = dateString.split("-");  
+	var dateObj = new Date(dateArray[0], Number(dateArray[1])-1, dateArray[2]);  
+	var betweenDay = (today.getTime() - dateObj.getTime())/1000/60/60/24;  
+
+}
 </script>
-
-
 
 <body>
 	<!--  wrapper -->
@@ -92,16 +97,16 @@ $(document).ready(function(){
 								<h5>${truck.category1 }</h5>
 								<h5>${truck.location }</h5>
 								
-							<%-- 	<h5>${truck.reviewScore }</h5>
+							<%-- 	
+								<h5>${truck.reviewScore }</h5>
 								<h5>${truck.reviewCount }</h5>
 							 --%>
 							
 							</div>
 							<span style="float: right; margin-right: 30px; margin-top: 30px">
 								<a href="${ctx }/seller/modify.do"><button type="button"
-										class="btn btn-default" onclick="${ctx}/seller/modify.do">판매자
-										정보 수정</button></a> <a href="${ctx }/seller/remove.do"><button
-										type="button" class="btn btn-default">판매자 탈퇴</button></a>
+										class="btn btn-default" onclick="${ctx}/seller/modify.do">판매자정보 수정</button></a> <a href="${ctx }/seller/remove.do">
+										<button type="button" class="btn btn-default">판매자 탈퇴</button></a>
 							</span>
 						</div>
 					</div>
@@ -121,7 +126,7 @@ $(document).ready(function(){
 									<h4>
 										- 광고 시작일 <small> 광고 시작일을 선택해주세요.</small>
 									</h4>
-									<input id="startdate" name="startdate" type="date"
+									<input id="startdate" name="startdate" type="date" oninput="checkDay()"
 										data-date-inline-picker="true" style="margin-left: 20px" />
 								</div>
 								<br />

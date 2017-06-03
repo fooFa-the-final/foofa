@@ -53,6 +53,7 @@ public class FollowController {
 		String fromId = member.getMemberId();
 		List<Follow> follow =  followService.findFollow(fromId);
 		model.addAttribute("follow", follow);
+		System.out.println(member.getProfileImg());
 		
 		return "../view/user/memberFollowerList.jsp";
 	}

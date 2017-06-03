@@ -95,22 +95,11 @@ public class MemberController {
 		return "../view/index.jsp";
 	}
 	
-	@ResponseBody
-    @RequestMapping(value = "member/ajaxUpload.do", method=RequestMethod.GET)
-    public String ajaxUpload(MultipartHttpServletRequest multi, HttpSession session,Model model) {
-		 String root = multi.getSession().getServletContext().getRealPath("/");
-	     String path = root+"resources/upload/";
-	     Member member = service.findById((String)(session.getAttribute("loginUserId")));
-	     member.getProfileImg();
-	     String img =path+member;
-	     System.out.println(img);
-        return "../view/user/memberFollowerList.jsp";
-    }
      
     @ResponseBody
     @RequestMapping(value = "member/fileUpload.do", method=RequestMethod.POST)
-    public String fileUp(MultipartHttpServletRequest multi, HttpSession session) {
-         
+    public String fileUp(MultipartHttpServletRequest multi, HttpSession session,Model model) {
+         String img= null;
         // 저장 경로 설정
         String root = multi.getSession().getServletContext().getRealPath("/");
         String path = root+"resources/upload/";
@@ -133,16 +122,17 @@ public class MemberController {
             Member member = service.findById((String)(session.getAttribute("loginUserId")));
             member.setProfileImg(newFileName);
             service.modifyImg(member);
-            System.out.println(member.toString());
+            String imgurl = member.getProfileImg();
+            img = path+imgurl;
+            member.setProfileImg(img);
+            service.modifyImg(member);
+            
             try {
                 mFile.transferTo(new File(path+newFileName));
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
-        return "redirect:/member/ajaxUpload.do";
+		return img;
     }
 }
-
-
-

@@ -47,9 +47,14 @@
 		<%@ include file="../header.jspf"%>
 		<%@ include file="../left/sellerLeft.jspf"%>
 	<!--  end wrapper -->
-	<div class="container">
-		<form method="post" name="forName">
+	<body>
+	<div id="wrapper">
+		<!--  page-wrapper -->
+		<div id="page-wrapper">
 			<div class="row">
+				<div class="col-lg-12">
+					<div class="col-lg-10">
+						<form method="post" name="forName">
 				<div class="col-md-8 col-md-offset-2 text-center logo-margin ">
 					<h1>회원탈퇴</h1>
 				</div>
@@ -59,18 +64,39 @@
 							<h3 class="panel-title">약관동의</h3>
 						</div>
 						<div class="panel-body">
-							<h1>탈퇴 후 회원정보 및 개인형 서비스 이용기록은 모두 삭제됩니다.</h1>
-							<h1>사용하고 계신 아이디는 탈퇴할 경우 재사용 및 복구가 불가능합니다.</h1>
+							<h1>탈퇴 후 판매자 정보, 푸드트럭 정보, 매출관련 기록은 전부 삭제됩니다.</h1>
+							<h1>사용하고 계신 아이디는 탈퇴할 경우 복구가 불가능합니다.</h1>
 							<input type="checkbox" id="req" name="req" value="yes"><b>안내
 								사항을 모두 확인하였으며, 이에 동의합니다.</b>
 						</div>
 					</div>
-					<span>우린 친구라고 믿었는대...잘가...</span> <input type="button" name="btn"
-						onclick="pass();" class="btn btn-primary" value="Delete" />
+					<span>우린 친구였지? 그렇지?</span>
+													<div class="col-md-6 col-md-offset-3 text-center logo-margin">
+					
+					 <input type="button" name="btn"
+						onclick="pass();" class="btn btn-primary" value="탈퇴하기" />
+				
 				</div>
 			</div>
 		</form>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
+	
+	<!-- Core Scripts - Include with every page -->
+	<script src="${ctx}/resources/plugins/jquery-1.10.2.js"></script>
+	<script src="${ctx}/resources/plugins/bootstrap/bootstrap.min.js"></script>
+	<script src="${ctx}/resources/plugins/metisMenu/jquery.metisMenu.js"></script>
+	<script src="${ctx}/resources/plugins/pace/pace.js"></script>
+	<script src="${ctx}/resources/scripts/siminta.js"></script>
+	<script>
+		$(document).ready(function() {
+			$('#side-remove-seller').attr('class', 'selected');
+		})
+	</script>
+</body>
 	<!-- Core Scripts - Include with every page -->
 	<script src="${ctx}/resources/plugins/jquery-1.10.2.js"></script>
 	<script src="${ctx}/resources/plugins/bootstrap/bootstrap.min.js"></script>
