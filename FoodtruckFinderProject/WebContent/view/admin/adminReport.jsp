@@ -125,7 +125,7 @@
                                     	<c:forEach items="${list }" var = "review" varStatus="status">
 	                                        <tr class="odd gradeX" id = "tr${review.reviewId }">
 	                                            <td>${status.count }</td>
-	                                            <td class="index-overflow">${review.contents }</td>
+	                                            <td class="center">${review.contents }</td>
 	                                            <td class="center">${review.writer.memberId }</td>
 	                                            <td class="center" id="report${review.reviewId }">
 	                                            	<script>
