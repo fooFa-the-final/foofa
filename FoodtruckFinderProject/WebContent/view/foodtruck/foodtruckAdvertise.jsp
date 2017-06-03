@@ -60,17 +60,10 @@ $(document).ready(function(){
             	}
     		return false;
         	} 
+	        $('#myModal').modal('toggle');
+
     });   
 });
-
-function checkDay(){
-	var today = new Date();  
-	var dateString =  $("input[name='startdate']").val();
-	var dateArray = dateString.split("-");  
-	var dateObj = new Date(dateArray[0], Number(dateArray[1])-1, dateArray[2]);  
-	var betweenDay = (today.getTime() - dateObj.getTime())/1000/60/60/24;  
-
-}
 </script>
 
 <body>
@@ -103,11 +96,13 @@ function checkDay(){
 							 --%>
 							
 							</div>
+							<%-- 
 							<span style="float: right; margin-right: 30px; margin-top: 30px">
 								<a href="${ctx }/seller/modify.do"><button type="button"
 										class="btn btn-default" onclick="${ctx}/seller/modify.do">판매자정보 수정</button></a> <a href="${ctx }/seller/remove.do">
 										<button type="button" class="btn btn-default">판매자 탈퇴</button></a>
 							</span>
+							 --%>
 						</div>
 					</div>
 				</div>
@@ -126,8 +121,7 @@ function checkDay(){
 									<h4>
 										- 광고 시작일 <small> 광고 시작일을 선택해주세요.</small>
 									</h4>
-									<input id="startdate" name="startdate" type="date" oninput="checkDay()"
-										data-date-inline-picker="true" style="margin-left: 20px" />
+									<input id="startdate" name="startdate" type="date" data-date-inline-picker="true" style="margin-left: 20px" />
 								</div>
 								<br />
 								<h4>
@@ -154,10 +148,9 @@ function checkDay(){
 									</div>
 								</div>
 								<div style="width: 100%; height: 90px;"></div>
-								<button type="submit" class="btn btn-primary btn-lg"
+								<button type="submit" class="btn btn-primary btn-lg" aria-expanded="true"
+															data-toggle="modal" data-target="#myModal"
 									>결제</button>
-								<!-- 
-								data-toggle="modal" data-target="#myModal"
 								<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
 									aria-labelledby="myModalLabel" aria-hidden="true">
 									<div class="modal-dialog">
@@ -176,7 +169,6 @@ function checkDay(){
 										</div>
 									</div>
 								</div>
-							 -->
 							</form>
 						</div>
 					</div>
