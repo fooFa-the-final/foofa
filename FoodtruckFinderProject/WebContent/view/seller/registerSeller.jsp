@@ -95,8 +95,6 @@
 		    }); // end keyup
 		});		
 		
-		
-		
 											if (!idReg.test($("input[name='sellerId']").val())) {
 												if ($("input[name='sellerId']").val() == "") {
 													$("input[name='sellerId']").css("border","1px solid red").after("<span>아이디4글자 이상 16글자 이하 영문자 숫자의 조합입니다.</span>");
@@ -155,7 +153,6 @@
 										var ds = document.getElementById('idmessage');
 										alert(data);
 										alert(ds);
-										
 									} else {
 										$('#idmessage').html("사용중인 ID 입니다.");
 										$('#sucessCheck').val(data); 
@@ -164,9 +161,7 @@
 										
 										alert(ds);
 									}
-									
 								}
-
 							});
 						});
 					});
