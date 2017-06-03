@@ -64,8 +64,6 @@ $(document).ready(function(){
         	} 
     });   
 });
-
-
 </script>
 
 
@@ -73,9 +71,7 @@ $(document).ready(function(){
 <body>
 	<!--  wrapper -->
 	<div id="wrapper">
-
 		<%@ include file="../header.jspf"%>
-
 		<%@ include file="../left/sellerLeft.jspf"%>
 		<!--  page-wrapper -->
 		<div id="page-wrapper">

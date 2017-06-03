@@ -13,6 +13,39 @@
         table.border {
             
         }
+        
+       	ul {  
+    text-align:center;  
+}  
+ul li {  
+    display:inline;  
+    vertical-align:middle;  
+}
+  
+ul li a {  
+    display:-moz-inline-stack;  /*FF2*/  
+    display:inline-block;  
+    vertical-align:top;  
+    padding:4px;  
+    margin-right:3px;  
+    width:30px !important;  
+    color:#000;  
+    font:bold 12px tahoma;  
+    border:1px solid #eee;  
+    text-align:center;  
+    text-decoration:none;  
+    width /**/:26px;    /*IE 5.5*/  
+}  
+ul li a.now {  
+    color:#fff;  
+    background-color:#f44;  
+    border:1px solid #f40;  
+}  
+ul li a:hover, ul li a:focus {  
+    color:#fff;  
+    border:1px solid #f40;  
+    background-color:#f40;  
+}  
     </style>
 <head>
     <meta charset="utf-8">
@@ -80,6 +113,13 @@
             		<tr></tr>
             	</thead>
           		<tbody>
+          		<c:choose>
+          		<c:when test="${trucks eq null || empty trucks }">
+          			<tr>
+          				<td align="center">해당 검색 결과가 없습니다.</td>
+          			</tr>
+          		</c:when>
+          		<c:otherwise>
           		<c:forEach items="${trucks }" var="truck">
           			<tr>
 	          			<td rowspan="2" style="padding:10px;" align="right">
@@ -96,7 +136,9 @@
           					<i class="fa fa-comment fa-fw"></i> 100 Reviews
           				</td>
           			</tr>
-          		</c:forEach>	
+          		</c:forEach>
+          		</c:otherwise>
+          		</c:choose>	
           		</tbody>
           </table>
         </div>
@@ -105,6 +147,10 @@
 			<img width="300px" height="300px" src="${ctx }/resources/img/map.jpg" >
         </div>
         <div class="col-sm-2"></div>
+</div>
+<div class="col-lg-12" id="pagingArea" style="text-align:center; margin-bottom:100px; margin-top:50px">
+	<input type="hidden" id="currentIndex" value="">
+	<input type="hidden" id="allCount" value="${allCount }">
 </div>
         <!-- end page-wrapper -->
 <!-- <center><div class=conatiner>
@@ -127,6 +173,99 @@
     <script src="${ctx }/resources/plugins/dataTables/jquery.dataTables.js"></script>
     <script src="${ctx }/resources/plugins/dataTables/dataTables.bootstrap.js"></script>
     <script>
+    
+    $(document).ready(function() {
+    	
+    	var allCount = $("#allCount").val();
+    	console.log("allCount : " + allCount);
+    	var rowCount = 10;
+    	var totalIndex = Math.ceil(allCount/rowCount);
+    	console.log("total index : " + totalIndex);
+    	var firstIndex = "";
+    	var lastIndex = "";
+    	
+    	var currentIndex = $("#currentIndex").val();
+    	
+    	if(currentIndex == "" || currentIndex == 1){
+    		firstIndex = 1;
+    		currentIndex = 1;
+    	}
+    	
+    	if(totalIndex <= 10){
+    		lastIndex = totalIndex;
+    	} else if(firstIndex == 1 && totalIndex > 10){
+    		lastIndex = 10;
+    	} else {
+    		lastIndex = Math.ceil(currentIndex/10)*10;
+    		firstIndex = lastIndex - 9;
+    		if(lastIndex > totalIndex){
+    			lastIndex = totalIndex;
+    		}
+    	}
+    	
+    	var pagingHtml = "";
+    	var prePagingHtml = "";
+    	var postPagingHtml = "";
+    	
+    	for(var i = firstIndex; i <= lastIndex; i++){
+    		if(i == currentIndex){
+    			pagingHtml += "<button onClick='movePage(" + i + ")'><b>" + i + "</b></button>"
+    		} else {
+    			pagingHtml += "<button onClick='movePage(" + i + ")'>" + i + "</button>"
+    		}
+    	}
+
+    	if(currentIndex != 1){
+    		prePagingHtml += "<button onClick='movePage(1)'><<</button>";
+    		var pageBefore = firstIndex - 1;
+    		if(pageBefore < 1){
+    			pageBefore = 1;
+    		}
+    		prePagingHtml +="<button onClick='movePage(" + pageBefore + ")'><</button>"
+    	}
+    	if(currentIndex != totalIndex){
+    		var Pageafter = lastIndex + 1;
+    		if(pageAfter > totalIndex){
+    			pageAfter = totalIndex;
+    		}
+    	}
+    	if(currentIndex != 1){
+    		prePagingHtml += "<button onClick='movePage(1)'><<</button>";
+    		var pageBefore = firstIndex - 1;
+    		if(pageBefore < 1){
+    			pageBefore = 1;
+    		}
+    		prePagingHtml += "<button onClick='movePage(" + pageBefore + ")'><</button>"
+    	}
+    	if(currentIndex != totalIndex){
+    		var pageAfter = lastIndex + 1;
+    		if(pageAfter > totalIndex){
+    			pageAfter = totalIndex;
+    		}
+    		postPagingHtml += "<button onClick='movePage(" + pageAfter + ")'>></button>";
+    		postPagingHtml += "<button onClick='movePage(" + totalIndex + ")'>>></button>"
+    	}
+    	
+    	$("#pagingArea").empty();
+    	$("#pagingArea").append(prePagingHtml + pagingHtml + postPagingHtml);
+    	
+	});
+    
+    var movePage = function(pageNum) {
+		$("#currentIndex").val(pageNum);
+		$.ajax({
+			url:"${ctx }/foodtruck/searchByKeyLoc.do"
+			,type:"POST"
+			,data:{pageNum:pageNum, keyword:"${keyword}", location:"${location}"}
+// 			,success:function(){alert("목록 어떻게 다시 뿌려주죠?");}
+			,success:function(data){
+				$("#trucks").html(data);
+				}
+			,error:function(){alert("ajax 연결 실패");}
+			
+		});
+	}
+    
 	$("input:checkbox").on('click', function() {
 	      if ( $(this).prop('checked') ) {
 	    	  
@@ -136,8 +275,20 @@
 	    });
 	    
 	var stateBtn = function(obj){
-		$(obj).removeClass("btn btn-outline btn-default").addClass("btn btn-success");
+		if($(obj).hasClass("btn btn-outline btn-default")){
+			$(obj).removeClass("btn btn-outline btn-default").addClass("btn btn-success");
+			$.ajax({
+				url:"${ctx}/foodtruck/searchByFilter.do"
+				,type:"get"
+				,data:{state:true}
+				,success:display
+			});
+		} else {
+			$(obj).removeClass("btn btn-success").addClass("btn btn-outline btn-default");
+		}
 	}
+	
+	
     </script>
 
 </body>

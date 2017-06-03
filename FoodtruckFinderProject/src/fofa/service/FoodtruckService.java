@@ -1,5 +1,6 @@
 package fofa.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import fofa.domain.Foodtruck;
@@ -13,9 +14,9 @@ public interface FoodtruckService {
 	
 	Foodtruck findById(String foodtruckId);
 	
-	List<Foodtruck> findByLoc(int pageNum, String location);
+	List<HashMap<String, String>> findByLoc(int pageNum, String location);
 	
-	List<Foodtruck> findByKeyLoc(int pageNum, String keyword, String location);
+	List<HashMap<String, String>> findByKeyLoc(int pageNum, String keyword, String location);
 	
 	List<Foodtruck> findByFilter(int pageNum, Foodtruck foodtruck);
 	

@@ -44,9 +44,7 @@
 
 <body class="body-Login-back">
 	<!--  wrapper -->
-	<div id="wrapper">
 		<%@ include file="../header.jspf"%>
-	</div>
 		<%@ include file="../left/sellerLeft.jspf"%>
 	<!--  end wrapper -->
 	<div class="container">

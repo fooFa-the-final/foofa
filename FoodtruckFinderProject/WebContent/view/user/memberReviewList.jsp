@@ -23,7 +23,6 @@
 <!-- Page-Level CSS -->
 <link href="../../resources/plugins/dataTables/dataTables.bootstrap.css"
 	rel="stylesheet" />
-	 <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=noUvsaR702FX6WH5un5h&submodules=geocoder"></script>
 <script>
 	var revDel = function(reviewId){
 		$.ajax({

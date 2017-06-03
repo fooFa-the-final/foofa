@@ -41,6 +41,8 @@ public class ReviewController {
 	
 	@RequestMapping("/review/list/member.do")
 	public String searchByMemberId(String memberId, HttpSession session, Model model){
+		if(memberId == null)
+			memberId = (String)session.getAttribute("loginUserId");
 		Member member = memberService.findById(memberId);
 		model.addAttribute("member", member);
 		model.addAttribute("nowId", (String)session.getAttribute("loginUserId"));
@@ -97,14 +99,15 @@ public class ReviewController {
 	@RequestMapping(value="/review/modify.do", method=RequestMethod.GET)
 	public String modifyReviewForm(String reviewId, Model model){
 		Review review = reviewService.findById(reviewId);
-		System.out.println(review.toString());
 		model.addAttribute("review", review);
 		return "/view/user/registerReview.jsp";
 	}
 	
 	@RequestMapping(value="/review/modify.do", method=RequestMethod.POST)
-	public String modifyReview(Review review){
-		return "redirect:list/member.do";
+	public String modifyReview(Review review, HttpSession session){
+		String memberId = (String)session.getAttribute("loginUserId");
+		reviewService.modify(review);
+		return "redirect:list/member.do?memberId="+memberId;
 	}
 	
 	@RequestMapping("/review/remove.do")
@@ -141,18 +144,7 @@ public class ReviewController {
 		List<Report> list = reviewService.findReport(reviewId);
 		
 		System.out.println("신고 테이블 개수 : " + list.size());
-		/*JSONArray js = new JSONArray();
-		JSONObject jso = new JSONObject();
-		jso.put("data", list);
-		resp.setContentType("text/html;charset=utf-8");
 		
-		try {
-			PrintWriter out = resp.getWriter();
-			out.print(jso.toString());
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}*/
 		return list;
 	}
 	

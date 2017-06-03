@@ -26,7 +26,7 @@
 	            			<!-- search section-->
 	                        <div class="input-group custom-search-form" style="margin:6px;" >
 	                        	<form method="post" action="${ctx }/foodtruck/searchByKeyLoc.do" style="margin:7px;">
-	                        	<input type="hidden" name="pageNum" value="1">
+	                        	<input type="hidden" name="pageNum" value="0">
 	                        	<c:choose>
 		                        	<c:when test="${keyword ne null }">
 		                        		<input type="text" class="form-control" name="keyword" placeholder="Search" style="width: 300px; padding:0px;" value="${keyword }">
