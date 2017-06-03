@@ -41,6 +41,8 @@ public class ReviewController {
 	
 	@RequestMapping("/review/list/member.do")
 	public String searchByMemberId(String memberId, HttpSession session, Model model){
+		if(memberId == null)
+			memberId = (String)session.getAttribute("loginUserId");
 		Member member = memberService.findById(memberId);
 		model.addAttribute("member", member);
 		model.addAttribute("nowId", (String)session.getAttribute("loginUserId"));
@@ -102,9 +104,10 @@ public class ReviewController {
 	}
 	
 	@RequestMapping(value="/review/modify.do", method=RequestMethod.POST)
-	public String modifyReview(Review review){
+	public String modifyReview(Review review, HttpSession session){
+		String memberId = (String)session.getAttribute("loginUserId");
 		reviewService.modify(review);
-		return "redirect:review/list/member.do?memberId="+review.getWriter().getMemberId();
+		return "redirect:list/member.do?memberId="+memberId;
 	}
 	
 	@RequestMapping("/review/remove.do")

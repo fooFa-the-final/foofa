@@ -70,6 +70,8 @@ h2 {
 <script src='${ctx }/resources/scripts/moment.min.js'></script>
 <script src='${ctx }/resources/scripts/jquery.min.js'></script>
 <script src='${ctx }/resources/scripts/fullcalendar.min.js'></script>
+	 <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=noUvsaR702FX6WH5un5h&submodules=geocoder"></script>
+
 <script>
 	$(document).ready(function() {
 		$('#side-sales').attr('class', 'selected');
@@ -249,14 +251,19 @@ h2 {
 						year();
 						var position = new naver.maps.LatLng(37.4795169, 126.8824995);
 						var map = new naver.maps.Map('map', {
-						center: position,
-						zoom: 10
-				});
+							center: position,
+							zoom: 10
+						});
+						var marker = new naver.maps.Marker({
+							position: position,
+							map: map
+						});
 					})
 				</script>
 			</div>
 			<div id='calendar' />
-			<div id='map' />
+			<div id='map' style="height:400px;width:300px">
+			</div>
 		</div>
 
 

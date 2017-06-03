@@ -15,7 +15,8 @@
     <link href="${ctx }/resources/plugins/pace/pace-theme-big-counter.css" rel="stylesheet" />
     <link href="${ctx }/resources/css/style.css" rel="stylesheet" />
       <link href="${ctx }/resources/css/main-style.css" rel="stylesheet" />
-
+	<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=noUvsaR702FX6WH5un5h&submodules=geocoder"></script>
+	
 </head>
 
 <body>
@@ -141,8 +142,7 @@
                 </div>
                  
                    </div>
-                   <div class="col-md-4" style="background-color: white; height:350px">
-                       <h2>Map</h2>
+                   <div class="col-md-4" id = "map" style="background-color: white; height:350px">
                        
                    </div>
                    
@@ -214,6 +214,11 @@
 	<script>
 		$(document).ready(function() {
 			$('#side-info').attr('class', 'selected');
+			var position = new naver.maps.LatLng(37.4795169, 126.8824995);
+			var map = new naver.maps.Map('map', {
+				center: position,
+				zoom: 10
+			});
 		});
 	</script>
 

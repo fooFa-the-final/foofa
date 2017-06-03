@@ -23,10 +23,17 @@
 <!-- Page-Level CSS -->
 <script>
 	$(document).ready(function(){
-		<c:if test="${review ne 'null'}">
+		<c:choose>
+		<c:when test="${review ne 'null'}">
 			$('input:radio[name=score]:input[value='+${review.score}+']').attr("checked", true);
 			$('#contents').val("${review.contents}");
-		</c:if>
+			$('#submit').attr("action", "${ctx }/review/modify.do");
+		</c:when>
+		<c:otherwise>
+			$('#submit').attr("action", "${ctx }/review/create.do");
+		
+		</c:otherwise>
+		</c:choose>
 	});
 </script>
 </head>
@@ -57,7 +64,7 @@
 	</div>
 	<!-- end wrapper -->
 	<div class="container" style="color: black;">
-	<form method="POST" action="${ctx }/review/create.do">
+	<form method="POST">
 		<h2>Write Review</h2>
 		<div class="row">
 			<div class="col-md-1 col-lg-1"></div>
@@ -101,17 +108,17 @@
 
 				<br> <br>
 				<div class="col-lg-12">
-				<c:choose>
+			<%-- 	<c:choose>
 				<c:when test="${review eq 'null'}">
-					<form method="post" action="${ctx }/review/create.do">
+					<form id = "create" method="post" action="${ctx }/review/create.do">
 					<input type="hidden" name="foodtruckId" value="${truck.foodtruckId}">
 				</c:when>
 				<c:otherwise>
-					<form method="post" action="${ctx }/review/modify.do">
+					<form id = "modify" method="post" action="${ctx }/review/modify.do">
 				</c:otherwise>
-				</c:choose>
+				</c:choose> --%>
 				
-					
+				<form id = "submit" method = "post">	
 					<div class="col-lg-8" style="float: left">
 						<table width="1150px">
 							<thead>
