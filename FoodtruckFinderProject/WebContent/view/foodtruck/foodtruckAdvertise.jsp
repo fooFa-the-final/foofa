@@ -29,18 +29,7 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
 <script>
-var date = new Date();
 
-var year = date.getFullYear();
-var month = date.getMonth()+1;
-var day = date.getDate();
-
-if ((day+"").length < 2) {
-    day = "0" + day;
-}
-
-
-var getDate = year + month + day;
 $(document).ready(function(){
     $("form").submit(function(){
     	var today = new Date();  
@@ -48,18 +37,15 @@ $(document).ready(function(){
     	var dateArray = dateString.split("-");  
     	var dateObj = new Date(dateArray[0], Number(dateArray[1])-1, dateArray[2]);  
     	var betweenDay = (today.getTime() - dateObj.getTime());  
-    	var st = $(":input:radio[name=period]:checked").val();
-	        if(eval(getDate) >= $("input[name='startdate']").val()){
-            $("input[name='startdate']").css("border", "1px solid red").after("<span>유효한 날짜를 입력해주세요.</span>");
+	        if($("input[name='startdate']").val() == ""){
+            $("input[name='startdate']").css("border", "1px solid red").after("<span>날짜를 입력해주세요.</span>");
             $("span").css("color", "red").fadeOut(3000);
             return false;
-        	} else if(betweenDay < 0){
- 				alert("여기요");
-        		return false;       		
+        	} else if(betweenDay > 0){
+                $("input[name='startdate']").css("border", "1px solid red").after("<span>광고시작 날짜는 지난 날짜를 선택할 수 없습니다.</span>");
+                $("span").css("color", "red").fadeOut(3000); 				
+ 				return false;       		
         	}
-	        
-	        
-	        
 	        else if (st == null){
             	var sel_type = null;
             	var chk_radio = document.getElementsByName('period');
@@ -83,7 +69,6 @@ function checkDay(){
 	var dateArray = dateString.split("-");  
 	var dateObj = new Date(dateArray[0], Number(dateArray[1])-1, dateArray[2]);  
 	var betweenDay = (today.getTime() - dateObj.getTime())/1000/60/60/24;  
-	alert(today);  
 
 }
 </script>
@@ -112,7 +97,8 @@ function checkDay(){
 								<h5>${truck.category1 }</h5>
 								<h5>${truck.location }</h5>
 								
-							<%-- 	<h5>${truck.reviewScore }</h5>
+							<%-- 	
+								<h5>${truck.reviewScore }</h5>
 								<h5>${truck.reviewCount }</h5>
 							 --%>
 							
