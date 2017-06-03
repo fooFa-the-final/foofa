@@ -143,7 +143,6 @@ public class FoodtruckController {
 		int allCount = 0;
 		if(keyword.isEmpty()){
 			sqlMap = foodtruckService.findByLoc(pageNum, location);
-			
 		} else {
 			sqlMap = foodtruckService.findByKeyLoc(pageNum, keyword, location);
 		}
@@ -161,7 +160,7 @@ public class FoodtruckController {
 		if(!sqlMap.isEmpty()){
 			allCount = Integer.parseInt(sqlMap.get(0).get("allCount"));
 		}
-
+		model.addAttribute("currentPage", pageNum);
 		model.addAttribute("allCount", allCount);
 		model.addAttribute("trucks", trucks);
 		model.addAttribute("keyword", keyword);

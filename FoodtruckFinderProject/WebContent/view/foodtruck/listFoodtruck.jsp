@@ -209,19 +209,19 @@ ul li a:hover, ul li a:focus {
     	
     	for(var i = firstIndex; i <= lastIndex; i++){
     		if(i == currentIndex){
-    			pagingHtml += "<button onClick='movePage(" + i + ")'><b>" + i + "</b></button>"
+    			pagingHtml += "<span onClick='${ctx }/foodtruck/searchByKeyLoc.do?pageNum=" + i + "'><b>" + i + "</b></span>"
     		} else {
-    			pagingHtml += "<button onClick='movePage(" + i + ")'>" + i + "</button>"
+    			pagingHtml += "<span onClick='${ctx }/foodtruck/searchByKeyLoc.do?pageNum=" + i + "'>" + i + "</span>"
     		}
     	}
 
     	if(currentIndex != 1){
-    		prePagingHtml += "<button onClick='movePage(1)'><<</button>";
+    		prePagingHtml += "<span onClick='${ctx }/foodtruck/searchByKeyLoc.do?pageNum=1'><<</span>";
     		var pageBefore = firstIndex - 1;
     		if(pageBefore < 1){
     			pageBefore = 1;
     		}
-    		prePagingHtml +="<button onClick='movePage(" + pageBefore + ")'><</button>"
+    		prePagingHtml +="<span onClick='${ctx }/foodtruck/seachByKeyLoc.do?pageNum=" + pageBefore + ")'><</span>"
     	}
     	if(currentIndex != totalIndex){
     		var Pageafter = lastIndex + 1;
@@ -230,20 +230,20 @@ ul li a:hover, ul li a:focus {
     		}
     	}
     	if(currentIndex != 1){
-    		prePagingHtml += "<button onClick='movePage(1)'><<</button>";
+    		prePagingHtml += "<span onClick='${ctx }/foodtruck/searchByKeyLoc.do?pageNum=1'><<</span>";
     		var pageBefore = firstIndex - 1;
     		if(pageBefore < 1){
     			pageBefore = 1;
     		}
-    		prePagingHtml += "<button onClick='movePage(" + pageBefore + ")'><</button>"
+    		prePagingHtml += "<span onClick='${ctx }/foodtruck/searchByKeyLoc.do?pageNum=" + pageBefore + "'><</span>"
     	}
     	if(currentIndex != totalIndex){
     		var pageAfter = lastIndex + 1;
     		if(pageAfter > totalIndex){
     			pageAfter = totalIndex;
     		}
-    		postPagingHtml += "<button onClick='movePage(" + pageAfter + ")'>></button>";
-    		postPagingHtml += "<button onClick='movePage(" + totalIndex + ")'>>></button>"
+    		postPagingHtml += "<span onClick='${ctx }/foodtruck/seachByKeyLoc.do?pageNum=" + pageAfter + "'>></span>";
+    		postPagingHtml += "<span onClick='${ctx }/foodtruck/searchByKeyLoc.do?pageNum=" + totalIndex + "'>>></span>"
     	}
     	
     	$("#pagingArea").empty();
@@ -251,20 +251,20 @@ ul li a:hover, ul li a:focus {
     	
 	});
     
-    var movePage = function(pageNum) {
-		$("#currentIndex").val(pageNum);
-		$.ajax({
-			url:"${ctx }/foodtruck/searchByKeyLoc.do"
-			,type:"POST"
-			,data:{pageNum:pageNum, keyword:"${keyword}", location:"${location}"}
-// 			,success:function(){alert("목록 어떻게 다시 뿌려주죠?");}
-			,success:function(data){
-				$("#trucks").html(data);
-				}
-			,error:function(){alert("ajax 연결 실패");}
+//     var movePage = function(pageNum) {
+// 		$("#currentIndex").val(pageNum);
+// 		$.ajax({
+// 			url:"${ctx }/foodtruck/searchByKeyLoc.do"
+// 			,type:"POST"
+// 			,data:{pageNum:pageNum, keyword:"${keyword}", location:"${location}"}
+// // 			,success:function(){alert("목록 어떻게 다시 뿌려주죠?");}
+// 			,success:function(data){
+// 				$("#trucks").html(data);
+// 				}
+// 			,error:function(){alert("ajax 연결 실패");}
 			
-		});
-	}
+// 		});
+// 	}
     
 	$("input:checkbox").on('click', function() {
 	      if ( $(this).prop('checked') ) {
