@@ -32,7 +32,14 @@ $(document).ready(function(){
             $("input[name='password1']").css("border", "1px solid red").after("<span>비밀번호가 일치하지 않습니다</span>");
             $("span").css("color", "red").fadeOut(3000);
             return false;
-        }
+        } else if ($("input[name='certification']").val().length != 10) {
+				$("input[name='certification']").css("border","1px solid red").after("<span>사업자등록번호를 10자리를 입력해주세요</span>");
+				$("span").css("color", "red").fadeOut(3000);
+				return false;
+			} else if ($("input[name='phone']").val().length != 11) {$("input[name='phone']").css("border","1px solid red").after("<span>휴대폰 번호 11자리를 입력해주세요</span>");
+				$("span").css("color", "red").fadeOut(3000);
+				return false;
+			}
     });   
     $(":input").focus(function(){
         $(this).css("border", "4px red solid");
@@ -79,8 +86,7 @@ $(document).ready(function(){
 							type="number" name="phone" class="form-control" id="phone"
 							value="${seller.phone }" placeholder="${seller.phone }">
 					</div>
-
-					<button type="submit" class="btn btn-primary">Modify</button>
+					<button type="submit" class="btn btn-primary">회원정보수정</button>
 				</form>
 			</div>
 		</div>
