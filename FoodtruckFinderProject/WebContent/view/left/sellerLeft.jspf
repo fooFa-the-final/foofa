@@ -20,14 +20,14 @@
                         <!-- second-level-items -->
                     </li>
                      <li id="side-adv" >
-                        <a href="#"><i class="fa fa-flask fa-fw"></i>광고요청</a>
+                        <a href="${ctx }/foodtruck/reqest.do"><i class="fa fa-flask fa-fw"></i>광고요청</a>
                     </li>
                     <li id="side-sales" >
-                        <a href="#"><i class="fa fa-table fa-fw"></i>매출통계</a>
+                        <a href="${ctx }/sales/truck.do"><i class="fa fa-table fa-fw"></i>매출통계</a>
                     </li>
-                    <li id="side-survey" ><a href="#"><i class="fa fa-edit fa-fw"></i>설문통계</a></li>
-                    <li id="side-modify-seller" ><a href="#"><i class="fa fa-edit fa-fw"></i>판매자 정보 수정</a></li>
-                    <li id="side-remove-seller" ><a href="#"><i class="fa fa-edit fa-fw"></i>판매자 탈퇴</a></li>
+                    <li id="side-survey" ><a href="${ctx }/survey/truckStat.do"><i class="fa fa-edit fa-fw"></i>설문통계</a></li>
+                    <li id="side-modify-seller" ><a href="${ctx }/seller/modify.do"><i class="fa fa-edit fa-fw"></i>판매자 정보 수정</a></li>
+                    <li id="side-remove-seller" ><a href="${ctx }/seller/checkPw.do"><i class="fa fa-edit fa-fw"></i>판매자 탈퇴</a></li>
                 </ul>
                 <!-- end side-menu -->
             </div>

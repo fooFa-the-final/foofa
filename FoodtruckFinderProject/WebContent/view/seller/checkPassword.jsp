@@ -69,10 +69,7 @@
 <body>
 
 	<div id="wrapper">
-		<header>
-			<%@ include file="../header.jspf"%>
-		</header>
-
+		<%@ include file="../header.jspf"%>
 		<%@ include file="../left/sellerLeft.jspf"%>
 		<!--  page-wrapper -->
 		<div id="page-wrapper">

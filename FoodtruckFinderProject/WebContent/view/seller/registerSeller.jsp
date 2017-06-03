@@ -195,7 +195,7 @@
 					$('#idmessage').html("사용중인 ID 입니다.");
                     $("#checkaa").css("background-color", "#B0F6AC");
                         $(".signupbtn").prop("disabled", true);
-                        $(".signupbtn").css("background-color", "#aaaaaa");
+                        $(".signupbtn").css("background-color", "#8A8A80");
 
                 }				
                 }
@@ -214,7 +214,7 @@
 		<!-- navbar top -->
 	</div>
 	<div id="Register">
-		<b style="margin-left: 157px"><font size="6">Join With us
+		<b style="margin-left: 78px"><font size="6">Join With us
 				as Seller</font></b>
 	</div>
 	<br>
@@ -240,15 +240,12 @@
 						<div id="checkPwd"></div>
 						<br> <b><font size="4">Business Registration
 								Number</font></b> <br> <input id="certification" name="certification"
-							type="text" onkeypress="onlyNumber()" maxlength="10">
+							type="text" onkeypress="onlyNumber()" maxlength="10"> 
 						-(하이픈)입력하지 않으셔도 됩니다. <br> <br> <b><font size="4">Phone</font></b>
 						<br> <input id="phone" name="phone" type="text" name="phone"
-							onkeypress="onlyNumber();" maxlength="11"> <br> <br>
+							onkeypress="onlyNumber();" maxlength="11">-(하이픈)입력하지 않으셔도 됩니다. <br> <br>
 						<div class="col-md-offset-5 col-sm-25 col-lg-25">
 						   <input type="submit" class="signupbtn" disabled="disabled" value="등록">
-					<!-- 
-							<input type="submit" value="등록" class="btn btn-primary">
-					 -->
 						</div>
 					</div>
 				</form>

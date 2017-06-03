@@ -25,7 +25,6 @@
     <div id="wrapper">
 
 		<%@ include file="../header.jspf"%>
-        
         <%@ include file="../left/sellerLeft.jspf"%>
      
         <!--  page-wrapper -->

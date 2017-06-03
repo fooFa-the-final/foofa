@@ -13,7 +13,7 @@
 				<li><a href="#"><i class="fa fa-flask fa-fw"></i>Followers</a>
 				<li><a href="${ctx}/review/list/member.do"><i class="fa fa-flask fa-fw"></i>My
 						Followers Review</a></li>
-				<li><a href="#"><i class="fa fa-table fa-fw"></i>단골</a></li>
+				<li><a href="${ctx}/favorite/list.do"><i class="fa fa-table fa-fw"></i>단골</a></li>
 				<li><a href="${ctx}/member/modify.do"><i class="fa fa-edit fa-fw"></i>회원정보수정</a></li>
 			</ul>
 			<!-- end side-menu -->
