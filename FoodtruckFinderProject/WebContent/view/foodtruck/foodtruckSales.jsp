@@ -14,6 +14,7 @@
 <script src="${ctx }/resources/plugins/metisMenu/jquery.metisMenu.js"></script>
 <script src="${ctx }/resources/plugins/pace/pace.js"></script>
 <script src="${ctx }/resources/scripts/siminta.js"></script>
+
 <!-- Core CSS - Include with every page -->
 <link href="${ctx }/resources/plugins/bootstrap/bootstrap.css"
 	rel="stylesheet" />
@@ -67,10 +68,13 @@ h2 {
 <link href='${ctx }/resources/css/fullcalendar.min.css' rel='stylesheet' />
 <link href='${ctx }/resources/css/fullcalendar.print.min.css'
 	rel='stylesheet' media='print' />
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src='${ctx }/resources/scripts/moment.min.js'></script>
-<script src='${ctx }/resources/scripts/jquery.min.js'></script>
+<%-- <script src='${ctx }/resources/scripts/jquery.min.js'></script> --%>
 <script src='${ctx }/resources/scripts/fullcalendar.min.js'></script>
 	 <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=noUvsaR702FX6WH5un5h&submodules=geocoder"></script>
+
 
 <script>
 	$(document).ready(function() {
@@ -80,6 +84,7 @@ h2 {
 			dayClick : function(date, jsEvent, view) {
 
 				convertDate(date.format());
+				
 			},
 			events : function(start, end, timezone, callback) {
 				$.ajax({
@@ -101,6 +106,7 @@ h2 {
 		function convertDate(date) {
 			var date = new Date(date);
 			date = date.yyyymmdd();
+			jQuery('#myModal').modal();
 			alert(date);
 		}
 		Date.prototype.yyyymmdd = function() {
@@ -265,6 +271,26 @@ h2 {
 			<div id='map' style="height:400px;width:300px">
 			</div>
 		</div>
+		<div class="modal fade" id="myModal" role="dialog">
+								    <div class="modal-dialog">
+								      <!-- Modal content-->
+								      <div class="modal-content">
+								        <div class="modal-header">
+								          <button type="button" class="close" data-dismiss="modal">&times;</button>
+								          <h4 class="modal-title">접수된 신고 이유</h4>
+								        </div>
+								        
+								        <div class="modal-body" id = "modalCons">
+								           	<h4>신고 된 리뷰 내용 </h4>
+								          
+								        </div>
+								        <div class="modal-footer">
+								          <input type="button" class="btn btn-default" data-dismiss="modal" value="닫기">
+								        </div>
+								      </div>
+								      
+								    </div>
+								  </div>
 
 
 	</div>
