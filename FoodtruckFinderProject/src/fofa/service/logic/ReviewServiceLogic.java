@@ -22,10 +22,7 @@ public class ReviewServiceLogic implements ReviewService {
 
 	@Autowired
 	private ReviewStore reviewStore;
-	
-	@Autowired
-	private FollowStore followStore;
-	
+		
 	@Autowired
 	private ReportStore reportStore;
 	

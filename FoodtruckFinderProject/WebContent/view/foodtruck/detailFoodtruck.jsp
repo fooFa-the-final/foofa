@@ -107,11 +107,13 @@
 	 	
 	 	var report = function(reviewId){
 	 		var reaId = "#reason" + reviewId;
+	 		var name = "reason" + reviewId
+	 		var st = $(":input:radio[name='"+ name + "']:checked").val();
 	 		$.ajax({
 	 			type:'POST',
 	 			url : "${ctx}/review/report/create.do",
 	 			data:{
-	 				reviewId : reviewId, reason : $(reaId).val()
+	 				reviewId : reviewId, reason : st
 	 			},
 	 			success : function(data){
 	 				if ($.trim(data) == 'true') {
@@ -250,11 +252,11 @@
 								        
 								        <div class="modal-body">
 								           	<h4>리뷰 내용 : ${Review.contents }</h4>
-								          <input type="radio" name = "reason" value="설" onClick="untype()"> 설<br>
-								          <input type="radio" name = "reason" value="레" onClick="untype()"> 레<br>
-								          <input type="radio" name = "reason" value="여" onClick="untype()"> 여<br>
-								          <input type="radio" name = "reason" value="라" onClick="untype()"> 라<br>
-								          <input type="radio" name = "reason" value="direct" onClick="availableType()"> 얍<br>
+								          <input type="radio" name = "reason${Review.reviewId }" value="욕설" onClick="untype()"> 욕설<br>
+								          <input type="radio" name = "reason${Review.reviewId }" value="음란" onClick="untype()"> 음란<br>
+								          <input type="radio" name = "reason${Review.reviewId }" value="광고" onClick="untype()"> 광고<br>
+								          <input type="radio" name = "reason${Review.reviewId }" value="부적절한 리뷰" onClick="untype()"> 부적절한 리뷰<br>
+								          <input type="radio" name = "reason${Review.reviewId }" value="direct" onClick="availableType()"> 직접 적겠습니다.<br>
 								          <input type="text" class="form-control" placeholder="신고 사유를 적어주세요" id="reason${Review.reviewId}" name="reasonContents">
 								        </div>
 								        <div class="modal-footer">
