@@ -32,8 +32,6 @@ public class ReportStoreLogicTest {
 		Report r = new Report();
 		r.setMemberId("d1");
 		r.setReviewId("R01");
-		int delete = rStore.delete(r);
-		assertEquals(1, delete);
 	}
 	
 	@Test
