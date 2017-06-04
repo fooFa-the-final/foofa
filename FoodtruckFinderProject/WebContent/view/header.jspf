@@ -26,21 +26,20 @@
 	            			<!-- search section-->
 	                        <div class="input-group custom-search-form" style="margin:6px;" >
 	                        	<form method="post" action="${ctx }/foodtruck/searchByKeyLoc.do" style="margin:7px;">
-	                        	<input type="hidden" name="pageNum" value="0">
 	                        	<c:choose>
 		                        	<c:when test="${keyword ne null }">
-		                        		<input type="text" class="form-control" name="keyword" placeholder="Search" style="width: 300px; padding:0px;" value="${keyword }">
+		                        		<input type="text" class="form-control" id="keyword" name="keyword" placeholder="Search" style="width: 300px; padding:0px;" value="${keyword }">
 		                        	</c:when>
 		                        	<c:otherwise>
-		                        		<input type="text" class="form-control" name="keyword" placeholder="Search" style="width: 300px; padding:0px;">
+		                        		<input type="text" class="form-control" id="keyword" name="keyword" placeholder="Search" style="width: 300px; padding:0px;">
 		                        	</c:otherwise>
 	                        	</c:choose>
 	                        	<c:choose>
 		                        	<c:when test="${location ne null }">
-		                            	<input type="text" class="form-control" name="location" placeholder="Location" style="width: 300px; padding:0px;" value="${location }">
+		                            	<input type="text" class="form-control" id="location" name="location" placeholder="Location" style="width: 300px; padding:0px;" value="${location }">
 		                            </c:when>
 		                            <c:otherwise>
-		                            	<input type="text" class="form-control" name="location" placeholder="Location" style="width: 300px; padding:0px;">
+		                            	<input type="text" class="form-control" id="location" name="location" placeholder="Location" style="width: 300px; padding:0px;">
 		                            </c:otherwise>
 	                            </c:choose>
 	                                <button class="btn btn-default" type="submit" style="height:34px">

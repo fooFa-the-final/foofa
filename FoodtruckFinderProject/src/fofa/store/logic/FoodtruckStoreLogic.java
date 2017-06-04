@@ -66,7 +66,6 @@ public class FoodtruckStoreLogic implements FoodtruckStore{
 	@Override
 	public List<HashMap<String, String>> selectByLoc(int pageNum, String location) {
 		SqlSession session = factory.openSession();
-		List<Foodtruck> list = null;
 		
 		int nPageIndex = 0;
 		int nPageRow = 10;
@@ -96,6 +95,10 @@ public class FoodtruckStoreLogic implements FoodtruckStore{
 		
 		int nPageIndex = 0;
 		int nPageRow = 10;
+		
+		if(pageNum != 0){
+			nPageIndex = pageNum - 1;
+		}
 		
 		Map<String, Object> map = new HashMap<>();
 		map.put("START", (nPageIndex * nPageRow) + 1);

@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import fofa.domain.Foodtruck;
 import fofa.domain.Menu;
@@ -133,18 +134,16 @@ public class FoodtruckController {
 	}
 	
 	
-	@RequestMapping(value="/searchByKeyLoc.do", method=RequestMethod.POST)
-	public String searchByKeyLoc(int pageNum, String keyword, String location, Model model){
-		if(pageNum==0){
-			pageNum++;
-		}
+	@RequestMapping(value="/searchByKeyLoc.do", method=RequestMethod.GET)
+	public String searchByKeyLoc(String keyword, String location, int currentIndex, Model model){
+		System.out.println("keyword : " + keyword + " / location : " + location + " / pageNum : " + currentIndex);
 		List<HashMap<String, String>> sqlMap;
 		List<Foodtruck> trucks = new ArrayList<>();
 		int allCount = 0;
-		if(keyword.isEmpty()){
-			sqlMap = foodtruckService.findByLoc(pageNum, location);
+		if(keyword==null || keyword==""){
+			sqlMap = foodtruckService.findByLoc(currentIndex, location);
 		} else {
-			sqlMap = foodtruckService.findByKeyLoc(pageNum, keyword, location);
+			sqlMap = foodtruckService.findByKeyLoc(currentIndex, keyword, location);
 		}
 		
 		for(int i = 0; i < sqlMap.size(); i++){
@@ -160,11 +159,85 @@ public class FoodtruckController {
 		if(!sqlMap.isEmpty()){
 			allCount = Integer.parseInt(sqlMap.get(0).get("allCount"));
 		}
-		model.addAttribute("currentPage", pageNum);
+		model.addAttribute("currentIndex", currentIndex);
 		model.addAttribute("allCount", allCount);
 		model.addAttribute("trucks", trucks);
 		model.addAttribute("keyword", keyword);
 		model.addAttribute("location", location);
+		return "../view/foodtruck/listFoodtruck.jsp";
+	}
+	
+	@RequestMapping(value="/searchByKeyLoc.do", method=RequestMethod.POST)
+	public String searchByKeyLoc(Integer currentIndex, String keyword, String location, Model model){
+		if(currentIndex==null){
+			currentIndex = 1;
+		}
+		List<HashMap<String, String>> sqlMap;
+		List<Foodtruck> trucks = new ArrayList<>();
+		int allCount = 0;
+		if(keyword.isEmpty()){
+			sqlMap = foodtruckService.findByLoc(currentIndex, location);
+		} else {
+			sqlMap = foodtruckService.findByKeyLoc(currentIndex, keyword, location);
+		}
+		
+		for(int i = 0; i < sqlMap.size(); i++){
+			Foodtruck t = new Foodtruck();
+			t.setFoodtruckId(sqlMap.get(i).get("foodtruckId"));
+			t.setFoodtruckName(sqlMap.get(i).get("foodtruckName"));
+			t.setFoodtruckImg(sqlMap.get(i).get("foodtruckImg"));
+			t.setCategory1(sqlMap.get(i).get("category1"));
+			t.setSpot(sqlMap.get(i).get("spot"));
+			t.setLocation(sqlMap.get(i).get("location"));
+			trucks.add(t);
+		}
+		if(!sqlMap.isEmpty()){
+			allCount = Integer.parseInt(sqlMap.get(0).get("allCount"));
+		}
+		model.addAttribute("currentIndex", currentIndex);
+		model.addAttribute("allCount", allCount);
+		model.addAttribute("trucks", trucks);
+		model.addAttribute("keyword", keyword);
+		model.addAttribute("location", location);
+		return "../view/foodtruck/listFoodtruck.jsp";
+	}
+	
+	
+	@RequestMapping(value="/search.do", method=RequestMethod.GET)
+	public String searchByKeyLocAjax(HttpServletRequest request, Model model){
+		String location = request.getParameter("location");
+		String pageNum = request.getParameter("currentIndex");
+		System.out.println(pageNum + location);
+//		if(pageNum==null){
+//			pageNum = 1;
+//		}
+//		List<HashMap<String, String>> sqlMap;
+//		List<Foodtruck> trucks = new ArrayList<>();
+//		int allCount = 0;
+//		if(keyword.isEmpty()){
+//			sqlMap = foodtruckService.findByLoc(pageNum, location);
+//		} else {
+//			sqlMap = foodtruckService.findByKeyLoc(pageNum, keyword, location);
+//		}
+//		
+//		for(int i = 0; i < sqlMap.size(); i++){
+//			Foodtruck t = new Foodtruck();
+//			t.setFoodtruckId(sqlMap.get(i).get("foodtruckId"));
+//			t.setFoodtruckName(sqlMap.get(i).get("foodtruckName"));
+//			t.setFoodtruckImg(sqlMap.get(i).get("foodtruckImg"));
+//			t.setCategory1(sqlMap.get(i).get("category1"));
+//			t.setSpot(sqlMap.get(i).get("spot"));
+//			t.setLocation(sqlMap.get(i).get("location"));
+//			trucks.add(t);
+//		}
+//		if(!sqlMap.isEmpty()){
+//			allCount = Integer.parseInt(sqlMap.get(0).get("allCount"));
+//		}
+//		model.addAttribute("currentPage", pageNum);
+//		model.addAttribute("allCount", allCount);
+//		model.addAttribute("trucks", trucks);
+//		model.addAttribute("keyword", keyword);
+//		model.addAttribute("location", location);
 		return "../view/foodtruck/listFoodtruck.jsp";
 	}
 	

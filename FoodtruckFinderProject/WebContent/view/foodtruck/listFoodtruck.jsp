@@ -112,7 +112,7 @@ ul li a:hover, ul li a:focus {
             		<tr></tr>
             		<tr></tr>
             	</thead>
-          		<tbody>
+          		<tbody id="ajax-tbody-results">
           		<c:choose>
           		<c:when test="${trucks eq null || empty trucks }">
           			<tr>
@@ -127,7 +127,8 @@ ul li a:hover, ul li a:focus {
 	          			</td>
 	          			<td style="height:60px">
 	          				<a href="${ctx }/foodtruck/"><font size="5px" color="black">${truck.foodtruckName }</font></a>&nbsp;
-	          				<font size="2px">${truck.category1 }  ${truck.category2 }  ${truck.category3 }</font>
+	          				<font size="2px">${truck.category1 }  ${truck.category2 }  ${truck.category3 }</font><br>
+	          				<font size="2px">${truck.spot }</font>
 	          			</td>
           			</tr>
           			<tr>
@@ -149,8 +150,10 @@ ul li a:hover, ul li a:focus {
         <div class="col-sm-2"></div>
 </div>
 <div class="col-lg-12" id="pagingArea" style="text-align:center; margin-bottom:100px; margin-top:50px">
-	<input type="hidden" id="currentIndex" value="">
+	<input type="hidden" id="currentIndex" value="${currentIndex }">
 	<input type="hidden" id="allCount" value="${allCount }">
+<%-- 	<input type="hidden" id="location" value="${location }"> --%>
+<%-- 	<input type="hidden" id="keyword" value="${keyword }"> --%>
 </div>
         <!-- end page-wrapper -->
 <!-- <center><div class=conatiner>
@@ -177,10 +180,8 @@ ul li a:hover, ul li a:focus {
     $(document).ready(function() {
     	
     	var allCount = $("#allCount").val();
-    	console.log("allCount : " + allCount);
     	var rowCount = 10;
     	var totalIndex = Math.ceil(allCount/rowCount);
-    	console.log("total index : " + totalIndex);
     	var firstIndex = "";
     	var lastIndex = "";
     	
@@ -209,19 +210,19 @@ ul li a:hover, ul li a:focus {
     	
     	for(var i = firstIndex; i <= lastIndex; i++){
     		if(i == currentIndex){
-    			pagingHtml += "<span onClick='${ctx }/foodtruck/searchByKeyLoc.do?pageNum=" + i + "'><b>" + i + "</b></span>"
+    			pagingHtml += "<span onclick='movePage(" + i + ")' style='cursor:pointer;'><b>" + "[" + i + "]" + "</b></span>"
     		} else {
-    			pagingHtml += "<span onClick='${ctx }/foodtruck/searchByKeyLoc.do?pageNum=" + i + "'>" + i + "</span>"
+    			pagingHtml += "<span onclick='movePage(" + i + ")' style='cursor:pointer;'>" + "[" + i + "]" + "</span>"
     		}
     	}
 
     	if(currentIndex != 1){
-    		prePagingHtml += "<span onClick='${ctx }/foodtruck/searchByKeyLoc.do?pageNum=1'><<</span>";
+    		prePagingHtml += "<span onclick='movePage(1)' style='cursor:pointer;'>[<<]</span>";
     		var pageBefore = firstIndex - 1;
     		if(pageBefore < 1){
     			pageBefore = 1;
     		}
-    		prePagingHtml +="<span onClick='${ctx }/foodtruck/seachByKeyLoc.do?pageNum=" + pageBefore + ")'><</span>"
+    		prePagingHtml +="<span onclick='movePage(" + pageBefore + ")' style='cursor:pointer;'>[<]</span>"
     	}
     	if(currentIndex != totalIndex){
     		var Pageafter = lastIndex + 1;
@@ -229,21 +230,13 @@ ul li a:hover, ul li a:focus {
     			pageAfter = totalIndex;
     		}
     	}
-    	if(currentIndex != 1){
-    		prePagingHtml += "<span onClick='${ctx }/foodtruck/searchByKeyLoc.do?pageNum=1'><<</span>";
-    		var pageBefore = firstIndex - 1;
-    		if(pageBefore < 1){
-    			pageBefore = 1;
-    		}
-    		prePagingHtml += "<span onClick='${ctx }/foodtruck/searchByKeyLoc.do?pageNum=" + pageBefore + "'><</span>"
-    	}
     	if(currentIndex != totalIndex){
     		var pageAfter = lastIndex + 1;
     		if(pageAfter > totalIndex){
     			pageAfter = totalIndex;
     		}
-    		postPagingHtml += "<span onClick='${ctx }/foodtruck/seachByKeyLoc.do?pageNum=" + pageAfter + "'>></span>";
-    		postPagingHtml += "<span onClick='${ctx }/foodtruck/searchByKeyLoc.do?pageNum=" + totalIndex + "'>>></span>"
+    		postPagingHtml += "<span onclick='movePage(" + pageAfter + ")' style='cursor:pointer;'>[>]</span>";
+    		postPagingHtml += "<span onclick='movePage(" + totalIndex + ")' style='cursor:pointer;'>[>>]</span>"
     	}
     	
     	$("#pagingArea").empty();
@@ -251,20 +244,21 @@ ul li a:hover, ul li a:focus {
     	
 	});
     
-//     var movePage = function(pageNum) {
-// 		$("#currentIndex").val(pageNum);
+    var movePage = function(pageNum) {
+		$("#currentIndex").val(pageNum);
+		window.location = '${ctx}/foodtruck/searchByKeyLoc.do?keyword="${keyword}"&location=${location}&currentIndex=' + pageNum + '';
 // 		$.ajax({
-// 			url:"${ctx }/foodtruck/searchByKeyLoc.do"
+// 			url:"${ctx }/foodtruck/searchByKeyLocAjax.do"
 // 			,type:"POST"
 // 			,data:{pageNum:pageNum, keyword:"${keyword}", location:"${location}"}
-// // 			,success:function(){alert("목록 어떻게 다시 뿌려주죠?");}
-// 			,success:function(data){
-// 				$("#trucks").html(data);
+// // 			,success:function(){alert("${keyword}" + " / " + "${location}");}
+// 			,success:function(response){
+// 				jQuery("#table-template").tmpl(response).appendTo("#ajax-tbody-results");
 // 				}
 // 			,error:function(){alert("ajax 연결 실패");}
 			
 // 		});
-// 	}
+	}
     
 	$("input:checkbox").on('click', function() {
 	      if ( $(this).prop('checked') ) {
@@ -290,7 +284,7 @@ ul li a:hover, ul li a:focus {
 	
 	
     </script>
-
+    
 </body>
 
 </html>
