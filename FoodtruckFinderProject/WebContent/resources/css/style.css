@@ -21,6 +21,10 @@ body {
 /* 	background-color: #f8f8f8; */
 }
 
+.text-center{
+	text-align:center;
+}
+
 /* Wrappers */
 
 /* ------------------------------- */
@@ -379,7 +383,6 @@ body.main-body {
 }
 
 img.main_img_person {
-	margin-top: 90px;
 	width: 50px;
 	height: 50px;
 	overflow: hidden;
@@ -419,6 +422,7 @@ div.div-gray{
 img.main-truck-img {
 	width: 261px;
 	height: 225px;
+	cursor: pointer;
 }
 
 div.main-container div.row {
@@ -426,7 +430,7 @@ div.main-container div.row {
 }
 
 .top-head-menu {
-	height:40px;
+	height:80px;
 	margin-right:20px;
 }
 
@@ -491,13 +495,18 @@ img.somenail {
 
 .review-heading {
 	background-color: #d9edf7;
-	height: 90px;
 	border-radius: 4px 4px 0px 0px;
 }
 
 .review-heading a {
 	color: #0073bb;
 	font-weight: bold;
+}
+
+
+.navbar-main-links {
+	height: 100%;
+	margin-bottom: -70px;
 }
 
 /***** CSS Magic to Highlight Stars on Hover *****/

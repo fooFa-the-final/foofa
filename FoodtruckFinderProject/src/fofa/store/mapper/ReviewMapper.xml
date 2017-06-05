@@ -56,10 +56,12 @@
   		WHERE foodtruck_Id = #{foodtruck.foodtruckId}
   	</select>
   	<select id="selectByRecommand" resultMap="ReviewMap">
+  		select * from (
   		select r.review_id review_id, member_id, foodtruck_id, contents, score, writedate 
   		from review_tb r LEFT OUTER JOIN (select review_id, count(*) recommand from recommand_tb group by review_id) d 
   		ON d.review_id = r.review_id
 		order by recommand desc nulls last
+		) where rownum <![CDATA[ <= ]]> 4
   	</select>
   	<select id = "avgScore" resultType="Double" parameterType="String">
   		select avg(score) from review_tb where foodtruck_Id = #{foodtruckId}

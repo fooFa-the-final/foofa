@@ -40,6 +40,7 @@ public class MainController {
 
 	@RequestMapping("index.do")
 	public String showMain(Model model){
+		System.out.println(System.currentTimeMillis());
 		List<Review> allReview = reviewService.findByRecommand();
 		List<Review> reviews = new ArrayList<>();
 		reviews.add(allReview.get(1));
@@ -47,21 +48,26 @@ public class MainController {
 		reviews.add(allReview.get(3));
 		model.addAttribute("reviews", reviews);
 		model.addAttribute("hotReview", allReview.get(0));
+
+		System.out.println(System.currentTimeMillis());
 		double mainRandom = Math.random();
 		int intMain = (int)(mainRandom*allReview.size());
 		Review mainReview = reviewService.findById(allReview.get(intMain).getReviewId());
 		model.addAttribute("mainFoodImg",mainReview.getImages().get(0).getFilename());
 		model.addAttribute("mainMember", memberService.findById(mainReview.getWriter().getMemberId()));
-		
+
+		System.out.println(System.currentTimeMillis());
 		List<Advertise> allAdv = advertiseService.findNowAd();
 		List<Foodtruck> adTrucks = new ArrayList<>();
-		
+
+		System.out.println(System.currentTimeMillis());
 		for(int i=0; i<9; i++){
 			String sellerId = allAdv.get(i).getSellerId();
 			adTrucks.add(foodtruckService.findBySeller(sellerId));
 		}
 		model.addAttribute("adTrucks", adTrucks);
-		
+
+		System.out.println(System.currentTimeMillis());
 //		List<Foodtruck> allTrucks = foodtruckService.findByLoc("가산동");
 //		List<Foodtruck> nearTrucks = new ArrayList<>();
 //		for(int i=0; i<3; i++){
@@ -93,7 +99,7 @@ public class MainController {
 			double mainRandom = Math.random();
 			int intMain = (int)(mainRandom*allReview.size());
 			Review randomReview = reviewService.findById(allReview.get(intMain).getReviewId());
-			if(!randomReview.getImages().isEmpty()){
+			if((!randomReview.getImages().isEmpty()) && randomReview.getImages().get(0)!=null){
 				mainReview = randomReview;
 				break;
 			}
@@ -102,6 +108,7 @@ public class MainController {
 		model.addAttribute("mainFoodImg", mainReview.getImages().get(0).getFilename());
 		model.addAttribute("mainMember", memberService.findById(mainReview.getWriter().getMemberId()));
 		
+		System.out.println("end : "+ mainReview.getImages().get(0).getFilename());
 		return "view/main.jsp";
 	}
 

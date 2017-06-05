@@ -75,7 +75,7 @@
 	<!--  wrapper -->
        <div id="wrapper">
 		<%@ include file="../header.jspf"%>
-	</div>
+
 
 
         
@@ -177,11 +177,9 @@
                 	
             	</div>
             </div>
-        </div>
         <!-- end page-wrapper -->
         
-    </div>
-
+	</div>
 </body>
 
 </html>
