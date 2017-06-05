@@ -69,25 +69,26 @@ ul li a:hover, ul li a:focus {
 		<%@ include file="../header.jspf"%>
         <!--  page-wrapper -->
     </div>
-
+		<form id="search-with-filter" action="${ctx }/foodtruck/searchByFilter.do" method="post">
             <div class="row" style="margin-left:25%">
                 <!-- Page Header -->
                 <div class="col-lg-10" style="margin-top:6%; margin-bottom:4%">
                     <div class="col-sm-2">
                     	<button type="button" class="btn btn-outline btn-default" onClick="stateBtn(this)">OPEN NOW</button>
+                    	<input type="hidden" id="openstate" value="">
                 	</div>    
                 	<div class="col-md-6"> 
                     <label class="checkbox-inline">
-                     <input type="checkbox" id="checkCard">카드 결제
+                   		<input type="checkbox" id="card" name="checkFilter">카드 결제
                     </label>
                     <label class="checkbox-inline">
-                     <input type="checkbox" id="checkDrinking">알콜 판매
+                     	<input type="checkbox" id="drinking" name="checkFilter">알콜 판매
                     </label>
                     <label class="checkbox-inline">
-                     <input type="checkbox" id="checkParking">주차 가능
+                    	 <input type="checkbox" id="parking" name="checkFilter">주차 가능
                     </label>
                     <label class="checkbox-inline">
-                     <input type="checkbox" id="checkCatering">케이터링
+                    	 <input type="checkbox" id="catering" name="checkFilter">케이터링
                     </label>
                     </div>
                     <div class="cil-md-3">               
@@ -97,12 +98,15 @@ ul li a:hover, ul li a:focus {
                          </select>
                     </div>
                 </div>
+                <input type="hidden" id="keyword" name="keyword" value="${keyword }">
+				<input type="hidden" id="location" name="location" value="${location }">
+				<input type="hidden" id="checking" name="checking" value="">
             </div>
     
     
     <div class="row">
     <div class="col-sm-2"></div>
-    <div class="col-md-6">
+    <div class="col-md-6" id="searchList">
             <table style="width:100%" id="dataTables-example">
             	<colgroup>
             		<col width="30%"/>
@@ -126,7 +130,7 @@ ul li a:hover, ul li a:focus {
 	          				<img width="130px" height="130px" src="${ctx }/resources/img/${truck.foodtruckImg }" style="margin-right:10px">
 	          			</td>
 	          			<td style="height:60px">
-	          				<a href="${ctx }/foodtruck/"><font size="5px" color="black">${truck.foodtruckName }</font></a>&nbsp;
+	          				<a href="${ctx }/review/list/truck.do?foodtruckId=${truck.foodtruckId }"><font size="5px" color="black">${truck.foodtruckName }</font></a>&nbsp;
 	          				<font size="2px">${truck.category1 }  ${truck.category2 }  ${truck.category3 }</font><br>
 	          				<font size="2px">${truck.spot }</font>
 	          			</td>
@@ -152,9 +156,8 @@ ul li a:hover, ul li a:focus {
 <div class="col-lg-12" id="pagingArea" style="text-align:center; margin-bottom:100px; margin-top:50px">
 	<input type="hidden" id="currentIndex" value="${currentIndex }">
 	<input type="hidden" id="allCount" value="${allCount }">
-<%-- 	<input type="hidden" id="location" value="${location }"> --%>
-<%-- 	<input type="hidden" id="keyword" value="${keyword }"> --%>
 </div>
+</form>
         <!-- end page-wrapper -->
 <!-- <center><div class=conatiner>
     <a style="color:white; font-size: 30px;">1</a>
@@ -242,43 +245,55 @@ ul li a:hover, ul li a:focus {
     	$("#pagingArea").empty();
     	$("#pagingArea").append(prePagingHtml + pagingHtml + postPagingHtml);
     	
+    	var card = "${card}";
+    	var drinking = "${drinking}";
+    	var parking = "${parking}";
+    	var catering = "${catering}";
+    	
+    	if(card=="true"){
+    		$("#card").prop('checked', true);
+    	}
+    	if(drinking=="true"){
+    		$("#drinking").prop('checked', true);
+    	}
+    	if(parking=="true"){
+    		$("#parking").prop('checked', true);
+    	}
+    	if(catering=="true"){
+    		$("#catering").prop('checked', true);
+    	}
 	});
     
     var movePage = function(pageNum) {
 		$("#currentIndex").val(pageNum);
-		window.location = '${ctx}/foodtruck/searchByKeyLoc.do?keyword="${keyword}"&location=${location}&currentIndex=' + pageNum + '';
-// 		$.ajax({
-// 			url:"${ctx }/foodtruck/searchByKeyLocAjax.do"
-// 			,type:"POST"
-// 			,data:{pageNum:pageNum, keyword:"${keyword}", location:"${location}"}
-// // 			,success:function(){alert("${keyword}" + " / " + "${location}");}
-// 			,success:function(response){
-// 				jQuery("#table-template").tmpl(response).appendTo("#ajax-tbody-results");
-// 				}
-// 			,error:function(){alert("ajax 연결 실패");}
-			
-// 		});
+		window.location = '${ctx}/foodtruck/searchByKeyLoc.do?keyword=${keyword}&location=${location}&currentIndex=' + pageNum + '';
 	}
     
-	$("input:checkbox").on('click', function() {
-	      if ( $(this).prop('checked') ) {
-	    	  
-	      } else {
-	    	  
-	      }
+	
+	$(":checkbox").change(function() {
+	    var notChecked = [], checked = [];
+	    $(":checkbox").map(function() {
+	        this.checked ? checked.push(this.id) : notChecked.push(this.id);
 	    });
+	    var checked2 = "";
+	    for(var a=0; a<checked.length; a++){
+	    	checked2 += checked[a] + "/";
+	    }
+	    alert(checked2);
+	    $("#checking").val(checked2);
+	    $("#search-with-filter").submit();
+	});
 	    
+	
 	var stateBtn = function(obj){
 		if($(obj).hasClass("btn btn-outline btn-default")){
 			$(obj).removeClass("btn btn-outline btn-default").addClass("btn btn-success");
-			$.ajax({
-				url:"${ctx}/foodtruck/searchByFilter.do"
-				,type:"get"
-				,data:{state:true}
-				,success:display
-			});
+			$("#openstate").val("true");
+			$("#search-with-filter").submit();
 		} else {
 			$(obj).removeClass("btn btn-success").addClass("btn btn-outline btn-default");
+			$("#openstate").val("");
+			$("#search-with-filter").submit();
 		}
 	}
 	

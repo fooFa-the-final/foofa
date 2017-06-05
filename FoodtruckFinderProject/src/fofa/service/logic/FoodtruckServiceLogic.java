@@ -72,7 +72,7 @@ public class FoodtruckServiceLogic implements FoodtruckService{
 	}
 
 	@Override
-	public List<Foodtruck> findByFilter(int pageNum, Foodtruck foodtruck) {
+	public List<HashMap<String, String>> findByFilter(int pageNum, Foodtruck foodtruck) {
 		return foodtruckStore.selectByFilter(pageNum, foodtruck);
 	}
 

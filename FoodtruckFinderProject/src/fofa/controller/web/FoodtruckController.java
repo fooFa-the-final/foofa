@@ -136,10 +136,10 @@ public class FoodtruckController {
 	
 	@RequestMapping(value="/searchByKeyLoc.do", method=RequestMethod.GET)
 	public String searchByKeyLoc(String keyword, String location, int currentIndex, Model model){
-		System.out.println("keyword : " + keyword + " / location : " + location + " / pageNum : " + currentIndex);
 		List<HashMap<String, String>> sqlMap;
 		List<Foodtruck> trucks = new ArrayList<>();
 		int allCount = 0;
+
 		if(keyword==null || keyword==""){
 			sqlMap = foodtruckService.findByLoc(currentIndex, location);
 		} else {
@@ -203,70 +203,73 @@ public class FoodtruckController {
 	}
 	
 	
-	@RequestMapping(value="/search.do", method=RequestMethod.GET)
-	public String searchByKeyLocAjax(HttpServletRequest request, Model model){
-		String location = request.getParameter("location");
-		String pageNum = request.getParameter("currentIndex");
-		System.out.println(pageNum + location);
-//		if(pageNum==null){
-//			pageNum = 1;
-//		}
-//		List<HashMap<String, String>> sqlMap;
-//		List<Foodtruck> trucks = new ArrayList<>();
-//		int allCount = 0;
-//		if(keyword.isEmpty()){
-//			sqlMap = foodtruckService.findByLoc(pageNum, location);
-//		} else {
-//			sqlMap = foodtruckService.findByKeyLoc(pageNum, keyword, location);
-//		}
-//		
-//		for(int i = 0; i < sqlMap.size(); i++){
-//			Foodtruck t = new Foodtruck();
-//			t.setFoodtruckId(sqlMap.get(i).get("foodtruckId"));
-//			t.setFoodtruckName(sqlMap.get(i).get("foodtruckName"));
-//			t.setFoodtruckImg(sqlMap.get(i).get("foodtruckImg"));
-//			t.setCategory1(sqlMap.get(i).get("category1"));
-//			t.setSpot(sqlMap.get(i).get("spot"));
-//			t.setLocation(sqlMap.get(i).get("location"));
-//			trucks.add(t);
-//		}
-//		if(!sqlMap.isEmpty()){
-//			allCount = Integer.parseInt(sqlMap.get(0).get("allCount"));
-//		}
-//		model.addAttribute("currentPage", pageNum);
-//		model.addAttribute("allCount", allCount);
-//		model.addAttribute("trucks", trucks);
-//		model.addAttribute("keyword", keyword);
-//		model.addAttribute("location", location);
-		return "../view/foodtruck/listFoodtruck.jsp";
-	}
 	
-	
-	@RequestMapping("/searchByFilter.do")
+	@RequestMapping(value="/searchByFilter.do", method=RequestMethod.POST)
 	public String searchByFilter(HttpServletRequest request, Model model){
-		boolean state = Boolean.parseBoolean(request.getParameter("state"));
-		boolean card = Boolean.parseBoolean(request.getParameter("checkCard"));
-		boolean drinking = Boolean.parseBoolean(request.getParameter("checkDrinking"));
-		boolean parking = Boolean.parseBoolean(request.getParameter("checkParking"));
-		boolean catering = Boolean.parseBoolean(request.getParameter("checkCatering"));
+		String location = request.getParameter("location");
+		String keyword = request.getParameter("keyword");
+		String checked = request.getParameter("checking");
+		int currentIndex = 1;
+//		boolean state = Boolean.parseBoolean(request.getParameter("state"));
+		String state = request.getParameter("openstate");
+		
+		if(request.getParameter("currentIndex") != null){
+			currentIndex = Integer.parseInt(request.getParameter("currentIndex"));
+		}
+		if(state!=null){
+			System.out.println("state" + state);
+		}
+		System.out.println("state" + state);
+		
 		Foodtruck foodtruck = new Foodtruck();
 		
-		if(state==true || state==false){
-			foodtruck.setState(state);
+		String[] filter = checked.split("/");
+		for(int i = 0; i < filter.length; i++){
+			if(filter[i].equals("card")){
+				foodtruck.setCard(true);
+				model.addAttribute("card", true);
+			}
+			if(filter[i].equals("drinking")){
+				foodtruck.setDrinking(true);
+				model.addAttribute("drinking", true);
+			}
+			if(filter[i].equals("parking")){
+				foodtruck.setParking(true);
+				model.addAttribute("parking", true);
+			}
+			if(filter[i].equals("catering")){
+				foodtruck.setCatering(true);
+				model.addAttribute("catering", true);
+			}
 		}
-		if(card==true || card==false){
-			foodtruck.setCard(card);
+		
+//		System.out.println("loc:"+location+" key:"+keyword+" index:"+currentIndex + " checked:" + checked);
+		foodtruck.setLocation(location);
+		foodtruck.setFoodtruckName(keyword);
+		
+		List<HashMap<String, String>> sqlMap = foodtruckService.findByFilter(currentIndex, foodtruck);
+		List<Foodtruck> trucks = new ArrayList<>();
+		int allCount = 0;
+//		System.out.println("궁금궁금 : " + sqlMap.size() + "/" + Integer.parseInt(sqlMap.get(0).get("allCount")));
+		
+		for(int i = 0; i < sqlMap.size(); i++){
+			Foodtruck t = new Foodtruck();
+			t.setFoodtruckId(sqlMap.get(i).get("foodtruckId"));
+			t.setFoodtruckName(sqlMap.get(i).get("foodtruckName"));
+			t.setFoodtruckImg(sqlMap.get(i).get("foodtruckImg"));
+			t.setCategory1(sqlMap.get(i).get("category1"));
+			t.setSpot(sqlMap.get(i).get("spot"));
+			t.setLocation(sqlMap.get(i).get("location"));
+			trucks.add(t);
 		}
-		if(drinking==true || drinking==false){
-			foodtruck.setDrinking(drinking);
+		if(!sqlMap.isEmpty()){
+			allCount = Integer.parseInt(sqlMap.get(0).get("allCount"));
 		}
-		if(parking==true || parking==false){
-			foodtruck.setParking(parking);
-		}
-		if(catering==true || catering==false){
-			foodtruck.setCatering(catering);
-		}
-		foodtruckService.findByFilter(Integer.parseInt(request.getParameter("pageNum")), foodtruck);
+		model.addAttribute("currentIndex", currentIndex);
+		model.addAttribute("allCount", allCount);
+		model.addAttribute("trucks", trucks);
+		model.addAttribute("keyword", foodtruck.getFoodtruckName());
+		model.addAttribute("location", foodtruck.getLocation());
 		
 		return "../view/foodtruck/listFoodtruck.jsp";
 	}

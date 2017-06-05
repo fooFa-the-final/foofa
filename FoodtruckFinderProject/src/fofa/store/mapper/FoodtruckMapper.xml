@@ -96,11 +96,13 @@
   		<include refid="pagingPost"/>
   	</select>
   	
-  	<select id="selectByFilter" parameterType="Foodtruck" resultMap="searchMap">
-  		<include refid="selectFoodtrucks"/>
+  	<select id="selectByFilter" parameterType="Hashmap" resultMap="searchMap">
+  		<include refid="pagingPre"/>
+  		<include refid="pagingTrucks"/>
   		<where> 
+  			(truckName LIKE '%'||#{keyword}||'%' OR category LIKE '%'||#{keyword}||'%') AND (location LIKE '%'||#{location}||'%' OR area LIKE '%'||#{location}||'%')
   		<if test="card">
-  		payment=#{card} 
+  		AND payment=#{card} 
   		</if>
   		<if test="parking">
   		AND parking=#{parking} 
@@ -115,6 +117,7 @@
   		AND operation_state=#{state}
   		</if>
   		</where>
+  		<include refid="pagingPost"/>
   	</select>
   	
   	<select id="selectBySellerId" parameterType="String" resultMap="foodtruckMap">
