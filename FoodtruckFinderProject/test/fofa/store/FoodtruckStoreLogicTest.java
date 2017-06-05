@@ -71,9 +71,9 @@ public class FoodtruckStoreLogicTest {
 		t.setState(false);
 		
 		
-		List<Foodtruck> list = store.selectByFilter(1, t);
+		List<HashMap<String, String>> list = store.selectByFilter(1, t);
 		
-		assertEquals(4, list.size());
+		assertEquals(10, list.size());
 	}
 
 	@Test

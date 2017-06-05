@@ -18,7 +18,7 @@ public interface FoodtruckMapper {
 	
 	List<HashMap<String, String>> selectByKeyLoc(Map<String, Object> map);
 	
-	HashMap<String, Object> selectByFilter(Map<String, Object> map);
+	List<HashMap<String, String>> selectByFilter(Map<String, Object> map);
 	
 	Foodtruck selectBySellerId(String sellerId);
 	
