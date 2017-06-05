@@ -75,9 +75,9 @@
 								style="height: 70px; width: 70px" />
 							</a>
 							<div class="user-info">
-								<tr class="odd gradeX">
-									<td>${truck.foodtruckName }</td>
-								</tr>
+								<p>
+									${truck.foodtruckName }
+								</p>
 								<br>
 								<h5>${truck.favoriteCount } Favorite</h5>
 								<h5>${truck.reviewCount } Reviews</h5>
@@ -111,10 +111,6 @@
 		<script
 			src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 	<script>
-		$(document).ready(function() {
-			$('#dataTables-example').dataTable();
-		});
-		
 
 			function fileSubmit() {
 				var formData = new FormData($("#fileForm")[0]);
@@ -135,22 +131,18 @@
 				});
 			}
 
-			var favorite = function(toId) {
-				$(document).ready(function() {
-					var btn = $("#delete");
+			var favorite = function(foodtruckId) {
+					
 					$.ajax({
 						type : 'GET',
 						url : "${ctx }/favorite/remove.do",
 						data : {
-							toId : toId
+							foodtruckId : foodtruckId
 						},
 						success : function(data) {
-							var fowId = "#follwer"+toId;
-							$(fowId).remove();
-							
+							$("#"+foodtruckId).remove();
 						}
 					});
-				});
 			}
 	</script>
 

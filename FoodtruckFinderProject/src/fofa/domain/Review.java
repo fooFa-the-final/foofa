@@ -86,6 +86,7 @@ public class Review {
 	}
 	
 	public Image getMainImage(){
+		System.out.println(this.images.size()+" :" + this.reviewId);
 		return this.images.get(0);
 	}
 

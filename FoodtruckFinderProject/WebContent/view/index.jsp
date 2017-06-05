@@ -34,7 +34,7 @@ a.link {font-size: 0.7em; color:blue;}
 <body class="main-body">
 	<!-- navbar top -->
 
-	<nav id="mainNav" class=" main-head-top effect" role="navigation" id="navbar" style=" background-color: rgba(0, 0, 0, .8);">
+	<nav id="mainNav" class=" main-head-top effect" role="navigation" id="navbar" style=" background-color: rgba(0, 0, 0, .8); background-position:center center">
 		<!-- navbar-header -->
 		<div class="col-lg-12 top-head-menu" style="">
 			<span style="float: right; margin: 20px 30px 0 0;">
@@ -42,8 +42,8 @@ a.link {font-size: 0.7em; color:blue;}
 			<button type="button" class="btn btn-outline btn-danger signUpBtn"  onclick="location.href='${ctx}/member/createForm.do'">Sign up</button>
 			</span>
 		</div>
-		<ul class="nav navbar-top-links navbar-main-links navbar-center">
-			<li class="row">
+		<ul class="nav navbar-top-links navbar-center navbar-main-links ">
+			<li class="row" style="margin-top: 13%;">
 				<div class="col-lg-12">
 					<a class="navbar-brand" style="align: center"
 						href="${ctx }/index.do"> <img style="height:60px;" src="${ctx}/resources/img/mainLogo.png" alt="" />
@@ -64,13 +64,10 @@ a.link {font-size: 0.7em; color:blue;}
 					<!--end search section-->
 				</div>
 			</li>
-			<li class="row" style="display: block; float: bottom">
-				<div id="col-lg-12">
+			</ul>
+			<div id="col-lg-12" class="text-center">
 					<img id="mainMemberImg"  class="main_img_person" src="${ctx}/resources/img/user.jpg" onclick="location.href='${ctx}/review/list/member.do?memberId=${mainMember.memberId}'" />
-				</div>
-			</li>
-
-		</ul>
+			</div>
 		<!-- navbar-top-links -->
 	</nav>
 	<!-- end navbar top -->
@@ -91,7 +88,7 @@ a.link {font-size: 0.7em; color:blue;}
 					<div class="col-lg-4">
 						<div class="panel panel-danger">
 							<div class="panel-header">
-								<img src="${ctx}/resources/img/${truck.foodtruckImg }" class="main-truck-img" />
+								<img src="${ctx}/resources/img/${truck.foodtruckImg }" class="main-truck-img"onclick="location.href='${ctx }/review/list/truck.do?foodtruckId=${truck.foodtruckId}'"/>
 							</div>
 							<div class="panel-body text-left">
 								<b>${truck.foodtruckName }</b> <br> <p > 평점 :<span class="starRating" style="text-align:left;"><span style="width: ${truck.score*20 }%">${truck.score }점</span></span></p>리뷰수 : ${truck.reviewCount }
@@ -103,7 +100,7 @@ a.link {font-size: 0.7em; color:blue;}
 				<div class="col-lg-4">
 					<div class="panel panel-danger">
 						<div class="panel-header">
-							<img src="${ctx}/resources/img/${truck.foodtruckImg }" class="main-truck-img" />
+							<img src="${ctx}/resources/img/${truck.foodtruckImg }" class="main-truck-img" onclick="location.href='${ctx }/review/list/truck.do?foodtruckId=${truck.foodtruckId}'" />
 						</div>
 						<div class="panel-body text-left">
 							<b>${truck.foodtruckName }</b> <br> <p > 평점 :<span class="starRating" style="text-align:left;"><span style="width: ${truck.score*20 }%">${truck.score }점</span></span></p>리뷰수 : ${truck.reviewCount }
@@ -116,7 +113,7 @@ a.link {font-size: 0.7em; color:blue;}
 				<div class="col-lg-4">
 					<div class="panel panel-danger">
 						<div class="panel-header">
-							<img src="${ctx}/resources/img/${truck.foodtruckImg }" class="main-truck-img" />
+							<img src="${ctx}/resources/img/${truck.foodtruckImg }" class="main-truck-img" onclick="location.href='${ctx }/review/list/truck.do?foodtruckId=${truck.foodtruckId}'"/>
 						</div>
 						<div class="panel-body text-left">
 							<b>${truck.foodtruckName }</b> <br> <p > 평점 :<span class="starRating" style="text-align:left;"><span style="width: ${truck.score*20 }%">${truck.score }점</span></span></p>리뷰수 : ${truck.reviewCount }						
@@ -143,7 +140,7 @@ a.link {font-size: 0.7em; color:blue;}
 				<div class="sub-container">
 				<div class="col-lg-9">
 						<div class="panel panel-primary text-left" style="height:327px">
-							<div class="review-heading padding-10">
+							<div class="review-heading padding-10" style="	height: 90px;">
 								<img class="somenail" src="${ctx }/resources/img/${review.writer.profileImg }"/>
 								<div style="float:left; width:80%;">
 									<ul>
@@ -176,15 +173,17 @@ a.link {font-size: 0.7em; color:blue;}
 				<div class="col-lg-3">
 					<div class="panel panel-primary text-center" style="height:327px">
 						<c:forEach var="review" varStatus="no" items="${reviews}"> 
+							<div class="review-heading">
+								 <a>${review.foodtruck.foodtruckName }</a>		 By <a>${review.writer.memberId }</a>						
+							</div>
 							<div class="panel-body" style="padding:5px;">
 								<img class="somenail" src="${ctx }/resources/img/${review.mainImage.filename}"/>
-								 <a>${review.foodtruck.foodtruckName }</a>
+
 								 <p class="index-overflow">${review.contents }</p>
-								By <a>${review.writer.memberId }</a>
-							</div>
-						<hr style="margin:5px 20px;">						
+							</div>					
 						
 						</c:forEach>
+						<hr style="margin:5px 20px;">	
 
 					<a class="link"> Read more list</a>					
 				</div>	
