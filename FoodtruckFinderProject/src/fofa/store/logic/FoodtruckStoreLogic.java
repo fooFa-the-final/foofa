@@ -127,6 +127,7 @@ public class FoodtruckStoreLogic implements FoodtruckStore{
 		map.put("END", (nPageIndex * nPageRow) + nPageRow);
 		map.put("location", foodtruck.getLocation());
 		map.put("keyword", foodtruck.getFoodtruckName());
+		
 		if(foodtruck.isCard()){
 			map.put("card", true);
 		}
@@ -139,6 +140,10 @@ public class FoodtruckStoreLogic implements FoodtruckStore{
 		if(foodtruck.isParking()){
 			map.put("parking", true);
 		}
+		if(foodtruck.isState()){
+			map.put("state", true);
+		}
+		
 		List<HashMap<String, String>> sqlMap;
 		try{
 			FoodtruckMapper mapper = session.getMapper(FoodtruckMapper.class);

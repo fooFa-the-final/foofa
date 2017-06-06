@@ -74,7 +74,7 @@ ul li a:hover, ul li a:focus {
                 <!-- Page Header -->
                 <div class="col-lg-10" style="margin-top:6%; margin-bottom:4%">
                     <div class="col-sm-2">
-                    	<button type="button" name="openstateBtn" class="btn btn-outline btn-default" onClick="stateBtn(this)">OPEN NOW</button>
+                    	<button type="button" id="openstateBtn" name="openstateBtn" class="btn btn-outline btn-default" onClick="stateBtn(this)">OPEN NOW</button>
                     	<input type="hidden" id="openstate" name="openstate" value="">
                 	</div>    
                 	<div class="col-md-6"> 
@@ -249,7 +249,7 @@ ul li a:hover, ul li a:focus {
     	var drinking = "${drinking}";
     	var parking = "${parking}";
     	var catering = "${catering}";
-    	var openstate = "${openstate}";
+    	var openstate = "${openState}";
     	
     	if(card=="true"){
     		$("#card").prop('checked', true);
@@ -284,7 +284,7 @@ ul li a:hover, ul li a:focus {
 	    for(var a=0; a<checked.length; a++){
 	    	checked2 += checked[a] + "/";
 	    }
-	    alert(checked2);
+// 	    alert(checked2);
 	    $("#checking").val(checked2);
 	    $("#search-with-filter").submit();
 	});

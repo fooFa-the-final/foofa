@@ -218,10 +218,10 @@ public class FoodtruckController {
 			currentIndex = Integer.parseInt(request.getParameter("currentIndex"));
 		}
 		if(state){
+//			System.out.println("state true");
 			foodtruck.setState(state);
-			model.addAttribute("openstate", true);
+			model.addAttribute("openState", true);
 		}
-		
 		
 		
 		String[] filter = checked.split("/");
