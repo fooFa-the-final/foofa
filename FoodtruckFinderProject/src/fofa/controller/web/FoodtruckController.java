@@ -206,22 +206,23 @@ public class FoodtruckController {
 	
 	@RequestMapping(value="/searchByFilter.do", method=RequestMethod.POST)
 	public String searchByFilter(HttpServletRequest request, Model model){
+		Foodtruck foodtruck = new Foodtruck();
 		String location = request.getParameter("location");
 		String keyword = request.getParameter("keyword");
 		String checked = request.getParameter("checking");
 		int currentIndex = 1;
-//		boolean state = Boolean.parseBoolean(request.getParameter("state"));
-		String state = request.getParameter("openstate");
+		boolean state = Boolean.parseBoolean(request.getParameter("openstate"));
+//		String state = request.getParameter("openstate");
 		
 		if(request.getParameter("currentIndex") != null){
 			currentIndex = Integer.parseInt(request.getParameter("currentIndex"));
 		}
-		if(state!=null){
-			System.out.println("state" + state);
+		if(state){
+			foodtruck.setState(state);
+			model.addAttribute("openstate", true);
 		}
-		System.out.println("state" + state);
 		
-		Foodtruck foodtruck = new Foodtruck();
+		
 		
 		String[] filter = checked.split("/");
 		for(int i = 0; i < filter.length; i++){

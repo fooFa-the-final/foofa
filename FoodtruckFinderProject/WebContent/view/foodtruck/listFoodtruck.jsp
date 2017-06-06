@@ -74,8 +74,8 @@ ul li a:hover, ul li a:focus {
                 <!-- Page Header -->
                 <div class="col-lg-10" style="margin-top:6%; margin-bottom:4%">
                     <div class="col-sm-2">
-                    	<button type="button" class="btn btn-outline btn-default" onClick="stateBtn(this)">OPEN NOW</button>
-                    	<input type="hidden" id="openstate" value="">
+                    	<button type="button" name="openstateBtn" class="btn btn-outline btn-default" onClick="stateBtn(this)">OPEN NOW</button>
+                    	<input type="hidden" id="openstate" name="openstate" value="">
                 	</div>    
                 	<div class="col-md-6"> 
                     <label class="checkbox-inline">
@@ -249,6 +249,7 @@ ul li a:hover, ul li a:focus {
     	var drinking = "${drinking}";
     	var parking = "${parking}";
     	var catering = "${catering}";
+    	var openstate = "${openstate}";
     	
     	if(card=="true"){
     		$("#card").prop('checked', true);
@@ -261,6 +262,10 @@ ul li a:hover, ul li a:focus {
     	}
     	if(catering=="true"){
     		$("#catering").prop('checked', true);
+    	}
+    	if(openstate=="true"){
+    		$("#openstateBtn").removeClass("btn btn-outline btn-default").addClass("btn btn-success");
+    		$("#openstate").val("true");
     	}
 	});
     
