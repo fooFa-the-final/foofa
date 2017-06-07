@@ -291,6 +291,16 @@ ul li a:hover, ul li a:focus {
 	    
 	
 	var stateBtn = function(obj){
+		var notChecked = [], checked = [];
+	    $(":checkbox").map(function() {
+	        this.checked ? checked.push(this.id) : notChecked.push(this.id);
+	    });
+	    var checked2 = "";
+	    for(var a=0; a<checked.length; a++){
+	    	checked2 += checked[a] + "/";
+	    }
+	    $("#checking").val(checked2);
+		
 		if($(obj).hasClass("btn btn-outline btn-default")){
 			$(obj).removeClass("btn btn-outline btn-default").addClass("btn btn-success");
 			$("#openstate").val("true");
