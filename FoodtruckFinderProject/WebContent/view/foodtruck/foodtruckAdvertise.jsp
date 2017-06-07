@@ -54,12 +54,10 @@ $(document).ready(function(){
             			sel_type = chk_radio[i].value;
             		}
             	}
-            	alert(sel_type);
             	if(sel_type == null){
                 	$("input[name='result']").css("border", "1px solid red").after("<span>기간을 선택해 주세요.</span>");
                     $("span").css("color", "red").fadeOut(3000);
             		return false;
-
             	}
         	} 
     });   
