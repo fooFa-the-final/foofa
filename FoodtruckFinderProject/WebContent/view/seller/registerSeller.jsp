@@ -202,8 +202,12 @@
 		<!-- navbar top -->
 	</div>
 	<div id="Register">
-		<b style="margin-left: 78px"><font size="6">Join With us
+		<b style="margin-left: 15px"><font size="6">Join With us
 				as Seller</font></b>
+	<br>
+	<a style="margin-left:715px" href="${ctx }/view/member/registerMember.jsp" target="_self">회원 가입은 이쪽입니다</a>
+	
+
 	</div>
 	<br>
 	<br>

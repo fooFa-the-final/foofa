@@ -63,11 +63,10 @@
 	}
 
 	var idReg = /^[a-z]+[a-z0-9]{3,17}$/g;
+	var regEmail = /([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/; 
 
-	$(document).ready(function() {
-						$("form").submit(function() {
-						    $('#id').keyup(function(){
-						        if ( $('#id').val().length > 3) {
+	$(document).ready(function() {$("form").submit(function() {
+						    $('#id').keyup(function(){if ( $('#id').val().length > 3) {
 						            var id = $(this).val();
 				                    console.log(id);
 						            // ajax 실행
@@ -91,23 +90,16 @@
 						    }); // end keyup
 											if (!idReg.test($("input[name='memberId']").val())) {
 												if ($("input[name='memberId']").val() == "") {
-													$("input[name='memberId']").css("border","1px solid red").after(
-																	"<span>아이디4글자 이상 16글자 이하 영문자 숫자의 조합입니다.</span>");
+													$("input[name='memberId']").css("border","1px solid red").after("<span>아이디4글자 이상 16글자 이하 영문자 숫자의 조합입니다.</span>");
 													$("span").css("color","red").fadeOut(3000);
 													return false;
 												} else {
 													return false
 												}
-											} else if ($(
-													"input[name='password']")
-													.val() == "") {
-												$("input[name='password']")
-														.css("border",
-																"1px solid red")
-														.after(
-																"<span>비밀번호를 입력해주세요</span>");
-												$("span").css("color", "red")
-														.fadeOut(3000);
+											} else if ($("input[name='password']").val() == "") {
+												$("input[name='password']").css("border","1px solid red")
+														.after("<span>비밀번호를 입력해주세요</span>");
+												$("span").css("color", "red").fadeOut(3000);
 												return false;
 											} else if ($(
 													"input[name='password1']")
@@ -120,28 +112,22 @@
 												$("span").css("color", "red")
 														.fadeOut(3000);
 												return false;
-											} else if ($(
-													"input[name='email']")
-													.val().length < 10) {
-												$("input[name='email']")
-														.css("border",
-																"1px solid red")
-														.after(
-																"<span>이메일을 입력해주세요</span>");
-												$("span").css("color", "red")
-														.fadeOut(3000);
+											} else if ($("input[name='email']").val().length < 0) {
+												$("input[name='email']").css("border","1px solid red").after("<span>이메일을 입력해주세요</span>");
+												$("span").css("color", "red").fadeOut(3000);
 												return false;
-											} else if ($("input[name='birthday']")
-													.val() == "") {
-												$("input[name='birthday']")
-														.css("border",
-																"1px solid red")
-														.after(
-																"<span>생년월일 입력해주세요</span>");
-												$("span").css("color", "red")
-														.fadeOut(3000);
+											} else if(!regEmail.test($("input[name='email']").val())){
+												$("input[name='email']").css("border","1px solid red").after("<span>올바른 이메일주소를 입력해주세요</span>");
+												$("span").css("color", "red").fadeOut(3000);
+												return false;												
+											} else if ($("input[name='birthday']").val() == "") {
+												$("input[name='birthday']").css("border","1px solid red")
+														.after("<span>생년월일 입력해주세요</span>");$("span").css("color", "red").fadeOut(3000);
 												return false;
-											}
+											} else if(($("input[name*='gender']:checked").length)<=0){$("input[name='genderCheck']").css("border","1px solid red").after("<span>성별을 선택해주세요.</span>");
+											$("span").css("color", "red").fadeOut(3000);
+											return false;
+										}
 										});
 						$(":input").focus(function() {
 							$(this).css("border", "4px red solid");
@@ -208,6 +194,8 @@
 	
 </script>
 
+
+
 <body>
 
 	<!--  wrapper -->
@@ -217,16 +205,22 @@
 		<!-- navbar top -->
 	</div>
 	<div id="Register">
-		<b style="margin-left: 157px"><font size="6">Join With us
+		<b style="margin-left: 15px"><font size="6">Join With us
 				</font></b>
+	<br>
+	<a style="margin-left:715px" href="${ctx }/view/seller/registerSeller.jsp" target="_self">판매자 가입은 이쪽입니다</a>
+	
 	</div>
 	<br>
 	<br>
+
 	<div class="container">
 		<div class="row" id="Truck">
 			<div class="col-lg-12">
 
-				<form action="${ctx }/member/create.do" method="post">
+				<form name="form" id="form" action="${ctx }/member/create.do" method="post">	
+							
+				<div>
 					<b> <font size="4">ID</font></b> <br> <input id="id"
 						name="memberId" type="text" placeholder="ID를 입력해주세요."
 						onkeydown="fn_press_han(this);" oninput="checkId()">
@@ -247,14 +241,19 @@
 						<br> <input id="birthday" name="birthday" type="text"
 							onkeypress="onlyNumber();" maxlength="8"> 생년월일을 숫자로 입력해주세요 <br> <br>
 								  <b><font size="4">Gender</font></b><br>
+								  							<input type="hidden" name="genderCheck">
+								  							<br>
 								 <input type="radio" name="gender" id="gender" value="F">남성
 									<input type="radio" name="gender" id="gender" value="M">여성
 									<br><br>
 						   <input type="submit" class="signupbtn" disabled="disabled" value="등록">
+						   </div>
 						</div>
-				</form>
+																   				</form>
+						
 			</div>
 		</div>
+		
 		</div>
 
 		<br> <br>
@@ -268,4 +267,6 @@
 	<script src="${ctx}/resources/plugins/pace/pace.js"></script>
 	<script src="${ctx}/resources/scripts/siminta.js"></script>
 </body>
+
+
 </html>
