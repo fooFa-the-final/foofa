@@ -6,7 +6,7 @@
 <head>
 <c:set value="${pageContext.request.contextPath}" var="ctx" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FooFa Register Seller</title>
+<title>FooFa Register Member</title>
 <!-- Core CSS - Include with every page -->
 <link href="${ctx}/resources/plugins/bootstrap/bootstrap.css"
 	rel="stylesheet" />
@@ -64,25 +64,36 @@
 
 	var idReg = /^[a-z]+[a-z0-9]{3,17}$/g;
 
-	$(document)
-			.ready(
-					function() {
-						$("form")
-								.submit(
-										function() {
-											if (!idReg.test($(
-													"input[name='memberId']")
-													.val())) {
-												if ($("input[name='memberId']")
-														.val() == "") {
-													$("input[name='memberId']")
-															.css("border",
-																	"1px solid red")
-															.after(
+	$(document).ready(function() {
+						$("form").submit(function() {
+						    $('#id').keyup(function(){
+						        if ( $('#id').val().length > 3) {
+						            var id = $(this).val();
+				                    console.log(id);
+						            // ajax 실행
+						            $.ajax({
+						                type : 'POST',
+										url : "${ctx }/member/checkId.do",
+						                data:
+						                {
+						                    id: id
+						                },
+						                success : function(data) {
+						                    console.log(data);
+											if ($.trim(data) == 'no') {
+												$('#idmessage').html("사용 가능한 ID 입니다.");
+						                    } else {
+												$('#idmessage').html("사용 중인 ID 입니다.");
+						                    }
+						                }
+						            }); // end ajax
+						        }
+						    }); // end keyup
+											if (!idReg.test($("input[name='memberId']").val())) {
+												if ($("input[name='memberId']").val() == "") {
+													$("input[name='memberId']").css("border","1px solid red").after(
 																	"<span>아이디4글자 이상 16글자 이하 영문자 숫자의 조합입니다.</span>");
-													$("span").css("color",
-															"red")
-															.fadeOut(3000);
+													$("span").css("color","red").fadeOut(3000);
 													return false;
 												} else {
 													return false
@@ -143,27 +154,6 @@
 						}).blur(function() {
 							$("strong").remove();
 						})
-
-						$("#idCheck").click(function() {
-							var id = $("#id").val();
-							$.ajax({
-								type : 'POST',
-								url : "${ctx }/member/checkId.do",
-								data : {
-									id : id
-								},
-								success : function(data) {
-									$("#result").html(data);
-									if ($.trim(data) == 'no') {
-										$('#idmessage').html("사용 가능한 ID 입니다.");
-									} else {
-										$('#idmessage').html("사용중인 ID 입니다.");
-									}
-
-								}
-
-							});
-						});
 					});
 
 	function onlyNumber(str) {
@@ -186,6 +176,36 @@
 			}
 		}
 	}
+	
+	
+	function checkId(){
+		var id = $("#id").val();
+		if($("input[name='memberId']").val().length > 4){
+			$.ajax({
+				type : 'POST',
+				url : "${ctx }/member/checkId.do",
+				data : {
+					id : id
+				},
+				success : function(data) {
+					$("#result").html(data);
+					if ($.trim(data) == 'no') {
+						$('#idmessage').html("사용 가능한 ID 입니다.");
+	                    $(".signupbtn").prop("disabled", false);
+	                    $(".signupbtn").css("background-color", "#4CAF50");
+					} else {
+						$('#idmessage').html("사용중인 ID 입니다.");
+                        $(".signupbtn").prop("disabled", true);
+                        $(".signupbtn").css("background-color", "#8A8A80");
+					}
+
+				}
+
+			});
+		}
+	}
+		
+	
 </script>
 
 <body>
@@ -207,13 +227,9 @@
 			<div class="col-lg-12">
 
 				<form action="${ctx }/member/create.do" method="post">
-
-
-
 					<b> <font size="4">ID</font></b> <br> <input id="id"
 						name="memberId" type="text" placeholder="ID를 입력해주세요."
-						onkeydown="fn_press_han(this);">
-					<button type="button" name="checking" id="idCheck" value="t">중복확인</button>
+						onkeydown="fn_press_han(this);" oninput="checkId()">
 					<div id="idmessage">
 						<br>
 					</div>
@@ -229,19 +245,19 @@
 							type="text" onkeypress="fn_press_han">
 						<br> <br> <b><font size="4">birthday</font></b>
 						<br> <input id="birthday" name="birthday" type="text"
-							onkeypress="onlyNumber();" maxlength="8"> -(하이픈)입력하지 않으셔도 됩니다. <br> <br>
+							onkeypress="onlyNumber();" maxlength="8"> 생년월일을 숫자로 입력해주세요 <br> <br>
 								  <b><font size="4">Gender</font></b><br>
-								 <input type="radio" name="gender" id="gender" value="F">F
-									<input type="radio" name="gender" id="gender" value="M">M
+								 <input type="radio" name="gender" id="gender" value="F">남성
+									<input type="radio" name="gender" id="gender" value="M">여성
 									<br><br>
-							<input type="submit" value="등록" class="btn btn-primary">
+						   <input type="submit" class="signupbtn" disabled="disabled" value="등록">
 						</div>
-					</div>
 				</form>
 			</div>
 		</div>
+		</div>
+
 		<br> <br>
-	</div>
 
 	<!-- end wrapper -->
 
