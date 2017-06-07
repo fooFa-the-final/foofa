@@ -2,5 +2,5 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
-<c:redirect url="${pageContext.request.contextPath }/index.do"/>
+<c:redirect url="index.do"/>
 </html>

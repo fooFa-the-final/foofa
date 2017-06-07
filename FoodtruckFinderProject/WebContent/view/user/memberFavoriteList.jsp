@@ -30,7 +30,7 @@
 		<%@ include file="../header.jspf"%>
 		<%@ include file="../left/memberLeft.jspf"%>
 		<!--  page-wrapper -->
-		<div id="page-wrapper" style="background-color: #FFFFFF">
+		<div id="page-wrapper">
 		
 				<div class="row">
 					<!-- Page Header -->
@@ -49,7 +49,7 @@
 
 						</a>
 						<div class="user-info">
-							<h1>"${member.memberId }"님의 프로필 페이지</h1>
+							<h1>"${member.memberId }" </h1>
 							<br>
 							<h5>${member.email }</h5>
 							<h5>${member.followCount } Followers</h5>
@@ -144,6 +144,10 @@
 						}
 					});
 			}
+			
+	        $(document).ready(function () {
+				$('#side-favorite').attr('class', 'selected');
+	        });
 	</script>
 
 </body>

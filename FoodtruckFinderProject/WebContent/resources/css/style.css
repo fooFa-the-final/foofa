@@ -496,6 +496,7 @@ img.somenail {
 .review-heading {
 	background-color: #d9edf7;
 	border-radius: 4px 4px 0px 0px;
+	height: 80px
 }
 
 .review-heading a {

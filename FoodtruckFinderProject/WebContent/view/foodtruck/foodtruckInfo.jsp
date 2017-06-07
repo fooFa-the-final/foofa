@@ -33,7 +33,7 @@
                 <!-- Page Header -->
                 <div class="col-md-12" style="background-color:white; height:300px">
                     <div class="col-md-8">
-                    	<form id="fileForm" method="post" enctype="multipart/form-data" action="">
+                    	<form id="FILE_FORM" method="post" enctype="multipart/form-data" action="">
                             <a class="navbar-brand" href="#" style="margin-top:10px;" >
                                 <img name="image" id="image" src="${ctx }/resources/img/${truck.foodtruckImg }" style="height:250px; width:250px" onClick="document.all.file.click();"/>
                             	<input type="file" name="file" id="file" style="display: none;" onchange="fileinfo(this)" />
@@ -232,17 +232,25 @@
 	            reader.readAsDataURL(input.files[0]);
             }
 	      	
-	      	function fileUpload() {
-	      		$('#fileForm').ajaxForm({
-	      		url: "${ctx}/foodtruck/modifyPicture.do",
-	      		enctype: "multipart/form-data", // 여기에 url과 enctype은 꼭 지정해주어야 하는 부분이며 multipart로 지정해주지 않으면 controller로 파일을 보낼 수 없음
-	      		success: function(result){
-	      		alert(result);
-	      		}
-	      		});
-	      		// 여기까지는 ajax와 같다. 하지만 아래의 submit명령을 추가하지 않으면 백날 실행해봤자 액션이 실행되지 않는다.
-	      		$("#fileForm").submit();
-	      		}
+	      	function sendFile(file) {
+	            var form_data = new FormData();
+	            form_data.append('file', file);
+	            $.ajax({
+	              data: form_data,
+	              type: "POST",
+	              url: '/image',
+	              cache: false,
+	              contentType: false,
+	              enctype: 'multipart/form-data',
+	              processData: false,
+	              success: function() {
+	              	alert("사진이 변경되었습니다.");
+	              },
+	              error: function(){
+	            	  alert("사진변경 실패");
+	              }
+	            });
+	          }
         }
 		
 // 		function uploadFile(){

@@ -29,7 +29,9 @@ $(document).ready(function(){
     		{
        	var pw1 = document.getElementById("password").value;
        	var pw2 = document.getElementById("password1").value;
-    	if(pw1 != pw2){
+    	var gender = $('#gender');
+
+       	if(pw1 != pw2){
             $("input[name='password1']").css("border", "1px solid red").after("<span>비밀번호가 일치하지 않습니다</span>");
             $("span").css("color", "red").fadeOut(3000);
             return false;
@@ -37,10 +39,27 @@ $(document).ready(function(){
 				$("input[name='certification']").css("border","1px solid red").after("<span>사업자등록번호를 10자리를 입력해주세요</span>");
 				$("span").css("color", "red").fadeOut(3000);
 				return false;
-			} else if ($("input[name='phone']").val().length != 11) {$("input[name='phone']").css("border","1px solid red").after("<span>휴대폰 번호 11자리를 입력해주세요</span>");
-				$("span").css("color", "red").fadeOut(3000);
+		} else if ($("input[name='birthday']").val() != ""){
+			var data = document.getElementById("birthday").value;
+			var y = parseInt(data.substr(0, 4), 10); 
+			var m = parseInt(data.substr(4, 2), 10); 
+			var d = parseInt(data.substr(6, 2), 10); 
+			var dt = new Date(y, m-1, d); 
+			if(dt.getDate() != d) { $("input[name='birthday']").css("border","1px solid red")
+				.after("<span>유효한 연도를 입력해주세요</span>");$("span").css("color", "red").fadeOut(3000);
 				return false;
-			}
+
+			} 
+			else if(dt.getMonth()+1 != m) { $("input[name='birthday']").css("border","1px solid red")
+				.after("<span>유효한 월을 입력해주세요</span>");$("span").css("color", "red").fadeOut(3000); 
+				return false;
+
+			} 
+			else if(dt.getFullYear() != y) { $("input[name='birthday']").css("border","1px solid red")
+				.after("<span>유효한 일수를 입력해주세요</span>");$("span").css("color", "red").fadeOut(3000); 
+				return false;
+			} 
+		}
     });   
     $(":input").focus(function(){
         $(this).css("border", "4px red solid");
@@ -65,12 +84,9 @@ $(document).ready(function(){
 			<div class="row">
 				<div class="col-lg-12">
 					<h2>Modify your Info</h2>
-
-
 					<div class="form-group">
 						<form role="form" action="${ctx }/member/modify.do" method="post">
 							<input type="hidden" value="${member.memberId }" name="memberId">
-
 							<div class="form-group">
 								<label>ID</label> <b class="form-control">${member.memberId }</b>
 							</div>
@@ -80,29 +96,30 @@ $(document).ready(function(){
 								<br> <label>Password Check</label><input class="form-control" id="password1"
 						name="password1"			type="password" value="${member.password}"> <br>
 							</div>
-
 							<div class="form-group">
 								<label>Email</label> <input class="form-control" id="email"
 									type="text" name="email" value="${member.email}"> <br>
-
 							</div>
 							<div class="form-group">
 								<label>Birthday</label> <input class="form-control"
 									id="birthday" type="text" name="birthday"
 									value="${member.birthday}"> <br>
-
 							</div>
-
 							<div class="form-group">
 								<div>
-									<label>성별</label><br> <label class="radio-inline">
-										<input type="radio" name="gender" id="gender" value="F">여성
-									</label> <label class="radio-inline"> <input type="radio"
-										name="gender" id="gender" value="M">남성
+								<label>성별</label><br>
+								<c:if test="${member.gender eq 'M' }">
+									 <label class="radio-inline">
+										<input type="radio" checked="checked" name="gender" id="gender" value="${member.gender }">남성
+								</label>
+								</c:if>
+								<c:if test="${member.gender eq 'F' }">
+									 <label class="radio-inline"> <input type="radio" checked="checked"
+										name="gender" id="gender" value="${member.gender }">여성
 									</label>
+									</c:if>
 								</div>
 							</div>
-
 							<button type="submit" class="btn btn-primary">Modify</button>
 						</form>
 					</div>

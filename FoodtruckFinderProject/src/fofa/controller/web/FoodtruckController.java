@@ -112,11 +112,13 @@ public class FoodtruckController {
 		return "redirect:/foodtruck/searchById.do";
 	}
 	
-	@ResponseBody
+//	@ResponseBody
 	@RequestMapping(value="/modifyPicture.do", method=RequestMethod.POST)
-	public String modifyPicture(MultipartHttpServletRequest multi, HttpSession session){
+	public String modifyPicture(MultipartHttpServletRequest req, HttpSession session, HttpServletRequest request) throws Exception{
 		
 		System.out.println("controller");
+		
+		
 		
 //		  	String img= null;
 //	        // 저장 경로 설정
