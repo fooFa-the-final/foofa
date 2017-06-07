@@ -57,6 +57,7 @@
                                 </div>
                                 <!-- Change this to a button or input when using this as a form -->
                                 <button type="submit" class="btn btn-lg btn-success btn-block">Login</button>
+                                <button type="button" class="btn btn-lg btn-success btn-block" onclick="loginG();">Google Login</button>
                             </fieldset>
                         </form>
                     </div>
@@ -74,7 +75,7 @@
     <script src="resources/plugins/jquery-1.10.2.js"></script>
     <script src="resources/plugins/bootstrap/bootstrap.min.js"></script>
     <script src="resources/plugins/metisMenu/jquery.metisMenu.js"></script>
-
+	<script src=”resources/scripts/google_oauth.js”></script> 
 </body>
 
 </html>
