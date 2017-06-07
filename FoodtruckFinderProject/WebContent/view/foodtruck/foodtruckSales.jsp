@@ -169,8 +169,6 @@ h2 {
 				<input type="button" value="연간 매출" onclick="year()"> <input
 					type="button" value="10일간 매출" onclick="days()">
 				<div id="chart71"></div>
-				<p style='font-size: 12px; padding: 0 0 40px 40px'>** Mouse over
-					the chart area in order to move the guide line</p>
 				<script>
 					function year() {
 						$(".accessibility").remove();

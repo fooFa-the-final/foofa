@@ -36,6 +36,7 @@ public class SurveyController {
 
 	@RequestMapping("/truckStat.do")
 	public String searchSurveysStat(String foodtruckId, Model model){
+		System.out.println("done");
 		model.addAttribute("avgItemList", surveyService.findAvgScoreBySurveyItem(foodtruckId));
 		
 		return "/view/foodtruck/foodtruckSurvey.jsp";
@@ -43,6 +44,8 @@ public class SurveyController {
 
 	@RequestMapping("/itemStat.do")
 	public String searchItemStat(String foodtruckId, String ItemId, Model model){
+		//System.out.println(foodtruckId + ItemId);
+		
 		model.addAttribute("genderStat", surveyService.findAvgByGender(foodtruckId, ItemId));
 		model.addAttribute("ageStat", surveyService.findAvgByAges(foodtruckId, ItemId));
 		return "/view/foodtruck/foodtruckSurveyDetail.jsp";
