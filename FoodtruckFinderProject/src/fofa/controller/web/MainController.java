@@ -116,6 +116,7 @@ public class MainController {
 	public String showLoginForm(){
 		return "view/user/login.jsp";
 	}
+	
 
 	@RequestMapping("/logout.do")
 	public String logout(HttpSession session){
@@ -123,7 +124,17 @@ public class MainController {
 		return "redirect:index.do";
 	}
 	
-
+	@RequestMapping(value="/googleLogin.do", method=RequestMethod.POST)
+	public String googleLogin(HttpSession session, Member member){
+		if(memberService.checkPw(member.getMemberId(), member.getPassword())){
+			memberService.register(member);
+		}
+		session.setAttribute("loginUserId", member.getMemberId());
+		session.setAttribute("isGoogle", true);
+		
+		return "redirect:main.do";
+	}
+	
 	@RequestMapping(value="login.do", method=RequestMethod.POST)
 	public String login(HttpServletRequest request, Member member){
 		String[] isSeller = request.getParameterValues("isSeller");

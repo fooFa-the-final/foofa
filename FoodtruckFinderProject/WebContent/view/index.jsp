@@ -54,12 +54,14 @@ a.link {font-size: 0.7em; color:blue;}
 				<div class="col-lg-12">
 					<!-- search section-->
 					<div class="input-group custom-search-form">
-						<input id="searchKey" type="text" class="form-control" placeholder="Search"
+	                   <form method="post" action="${ctx }/foodtruck/searchByKeyLoc.do" style="margin:7px;">
+						<input id="searchKey" type="text" name="keyword" class="form-control" placeholder="Search"
 							style="width: 400px"> <input id="searchLoc" type="text"
-							class="form-control" placeholder="Location" style="width: 400px">
-						<button class="btn btn-danger searchBtn" type="button" onclick="searchTruck()">
+							class="form-control" name="location"  placeholder="Location" style="width: 400px">
+						<button class="btn btn-danger searchBtn" type="submit">
 							<i class="fa fa-search"></i>
 						</button>
+						</form>
 					</div>
 					<!--end search section-->
 				</div>
