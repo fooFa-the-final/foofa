@@ -1,4 +1,5 @@
- <%@ page language="java" contentType="text/html; charset=UTF-8"
+
+<%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="ctx" value="${pageContext.request.contextPath }"></c:set>
@@ -68,77 +69,84 @@ h2 {
 <link href='${ctx }/resources/css/fullcalendar.min.css' rel='stylesheet' />
 <link href='${ctx }/resources/css/fullcalendar.print.min.css'
 	rel='stylesheet' media='print' />
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src='${ctx }/resources/scripts/moment.min.js'></script>
 <%-- <script src='${ctx }/resources/scripts/jquery.min.js'></script> --%>
 <script src='${ctx }/resources/scripts/fullcalendar.min.js'></script>
-	 <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=noUvsaR702FX6WH5un5h&submodules=geocoder"></script>
+<script type="text/javascript"
+	src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=noUvsaR702FX6WH5un5h&submodules=geocoder"></script>
 
 
 <script>
-	$(document).ready(function() {
-		$('#side-sales').attr('class', 'selected');
-		$('#calendar').fullCalendar({
-			
-			dayClick : function(date, jsEvent, view) {
+	$(document)
+			.ready(
+					function() {
+						$('#side-sales').attr('class', 'selected');
+						$('#calendar').fullCalendar({
 
-				convertDate(date.format());
-				
-			},
-			events : function(start, end, timezone, callback) {
-				$.ajax({
-					url : '${ctx}/sales/month.do',
-					dataType : 'json',
-					success : function(data) {
-						var events = [];
-						$.each(data,function(i,item) {
-							events.push({
-								title : item.re,
-								start : item.da
-							});
+							dayClick : function(date, jsEvent, view) {
+
+								convertDate(date.format());
+
+							},
+							events : function(start, end, timezone, callback) {
+								$.ajax({
+									url : '${ctx}/sales/month.do',
+									dataType : 'json',
+									success : function(data) {
+										var events = [];
+										$.each(data, function(i, item) {
+											events.push({
+												title : item.re,
+												start : item.da
+											});
+										});
+										callback(events);
+									}
+								});
+							}
 						});
-						callback(events);
-					}
-				});
-			}
-		});
-		function convertDate(date) {
-			var date = new Date(date);
-			date = date.yyyymmdd();
-			alert(date);
-			$.ajax({
-				url : '${ctx}/sales/date.do',
-				type : "post",
-				data : {
-					date : date
-				},
-				dataType : 'json',
-				success : function(data) {
-					document.getElementById("revenue").value = data.re;
-					document.getElementById("location1").value = data.lo;
-					document.getElementById("date").value = data.da;
-					document.getElementById("date2").value = data.da;
-					
-					jQuery('#showModal').modal();
-					
-				},
-				error : function() {
-					document.getElementById("date1").value = date;
-					jQuery('#inputModal').modal();
-					
-				}
-			});
-		
-		}
-		Date.prototype.yyyymmdd = function() {
-			var yyyy = this.getFullYear().toString();
-			var mm = (this.getMonth() + 1).toString();
-			var dd = this.getDate().toString();
-			return yyyy + (mm[1] ? mm : "0" + mm[0])
-					+ (dd[1] ? dd : "0" + dd[0]);
-		}
-	})
+						function convertDate(date) {
+							var date = new Date(date);
+							date = date.yyyymmdd();
+							alert(date);
+							$
+									.ajax({
+										url : '${ctx}/sales/date.do',
+										type : "post",
+										data : {
+											date : date
+										},
+										dataType : 'json',
+										success : function(data) {
+											document.getElementById("revenue").value = data.re;
+											document
+													.getElementById("location1").value = data.lo;
+											document.getElementById("date").value = data.da;
+											document.getElementById("date2").value = data.da;
+
+											jQuery('#showModal').modal();
+
+										},
+										error : function() {
+											document.getElementById("date1").value = date;
+											jQuery('#inputModal').modal();
+
+										}
+									});
+
+						}
+						Date.prototype.yyyymmdd = function() {
+							var yyyy = this.getFullYear().toString();
+							var mm = (this.getMonth() + 1).toString();
+							var dd = this.getDate().toString();
+							return yyyy + (mm[1] ? mm : "0" + mm[0])
+									+ (dd[1] ? dd : "0" + dd[0]);
+						}
+					})
 </script>
 <style>
 #calendar {
@@ -275,6 +283,22 @@ h2 {
 					}
 				</script>
 				<script>
+<<<<<<< HEAD
+					$(document).ready(
+							function() {
+								year();
+								var position = new naver.maps.LatLng(
+										37.4795169, 126.8824995);
+								var map = new naver.maps.Map('map', {
+									center : position,
+									zoom : 10
+								});
+								var marker = new naver.maps.Marker({
+									position : position,
+									map : map
+								});
+							})
+=======
 				var change = function(e){
 					var tm128 = naver.maps.TransCoord.fromLatLngToTM128(e.coord);
 					naver.maps.Service.reverseGeocode({
@@ -325,13 +349,47 @@ h2 {
 						map.setCenter(point);
 					}
 				});
+>>>>>>> branch '170524' of https://github.com/fooFa-the-final/foofa.git
 				</script>
 			</div>
 			<div id='calendar' />
-			<div id='map' style="height:400px;width:300px">
-			</div>
+			<div id='map' style="height: 400px; width: 300px"></div>
 		</div>
 		<div class="modal fade" id="showModal" role="dialog">
+<<<<<<< HEAD
+			<div class="modal-dialog">
+				<!-- Modal content-->
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title">매출확인</h4>
+					</div>
+
+					<div class="modal-body" id="modalCons">
+						<form action="${ctx }/sales/modify.do" method="POST">
+							매출 : <input type="number" name="revenue" id="revenue" value=""><br>
+							위치 : <input type="text" name="location" id="location1" value=""><br>
+							날짜 : <input type="text" name="date" id="date" value=""><br>
+							<input type="submit" value="수정">
+						</form>
+						<form action="${ctx }/sales/remove.do" method="GET">
+							<input type="hidden" name="date" id="date2" value=""><br>
+							<input type="submit" value="삭제">
+						</form>
+
+
+
+
+					</div>
+					<div class="modal-footer">
+						<input type="button" class="btn btn-default" data-dismiss="modal"
+							value="닫기">
+					</div>
+				</div>
+
+			</div>
+		</div>
+=======
 								    <div class="modal-dialog">
 								      <!-- Modal content-->
 								      <div class="modal-content">
@@ -363,7 +421,36 @@ h2 {
 								      
 								    </div>
 								  </div>
+>>>>>>> branch '170524' of https://github.com/fooFa-the-final/foofa.git
 		<div class="modal fade" id="inputModal" role="dialog">
+<<<<<<< HEAD
+			<div class="modal-dialog">
+				<!-- Modal content-->
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title">매출입력</h4>
+					</div>
+
+					<div class="modal-body" id="modalCons">
+						<form action="${ctx }/sales/create.do" method="POST">
+							매출 : <input type="number" name="revenue"> <input
+								type="hidden" name="date" id="date1" value=""> 위치 : <input
+								type="text" name="location"> <input type="submit"
+								value="등록">
+						</form>
+
+
+					</div>
+					<div class="modal-footer">
+						<input type="button" class="btn btn-default" data-dismiss="modal"
+							value="닫기">
+					</div>
+				</div>
+
+			</div>
+		</div>
+=======
 								    <div class="modal-dialog">
 								      <!-- Modal content-->
 								      <div class="modal-content">
@@ -389,6 +476,7 @@ h2 {
 								      
 								    </div>
 								  </div>
+>>>>>>> branch '170524' of https://github.com/fooFa-the-final/foofa.git
 
 
 	</div>
