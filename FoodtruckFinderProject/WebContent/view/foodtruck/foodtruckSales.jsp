@@ -275,18 +275,56 @@ h2 {
 					}
 				</script>
 				<script>
-					$(document).ready(function() {
-						year();
-						var position = new naver.maps.LatLng(37.4795169, 126.8824995);
-						var map = new naver.maps.Map('map', {
-							center: position,
-							zoom: 10
-						});
-						var marker = new naver.maps.Marker({
-							position: position,
-							map: map
-						});
-					})
+				var change = function(e){
+					var tm128 = naver.maps.TransCoord.fromLatLngToTM128(e.coord);
+					naver.maps.Service.reverseGeocode({
+				        location: tm128,
+				        coordType: naver.maps.Service.CoordType.TM128
+				    }, function(status, response) {
+				        if (status === naver.maps.Service.Status.ERROR) {
+				            return alert('잘못 입력했습니다.');
+				        }
+				        var item = response.result.items[0],
+		 				point = new naver.maps.Point(item.point.x, item.point.y);
+				        $("#locat").val(item.address);
+				   		mapChange(point);
+					});
+					
+				};
+				
+				
+				$(document).ready(function() {
+					year();
+					var position = new naver.maps.LatLng(37.4795169, 126.8824995);
+					var map = new naver.maps.Map('map', {
+						center: position,
+						zoom: 10
+					});
+					var marker = new naver.maps.Marker({
+						position: position,
+						map: map
+					});
+					
+					var map2 = new naver.maps.Map('map2', {
+						center: position,
+						zoom: 10
+					});
+					
+					var marker2 = new naver.maps.Marker({
+						position: position,
+						map: map2
+					});
+					
+					naver.maps.Event.addListener(map2, 'click', function(e) {
+		 			   marker2.setPosition(e.coord);
+		 			   change(e);
+		 			});
+					
+					var mapChange = function(point){
+						marker.setPosition(point);
+						map.setCenter(point);
+					}
+				});
 				</script>
 			</div>
 			<div id='calendar' />
@@ -304,9 +342,9 @@ h2 {
 								        
 								        <div class="modal-body" id = "modalCons">
 								        <form action="${ctx }/sales/modify.do" method="POST">
-								          	매출 : <input type="number" name="revenue" id="revenue" value=""><br>
-								          	위치 : <input type="text" name="location" id="location1" value=""><br>
-								          	날짜 : <input type="text" name="date" id="date" value=""><br>
+								          	매출 : <input type="number" name="revenue" id="revenue" value="" style="width:300px"><br>
+								          	위치 : <input type="text" name="location" id="location1" value="" style="width:300px"><br>
+								          	날짜 : <input type="text" name="date" id="date" value="" style="width:300px"><br>
 								          	<input type="submit" value="수정">
 								        </form> 
 								          <form action="${ctx }/sales/remove.do" method="GET">
@@ -338,10 +376,10 @@ h2 {
 								        <form action="${ctx }/sales/create.do" method="POST">
 								          	매출 : <input type="number" name="revenue">
 								          	<input type="hidden" name="date" id="date1" value="">
-								          	위치 : <input type="text" name="location">
+								          	위치 : <input type="text" name="location" id="locat" style="width:300px">
 								          	<input type="submit" value="등록">
 								        </form> 
-								         
+								         <div id = "map2" style="width:400px;height:300px;margin-top:20px">
 								          
 								        </div>
 								        <div class="modal-footer">
