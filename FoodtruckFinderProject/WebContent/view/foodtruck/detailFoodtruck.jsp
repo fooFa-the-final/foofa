@@ -188,34 +188,50 @@
                                 <h1>${truck.foodtruckName }</h1><br>
                                 <h5>${truck.category1 }</h5>
                                 <h5>${truck.spot }</h5>
-                                <h5><span id="followCount"></span>이 이푸드트럭을 단골로 등록했습니다.</h5>
+                                <h5><span id="followCount"></span>이 해당 푸드트럭을 단골로 등록했습니다.</h5>
                                 <h5>${fn:length(reviewList)} Reviews</h5>
                             </div>
                     </span>
                     <span style="float:right; margin-right:50px; margin-top: 30px">
                         <button id="favoriteBtn" type="button" class="btn btn-default btn-circle btn-lg" onclick="favorite('${truck.foodtruckId }');"><i class="fa fa-heart"></i></button>
-                        <a href="#"><button type="button" class="btn btn-danger">리뷰 작성</button></a>
+                        <a href="${ctx }/review/create.do?foodtruckId=${truck.foodtruckId}"><button type="button" class="btn btn-danger">리뷰 작성</button></a>
                     </span>        
                 </div>
                 <!--End Page Header -->
                 <div class="col-md-10 col-md-offset-1" style="background-color:white">
                 	<div class="col-md-12" style="background-color:black;height:2px;margin-top:10px">
                 	</div>
-                	<div class="col-md-12" style="margin-top:10px; display:inline-block">
-	                	<div class="col-md-3">
-	                		<form>
-							 <fieldset class="truck-border">
-							  <legend class="truck-border">Menu</legend>
-							  <font size = "4">
-							  <c:forEach items="${truck.menus }" var="menu">
-							  	${menu.menuName } <span style="float:right">${menu.price }원</span><br>
-							  </c:forEach>
-							 </font>
-							 </fieldset>
+                	<div class="col-md-12" style="margin-top:10px; margin-left:50px; display:inline-block">
+	                	<div class="col-md-6">
+		                	<form>
+								 <fieldset class="truck-border">
+								  <legend class="truck-border">Today</legend>
+								  <font size = "3">
+									  Today's Hour	&nbsp; ${startTime }부터 ${endTime }까지 영업합니다.<br>
+									  Today's Location &nbsp; ${truck.spot }<br>
+									  Today's Issue<br>&nbsp; ${truck.notice }
+								  </font>
+								 </fieldset>
 							</form>
-	                	</div>
-	                	<div class="col-md-4">
 	                		<form>
+<<<<<<< HEAD
+								 <fieldset class="truck-border">
+								  <legend class="truck-border">Menu</legend>
+								  <font size = "3">
+								  <c:forEach items="${truck.menus }" var="menu">
+								  	<span style="float:left; width:360px">${menu.menuName } </span>
+								  	<span style="width: auto; text-align:center;"> &#8361; ${menu.price }</span>
+								  	<c:if test="${menu.menuState eq true }">
+										<span style="float:right">판매중</span>
+								  	</c:if>
+								  	<c:if test="${menu.menuState eq false }">
+								  		<span style="float:right"><font color="red">매진</font></span>
+								  	</c:if>
+								  	<br>
+								  </c:forEach>
+								 </font>
+								 </fieldset>
+=======
 							 <fieldset class="truck-border">
 							  <legend class="truck-border">Today</legend>
 							  <font size = "4">
@@ -224,9 +240,11 @@
 								  Today's Issue<br><br> ${truck.notice }
 							  </font>
 							 </fieldset>
+>>>>>>> branch '170524' of https://github.com/fooFa-the-final/foofa.git
 							</form>
+							
 	                	</div>
-	                	<div class="col-md-4 col-md-offset-1" style="border: 1px solid;height:400px;margin-top:15px" id="map">
+	                	<div class="col-md-4 col-md-offset-1" style="border: 1px solid; height:400px; margin-top:15px;" id="map">
 	                		
 	                	</div>
                 	</div>

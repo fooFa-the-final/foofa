@@ -33,9 +33,12 @@
                 <!-- Page Header -->
                 <div class="col-md-12" style="background-color:white; height:300px">
                     <div class="col-md-8">
-                            <a class="navbar-brand" href="#" style="margin-top:10px;">
-                                <img src="${ctx }/resources/img/${truck.foodtruckImg }" style="height:250px; width:250px"/>
+                    	<form id="FILE_FORM" method="post" enctype="multipart/form-data" action="">
+                            <a class="navbar-brand" href="#" style="margin-top:10px;" >
+                                <img name="image" id="image" src="${ctx }/resources/img/${truck.foodtruckImg }" style="height:250px; width:250px" onClick="document.all.file.click();"/>
+                            	<input type="file" name="file" id="file" style="display: none;" onchange="fileinfo(this)" />
                             </a>
+                        </form>    
                             <div class="user-info" style="margin-top:30px;">
                                 <h1>${truck.foodtruckName }</h1><br>
                                 <h5>${truck.category1 }</h5>
@@ -219,6 +222,59 @@
 				zoom: 10
 			});
 		});
+		
+		function fileinfo(input){
+	      	if (input.files && input.files[0]) {
+	            var reader = new FileReader();
+	            reader.onload = function (e) {
+	                    $("#image").attr("src", e.target.result);
+	                }
+	            reader.readAsDataURL(input.files[0]);
+            }
+	      	
+	      	function sendFile(file) {
+	            var form_data = new FormData();
+	            form_data.append('file', file);
+	            $.ajax({
+	              data: form_data,
+	              type: "POST",
+	              url: '/image',
+	              cache: false,
+	              contentType: false,
+	              enctype: 'multipart/form-data',
+	              processData: false,
+	              success: function() {
+	              	alert("사진이 변경되었습니다.");
+	              },
+	              error: function(){
+	            	  alert("사진변경 실패");
+	              }
+	            });
+	          }
+        }
+		
+// 		function uploadFile(){
+//             var form = $('FILE_FORM')[0];
+//             var formData = new FormData(form);
+//             formData.append("fileObj", $("#file")[0].files[0]);
+
+//             $.ajax({
+//                 url: '${ctx }/foodtruck/modifyPicture.do',
+//                 processData: false,
+//                 contentType: false,
+//                 data: formData,
+//                 type: 'POST',
+//                 enctype: 'multipart/form-data',
+//                 success: function(result){
+//                     alert("사진이 변경되었습니다.");
+//                 }
+//                 error: function(){
+//                 	alert("사진 변경에 실패하였습니다.");
+//                 }
+//             });
+//         }
+
+
 	</script>
 
 </body>

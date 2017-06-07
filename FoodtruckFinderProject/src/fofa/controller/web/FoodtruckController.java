@@ -1,5 +1,6 @@
 package fofa.controller.web;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -15,8 +16,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import fofa.domain.Foodtruck;
+import fofa.domain.Member;
 import fofa.domain.Menu;
 import fofa.service.AdvertiseService;
 import fofa.service.FavoriteService;
@@ -108,10 +112,56 @@ public class FoodtruckController {
 		return "redirect:/foodtruck/searchById.do";
 	}
 	
-	@RequestMapping(value="/modifyPicture.do", method=RequestMethod.GET)
-	public String modifyPicture(String foodtruckId, String file_name){
+//	@ResponseBody
+	@RequestMapping(value="/modifyPicture.do", method=RequestMethod.POST)
+	public String modifyPicture(MultipartHttpServletRequest req, HttpSession session, HttpServletRequest request) throws Exception{
 		
-		return null;
+		System.out.println("controller");
+		
+		
+		
+//		  	String img= null;
+//	        // 저장 경로 설정
+//	        String root = multi.getSession().getServletContext().getRealPath("/");
+//	        String path = root+"resources/upload/";
+//	         
+//	        String newFileName = ""; // 업로드 되는 파일명
+//	         
+//	        File dir = new File(path);
+//	        if(!dir.isDirectory()){
+//	            dir.mkdir();
+//	        }
+//	         
+//	        Iterator<String> files = multi.getFileNames();
+//	        while(files.hasNext()){
+//	            String uploadFile = files.next();
+//	                         
+//	            MultipartFile mFile = multi.getFile(uploadFile);
+//	            String fileName = mFile.getOriginalFilename();
+//	            newFileName = System.currentTimeMillis() + "." +fileName.substring(fileName.lastIndexOf(".") + 1);
+////	            Member member = service.findById((String)(session.getAttribute("loginUserId")));
+//	            Foodtruck foodtruck = foodtruckService.findBySeller((String)session.getAttribute("loginUserId"));
+////	            member.setProfileImg(newFileName);
+//	            foodtruck.setFoodtruckImg(newFileName);
+////	            service.modifyImg(member);
+////	            foodtruckService.modify(foodtruck);
+////	            String imgurl = member.getProfileImg();
+//	            img = path + newFileName;
+////	            member.setProfileImg(img);
+//	            foodtruck.setFoodtruckImg(img);
+////	            service.modifyImg(member);
+//	            
+//	            System.out.println("newFileName : " + newFileName);
+//	            System.out.println("img : " + img);
+//	            
+//	            try {
+//	                mFile.transferTo(new File(path+newFileName));
+//	            } catch (Exception e) {
+//	                e.printStackTrace();
+//	            }
+//	        }
+//			return img;
+		return "1";
 	}
 	
 	@RequestMapping(value="/modifyState.do", method=RequestMethod.GET)
