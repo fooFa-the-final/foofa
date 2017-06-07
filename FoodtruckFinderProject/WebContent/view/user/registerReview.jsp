@@ -18,8 +18,9 @@
 	rel="stylesheet" />
 <link href="${ctx }/resources/css/style.css" rel="stylesheet" />
 <link href="${ctx }/resources/css/main-style.css" rel="stylesheet" />
-
 <script src="${ctx }/resources/plugins/jquery-1.10.2.js"></script>
+<script src="http://malsup.github.com/jquery.form.js"></script> 
+
 <!-- Page-Level CSS -->
 <script>
 	$(document).ready(function(){
@@ -36,12 +37,7 @@
 		</c:otherwise>
 		</c:choose>
 		
-		$("#file1").change(function(){
-		    alert("file1");
-		});
-		$("#file2").change(function(){
-		    alert("file2");
-		});
+		
 	});
 	var openSurvey = function(){
 		if($("input:checkbox[id='isSurvey']").is(":checked"))
@@ -51,16 +47,31 @@
 	var uploadImage = function(){
 		$('#upload').modal();
 	}
-	
+	var image1;
+	var image2;
 	var fileinfo = function(input){
 		if (input.files && input.files[0]) {
             var reader = new FileReader();
             reader.onload = function (e) {
-                    $("#image").append('<img src="' + e.target.result + '" style="width:200px; height: 200px;">');
-                }
-            reader.readAsDataURL(input.files[0]);
+            	if(input.id == "file1")
+            		$("#img1").attr("src", e.target.result);
+            	else
+            		$("#img2").attr("src", e.target.result);
             }
+            reader.readAsDataURL(input.files[0]);
+        }
 	}
+	
+	var imgUpload = function(){
+		$('#uploadImage').ajaxForm({
+			url: "${ctx}/review/img.do",
+			enctype: "multipart/form-data", // 여기에 url과 enctype은 꼭 지정해주어야 하는 부분이며 multipart로 지정해주지 않으면 controller로 파일을 보낼 수 없음
+			success: function(result){
+				alert(result);
+			}
+		});
+		$("#uploadImage").submit();
+    }
 </script>
 </head>
 
@@ -244,15 +255,16 @@
 		          <button type="button" class="close" data-dismiss="modal">&times;</button>
 		          <h4 class="modal-title">사진 업로드</h4>
 		        </div>
-		        
+		        <form id = "uploadImage" method = "POST" action="${ctx }/review/img.do" enctype="multipart/form-data">
 		        <div class="modal-body">
-		           	<input type="file" id = "file1"><br>
-		          	<input type="file" id = "file2">
+		           	<input type="file" id = "file1" name = "file1" onchange="fileinfo(this)"><br>
+		          	<input type="file" id = "file2" name = "file2" onchange="fileinfo(this)">
 		        </div>
 		        <div class="modal-footer">
-		        <input type="button" class="btn btn-default" data-dismiss="modal" value="업로드">
+		        <input type="button" class="btn btn-default" data-dismiss="modal" value="업로드" onclick="imgUpload()">
 		          <input type="button" class="btn btn-default" data-dismiss="modal" value="닫기">
 		        </div>
+		        </form>
 		      </div>
 		      
 		    </div>
