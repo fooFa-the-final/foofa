@@ -51,10 +51,22 @@
 #in {
 	display: inline-block;
 }
+
+@mixin center-modal {
+  .modal {
+    display: flex !important;
+    align-items: center;
+  }
+
+  .modal-dialog {
+    text-align: left;
+  }
+}
 </style>
 
 
 <body>
+<form id = "submit" method = "post">	
 	<!--  wrapper -->
 	<div id="wrapper">
 		<header>
@@ -68,18 +80,17 @@
 	</div>
 	<!-- end wrapper -->
 	<div class="container" style="color: black;">
-	<form method="POST">
 		<h2>Write Review</h2>
 		<div class="row">
 			<div class="col-md-1 col-lg-1"></div>
 			<div class="col-md-3 col-lg-3">
 				<div class="blog-stripe">
-					<img width="200x" height="200px"
+					<img width="200px" height="200px"
 						src="${ctx }/resources/img/pizzahut.png">
 				</div>
 			</div>
 			<div class="col-md-1 col-lg-1"></div>
-			<div class="col-md-7 col-lg-7" style="margin-bottom: 50px">
+			<div class="col-md-4 col-lg-3">
 
 				<ul class="all-blogs">
 					<li class="media">
@@ -97,13 +108,19 @@
 						</div>
 					</li>
 					<li class="media">
-						<div class="media-body">
+						<div class="media-body" >
 							<h4 class="media-heading">${truck.spot }</h4>
 						</div>
 					</li>
 				</ul>
 			</div>
-			<div class="form-group">
+			<div class="col-md-1 col-lg-1"></div>
+			<!-- 「그림」 -->
+			<div class="col-md-4 col-lg-4" style="height:200px;display:inline-block">
+				<img id = "img1" style="width:150px;height:150px;border:0px;">
+				<img id = "img2" style="width:150px;height:150px;border:0px;">
+			</div>
+			<div class="form-group" >
 				<div class="text-right">
 					<a href="">
 						<button type="button" class="btn btn-primary" >Add photo</button>
@@ -112,7 +129,7 @@
 
 				<br> <br>
 				<div class="col-lg-12">
-				<form id = "submit" method = "post">	
+				
 					<div class="col-lg-8" style="float: left">
 						<table width="1150px">
 							<thead>
@@ -194,14 +211,11 @@
 					    </div>
 					  </div>
 <br>
-    </div>
-    
-    
+    			</div>
         </div>    
 
 
 			</div>
-			<div class="show">
 			<div class="in" align="center">
 			<c:choose>
 				<c:when test="${review eq 'null'}">
@@ -212,11 +226,8 @@
 				</c:otherwise>
 			</c:choose>
 			</div>
-			
-</div>
-		</div>
-	</form>
-	</div>
+	
+</form>
 	<!-- end wrapper -->
 	<!-- Core Scripts - Include with every page -->
 	<script src="${ctx }/resources/plugins/bootstrap/bootstrap.min.js"></script>
