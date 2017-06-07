@@ -112,12 +112,23 @@ public class FoodtruckController {
 		return "redirect:/foodtruck/searchById.do";
 	}
 	
-//	@ResponseBody
+	@ResponseBody
 	@RequestMapping(value="/modifyPicture.do", method=RequestMethod.POST)
 	public String modifyPicture(MultipartHttpServletRequest request){
 		
 		System.out.println("controller");
-		
+		MultipartHttpServletRequest multipartHttpServletRequest = (MultipartHttpServletRequest)request;
+	    Iterator<String> iterator = multipartHttpServletRequest.getFileNames();
+	    MultipartFile multipartFile = null;
+	    while(iterator.hasNext()){
+	        multipartFile = multipartHttpServletRequest.getFile(iterator.next());
+	        if(multipartFile.isEmpty() == false){
+	            System.out.println("name : "+multipartFile.getName());
+	            System.out.println("filename : "+multipartFile.getOriginalFilename());
+	            System.out.println("size : "+multipartFile.getSize());
+	        }
+	    }
+	    return "1";
 		
 		
 //		  	String img= null;
@@ -161,7 +172,6 @@ public class FoodtruckController {
 //	            }
 //	        }
 //			return img;
-		return "1";
 	}
 	
 	@RequestMapping(value="/modifyState.do", method=RequestMethod.GET)
