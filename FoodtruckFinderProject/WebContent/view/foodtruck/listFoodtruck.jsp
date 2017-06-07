@@ -269,10 +269,17 @@ ul li a:hover, ul li a:focus {
     		$("#openstate").val("true");
     	}
     	
+    	// 지도
+    	var position = new naver.maps.LatLng(37.4795169, 126.8824995);
     	var map = new naver.maps.Map('map', {
-    	    center: point,
+    	    center: position,
     	    zoom: 10
     	});
+    	
+    	var marker = new naver.maps.Marker({
+			position: position,
+			map: map
+		});
 	});
     
     var movePage = function(pageNum) {
