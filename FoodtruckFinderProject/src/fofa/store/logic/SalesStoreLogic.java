@@ -89,13 +89,14 @@ public class SalesStoreLogic implements SalesStore {
 		} finally {
 			session.close();
 		}
+		System.out.println("date : " + sale.getDate());
 		return sale;
 	}
 
 	@Override
 	public List<Sale> select1MonthSales(String foodtruckId) {
 		SqlSession session = factory.openSession();
-		
+
 		List<Sale> list = new ArrayList<>();
 		try {
 			SalesMapper mapper = session.getMapper(SalesMapper.class);
@@ -103,8 +104,8 @@ public class SalesStoreLogic implements SalesStore {
 		} finally {
 			session.close();
 		}
-		System.out.println("listSize" + list.size());
-		System.out.println(list.get(0).getDate());
+		// System.out.println("listSize" + list.size());
+		// System.out.println(list.get(0).getDate());
 		return list;
 	}
 

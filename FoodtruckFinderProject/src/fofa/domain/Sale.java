@@ -6,6 +6,12 @@ import org.springframework.stereotype.Component;
 public class Sale {
 
 	private String location;
+	@Override
+	public String toString() {
+		return "Sale [location=" + location + ", foodtruckId=" + foodtruckId + ", date=" + date + ", revenue=" + revenue
+				+ ", salesId=" + salesId + "]";
+	}
+
 	private String foodtruckId;
 	private String date;
 	private int revenue;

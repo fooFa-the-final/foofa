@@ -106,8 +106,29 @@ h2 {
 		function convertDate(date) {
 			var date = new Date(date);
 			date = date.yyyymmdd();
-			jQuery('#myModal').modal();
 			alert(date);
+			$.ajax({
+				url : '${ctx}/sales/date.do',
+				type : "post",
+				data : {
+					date : date
+				},
+				dataType : 'json',
+				success : function(data) {
+					document.getElementById("revenue").value = data.re;
+					document.getElementById("location").value = data.lo;
+					document.getElementById("date").value = data.da;
+					
+					jQuery('#showModal').modal();
+					
+				},
+				error : function() {
+					document.getElementById("date").value = date;
+					jQuery('#inputModal').modal();
+					
+				}
+			});
+		
 		}
 		Date.prototype.yyyymmdd = function() {
 			var yyyy = this.getFullYear().toString();
@@ -271,17 +292,48 @@ h2 {
 			<div id='map' style="height:400px;width:300px">
 			</div>
 		</div>
-		<div class="modal fade" id="myModal" role="dialog">
+		<div class="modal fade" id="showModal" role="dialog">
 								    <div class="modal-dialog">
 								      <!-- Modal content-->
 								      <div class="modal-content">
 								        <div class="modal-header">
 								          <button type="button" class="close" data-dismiss="modal">&times;</button>
-								          <h4 class="modal-title">접수된 신고 이유</h4>
+								          <h4 class="modal-title">매출확인</h4>
 								        </div>
 								        
 								        <div class="modal-body" id = "modalCons">
-								           	<h4>신고 된 리뷰 내용 </h4>
+								        <form action="${ctx }/sales/modify.do" method="POST">
+								          	매출 : <input type="number" name="revenue" id="revenue" value=""><br>
+								          	위치 : <input type="text" name="location" id="location" value=""><br>
+								          	날짜 : <input type="text" name="date" id="date" value=""><br>
+								          	<input type="submit" value="수정">
+								        </form> 
+								         
+								          
+								        </div>
+								        <div class="modal-footer">
+								          <input type="button" class="btn btn-default" data-dismiss="modal" value="닫기">
+								        </div>
+								      </div>
+								      
+								    </div>
+								  </div>
+		<div class="modal fade" id="inputModal" role="dialog">
+								    <div class="modal-dialog">
+								      <!-- Modal content-->
+								      <div class="modal-content">
+								        <div class="modal-header">
+								          <button type="button" class="close" data-dismiss="modal">&times;</button>
+								          <h4 class="modal-title">매출입력</h4>
+								        </div>
+								        
+								        <div class="modal-body" id = "modalCons">
+								        <form action="${ctx }/sales/create.do" method="POST">
+								          	매출 : <input type="number" name="revenue">
+								          	<input type="hidden" name="date" id="date" value="">
+								          	<input type="submit" value="등록">
+								        </form> 
+								         
 								          
 								        </div>
 								        <div class="modal-footer">

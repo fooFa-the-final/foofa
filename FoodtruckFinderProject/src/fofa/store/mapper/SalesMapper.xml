@@ -33,9 +33,9 @@
 		SET
 		day=#{date},location=#{location},revenue=#{revenue}
 		WHERE
-		sales_id=#{salesId}
+		day=#{date} AND foodtruck_id=#{foodtruckId}
 	</update>
-	<select id="selectDaySale" parameterType="Sale" resultType="Sale">
+	<select id="selectDaySale" parameterType="Sale" resultMap="SaleMap">
 		SELECT
 		sales_id,foodtruck_id,day,location,revenue
 		FROM sales_tb
