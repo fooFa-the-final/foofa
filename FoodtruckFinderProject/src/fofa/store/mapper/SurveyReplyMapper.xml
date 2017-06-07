@@ -12,11 +12,14 @@
 	</resultMap>
 
 	<select id="selectAvgBySurveyItem" parameterType="String" resultMap="surveyReplyMap">
-		select R.item_id itemId, AVG(R.SCORE) score
+		select O.item_id, score, item_name surveyId
+		from SURVEY_ITEM_TB I, (
+		select R.ITEM_id item_id, AVG(R.SCORE) score
 		FROM SURVEY_TB S, SURVEY_REPLY_TB R
 		WHERE S.SURVEY_ID = R.SURVEY_ID
 		AND S.FOODTRUCK_ID = #{foodtruckId}
-		group by R.item_id
+		group by R.ITEM_id) O
+		WHERE I.ITEM_ID = O.ITEM_ID
 	</select>
 	
 	<select id="selectBySurveyId" parameterType="String" resultMap="surveyReplyMap">

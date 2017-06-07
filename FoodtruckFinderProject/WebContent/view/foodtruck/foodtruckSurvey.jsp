@@ -35,120 +35,72 @@
 				<!-- Page Header -->
 				<div class="col-lg-12" style="margin-top: 20px;">
 					<div class="panel panel-default panel-body">
-                    	<span>
-                        	<img src="${ctx }/resources/img/waikiki.jpg" style="height:250px; width:250px; margin:5px;"/>
-                            	<div class="user-info">
-                                	<h1>${truck.foodtruckName }</h1><br>
+                        	<div class="col-lg-4" style=""><img src="${ctx }/resources/img/waikiki.jpg" style="height:250px; width:250px;"/></div>
+                            	<div class="col-lg-8 user-info">
+                            		<div style="width:100%">
+                                		<span><b>${truck.foodtruckName }</b></span>
+                                		<span style="float:right;">
+                        			   <button id="favoriteBtn" type="button" class="btn btn-default btn-circle btn-lg" onclick="favorite('${truck.foodtruckId }');"><i class="fa fa-heart"></i></button>
+                       						 <a href="#"><button type="button" class="btn btn-danger">리뷰 작성</button></a>    </span>                     		
+                            		</div>
                                 	<h5>${truck.category1 }</h5>
                                 	<h5>${truck.spot }</h5>
                                 	<h5><span id="followCount"></span>이 이푸드트럭을 단골로 등록했습니다.</h5>
                                 	<h5>${fn:length(reviewList)} Reviews</h5>
                             	</div>
-                    		</span>
                     	<span style="float:right; margin-right:50px; margin-top: 30px">
-                        <button id="favoriteBtn" type="button" class="btn btn-default btn-circle btn-lg" onclick="favorite('${truck.foodtruckId }');"><i class="fa fa-heart"></i></button>
-                        <a href="#"><button type="button" class="btn btn-danger">리뷰 작성</button></a>
+
                     </span>        
                		 </div>
 				</div>
 				<!--End Page Header -->
 
-				<div class="col-md-12" style="margin-bottom: 50px">
-					<div class="col-lg-8">
-						<h1>Survey Detail</h1>
-					</div>
-					<div class="col-md-8">
-						<div class="col-lg-12">
-							<h2>Food</h2>
-							<h4>Food항목에관한 통계입니다.</h4>
-						</div>
-					</div>
-
-					<div class="col-lg-12">
-						<div class="col-lg-12">
-							<div class="col-lg-6">
-								<!-- pie chart-->
-								<div class="panel panel-default">
-									<div class="panel-heading">Female</div>
-									<div class="panel-body">
-										<div class="flot-chart">
-											<div class="flot-chart-content" id="flot-pie-chart-F"></div>
-										</div>
-									</div>
-								</div>
-								<!--end pie chart-->
-							</div>
-							<div class="col-lg-6">
-								<!-- pie chart-->
-								<div class="panel panel-default">
-									<div class="panel-heading">Male</div>
-									<div class="panel-body">
-										<div class="flot-chart">
-											<div class="flot-chart-content" id="flot-pie-chart-M"></div>
-										</div>
-									</div>
-								</div>
-								<!--end pie chart-->
-							</div>
-						</div>
-						<div class="col-lg-12">
-							<div class="col-lg-12">
-								<!--Pill Tabs   -->
-								<div class="panel panel-default">
-									<div class="panel-heading">Pill Tabs</div>
-									<div class="panel-body">
-										<ul class="nav nav-pills">
-											<li class="active"><a href="#10-pills" data-toggle="tab">10대</a>
-											</li>
-											<li><a href="#20-pills" data-toggle="tab">20대</a></li>
-											<li><a href="#30-pills" data-toggle="tab">30대</a></li>
-											<li><a href="#40-pills" data-toggle="tab">40대</a></li>
-											<li><a href="#50-pills" data-toggle="tab">50대 이상</a></li>
-										</ul>
-
-										<div class="tab-content">
-											<div class="tab-pane fade in active" id="10-pills">
-												<!-- pie chart-->
-												<div class="flot-chart">
-													<div class="flot-chart-content" id="flot-pie-chart-10"></div>
-												</div>
-												<!--end pie chart-->
-											</div>
-											<div class="tab-pane fade" id="20-pills">
-												<!-- pie chart-->
-												<div class="flot-chart">
-													<div class="flot-chart-content" id="flot-pie-chart-20"></div>
-												</div>
-												<!--end pie chart-->
-											</div>
-											<div class="tab-pane fade" id="30-pills">
-												<!-- pie chart-->
-												<div class="flot-chart">
-													<div class="flot-chart-content" id="flot-pie-chart-30"></div>
-												</div>
-												<!--end pie chart-->
-											</div>
-											<div class="tab-pane fade" id="40-pills">
-												<!-- pie chart-->
-												<div class="flot-chart">
-													<div class="flot-chart-content" id="flot-pie-chart-40"></div>
-												</div>
-												<!--end pie chart-->
-											</div>
-											<div class="tab-pane fade" id="50-pills">
-												<!-- pie chart-->
-												<div class="flot-chart">
-													<div class="flot-chart-content" id="flot-pie-chart-50"></div>
-												</div>
-												<!--end pie chart-->
-											</div>
-										</div>
-									</div>
-								</div>
-								<!--End Pill Tabs   -->
-							</div>
-
-						</div>
+				<div class="col-lg-12">
+					<div class="panel panel-default panel-body">
+						<h1 class="page-header" style="margin-top:20px;">Survey Statics</h1>
+						<div class="col-lg-10">
+                          <h2>Score</h2>
+                          <div class="col-lg-8" style="float: left">
+                              <table>
+                              <thead>
+                                  <tr>
+                                      <th width="150px"></th>
+                                      <th></th>
+                                  </tr>
+                              </thead>
+                               <tbody>
+                               	<c:forEach var="item" items="${avgItemList }">
+                                   <tr>
+                                       <td><a href="${ctx }/itemStat.do?itemId=${item.itemId }&foodtruckId=${truck.foodtruckId}">${item.surveyId }</a> </td>
+                                        <td>
+											<span class="starRating" style="text-align:left;"><span style="width: ${item.score*20 }%">${item.score }점</span></span>
+                                        </td>
+                                   </tr>
+                                 </c:forEach>
+                               </tbody>
+                           </table>
+                          </div>
+                      </div>
+						<div class="col-lg-10">
+                          <h2>Comments</h2>
+                          <div class="col-lg-8" style="float: left">
+                              <table>
+                              <thead>
+                                  <tr>
+                                      <th width="150px"></th>
+                                      <th></th>
+                                  </tr>
+                              </thead>
+                               <tbody>
+                               	<c:forEach var="comment" items="${commentList }">
+                                   <tr>
+                                       <td>${comment.suggestion }</td>
+                                   </tr>
+                                 </c:forEach>
+                               </tbody>
+                           </table>
+                          </div>
+                      </div>						
 					</div>
 				</div>
 
