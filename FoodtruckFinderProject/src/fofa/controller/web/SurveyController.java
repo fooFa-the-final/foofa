@@ -38,7 +38,7 @@ public class SurveyController {
 	public String searchSurveysStat(String foodtruckId, Model model){
 		System.out.println("done");
 		model.addAttribute("avgItemList", surveyService.findAvgScoreBySurveyItem(foodtruckId));
-		
+		model.addAttribute("truck", foodtruckService.findById(foodtruckId));
 		return "/view/foodtruck/foodtruckSurvey.jsp";
 	}
 

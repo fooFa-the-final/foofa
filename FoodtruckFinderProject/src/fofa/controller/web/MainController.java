@@ -108,7 +108,6 @@ public class MainController {
 		model.addAttribute("mainFoodImg", mainReview.getImages().get(0).getFilename());
 		model.addAttribute("mainMember", memberService.findById(mainReview.getWriter().getMemberId()));
 		
-		System.out.println("end : "+ mainReview.getImages().get(0).getFilename());
 		return "view/main.jsp";
 	}
 

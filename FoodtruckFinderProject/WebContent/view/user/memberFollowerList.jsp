@@ -45,13 +45,12 @@
 
 						</a>
 						<div class="user-info">
-							<h1>${member.memberId }</h1>
-							<br>
-							<h5>twicejjang@chogo</h5>
-							<h5>144Followers</h5>
-							<h5>255Reviews</h5>
+                                <h2>${member.memberId}</h2><br>	
+                                <h5>${member.email }</h5>
+                                <h5>팔로워수&nbsp; ${member.followCount }</h5>
+                                <h5>리뷰작성&nbsp;&nbsp;${member.reviewCount }</h5>
 						</div>
-						<span style="float: right; margin-right: 90px; margin-top: 30px">
+<%-- 						<span style="float: right; margin-right: 90px; margin-top: 30px">
 							<a href="${ctx }/member/checkPw.do"><button type="button"
 									class="btn btn-default">회원 탈퇴</button></a> <br> <br> <br>
 							<br> <br> <br> <br> <a href="#">
@@ -59,7 +58,7 @@
 							<button
 									type="button" class="btn btn-default">Make Follow</button></c:if></a>
 									
-						</span>
+						</span> --%>
 					</div>
 				<br> <br> <br> <br> <br> <br> <br>
 				<br> <br> <br> <br> <br> <br> <br>
@@ -69,25 +68,25 @@
 					<h1>Follwer List</h1>
 					<br>
 					<c:forEach var="follow" items="${follow}" varStatus="sts">
-						<div id="follwer${follow.toId }" style="margin-bottom: 50px">
+						<div id="follwer${follow.memberId }" style="margin-bottom: 50px">
 							<a class="navbar-brand" href="#"
 								style="margin-top: 10px; margin-left: 20px"> <img
-								src="../resources/img/waikiki.jpg"
+								src="${ctx }/resources/img/${follow.profileImg }"
 								style="height: 70px; width: 70px" />
 							</a>
 							<div class="user-info">
 								<tr class="odd gradeX">
-									<td>${follow.toId }</td>
+									<td><a href="${ctx }/review/list/member.do?memberId=${follow.memberId }">${follow.memberId }</a></td>
 								</tr>
 								<br>
-								<h5>144Followers</h5>
-								<h5>255Reviews</h5>
+								<h5>팔로워수&nbsp; ${follow.followCount }</h5>
+								<h5>리뷰작성&nbsp;&nbsp;${follow.reviewCount }</h5>
 								<br>
 							</div>
 							<div style="float: right;">
 								<br> <br> <br>
 								<button type="button" class="btn btn-default"
-									onclick="follow('${follow.toId}');">UNFOLLOW</button>
+									onclick="follow('${follow.memberId}');">UNFOLLOW</button>
 							</div>
 							</div>
 					</c:forEach>
