@@ -60,6 +60,7 @@ ul li a:hover, ul li a:focus {
 	<script src="${ctx }/resources/plugins/jquery-1.10.2.js"></script>
     <!-- Page-Level CSS -->
     <link href="${ctx }/resources/plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet" />
+    <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=noUvsaR702FX6WH5un5h&submodules=geocoder"></script>
 
 </head>
 
@@ -148,8 +149,8 @@ ul li a:hover, ul li a:focus {
           </table>
         </div>
 
-       <div class="col-md-2">
-			<img width="300px" height="300px" src="${ctx }/resources/img/map.jpg" >
+       <div class="col-md-2" id = "map">
+			
         </div>
         <div class="col-sm-2"></div>
 </div>
@@ -267,6 +268,18 @@ ul li a:hover, ul li a:focus {
     		$("#openstateBtn").removeClass("btn btn-outline btn-default").addClass("btn btn-success");
     		$("#openstate").val("true");
     	}
+    	
+    	// 지도
+    	var position = new naver.maps.LatLng(37.4795169, 126.8824995);
+    	var map = new naver.maps.Map('map', {
+    	    center: position,
+    	    zoom: 10
+    	});
+    	
+    	var marker = new naver.maps.Marker({
+			position: position,
+			map: map
+		});
 	});
     
     var movePage = function(pageNum) {
@@ -291,6 +304,16 @@ ul li a:hover, ul li a:focus {
 	    
 	
 	var stateBtn = function(obj){
+		var notChecked = [], checked = [];
+	    $(":checkbox").map(function() {
+	        this.checked ? checked.push(this.id) : notChecked.push(this.id);
+	    });
+	    var checked2 = "";
+	    for(var a=0; a<checked.length; a++){
+	    	checked2 += checked[a] + "/";
+	    }
+	    $("#checking").val(checked2);
+		
 		if($(obj).hasClass("btn btn-outline btn-default")){
 			$(obj).removeClass("btn btn-outline btn-default").addClass("btn btn-success");
 			$("#openstate").val("true");
@@ -301,6 +324,8 @@ ul li a:hover, ul li a:focus {
 			$("#search-with-filter").submit();
 		}
 	}
+	
+	
 	
 	
     </script>
