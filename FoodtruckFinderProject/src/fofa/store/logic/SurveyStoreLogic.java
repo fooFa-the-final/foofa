@@ -72,10 +72,12 @@ public class SurveyStoreLogic implements SurveyStore{
 	@Override
 	public List<Survey> selectAvgByGender(String foodtruckId, String itemId) {
 		SqlSession session = factory.openSession();
+		System.out.println("store : " + foodtruckId + itemId);
 		List<Survey> surveys = new ArrayList<>();
 		try {
 			SurveyMapper mapper = session.getMapper(SurveyMapper.class);
-			Map<String, String> params = new HashMap<>();
+			HashMap<String, String> params = new HashMap<>();
+			
 
 			params.put("foodtruckId", foodtruckId);
 			params.put("itemId", itemId);
@@ -84,6 +86,10 @@ public class SurveyStoreLogic implements SurveyStore{
 		} finally {
 			session.close();
 		}
+		for(int i = 0;i<surveys.size();i++){
+			System.out.println("gender : " +surveys.get(i).getGender());
+		}
+		
 		return surveys;
 	}
 
