@@ -121,11 +121,11 @@
 										<img class="somenail" src="${ctx }/resources/img/${review.writer.profileImg }"/>
 										<div style="float:left; width:80%;">
 											<ul>
-												<li><a>${review.writer.memberId }</a></li>
+												<li><a href="${ctx }/review/list/member.do?memberId=${review.writer.memberId }">${review.writer.memberId }</a></li>
 												<li> <span class="sub-li-follow"><i class="fa fa-thumbs-up"></i> ${review.recommand } </span>
 													 <span class="sub-li-favorite">71 </span>
 												</li>
-												<li> <a href="${ctx }/">${review.foodtruck.foodtruckName }</a> 에 대한 리뷰 </li>
+												<li> <a href="${ctx }/review/list/truck.do?foodtruckId=${review.foodtruck.foodtruckId }">${review.foodtruck.foodtruckName }</a> 에 대한 리뷰 </li>
 											</ul>
 										</div>
 									</div>
