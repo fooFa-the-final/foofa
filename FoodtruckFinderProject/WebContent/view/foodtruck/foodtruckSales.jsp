@@ -169,8 +169,6 @@ h2 {
 				<input type="button" value="연간 매출" onclick="year()"> <input
 					type="button" value="10일간 매출" onclick="days()">
 				<div id="chart71"></div>
-				<p style='font-size: 12px; padding: 0 0 40px 40px'>** Mouse over
-					the chart area in order to move the guide line</p>
 				<script>
 					function year() {
 						$(".accessibility").remove();
@@ -300,15 +298,16 @@ h2 {
 					
 				};
 				
-				
+				var marker;
+				var map;
 				$(document).ready(function() {
 					year();
 					var position = new naver.maps.LatLng(37.4795169, 126.8824995);
-					var map = new naver.maps.Map('map', {
+					map = new naver.maps.Map('map', {
 						center: position,
 						zoom: 10
 					});
-					var marker = new naver.maps.Marker({
+					marker = new naver.maps.Marker({
 						position: position,
 						map: map
 					});
@@ -327,12 +326,21 @@ h2 {
 		 			   marker2.setPosition(e.coord);
 		 			   change(e);
 		 			});
+<<<<<<< HEAD
+				});
+				
+				var mapChange = function(point){
+					marker.setPosition(point);
+					map.setCenter(point);
+				}
+=======
 					
 					var mapChange = function(point){
 						marker.setPosition(point);
 						map.setCenter(point);
 					}
 				});
+>>>>>>> branch '170524' of https://github.com/fooFa-the-final/foofa
 				</script>
 			</div>
 			<div id='calendar' />

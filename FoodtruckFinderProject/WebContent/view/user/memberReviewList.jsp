@@ -62,7 +62,7 @@
                 		<div class="col-lg-10" style="margin-top:30px" id="rev${review.reviewId }">
                 			<div class="col-lg-11" style="display:inline-block">
                 				<div class="col-lg-9">
-                					<font size="6">${review.foodtruck.foodtruckName }</font><br>
+                					<h4>${review.foodtruck.foodtruckName }</h4>
                 					<h4>${review.foodtruck.category1 }</h4>
                 				</div>
                 				<div class="col-lg-3">

@@ -28,16 +28,38 @@
 			$('input:radio[name=score]:input[value='+${review.score}+']').attr("checked", true);
 			$('#contents').val("${review.contents}");
 			$('#submit').attr("action", "${ctx }/review/modify.do");
+			$("#isSurvey").attr("disabled", true); 
 		</c:when>
 		<c:otherwise>
 			$('#submit').attr("action", "${ctx }/review/create.do");
 		
 		</c:otherwise>
 		</c:choose>
+		
+		$("#file1").change(function(){
+		    alert("file1");
+		});
+		$("#file2").change(function(){
+		    alert("file2");
+		});
 	});
 	var openSurvey = function(){
 		if($("input:checkbox[id='isSurvey']").is(":checked"))
 			$('#myModal').modal();
+	}
+	
+	var uploadImage = function(){
+		$('#upload').modal();
+	}
+	
+	var fileinfo = function(input){
+		if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                    $("#image").append('<img src="' + e.target.result + '" style="width:200px; height: 200px;">');
+                }
+            reader.readAsDataURL(input.files[0]);
+            }
 	}
 </script>
 </head>
@@ -52,16 +74,6 @@
 	display: inline-block;
 }
 
-@mixin center-modal {
-  .modal {
-    display: flex !important;
-    align-items: center;
-  }
-
-  .modal-dialog {
-    text-align: left;
-  }
-}
 </style>
 
 
@@ -82,15 +94,15 @@
 	<div class="container" style="color: black;">
 		<h2>Write Review</h2>
 		<div class="row">
-			<div class="col-md-1 col-lg-1"></div>
-			<div class="col-md-3 col-lg-3">
+		<div class="col-lg-12" style="display:block;">
+		
+			<div class="col-lg-3">
 				<div class="blog-stripe">
 					<img width="200px" height="200px"
 						src="${ctx }/resources/img/pizzahut.png">
 				</div>
 			</div>
-			<div class="col-md-1 col-lg-1"></div>
-			<div class="col-md-4 col-lg-3">
+			<div class="col-lg-6">
 
 				<ul class="all-blogs">
 					<li class="media">
@@ -114,23 +126,17 @@
 					</li>
 				</ul>
 			</div>
-			<div class="col-md-1 col-lg-1"></div>
 			<!-- 「그림」 -->
-			<div class="col-md-4 col-lg-4" style="height:200px;display:inline-block">
-				<img id = "img1" style="width:150px;height:150px;border:0px;">
-				<img id = "img2" style="width:150px;height:150px;border:0px;">
+			<div class="col-lg-4" style="height:200px;display:inline-block">
+				<img id = "img1" style="width:150px;height:150px;border:0px">
+				<img id = "img2" style="width:150px;height:150px;border:0px">
 			</div>
-			<div class="form-group" >
 				<div class="text-right">
-					<a href="">
-						<button type="button" class="btn btn-primary" >Add photo</button>
-					</a>
-				</div>
-
-				<br> <br>
+						<input type="button" class="btn btn-primary" data-toggle="modal" data-target="#upload" value="Add Photo">
+        </div>    
+        
+        
 				<div class="col-lg-12">
-				
-					<div class="col-lg-8" style="float: left">
 						<table width="1150px">
 							<thead>
 								<tr>
@@ -169,10 +175,13 @@
 										rows=15></textarea></td>
 							</tr>
 						</table>
-					</div>
 				</div>
+				</div>
+				
 				설문 응답 여부 : 
 				<input type="checkbox" class = "btn btn-default" name = "isSurvey" id = "isSurvey" onclick="openSurvey()"> 
+					
+			
 					<div class="modal fade" id="myModal" role="dialog">
 					    <div class="modal-dialog">
 					      <!-- Modal content-->
@@ -210,9 +219,7 @@
 					      
 					    </div>
 					  </div>
-<br>
     			</div>
-        </div>    
 
 
 			</div>
@@ -226,8 +233,30 @@
 				</c:otherwise>
 			</c:choose>
 			</div>
-	
+			 
 </form>
+<!-- 그림 Modal -->
+		  	<div class="modal fade" id="upload" role="dialog">
+		    <div class="modal-dialog">
+		      <!-- Modal content-->
+		      <div class="modal-content">
+		        <div class="modal-header">
+		          <button type="button" class="close" data-dismiss="modal">&times;</button>
+		          <h4 class="modal-title">사진 업로드</h4>
+		        </div>
+		        
+		        <div class="modal-body">
+		           	<input type="file" id = "file1"><br>
+		          	<input type="file" id = "file2">
+		        </div>
+		        <div class="modal-footer">
+		        <input type="button" class="btn btn-default" data-dismiss="modal" value="업로드">
+		          <input type="button" class="btn btn-default" data-dismiss="modal" value="닫기">
+		        </div>
+		      </div>
+		      
+		    </div>
+		  </div>	
 	<!-- end wrapper -->
 	<!-- Core Scripts - Include with every page -->
 	<script src="${ctx }/resources/plugins/bootstrap/bootstrap.min.js"></script>

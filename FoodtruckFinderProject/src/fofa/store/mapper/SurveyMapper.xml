@@ -34,13 +34,12 @@
 		GROUP BY S.AGE_RANGE
 	</select>
 	<select id="selectAvgByGender" parameterType="HashMap" resultType="Survey">
-		SELECT #{foodtruckId} FOODTRUCKID, S.GENDER GENDER, AVG(R.SCORE) score
+		SELECT 'F1' FOODTRUCKID, S.GENDER GENDER, score
 		FROM SURVEY_TB
 		S, SURVEY_REPLY_TB R
 		WHERE S.SURVEY_ID = R.SURVEY_ID
 		AND FOODTRUCK_ID= #{foodtruckId}
 		AND R.ITEM_ID = #{itemId}
-		GROUP BY S.GENDER
 	</select>
 	
 	
