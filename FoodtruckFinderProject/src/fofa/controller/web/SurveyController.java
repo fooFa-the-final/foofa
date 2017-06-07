@@ -37,7 +37,7 @@ public class SurveyController {
 	@RequestMapping("/truckStat.do")
 	public String searchSurveysStat(String foodtruckId, Model model){
 		model.addAttribute("avgItemList", surveyService.findAvgScoreBySurveyItem(foodtruckId));
-		
+		model.addAttribute("truck", foodtruckService.findById(foodtruckId));
 		return "/view/foodtruck/foodtruckSurvey.jsp";
 	}
 

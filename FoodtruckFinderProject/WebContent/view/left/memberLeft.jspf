@@ -19,6 +19,7 @@
                     <li id="side-favorite" >
                         <a href="${ctx }/favorite/list.do"><i class="fa fa-table fa-fw"></i>단골 목록</a>
                     </li>
+                    <c:if test="${loginUser != member.memberId || loginUser eq '' }"></c:if>
                     <li id="side-modify" >
                         <a href="${ctx }/member/modify.do"><i class="fa fa-edit fa-fw"></i>회원 정보 수정</a>
                     </li>

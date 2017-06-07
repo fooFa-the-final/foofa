@@ -175,7 +175,7 @@ a.link {font-size: 0.7em; color:blue;}
 				<div class="col-lg-3">
 					<div class="panel panel-primary text-center" style="height:327px">
 						<c:forEach var="review" varStatus="no" items="${reviews}"> 
-							<div class="review-heading">
+							<div class="review-heading" style="height:25px">
 								 <a>${review.foodtruck.foodtruckName }</a>		 By <a>${review.writer.memberId }</a>						
 							</div>
 							<div class="panel-body" style="padding:5px;">
