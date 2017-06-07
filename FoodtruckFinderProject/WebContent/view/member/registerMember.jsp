@@ -124,6 +124,26 @@
 												$("input[name='birthday']").css("border","1px solid red")
 														.after("<span>생년월일 입력해주세요</span>");$("span").css("color", "red").fadeOut(3000);
 												return false;
+											} else if ($("input[name='birthday']").val() != ""){
+												var data = document.getElementById("birthday").value;
+												var y = parseInt(data.substr(0, 4), 10); 
+												var m = parseInt(data.substr(4, 2), 10); 
+												var d = parseInt(data.substr(6, 2), 10); 
+												var dt = new Date(y, m-1, d); 
+												if(dt.getDate() != d) { $("input[name='birthday']").css("border","1px solid red")
+													.after("<span>유효한 연도를 입력해주세요</span>");$("span").css("color", "red").fadeOut(3000);
+													return false;
+	
+												} 
+												else if(dt.getMonth()+1 != m) { $("input[name='birthday']").css("border","1px solid red")
+													.after("<span>유효한 월을 입력해주세요</span>");$("span").css("color", "red").fadeOut(3000); 
+													return false;
+	
+												} 
+												else if(dt.getFullYear() != y) { $("input[name='birthday']").css("border","1px solid red")
+													.after("<span>유효한 일수를 입력해주세요</span>");$("span").css("color", "red").fadeOut(3000); 
+													return false;
+												} 
 											} else if(($("input[name*='gender']:checked").length)<=0){$("input[name='genderCheck']").css("border","1px solid red").after("<span>성별을 선택해주세요.</span>");
 											$("span").css("color", "red").fadeOut(3000);
 											return false;

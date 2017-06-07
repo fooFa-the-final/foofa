@@ -148,8 +148,8 @@ $(document).ready(function(){
 									</div>
 								</div>
 								<div style="width: 100%; height: 90px;"></div>
-								<button type="submit" class="btn btn-primary btn-lg" aria-expanded="true"
-														
+								<button type="button" class="btn btn-primary btn-lg" aria-expanded="true"
+											data-toggle="modal" data-target="#myModal"
 									>결제</button>
 								<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
 									aria-labelledby="myModalLabel" aria-hidden="true">
@@ -162,8 +162,7 @@ $(document).ready(function(){
 											</div>
 											<div class="modal-body">정말로 결제를 하시겠습니까?</div>
 											<div class="modal-footer">
-												<button type="submit" class="btn btn-default"
-													data-dismiss="modal">결제하기</button>
+												<button type="submit" class="btn btn-primary btn-lg" aria-expanded="true">결제하기</button>
 											<button type="button" class="btn btn-default"
 													data-dismiss="modal">취소하기</button>
 											
