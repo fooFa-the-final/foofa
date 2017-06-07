@@ -39,7 +39,27 @@ $(document).ready(function(){
 				$("input[name='certification']").css("border","1px solid red").after("<span>사업자등록번호를 10자리를 입력해주세요</span>");
 				$("span").css("color", "red").fadeOut(3000);
 				return false;
+		} else if ($("input[name='birthday']").val() != ""){
+			var data = document.getElementById("birthday").value;
+			var y = parseInt(data.substr(0, 4), 10); 
+			var m = parseInt(data.substr(4, 2), 10); 
+			var d = parseInt(data.substr(6, 2), 10); 
+			var dt = new Date(y, m-1, d); 
+			if(dt.getDate() != d) { $("input[name='birthday']").css("border","1px solid red")
+				.after("<span>유효한 연도를 입력해주세요</span>");$("span").css("color", "red").fadeOut(3000);
+				return false;
+
 			} 
+			else if(dt.getMonth()+1 != m) { $("input[name='birthday']").css("border","1px solid red")
+				.after("<span>유효한 월을 입력해주세요</span>");$("span").css("color", "red").fadeOut(3000); 
+				return false;
+
+			} 
+			else if(dt.getFullYear() != y) { $("input[name='birthday']").css("border","1px solid red")
+				.after("<span>유효한 일수를 입력해주세요</span>");$("span").css("color", "red").fadeOut(3000); 
+				return false;
+			} 
+		}
     });   
     $(":input").focus(function(){
         $(this).css("border", "4px red solid");
@@ -76,7 +96,6 @@ $(document).ready(function(){
 								<br> <label>Password Check</label><input class="form-control" id="password1"
 						name="password1"			type="password" value="${member.password}"> <br>
 							</div>
-
 							<div class="form-group">
 								<label>Email</label> <input class="form-control" id="email"
 									type="text" name="email" value="${member.email}"> <br>
@@ -101,7 +120,6 @@ $(document).ready(function(){
 									</c:if>
 								</div>
 							</div>
-
 							<button type="submit" class="btn btn-primary">Modify</button>
 						</form>
 					</div>
