@@ -93,7 +93,7 @@ a.link {font-size: 0.7em; color:blue;}
 								<img src="${ctx}/resources/img/${truck.foodtruckImg }" class="main-truck-img"onclick="location.href='${ctx }/review/list/truck.do?foodtruckId=${truck.foodtruckId}'"/>
 							</div>
 							<div class="panel-body text-left">
-								<b>${truck.foodtruckName }</b> <br> <p > 평점 :<span class="starRating" style="text-align:left;"><span style="width: ${truck.score*20 }%">${truck.score }점</span></span></p>리뷰수 : ${truck.reviewCount }
+								<b><a href="${ctx }/review/list/truck.do?foodtruckId=${truck.foodtruckId }">${truck.foodtruckName }</a></b> <br> <p > 평점 :<span class="starRating" style="text-align:left;"><span style="width: ${truck.score*20 }%">${truck.score }점</span></span></p>리뷰수 : ${truck.reviewCount }
 							</div>
 						</div>
 					</div>		
@@ -105,7 +105,7 @@ a.link {font-size: 0.7em; color:blue;}
 							<img src="${ctx}/resources/img/${truck.foodtruckImg }" class="main-truck-img" onclick="location.href='${ctx }/review/list/truck.do?foodtruckId=${truck.foodtruckId}'" />
 						</div>
 						<div class="panel-body text-left">
-							<b>${truck.foodtruckName }</b> <br> <p > 평점 :<span class="starRating" style="text-align:left;"><span style="width: ${truck.score*20 }%">${truck.score }점</span></span></p>리뷰수 : ${truck.reviewCount }
+								<b><a href="${ctx }/review/list/truck.do?foodtruckId=${truck.foodtruckId }">${truck.foodtruckName }</a></b> <br> <p > 평점 :<span class="starRating" style="text-align:left;"><span style="width: ${truck.score*20 }%">${truck.score }점</span></span></p>리뷰수 : ${truck.reviewCount }
 						</div>
 					</div>	
 				</div>
@@ -118,7 +118,7 @@ a.link {font-size: 0.7em; color:blue;}
 							<img src="${ctx}/resources/img/${truck.foodtruckImg }" class="main-truck-img" onclick="location.href='${ctx }/review/list/truck.do?foodtruckId=${truck.foodtruckId}'"/>
 						</div>
 						<div class="panel-body text-left">
-							<b>${truck.foodtruckName }</b> <br> <p > 평점 :<span class="starRating" style="text-align:left;"><span style="width: ${truck.score*20 }%">${truck.score }점</span></span></p>리뷰수 : ${truck.reviewCount }						
+								<b><a href="${ctx }/review/list/truck.do?foodtruckId=${truck.foodtruckId }">${truck.foodtruckName }</a></b> <br> <p > 평점 :<span class="starRating" style="text-align:left;"><span style="width: ${truck.score*20 }%">${truck.score }점</span></span></p>리뷰수 : ${truck.reviewCount }
 						</div>
 					</div>
 				
@@ -146,11 +146,11 @@ a.link {font-size: 0.7em; color:blue;}
 								<img class="somenail" src="${ctx }/resources/img/${review.writer.profileImg }"/>
 								<div style="float:left; width:80%;">
 									<ul>
-										<li><a>${hotReview.writer.memberId }</a></li>
+										<li><a href="${ctx }/review/list/member.do?memberId=${hotReview.writer.memberId }">${hotReview.writer.memberId }</a></li>
 										<li> <span class="sub-li-follow"><i class="fa fa-thumbs-up fa-1x"></i>${hotReview.recommand } </span>
 											 <span class="sub-li-favorite"><i class="fa fa-twitter fa-1x"></i>${hotReview.recommand } </span>
 										</li>
-										<li> <a href="${ctx }/">${hotReview.foodtruck.foodtruckName }</a> 에 대한 리뷰 </li>
+										<li> <a href="${ctx }/review/list/truck.do?foodtruckId=${hotReview.foodtruck.foodtruckId }">${hotReview.foodtruck.foodtruckName }</a> 에 대한 리뷰 </li>
 									</ul>
 								</div>
 							</div>
@@ -176,7 +176,7 @@ a.link {font-size: 0.7em; color:blue;}
 					<div class="panel panel-primary text-center" style="height:327px">
 						<c:forEach var="review" varStatus="no" items="${reviews}"> 
 							<div class="review-heading" style="height:25px">
-								 <a>${review.foodtruck.foodtruckName }</a>		 By <a>${review.writer.memberId }</a>						
+								 <a href="${ctx }/review/list/truck.do?foodtruckId=${review.foodtruck.foodtruckId }">${review.foodtruck.foodtruckName }</a>		 By <a href="${ctx }/review/list/member.do?memberId=${review.writer.memberId }">${review.writer.memberId }</a>						
 							</div>
 							<div class="panel-body" style="padding:5px;">
 								<img class="somenail" src="${ctx }/resources/img/${review.mainImage.filename}"/>
@@ -193,7 +193,6 @@ a.link {font-size: 0.7em; color:blue;}
 		</div>
 				<div class="row">
 				<h4>Nearlest Foodtrucks</h4>
-				
 				<div class="sub-container">
 				<div class="col-lg-4">
 					<div class="panel panel-danger">

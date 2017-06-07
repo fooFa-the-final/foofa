@@ -49,18 +49,18 @@
 
 						</a>
 						<div class="user-info">
-							<h1>"${member.memberId }" </h1>
-							<br>
-							<h5>${member.email }</h5>
-							<h5>${member.followCount } Followers</h5>
-							<h5>${member.reviewCount } Reviews</h5>
+                                <h2>${member.memberId}</h2><br>	
+                                <h5>${member.email }</h5>
+                                <h5>팔로워수&nbsp; ${member.followCount }</h5>
+                                <h5>리뷰작성&nbsp;&nbsp;${member.reviewCount }</h5>
 						</div>
-						<span style="float: right; margin-right: 90px; margin-top: 30px">
+					<%-- 	<span style="float: right; margin-right: 90px; margin-top: 30px">
 							<a href="${ctx }/member/checkPw.do"><button type="button"
 									class="btn btn-default">회원 탈퇴</button></a>
 						 <a href="#"><button
 									type="button" class="btn btn-default">Make Follow</button></a>
 						</span>
+					 --%>
 					</div>
 				</div>
 
@@ -76,7 +76,7 @@
 							</a>
 							<div class="user-info">
 								<p>
-									${truck.foodtruckName }
+									<a href="${ctx }/review/list/truck.do?foodtruckId=${truck.foodtruckId }">${truck.foodtruckName }</a>
 								</p>
 								<br>
 								<h5>${truck.favoriteCount } Favorite</h5>
@@ -86,7 +86,7 @@
 							<div style="float: right;">
 								<br> <br> <br>
 								<button type="button" class="btn btn-default"
-									onclick="favorite('${truck.foodtruckId }');">UNfavorite</button>
+									onclick="favorite('${truck.foodtruckId }');">Unfavorite</button>
 							</div>
 							</div>
 					</c:forEach>
@@ -99,15 +99,15 @@
 	<!-- end wrapper -->
 
 	<!-- Core Scripts - Include with every page -->
-	<script src="../../resources/plugins/jquery-1.10.2.js"></script>
-	<script src="../../resources/plugins/bootstrap/bootstrap.min.js"></script>
-	<script src="../../resources/plugins/metisMenu/jquery.metisMenu.js"></script>
-	<script src="../../resources/plugins/pace/pace.js"></script>
-	<script src="../../resources/scripts/siminta.js"></script>
+	<script src="${ctx}/resources/plugins/jquery-1.10.2.js"></script>
+	<script src="${ctx}/resources/plugins/bootstrap/bootstrap.min.js"></script>
+	<script src="${ctx}/resources/plugins/metisMenu/jquery.metisMenu.js"></script>
+	<script src="${ctx}/resources/plugins/pace/pace.js"></script>
+	<script src="${ctx}/resources/scripts/siminta.js"></script>
 	<!-- Page-Level Plugin Scripts-->
-	<script src="../../resources/plugins/dataTables/jquery.dataTables.js"></script>
+	<script src="${ctx}/resources/plugins/dataTables/jquery.dataTables.js"></script>
 	<script
-		src="../../resources/plugins/dataTables/dataTables.bootstrap.js"></script>
+		src="${ctx}/resources/plugins/dataTables/dataTables.bootstrap.js"></script>
 		<script
 			src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 	<script>
