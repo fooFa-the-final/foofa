@@ -140,7 +140,6 @@ public class ReviewController {
 		Date date = new Date();
 		int year = date.getYear() + 1;
 		int age = year - Integer.parseInt(birth);
-		System.out.println(age);
 		int ageRange = age/10 * 10;
 		return ageRange;
 	}
