@@ -13,5 +13,8 @@ public interface FavoriteService {
 	List<Favorite> findMemberId(String memberId);
 	
 	int findByFoodtruckId(String foodtruckId);
+	
+	boolean alreadyFavorite(Favorite favorite);
 
+	int foodtruckCount(String foodtruckId);
 }

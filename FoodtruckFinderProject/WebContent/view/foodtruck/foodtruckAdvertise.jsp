@@ -25,34 +25,52 @@
 
 </head>
 
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+<script>
+
+$(document).ready(function(){
+    $("form").submit(function(){
+    	var today = new Date();  
+    	var dateString =  $("input[name='startdate']").val();
+    	var dateArray = dateString.split("-");  
+    	var dateObj = new Date(dateArray[0], Number(dateArray[1])-1, dateArray[2]);  
+    	var betweenDay = (today.getTime() - dateObj.getTime());  
+	        if($("input[name='startdate']").val() == ""){
+            $("input[name='startdate']").css("border", "1px solid red").after("<span>날짜를 입력해주세요.</span>");
+            $("span").css("color", "red").fadeOut(3000);
+            return false;
+        	} else if(betweenDay > 0){
+                $("input[name='startdate']").css("border", "1px solid red").after("<span>광고시작 날짜는 지난 날짜를 선택할 수 없습니다.</span>");
+                $("span").css("color", "red").fadeOut(3000); 				
+ 				return false;       		
+        	}
+	        else if (st == null){
+            	var sel_type = null;
+            	var chk_radio = document.getElementsByName('period');
+            	for(var i=0;i<chk_radio.length;i++){
+            		if(chk_radio[i].checked == true){ 
+            			sel_type = chk_radio[i].value;
+            		}
+            	}
+            	if(sel_type == null){
+                	$("input[name='result']").css("border", "1px solid red").after("<span>기간을 선택해 주세요.</span>");
+                    $("span").css("color", "red").fadeOut(3000);
+            	}
+    		return false;
+        	} 
+	        $('#myModal').modal('toggle');
+
+    });   
+});
+</script>
+
 <body>
 	<!--  wrapper -->
 	<div id="wrapper">
-
 		<%@ include file="../header.jspf"%>
-
-		<!-- navbar side -->
-		<nav class="navbar-default navbar-static-side" role="navigation">
-			<!-- sidebar-collapse -->
-			<div class="sidebar-collapse">
-				<!-- side-menu -->
-				<ul class="nav" id="side-menu">
-					<li><a href="${ctx }/#"><i class="fa fa-files-o fa-fw"></i>Truck
-							Info</a></li>
-					<li><a href="${ctx }/#"><i class="fa fa-bar-chart-o fa-fw"></i>매출
-							통계</a></li>
-					<li><a href="${ctx }/#"><i class="fa fa-dashboard fa-fw"></i>설문
-							통계</a></li>
-					<li><a href="${ctx }/#"><i class="fa fa-wrench fa-fw"></i>정보
-							수정</a></li>
-					<li class="selected"><a href="${ctx }/#"><i
-							class="fa fa-edit fa-fw"></i>광고 요청</a></li>
-				</ul>
-				<!-- end side-menu -->
-			</div>
-			<!-- end sidebar-collapse -->
-		</nav>
-		<!-- end navbar side -->
+		<%@ include file="../left/sellerLeft.jspf"%>
 		<!--  page-wrapper -->
 		<div id="page-wrapper">
 			<div class="row">
@@ -71,14 +89,20 @@
 								<br>
 								<h5>${truck.category1 }</h5>
 								<h5>${truck.location }</h5>
+								
+							<%-- 	
 								<h5>${truck.reviewScore }</h5>
 								<h5>${truck.reviewCount }</h5>
+							 --%>
+							
 							</div>
+							<%-- 
 							<span style="float: right; margin-right: 30px; margin-top: 30px">
-								<a href="${ctx }/seller/modify.do"><button type="button" class="btn btn-default" onclick="${ctx}/seller/modify.do">판매자
-										정보 수정</button></a> <a href="${ctx }/seller/remove.do"><button type="button"
-										class="btn btn-default">판매자 탈퇴</button></a>
+								<a href="${ctx }/seller/modify.do"><button type="button"
+										class="btn btn-default" onclick="${ctx}/seller/modify.do">판매자정보 수정</button></a> <a href="${ctx }/seller/remove.do">
+										<button type="button" class="btn btn-default">판매자 탈퇴</button></a>
 							</span>
+							 --%>
 						</div>
 					</div>
 				</div>
@@ -97,8 +121,7 @@
 									<h4>
 										- 광고 시작일 <small> 광고 시작일을 선택해주세요.</small>
 									</h4>
-									<input id="startdate" name="startdate" type="date"
-										data-date-inline-picker="true" style="margin-left: 20px" />
+									<input id="startdate" name="startdate" type="date" data-date-inline-picker="true" style="margin-left: 20px" />
 								</div>
 								<br />
 								<h4>
@@ -114,6 +137,7 @@
 										name="period" value="14">14 일
 									</label> <label class="radio-inline"> <input type="radio"
 										name="period" value="30">30 일
+										<input type="hidden" name="result">
 									</label>
 								</div>
 
@@ -124,8 +148,9 @@
 									</div>
 								</div>
 								<div style="width: 100%; height: 90px;"></div>
-								<button type="submit" class="btn btn-primary btn-lg"
-									data-toggle="modal" data-target="#myModal">결제</button>
+								<button type="button" class="btn btn-primary btn-lg" aria-expanded="true"
+															data-toggle="modal" data-target="#myModal"
+									>결제</button>
 								<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
 									aria-labelledby="myModalLabel" aria-hidden="true">
 									<div class="modal-dialog">
@@ -135,11 +160,13 @@
 													aria-hidden="true">&times;</button>
 												<h4 class="modal-title" id="myModalLabel">광고 결제</h4>
 											</div>
-											<div class="modal-body">결제가 완료되었습니다. 광고가 시작되면 메일이
-												발송됩니다.</div>
+											<div class="modal-body">정말로 결제를 하시겠습니까?</div>
 											<div class="modal-footer">
-												<button type="button" class="btn btn-default"
-													data-dismiss="modal">Close</button>
+												<button type="submit" class="btn btn-default"
+													data-dismiss="modal">결제하기</button>
+											<button type="button" class="btn btn-default"
+													data-dismiss="modal">취소하기</button>
+											
 											</div>
 										</div>
 									</div>
@@ -170,6 +197,7 @@
 	<script>
 		$(document).ready(function() {
 			$('#dataTables-example').dataTable();
+			$('#side-adv').attr('class', 'selected');
 		});
 	</script>
 

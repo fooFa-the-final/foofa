@@ -1,5 +1,6 @@
 package fofa.service.logic;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,27 +48,47 @@ public class FoodtruckServiceLogic implements FoodtruckService{
 
 	@Override
 	public Foodtruck findById(String foodtruckId) {
-		return foodtruckStore.selectById(foodtruckId);
+		Foodtruck foodtruck = foodtruckStore.selectById(foodtruckId);
+		String[] category = foodtruck.getCategory1().split("/");
+		foodtruck.setCategory1(category[0]);
+			if(category.length >= 2){
+				foodtruck.setCategory2(category[1]);
+			}
+			if(category.length >= 3){
+				foodtruck.setCategory2(category[1]);
+				foodtruck.setCategory3(category[2]);
+			}
+		return foodtruck;
 	}
 
 	@Override
-	public List<Foodtruck> findByLoc(String location) {
-		return foodtruckStore.selectByLoc(location);
+	public List<HashMap<String, String>> findByLoc(int pageNum, String location) {
+		return foodtruckStore.selectByLoc(pageNum, location);
 	}
 
 	@Override
-	public List<Foodtruck> findByKeyLoc(String keyword, String location) {
-		return foodtruckStore.selectByKeyLoc(keyword, location);
+	public List<HashMap<String, String>> findByKeyLoc(int pageNum, String keyword, String location) {
+		return foodtruckStore.selectByKeyLoc(pageNum, keyword, location);
 	}
 
 	@Override
-	public List<Foodtruck> findByFilter(Foodtruck foodtruck) {
-		return foodtruckStore.selectByFilter(foodtruck);
+	public List<HashMap<String, String>> findByFilter(int pageNum, Foodtruck foodtruck) {
+		return foodtruckStore.selectByFilter(pageNum, foodtruck);
 	}
 
 	@Override
 	public Foodtruck findBySeller(String sellerId) {
-		return foodtruckStore.selectBySellerId(sellerId);
+		Foodtruck foodtruck = foodtruckStore.selectBySellerId(sellerId);
+		String[] category = foodtruck.getCategory1().split("/");
+		foodtruck.setCategory1(category[0]);
+			if(category.length >= 2){
+				foodtruck.setCategory2(category[1]);
+			}
+			if(category.length >= 3){
+				foodtruck.setCategory2(category[1]);
+				foodtruck.setCategory3(category[2]);
+			}
+		return foodtruck;
 	}
 
 	@Override

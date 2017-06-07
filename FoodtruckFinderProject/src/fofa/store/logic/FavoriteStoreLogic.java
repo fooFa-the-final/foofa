@@ -29,6 +29,7 @@ public class FavoriteStoreLogic implements FavoriteStore{
 			session.commit();
 		}finally{
 			session.close();
+			System.out.println(insert);
 		}
 		return insert;
 	}
@@ -62,6 +63,32 @@ public class FavoriteStoreLogic implements FavoriteStore{
 
 	@Override
 	public int selectByTruckId(String foodtruckId) {
+		SqlSession session = factory.openSession();
+		int count = 0;
+		try{
+			FavoriteMapper mapper = session.getMapper(FavoriteMapper.class);
+			count = mapper.selectByTruckId(foodtruckId);
+		}finally{
+			session.close();
+		}
+		return count;
+	}
+
+	@Override
+	public int select(Favorite favorite) {
+		SqlSession session = factory.openSession();
+		int count = 0;
+		try{
+			FavoriteMapper mapper = session.getMapper(FavoriteMapper.class);
+			count = mapper.select(favorite);
+		}finally{
+			session.close();
+		}
+		return count;
+	}
+
+	@Override
+	public int selectCount(String foodtruckId) {
 		SqlSession session = factory.openSession();
 		int count = 0;
 		try{

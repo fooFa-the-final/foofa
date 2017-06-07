@@ -6,10 +6,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import fofa.domain.Sale;
 import fofa.store.SalesStore;
@@ -91,19 +93,18 @@ public class SalesStoreLogic implements SalesStore {
 	}
 
 	@Override
-	public List<Sale> select1MonthSales(String foodtruckId, String month) {
+	public List<Sale> select1MonthSales(String foodtruckId) {
 		SqlSession session = factory.openSession();
-		Map<String, String> map = new HashMap<>();
-		map.put("month", month);
-		map.put("foodtruckId", foodtruckId);
-
+		
 		List<Sale> list = new ArrayList<>();
 		try {
 			SalesMapper mapper = session.getMapper(SalesMapper.class);
-			list = mapper.select1MonthSales(map);
+			list = mapper.select1MonthSales(foodtruckId);
 		} finally {
 			session.close();
 		}
+		System.out.println("listSize" + list.size());
+		System.out.println(list.get(0).getDate());
 		return list;
 	}
 

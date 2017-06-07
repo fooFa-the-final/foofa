@@ -30,7 +30,8 @@ public class Foodtruck {
 	private boolean catering;
 	private boolean state;
 	private int favoriteCount;
-	private List<Review> reviews;
+	private int reviewCount;
+	private double score;
 	private List<Menu> menus;
 	
 	
@@ -136,11 +137,12 @@ public class Foodtruck {
 	public void setFavoriteCount(int favoriteCount) {
 		this.favoriteCount = favoriteCount;
 	}
-	public List<Review> getReviews() {
-		return reviews;
+
+	public int getReviewCount() {
+		return reviewCount;
 	}
-	public void setReviews(List<Review> reviews) {
-		this.reviews = reviews;
+	public void setReviewCount(int reviewCount) {
+		this.reviewCount = reviewCount;
 	}
 	public List<Menu> getMenus() {
 		return menus;
@@ -148,28 +150,14 @@ public class Foodtruck {
 	public void setMenus(List<Menu> menus) {
 		this.menus = menus;
 	}
-	
-	public float getReviewScore(){
-		float score = 0;
-		for(Review r : reviews){
-			score += r.getScore();
-		}
-		
-		return score/reviews.size();
+	public double getScore() {
+		return score;
+	}
+	public void setScore(double score) {
+		this.score = score;
 	}
 	
-	public int getReviewCount(){
-		return reviews.size();
-	}
-	@Override
-	public String toString() {
-		return "Foodtruck [foodtruckId=" + foodtruckId + ", sellerId=" + sellerId + ", foodtruckName=" + foodtruckName
-				+ ", foodtruckImg=" + foodtruckImg + ", operationTime=" + operationTime + ", spot=" + spot + ", notice="
-				+ notice + ", location=" + location + ", category1=" + category1 + ", category2=" + category2
-				+ ", category3=" + category3 + ", card=" + card + ", parking=" + parking + ", drinking=" + drinking
-				+ ", catering=" + catering + ", state=" + state + ", favoriteCount=" + favoriteCount + ", reviews="
-				+ reviews + ", menus=" + menus + "]";
-	}
+
 	
 	
 

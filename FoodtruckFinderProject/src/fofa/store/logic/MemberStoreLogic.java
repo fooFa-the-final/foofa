@@ -75,4 +75,19 @@ public class MemberStoreLogic implements MemberStore{
 		return member;
 	}
 
+	@Override
+	public int imgupdate(Member member) {
+		SqlSession session = factory.openSession();
+		int update = 0;
+		try{
+			MemberMapper mapper = session.getMapper(MemberMapper.class);
+			update = mapper.imgupdate(member);
+			session.commit();
+		}finally{
+			session.close();
+		}
+		
+		return update;
+	}
+
 }

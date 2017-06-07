@@ -1,6 +1,7 @@
 package fofa.service.logic;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,10 +22,7 @@ public class ReviewServiceLogic implements ReviewService {
 
 	@Autowired
 	private ReviewStore reviewStore;
-	
-	@Autowired
-	private FollowStore followStore;
-	
+		
 	@Autowired
 	private ReportStore reportStore;
 	
@@ -58,13 +56,7 @@ public class ReviewServiceLogic implements ReviewService {
 
 	@Override
 	public List<Review> findByFromId(String memberId) {
-		List<Follow> list = followStore.selectByFromId(memberId);
-		System.out.println("follow list : " + list.size());
-		List<Review> reviewList = new ArrayList<>();
-		for(Follow f : list){
-			reviewList.addAll(reviewStore.selectByMemberId(f.getToId()));
-		}
-		System.out.println(reviewList.size());
+		List<Review> reviewList = reviewStore.selectByFromId(memberId);
 		return reviewList;
 	}
 
@@ -81,10 +73,15 @@ public class ReviewServiceLogic implements ReviewService {
 	@Override
 	public List<Review> findAllByReported() {
 		List<Report> reportList = reportStore.selectAll();
-		List<Review> list = new ArrayList<>();
-		for(Report r : reportList){
-			list.add(reviewStore.selectById(r.getReviewId()));
+		HashSet<String> hs = new HashSet<>();
+		for(Report r: reportList){
+			hs.add(r.getReviewId());
 		}
+		List<Review> list = new ArrayList<>();
+		for(String r : hs){
+			list.add(reviewStore.selectById(r));
+		}
+		
 		return list;
 	}
 
@@ -94,8 +91,8 @@ public class ReviewServiceLogic implements ReviewService {
 	}
 
 	@Override
-	public Report findReport(Report report) {
-		return reportStore.selectById(report);
+	public List<Report> findReport(String reviewId) {
+		return reportStore.selectById(reviewId);
 	}
 
 	@Override
@@ -109,7 +106,7 @@ public class ReviewServiceLogic implements ReviewService {
 	}
 
 	@Override
-	public boolean removeReport(Report report) {
-		return reportStore.delete(report) > 0;
+	public boolean removeReport(String reviewId) {
+		return reportStore.delete(reviewId) > 0;
 	}
 }

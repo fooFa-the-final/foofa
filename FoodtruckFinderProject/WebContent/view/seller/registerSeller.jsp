@@ -26,8 +26,7 @@
 </head>
 
 <style>
-<
-style>#indexMain {
+#indexMain {
 	margin: 60px;
 }
 
@@ -52,81 +51,144 @@ style>#indexMain {
 
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+
+
 <script>
-
-function onlyNumber() {
-    if ((event.keyCode < 48) || (event.keyCode > 57))
-        event.returnValue = false;
-}
-
-var str;
-function autoHypenPhone(str){
-	str = str.replace(/[^0-9]/g, '');
-	var tmp = '';
-	if( str.length < 4){
-		return str;
-	}else if(str.length < 7){
-		tmp += str.substr(0, 3);
-		tmp += '-';
-		tmp += str.substr(3);
-		return tmp;
-	}else if(str.length < 11){
-		tmp += str.substr(0, 3);
-		tmp += '-';
-		tmp += str.substr(3, 3);
-		tmp += '-';
-		tmp += str.substr(6);
-		return tmp;
-	}else{				
-		tmp += str.substr(0, 3);
-		tmp += '-';
-		tmp += str.substr(3, 4);
-		tmp += '-';
-		tmp += str.substr(7);
-		return tmp;
+	function fn_press_han(obj) {
+		//좌우 방향키, 백스페이스, 딜리트, 탭키에 대한 예외
+		if (event.keyCode == 8 || event.keyCode == 9 || event.keyCode == 37
+				|| event.keyCode == 39 || event.keyCode == 46)
+			return;
+		//obj.value = obj.value.replace(/[\a-zㄱ-ㅎㅏ-ㅣ가-힣]/g, '');
+		obj.value = obj.value.replace(/[\ㄱ-ㅎㅏ-ㅣ가-힣]/g, '');
 	}
-	return str;
-}
+	var idReg = /^[a-z]+[a-z0-9]{3,17}$/g;
+	$(document).ready(function() {$("form").submit(function() {
+		$(document).ready(function(){
+		    $('#id').keyup(function(){
+		        if ( $('#id').val().length > 4) {
+		            var id = $(this).val();
+                    console.log(id);
+		            // ajax 실행
+		            $.ajax({
+		                type : 'POST',
+						url : "${ctx }/seller/checkId.do",
+		                data:
+		                {
+		                    sellerId: id
+		                },
+		                success : function(data) {
+		                    console.log(data);
+							if ($.trim(data) == 'no') {
+								$('#idmessage').html("사용 가능한 ID 입니다.");
+		                    } else {
+								$('#idmessage').html("사용 중인 ID 입니다.");
+		                    }
+		                }
+		            }); // end ajax
+		        }
+		    }); // end keyup
+		});		
+		
+											if (!idReg.test($("input[name='sellerId']").val())) {
+												if ($("input[name='sellerId']").val() == "") {
+													$("input[name='sellerId']").css("border","1px solid red").after("<span>아이디4글자 이상 16글자 이하 영문자 숫자의 조합입니다.</span>");
+													$("span").css("color","red").fadeOut(3000);
+													return false;
+												} else {
+													return false
+												}
+											} else if ($("input[name='password']").val() == "") {$("input[name='password']").css("border","1px solid red").after("<span>비밀번호를 입력해주세요</span>");
+												$("span").css("color", "red").fadeOut(3000);
+												return false;
+											} else if ($("input[name='password1']").val() == "") {$("input[name='password1']").css("border","1px solid red").after("<span>비밀번호를 한번더 입력해주세요</span>");
+												$("span").css("color", "red").fadeOut(3000);
+												return false;
+											} else if($("input[name='password']").val() != $("input[name='password1']").val()){
+												document.getElementById('checkPwd').style.color = "red";
+												document.getElementById('checkPwd').innerHTML = "암호가 일치하지 않습니다..";
+												return false;
+											} else if ($("input[name='certification']").val().length != 10) {
+												$("input[name='certification']").css("border","1px solid red").after("<span>사업자등록번호를 10자리를 입력해주세요</span>");
+												$("span").css("color", "red").fadeOut(3000);
+												return false;
+											} else if ($("input[name='phone']").val().length != 11) {$("input[name='phone']").css("border","1px solid red").after("<span>휴대폰 번호 11자리를 입력해주세요</span>");
+												$("span").css("color", "red").fadeOut(3000);
+												return false;
+											}
+										});
+						$(":input").focus(function() {
+							$(this).css("border", "4px red solid");
+						}).blur(function() {
+							$(this).css("border", "");
+						});
 
-	//아이디 ajax
-	$(document).ready(function() {
-	$("#idCheck").click(function() {
+						$(":text").focus(function() {
+							$(this).after("<strong>필수 항목입니다.</strong>");
+						}).blur(function() {
+							$("strong").remove();
+						})
+
+						$("#idCheck").click(function() {
+							var id = $("#id").val();
+							$.ajax({
+								type : 'POST',
+								url : "${ctx }/seller/checkId.do",
+								data : {
+									sellerId : id
+								/* sellerId => 넘어가는 parameter이름 : id 넘기는 var id */
+								},
+								success : function(data) {
+									var suc = "suc";
+									var fail = "fa"
+									$("#result").html(data);
+									if ($.trim(data) == 'no') {
+										$('#idmessage').html("사용 가능한 ID 입니다.");
+										$('#sucessCheck').val(data);
+										var ds = document.getElementById('idmessage');
+									} else {
+										$('#idmessage').html("사용중인 ID 입니다.");
+										$('#sucessCheck').val(data); 
+										var ds = document.getElementById('sucessCheck');
+									}
+								}
+							});
+						});
+					});
+	function onlyNumber(str) {
+		if ((event.keyCode < 48) || (event.keyCode > 57))
+			event.returnValue = false;
+	}
+	
+	function checkId(){ 						
 		var id = $("#id").val();
+		if($("input[name='sellerId']").val().length > 4){
 		$.ajax({
 			type : 'POST',
-			url : "${ctx }/member/checkId.do",
+			url : "${ctx }/seller/checkId.do",
 			data : {
-				id : id
+				sellerId : id
+			/* sellerId => 넘어가는 parameter이름 : id 넘기는 var id */
 			},
 			success : function(data) {
-				$("#result").html(data);
 				if ($.trim(data) == 'no') {
 					$('#idmessage').html("사용 가능한 ID 입니다.");
+                    $(".signupbtn").prop("disabled", false);
+                    $(".signupbtn").css("background-color", "#4CAF50");
+
 				} else {
 					$('#idmessage').html("사용중인 ID 입니다.");
-				}
+                    $("#checkaa").css("background-color", "#B0F6AC");
+                        $(".signupbtn").prop("disabled", true);
+                        $(".signupbtn").css("background-color", "#8A8A80");
 
-			}
-
+                }				
+                }
 		});
-	});
-	});
-
-	//비밀번호 일치 확인 
-	function checkPwd() {
-		var f1 = document.forms[0];
-		var pw1 = f1.password.value;
-		var pw2 = f1.password1.value;
-		if (pw1 != '' && pw2 != '') {
-			if (pw1 != pw2) {
-				document.getElementById('checkPwd').style.color = "red";
-				document.getElementById('checkPwd').innerHTML = "동일한 암호를 입력하세요.";
-			} else {
-				document.getElementById('checkPwd').style.color = "black";
-				document.getElementById('checkPwd').innerHTML = "암호가 확인 되었습니다.";
-			}
 		}
 	}
+	
 </script>
 
 <body>
@@ -134,12 +196,11 @@ function autoHypenPhone(str){
 	<!--  wrapper -->
 	<div id="wrapper">
 
-
 		<%@ include file="../header.jspf"%>
 		<!-- navbar top -->
 	</div>
 	<div id="Register">
-		<b style="margin-left: 157px"><font size="6">Join With us
+		<b style="margin-left: 78px"><font size="6">Join With us
 				as Seller</font></b>
 	</div>
 	<br>
@@ -148,28 +209,29 @@ function autoHypenPhone(str){
 		<div class="row" id="Truck">
 			<div class="col-lg-12">
 				<form action="${ctx }/seller/create.do" method="post">
-					<b> <font size="4">ID</font></b> <br>
-						<input id="id" name="sellerId" type="text" placeholder="ID를 입력해주세요.">
-						<button type="button" id="idCheck">중복확인</button>
-						<div id="idmessage"><br></div>
+					<b> <font size="4">ID</font></b> <br> <input id="id" required class="id"
+						name="sellerId" type="text" placeholder="ID를 입력해주세요."
+						onkeydown="fn_press_han(this);" oninput="checkId()">
+					<div id="idmessage">
 						<br>
+					<input type="hidden" id="sucessCheck" name="sucessCheck" value="">
+					</div>
+					<br>
 					<div>
 						<b> <font size="4">Password</font></b> <br> <input
 							id="password" name="password" type="password"> <br>
 						<br> <b> <font size="4">Confirm Password</font></b> <br>
 						<input id="password1" name="password1" type="password"
-							onkeyup="checkPwd();">
+							>
 						<div id="checkPwd"></div>
 						<br> <b><font size="4">Business Registration
 								Number</font></b> <br> <input id="certification" name="certification"
-							type="text" onkeypress="onlyNumber()" maxlength="10"> -은 입력하지 않으셔도 됩니다. 
-							<br> <br> <b><font size="4">Phone</font></b>
-						<br> <input id="phone" name="phone" type="text" name="phone" onkeypress="autoHypenPhone();" onkeypress="onlyNumber();" maxlength="13">
-						
-						
-						<br> <br>
+							type="text" onkeypress="onlyNumber()" maxlength="10"> 
+						-(하이픈)입력하지 않으셔도 됩니다. <br> <br> <b><font size="4">Phone</font></b>
+						<br> <input id="phone" name="phone" type="text" name="phone"
+							onkeypress="onlyNumber();" maxlength="11">-(하이픈)입력하지 않으셔도 됩니다. <br> <br>
 						<div class="col-md-offset-5 col-sm-25 col-lg-25">
-							<input type="submit" value="등록" class="btn btn-primary">
+						   <input type="submit" class="signupbtn" disabled="disabled" value="등록">
 						</div>
 					</div>
 				</form>
@@ -181,11 +243,10 @@ function autoHypenPhone(str){
 	<!-- end wrapper -->
 
 	<!-- Core Scripts - Include with every page -->
-
-	<script src="assets/plugins/jquery-1.10.2.js"></script>
-	<script src="assets/plugins/bootstrap/bootstrap.min.js"></script>
-	<script src="assets/plugins/metisMenu/jquery.metisMenu.js"></script>
-	<script src="assets/plugins/pace/pace.js"></script>
-	<script src="assets/scripts/siminta.js"></script>
+	<script src="${ctx}/resources/plugins/jquery-1.10.2.js"></script>
+	<script src="${ctx}/resources/plugins/bootstrap/bootstrap.min.js"></script>
+	<script src="${ctx}/resources/plugins/metisMenu/jquery.metisMenu.js"></script>
+	<script src="${ctx}/resources/plugins/pace/pace.js"></script>
+	<script src="${ctx}/resources/scripts/siminta.js"></script>
 </body>
 </html>

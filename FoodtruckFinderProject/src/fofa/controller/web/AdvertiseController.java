@@ -37,12 +37,9 @@ public class AdvertiseController {
 	@RequestMapping(value = "foodtruck/reqest.do", method = RequestMethod.POST)
 	public String request(HttpSession session, Advertise advertise) {
 
-		// 세션수행 불가시 코드
-//		advertise.setSellerId("jelly");
 		String sellerId = ((String) session.getAttribute("loginUserId"));
-		// advertise.setSellerId((String) session.getAttribute(""));
 		advertiseService.register(advertise);
-		return "../view/foodtruck/foodtruckInfo.jsp";
+		return "redirect:searchById.do";
 	
 	}
 
@@ -83,6 +80,7 @@ public class AdvertiseController {
 		String truckname;
 		for (int k = 0; k < list.size(); k++) {
 			Foodtruck food = foodtruckService.findBySeller(list.get(k).getSellerId());
+			System.out.println(list.get(k).getSellerId());
 			truckname = food.getFoodtruckName();
 			list.get(k).setSellerId(truckname);
 		}

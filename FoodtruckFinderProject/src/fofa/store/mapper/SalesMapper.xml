@@ -6,7 +6,7 @@
 <mapper namespace="fofa.store.mapper.SalesMapper">
 
 	<resultMap type="Sale" id="SaleMap">
-		<id column="sale_id" property="saleID" />
+		<id column="sales_id" property="salesId" />
 		<result column="foodtruck_id" property="foodtruckId" />
 		<result column="day" property="date" />
 		<result column="location" property="location" />
@@ -43,14 +43,12 @@
 		day=#{date} AND foodtruck_id=#{foodtruckId}
 	</select>
 
-	<select id="select1MonthSales" parameterType="hashmap"
-		resultMap="SaleMap">
+	<select id="select1MonthSales" parameterType="String" resultMap="SaleMap">
 		SELECT
 		sales_id,foodtruck_id,day,location,revenue
 		FROM
 		sales_tb
-		WHERE #{month}=substr(day,1,6) AND
-		foodtruck_id=#{foodtruckId}
+		WHERE foodtruck_id=#{foodtruckId}
 	</select>
 	<select id="select1YearSales" parameterType="String" resultMap="SaleMap">
 		SELECT #{foodtruckId} FOODTRUCK_ID, substr(day,1,6) DAY,

@@ -1,7 +1,10 @@
 package fofa.controller.web;
 
-import java.io.IOException; 
+import java.io.File;
+import java.io.IOException;
+import java.util.Iterator;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -11,6 +14,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import fofa.domain.Member;
 import fofa.service.MemberService;
@@ -33,7 +38,6 @@ public class MemberController {
 		String memberId = req.getParameter("id");
 		boolean result;
 		result = service.checkId(memberId);
-		System.out.println(result);
 		
 		
 		if(result == true){
@@ -56,7 +60,7 @@ public class MemberController {
 	@RequestMapping(value="member/modify.do", method=RequestMethod.POST)
 	public String modify(Member member){
 		service.modify(member);
-		return "redirect:review/list/member.do";
+		return "redirect:/review/list/member.do";
 	}
 	@RequestMapping(value="member/checkPw.do", method=RequestMethod.GET)
 	public String checkPwForm(HttpSession session){
@@ -68,11 +72,10 @@ public class MemberController {
 	@ResponseBody
 	@RequestMapping(value="member/checkPw.do", method=RequestMethod.POST)
 	public String checkPw(HttpSession session, String password){
-		Member member = service.findById((String)(session.getAttribute("loginUserId")));
-		String memberId = member.getMemberId();
+		String memberId = ((String)(session.getAttribute("loginUserId")));
+		
 		boolean result;
 		result = service.checkPw(memberId, password);
-		System.out.println(result);
 		
 		if(result == true){
 			return "yes";
@@ -91,10 +94,45 @@ public class MemberController {
 		 service.remove((String)(session.getAttribute("loginUserId")));
 		return "../view/index.jsp";
 	}
-	@RequestMapping("member/modifypic.do")
-	public String modifyPicture(HttpSession session, String img){
-		
-		
-		return "redirect:review/list/member.do";
-	}
+	
+     
+    @ResponseBody
+    @RequestMapping(value = "member/fileUpload.do", method=RequestMethod.POST)
+    public String fileUp(MultipartHttpServletRequest multi, HttpSession session,Model model) {
+         String img= null;
+        // 저장 경로 설정
+        String root = multi.getSession().getServletContext().getRealPath("/");
+        String path = root+"resources/upload/";
+         
+        String newFileName = ""; // 업로드 되는 파일명
+         
+        File dir = new File(path);
+        if(!dir.isDirectory()){
+            dir.mkdir();
+        }
+         
+        Iterator<String> files = multi.getFileNames();
+        while(files.hasNext()){
+            String uploadFile = files.next();
+                         
+            MultipartFile mFile = multi.getFile(uploadFile);
+            String fileName = mFile.getOriginalFilename();
+            newFileName = System.currentTimeMillis()+"."
+                    +fileName.substring(fileName.lastIndexOf(".")+1);
+            Member member = service.findById((String)(session.getAttribute("loginUserId")));
+            member.setProfileImg(newFileName);
+            service.modifyImg(member);
+            String imgurl = member.getProfileImg();
+            img = path+imgurl;
+            member.setProfileImg(img);
+            service.modifyImg(member);
+            
+            try {
+                mFile.transferTo(new File(path+newFileName));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+		return img;
+    }
 }

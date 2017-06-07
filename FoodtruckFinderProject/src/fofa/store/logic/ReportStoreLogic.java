@@ -37,12 +37,12 @@ public class ReportStoreLogic implements ReportStore {
 	}
 
 	@Override
-	public int delete(Report report) {
+	public int delete(String reviewId) {
 		SqlSession session = factory.openSession();
 		int delete = 0;
 		try{
 			ReportMapper mapper = session.getMapper(ReportMapper.class);
-			delete = mapper.delete(report);
+			delete = mapper.delete(reviewId);
 			session.commit();
 		} finally {
 			session.close();
@@ -51,11 +51,12 @@ public class ReportStoreLogic implements ReportStore {
 	}
 
 	@Override
-	public Report selectById(Report report) {
+	public List<Report> selectById(String reviewId) {
 		SqlSession session = factory.openSession();
+		List<Report> report = null;
 		try{
 			ReportMapper mapper = session.getMapper(ReportMapper.class);
-			report = mapper.selectById(report);
+			report = mapper.selectById(reviewId);
 
 		} finally {
 			session.close();

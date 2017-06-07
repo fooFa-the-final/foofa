@@ -18,10 +18,28 @@
 	rel="stylesheet" />
 <link href="${ctx }/resources/css/style.css" rel="stylesheet" />
 <link href="${ctx }/resources/css/main-style.css" rel="stylesheet" />
-<!-- Page-Level CSS -->
-<link href="../../resources/plugins/dataTables/dataTables.bootstrap.css"
-	rel="stylesheet" />
 
+<script src="${ctx }/resources/plugins/jquery-1.10.2.js"></script>
+<!-- Page-Level CSS -->
+<script>
+	$(document).ready(function(){
+		<c:choose>
+		<c:when test="${review ne 'null'}">
+			$('input:radio[name=score]:input[value='+${review.score}+']').attr("checked", true);
+			$('#contents').val("${review.contents}");
+			$('#submit').attr("action", "${ctx }/review/modify.do");
+		</c:when>
+		<c:otherwise>
+			$('#submit').attr("action", "${ctx }/review/create.do");
+		
+		</c:otherwise>
+		</c:choose>
+	});
+	var openSurvey = function(){
+		if($("input:checkbox[id='isSurvey']").is(":checked"))
+			$('#myModal').modal();
+	}
+</script>
 </head>
 
 <style>
@@ -39,57 +57,18 @@
 <body>
 	<!--  wrapper -->
 	<div id="wrapper">
-		<!-- navbar top -->
-		<nav class="navbar navbar-default navbar-fixed-top" role="navigation"
-			id="navbar">
-			<!-- navbar-header -->
-			<a class="navbar-brand" href="index.html"> <img
-				src="../../resources/img/logo.png" alt="" />
-			</a>
-			<!-- navbar-top-links -->
-			<ul class="nav navbar-top-links navbar-right">
-				<!-- main dropdown -->
-				<li class="row">
-					<div class="col-xs-10" style="margin-right: 200px">
-						<!-- search section-->
-						<div class="input-group custom-search-form">
-							<input type="text" class="form-control" placeholder="Search"
-								style="width: 400px"> <input type="text"
-								class="form-control" placeholder="Location" style="width: 400px">
-							<button class="btn btn-default" type="button">
-								<i class="fa fa-search"></i>
-							</button>
-						</div>
-						<!--end search section-->
-					</div>
-				</li>
-				<li class="dropdown"><a class="dropdown-toggle"
-					data-toggle="dropdown" href="#"> <i class="fa fa-user fa-3x"></i>
-				</a> <!-- dropdown user-->
-
-					<ul class="dropdown-menu dropdown-user">
-						<li><a href="#"><i class="fa fa-user fa-fw"></i>User
-								Profile</a></li>
-						<li><a href="#"><i class="fa fa-gear fa-fw"></i>Settings</a>
-						</li>
-						<li class="divider"></li>
-						<li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i>Logout</a>
-						</li>
-					</ul> <!-- end dropdown-user --></li>
-				<!-- end main dropdown -->
-			</ul>
-			<!-- end navbar-top-links -->
-		</nav>
-		<!-- end navbar top -->
+		<header>
+			<%@ include file="../header.jspf"%>
+		</header>
 
 		<!--  page-wrapper -->
 
 
 
 	</div>
-	<!-- end page-wrapper -->
+	<!-- end wrapper -->
 	<div class="container" style="color: black;">
-	<form method="POST" action="${ctx }/review/create.do">
+	<form method="POST">
 		<h2>Write Review</h2>
 		<div class="row">
 			<div class="col-md-1 col-lg-1"></div>
@@ -133,8 +112,7 @@
 
 				<br> <br>
 				<div class="col-lg-12">
-				<form method="post" action="${ctx }/review/create.do">
-					<input type="hidden" name="foodtruckId" value="${truck.foodtruckId}">
+				<form id = "submit" method = "post">	
 					<div class="col-lg-8" style="float: left">
 						<table width="1150px">
 							<thead>
@@ -169,81 +147,52 @@
 								</tr>
 							</tbody>
 							<tr>
-								<td colspan="2"><textarea name="contents"
+								<td colspan="2"><textarea name="contents" id="contents"
 										style="width: 100%; border: 1; overflow: visible; text-overflow: ellipsis;"
 										rows=15></textarea></td>
 							</tr>
 						</table>
 					</div>
 				</div>
-
-
-
-			            <div style="margin-left:30px">
-						<a style="color:black" onclick="this.nextSibling.style.display=(this.nextSibling.style.display=='none')?'block':'none';" href="javascript:void(0)"> 
-						푸드트럭 설문조사 항목
-						</a><div style="DISPLAY: none">
-        
-        
-                                            <h4>음식의 가격에 만족하십니까?</h4>
-                                            <label class="radio-inline">
-                                                <input type="radio" name="optionsRadiosInline" id="optionsRadiosInline1" value="option1" >매우만족
-                                            </label>
-                                            <label class="radio-inline">
-                                                <input type="radio" name="optionsRadiosInline" id="optionsRadiosInline2" value="option2">만족
-                                            </label>
-                                            <label class="radio-inline">
-                                                <input type="radio" name="optionsRadiosInline" id="optionsRadiosInline3" value="option3">보통
-                                            </label>
-                                        
-                                        <label class="radio-inline">
-                                                <input type="radio" name="optionsRadiosInline" id="optionsRadiosInline3" value="option3">불만
-                                            </label>
-                                              <label class="radio-inline">
-                                                <input type="radio" name="optionsRadiosInline" id="optionsRadiosInline3" value="option3">매우불만
-                                            </label>
-                                        
-    
-    <br>
-                                                <h4>음식의 품질에 만족하십니까?</h4>
-                                            <label class="radio-inline">
-                                                <input type="radio" name="optionsRadiosInline" id="optionsRadiosInline1" value="option1" >매우만족
-                                            </label>
-                                            <label class="radio-inline">
-                                                <input type="radio" name="optionsRadiosInline" id="optionsRadiosInline2" value="option2">만족
-                                            </label>
-                                            <label class="radio-inline">
-                                                <input type="radio" name="optionsRadiosInline" id="optionsRadiosInline3" value="option3">보통
-                                            </label>
-                                        
-                                        <label class="radio-inline">
-                                                <input type="radio" name="optionsRadiosInline" id="optionsRadiosInline3" value="option3">불만
-                                            </label>
-                                              <label class="radio-inline">
-                                                <input type="radio" name="optionsRadiosInline" id="optionsRadiosInline3" value="option3">매우불만
-                                            </label>
-    
-    <br>
-                                                <h4>푸드트럭커의 서비스에 만족하십니까? </h4>
-                                            <label class="radio-inline">
-                                                <input type="radio" name="optionsRadiosInline" id="optionsRadiosInline1" value="option1" >매우만족
-                                            </label>
-                                            <label class="radio-inline">
-                                                <input type="radio" name="optionsRadiosInline" id="optionsRadiosInline2" value="option2">만족
-                                            </label>
-                                            <label class="radio-inline">
-                                                <input type="radio" name="optionsRadiosInline" id="optionsRadiosInline3" value="option3">보통
-                                            </label>
-                                        
-                                        <label class="radio-inline">
-                                                <input type="radio" name="optionsRadiosInline" id="optionsRadiosInline3" value="option3">불만
-                                            </label>
-                                              <label class="radio-inline">
-                                                <input type="radio" name="optionsRadiosInline" id="optionsRadiosInline3" value="option3">매우불만
-                                            </label>
-    
-        
-    <textarea name="ourtext" style="width:100%;border:1;overflow:visible;text-overflow:ellipsis;" rows=3 placeholder="기타의견사항"></textarea>
+				설문 응답 여부 : 
+				<input type="checkbox" class = "btn btn-default" name = "isSurvey" id = "isSurvey" onclick="openSurvey()"> 
+					<div class="modal fade" id="myModal" role="dialog">
+					    <div class="modal-dialog">
+					      <!-- Modal content-->
+					      <div class="modal-content">
+					        <div class="modal-header">
+					          <button type="button" class="close" data-dismiss="modal">&times;</button>
+					          <h4 class="modal-title">설문</h4>
+					        </div>
+					        
+					        <div class="modal-body">
+					          <c:forEach items="${itemlist }" var = "item">
+		     					<h4>${item.question }</h4>
+		                        <label class="radio-inline">
+		                            <input type="radio" name="q${item.itemId }" value="5" >매우만족
+		                        </label>
+		                        <label class="radio-inline">
+		                            <input type="radio" name="q${item.itemId }" value="4">만족
+		                        </label>
+		                        <label class="radio-inline">
+		                            <input type="radio" name="q${item.itemId }" value="3">보통
+		                        </label>
+		                    	<label class="radio-inline">
+		                            <input type="radio" name="q${item.itemId }" value="2">불만
+		                        </label>
+		                        <label class="radio-inline">
+		                            <input type="radio" name="q${item.itemId }" value="1">매우불만
+		                        </label>
+								</c:forEach>
+								<textarea name="ourtext" style="width:100%;border:1;overflow:visible;text-overflow:ellipsis;" rows=3 placeholder="기타의견사항"></textarea>
+					        </div>
+					        <div class="modal-footer">
+					          <input type="button" class="btn btn-default" data-dismiss="modal" value="닫기">
+					        </div>
+					      </div>
+					      
+					    </div>
+					  </div>
 <br>
     </div>
     
@@ -254,7 +203,14 @@
 			</div>
 			<div class="show">
 			<div class="in" align="center">
-				<input type="submit" class="btn btn-success" value="리뷰 등록">
+			<c:choose>
+				<c:when test="${review eq 'null'}">
+					<input type="submit" class="btn btn-success" value="리뷰 등록">
+				</c:when>
+				<c:otherwise>
+					<input type="submit" class="btn btn-primary" value="리뷰 수정">	
+				</c:otherwise>
+			</c:choose>
 			</div>
 			
 </div>
@@ -263,7 +219,6 @@
 	</div>
 	<!-- end wrapper -->
 	<!-- Core Scripts - Include with every page -->
-	<script src="${ctx }/resources/plugins/jquery-1.10.2.js"></script>
 	<script src="${ctx }/resources/plugins/bootstrap/bootstrap.min.js"></script>
 	<script src="${ctx }/resources/plugins/metisMenu/jquery.metisMenu.js"></script>
 	<script src="${ctx }/resources/plugins/pace/pace.js"></script>

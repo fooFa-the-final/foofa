@@ -26,7 +26,7 @@ public class SellerServiceLogic implements SellerService {
 	@Override
 	public boolean checkPw(String sellerId, String password) {
 		Seller seller = sellerStore.select(sellerId);
-		if (seller.getPassword().equals(password)) {
+		if (seller!=null && seller.getPassword().equals(password)) {
 			return true;
 		} else {
 			return false;
@@ -60,6 +60,7 @@ public class SellerServiceLogic implements SellerService {
 
 	@Override
 	public boolean remove(String sellerId) {
+		System.out.println(sellerId);
 		return sellerStore.delete(sellerId) > 0;
 	}
 }

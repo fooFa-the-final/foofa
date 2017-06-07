@@ -1,0 +1,33 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+       <!-- navbar side -->
+        <nav class="navbar-default navbar-static-side" role="navigation">
+            <!-- sidebar-collapse -->
+            <div class="sidebar-collapse">
+                <!-- side-menu -->
+                <ul class="nav" id="side-menu">
+                    <li id="side-review" >
+                        <a href="${ctx }/review/list/member.do"><i class="fa fa-dashboard fa-fw"></i>My Reviews </a>
+                    </li>
+                     <li id="side-follow" >
+                        <a href="${ctx }/follow/list.do"><i class="fa fa-flask fa-fw"></i>팔로우 목록</a>
+                    </li>
+                    <li id="side-news" >
+                        <a href="${ctx }/review/list/follow.do"><i class="fa fa-flask fa-fw"></i>팔로우 뉴스피드</a>
+                    </li>
+                    <li id="side-favorite" >
+                        <a href="${ctx }/favorite/list.do"><i class="fa fa-table fa-fw"></i>단골 목록</a>
+                    </li>
+                    <li id="side-modify" >
+                        <a href="${ctx }/member/modify.do"><i class="fa fa-edit fa-fw"></i>회원 정보 수정</a>
+                    </li>
+                    <li id="side-remove" >
+                        <a href="${ctx }/member/checkPw.do"><i class="fa fa-table fa-fw"></i>회원 탈퇴</a>
+                    </li>
+                </ul>
+                <!-- end side-menu -->
+            </div>
+            <!-- end sidebar-collapse -->
+        </nav>
+        <!-- end navbar side -->

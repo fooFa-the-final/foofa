@@ -2,6 +2,7 @@ package fofa.store;
 
 import static org.junit.Assert.*;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.junit.Test;
@@ -32,15 +33,15 @@ public class FoodtruckStoreLogicTest {
 //		assertEquals(1, store.insert(foodtruck));
 //	}
 
-	@Test
-	public void testUpdate() {
-		Foodtruck foodtruck = store.selectById("F12");
-		
-		foodtruck.setFoodtruckImg("image");
-		foodtruck.setFoodtruckName("10000LAB COFFEE");
-		
-		assertEquals(1, store.update(foodtruck));
-	}
+//	@Test
+//	public void testUpdate() {
+//		Foodtruck foodtruck = store.selectById("F12");
+//		
+//		foodtruck.setFoodtruckImg("image");
+//		foodtruck.setFoodtruckName("10000LAB COFFEE");
+//		
+//		assertEquals(1, store.update(foodtruck));
+//	}
 
 	@Test
 	public void testSelectById() {
@@ -51,26 +52,28 @@ public class FoodtruckStoreLogicTest {
 
 	@Test
 	public void testSelectByLoc() {
-		List<Foodtruck> list = store.selectByLoc("경기도");
+		List<HashMap<String, String>> list = store.selectByLoc(1, "서울");
 		
-		assertEquals(2, list.size());
+		assertEquals("sampleTruck106", list.get(0).get("foodtruckName"));
+		assertEquals("485", list.get(0).get("allCount"));
 	}
 
-	@Test
-	public void testSelectByKeyLoc() {
-		List<Foodtruck> list = store.selectByKeyLoc("candy", "서울");
-		
-		assertEquals("F11", list.get(0).getFoodtruckId());
-	}
+//	@Test
+//	public void testSelectByKeyLoc() {
+//		List<Foodtruck> list = store.selectByKeyLoc(1, "", "서울");
+//		
+//		assertEquals(10, list.size());
+//	}
 
 	@Test
 	public void testSelectByFilter() {
 		Foodtruck t = new Foodtruck();
-		t.setState(true);
+		t.setState(false);
 		
-		List<Foodtruck> list = store.selectByFilter(t);
 		
-		assertEquals(4, list.size());
+		List<HashMap<String, String>> list = store.selectByFilter(1, t);
+		
+		assertEquals(10, list.size());
 	}
 
 	@Test

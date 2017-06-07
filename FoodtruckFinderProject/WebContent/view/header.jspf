@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+
           <!-- navbar top -->
         <nav class="navbar navbar-default navbar-fixed-top" role="navigation" id="navbar" style="height:60px; margin:0px">
             <!-- navbar-header -->
@@ -25,9 +27,23 @@
                 <li class="row" style=" margin-right:20px; padding:0px;  width:90%">
 	            			<!-- search section-->
 	                        <div class="input-group custom-search-form" style="margin:6px;" >
-	                        	<form method="post" action="/truck/list/key.do" style="margin:7px;">
-	                        	<input type="text" class="form-control" name="keyword" placeholder="Search" style="width: 300px; padding:0px;">
-	                            <input type="text" class="form-control" name="location" placeholder="Location" style="width: 300px; padding:0px; ">
+	                        	<form method="post" action="${ctx }/foodtruck/searchByKeyLoc.do" style="margin:7px;">
+	                        	<c:choose>
+		                        	<c:when test="${keyword ne null }">
+		                        		<input type="text" class="form-control" id="keyword" name="keyword" placeholder="Search" style="width: 300px; padding:0px;" value="${keyword }">
+		                        	</c:when>
+		                        	<c:otherwise>
+		                        		<input type="text" class="form-control" id="keyword" name="keyword" placeholder="Search" style="width: 300px; padding:0px;">
+		                        	</c:otherwise>
+	                        	</c:choose>
+	                        	<c:choose>
+		                        	<c:when test="${location ne null }">
+		                            	<input type="text" class="form-control" id="location" name="location" placeholder="Location" style="width: 300px; padding:0px;" value="${location }">
+		                            </c:when>
+		                            <c:otherwise>
+		                            	<input type="text" class="form-control" id="location" name="location" placeholder="Location" style="width: 300px; padding:0px;">
+		                            </c:otherwise>
+	                            </c:choose>
 	                                <button class="btn btn-default" type="submit" style="height:34px">
 	                                    <i class="fa fa-search" style="padding:0px"></i>
 	                                </button>
@@ -63,3 +79,4 @@
             <!-- end navbar-top-links -->
         </nav>
         <!-- end navbar top -->
+           

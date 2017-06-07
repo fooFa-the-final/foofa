@@ -26,10 +26,9 @@ public class SellerController {
 	}
 
 	@ResponseBody
-	@RequestMapping(value = "seller/checkId.do")
+	@RequestMapping(value = "seller/checkId.do", method=RequestMethod.POST)
 	public String checkId(HttpServletRequest req) {
 		String sellerId = req.getParameter("sellerId");
-		System.out.println(sellerId);
 		boolean result;
 		result = sellerService.checkId(sellerId);
 		if (result == true) {
@@ -50,12 +49,9 @@ public class SellerController {
 		String sellerId = seller.getSellerId();
 		boolean result;
 		result = sellerService.checkPw(sellerId, password);
-		System.out.println(result);
-
 		if (result == true) {
 			return "yes";
 		}
-
 		return "no";
 	}
 
@@ -66,9 +62,8 @@ public class SellerController {
 
 	@RequestMapping(value = "seller/remove.do", method = RequestMethod.POST)
 	public String remove(HttpSession session) {
-		String sellerId = (String) session.getAttribute("loginUserId");
-		System.out.println(sellerId);
-		sellerService.remove(sellerId);
+		sellerService.remove((String) session.getAttribute("loginUserId"));
+		session.invalidate();
 		return "redirect:/index.do";
 	}
 	
@@ -91,7 +86,7 @@ public class SellerController {
 	@RequestMapping(value = "seller/modify.do", method = RequestMethod.POST)
 	public String modify(Seller seller) {
 		sellerService.modify(seller);
-		return "../view/foodtruck/foodtruckInfo.jsp";
+		return "redirect:/foodtruck/searchById.do";
 	}
 
 

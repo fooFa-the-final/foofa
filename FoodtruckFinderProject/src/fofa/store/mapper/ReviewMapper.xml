@@ -42,15 +42,34 @@
   		FROM review_tb
   		WHERE member_id = #{writer.memberId}
   	</select>
+   	<select id="selectByFromId" parameterType="String" resultMap="ReviewMap">
+   		select * from (
+  		SELECT review_id, member_id, foodtruck_id, contents, score, writedate
+  		FROM review_tb
+  		WHERE member_id in (select to_id from follow_tb where from_id = #{fromId})
+		order by writedate desc
+		) where rownum <![CDATA[ <= ]]> 20 
+  	</select>
   	<select id="selectByTruckId" parameterType="String" resultMap="ReviewMap">
   		SELECT review_id, member_id, foodtruck_id, contents, score, writedate
   		FROM review_tb
   		WHERE foodtruck_Id = #{foodtruck.foodtruckId}
   	</select>
   	<select id="selectByRecommand" resultMap="ReviewMap">
+  		select * from (
   		select r.review_id review_id, member_id, foodtruck_id, contents, score, writedate 
   		from review_tb r LEFT OUTER JOIN (select review_id, count(*) recommand from recommand_tb group by review_id) d 
   		ON d.review_id = r.review_id
-		order by recommand desc
+		order by recommand desc nulls last
+		) where rownum <![CDATA[ <= ]]> 4
+  	</select>
+  	<select id = "avgScore" resultType="Double" parameterType="String">
+  		select avg(score) from review_tb where foodtruck_Id = #{foodtruckId}
+  	</select>
+  	<select id = "selectTruckCount" resultType="int" parameterType="String">
+  		select count(*) from review_tb where foodtruck_Id = #{foodtruckId}
+  	</select>
+  	 <select id = "selectMemberCount" resultType="int" parameterType="String">
+  		select count(*)  reviewCount from review_tb where member_id = #{memberId}
   	</select>
   </mapper>

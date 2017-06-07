@@ -13,14 +13,14 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bootsrtap Free Admin Template - SIMINTA | Admin Dashboad Template</title>
+    <title>Foodtruck Finder</title>
     <!-- Core CSS - Include with every page -->
-    <link href="../../resources/plugins/bootstrap/bootstrap.css" rel="stylesheet" />
-    <link href="../../resources/font-awesome/css/font-awesome.css" rel="stylesheet" />
-    <link href="../../resources/plugins/pace/pace-theme-big-counter.css" rel="stylesheet" />
-    <link href="../../resources/css/style.css" rel="stylesheet" />
-    <link href="../../resources/css/main-style.css" rel="stylesheet" />
-    <script src="../../resources/plugins/jquery-1.10.2.js"></script>
+    <link href="${ctx }/resources/plugins/bootstrap/bootstrap.css" rel="stylesheet" />
+    <link href="${ctx }/resources/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <link href="${ctx }/resources/plugins/pace/pace-theme-big-counter.css" rel="stylesheet" />
+    <link href="${ctx }/resources/css/style.css" rel="stylesheet" />
+    <link href="${ctx }/resources/css/main-style.css" rel="stylesheet" />
+    <script src="${ctx }/resources/plugins/jquery-1.10.2.js"></script>
 	 <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=noUvsaR702FX6WH5un5h&submodules=geocoder"></script>
 	 <script>
 	 	var newMarker = function(position){
@@ -32,7 +32,33 @@
 			markers.push(marker);
 		    console.log(position + "length : " +markers.length);
 		}
+	 	//favorite 수 반환
 	 	$(document).ready(function(){
+	 		$.ajax({
+	 			type:'get',
+	 			url : "${ctx }/favorite/count.do",
+	 			data:{
+	 				foodtruckId : '${truck.foodtruckId}'
+	 			},
+	 			success : function(data){
+					$("#followCount").html(data);
+	 			}
+	 		});	 		
+		 //버튼 서식 지정 
+		 		$.ajax({
+		 			type:'get',
+		 			url : "${ctx }/favorite/exist.do",
+		 			data:{
+		 				foodtruckId : '${truck.foodtruckId}'
+		 			},
+		 			success : function(data){
+						if(data){
+							 $("#favoriteBtn").attr('class', 'btn btn-danger btn-circle btn-lg');
+						}else {
+							 $("#favoriteBtn").attr('class', 'btn btn-default btn-circle btn-lg');
+						}
+		 			}
+		 		});	 	 		
 	 		
 	 		naver.maps.Service.geocode({
 	 			address: "${truck.location}"
@@ -81,21 +107,60 @@
 	 	
 	 	var report = function(reviewId){
 	 		var reaId = "#reason" + reviewId;
+	 		var name = "reason" + reviewId
+	 		var st = $(":input:radio[name='"+ name + "']:checked").val();
 	 		$.ajax({
 	 			type:'POST',
 	 			url : "${ctx}/review/report/create.do",
 	 			data:{
-	 				reviewId : reviewId, reason : $(reaId).val()
+	 				reviewId : reviewId, reason : st
 	 			},
 	 			success : function(data){
 	 				if ($.trim(data) == 'true') {
-						alert("신고 처리가 완료되었습니다.");
+						alert("신고 등록이 완료되었습니다.");
 					} else if ($.trim(data) == 'false') {
 						alert("이미 신고된 리뷰입니다.");
 					}
 	 			}
 	 		});
 	 	}
+	 	
+	 	var untype = function(){
+	 		 $("input[name=reasonContents]").attr("readonly",true).attr("disabled", true);
+	 		 //$("input[name=reasonContents]").attr("disabled",true);
+	 	}
+	 	
+	 	var availableType = function(){
+	 		 $("input[name=reasonContents]").attr("readonly",false).attr("disabled", false);
+	 		 //$("input[name=reasonContents]").attr("disabled",true);
+	 	}
+	 	
+	 	var favorite = function(truckId){
+	 		var btn = $("#favoriteBtn");
+	 		var classN = btn.attr('class');
+	 		var url ="";
+	 		
+	 		if(classN == "btn btn-default btn-circle btn-lg"){
+	 			url = "${ctx}/favorite/create.do";
+	 			classN = "btn btn-danger btn-circle btn-lg";
+	 		} else {
+	 			url = "${ctx}/favorite/remove.do";
+	 			classN = "btn btn-default btn-circle btn-lg";
+	 		}
+	 		
+	 		$.ajax({
+	 			type:'GET',
+	 			url : url,
+	 			data:{
+	 				foodtruckId : truckId
+	 			},
+	 			success : function(data){
+	 				if (data) {
+	 					btn.attr("class", classN);
+					} 
+	 			}
+	 		});
+	 	};
 	 </script>
 </head>
 
@@ -103,54 +168,8 @@
     <!--  wrapper -->
     
     <div id="wrapper">
-        <!-- navbar top -->
-        <nav class="navbar navbar-default navbar-fixed-top" role="navigation" id="navbar">
-            <!-- navbar-header -->
-            <div class="navbar-header">
-                <a class="navbar-brand" href="index.html">
-                    <img src="../../resources/img/logo.png" alt="" />
-                </a>
-            </div>
-            <!-- end navbar-header -->
-            <!-- navbar-top-links -->
-            <ul class="nav navbar-top-links navbar-right">
-               
-               <li class="row">
-                    <!-- search section-->
-                    <div class="input-group custom-search-form" style="width:800px; margin-right:200px">
-                        <input type="text" class="form-control" placeholder="Search" style="width: 45%">
-                        <input type="text" class="form-control" placeholder="Location" style="width: 45%">
-                            <button class="btn btn-default" type="button">
-                                <i class="fa fa-search"></i>
-                            </button>
-                    </div>
-                    <!--end search section-->
-                </li>
-               
-                <!-- main dropdown -->
-                    <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-user fa-3x"></i>
-                    </a>
-                    <!-- dropdown user-->
-                    <ul class="dropdown-menu dropdown-user">
-                        <li><a href="#"><i class="fa fa-user fa-fw"></i>User Profile</a>
-                        </li>
-                        <li><a href="#"><i class="fa fa-gear fa-fw"></i>Settings</a>
-                        </li>
-                        <li class="divider"></li>
-                        <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i>Logout</a>
-                        </li>
-                    </ul>
-                    <!-- end dropdown-user -->
-                </li>
-                <!-- end main dropdown -->
-            </ul>
-            <!-- end navbar-top-links -->
 
-        </nav>
-        <!-- end navbar top -->
-        
+		<%@ include file="../header.jspf"%>
         <!--  page-wrapper -->
             <div class="row">
                 <!-- Page Header -->
@@ -161,15 +180,15 @@
                             </a>
                             <div class="user-info">
                                 <h1>${truck.foodtruckName }</h1><br>
-                                <h5>${truck.category1 }양식</h5>
+                                <h5>${truck.category1 }</h5>
                                 <h5>${truck.spot }</h5>
-                                <h5>144 Followers</h5>
+                                <h5><span id="followCount"></span>이 이푸드트럭을 단골로 등록했습니다.</h5>
                                 <h5>${fn:length(reviewList)} Reviews</h5>
                             </div>
                     </span>
                     <span style="float:right; margin-right:50px; margin-top: 30px">
-                        <a href="#"><button type="button" class="btn btn-default">판매자 정보 수정</button></a>
-                        <a href="#"><button type="button" class="btn btn-default">판매자 탈퇴</button></a>
+                        <button id="favoriteBtn" type="button" class="btn btn-default btn-circle btn-lg" onclick="favorite('${truck.foodtruckId }');"><i class="fa fa-heart"></i></button>
+                        <a href="#"><button type="button" class="btn btn-danger">리뷰 작성</button></a>
                     </span>        
                 </div>
                 <!--End Page Header -->
@@ -194,7 +213,7 @@
 							 <fieldset class="truck-border">
 							  <legend class="truck-border">Today</legend>
 							  <font size = "4">
-								  Today's Hour: ${startHour }:${startMin }~${endHour }:${endMin }<br>
+								  Today's Hour: ${startTime } ~ ${endTime }<br>
 								  Today's Location: ${truck.spot }<br>
 								  Today's Issue<br><br> ${truck.notice }
 							  </font>
@@ -232,9 +251,13 @@
 								        </div>
 								        
 								        <div class="modal-body">
-								           	<h4>신고 내용 : ${Review.contents }</h4>
-								           		
-								          <input type="text" class="form-control" placeholder="신고 사유를 적어주세요" id="reason${Review.reviewId}" name="reason">
+								           	<h4>리뷰 내용 : ${Review.contents }</h4>
+								          <input type="radio" name = "reason${Review.reviewId }" value="욕설" onClick="untype()"> 욕설<br>
+								          <input type="radio" name = "reason${Review.reviewId }" value="음란" onClick="untype()"> 음란<br>
+								          <input type="radio" name = "reason${Review.reviewId }" value="광고" onClick="untype()"> 광고<br>
+								          <input type="radio" name = "reason${Review.reviewId }" value="부적절한 리뷰" onClick="untype()"> 부적절한 리뷰<br>
+								          <input type="radio" name = "reason${Review.reviewId }" value="direct" onClick="availableType()"> 직접 적겠습니다.<br>
+								          <input type="text" class="form-control" placeholder="신고 사유를 적어주세요" id="reason${Review.reviewId}" name="reasonContents">
 								        </div>
 								        <div class="modal-footer">
 								          <input type="button" class="btn btn-default" data-dismiss="modal" value="신고" onClick="report('${Review.reviewId}')">
@@ -252,15 +275,15 @@
 			
         </div>
         <!-- end page-wrapper -->
-        
+       </div>
     <!-- end wrapper -->
 
     <!-- Core Scripts - Include with every page -->
     
-    <script src="../../resources/plugins/bootstrap/bootstrap.min.js"></script>
-    <script src="../../resources/plugins/metisMenu/jquery.metisMenu.js"></script>
-    <script src="../../resources/plugins/pace/pace.js"></script>
-    <script src="../../resources/scripts/siminta.js"></script>
+    <script src="${ctx }/resources/plugins/bootstrap/bootstrap.min.js"></script>
+    <script src="${ctx }/resources/plugins/metisMenu/jquery.metisMenu.js"></script>
+    <script src="${ctx }/resources/plugins/pace/pace.js"></script>
+    <script src="${ctx }/resources/scripts/siminta.js"></script>
 
 </body>
 </html>

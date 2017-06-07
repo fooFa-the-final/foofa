@@ -31,7 +31,6 @@ public class MemberServiceLogic implements MemberService{
 
 	@Override
 	public boolean remove(String memberId) {
-	System.out.println(memberId);
 		return store.delete(memberId) >0;
 	}
 
@@ -50,13 +49,7 @@ public class MemberServiceLogic implements MemberService{
 	public boolean checkPw(String memberId, String password) {
 
 		Member member = store.select(memberId);
-		if(member ==null){
-			String back;
-			back ="../view/user/login.jsp";
-			return false;
-		}
-		
-		if (member.getPassword().equals(password)) {
+		if (member!=null && member.getPassword().equals(password)) {
 			return true;
 		} else {
 			return false;
@@ -69,5 +62,12 @@ public class MemberServiceLogic implements MemberService{
 		Member member =store.select(memberId);
 		return member;
 	}
+
+	@Override
+	public boolean modifyImg(Member member) {
+		return store.imgupdate(member)>0;
+	}
+	
+	
 
 }

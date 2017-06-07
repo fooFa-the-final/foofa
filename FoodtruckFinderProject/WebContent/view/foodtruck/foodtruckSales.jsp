@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+ <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="ctx" value="${pageContext.request.contextPath }"></c:set>
@@ -14,6 +14,7 @@
 <script src="${ctx }/resources/plugins/metisMenu/jquery.metisMenu.js"></script>
 <script src="${ctx }/resources/plugins/pace/pace.js"></script>
 <script src="${ctx }/resources/scripts/siminta.js"></script>
+
 <!-- Core CSS - Include with every page -->
 <link href="${ctx }/resources/plugins/bootstrap/bootstrap.css"
 	rel="stylesheet" />
@@ -67,66 +68,55 @@ h2 {
 <link href='${ctx }/resources/css/fullcalendar.min.css' rel='stylesheet' />
 <link href='${ctx }/resources/css/fullcalendar.print.min.css'
 	rel='stylesheet' media='print' />
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src='${ctx }/resources/scripts/moment.min.js'></script>
-<script src='${ctx }/resources/scripts/jquery.min.js'></script>
+<%-- <script src='${ctx }/resources/scripts/jquery.min.js'></script> --%>
 <script src='${ctx }/resources/scripts/fullcalendar.min.js'></script>
+	 <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=noUvsaR702FX6WH5un5h&submodules=geocoder"></script>
+
+
 <script>
-	$(document).ready(
-			function() {
+	$(document).ready(function() {
+		$('#side-sales').attr('class', 'selected');
+		$('#calendar').fullCalendar({
+			
+			dayClick : function(date, jsEvent, view) {
 
-				$('#calendar').fullCalendar({
-					dayClick : function(date, jsEvent, view) {
-
-						convertDate(date.format());
-					},
-					defaultDate : '2017-05-12',
-					editable : true,
-					eventLimit : true, // allow "more" link when too many events
-					events : [ {
-						title : 'Click for Google',
-						url : 'http://google.com/',
-						start : '2017-05-28'
-					} ]
+				convertDate(date.format());
+				
+			},
+			events : function(start, end, timezone, callback) {
+				$.ajax({
+					url : '${ctx}/sales/month.do',
+					dataType : 'json',
+					success : function(data) {
+						var events = [];
+						$.each(data,function(i,item) {
+							events.push({
+								title : item.re,
+								start : item.da
+							});
+						});
+						callback(events);
+					}
 				});
-				jQuery("button.fc-prev-button").click(function() {
-					var date = jQuery("#calendar").fullCalendar("getDate");
-					convertMonth(date);
-				});
-				jQuery("button.fc-next-button").click(function() {
-					var date = jQuery("#calendar").fullCalendar("getDate");
-					convertMonth(date);
-				});
-				function convertDate(date) {
-					var date = new Date(date);
-					date = date.yyyymmdd();
-					alert(date);
-				}
-				Date.prototype.yyyymmdd = function() {
-					var yyyy = this.getFullYear().toString();
-					var mm = (this.getMonth() + 1).toString();
-					var dd = this.getDate().toString();
-					return yyyy + (mm[1] ? mm : "0" + mm[0])
-							+ (dd[1] ? dd : "0" + dd[0]);
-				}
-				function convertMonth(date) {
-					var date = new Date(date);
-
-					date = date.yyyymm();
-					var allData = {
-						"month" : date
-					};
-					alert(date);
-
-				}
-				Date.prototype.yyyymm = function() {
-					var yyyy = this.getFullYear().toString();
-					var mm = (this.getMonth() + 1).toString();
-					return yyyy + (mm[1] ? mm : "0" + mm[0]);
-				}
-
-			});
-	
-
+			}
+		});
+		function convertDate(date) {
+			var date = new Date(date);
+			date = date.yyyymmdd();
+			jQuery('#myModal').modal();
+			alert(date);
+		}
+		Date.prototype.yyyymmdd = function() {
+			var yyyy = this.getFullYear().toString();
+			var mm = (this.getMonth() + 1).toString();
+			var dd = this.getDate().toString();
+			return yyyy + (mm[1] ? mm : "0" + mm[0])
+					+ (dd[1] ? dd : "0" + dd[0]);
+		}
+	})
 </script>
 <style>
 #calendar {
@@ -140,30 +130,8 @@ h2 {
 	<div id="wrapper">
 		<!-- navbar top -->
 		<%@ include file="../header.jspf"%>
-		<!-- end navbar top -->
 
-
-		<!-- navbar side -->
-		<nav class="navbar-default navbar-static-side" role="navigation">
-		<!-- sidebar-collapse -->
-		<div class="sidebar-collapse">
-			<!-- side-menu -->
-			<ul class="nav" id="side-menu">
-				<li class="active"><a href="#"><i
-						class="fa fa-files-o fa-fw"></i>Truck Info<span class="fa arrow"></span></a>
-					<ul class="nav nav-second-level">
-						<li><a href="#">Truck Info</a></li>
-						<li><a href="#">트럭정보 수정</a></li>
-					</ul> <!-- second-level-items --></li>
-				<li><a href="#"><i class="fa fa-flask fa-fw"></i>광고요청</a></li>
-				<li class="selected"><a href="#"><i
-						class="fa fa-table fa-fw"></i>매출통계</a></li>
-				<li><a href="#"><i class="fa fa-edit fa-fw"></i>설문통계</a></li>
-			</ul>
-			<!-- end side-menu -->
-		</div>
-		<!-- end sidebar-collapse --> </nav>
-		<!-- end navbar side -->
+		<%@ include file="../left/sellerLeft.jspf"%>
 		<div id="page-wrapper">
 			<!--매출페이지 시작  -->
 			<div>
@@ -287,12 +255,42 @@ h2 {
 				<script>
 					$(document).ready(function() {
 						year();
+						var position = new naver.maps.LatLng(37.4795169, 126.8824995);
+						var map = new naver.maps.Map('map', {
+							center: position,
+							zoom: 10
+						});
+						var marker = new naver.maps.Marker({
+							position: position,
+							map: map
+						});
 					})
 				</script>
 			</div>
 			<div id='calendar' />
-			<div id='map' />
+			<div id='map' style="height:400px;width:300px">
+			</div>
 		</div>
+		<div class="modal fade" id="myModal" role="dialog">
+								    <div class="modal-dialog">
+								      <!-- Modal content-->
+								      <div class="modal-content">
+								        <div class="modal-header">
+								          <button type="button" class="close" data-dismiss="modal">&times;</button>
+								          <h4 class="modal-title">접수된 신고 이유</h4>
+								        </div>
+								        
+								        <div class="modal-body" id = "modalCons">
+								           	<h4>신고 된 리뷰 내용 </h4>
+								          
+								        </div>
+								        <div class="modal-footer">
+								          <input type="button" class="btn btn-default" data-dismiss="modal" value="닫기">
+								        </div>
+								      </div>
+								      
+								    </div>
+								  </div>
 
 
 	</div>

@@ -30,9 +30,9 @@ var registMenu = function(){
 	var comHtml = "";
 	var count = c++;
 	comHtml += '<tr class="odd gradeX">';
-	comHtml += '<td></td><td align="left"><input type="text" id="menuName'+(count)+'" name="menuName" value="'+$("#inputMenuName").val()+'" readonly></td>';
-	comHtml += '<td align="left"><input type="text" id="menuPrice'+(count)+'" name="menuPrice" value="'+$("#inputMenuPrice").val()+'" readonly></td>';
-	comHtml += '<td ><input type="text" id="menuState'+(count)+'" name="menuState" value="'+ $("#inputMenuState").val() +'" readonly></td>';
+	comHtml += '<td></td><td align="left"><input type="text" id="menuName'+(count)+'" name="menuName" value="'+$("#inputMenuName").val()+'" style="border:0px; background-color:transparent" readonly></td>';
+	comHtml += '<td align="left"><input type="text" id="menuPrice'+(count)+'" name="menuPrice" value="'+$("#inputMenuPrice").val()+'" style="border:0px; background-color:transparent" readonly></td>';
+	comHtml += '<td ><input type="text" id="menuState'+(count)+'" name="menuState" value="'+ $("#inputMenuState").val() +'" style="border:0px; background-color:transparent" readonly></td>';
 	comHtml += '<td>';
 	comHtml += '<button type="button" class="btn btn-default btn-circle" onClick="modifyMenu(this)"><i class="fa fa-pencil"></i></button>';
     comHtml += '<button type="button" class="btn btn-danger btn-circle" onClick="removeMenu(this)"><i class="fa fa-times"></i></button>';
@@ -76,12 +76,9 @@ var removeMenu = function(obj){
 				<div class="col-xs-10" style="margin-right: 200px">
 					<!-- search section-->
 					<div class="input-group custom-search-form">
-						<input type="text" class="form-control" placeholder="Search"
-							style="width: 400px"> <input type="text"
-							class="form-control" placeholder="Location" style="width: 400px">
-						<button class="btn btn-default" type="button">
-							<i class="fa fa-search"></i>
-						</button>
+						<input type="text" class="form-control" placeholder="Search" style="width: 400px"> 
+						<input type="text" class="form-control" placeholder="Location" style="width: 400px">
+						<button class="btn btn-default" type="button"> <i class="fa fa-search"></i> </button>
 					</div>
 					<!--end search section-->
 				</div>
@@ -163,8 +160,8 @@ var removeMenu = function(obj){
 		                                            <td align="left"><input id="inputMenuPrice" name="inputMenuPrice" type="number" placeholder="메뉴 가격"></td>
 		                                            <td>
 		                                                <select id="inputMenuState" name="inputMenuState">
-		                                                    <option value="판매중">판매중</option>
-		                                                    <option value="매진">매진</option>
+		                                                    <option value="true">판매중</option>
+		                                                    <option value="false">매진</option>
 		                                                </select>
 		                                            </td>
 		                                            <td align="center">
