@@ -8,17 +8,20 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <!-- Core CSS - Include with every page -->
-<link href="../../resources/plugins/bootstrap/bootstrap.css"
+<link href="${ctx }/resources/plugins/bootstrap/bootstrap.css"
 	rel="stylesheet" />
-<link href="../../resources/font-awesome/css/font-awesome.css"
+<link href="${ctx }/resources/font-awesome/css/font-awesome.css"
 	rel="stylesheet" />
-<link href="../../resources/plugins/pace/pace-theme-big-counter.css"
+<link href="${ctx }/resources/plugins/pace/pace-theme-big-counter.css"
 	rel="stylesheet" />
-<link href="../../resources/css/style.css" rel="stylesheet" />
-<link href="../../resources/css/main-style.css" rel="stylesheet" />
+<link href="${ctx }/resources/css/style.css" rel="stylesheet" />
+<link href="${ctx }/resources/css/main-style.css" rel="stylesheet" />
 <!-- Page-Level CSS -->
-<link href="../../resources/plugins/morris/morris-0.4.3.min.css"
+<link href="${ctx }/resources/plugins/morris/morris-0.4.3.min.css"
 	rel="stylesheet" />
+<link rel='stylesheet' href='${ctx }/resources/css/Nwagon.css'
+	type='text/css'>
+<script src='${ctx }/resources/scripts/Nwagon.js'></script>
 
 
 </head>
@@ -29,7 +32,8 @@
 		<%@ include file="../header.jspf"%>
 
 		<%@ include file="../left/sellerLeft.jspf"%>
-		<!-- end sidebar-collapse --> </nav>
+		<!-- end sidebar-collapse -->
+		</nav>
 		<!-- end navbar side -->
 		<!--  page-wrapper -->
 		<div id="page-wrapper" style="margin-top: 80px">
@@ -77,7 +81,33 @@
 									<div class="panel-heading">Female</div>
 									<div class="panel-body">
 										<div class="flot-chart">
-											<div class="flot-chart-content" id="flot-pie-chart-F"></div>
+											<div id="chart"></div>
+											<script>
+												var options = {
+													'dataset' : {
+														title : 'Web accessibility status',
+														values : [ 18, 12, 3,
+																10, 7 ],
+														colorset : [ '#56b4e9',
+																'#e69f00',
+																'#cc79a7',
+																'#009e73',
+																'#0072b2' ],
+														fields : [ 'A', 'B',
+																'C', 'D', 'E' ]
+													},
+													'donut_width' : 100,
+													'core_circle_radius' : 0,
+													'chartDiv' : 'chart',
+													'chartType' : 'pie',
+													'chartSize' : {
+														width : 600,
+														height : 300
+													}
+												};
+
+												Nwagon.chart(options);
+											</script>
 										</div>
 									</div>
 								</div>
@@ -89,7 +119,42 @@
 									<div class="panel-heading">Male</div>
 									<div class="panel-body">
 										<div class="flot-chart">
-											<div class="flot-chart-content" id="flot-pie-chart-M"></div>
+											<div class="panel-body">
+												<div class="flot-chart">
+													<div id="chart1" />
+													<script>
+														var options = {
+															'dataset' : {
+																title : 'Web accessibility status',
+																values : [ 18,
+																		12, 3,
+																		10, 7 ],
+																colorset : [
+																		'#56b4e9',
+																		'#e69f00',
+																		'#cc79a7',
+																		'#009e73',
+																		'#0072b2' ],
+																fields : [ 'A',
+																		'B',
+																		'C',
+																		'D',
+																		'E' ]
+															},
+															'donut_width' : 100,
+															'core_circle_radius' : 0,
+															'chartDiv' : 'chart1',
+															'chartType' : 'pie',
+															'chartSize' : {
+																width : 600,
+																height : 300
+															}
+														};
+
+														Nwagon.chart(options);
+													</script>
+												</div>
+											</div>
 										</div>
 									</div>
 								</div>
@@ -115,14 +180,97 @@
 											<div class="tab-pane fade in active" id="10-pills">
 												<!-- pie chart-->
 												<div class="flot-chart">
-													<div class="flot-chart-content" id="flot-pie-chart-10"></div>
+													<div class="panel-body">
+														<div class="flot-chart">
+															<div id="chart10" />
+															<script>
+																var options = {
+																	'dataset' : {
+																		title : 'Web accessibility status',
+																		values : [
+																				18,
+																				12,
+																				3,
+																				10,
+																				7 ],
+																		colorset : [
+																				'#56b4e9',
+																				'#e69f00',
+																				'#cc79a7',
+																				'#009e73',
+																				'#0072b2' ],
+																		fields : [
+																				'A',
+																				'B',
+																				'C',
+																				'D',
+																				'E' ]
+																	},
+																	'donut_width' : 100,
+																	'core_circle_radius' : 0,
+																	'chartDiv' : 'chart10',
+																	'chartType' : 'pie',
+																	'chartSize' : {
+																		width : 600,
+																		height : 300
+																	}
+																};
+
+																Nwagon
+																		.chart(options);
+															</script>
+														</div>
+													</div>
 												</div>
 												<!--end pie chart-->
 											</div>
 											<div class="tab-pane fade" id="20-pills">
 												<!-- pie chart-->
 												<div class="flot-chart">
-													<div class="flot-chart-content" id="flot-pie-chart-20"></div>
+													<div class="flot-chart-content" id="flot-pie-chart-20">
+														<div class="panel-heading">Female</div>
+														<div class="panel-body">
+															<div class="flot-chart">
+																<div id="chart20" />
+																<script>
+																	var options = {
+																		'dataset' : {
+																			title : 'Web accessibility status',
+																			values : [
+																					8,
+																					29,
+																					31,
+																					10,
+																					7 ],
+																			colorset : [
+																					'#56b4e9',
+																					'#e69f00',
+																					'#cc79a7',
+																					'#009e73',
+																					'#0072b2' ],
+																			fields : [
+																					'A',
+																					'B',
+																					'C',
+																					'D',
+																					'E' ]
+																		},
+																		'donut_width' : 100,
+																		'core_circle_radius' : 0,
+																		'chartDiv' : 'chart20',
+																		'chartType' : 'pie',
+																		'chartSize' : {
+																			width : 600,
+																			height : 300
+																		}
+																	};
+
+																	Nwagon
+																			.chart(options);
+																</script>
+															</div>
+														</div>
+													</div>
 												</div>
 												<!--end pie chart-->
 											</div>
@@ -165,17 +313,17 @@
 	<!-- end wrapper -->
 
 	<!-- Core Scripts - Include with every page -->
-	<script src="../resources/plugins/jquery-1.10.2.js"></script>
-	<script src="../resources/plugins/bootstrap/bootstrap.min.js"></script>
-	<script src="../resources/plugins/metisMenu/jquery.metisMenu.js"></script>
-	<script src="../resources/plugins/pace/pace.js"></script>
-	<script src="../resources/scripts/siminta.js"></script>
+	<script src="${ctx }/resources/plugins/jquery-1.10.2.js"></script>
+	<script src="${ctx }/resources/plugins/bootstrap/bootstrap.min.js"></script>
+	<script src="${ctx }/resources/plugins/metisMenu/jquery.metisMenu.js"></script>
+	<script src="${ctx }/resources/plugins/pace/pace.js"></script>
+	<script src="${ctx }/resources/scripts/siminta.js"></script>
 	<!-- Page-Level Plugin Scripts-->
-	<script src="../../resources/plugins/flot/jquery.flot.js"></script>
-	<script src="../../resources/plugins/flot/jquery.flot.tooltip.min.js"></script>
-	<script src="../../resources/flot/jquery.flot.resize.js"></script>
-	<script src="../../resources/flot/jquery.flot.pie.js"></script>
-	<script src="../../resources/scripts/flot-demo.js"></script>
+	<script src="${ctx }/resources/plugins/flot/jquery.flot.js"></script>
+	<script src="${ctx }/resources/plugins/flot/jquery.flot.tooltip.min.js"></script>
+	<script src="${ctx }/resources/flot/jquery.flot.resize.js"></script>
+	<script src="${ctx }/resources/flot/jquery.flot.pie.js"></script>
+	<script src="${ctx }/resources/scripts/flot-demo.js"></script>
 </body>
 
 </html>
