@@ -32,7 +32,6 @@
 		<%@ include file="../header.jspf"%>
 		<%@ include file="../left/memberLeft.jspf"%>
 
-
         <!-- end navbar side -->
         <!--  page-wrapper -->
         <div id="page-wrapper">
@@ -111,6 +110,10 @@
 
 	<!--  Page Script  -->	
 	<script>
+    $(document).ready(function () {
+		$('#side-review').attr('class', 'selected');
+    });
+    
 	var revDel = function(reviewId){
 		$.ajax({
 			type:'get',
