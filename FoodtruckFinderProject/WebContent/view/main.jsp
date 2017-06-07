@@ -78,12 +78,13 @@
 				<div class="col-lg-12">
 					<!-- search section-->
 					<div class="input-group custom-search-form">
-						<input id="searchKey" type="text" class="form-control" placeholder="Search"
-							style="width: 400px"> <input id="searchLoc" type="text"
-							class="form-control" placeholder="Location" style="width: 400px">
-						<button class="btn btn-danger searchBtn" type="button" onclick="searchTruck()">
-							<i class="fa fa-search"></i>
-						</button>
+						<form method="post" action="${ctx }/foodtruck/searchByKeyLoc.do" style="margin:7px;">
+		                        		<input type="text" class="form-control" id="keyword" name="keyword" placeholder="Search" style="width: 300px; padding:0px;">
+		                            	<input type="text" class="form-control" id="location" name="location" placeholder="Location" style="width: 300px; padding:0px;">
+	                                <button class="btn btn-default" type="submit" style="height:34px">
+	                                    <i class="fa fa-search" style="padding:0px"></i>
+	                                </button>
+	                            </form>
 					</div>
 					<!--end search section-->
 				</div>
