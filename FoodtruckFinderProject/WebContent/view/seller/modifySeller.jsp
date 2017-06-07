@@ -8,7 +8,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Foodtruck Finder</title>
+<title>판매자 정보수정</title>
 <!-- Core CSS - Include with every page -->
 <link href="${ctx }/resources/plugins/bootstrap/bootstrap.css"
 	rel="stylesheet" />

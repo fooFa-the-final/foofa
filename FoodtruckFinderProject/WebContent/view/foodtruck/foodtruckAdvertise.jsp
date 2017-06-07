@@ -32,6 +32,7 @@
 
 $(document).ready(function(){
     $("form").submit(function(){
+		var st = $(":input:radio[name=period]:checked").val();
     	var today = new Date();  
     	var dateString =  $("input[name='startdate']").val();
     	var dateArray = dateString.split("-");  
@@ -45,8 +46,7 @@ $(document).ready(function(){
                 $("input[name='startdate']").css("border", "1px solid red").after("<span>광고시작 날짜는 지난 날짜를 선택할 수 없습니다.</span>");
                 $("span").css("color", "red").fadeOut(3000); 				
  				return false;       		
-        	}
-	        else if (st == null){
+        	}else if (st == null){
             	var sel_type = null;
             	var chk_radio = document.getElementsByName('period');
             	for(var i=0;i<chk_radio.length;i++){
@@ -54,14 +54,14 @@ $(document).ready(function(){
             			sel_type = chk_radio[i].value;
             		}
             	}
+            	alert(sel_type);
             	if(sel_type == null){
                 	$("input[name='result']").css("border", "1px solid red").after("<span>기간을 선택해 주세요.</span>");
                     $("span").css("color", "red").fadeOut(3000);
-            	}
-    		return false;
-        	} 
-	        $('#myModal').modal('toggle');
+            		return false;
 
+            	}
+        	} 
     });   
 });
 </script>
@@ -148,8 +148,8 @@ $(document).ready(function(){
 									</div>
 								</div>
 								<div style="width: 100%; height: 90px;"></div>
-								<button type="button" class="btn btn-primary btn-lg" aria-expanded="true"
-															data-toggle="modal" data-target="#myModal"
+								<button type="submit" class="btn btn-primary btn-lg" aria-expanded="true"
+														
 									>결제</button>
 								<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
 									aria-labelledby="myModalLabel" aria-hidden="true">

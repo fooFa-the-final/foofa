@@ -13,7 +13,7 @@ public interface SalesMapper {
 
 	int insert(Sale sale);
 	int update(Sale sale);
-	int delete(String saleId);
+	int delete(Sale sale);
 	Sale selectDaySale(Sale sale);
 	List<Sale> select1MonthSales(String foodtruckId);
 	List<Sale> select1YearSales(String foodtruckId);

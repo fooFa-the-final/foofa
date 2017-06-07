@@ -60,13 +60,13 @@ public class SalesStoreLogic implements SalesStore {
 	}
 
 	@Override
-	public int delete(String saleId) {
+	public int delete(Sale sale) {
 		SqlSession session = factory.openSession();
 		int deleteCount = 0;
 
 		try {
 			SalesMapper mapper = session.getMapper(SalesMapper.class);
-			deleteCount = mapper.delete(saleId);
+			deleteCount = mapper.delete(sale);
 			session.commit();
 		} finally {
 			session.close();
@@ -89,13 +89,14 @@ public class SalesStoreLogic implements SalesStore {
 		} finally {
 			session.close();
 		}
+		System.out.println("date : " + sale.getDate());
 		return sale;
 	}
 
 	@Override
 	public List<Sale> select1MonthSales(String foodtruckId) {
 		SqlSession session = factory.openSession();
-		
+
 		List<Sale> list = new ArrayList<>();
 		try {
 			SalesMapper mapper = session.getMapper(SalesMapper.class);
@@ -103,8 +104,8 @@ public class SalesStoreLogic implements SalesStore {
 		} finally {
 			session.close();
 		}
-		System.out.println("listSize" + list.size());
-		System.out.println(list.get(0).getDate());
+		// System.out.println("listSize" + list.size());
+		// System.out.println(list.get(0).getDate());
 		return list;
 	}
 

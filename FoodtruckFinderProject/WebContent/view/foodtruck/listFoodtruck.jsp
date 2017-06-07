@@ -149,7 +149,7 @@ ul li a:hover, ul li a:focus {
           </table>
         </div>
 
-       <div class="col-md-2" id = "map">
+       <div class="col-md-3" id = "map" style="height:400px">
 			
         </div>
         <div class="col-sm-2"></div>
@@ -270,16 +270,52 @@ ul li a:hover, ul li a:focus {
     	}
     	
     	// 지도
-    	var position = new naver.maps.LatLng(37.4795169, 126.8824995);
+    	var position;
+    	<c:forEach items="${trucks }" var="truck">
+    	naver.maps.Service.geocode({
+ 			address: "${truck.location}"
+ 		}, function(status, response){
+ 			if (status === naver.maps.Service.Status.ERROR) {
+	           console.log('${truck.location} = 잘못찍힌주소');
+	        }
+ 			
+ 			var item = response.result.items[0],
+ 				point = new naver.maps.Point(item.point.x, item.point.y);
+ 			
+ 			if(position === undefined){
+ 				position = point;
+ 				map.setCenter(position);
+ 			}
+ 			
+ 			var contentString = [
+ 				'<div style="padding:10px;width:200px;font-size:14px;line-height:20px;">',
+ 					'<h3>${truck.foodtruckName}</h3>',
+ 					'<p>${truck.location}</p>',
+ 				'</div>'
+ 			].join('');
+ 			
+ 			var infowindow = new naver.maps.InfoWindow({
+ 				content: contentString
+ 			});
+ 			var marker = new naver.maps.Marker({
+				position: point,
+				map: map
+			});
+ 			naver.maps.Event.addListener(marker, 'click', function(e) {
+ 			    if (infowindow.getMap()) {
+ 			        infowindow.close();
+ 			    } else {
+ 			        infowindow.open(map, marker);
+ 			    }
+ 			});
+ 			
+ 			}
+ 		);  
+    	</c:forEach>
     	var map = new naver.maps.Map('map', {
-    	    center: position,
-    	    zoom: 10
+    		center: position,
+    	    zoom: 11
     	});
-    	
-    	var marker = new naver.maps.Marker({
-			position: position,
-			map: map
-		});
 	});
     
     var movePage = function(pageNum) {
