@@ -6,7 +6,7 @@
 <head>
 <c:set value="${pageContext.request.contextPath}" var="ctx" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FooFa Register Seller</title>
+<title>푸파 판매자 등록</title>
 <!-- Core CSS - Include with every page -->
 <link href="${ctx}/resources/plugins/bootstrap/bootstrap.css"
 	rel="stylesheet" />
@@ -64,10 +64,13 @@
 		obj.value = obj.value.replace(/[\ㄱ-ㅎㅏ-ㅣ가-힣]/g, '');
 	}
 	var idReg = /^[a-z]+[a-z0-9]{3,17}$/g;
+	var re_mail = /^([\w\.-]+)@([a-z\d\.-]+)\.([a-z\.]{2,6})$/; // 이메일 검사식
+
+	
 	$(document).ready(function() {$("form").submit(function() {
 		$(document).ready(function(){
 		    $('#id').keyup(function(){
-		        if ( $('#id').val().length > 4) {
+		        if ( $('#id').val().length > 3) {
 		            var id = $(this).val();
                     console.log(id);
 		            // ajax 실행
@@ -90,7 +93,6 @@
 		        }
 		    }); // end keyup
 		});		
-		
 											if (!idReg.test($("input[name='sellerId']").val())) {
 												if ($("input[name='sellerId']").val() == "") {
 													$("input[name='sellerId']").css("border","1px solid red").after("<span>아이디4글자 이상 16글자 이하 영문자 숫자의 조합입니다.</span>");
@@ -222,7 +224,7 @@
 							id="password" name="password" type="password"> <br>
 						<br> <b> <font size="4">Confirm Password</font></b> <br>
 						<input id="password1" name="password1" type="password"
-							>
+							>	
 						<div id="checkPwd"></div>
 						<br> <b><font size="4">Business Registration
 								Number</font></b> <br> <input id="certification" name="certification"

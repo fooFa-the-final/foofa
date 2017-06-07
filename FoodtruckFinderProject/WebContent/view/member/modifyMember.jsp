@@ -21,6 +21,36 @@
 </head>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	
+	
+<script>
+$(document).ready(function(){
+    $("form").submit(function()
+    		{
+       	var pw1 = document.getElementById("password").value;
+       	var pw2 = document.getElementById("password1").value;
+    	if(pw1 != pw2){
+            $("input[name='password1']").css("border", "1px solid red").after("<span>비밀번호가 일치하지 않습니다</span>");
+            $("span").css("color", "red").fadeOut(3000);
+            return false;
+        } else if ($("input[name='certification']").val().length != 10) {
+				$("input[name='certification']").css("border","1px solid red").after("<span>사업자등록번호를 10자리를 입력해주세요</span>");
+				$("span").css("color", "red").fadeOut(3000);
+				return false;
+			} else if ($("input[name='phone']").val().length != 11) {$("input[name='phone']").css("border","1px solid red").after("<span>휴대폰 번호 11자리를 입력해주세요</span>");
+				$("span").css("color", "red").fadeOut(3000);
+				return false;
+			}
+    });   
+    $(":input").focus(function(){
+        $(this).css("border", "4px red solid");
+    }).blur(function(){
+        $(this).css("border", "");
+    });       
+});
+</script>	
+
+	
 <body>
 
 	<div id="wrapper">
@@ -48,7 +78,7 @@
 								<br><label>Password</label> <input class="form-control" id="password"
 									type="password" name="password" value="${member.password}">
 								<br> <label>Password Check</label><input class="form-control" id="password1"
-									type="password" value="${member.password}"> <br>
+						name="password1"			type="password" value="${member.password}"> <br>
 							</div>
 
 							<div class="form-group">
@@ -66,9 +96,9 @@
 							<div class="form-group">
 								<div>
 									<label>성별</label><br> <label class="radio-inline">
-										<input type="radio" name="gender" id="gender" value="F">F
+										<input type="radio" name="gender" id="gender" value="F">여성
 									</label> <label class="radio-inline"> <input type="radio"
-										name="gender" id="gender" value="M">M
+										name="gender" id="gender" value="M">남성
 									</label>
 								</div>
 							</div>
