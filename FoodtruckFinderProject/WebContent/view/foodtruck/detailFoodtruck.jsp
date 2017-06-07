@@ -84,6 +84,10 @@
 	 		)   
 	 	});
 	 	var recReview = function(reviewId){
+	 		if(${loginUserId == null || loginUserId == ''}){
+	 			
+	 		}else {
+	 		
 	 		$.ajax({
 	 			type:'get',
 	 			url : "${ctx }/review/recommand.do",
@@ -103,6 +107,7 @@
 					}
 	 			}
 	 		});
+	 		}
 	 	}
 	 	
 	 	var report = function(reviewId){
@@ -214,7 +219,7 @@
 							  <legend class="truck-border">Today</legend>
 							  <font size = "4">
 								  Today's Hour: ${startTime } ~ ${endTime }<br>
-								  Today's Location: ${truck.spot }<br>
+								  Today's Location: ${truck.location }<br>
 								  Today's Issue<br><br> ${truck.notice }
 							  </font>
 							 </fieldset>
