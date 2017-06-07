@@ -11,7 +11,7 @@ public interface SalesService {
 
 	boolean modify(Sale sale);
 
-	boolean remove(String saleId);
+	boolean remove(Sale sale);
 
 	Sale findDateSale(String date, String foodtruckId);
 

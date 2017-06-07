@@ -14,7 +14,7 @@ public interface SalesStore {
 
 	int update(Sale sale);
 
-	int delete(String saleId);
+	int delete(Sale sale);
 
 	Sale selectDaySale(String date, String foodtruckId);
 
