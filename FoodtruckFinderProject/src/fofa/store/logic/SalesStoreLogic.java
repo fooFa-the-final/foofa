@@ -60,13 +60,13 @@ public class SalesStoreLogic implements SalesStore {
 	}
 
 	@Override
-	public int delete(String saleId) {
+	public int delete(Sale sale) {
 		SqlSession session = factory.openSession();
 		int deleteCount = 0;
 
 		try {
 			SalesMapper mapper = session.getMapper(SalesMapper.class);
-			deleteCount = mapper.delete(saleId);
+			deleteCount = mapper.delete(sale);
 			session.commit();
 		} finally {
 			session.close();

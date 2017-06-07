@@ -36,8 +36,8 @@ public class SalesServiceLogic implements SalesService {
 	}
 
 	@Override
-	public boolean remove(String saleId) {
-		if (1 == store.delete(saleId)) {
+	public boolean remove(Sale sale) {
+		if (1 == store.delete(sale)) {
 			return true;
 		}
 		return false;

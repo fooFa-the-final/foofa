@@ -33,8 +33,9 @@ public class SalesController {
 		 */
 
 		sale.setFoodtruckId("F1");
+		System.out.println("input : " + sale.toString());
 		service.register(sale);
-		return "redirect:/truck.do";
+		return "redirect:/sales/truck.do";
 	}
 
 	@RequestMapping(value = "sales/modify.do", method = RequestMethod.POST)
@@ -45,12 +46,20 @@ public class SalesController {
 		 */
 		sale.setFoodtruckId("F1");
 		service.modify(sale);
-		return "redirect:/truck.do";
+		return "redirect:/sales/truck.do";
 	}
 
 	@RequestMapping("sales/remove.do")
-	public String remove(String saleId) {
-		return "redirect:sales/truck.do";
+	public String remove(HttpServletRequest req, String date) {
+		/*
+		 * HttpSession session = req.getSession(); String foodtruckId = (String)
+		 * session.getAttribute("loginTruckId");
+		 */
+		Sale sale = new Sale();
+		sale.setDate(date);
+		sale.setFoodtruckId("F1");
+		service.remove(sale);
+		return "redirect:/sales/truck.do";
 	}
 
 	@RequestMapping("sales/truck.do")

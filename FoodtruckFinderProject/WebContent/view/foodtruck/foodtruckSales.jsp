@@ -116,14 +116,15 @@ h2 {
 				dataType : 'json',
 				success : function(data) {
 					document.getElementById("revenue").value = data.re;
-					document.getElementById("location").value = data.lo;
+					document.getElementById("location1").value = data.lo;
 					document.getElementById("date").value = data.da;
+					document.getElementById("date2").value = data.da;
 					
 					jQuery('#showModal').modal();
 					
 				},
 				error : function() {
-					document.getElementById("date").value = date;
+					document.getElementById("date1").value = date;
 					jQuery('#inputModal').modal();
 					
 				}
@@ -304,10 +305,16 @@ h2 {
 								        <div class="modal-body" id = "modalCons">
 								        <form action="${ctx }/sales/modify.do" method="POST">
 								          	매출 : <input type="number" name="revenue" id="revenue" value=""><br>
-								          	위치 : <input type="text" name="location" id="location" value=""><br>
+								          	위치 : <input type="text" name="location" id="location1" value=""><br>
 								          	날짜 : <input type="text" name="date" id="date" value=""><br>
 								          	<input type="submit" value="수정">
 								        </form> 
+								          <form action="${ctx }/sales/remove.do" method="GET">
+								          <input type="hidden" name="date" id="date2" value=""><br>
+								          	<input type="submit" value="삭제">
+								        </form> 
+								        
+								        
 								         
 								          
 								        </div>
@@ -330,7 +337,8 @@ h2 {
 								        <div class="modal-body" id = "modalCons">
 								        <form action="${ctx }/sales/create.do" method="POST">
 								          	매출 : <input type="number" name="revenue">
-								          	<input type="hidden" name="date" id="date" value="">
+								          	<input type="hidden" name="date" id="date1" value="">
+								          	위치 : <input type="text" name="location">
 								          	<input type="submit" value="등록">
 								        </form> 
 								         
