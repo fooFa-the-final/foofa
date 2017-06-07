@@ -283,22 +283,6 @@ h2 {
 					}
 				</script>
 				<script>
-<<<<<<< HEAD
-					$(document).ready(
-							function() {
-								year();
-								var position = new naver.maps.LatLng(
-										37.4795169, 126.8824995);
-								var map = new naver.maps.Map('map', {
-									center : position,
-									zoom : 10
-								});
-								var marker = new naver.maps.Marker({
-									position : position,
-									map : map
-								});
-							})
-=======
 				var change = function(e){
 					var tm128 = naver.maps.TransCoord.fromLatLngToTM128(e.coord);
 					naver.maps.Service.reverseGeocode({
@@ -349,14 +333,12 @@ h2 {
 						map.setCenter(point);
 					}
 				});
->>>>>>> branch '170524' of https://github.com/fooFa-the-final/foofa.git
 				</script>
 			</div>
 			<div id='calendar' />
 			<div id='map' style="height: 400px; width: 300px"></div>
 		</div>
 		<div class="modal fade" id="showModal" role="dialog">
-<<<<<<< HEAD
 			<div class="modal-dialog">
 				<!-- Modal content-->
 				<div class="modal-content">
@@ -389,7 +371,6 @@ h2 {
 
 			</div>
 		</div>
-=======
 								    <div class="modal-dialog">
 								      <!-- Modal content-->
 								      <div class="modal-content">
@@ -421,9 +402,7 @@ h2 {
 								      
 								    </div>
 								  </div>
->>>>>>> branch '170524' of https://github.com/fooFa-the-final/foofa.git
 		<div class="modal fade" id="inputModal" role="dialog">
-<<<<<<< HEAD
 			<div class="modal-dialog">
 				<!-- Modal content-->
 				<div class="modal-content">
@@ -450,7 +429,6 @@ h2 {
 
 			</div>
 		</div>
-=======
 								    <div class="modal-dialog">
 								      <!-- Modal content-->
 								      <div class="modal-content">
@@ -476,7 +454,6 @@ h2 {
 								      
 								    </div>
 								  </div>
->>>>>>> branch '170524' of https://github.com/fooFa-the-final/foofa.git
 
 
 	</div>
