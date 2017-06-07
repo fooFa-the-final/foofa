@@ -64,6 +64,7 @@
 	 			address: "${truck.location}"
 	 		}, function(status, response){
 	 			if (status === naver.maps.Service.Status.ERROR) {
+	 				position = new naver.maps.LatLng(37.4795169, 126.8824995);
 		            return alert('잘못 입력 되어있는 주소입니다. 기본 좌표를 찍어주겠습니다.');
 		        }
 	 			
