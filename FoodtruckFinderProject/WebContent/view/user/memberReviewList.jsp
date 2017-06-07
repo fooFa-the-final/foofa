@@ -45,8 +45,8 @@
                             <div class="user-info">
                                 <h2>${member.memberId}</h2><br>
                                 <h5>${member.email }</h5>
-                                <h5>144 Followers</h5>
-                                <h5>255 Reviews</h5>
+                                <h5>팔로워수&nbsp; ${member.followCount }</h5>
+                                <h5>리뷰작성&nbsp;&nbsp;${member.reviewCount }</h5>
                             </div>
                     </span>
                     <c:if test="${loginUser != null  && loginUser != member.memberId}">
@@ -62,7 +62,7 @@
                 		<div class="col-lg-10" style="margin-top:30px" id="rev${review.reviewId }">
                 			<div class="col-lg-11" style="display:inline-block">
                 				<div class="col-lg-9">
-                					<font size="6">${review.foodtruck.foodtruckName }</font><br>
+                					<h4><a href="${ctx }/review/list/truck.do?foodtruckId=${review.foodtruck.foodtruckId }">${review.foodtruck.foodtruckName }</a></h4>
                 					<h4>${review.foodtruck.category1 }</h4>
                 				</div>
                 				<div class="col-lg-3">

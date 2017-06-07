@@ -52,9 +52,10 @@ public class ReviewController {
 	private SurveyItemService itemService;
 	@RequestMapping("/review/list/member.do")
 	public String searchByMemberId(String memberId, HttpSession session, Model model){
-		if(memberId == null)
+		if(memberId == null){
 			memberId = (String)session.getAttribute("loginUserId");
-		Member member = memberService.findById(memberId);
+		}
+			Member member = memberService.findById(memberId);
 		model.addAttribute("member", member);
 		model.addAttribute("nowId", (String)session.getAttribute("loginUserId"));
 		List<Review> list = reviewService.findByMemberId(memberId);
@@ -70,6 +71,8 @@ public class ReviewController {
 			System.out.println(r.getFoodtruck().getFoodtruckName());
 		}
 		model.addAttribute("list", list);
+		Member member = memberService.findById(memberId);
+		model.addAttribute("member", member);
 		return "../../view/user/memberNewsfeed.jsp";
 	}
 	

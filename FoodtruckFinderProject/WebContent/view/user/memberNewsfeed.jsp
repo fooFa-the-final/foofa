@@ -35,21 +35,12 @@
                                 <img src="${ctx}/resources/img/waikiki.jpg" style="height:250px; width:250px"/>
                             </a>
                             <div class="user-info" >
-                                <h1><a style="color:black">트와이스님의 프로필 페이지</a></h1><br>
-                                <h5>twicejjang@chogo</h5>
-                                <h5>144Followers</h5>
-                                <h5>255Reviews</h5>
+                                <h2>${member.memberId}</h2><br>	
+                                <h5>${member.email }</h5>
+                                <h5>팔로워수&nbsp; ${member.followCount }</h5>
+                                <h5>리뷰작성&nbsp;&nbsp;${member.reviewCount }</h5>
                             </div>  
                     </span>
-                <span style="float:right; margin-right:50px; margin-down: 30px;  margin-top: 70px;">
-                    <div class="button">    
-                    <a href="#"><button type="button" class="btn btn-default">회원 탈퇴</button></a>
-                        <br>
-                        <br><br><br><br><br><br>
-                        
-                        <a href="#"><button type="button" class="btn btn-default">Make Follow</button></a>
-                    </div>
-                        </span>    
                         </div>
             
                 <!-- Page Header -->
@@ -59,11 +50,11 @@
                 	<h1>My Followers Review</h1>
                 	<c:forEach items="${list }" var="Review">
                 		<div class = "col-md-offset-1 col-md-8" style="height:500px;margin-top:50px">
-                		<span><font class="h3"><a href="#">${Review.foodtruck.foodtruckName }</a></font></span>
+                		<span><font class="h3"><a href="${ctx }/review/list/truck.do?foodtruckId=${Review.foodtruck.foodtruckId }">${Review.foodtruck.foodtruckName }</a></font></span>
                 		<span style="float:right"><input type="button" value="follow" class="btn btn-result"> <input type="button" value="!" class="btn btn-result"></span><br>
                 		<img src="${ctx}/resources/img/smile.png" width="300px" height="300px"><br><br>
                 		<font size="4px">
-                		<span>점수 : ${Review.score } 따봉: 155</span>
+                		<span>점수 : ${Review.score } 추천: ${Review.recommand }</span>
                 		<span style="float:right">${Review.writeDate }</span><br>
                 		${Review.contents }	
                 		</font>
