@@ -114,7 +114,7 @@ public class FoodtruckController {
 	
 //	@ResponseBody
 	@RequestMapping(value="/modifyPicture.do", method=RequestMethod.POST)
-	public String modifyPicture(MultipartHttpServletRequest req, HttpSession session, HttpServletRequest request) throws Exception{
+	public String modifyPicture(MultipartHttpServletRequest request){
 		
 		System.out.println("controller");
 		
@@ -166,8 +166,16 @@ public class FoodtruckController {
 	
 	@RequestMapping(value="/modifyState.do", method=RequestMethod.GET)
 	public boolean modifyState(String foodtruckId, boolean operation_state){
+		Foodtruck foodtruck = foodtruckService.findById(foodtruckId);
 		
-		return false;
+		if(operation_state){
+			foodtruck.setState(false);
+		}else{
+			foodtruck.setState(true);
+		}
+		foodtruckService.modify(foodtruck);
+
+		return foodtruck.isState();
 	}
 	
 	@RequestMapping("/searchById.do")

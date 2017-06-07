@@ -4,6 +4,47 @@
 <c:set var="ctx" value="${pageContext.request.contextPath }" />
 <!DOCTYPE html>
 <html>
+<style>
+input.cmn-toggle-round-flat + label {
+  padding: 2px;
+  width: 120px;
+  height: 60px;
+  background-color: #dddddd;
+  border-radius: 60px;
+  transition: background 0.4s;
+}
+input.cmn-toggle-round-flat + label:before,
+input.cmn-toggle-round-flat + label:after {
+  display: block;
+  position: absolute;
+  content: "";
+}
+input.cmn-toggle-round-flat + label:before {
+  top: 2px;
+  left: 2px;
+  bottom: 2px;
+  right: 2px;
+  background-color: #fff;
+  border-radius: 60px;
+  transition: background 0.4s;
+}
+input.cmn-toggle-round-flat + label:after {
+  top: 4px;
+  left: 4px;
+  bottom: 4px;
+  width: 52px;
+  background-color: #dddddd;
+  border-radius: 52px;
+  transition: margin 0.4s, background 0.4s;
+}
+input.cmn-toggle-round-flat:checked + label {
+  background-color: #8ce196;
+}
+input.cmn-toggle-round-flat:checked + label:after {
+  margin-left: 60px;
+  background-color: #8ce196;
+}
+</style>
 
 <head>
     <meta charset="utf-8">
@@ -33,7 +74,7 @@
                 <!-- Page Header -->
                 <div class="col-md-12" style="background-color:white; height:300px">
                     <div class="col-md-8">
-                    	<form id="FILE_FORM" method="post" enctype="multipart/form-data" action="">
+                    	<form id="fileForm" method="post" enctype="multipart/form-data">
                             <a class="navbar-brand" href="#" style="margin-top:10px;" >
                                 <img name="image" id="image" src="${ctx }/resources/img/${truck.foodtruckImg }" style="height:250px; width:250px" onClick="document.all.file.click();"/>
                             	<input type="file" name="file" id="file" style="display: none;" onchange="fileinfo(this)" />
@@ -50,7 +91,9 @@
                     <div class="col-md-3" style="float:right; margin-right:30px; margin-top: 30px">
                         <a href="${ctx }/seller/modify.do"><button type="button" class="btn btn-default">판매자 정보 수정</button></a>
                         <a href="${ctx }/seller/checkPw.do"><button type="button" class="btn btn-default">판매자 탈퇴</button></a>
-                    </div>        
+                    </div>
+                    <button type="button" id="openstateBtn" name="openstateBtn" class="btn btn-outline btn-default" onClick="stateBtn(this)">OPEN NOW</button>        
+                	<input type="hidden" id="openstate" name="openstate" value="">
                 </div>
                 <!--End Page Header -->
                 
@@ -231,50 +274,38 @@
 	                }
 	            reader.readAsDataURL(input.files[0]);
             }
-	      	
-	      	function sendFile(file) {
-	            var form_data = new FormData();
-	            form_data.append('file', file);
-	            $.ajax({
-	              data: form_data,
-	              type: "POST",
-	              url: '/image',
-	              cache: false,
-	              contentType: false,
-	              enctype: 'multipart/form-data',
-	              processData: false,
-	              success: function() {
-	              	alert("사진이 변경되었습니다.");
-	              },
-	              error: function(){
-	            	  alert("사진변경 실패");
-	              }
-	            });
-	          }
-        }
-		
-// 		function uploadFile(){
-//             var form = $('FILE_FORM')[0];
-//             var formData = new FormData(form);
-//             formData.append("fileObj", $("#file")[0].files[0]);
+	      	$("#fileForm").ajaxForm({
+	      		url:"${ctx}/foodtruck/modifyPicture.do",
+	      		enctype: "multipart/form-data",
+	      		success: function(result){
+	      			alert(result);
+	      		}
+	      	});
+	      	$("#fileForm").submit();
+		}
 
-//             $.ajax({
-//                 url: '${ctx }/foodtruck/modifyPicture.do',
-//                 processData: false,
-//                 contentType: false,
-//                 data: formData,
-//                 type: 'POST',
-//                 enctype: 'multipart/form-data',
-//                 success: function(result){
-//                     alert("사진이 변경되었습니다.");
-//                 }
-//                 error: function(){
-//                 	alert("사진 변경에 실패하였습니다.");
-//                 }
-//             });
-//         }
-
-
+// var stateBtn = function(obj){
+// 	if($(obj).hasClass("btn btn-outline btn-default")){
+// 		$(obj).removeClass("btn btn-outline btn-default").addClass("btn btn-success");
+// 		$("#openstate").val("true");
+// 	} else {
+// 		$(obj).removeClass("btn btn-success").addClass("btn btn-outline btn-default");
+// 		$("#openstate").val("false");
+// 	}
+// 	$.ajax({
+// 		 url: '${ctx }/foodtruck/modifyState.do',
+// 	     processData: false,
+// 	     contentType: false,
+// 	     data: {openstate:$("#openstate").val()},
+// 	     type: 'get',
+// 	     success: function(result){
+// 	         alert(result);
+// 	     },
+// 	     error: function(){
+// 	     	alert("실패");
+// 	     }
+// 	});
+// }
 	</script>
 
 </body>
