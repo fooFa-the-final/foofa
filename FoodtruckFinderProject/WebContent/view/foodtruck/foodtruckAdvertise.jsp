@@ -87,12 +87,8 @@ $(document).ready(function(){
 								<br>
 								<h5>${truck.category1 }</h5>
 								<h5>${truck.location }</h5>
-								
-							<%-- 	
-								<h5>${truck.reviewScore }</h5>
-								<h5>${truck.reviewCount }</h5>
-							 --%>
-							
+								<h5>단골수:&nbsp;&nbsp; ${truck.favoriteCount }</h5>
+								<h5>리뷰수:&nbsp;&nbsp; ${truck.reviewCount }</h5>
 							</div>
 							<%-- 
 							<span style="float: right; margin-right: 30px; margin-top: 30px">

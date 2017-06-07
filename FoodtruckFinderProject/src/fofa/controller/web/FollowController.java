@@ -1,5 +1,6 @@
 package fofa.controller.web;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -52,7 +53,16 @@ public class FollowController {
 		model.addAttribute(member);
 		String fromId = member.getMemberId();
 		List<Follow> follow =  followService.findFollow(fromId);
-		model.addAttribute("follow", follow);
+		List<Member> mfollow = new ArrayList<>();
+		for(int i = 0 ; i < follow.size(); i++) {
+			Member e = new Member();
+			e = memberService.findById(follow.get(i).getToId());
+			mfollow.add(e);
+		}
+		
+		
+		
+		model.addAttribute("follow", mfollow);
 		System.out.println(member.getProfileImg());
 		
 		return "../view/user/memberFollowerList.jsp";

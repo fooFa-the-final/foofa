@@ -1,7 +1,9 @@
 package fofa.controller.web;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,6 +16,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import fofa.domain.Foodtruck;
 import fofa.domain.Member;
@@ -48,9 +52,10 @@ public class ReviewController {
 	private SurveyItemService itemService;
 	@RequestMapping("/review/list/member.do")
 	public String searchByMemberId(String memberId, HttpSession session, Model model){
-		if(memberId == null)
+		if(memberId == null){
 			memberId = (String)session.getAttribute("loginUserId");
-		Member member = memberService.findById(memberId);
+		}
+			Member member = memberService.findById(memberId);
 		model.addAttribute("member", member);
 		model.addAttribute("nowId", (String)session.getAttribute("loginUserId"));
 		List<Review> list = reviewService.findByMemberId(memberId);
@@ -66,6 +71,8 @@ public class ReviewController {
 			System.out.println(r.getFoodtruck().getFoodtruckName());
 		}
 		model.addAttribute("list", list);
+		Member member = memberService.findById(memberId);
+		model.addAttribute("member", member);
 		return "../../view/user/memberNewsfeed.jsp";
 	}
 	
@@ -237,6 +244,24 @@ public class ReviewController {
 			return "false";
 		}
 		return "true"; // ajax
+	}
+	
+	@RequestMapping(value="/review/img.do", method=RequestMethod.POST)
+	@ResponseBody
+	public String registerImg(MultipartHttpServletRequest request){
+		MultipartHttpServletRequest multipartHttpServletRequest = (MultipartHttpServletRequest)request;
+	    Iterator<String> iterator = multipartHttpServletRequest.getFileNames();
+	    MultipartFile multipartFile = null;
+	    while(iterator.hasNext()){
+	        multipartFile = multipartHttpServletRequest.getFile(iterator.next());
+	        if(multipartFile.isEmpty() == false){
+	            System.out.println("name : "+multipartFile.getName());
+	            System.out.println("filename : "+multipartFile.getOriginalFilename());
+	            System.out.println("size : "+multipartFile.getSize());
+	        }
+	    }
+	    return "1";
+
 	}
 	
 	@RequestMapping("/review/removerecommand.do")
