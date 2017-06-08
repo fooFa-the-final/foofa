@@ -38,6 +38,7 @@
             <div class="row">
                 <!-- Page Header -->
  					<%@ include file="../include/memberProfile.jspf" %>
+
                 <!--End Page Header -->
                 
                 
@@ -64,7 +65,7 @@
                 			</div>
                 			<div class="col-lg-11" style="display:inline-block;margin-top:30px">
                 			<font size="4">
-                				<div class="col-lg-10">
+                				<div                                                                                                                                      class="col-lg-10">
                 					${review.contents }<br>
                 					<i class="fa fa-thumbs-up" ></i> : ${review.recommand }
                 				</div>

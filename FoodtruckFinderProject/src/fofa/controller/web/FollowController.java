@@ -70,10 +70,9 @@ public class FollowController {
 	public int searchCount(String memberId,HttpSession session, Model model){
 		memberId = ((String)(session.getAttribute("loginUserId")));
 		List<Follow> follow =  followService.findFollow(memberId);
-		follow.size();
-		System.out.println(follow.size());
 		int count;
 		count=follow.size();
+		
 		model.addAttribute("followCount", count);
 		return count;
 	}
