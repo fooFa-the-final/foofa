@@ -186,7 +186,7 @@
 	
 	function checkId(){
 		var id = $("#id").val();
-		if($("input[name='memberId']").val().length > 4){
+		if($("input[name='memberId']").val().length > 3){
 			$.ajax({
 				type : 'POST',
 				url : "${ctx }/member/checkId.do",

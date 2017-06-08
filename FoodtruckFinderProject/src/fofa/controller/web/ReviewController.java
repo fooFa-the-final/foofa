@@ -104,9 +104,7 @@ public class ReviewController {
 	
 	@RequestMapping(value="/review/create.do", method=RequestMethod.POST)
 	public String createReview(Review review, Model model, MultipartHttpServletRequest req){
-		System.out.println(req.getRealPath(""));
 		String foodtruckId = (String)req.getParameter("foodtruckId");
-		System.out.println("foodtruckId : " + foodtruckId);
 		Foodtruck truck = truckService.findById(foodtruckId);
 		review.setFoodtruck(truck);
 		HttpSession session = req.getSession();
@@ -118,7 +116,6 @@ public class ReviewController {
 	    List<Image> images = new ArrayList<>();
 	    String root = req.getSession().getServletContext().getRealPath("\\");
         String path = root+"\\resources\\img\\reviewImg\\";
-        System.out.println(path);
         String newFileName = "";
         File dir = new File(path);
         if(!dir.isDirectory()){
@@ -177,15 +174,11 @@ public class ReviewController {
 			surveyService.register(survey);
 		}
 		
-		
-	    
-	    
 		return "redirect:/review/list/truck.do?foodtruckId="+review.getFoodtruck().getFoodtruckId();
 	}
 	
 	private int calAges(String birth){
 		birth = birth.substring(2, 4);
-		System.out.println(birth);
 		Date date = new Date();
 		int year = date.getYear() + 1;
 		int age = year - Integer.parseInt(birth);
@@ -220,7 +213,6 @@ public class ReviewController {
 		Report report = new Report();
 		report.setMemberId((String)session.getAttribute("loginUserId"));
 		String reasonContents = req.getParameter("reasonContents");
-		System.out.println(req.getParameter("reason"));
 		if(req.getParameter("reason").equals("direct")){
 			if(reasonContents == null || reasonContents.trim().equals(""))
 				return "false";
@@ -286,24 +278,6 @@ public class ReviewController {
 			return "false";
 		}
 		return "true"; // ajax
-	}
-	
-	@RequestMapping(value="/review/img.do", method=RequestMethod.POST)
-	@ResponseBody
-	public String registerImg(MultipartHttpServletRequest request){
-		MultipartHttpServletRequest multipartHttpServletRequest = (MultipartHttpServletRequest)request;
-	    Iterator<String> iterator = multipartHttpServletRequest.getFileNames();
-	    MultipartFile multipartFile = null;
-	    while(iterator.hasNext()){
-	        multipartFile = multipartHttpServletRequest.getFile(iterator.next());
-	        if(multipartFile.isEmpty() == false){
-	            System.out.println("name : "+multipartFile.getName());
-	            System.out.println("filename : "+multipartFile.getOriginalFilename());
-	            System.out.println("size : "+multipartFile.getSize());
-	        }
-	    }
-	    return "1";
-
 	}
 	
 	@RequestMapping("/review/removerecommand.do")
