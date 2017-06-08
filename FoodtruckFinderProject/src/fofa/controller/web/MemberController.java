@@ -122,10 +122,7 @@ public class MemberController {
             Member member = service.findById((String)(session.getAttribute("loginUserId")));
             member.setProfileImg(newFileName);
             service.modifyImg(member);
-            String imgurl = member.getProfileImg();
-            img = path+imgurl;
-            member.setProfileImg(img);
-            service.modifyImg(member);
+            System.out.println(member.toString());
             
             try {
                 mFile.transferTo(new File(path+newFileName));

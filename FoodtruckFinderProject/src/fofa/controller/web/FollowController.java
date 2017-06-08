@@ -50,7 +50,8 @@ public class FollowController {
 	@RequestMapping("follow/list.do")
 	public String search(HttpSession session, Model model){
 		Member member = memberService.findById((String)(session.getAttribute("loginUserId")));
-		model.addAttribute(member);
+		model.addAttribute("member",member);
+		System.out.println(member.toString());
 		String fromId = member.getMemberId();
 		List<Follow> follow =  followService.findFollow(fromId);
 		List<Member> mfollow = new ArrayList<>();
@@ -59,11 +60,7 @@ public class FollowController {
 			e = memberService.findById(follow.get(i).getToId());
 			mfollow.add(e);
 		}
-		
-		
-		
 		model.addAttribute("follow", mfollow);
-		System.out.println(member.getProfileImg());
 		
 		return "../view/user/memberFollowerList.jsp";
 	}

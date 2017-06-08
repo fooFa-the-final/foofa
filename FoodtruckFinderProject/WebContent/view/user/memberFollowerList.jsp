@@ -35,7 +35,7 @@
 						style="height: 300px; background-color: #FFFFFF; position: absolute; width: 83.5%">
 						<a class="navbar-brand" href="#"
 							style="margin-top: 10px; margin-left: 20px"> 
-							<img id ="blah" src="${member.profileImg }" style="height: 250px; width: 250px" /> <br>
+							<img id ="blah" src="${ctx }/resources/upload/${member.profileImg }" style="height: 250px; width: 250px" /> <br>
 
 							<form id="fileForm" runat="server" action="fileUpload" method="post"
 								enctype="multipart/form-data" style="font-size:10px;">
