@@ -8,11 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import fofa.domain.Follow;
+import fofa.domain.Image;
 import fofa.domain.Recommand;
 import fofa.domain.Report;
 import fofa.domain.Review;
 import fofa.service.ReviewService;
 import fofa.store.FollowStore;
+import fofa.store.ImageStore;
 import fofa.store.RecommandStore;
 import fofa.store.ReportStore;
 import fofa.store.ReviewStore;
@@ -29,9 +31,16 @@ public class ReviewServiceLogic implements ReviewService {
 	@Autowired
 	private RecommandStore recommandStore;
 	
+	@Autowired
+	private ImageStore imageStore;
+	
 	@Override
-	public boolean register(Review review) {
-		return reviewStore.insert(review) > 0;
+	public String register(Review review) {
+		String reviewId = reviewStore.insert(review);
+		for(Image image : review.getImages()){
+			imageStore.insertImage(reviewId, image);
+		}
+		return reviewId;
 	}
 
 	@Override

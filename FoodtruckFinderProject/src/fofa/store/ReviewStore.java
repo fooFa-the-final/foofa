@@ -5,7 +5,7 @@ import java.util.List;
 import fofa.domain.Review;
 
 public interface ReviewStore {
-	int insert(Review review);
+	String insert(Review review);
 	int update(Review review);
 	int delete(String reviewId);
 	Review selectById(String reviewId);

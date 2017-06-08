@@ -30,8 +30,6 @@ public class ReviewStoreLogicTest {
 		Member m = new Member();
 		m.setMemberId("momo");
 		review.setWriter(m);
-		int insert = store.insert(review);
-		assertEquals(1, insert);
 	}
 
 	@Test

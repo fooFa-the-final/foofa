@@ -20,6 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import fofa.domain.Foodtruck;
+import fofa.domain.Image;
 import fofa.domain.Member;
 import fofa.domain.Recommand;
 import fofa.domain.Report;
@@ -101,13 +102,30 @@ public class ReviewController {
 	}
 	
 	@RequestMapping(value="/review/create.do", method=RequestMethod.POST)
-	public String createReview(Review review, HttpServletRequest req, Model model){
+	public String createReview(Review review, Model model, MultipartHttpServletRequest req){
+		System.out.println(req.getRealPath(""));
 		String foodtruckId = (String)req.getParameter("foodtruckId");
+		System.out.println("foodtruckId : " + foodtruckId);
 		Foodtruck truck = truckService.findById(foodtruckId);
 		review.setFoodtruck(truck);
 		HttpSession session = req.getSession();
 		Member member = memberService.findById((String)session.getAttribute("loginUserId"));
 		review.setWriter(member);
+		MultipartHttpServletRequest multipartHttpServletRequest = (MultipartHttpServletRequest)req;
+	    Iterator<String> iterator = multipartHttpServletRequest.getFileNames();
+	    MultipartFile multipartFile = null;
+	    List<Image> images;
+	    while(iterator.hasNext()){
+	        multipartFile = multipartHttpServletRequest.getFile(iterator.next());
+	        if(multipartFile.isEmpty() == false){
+	        	Image image = new Image();
+	        	image.setFilename(multipartFile.getName());
+	            /*System.out.println("name : "+multipartFile.getName());
+	            System.out.println("filename : "+multipartFile.getOriginalFilename());
+	            System.out.println("size : "+multipartFile.getSize());*/
+	        }
+	    }
+	    
 		reviewService.register(review);
 		if(req.getParameter("isSurvey") != null){
 			Survey survey = new Survey();
@@ -138,6 +156,10 @@ public class ReviewController {
 			survey.setReplies(replyList);
 			surveyService.register(survey);
 		}
+		
+		
+	    
+	    
 		return "redirect:/review/list/truck.do?foodtruckId="+review.getFoodtruck().getFoodtruckId();
 	}
 	

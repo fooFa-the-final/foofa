@@ -7,7 +7,7 @@ import fofa.domain.Report;
 import fofa.domain.Review;
 
 public interface ReviewService {
-	boolean register(Review review);
+	String register(Review review);
 	boolean modify(Review review);
 	boolean remove(String reviewId);
 	Review findById(String reviewId);

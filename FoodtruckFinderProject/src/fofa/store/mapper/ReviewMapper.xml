@@ -19,9 +19,12 @@
 	  	javaType="ArrayList" jdbcType="VARCHAR"/>
   	</resultMap>
   	
-  	<insert id="insert" parameterType="Review">
+  	<insert id="insert" parameterType="Review" useGeneratedKeys="true">
+  	<selectKey keyProperty="reviewId" resultType="string" order="BEFORE">
+  		SELECT 'R'||review_seq.nextval FROM DUAL
+  	</selectKey>
   		INSERT INTO review_tb
-  		VALUES ('R'||review_seq.nextval, #{writer.memberId}, #{foodtruck.foodtruckId}, #{contents}, #{score}, SYSDATE)
+  		VALUES (#{reviewId}, #{writer.memberId}, #{foodtruck.foodtruckId}, #{contents}, #{score}, SYSDATE)
   	</insert>
   	<update id="update" parameterType="Review">
   		UPDATE review_tb

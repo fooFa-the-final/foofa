@@ -19,16 +19,18 @@ public class ReviewStoreLogic implements ReviewStore {
 		factory = SqlSessionFactoryProvider.getSqlSessionFactory();
 	}
 	@Override
-	public int insert(Review review) {
+	public String insert(Review review) {
 		SqlSession session = factory.openSession();
-		int insert = 0;
+		String insert = "";
 		try{
 			ReviewMapper mapper = session.getMapper(ReviewMapper.class);
-			insert = mapper.insert(review);
+			mapper.insert(review);
+			insert = review.getReviewId();
 			session.commit();
 		} finally {
 			session.close();
 		} 
+		System.out.println("reviewId : " + insert);
 		return insert;
 	}
 

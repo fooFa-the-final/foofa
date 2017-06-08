@@ -32,6 +32,7 @@
 			$("#isSurvey").attr("disabled", true); 
 		</c:when>
 		<c:otherwise>
+			console.log("등록");
 			$('#submit').attr("action", "${ctx }/review/create.do");
 		
 		</c:otherwise>
@@ -62,7 +63,7 @@
         }
 	}
 	
-	var imgUpload = function(){
+	/* var imgUpload = function(){
 		$('#uploadImage').ajaxForm({
 			url: "${ctx}/review/img.do",
 			enctype: "multipart/form-data", // 여기에 url과 enctype은 꼭 지정해주어야 하는 부분이며 multipart로 지정해주지 않으면 controller로 파일을 보낼 수 없음
@@ -71,7 +72,7 @@
 			}
 		});
 		$("#uploadImage").submit();
-    }
+    } */
 </script>
 </head>
 
@@ -146,7 +147,8 @@
 						<input type="button" class="btn btn-primary" data-toggle="modal" data-target="#upload" value="Add Photo">
         </div>    
         
-        <form id = "submit" method = "post" action="">	
+        <form id = "submit" method = "post" enctype="multipart/form-data">
+        	<input type="hidden" name = "foodtruckId" value="${truck.foodtruckId }">
 				<div class="col-lg-12">
 						<table width="1150px">
 							<thead>
@@ -244,9 +246,7 @@
 				</c:otherwise>
 			</c:choose>
 			</div>
-			 
-</form>
-<!-- 그림 Modal -->
+			 <!-- 그림 Modal -->
 		  	<div class="modal fade" id="upload" role="dialog">
 		    <div class="modal-dialog">
 		      <!-- Modal content-->
@@ -269,6 +269,8 @@
 		      
 		    </div>
 		  </div>	
+</form>
+
 	<!-- end wrapper -->
 	<!-- Core Scripts - Include with every page -->
 	<script src="${ctx }/resources/plugins/bootstrap/bootstrap.min.js"></script>
