@@ -38,11 +38,10 @@
 						style="height: 350px; background-color: #FFFFFF; ">
 						<a class="navbar-brand" href="#"
 							style="margin-top: 10px; margin-left: 20px"> <img
-							src="../../resources/img/waikiki.jpg"
+							src="${ctx }/resources/upload/${member.profileImg }"
 							style="height: 250px; width: 250px" /> <br>
 
-							<form id="fileForm" action="fileUpload" method="post"
-								enctype="multipart/form-data">
+							<form id="fileForm" action="fileUpload" method="post" enctype="multipart/form-data">
 								<input type="file" id="fileUp" name="fileUp" /> <input
 									type="button" value="전송하기" onClick="fileSubmit();">
 							</form>
