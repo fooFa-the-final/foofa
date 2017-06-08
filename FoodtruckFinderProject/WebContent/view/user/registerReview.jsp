@@ -89,7 +89,7 @@
 
 
 <body>
-<form id = "submit" method = "post">	
+
 	<!--  wrapper -->
 	<div id="wrapper">
 		<header>
@@ -146,7 +146,7 @@
 						<input type="button" class="btn btn-primary" data-toggle="modal" data-target="#upload" value="Add Photo">
         </div>    
         
-        
+        <form id = "submit" method = "post" action="">	
 				<div class="col-lg-12">
 						<table width="1150px">
 							<thead>

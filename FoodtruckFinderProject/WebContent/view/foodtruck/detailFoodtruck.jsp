@@ -214,7 +214,6 @@
 								 </fieldset>
 							</form>
 	                		<form>
-<<<<<<< HEAD
 								 <fieldset class="truck-border">
 								  <legend class="truck-border">Menu</legend>
 								  <font size = "3">
@@ -231,7 +230,6 @@
 								  </c:forEach>
 								 </font>
 								 </fieldset>
-=======
 							 <fieldset class="truck-border">
 							  <legend class="truck-border">Today</legend>
 							  <font size = "4">
@@ -240,7 +238,6 @@
 								  Today's Issue<br><br> ${truck.notice }
 							  </font>
 							 </fieldset>
->>>>>>> branch '170524' of https://github.com/fooFa-the-final/foofa.git
 							</form>
 							
 	                	</div>
