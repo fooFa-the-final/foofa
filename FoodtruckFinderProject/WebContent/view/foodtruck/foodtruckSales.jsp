@@ -281,8 +281,7 @@ h2 {
 					}
 				</script>
 				<script>
-				var loc;
-				var change = function(e){
+				var change = function(e, id){
 					var tm128 = naver.maps.TransCoord.fromLatLngToTM128(e.coord);
 					naver.maps.Service.reverseGeocode({
 				        location: tm128,
@@ -293,10 +292,8 @@ h2 {
 				        }
 				        var item = response.result.items[0],
 		 				point = new naver.maps.Point(item.point.x, item.point.y);
-				        $("#locat").val(item.address);
-				   		loc = e.coord;
+				        $(id).val(item.address);
 					});
-					
 				};
 				
 				var marker;
@@ -325,7 +322,7 @@ h2 {
 					
 					naver.maps.Event.addListener(map2, 'click', function(e) {
 		 			   marker2.setPosition(e.coord);
-		 			   change(e);
+		 			   change(e, "#locat");
 		 			});
 				});
 				
@@ -350,6 +347,11 @@ h2 {
 							position: point,
 							map: map
 						});
+			 			
+			 			naver.maps.Event.addListener(map, 'click', function(e) {
+				 			   marker.setPosition(e.coord);
+				 			   change(e, "#location1");
+				 		});
 			 		});
 				}
 				</script>
