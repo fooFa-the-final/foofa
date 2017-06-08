@@ -78,31 +78,18 @@
 				<div class="col-lg-12">
 					<!-- search section-->
 					<div class="input-group custom-search-form">
-<<<<<<< HEAD
-						<form method="post" action="${ctx }/foodtruck/searchByKeyLoc.do" style="margin:7px;">
-		                        		<input type="text" class="form-control" id="keyword" name="keyword" placeholder="Search" style="width: 300px; padding:0px;">
-		                            	<input type="text" class="form-control" id="location" name="location" placeholder="Location" style="width: 300px; padding:0px;">
-	                                <button class="btn btn-default" type="submit" style="height:34px">
-	                                    <i class="fa fa-search" style="padding:0px"></i>
-	                                </button>
-	                            </form>
-=======
 	                   <form method="post" action="${ctx }/foodtruck/searchByKeyLoc.do" style="margin:7px;">
-						<input id="searchKey" type="text" class="form-control"  name="keyword"  placeholder="Search"
-							style="width: 400px"> <input id="searchLoc" name="location"  type="text"
-							class="form-control" placeholder="Location" style="width: 400px">
-						<button class="btn btn-danger searchBtn" type="submit">
-							<i class="fa fa-search"></i>
-						</button>
+						<input id="searchKey" type="text" class="form-control"  name="keyword"  placeholder="Search" style="width: 400px"> 
+						<input id="searchLoc" name="location"  type="text" class="form-control" placeholder="Location" style="width: 400px">
+						<button class="btn btn-danger searchBtn" type="submit"><i class="fa fa-search"></i></button>
 						</form>
->>>>>>> branch '170524' of https://github.com/fooFa-the-final/foofa.git
 					</div>
 					<!--end search section-->
 				</div>
 			</li>
-			<li class="row" style="display: block; float: bottom">
+			<li class="row" style="display: block;">
 				<div id="col-lg-12">
-					<img id="mainMemberImg"  class="main_img_person" src="${ctx}/resources/img/user.jpg" onclick="location.href='${ctx}/review/list/member.do?memberId=${mainMember.memberId}'" />
+					<img id="mainMemberImg"  class="main_img_person" src="${ctx}/resources/img/${mainMember.profileImg}" onclick="location.href='${ctx}/review/list/member.do?memberId=${mainMember.memberId}'" />
 				</div>
 			</li>
 
@@ -146,10 +133,10 @@
 											</p>
 										</div>
 										<div style="float:left; width:180px">
-											<img id="${review.reviewId}" src="${ctx }/resources/img/${review.mainImage.filename }" style="width: 160px; height:160px; margin:10px"/>
+											<img id="${review.reviewId}" src="${ctx }/resources/img/food/${review.mainImage.filename }" style="width: 160px; height:160px; margin:10px"/>
 											<div class="somenail-list">
 												<c:forEach var="image" varStatus="imageNo" items="${review.images }">
-													<img src="${ctx }/resources/img/${image.filename}" onclick="previewImage(this.src, '${review.reviewId}');"/>
+													<img src="${ctx }/resources/img/food/${image.filename}" onclick="previewImage(this.src, '${review.reviewId}');"/>
 												</c:forEach>
 											</div>
 										</div>							
@@ -203,9 +190,7 @@
 		var mainImgSrc = "${mainFoodImg}";
 		var mainMemberSrc = "${mainMember.profileImg}";
 		
-		console.log("mainImgSrc : "+mainImgSrc+" mainMemberSrc : "+mainMemberSrc);
-		$("#mainNav").css("background-image", "url('${ctx}/resources/img/"+mainImgSrc+"')");
-		$("#mainMemberImg").attr("src","${ctx}/resources/img/${mainMember.profileImg}");
+		$("#mainNav").css("background-image", "url('${ctx}/resources/img/food/"+mainImgSrc+"')");
 		
 	});
 	
