@@ -4,37 +4,30 @@
 <div class="col-lg-12">
 	<div class="panel panel-default">
 		<div class="panel-body">
+			<div class="col-lg-4" style="height:300px">
 			<form id="fileForm" method="post" enctype="multipart/form-data">
-				<a class="navbar-brand" href="#" style="margin-top: 10px;"> <img
+				<a class="navbar-brand" href="#"> <img
 					name="image" id="image"
-					src="${ctx }/resources/img/food/${truck.foodtruckImg }"
+					src="${ctx }/resources/img/member/${member.profileImg }"
 					style="height: 250px; width: 250px"
 					onClick="document.all.file.click();" /> <input type="file"
 					name="file" id="file" style="display: none;"
 					onchange="fileinfo(this)" />
 				</a>
 			</form>
-			<div class="col-lg-8">
-				<span style="font-size: 15px;">${truck.foodtruckName }</span> <span
-					style="float: right; margin-right: 10px;"><a
-					href="${ctx }/seller/modify.do"><button type="button"
-							class="btn btn-default">판매자 정보 수정</button></a> <a
-					href="${ctx }/seller/checkPw.do"><button type="button"
-							class="btn btn-default">판매자 탈퇴</button></a></span>
+			</div>
+			<div class="col-lg-8" style="margin-top:20px;">
+				<h2 style="display:inline">${member.memberId }</h2> 
+				<span style="float: right; margin-right: 10px;">
+                    <button id="favoriteBtn" type="button" class="btn btn-default btn-circle btn-lg" onclick="follow'${member.memberId }');"><i class="fa fa-heart"></i></button>
+                    <a href="${ctx }/review/create.do?foodtruckId=${truck.foodtruckId}"><button id="favoriteBtn" type="button" class="btn btn-primary btn-circle btn-lg" onclick="follow'${member.memberId }');"><i class="fa fa-list"></i></button></a>
+				</span>
 			</div>
 
-			<div class="col-lg-6 user-info">
-				<font size="6">${truck.foodtruckName }</font><br> <br>
-				<h5>${truck.category1 }</h5>
-				<h5>${truck.spot }</h5>
-				<h5>${truck.favoriteCount }Followers</h5>
-				<h5>${truck.reviewCount }Reviews</h5>
-			</div>
-			<div class="col-lg-2">
-				<button type="button" id="openstateBtn" name="openstateBtn"
-					class="btn btn-outline btn-default" onClick="stateBtn(this)">OPEN
-					NOW</button>
-				<input type="hidden" id="openstate" name="openstate" value="">
+			<div class="col-lg-8 user-info" style="margin-top:20px">
+				<h5>${member.email }</h5>
+				<h5>팔로워수&nbsp; ${member.followCount }</h5>
+				<h5>리뷰작성&nbsp;&nbsp;${member.reviewCount }</h5>
 			</div>
 		</div>
 	</div>
