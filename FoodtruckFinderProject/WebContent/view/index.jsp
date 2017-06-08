@@ -68,7 +68,7 @@ a.link {font-size: 0.7em; color:blue;}
 			</li>
 			</ul>
 			<div id="col-lg-12" class="text-center">
-					<img id="mainMemberImg"  class="main_img_person" src="${ctx}/resources/img/user.jpg" onclick="location.href='${ctx}/review/list/member.do?memberId=${mainMember.memberId}'" />
+					<img id="mainMemberImg"  class="main_img_person" src="${ctx}/resources/img/member/${mainMember.profileImg}" onclick="location.href='${ctx}/review/list/member.do?memberId=${mainMember.memberId}'" />
 			</div>
 		<!-- navbar-top-links -->
 	</nav>
@@ -90,7 +90,7 @@ a.link {font-size: 0.7em; color:blue;}
 					<div class="col-lg-4">
 						<div class="panel panel-danger">
 							<div class="panel-header">
-								<img src="${ctx}/resources/img/${truck.foodtruckImg }" class="main-truck-img"onclick="location.href='${ctx }/review/list/truck.do?foodtruckId=${truck.foodtruckId}'"/>
+								<img src="${ctx}/resources/img/truck/${truck.foodtruckImg }" class="main-truck-img"onclick="location.href='${ctx }/review/list/truck.do?foodtruckId=${truck.foodtruckId}'"/>
 							</div>
 							<div class="panel-body text-left">
 								<b><a href="${ctx }/review/list/truck.do?foodtruckId=${truck.foodtruckId }">${truck.foodtruckName }</a></b> <br> <p > 평점 :<span class="starRating" style="text-align:left;"><span style="width: ${truck.score*20 }%">${truck.score }점</span></span></p>리뷰수 : ${truck.reviewCount }
@@ -102,7 +102,7 @@ a.link {font-size: 0.7em; color:blue;}
 				<div class="col-lg-4">
 					<div class="panel panel-danger">
 						<div class="panel-header">
-							<img src="${ctx}/resources/img/${truck.foodtruckImg }" class="main-truck-img" onclick="location.href='${ctx }/review/list/truck.do?foodtruckId=${truck.foodtruckId}'" />
+							<img src="${ctx}/resources/img/truck/${truck.foodtruckImg }" class="main-truck-img" onclick="location.href='${ctx }/review/list/truck.do?foodtruckId=${truck.foodtruckId}'" />
 						</div>
 						<div class="panel-body text-left">
 								<b><a href="${ctx }/review/list/truck.do?foodtruckId=${truck.foodtruckId }">${truck.foodtruckName }</a></b> <br> <p > 평점 :<span class="starRating" style="text-align:left;"><span style="width: ${truck.score*20 }%">${truck.score }점</span></span></p>리뷰수 : ${truck.reviewCount }
@@ -115,7 +115,7 @@ a.link {font-size: 0.7em; color:blue;}
 				<div class="col-lg-4">
 					<div class="panel panel-danger">
 						<div class="panel-header">
-							<img src="${ctx}/resources/img/${truck.foodtruckImg }" class="main-truck-img" onclick="location.href='${ctx }/review/list/truck.do?foodtruckId=${truck.foodtruckId}'"/>
+							<img src="${ctx}/resources/img/truck/${truck.foodtruckImg }" class="main-truck-img" onclick="location.href='${ctx }/review/list/truck.do?foodtruckId=${truck.foodtruckId}'"/>
 						</div>
 						<div class="panel-body text-left">
 								<b><a href="${ctx }/review/list/truck.do?foodtruckId=${truck.foodtruckId }">${truck.foodtruckName }</a></b> <br> <p > 평점 :<span class="starRating" style="text-align:left;"><span style="width: ${truck.score*20 }%">${truck.score }점</span></span></p>리뷰수 : ${truck.reviewCount }
@@ -143,7 +143,7 @@ a.link {font-size: 0.7em; color:blue;}
 				<div class="col-lg-9">
 						<div class="panel panel-primary text-left" style="height:327px">
 							<div class="review-heading padding-10" style="	height: 90px;">
-								<img class="somenail" src="${ctx }/resources/img/${review.writer.profileImg }"/>
+								<img class="somenail" src="${ctx }/resources/img/member/${review.writer.profileImg }"/>
 								<div style="float:left; width:80%;">
 									<ul>
 										<li><a href="${ctx }/review/list/member.do?memberId=${hotReview.writer.memberId }">${hotReview.writer.memberId }</a></li>
@@ -162,10 +162,10 @@ a.link {font-size: 0.7em; color:blue;}
 									</p>
 								</div>
 								<div style="float:left; width:180px">
-									<img id="${hotReview.reviewId}" src="${ctx }/resources/img/${hotReview.mainImage.filename }" style="width: 160px; height:160px; margin:10px"/>
+									<img id="${hotReview.reviewId}" src="${ctx }/resources/img/food/${hotReview.mainImage.filename }" style="width: 160px; height:160px; margin:10px"/>
 									<div class="somenail-list">
 									<c:forEach var="image" varStatus="imageNo" items="${hotReview.images }">
-										<img src="${ctx }/resources/img/${image.filename}" onclick="previewImage(this.src, '${hotReview.reviewId}');"/>
+										<img src="${ctx }/resources/img/food/${image.filename}" onclick="previewImage(this.src, '${hotReview.reviewId}');"/>
 									</c:forEach>
 									</div>
 								</div>							
@@ -179,7 +179,7 @@ a.link {font-size: 0.7em; color:blue;}
 								 <a href="${ctx }/review/list/truck.do?foodtruckId=${review.foodtruck.foodtruckId }">${review.foodtruck.foodtruckName }</a>		 By <a href="${ctx }/review/list/member.do?memberId=${review.writer.memberId }">${review.writer.memberId }</a>						
 							</div>
 							<div class="panel-body" style="padding:5px;">
-								<img class="somenail" src="${ctx }/resources/img/${review.mainImage.filename}"/>
+								<img class="somenail" src="${ctx }/resources/img/food/${review.mainImage.filename}"/>
 
 								 <p class="index-overflow">${review.contents }</p>
 							</div>					
@@ -274,9 +274,7 @@ function showDivs(n) {
 		var mainImgSrc = "${mainFoodImg}";
 		var mainMemberSrc = "${mainMember.profileImg}";
 		
-		console.log("mainImgSrc : "+mainImgSrc+" mainMemberSrc : "+mainMemberSrc);
-		$("#mainNav").css("background-image", "url('${ctx}/resources/img/"+mainImgSrc+"')");
-		$("#mainMemberImg").attr("src","${ctx}/resources/img/${mainMember.profileImg}");
+		$("#mainNav").css("background-image", "url('${ctx}/resources/img/food/"+mainImgSrc+"')");
 		
 	});
 	

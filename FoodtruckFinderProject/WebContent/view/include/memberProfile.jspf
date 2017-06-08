@@ -19,10 +19,13 @@
 			<div class="col-lg-8" style="margin-top:20px;">
 				<h2 style="display:inline">${member.memberId }</h2> 
 				<span style="float: right; margin-right: 10px;">
-					<c:if test="${loginUserId ne member.memberId }">
+					<c:if test="${loginUserId ne null && loginUserId ne member.memberId }">
                     <button id="followBtn" type="button" class="btn btn-default btn-circle btn-lg" onclick="follow('${member.memberId }');"><i class="fa fa-heart"></i></button>
                     </c:if>
-                    <a href="${ctx }/review/list/member.do"><button type="button" class="btn btn-primary btn-circle btn-lg" onclick="follow'${member.memberId }');"><i class="fa fa-list"></i></button></a>
+                    <c:if test="${loginUserId eq null || loginUserId eq '' }">
+                    <button id="followBtn" type="button" class="btn btn-default btn-circle btn-lg" onclick="location.href='${ctx}/login.do'"><i class="fa fa-heart"></i></button>
+                    </c:if>
+                    <a href="${ctx }/review/list/member.do?memberId=${member.memberId}"><button type="button" class="btn btn-primary btn-circle btn-lg"><i class="fa fa-list"></i></button></a>
 				</span>
 			</div>
 
