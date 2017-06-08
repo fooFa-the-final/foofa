@@ -162,142 +162,123 @@
 						</div>
 						<div class="col-lg-12">
 							<div class="col-lg-12">
-								<!--Pill Tabs   -->
+								<!--Basic Tabs   -->
 								<div class="panel panel-default">
-									<div class="panel-heading">Pill Tabs</div>
+									<div class="panel-heading">나이대별</div>
 									<div class="panel-body">
-										<ul class="nav nav-pills">
-											<li class="active"><a href="#10-pills" data-toggle="tab">10대</a>
+										<ul class="nav nav-tabs">
+											<li class="active"><a href="#10A" data-toggle="tab">10대</a>
 											</li>
-											<li><a href="#20-pills" data-toggle="tab">20대</a></li>
-											<li><a href="#30-pills" data-toggle="tab">30대</a></li>
-											<li><a href="#40-pills" data-toggle="tab">40대</a></li>
-											<li><a href="#50-pills" data-toggle="tab">50대 이상</a></li>
+											<li><a href="#20A" data-toggle="tab">20대</a></li>
+											<li><a href="#30A" data-toggle="tab">30대</a></li>
+											<li><a href="#40A" data-toggle="tab">40대</a></li>
+											<li><a href="#50A" data-toggle="tab">50대이상</a></li>
 										</ul>
 
 										<div class="tab-content">
-											<div class="tab-pane fade in active" id="10-pills">
+											<div class="tab-pane fade in active" id="10A">
+												<h4>Home Tab</h4>
 												<!-- pie chart-->
-												<div class="flot-chart">
-													<div class="panel-body">
-														<div class="flot-chart">
-															<div id="chart10" />
-															<script>
-																var options = {
-																	'dataset' : {
-																		title : 'Web accessibility status',
-																		values : [
-																				18,
-																				12,
-																				3,
-																				10,
-																				7 ],
-																		colorset : [
-																				'#56b4e9',
-																				'#e69f00',
-																				'#cc79a7',
-																				'#009e73',
-																				'#0072b2' ],
-																		fields : [
-																				'A',
-																				'B',
-																				'C',
-																				'D',
-																				'E' ]
-																	},
-																	'donut_width' : 100,
-																	'core_circle_radius' : 0,
-																	'chartDiv' : 'chart10',
-																	'chartType' : 'pie',
-																	'chartSize' : {
-																		width : 600,
-																		height : 300
-																	}
-																};
+												<div id="chart2" />
+												<script>
+														var options = {
+															'dataset' : {
+																title : 'Web accessibility status',
+																values : [ ${maList[4].ages }, ${maList[3].ages }, ${maList[2].ages },
+																	${maList[1].ages }, ${maList[0].ages } ],
+																colorset : [
+																		'#56b4e9',
+																		'#e69f00',
+																		'#cc79a7',
+																		'#009e73',
+																		'#0072b2' ],
+																fields : [ '5',
+																		'4',
+																		'3',
+																		'2',
+																		'1' ]
+															},
+															'donut_width' : 100,
+															'core_circle_radius' : 0,
+															'chartDiv' : 'chart2',
+															'chartType' : 'pie',
+															'chartSize' : {
+																width : 600,
+																height : 300
+															}
+														};
 
-																Nwagon
-																		.chart(options);
-															</script>
-														</div>
-													</div>
-												</div>
+														Nwagon.chart(options);
+													</script>
 												<!--end pie chart-->
 											</div>
-											<div class="tab-pane fade" id="20-pills">
+											<div class="tab-pane fade" id="20A">
+												<h4>Profile Tab</h4>
 												<!-- pie chart-->
-												<div class="flot-chart">
-													<div class="flot-chart-content" id="flot-pie-chart-20">
-														<div class="panel-heading">Female</div>
-														<div class="panel-body">
-															<div class="flot-chart">
-																<div id="chart20" />
-																<script>
-																	var options = {
-																		'dataset' : {
-																			title : 'Web accessibility status',
-																			values : [
-																					8,
-																					29,
-																					31,
-																					10,
-																					7 ],
-																			colorset : [
-																					'#56b4e9',
-																					'#e69f00',
-																					'#cc79a7',
-																					'#009e73',
-																					'#0072b2' ],
-																			fields : [
-																					'A',
-																					'B',
-																					'C',
-																					'D',
-																					'E' ]
-																		},
-																		'donut_width' : 100,
-																		'core_circle_radius' : 0,
-																		'chartDiv' : 'chart20',
-																		'chartType' : 'pie',
-																		'chartSize' : {
-																			width : 600,
-																			height : 300
-																		}
-																	};
+												<div id="chart3" />
+												<script>
+														var options = {
+															'dataset' : {
+																title : 'Web accessibility status',
+																values : [ ${maList[4].ages }, ${maList[3].ages }, ${maList[2].ages },
+																	${maList[1].ages }, ${maList[0].ages } ],
+																colorset : [
+																		'#56b4e9',
+																		'#e69f00',
+																		'#cc79a7',
+																		'#009e73',
+																		'#0072b2' ],
+																fields : [ '5',
+																		'4',
+																		'3',
+																		'2',
+																		'1' ]
+															},
+															'donut_width' : 100,
+															'core_circle_radius' : 0,
+															'chartDiv' : 'chart3',
+															'chartType' : 'pie',
+															'chartSize' : {
+																width : 600,
+																height : 300
+															}
+														};
 
-																	Nwagon
-																			.chart(options);
-																</script>
-															</div>
-														</div>
-													</div>
-												</div>
+														Nwagon.chart(options);
+													</script>
 												<!--end pie chart-->
 											</div>
-											<div class="tab-pane fade" id="30-pills">
-												<!-- pie chart-->
-												<div class="flot-chart">
-													<div class="flot-chart-content" id="flot-pie-chart-30"></div>
-												</div>
-												<!--end pie chart-->
+											<div class="tab-pane fade" id="30A">
+												<h4>Messages Tab</h4>
 											</div>
-											<div class="tab-pane fade" id="40-pills">
-												<!-- pie chart-->
-												<div class="flot-chart">
-													<div class="flot-chart-content" id="flot-pie-chart-40"></div>
-												</div>
-												<!--end pie chart-->
+											<div class="tab-pane fade" id="40A">
+												<h4>Settings Tab</h4>
+												<p>Lorem ipsum dolor sit amet, consectetur adipisicing
+													elit, sed do eiusmod tempor incididunt ut labore et dolore
+													magna aliqua. Ut enim ad minim veniam, quis nostrud
+													exercitation ullamco laboris nisi ut aliquip ex ea commodo
+													consequat. Duis aute irure dolor in reprehenderit in
+													voluptate velit esse cillum dolore eu fugiat nulla
+													pariatur. Excepteur sint occaecat cupidatat non proident,
+													sunt in culpa qui officia deserunt mollit anim id est
+													laborum.</p>
 											</div>
-											<div class="tab-pane fade" id="50-pills">
-												<!-- pie chart-->
-												<div class="flot-chart">
-													<div class="flot-chart-content" id="flot-pie-chart-50"></div>
-												</div>
-												<!--end pie chart-->
+											<div class="tab-pane fade" id="50A">
+												<h4>Settings Tab</h4>
+												<p>Lorem ipsum dolor sit amet, consectetur adipisicing
+													elit, sed do eiusmod tempor incididunt ut labore et dolore
+													magna aliqua. Ut enim ad minim veniam, quis nostrud
+													exercitation ullamco laboris nisi ut aliquip ex ea commodo
+													consequat. Duis aute irure dolor in reprehenderit in
+													voluptate velit esse cillum dolore eu fugiat nulla
+													pariatur. Excepteur sint occaecat cupidatat non proident,
+													sunt in culpa qui officia deserunt mollit anim id est
+													laborum.</p>
 											</div>
 										</div>
 									</div>
 								</div>
-								<!--End Pill Tabs   -->
+								<!--End Basic Tabs   -->
 							</div>
 
 						</div>

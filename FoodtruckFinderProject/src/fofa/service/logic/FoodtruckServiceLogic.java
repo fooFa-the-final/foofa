@@ -72,8 +72,8 @@ public class FoodtruckServiceLogic implements FoodtruckService{
 	}
 
 	@Override
-	public List<HashMap<String, String>> findByFilter(int pageNum, Foodtruck foodtruck) {
-		return foodtruckStore.selectByFilter(pageNum, foodtruck);
+	public List<HashMap<String, String>> findByFilter(int pageNum, Foodtruck foodtruck, String sort) {
+		return foodtruckStore.selectByFilter(pageNum, foodtruck, sort);
 	}
 
 	@Override

@@ -116,7 +116,7 @@ public class FoodtruckStoreLogic implements FoodtruckStore{
 	}
 
 	@Override
-	public List<HashMap<String, String>> selectByFilter(int pageNum, Foodtruck foodtruck) {
+	public List<HashMap<String, String>> selectByFilter(int pageNum, Foodtruck foodtruck, String sort) {
 		SqlSession session = factory.openSession();
 		
 		int nPageIndex = 0;
@@ -127,6 +127,7 @@ public class FoodtruckStoreLogic implements FoodtruckStore{
 		map.put("END", (nPageIndex * nPageRow) + nPageRow);
 		map.put("location", foodtruck.getLocation());
 		map.put("keyword", foodtruck.getFoodtruckName());
+		map.put("stand", sort);
 		
 		if(foodtruck.isCard()){
 			map.put("card", true);

@@ -17,7 +17,7 @@ public interface FoodtruckStore {
 	
 	List<HashMap<String, String>> selectByKeyLoc(int pageNum, String keyword, String location);
 	
-	List<HashMap<String, String>> selectByFilter(int pageNum, Foodtruck foodtruck);
+	List<HashMap<String, String>> selectByFilter(int pageNum, Foodtruck foodtruck, String sort);
 	
 	Foodtruck selectBySellerId(String sellerId);
 

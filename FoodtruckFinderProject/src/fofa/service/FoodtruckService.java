@@ -18,7 +18,7 @@ public interface FoodtruckService {
 	
 	List<HashMap<String, String>> findByKeyLoc(int pageNum, String keyword, String location);
 	
-	List<HashMap<String, String>> findByFilter(int pageNum, Foodtruck foodtruck);
+	List<HashMap<String, String>> findByFilter(int pageNum, Foodtruck foodtruck, String sort);
 	
 	Foodtruck findBySeller(String sellerId);
 	

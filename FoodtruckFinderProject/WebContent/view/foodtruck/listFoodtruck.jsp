@@ -14,38 +14,6 @@
             
         }
         
-       	ul {  
-    text-align:center;  
-}  
-ul li {  
-    display:inline;  
-    vertical-align:middle;  
-}
-  
-ul li a {  
-    display:-moz-inline-stack;  /*FF2*/  
-    display:inline-block;  
-    vertical-align:top;  
-    padding:4px;  
-    margin-right:3px;  
-    width:30px !important;  
-    color:#000;  
-    font:bold 12px tahoma;  
-    border:1px solid #eee;  
-    text-align:center;  
-    text-decoration:none;  
-    width /**/:26px;    /*IE 5.5*/  
-}  
-ul li a.now {  
-    color:#fff;  
-    background-color:#f44;  
-    border:1px solid #f40;  
-}  
-ul li a:hover, ul li a:focus {  
-    color:#fff;  
-    border:1px solid #f40;  
-    background-color:#f40;  
-}  
     </style>
 <head>
     <meta charset="utf-8">
@@ -92,10 +60,10 @@ ul li a:hover, ul li a:focus {
                     	 <input type="checkbox" id="catering" name="checkFilter">케이터링
                     </label>
                     </div>
-                    <div class="cil-md-3">               
-                     	 <select id="disabledSelect" class="form-control" style="width:15%">
-                            <option>리뷰많은 순</option>
-                            <option>단골많은 순</option>
+                    <div class="col-md-3">               
+                     	 <select id="stand" name="stand" class="form-control" style="width:70%" onChange="selectBtn()">
+                            <option value="reviewCount">리뷰많은 순</option>
+                            <option value="favoriteCount">단골많은 순</option>
                          </select>
                     </div>
                 </div>
@@ -251,6 +219,7 @@ ul li a:hover, ul li a:focus {
     	var parking = "${parking}";
     	var catering = "${catering}";
     	var openstate = "${openState}";
+    	var stand = "${stand}";
     	
     	if(card=="true"){
     		$("#card").prop('checked', true);
@@ -267,6 +236,11 @@ ul li a:hover, ul li a:focus {
     	if(openstate=="true"){
     		$("#openstateBtn").removeClass("btn btn-outline btn-default").addClass("btn btn-success");
     		$("#openstate").val("true");
+    	}
+    	if(stand=="reviewCount"){
+    		$("#stand option[value='reviewCount']").attr('selected','selected');
+    	} else if(stand=="favoriteCount"){
+    		$("#stand option[value='favoriteCount']").attr('selected','selected');
     	}
     	
     	// 지도
@@ -356,12 +330,23 @@ ul li a:hover, ul li a:focus {
 			$("#search-with-filter").submit();
 		} else {
 			$(obj).removeClass("btn btn-success").addClass("btn btn-outline btn-default");
-			$("#openstate").val("");
+			$("#openstate").val("false");
 			$("#search-with-filter").submit();
 		}
 	}
 	
-	
+	var selectBtn = function(){
+		var notChecked = [], checked = [];
+	    $(":checkbox").map(function() {
+	        this.checked ? checked.push(this.id) : notChecked.push(this.id);
+	    });
+	    var checked2 = "";
+	    for(var a=0; a<checked.length; a++){
+	    	checked2 += checked[a] + "/";
+	    }
+	    $("#checking").val(checked2);
+	    $("#search-with-filter").submit();
+	}
 	
 	
     </script>
