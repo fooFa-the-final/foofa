@@ -73,4 +73,17 @@ public class FollowStoreLogic implements FollowStore {
 		}
 		return count;
 	}
+
+	@Override
+	public int select(Follow follow) {
+		SqlSession session = factory.openSession();
+		int count = 0;
+		try{
+			FollowMapper mapper = session.getMapper(FollowMapper.class);
+			count = mapper.select(follow);
+		}finally{
+			session.close();
+		}
+		return count;
+	}
 }

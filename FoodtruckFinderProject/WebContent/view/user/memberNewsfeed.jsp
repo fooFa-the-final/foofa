@@ -60,6 +60,11 @@ var report = function(reviewId){
 			}
 		});
 	}
+var previewImage = function(target, idNo){
+	$("#"+idNo).attr('src', target);
+	var targetDiv = document.getElementById(idNo);
+	var src = target;
+};	  
 </script>
 </head>
 
@@ -75,25 +80,14 @@ var report = function(reviewId){
         <!--  page-wrapper -->
         <div id="page-wrapper">
                 <div class="row" >
-                	<div style="height:300px; background-color:#FFFFFF; position:relative; width:83.5%; display:block">
-                    <span>
-                                  <img name="image" id="image" src="${ctx }/resources/upload/${member.profileImg }" style="height:250px; width:250px"/>
-                            <div class="user-info" >
-                                <h2>${member.memberId}</h2><br>	
-                                <h5>${member.email }</h5>
-                                <h5>팔로워수&nbsp; ${member.followCount }</h5>
-                                <h5>리뷰작성&nbsp;&nbsp;${member.reviewCount }</h5>
-                            </div>  
-                    </span>
-                        </div>
-            
-                <!-- Page Header -->
 
+                <!-- Page Header -->
+ 					<%@ include file="../include/memberProfile.jspf" %>
                 <!--End Page Header -->
-                <div class="col-md-12">
+                <div class="col-md-10">
                 	<h1>My Followers Review</h1>
                 	<c:forEach items="${list }" var="Review">
-                		<div class = "col-md-offset-1 col-md-6" style="margin-top:50px">
+                		<%-- <div class = "col-md-offset-1 col-md-6" style="margin-top:50px">
                 		<span><font class="h3"><a href="${ctx }/review/list/truck.do?foodtruckId=${Review.foodtruck.foodtruckId }">${Review.writer.memberId }</a></font></span>
                 		<span style="float:right"><input type="button" value="follow" class="btn btn-result"> <input type="button" value="!" class="btn btn-result" data-toggle="modal" data-target="#myModal${Review.reviewId }"></span><br>
                 		<c:forEach items="${Review.images }" var = "image">
@@ -101,12 +95,45 @@ var report = function(reviewId){
                 		</c:forEach>
 			                		<br><br>
                 		<font size="4px">
-                		<span>점수 : ${Review.score } <button style="border:0;background-color:white" onClick="recReview('${Review.reviewId}')"><i class="fa fa-thumbs-up" id="rec" ></i></button>: 
+                		<span>점수 : ${Review.score } <button style="border:0;background-color:transparent" onClick="recReview('${Review.reviewId}')"><i class="fa fa-thumbs-up" id="rec" ></i></button>: 
 		                		<input type="text" id="rec${Review.reviewId}" value="${Review.recommand }" style="border: 0px;" size=1 readonly></span>
 		                		<span style="float:right">${Review.writeDate }</span><br>
 		                		${Review.contents }	
-                		</font>
+                		</font> --%>
+                		<div class="panel panel-primary text-left">
+									<div class="review-heading padding-10">
+										<img class="somenail" src="${ctx }/resources/img/${Review.writer.profileImg }"/>
+										<div style="float:left; width:40%;">
+											<ul>
+												<li><a href="${ctx }/review/list/member.do?memberId=${Review.writer.memberId }">${Review.writer.memberId }</a></li>
+												<li> <span class="sub-li-follow"><button style="border:0;background-color:transparent" onClick="recReview('${Review.reviewId}')"><i class="fa fa-thumbs-up" id="rec" ></i></button> <input type="text" id="rec${Review.reviewId}" value="${Review.recommand }" style="border: 0px;background-color:transparent" size=1 readonly> </span>
+													 <span class="sub-li-favorite">71 </span>
+												</li>
+												<li> <a href="${ctx }/review/list/truck.do?foodtruckId=${Review.foodtruck.foodtruckId }">${Review.foodtruck.foodtruckName }</a> 에 대한 리뷰 </li>
+											</ul>
+										</div>
+										<div style="float:right">
+											<span style="float:right"><input type="button" value="follow" class="btn btn-default"> <input type="button" value="!" class="btn btn-default" data-toggle="modal" data-target="#myModal${Review.reviewId }"></span>
+										</div>
+									</div>
+									<div class="panel-body ">
+										<div style="display:block;width:500px; float:right;">
+											<span class="starRating" style="text-align:left;"><span style="width: ${Review.score *20}%">${Review.score }점</span></span> ${Review.writeDate}
+											<p class="reviewContent">${Review.contents }
+											</p>
+										</div>
+										<div style="float:left; width:180px">
+											<img id="${Review.reviewId}" src="${ctx }/resources/img/food/${Review.mainImage.filename }" style="width: 160px; height:160px; margin:10px"/>
+											<div class="somenail-list">
+												<c:forEach var="image" varStatus="imageNo" items="${Review.images }">
+													<img src="${ctx }/resources/img/reviewImg/${image.filename}" onclick="previewImage(this.src, '${Review.reviewId}');"/>
+												</c:forEach>
+											</div>
+										</div>							
+									</div>
+								</div>					
                 		<!-- Modal -->
+                		
 								  <div class="modal fade" id="myModal${Review.reviewId }" role="dialog">
 								    <div class="modal-dialog">
 								    
@@ -134,7 +161,7 @@ var report = function(reviewId){
 								      
 								    </div>
 								  </div>
-                		</div>
+                		
                 	</c:forEach>
                 </div>
             </div>
@@ -150,9 +177,13 @@ var report = function(reviewId){
     <script src="${ctx}/resources/plugins/metisMenu/jquery.metisMenu.js"></script>
     <script src="${ctx}/resources/plugins/pace/pace.js"></script>
     <script src="${ctx}/resources/scripts/siminta.js"></script>
+
+	<!-- Page-Level Plugin Scripts-->
+    <script src="${ctx}/resources/scripts/profile.js"></script>
     <script>
     $(document).ready(function () {
 		$('#side-news').attr('class', 'selected');
+		followExist('${member.memberId}');
     });
     </script>
 

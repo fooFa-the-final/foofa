@@ -10,5 +10,6 @@ public interface FollowStore {
 	int delete(Follow follow);
 	List<Follow> selectByFromId(String fromId);
 	int selectByToId(String toId);
+	int select(Follow follow);
 	
 }

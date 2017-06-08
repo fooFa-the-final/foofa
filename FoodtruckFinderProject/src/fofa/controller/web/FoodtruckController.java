@@ -116,7 +116,6 @@ public class FoodtruckController {
 	@RequestMapping(value="/modifyPicture.do", method=RequestMethod.POST)
 	public String modifyPicture(MultipartHttpServletRequest request){
 		
-		String img= null;
         // 저장 경로 설정
         String root = request.getSession().getServletContext().getRealPath("/");
         String path = root+"resources\\img\\food\\";
@@ -139,7 +138,7 @@ public class FoodtruckController {
             foodtruckService.modify(foodtruck);
             
             try {
-                mFile.transferTo(new File(path+newFileName));
+                mFile.transferTo(new File(path + newFileName));
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -256,7 +255,7 @@ public class FoodtruckController {
 		String keyword = request.getParameter("keyword");
 		String checked = request.getParameter("checking");
 		String sort = request.getParameter("stand");
-		System.out.println("sort : " + sort);
+		model.addAttribute("stand", sort);
 		int currentIndex = 1;
 		boolean state = Boolean.parseBoolean(request.getParameter("openstate"));
 //		String state = request.getParameter("openstate");

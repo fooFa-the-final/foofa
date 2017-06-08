@@ -32,5 +32,10 @@
     FROM follow_tb
     WHERE to_Id= #{memberId}
 	</select>
+  	<select id="select" parameterType="Follow" resultType="int">
+  		SELECT COUNT(*)
+  		FROM follow_tb
+  		WHERE to_Id=#{toId} and from_id=#{fromId}
+  	</select> 
 	</mapper>    
     

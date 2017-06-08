@@ -31,36 +31,10 @@
 		<%@ include file="../include/memberLeft.jspf"%>
 		<div id="page-wrapper">
 				<div class="row">
-				<div 
-						style="height: 300px; background-color: #FFFFFF; position: absolute; width: 83.5%">
-						
-                    	<form id="fileUpload" method="post" enctype="multipart/form-data">
-                            <a class="navbar-brand" href="#" style="margin-top:10px;" >
-                                <img name="image" id="image" src="${ctx }/resources/upload/${member.profileImg }" style="height:250px; width:250px" onClick="document.all.file.click();"/>
-                            	<input type="file" name="file" id="file" style="display: none;" onchange="fileinfo(this)"/>
-                            </a>
-                        </form> 
-						<div class="user-info">
-                                <h2>${member.memberId}</h2><br>	
-                                <h5>${member.email }</h5>
-                                <h5>팔로워수&nbsp; ${member.followCount }</h5>
-                                <h5>리뷰작성&nbsp;&nbsp;${member.reviewCount }</h5>
-						</div>
-						<span style="float: right; margin-right: 90px; margin-top: 30px">
-							<a href="${ctx }/member/checkPw.do"><button type="button"
-									class="btn btn-default">회원 탈퇴</button></a> <br> <br> <br>
-							<br> <br> <br> <br> <a href="#">
-							<c:if test="${loginUserId == member.memberId }">
-							<button
-									type="button" class="btn btn-default">Make Follow</button></c:if></a>
-									
-						</span> 
-					</div>
-				<br> <br> <br> <br> <br> <br> <br>
-				<br> <br> <br> <br> <br> <br> <br>
-				<br>
-
-					<br> <br>
+           		     <!-- Page Header -->
+ 					<%@ include file="../include/memberProfile.jspf" %>
+            	    <!--End Page Header -->
+                
 					<h1>Follwer List</h1>
 					<br>
 					<c:forEach var="follow" items="${follow}" varStatus="sts">
@@ -79,11 +53,12 @@
 								<h5>리뷰작성&nbsp;&nbsp;${follow.reviewCount }</h5>
 								<br>
 							</div>
+							<c:if test="${loginUserId eq member.memberId }">
 							<div style="float: right;">
 								<br> <br> <br>
 								<button type="button" class="btn btn-default"
-									onclick="follow('${follow.memberId}');">UNFOLLOW</button>
-							</div>
+									onclick="unfollow('${follow.memberId}');">UNFOLLOW</button>
+							</div></c:if>
 							</div>
 					</c:forEach>
 		</div>
@@ -98,17 +73,20 @@
 	<script src="${ctx }/resources/plugins/metisMenu/jquery.metisMenu.js"></script>
 	<script src="${ctx }/resources/plugins/pace/pace.js"></script>
 	<script src="${ctx }/resources/scripts/siminta.js"></script>
-	<!-- Page-Level Plugin Scripts-->
-	<script src="${ctx }/resources/plugins/dataTables/jquery.dataTables.js"></script>
-	<script
-		src="${ctx }/resources/plugins/dataTables/dataTables.bootstrap.js"></script>
-		
-		<script
-			src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<script src="${ctx }/resources/js/jquery-3.1.1.min.js"></script>
-	<script src="http://malsup.github.com/jquery.form.js"></script> 
 
-		<script>
+	<!-- Page-Level Plugin Scripts-->
+    <script src="${ctx}/resources/scripts/profile.js"></script>
+	<script src="${ctx }/resources/plugins/dataTables/jquery.dataTables.js"></script>
+	<script src="${ctx }/resources/plugins/dataTables/dataTables.bootstrap.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script src="${ctx }/resources/js/jquery-3.1.1.min.js"></script>
+	<script src="http://malsup.github.com/jquery.form.js"></script> 
+	<script>
+        $(document).ready(function () {
+			$('#side-follow').attr('class', 'selected');
+			followExist('${member.memberId}');
+        });
+		
 		function fileinfo(input){
 	      	if (input.files && input.files[0]) {
 	            var reader = new FileReader();
@@ -129,8 +107,7 @@
 	      	});
 	      	$("#fileUpload").submit();
 		}
-				var follow = function(toId) {
-					$(document).ready(function() {
+		var unfollow = function(toId) {
 						var btn = $("#delete");
 						$.ajax({
 							type : 'GET',
@@ -144,8 +121,7 @@
 								
 							}
 						});
-					});
-				}
+		}
 				</script>
 
 </body>

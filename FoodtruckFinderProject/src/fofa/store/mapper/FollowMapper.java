@@ -10,5 +10,6 @@ public interface FollowMapper {
 	int delete(Follow follow);
 	List<Follow> selectByFromId(String fromId);
 	int selectByToId(String memberId);
+	int select(Follow follow);
 	
 }
