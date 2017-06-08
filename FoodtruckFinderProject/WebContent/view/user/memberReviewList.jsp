@@ -46,6 +46,7 @@
                                 <h5>팔로워수&nbsp; ${member.followCount }</h5>
                                 <h5>리뷰작성&nbsp;&nbsp;${member.reviewCount }</h5>
                             </div>
+                            <button id="followBtn" type="button" class="btn btn-default btn-circle btn-lg" onclick="follow('${ member.memberId}');"><i class="fa fa-heart"></i></</button>
                     </span>
                     <c:if test="${loginUser != null  && loginUser != member.memberId}">
                     <span style="float:right; margin-right:50px; margin-top: 30px">
@@ -77,7 +78,7 @@
                 			</div>
                 			<div class="col-lg-11" style="display:inline-block;margin-top:30px">
                 			<font size="4">
-                				<div class="col-lg-10">
+                				<div                                                                                                                                      class="col-lg-10">
                 					${review.contents }<br>
                 					<i class="fa fa-thumbs-up" ></i> : ${review.recommand }
                 				</div>
