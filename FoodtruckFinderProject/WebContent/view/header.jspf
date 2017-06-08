@@ -58,9 +58,9 @@
                     <!-- dropdown user-->
                     
                     <ul class="dropdown-menu dropdown-user">
-                        <li><a href="#"><i class="fa fa-user fa-fw"></i>${loginUserId } Profile</a>
+                        <li><a href="${ctx }/review/list/member.do"><i class="fa fa-user fa-fw"></i>${loginUserId } Profile</a>
                         </li>
-                        <li><a href="#"><i class="fa fa-gear fa-fw"></i>Settings</a>
+                        <li><a href="${ctx }/member/modify.do"><i class="fa fa-gear fa-fw"></i>Modify Info</a>
                         </li>
                         <li class="divider"></li>
                         <c:choose>

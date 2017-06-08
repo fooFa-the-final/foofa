@@ -57,7 +57,7 @@ public class ReviewController {
 		if(memberId == null){
 			memberId = (String)session.getAttribute("loginUserId");
 		}
-			Member member = memberService.findById(memberId);
+		Member member = memberService.findById(memberId);
 		model.addAttribute("member", member);
 		model.addAttribute("nowId", (String)session.getAttribute("loginUserId"));
 		List<Review> list = reviewService.findByMemberId(memberId);
@@ -66,14 +66,14 @@ public class ReviewController {
 	}
 
 	@RequestMapping("/review/list/follow.do")
-	public String searchByFollower(HttpSession session, Model model){
-		String memberId = (String)session.getAttribute("loginUserId");
-		List<Review> list = reviewService.findByFromId(memberId);
-		for(Review r : list){
-			System.out.println(r.getFoodtruck().getFoodtruckName());
+	public String searchByFollower(String fromId, HttpSession session, Model model){
+		if(fromId == null){
+			fromId = (String)session.getAttribute("loginUserId");
 		}
+		List<Review> list = reviewService.findByFromId(fromId);
+
 		model.addAttribute("list", list);
-		Member member = memberService.findById(memberId);
+		Member member = memberService.findById(fromId);
 		model.addAttribute("member", member);
 		return "../../view/user/memberNewsfeed.jsp";
 	}
