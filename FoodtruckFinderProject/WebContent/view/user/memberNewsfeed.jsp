@@ -60,6 +60,11 @@ var report = function(reviewId){
 			}
 		});
 	}
+var previewImage = function(target, idNo){
+	$("#"+idNo).attr('src', target);
+	var targetDiv = document.getElementById(idNo);
+	var src = target;
+};	  
 </script>
 </head>
 
@@ -90,10 +95,10 @@ var report = function(reviewId){
                 <!-- Page Header -->
 
                 <!--End Page Header -->
-                <div class="col-md-12">
+                <div class="col-md-10">
                 	<h1>My Followers Review</h1>
                 	<c:forEach items="${list }" var="Review">
-                		<div class = "col-md-offset-1 col-md-6" style="margin-top:50px">
+                		<%-- <div class = "col-md-offset-1 col-md-6" style="margin-top:50px">
                 		<span><font class="h3"><a href="${ctx }/review/list/truck.do?foodtruckId=${Review.foodtruck.foodtruckId }">${Review.writer.memberId }</a></font></span>
                 		<span style="float:right"><input type="button" value="follow" class="btn btn-result"> <input type="button" value="!" class="btn btn-result" data-toggle="modal" data-target="#myModal${Review.reviewId }"></span><br>
                 		<c:forEach items="${Review.images }" var = "image">
@@ -101,12 +106,45 @@ var report = function(reviewId){
                 		</c:forEach>
 			                		<br><br>
                 		<font size="4px">
-                		<span>점수 : ${Review.score } <button style="border:0;background-color:white" onClick="recReview('${Review.reviewId}')"><i class="fa fa-thumbs-up" id="rec" ></i></button>: 
+                		<span>점수 : ${Review.score } <button style="border:0;background-color:transparent" onClick="recReview('${Review.reviewId}')"><i class="fa fa-thumbs-up" id="rec" ></i></button>: 
 		                		<input type="text" id="rec${Review.reviewId}" value="${Review.recommand }" style="border: 0px;" size=1 readonly></span>
 		                		<span style="float:right">${Review.writeDate }</span><br>
 		                		${Review.contents }	
-                		</font>
+                		</font> --%>
+                		<div class="panel panel-primary text-left">
+									<div class="review-heading padding-10">
+										<img class="somenail" src="${ctx }/resources/img/${Review.writer.profileImg }"/>
+										<div style="float:left; width:40%;">
+											<ul>
+												<li><a href="${ctx }/review/list/member.do?memberId=${Review.writer.memberId }">${Review.writer.memberId }</a></li>
+												<li> <span class="sub-li-follow"><button style="border:0;background-color:transparent" onClick="recReview('${Review.reviewId}')"><i class="fa fa-thumbs-up" id="rec" ></i></button> <input type="text" id="rec${Review.reviewId}" value="${Review.recommand }" style="border: 0px;background-color:transparent" size=1 readonly> </span>
+													 <span class="sub-li-favorite">71 </span>
+												</li>
+												<li> <a href="${ctx }/review/list/truck.do?foodtruckId=${Review.foodtruck.foodtruckId }">${Review.foodtruck.foodtruckName }</a> 에 대한 리뷰 </li>
+											</ul>
+										</div>
+										<div style="float:right">
+											<span style="float:right"><input type="button" value="follow" class="btn btn-default"> <input type="button" value="!" class="btn btn-default" data-toggle="modal" data-target="#myModal${Review.reviewId }"></span>
+										</div>
+									</div>
+									<div class="panel-body ">
+										<div style="display:block;width:500px; float:right;">
+											<span class="starRating" style="text-align:left;"><span style="width: ${Review.score *20}%">${Review.score }점</span></span> ${Review.writeDate}
+											<p class="reviewContent">${Review.contents }
+											</p>
+										</div>
+										<div style="float:left; width:180px">
+											<img id="${Review.reviewId}" src="${ctx }/resources/img/food/${Review.mainImage.filename }" style="width: 160px; height:160px; margin:10px"/>
+											<div class="somenail-list">
+												<c:forEach var="image" varStatus="imageNo" items="${Review.images }">
+													<img src="${ctx }/resources/img/reviewImg/${image.filename}" onclick="previewImage(this.src, '${Review.reviewId}');"/>
+												</c:forEach>
+											</div>
+										</div>							
+									</div>
+								</div>					
                 		<!-- Modal -->
+                		
 								  <div class="modal fade" id="myModal${Review.reviewId }" role="dialog">
 								    <div class="modal-dialog">
 								    
@@ -134,7 +172,7 @@ var report = function(reviewId){
 								      
 								    </div>
 								  </div>
-                		</div>
+                		
                 	</c:forEach>
                 </div>
             </div>
