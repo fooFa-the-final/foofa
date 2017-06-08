@@ -18,6 +18,11 @@ public class Survey {
 	public String getSurveyId() {
 		return surveyId;
 	}
+	@Override
+	public String toString() {
+		return "Survey [surveyId=" + surveyId + ", foodtruckId=" + foodtruckId + ", ages=" + ages + ", gender=" + gender
+				+ ", suggestion=" + suggestion + ", replies=" + replies + ", score=" + score + "]";
+	}
 	public void setSurveyId(String surveyId) {
 		this.surveyId = surveyId;
 	}

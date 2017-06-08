@@ -8,6 +8,7 @@ import java.util.Map;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import fofa.domain.Survey;
 import fofa.store.SurveyStore;
@@ -15,23 +16,23 @@ import fofa.store.factory.SqlSessionFactoryProvider;
 import fofa.store.mapper.SurveyMapper;
 
 @Repository
-public class SurveyStoreLogic implements SurveyStore{
-	
+public class SurveyStoreLogic implements SurveyStore {
+
 	private SqlSessionFactory factory;
-	
+
 	public SurveyStoreLogic() {
 		factory = SqlSessionFactoryProvider.getSqlSessionFactory();
 	}
-	
+
 	@Override
 	public String insert(Survey survey) {
 		SqlSession session = factory.openSession();
 		String insert = "";
-		try{
+		try {
 			SurveyMapper mapper = session.getMapper(SurveyMapper.class);
-		mapper.insert(survey);
-		insert = survey.getSurveyId();
-		session.commit();
+			mapper.insert(survey);
+			insert = survey.getSurveyId();
+			session.commit();
 		} finally {
 			session.close();
 		}
@@ -72,24 +73,21 @@ public class SurveyStoreLogic implements SurveyStore{
 	@Override
 	public List<Survey> selectAvgByGender(String foodtruckId, String itemId) {
 		SqlSession session = factory.openSession();
-		System.out.println("store : " + foodtruckId + itemId);
 		List<Survey> surveys = new ArrayList<>();
 		try {
 			SurveyMapper mapper = session.getMapper(SurveyMapper.class);
-			HashMap<String, String> params = new HashMap<>();
-			
+			// HashMap<String, String> params = new HashMap<>();
+			//
+			// params.put("foodtruckId", foodtruckId);
+			// params.put("itemId", itemId);
 
-			params.put("foodtruckId", foodtruckId);
-			params.put("itemId", itemId);
-			surveys = mapper.selectAvgByGender(params);
+			surveys = mapper.selectAvgByGender(foodtruckId, itemId);
+			//System.out.println(surveys.get(0).toString());
 			session.commit();
 		} finally {
 			session.close();
 		}
-		for(int i = 0;i<surveys.size();i++){
-			System.out.println("gender : " +surveys.get(i).getGender());
-		}
-		
+
 		return surveys;
 	}
 

@@ -20,154 +20,6 @@
     <link href="${ctx }/resources/plugins/pace/pace-theme-big-counter.css" rel="stylesheet" />
     <link href="${ctx }/resources/css/style.css" rel="stylesheet" />
     <link href="${ctx }/resources/css/main-style.css" rel="stylesheet" />
-    <script src="${ctx }/resources/plugins/jquery-1.10.2.js"></script>
-	 <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=noUvsaR702FX6WH5un5h&submodules=geocoder"></script>
-	 <script>
-	 	var newMarker = function(position){
-			var marker = new naver.maps.Marker({
-				position: position,
-				map: map
-			});
-			
-			markers.push(marker);
-		    console.log(position + "length : " +markers.length);
-		}
-	 	//favorite 수 반환
-	 	$(document).ready(function(){
-	 		$.ajax({
-	 			type:'get',
-	 			url : "${ctx }/favorite/count.do",
-	 			data:{
-	 				foodtruckId : '${truck.foodtruckId}'
-	 			},
-	 			success : function(data){
-					$("#followCount").html(data);
-	 			}
-	 		});	 		
-		 //버튼 서식 지정 
-		 		$.ajax({
-		 			type:'get',
-		 			url : "${ctx }/favorite/exist.do",
-		 			data:{
-		 				foodtruckId : '${truck.foodtruckId}'
-		 			},
-		 			success : function(data){
-						if(data){
-							 $("#favoriteBtn").attr('class', 'btn btn-danger btn-circle btn-lg');
-						}else {
-							 $("#favoriteBtn").attr('class', 'btn btn-default btn-circle btn-lg');
-						}
-		 			}
-		 		});	 	 		
-	 		
-	 		naver.maps.Service.geocode({
-	 			address: "${truck.location}"
-	 		}, function(status, response){
-	 			if (status === naver.maps.Service.Status.ERROR) {
-	 				position = new naver.maps.LatLng(37.4795169, 126.8824995);
-		            return alert('잘못 입력 되어있는 주소입니다. 기본 좌표를 찍어주겠습니다.');
-		        }
-	 			
-	 			var item = response.result.items[0],
-	 				point = new naver.maps.Point(item.point.x, item.point.y);
-	 		
-	 			var map = new naver.maps.Map('map', {
-				    center: point,
-				    zoom: 10
-				});
-	 			
-	 			var marker = new naver.maps.Marker({
-					position: point,
-					map: map
-				});
-		 		
-	 		}
-	 		)   
-	 	});
-	 	var recReview = function(reviewId){
-	 		if(${loginUserId == null || loginUserId == ''}){
-	 			
-	 		}else {
-	 		
-	 		$.ajax({
-	 			type:'get',
-	 			url : "${ctx }/review/recommand.do",
-	 			data:{
-	 				reviewId : reviewId
-	 			},
-	 			success : function(data){
-	 				var revId = "#rec" + reviewId;
- 					var recCount = eval($(revId).val());
- 					$(revId).val("");
-	 				if ($.trim(data) == 'true') {
-	 					$(revId).val(recCount+1);
-						alert("리뷰를 추천하셨습니다.");
-					} else if ($.trim(data) == 'false') {
-	 					$(revId).val(recCount-1);
-						alert("리뷰를 추천 해제 하셨습니다.")
-					}
-	 			}
-	 		});
-	 		}
-	 	}
-	 	
-	 	var report = function(reviewId){
-	 		var reaId = "#reason" + reviewId;
-	 		var name = "reason" + reviewId
-	 		var st = $(":input:radio[name='"+ name + "']:checked").val();
-	 		$.ajax({
-	 			type:'POST',
-	 			url : "${ctx}/review/report/create.do",
-	 			data:{
-	 				reviewId : reviewId, reason : st
-	 			},
-	 			success : function(data){
-	 				if ($.trim(data) == 'true') {
-						alert("신고 등록이 완료되었습니다.");
-					} else if ($.trim(data) == 'false') {
-						alert("이미 신고된 리뷰입니다.");
-					}
-	 			}
-	 		});
-	 	}
-	 	
-	 	var untype = function(){
-	 		 $("input[name=reasonContents]").attr("readonly",true).attr("disabled", true);
-	 		 //$("input[name=reasonContents]").attr("disabled",true);
-	 	}
-	 	
-	 	var availableType = function(){
-	 		 $("input[name=reasonContents]").attr("readonly",false).attr("disabled", false);
-	 		 //$("input[name=reasonContents]").attr("disabled",true);
-	 	}
-	 	
-	 	var favorite = function(truckId){
-	 		var btn = $("#favoriteBtn");
-	 		var classN = btn.attr('class');
-	 		var url ="";
-	 		
-	 		if(classN == "btn btn-default btn-circle btn-lg"){
-	 			url = "${ctx}/favorite/create.do";
-	 			classN = "btn btn-danger btn-circle btn-lg";
-	 		} else {
-	 			url = "${ctx}/favorite/remove.do";
-	 			classN = "btn btn-default btn-circle btn-lg";
-	 		}
-	 		
-	 		$.ajax({
-	 			type:'GET',
-	 			url : url,
-	 			data:{
-	 				foodtruckId : truckId
-	 			},
-	 			success : function(data){
-	 				if (data) {
-	 					btn.attr("class", classN);
-					} 
-	 			}
-	 		});
-	 	};
-	 </script>
 </head>
 
 <body>
@@ -188,7 +40,7 @@
                                 <h1>${truck.foodtruckName }</h1><br>
                                 <h5>${truck.category1 }</h5>
                                 <h5>${truck.spot }</h5>
-                                <h5><span id="followCount"></span>이 해당 푸드트럭을 단골로 등록했습니다.</h5>
+                                <h5><span id="followCount">${truck.favoriteCount }</span>이 해당 푸드트럭을 단골로 등록했습니다.</h5>
                                 <h5>${fn:length(reviewList)} Reviews</h5>
                             </div>
                     </span>
@@ -307,6 +159,104 @@
     <script src="${ctx }/resources/plugins/metisMenu/jquery.metisMenu.js"></script>
     <script src="${ctx }/resources/plugins/pace/pace.js"></script>
     <script src="${ctx }/resources/scripts/siminta.js"></script>
+    
+    <!-- Page Scripts -->
+    <script src="${ctx }/resources/plugins/jquery-1.10.2.js"></script>
+    <script src="${ctx }/resources/scripts/profile.js"></script>
+	 <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=noUvsaR702FX6WH5un5h&submodules=geocoder"></script>
 
+	 <script>
+	 	var newMarker = function(position){
+			var marker = new naver.maps.Marker({
+				position: position,
+				map: map
+			});
+			
+			markers.push(marker);
+		    console.log(position + "length : " +markers.length);
+		}
+	 	$(document).ready(function(){
+	 		favoriteCount("${truck.foodtruckId}");
+	 		exist("${truck.foodtruckId}");
+	 		
+ 	 		
+	 		naver.maps.Service.geocode({
+	 			address: "${truck.location}"
+	 		}, function(status, response){
+	 			if (status === naver.maps.Service.Status.ERROR) {
+	 				position = new naver.maps.LatLng(37.4795169, 126.8824995);
+		            return alert('잘못 입력 되어있는 주소입니다. 기본 좌표를 찍어주겠습니다.');
+		        }
+	 			
+	 			var item = response.result.items[0],
+	 				point = new naver.maps.Point(item.point.x, item.point.y);
+	 		
+	 			var map = new naver.maps.Map('map', {
+				    center: point,
+				    zoom: 10
+				});
+	 			
+	 			var marker = new naver.maps.Marker({
+					position: point,
+					map: map
+				});
+		 		
+	 		}
+	 		)   
+	 	});
+	 	var recReview = function(reviewId){
+	 		
+	 		$.ajax({
+	 			type:'get',
+	 			url : "${ctx }/review/recommand.do",
+	 			data:{
+	 				reviewId : reviewId
+	 			},
+	 			success : function(data){
+	 				var revId = "#rec" + reviewId;
+ 					var recCount = eval($(revId).val());
+ 					$(revId).val("");
+	 				if ($.trim(data) == 'true') {
+	 					$(revId).val(recCount+1);
+						alert("리뷰를 추천하셨습니다.");
+					} else if ($.trim(data) == 'false') {
+	 					$(revId).val(recCount-1);
+						alert("리뷰를 추천 해제 하셨습니다.")
+					}
+	 			}
+	 		});
+	 	}
+	 	
+	 	var report = function(reviewId){
+	 		var reaId = "#reason" + reviewId;
+	 		var name = "reason" + reviewId
+	 		var st = $(":input:radio[name='"+ name + "']:checked").val();
+	 		$.ajax({
+	 			type:'POST',
+	 			url : "${ctx}/review/report/create.do",
+	 			data:{
+	 				reviewId : reviewId, reason : st
+	 			},
+	 			success : function(data){
+	 				if ($.trim(data) == 'true') {
+						alert("신고 등록이 완료되었습니다.");
+					} else if ($.trim(data) == 'false') {
+						alert("이미 신고된 리뷰입니다.");
+					}
+	 			}
+	 		});
+	 	}
+	 	
+	 	var untype = function(){
+	 		 $("input[name=reasonContents]").attr("readonly",true).attr("disabled", true);
+	 		 //$("input[name=reasonContents]").attr("disabled",true);
+	 	}
+	 	
+	 	var availableType = function(){
+	 		 $("input[name=reasonContents]").attr("readonly",false).attr("disabled", false);
+	 		 //$("input[name=reasonContents]").attr("disabled",true);
+	 	}
+
+	 </script>
 </body>
 </html>

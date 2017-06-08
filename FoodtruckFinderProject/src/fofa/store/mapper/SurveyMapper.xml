@@ -10,6 +10,7 @@
 		<id column="survey_id" property="surveyId" />
 		<result column="foodtruck_id" property="foodtruckId" />
 		<result column="gender" property="gender" />
+		<result column="score" property="score" />
 		<result column="age_range" property="ages" />
 		<result column="opinion" property="suggestion" />
 		<collection property="replies" column="survey_id" ofType="SurveyReply"
@@ -26,31 +27,41 @@
 		WHERE FOODTRUCK_ID = #{foodtruckId}
 	</select>
 	<select id="selectAvgByAges" parameterType="HashMap" resultType="Survey">
-		SELECT #{foodtruckId} FOODTRUCKID, S.AGE_RANGE ages, AVG(R.SCORE) score
+		SELECT #{foodtruckId} FOODTRUCKID, S.AGE_RANGE ages, AVG(R.SCORE)
+		score
 		FROM SURVEY_TB S, SURVEY_REPLY_TB R
 		WHERE S.SURVEY_ID= R.SURVEY_ID
 		AND FOODTRUCK_ID= #{foodtruckId}
 		AND R.ITEM_ID = #{itemId}
-		GROUP BY S.AGE_RANGE
+		GROUP BY
+		S.AGE_RANGE
 	</select>
-	<select id="selectAvgByGender" parameterType="HashMap" resultType="Survey">
-		SELECT 'F1' FOODTRUCKID, S.GENDER GENDER, score
-		FROM SURVEY_TB
+	<select id="selectAvgByGender" parameterType="map"
+		resultMap="surveyMap">
+		SELECT 'F1' foodtruck_id, S.GENDER gender, score,
+		count(score) age_range
+		FROM
+		SURVEY_TB
 		S, SURVEY_REPLY_TB R
-		WHERE S.SURVEY_ID = R.SURVEY_ID
-		AND FOODTRUCK_ID= #{foodtruckId}
+		WHERE
+		S.SURVEY_ID = R.SURVEY_ID
+		AND
+		FOODTRUCK_ID= #{foodtruckId}
 		AND R.ITEM_ID = #{itemId}
+		GROUP BY S.GENDER, score
 	</select>
-	
-	
+
+
 	<insert id="insert" parameterType="Survey" useGeneratedKeys="true">
-	    <selectKey keyProperty="surveyId" resultType="string" order="BEFORE">
-           SELECT 'S'||survey_seq.nextval FROM DUAL
-        </selectKey>
-  		INSERT INTO SURVEY_TB (SURVEY_ID, FOODTRUCK_ID, GENDER, AGE_RANGE, OPINION) 
-  		VALUES (#{surveyId}, #{foodtruckId}, #{gender}, #{ages}, #{suggestion})
-  	</insert>
-  	
+		<selectKey keyProperty="surveyId" resultType="string" order="BEFORE">
+			SELECT 'S'||survey_seq.nextval FROM DUAL
+		</selectKey>
+		INSERT INTO SURVEY_TB (SURVEY_ID, FOODTRUCK_ID, GENDER, AGE_RANGE,
+		OPINION)
+		VALUES (#{surveyId}, #{foodtruckId}, #{gender}, #{ages},
+		#{suggestion})
+	</insert>
+
 </mapper>
   
   
