@@ -39,9 +39,7 @@
                 <!-- Page Header -->
                 <div class="col-lg-12" style="height:300px">
                     <span>
-                            <a class="navbar-brand" href="#" style="margin-top:10px; margin-left:20px">
-                                <img src="${ctx}/resources/img/waikiki.jpg" style="height:250px; width:250px"/>
-                            </a>
+                                <img name="image" id="image" src="${ctx }/resources/upload/${member.profileImg }" style="height:250px; width:250px"/>
                             <div class="user-info">
                                 <h2>${member.memberId}</h2><br>
                                 <h5>${member.email }</h5>
@@ -108,6 +106,8 @@
 
 	<!--  Page Script  -->	
 	<script>
+	
+	
     $(document).ready(function () {
 		$('#side-review').attr('class', 'selected');
     });
