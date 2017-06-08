@@ -41,9 +41,20 @@
   		FROM foodtruck_tb
   	</sql>
   	
-  	<sql id="pagingTrucks">
-  		SELECT foodtruck_id, truckName, truck_image, category, area, location, count(*)over() AS allCount
-  		FROM foodtruck_tb
+  	<sql id="pagingTrucksOrderbyReviewCount">
+  		SELECT f.FOODTRUCK_ID, f.TRUCKNAME, f.TRUCK_IMAGE, f.CATEGORY, f.AREA, f.LOCATION, count(*)over() AS allCount FROM (
+		SELECT count(foodtruck_id) stand, foodtruck_id
+		FROM review_tb
+		GROUP BY foodtruck_id)
+		r RIGHT OUTER JOIN foodtruck_tb f ON r.foodtruck_id = f.foodtruck_id
+  	</sql>
+  	
+  	<sql id="pagingTrucksOrderbyFavoriteCount">
+  		SELECT f.FOODTRUCK_ID, f.TRUCKNAME, f.TRUCK_IMAGE, f.CATEGORY, f.AREA, f.LOCATION, count(*)over() AS allCount FROM (
+		SELECT count(foodtruck_id) stand, foodtruck_id
+		FROM favorite
+		GROUP BY foodtruck_id)
+		r RIGHT OUTER JOIN foodtruck_tb f ON r.foodtruck_id = f.foodtruck_id
   	</sql>
   	
   	<sql id="pagingPre">
@@ -84,21 +95,28 @@
   	
   	<select id="selectByLoc" parameterType="Hashmap" resultMap="searchMap">
   		<include refid="pagingPre"/>
-  		<include refid="pagingTrucks"/>
+  		<include refid="pagingTrucksOrderbyReviewCount"/>
   		WHERE location LIKE '%'||#{location}||'%' OR area LIKE '%'||#{location}||'%'
+  		ORDER BY stand DESC NULLS LAST
   		<include refid="pagingPost"/>
   	</select>
   	
   	<select id="selectByKeyLoc" parameterType="Hashmap" resultMap="searchMap">
   		<include refid="pagingPre"/>
-  		<include refid="pagingTrucks"/>
+  		<include refid="pagingTrucksOrderbyReviewCount"/>
   		WHERE (truckName LIKE '%'||#{keyword}||'%' OR category LIKE '%'||#{keyword}||'%') AND (location LIKE '%'||#{location}||'%' OR area LIKE '%'||#{location}||'%')
+  		ORDER BY stand DESC NULLS LAST
   		<include refid="pagingPost"/>
   	</select>
   	
   	<select id="selectByFilter" parameterType="Hashmap" resultMap="searchMap">
   		<include refid="pagingPre"/>
-  		<include refid="pagingTrucks"/>
+  		<if test="stand eq 'reviewCount'">
+  			<include refid="pagingTrucksOrderbyReviewCount"/>
+  		</if>
+  		<if test="stand eq 'favoriteCount'">
+  			<include refid="pagingTrucksOrderbyFavoriteCount"/>
+  		</if>
   		<where> 
   			(truckName LIKE '%'||#{keyword}||'%' OR category LIKE '%'||#{keyword}||'%') AND (location LIKE '%'||#{location}||'%' OR area LIKE '%'||#{location}||'%')
   		<if test="card">
@@ -117,6 +135,7 @@
   		AND operation_state=#{state}
   		</if>
   		</where>
+  		ORDER BY stand DESC NULLS LAST
   		<include refid="pagingPost"/>
   	</select>
   	

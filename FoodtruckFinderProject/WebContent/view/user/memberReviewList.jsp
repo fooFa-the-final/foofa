@@ -38,12 +38,10 @@
             <div class="row">
                 <!-- Page Header -->
  					<%@ include file="../include/memberProfile.jspf" %>
-
                 <!--End Page Header -->
                 
-                
                 <div class="col-lg-12" style="background-color:white;padding:30px">
-                	<h3>Favorite</h3>
+                	<h3>Review</font></h3>
                 		<c:forEach items="${list }" var="review">
                 		<div class="col-lg-7" style="margin-top:30px" id="rev${review.reviewId }">
                 			<div class="col-lg-11" style="display:inline-block">
@@ -92,12 +90,14 @@
     <script src="${ctx}/resources/scripts/siminta.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-	<!--  Page Script  -->	
+	<!-- Page-Level Plugin Scripts-->
+    <script src="${ctx}/resources/scripts/profile.js"></script>
 	<script>
 	
 	
     $(document).ready(function () {
 		$('#side-review').attr('class', 'selected');
+		followExist('${member.memberId}');
     });
     
 	var revDel = function(reviewId){
@@ -115,33 +115,8 @@
 			}
 		});
 	}
-	
-	var follow = function(memberId){
- 		var btn = $("#followBtn");
- 		var classN = btn.attr('class');
- 		var url ="";
- 		
- 		if(classN == "btn btn-default btn-circle btn-lg"){
- 			url = "${ctx}/follow/create.do";
- 			classN = "btn btn-danger btn-circle btn-lg";
- 		} else {
- 			url = "${ctx}/follow/remove.do";
- 			classN = "btn btn-default btn-circle btn-lg";
- 		}
- 		
- 		$.ajax({
- 			type:'GET',
- 			url : url,
- 			data:{
- 				toId : memberId
- 			},
- 			success : function(data){
- 				if (data) {
- 					btn.attr("class", classN);
-				} 
- 			}
- 		});
- 	};
+
+
 </script>
 
 	

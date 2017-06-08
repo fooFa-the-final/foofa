@@ -31,26 +31,10 @@
 		<%@ include file="../include/memberLeft.jspf"%>
 		<!--  page-wrapper -->
 		<div id="page-wrapper">
-		
 				<div class="row">
-					<!-- Page Header -->
-					<div class="col-lg-12 div-profile"
-						style="height: 350px; background-color: #FFFFFF; ">
-				        <img name="image" id="image" src="${ctx }/resources/upload/${member.profileImg }" style="height:250px; width:250px"/>
-						<div class="user-info">
-                                <h2>${member.memberId}</h2><br>	
-                                <h5>${member.email }</h5>
-                                <h5>팔로워수&nbsp; ${member.followCount }</h5>
-                                <h5>리뷰작성&nbsp;&nbsp;${member.reviewCount }</h5>
-						</div>
-					<%-- 	<span style="float: right; margin-right: 90px; margin-top: 30px">
-							<a href="${ctx }/member/checkPw.do"><button type="button"
-									class="btn btn-default">회원 탈퇴</button></a>
-						 <a href="#"><button
-									type="button" class="btn btn-default">Make Follow</button></a>
-						</span>
-					 --%>
-					</div>
+              		<!-- Page Header -->
+ 					<%@ include file="../include/memberProfile.jspf" %>
+            	    <!--End Page Header -->
 				</div>
 
 			<div class="row">
@@ -93,7 +77,9 @@
 	<script src="${ctx}/resources/plugins/metisMenu/jquery.metisMenu.js"></script>
 	<script src="${ctx}/resources/plugins/pace/pace.js"></script>
 	<script src="${ctx}/resources/scripts/siminta.js"></script>
+
 	<!-- Page-Level Plugin Scripts-->
+    <script src="${ctx}/resources/scripts/profile.js"></script>
 	<script src="${ctx}/resources/plugins/dataTables/jquery.dataTables.js"></script>
 	<script
 		src="${ctx}/resources/plugins/dataTables/dataTables.bootstrap.js"></script>
@@ -136,6 +122,7 @@
 			
 	        $(document).ready(function () {
 				$('#side-favorite').attr('class', 'selected');
+				followExist('${member.memberId}');
 	        });
 	</script>
 

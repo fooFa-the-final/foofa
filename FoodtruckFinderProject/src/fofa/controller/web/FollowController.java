@@ -56,25 +56,33 @@ public class FollowController {
 		Member member = memberService.findById(fromId);
 		model.addAttribute("member",member);
 		List<Follow> follow =  followService.findFollow(fromId);
+		
+		System.out.println(follow.size());
 		List<Member> mfollow = new ArrayList<>();
 		for(int i = 0 ; i < follow.size(); i++) {
 			Member e = new Member();
-			e = memberService.findById(follow.get(i).getToId());
+			e = memberService.findById(follow.get(i).getFromId());
 			mfollow.add(e);
 		}
+		System.out.println(mfollow.size());
 		model.addAttribute("follow", mfollow);
 		
 		return "../view/user/memberFollowerList.jsp";
 	}
 	@RequestMapping("follow/count.do")
-	public int searchCount(String memberId,HttpSession session, Model model){
-		memberId = ((String)(session.getAttribute("loginUserId")));
-		List<Follow> follow =  followService.findFollow(memberId);
-		int count;
-		count=follow.size();
-		
+	@ResponseBody
+	public int searchCount(String toId, HttpSession session, Model model){
+		int count =  followService.findFollowsCount(toId);
 		model.addAttribute("followCount", count);
 		return count;
 	}
-	
+	@RequestMapping(value="follow/exist.do", method=RequestMethod.GET)
+	@ResponseBody
+	public boolean exist(String toId, HttpSession session){
+		Follow follow = new Follow();
+		follow.setFromId((String)session.getAttribute("loginUserId"));
+		follow.setToId(toId);
+		
+		return followService.alreadyFollow(follow);
+	}		
 }
