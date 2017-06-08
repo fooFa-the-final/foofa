@@ -41,7 +41,7 @@
 	<div id="wrapper">
 
 		<%@ include file="../header.jspf"%>
-		<%@ include file="../left/adminLeft.jspf"%>
+		<%@ include file="../include/adminLeft.jspf"%>
 		
 		<!--  page-wrapper -->
 		<div id="page-wrapper">

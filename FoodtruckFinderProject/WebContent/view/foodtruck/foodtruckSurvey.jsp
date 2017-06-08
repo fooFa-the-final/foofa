@@ -28,7 +28,7 @@
 	<!--  wrapper -->
 	<div id="wrapper">
 		<%@ include file="../header.jspf"%>
-		<%@ include file="../left/sellerLeft.jspf"%>
+		<%@ include file="../include/sellerLeft.jspf"%>
 		<!--  page-wrapper -->
 		<div id="page-wrapper">
 			<div class="row">

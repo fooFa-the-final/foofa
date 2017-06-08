@@ -24,7 +24,7 @@
         <!-- navbar top -->
         <%@ include file="../header.jspf"%>
         <!-- end navbar top -->
-        <%@ include file="../left/memberLeft.jspf"%>
+        <%@ include file="../include/memberLeft.jspf"%>
         
         <!--  page-wrapper -->
         <div id="page-wrapper">

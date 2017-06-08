@@ -69,7 +69,7 @@ input.cmn-toggle-round-flat:checked + label:after {
     <div id="wrapper">
 
 		<%@ include file="../header.jspf"%>
-        <%@ include file="../left/sellerLeft.jspf"%>
+        <%@ include file="../include/sellerLeft.jspf"%>
      
         <!--  page-wrapper -->
         <div id="page-wrapper">

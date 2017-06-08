@@ -30,7 +30,7 @@
 	<!--  wrapper -->
        <div id="wrapper">
 		<%@ include file="../header.jspf"%>
-		<%@ include file="../left/memberLeft.jspf"%>
+		<%@ include file="../include/memberLeft.jspf"%>
 
         <!-- end navbar side -->
         <!--  page-wrapper -->

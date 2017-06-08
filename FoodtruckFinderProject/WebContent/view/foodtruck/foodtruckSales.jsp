@@ -161,7 +161,7 @@ h2 {
 		<!-- navbar top -->
 		<%@ include file="../header.jspf"%>
 
-		<%@ include file="../left/sellerLeft.jspf"%>
+		<%@ include file="../include/sellerLeft.jspf"%>
 		<div id="page-wrapper">
 			<!--매출페이지 시작  -->
 			<div>
