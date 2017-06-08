@@ -326,21 +326,12 @@ h2 {
 		 			   marker2.setPosition(e.coord);
 		 			   change(e);
 		 			});
-<<<<<<< HEAD
 				});
 				
 				var mapChange = function(point){
 					marker.setPosition(point);
 					map.setCenter(point);
-				}
-=======
-					
-					var mapChange = function(point){
-						marker.setPosition(point);
-						map.setCenter(point);
-					}
-				});
->>>>>>> branch '170524' of https://github.com/fooFa-the-final/foofa
+				};
 				</script>
 			</div>
 			<div id='calendar' />
@@ -366,10 +357,6 @@ h2 {
 							<input type="hidden" name="date" id="date2" value=""><br>
 							<input type="submit" value="삭제">
 						</form>
-
-
-
-
 					</div>
 					<div class="modal-footer">
 						<input type="button" class="btn btn-default" data-dismiss="modal"
@@ -379,89 +366,89 @@ h2 {
 
 			</div>
 		</div>
-								    <div class="modal-dialog">
-								      <!-- Modal content-->
-								      <div class="modal-content">
-								        <div class="modal-header">
-								          <button type="button" class="close" data-dismiss="modal">&times;</button>
-								          <h4 class="modal-title">매출확인</h4>
-								        </div>
-								        
-								        <div class="modal-body" id = "modalCons">
-								        <form action="${ctx }/sales/modify.do" method="POST">
-								          	매출 : <input type="number" name="revenue" id="revenue" value="" style="width:300px"><br>
-								          	위치 : <input type="text" name="location" id="location1" value="" style="width:300px"><br>
-								          	날짜 : <input type="text" name="date" id="date" value="" style="width:300px"><br>
-								          	<input type="submit" value="수정">
-								        </form> 
-								          <form action="${ctx }/sales/remove.do" method="GET">
-								          <input type="hidden" name="date" id="date2" value=""><br>
-								          	<input type="submit" value="삭제">
-								        </form> 
-								        
-								        
-								         
-								          
-								        </div>
-								        <div class="modal-footer">
-								          <input type="button" class="btn btn-default" data-dismiss="modal" value="닫기">
-								        </div>
-								      </div>
-								      
-								    </div>
-								  </div>
-		<div class="modal fade" id="inputModal" role="dialog">
-			<div class="modal-dialog">
-				<!-- Modal content-->
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal">&times;</button>
-						<h4 class="modal-title">매출입력</h4>
-					</div>
-
-					<div class="modal-body" id="modalCons">
-						<form action="${ctx }/sales/create.do" method="POST">
-							매출 : <input type="number" name="revenue"> <input
-								type="hidden" name="date" id="date1" value=""> 위치 : <input
-								type="text" name="location"> <input type="submit"
-								value="등록">
-						</form>
-
-
-					</div>
-					<div class="modal-footer">
-						<input type="button" class="btn btn-default" data-dismiss="modal"
-							value="닫기">
-					</div>
+		<%-- <div class="modal-dialog">
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">매출확인</h4>
 				</div>
 
+				<div class="modal-body" id="modalCons">
+					<form action="${ctx }/sales/modify.do" method="POST">
+						매출 : <input type="number" name="revenue" id="revenue" value=""
+							style="width: 300px"><br> 위치 : <input type="text"
+							name="location" id="location1" value="" style="width: 300px"><br>
+						날짜 : <input type="text" name="date" id="date" value=""
+							style="width: 300px"><br> <input type="submit"
+							value="수정">
+					</form>
+					<form action="${ctx }/sales/remove.do" method="GET">
+						<input type="hidden" name="date" id="date2" value=""><br>
+						<input type="submit" value="삭제">
+					</form>
+				</div>
+				<div class="modal-footer">
+					<input type="button" class="btn btn-default" data-dismiss="modal"
+						value="닫기">
+				</div>
 			</div>
+
+		</div> --%>
+	</div>
+	<div class="modal fade" id="inputModal" role="dialog">
+		<div class="modal-dialog">
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">매출입력</h4>
+				</div>
+
+				<div class="modal-body" id="modalCons">
+					<form action="${ctx }/sales/create.do" method="POST">
+						매출 : <input type="number" name="revenue"> <input
+							type="hidden" name="date" id="date1" value=""> 위치 : <input
+							type="text" name="location"> <input type="submit"
+							value="등록">
+					</form>
+
+
+				</div>
+				<div class="modal-footer">
+					<input type="button" class="btn btn-default" data-dismiss="modal"
+						value="닫기">
+				</div>
+			</div>
+
 		</div>
-								    <div class="modal-dialog">
-								      <!-- Modal content-->
-								      <div class="modal-content">
-								        <div class="modal-header">
-								          <button type="button" class="close" data-dismiss="modal">&times;</button>
-								          <h4 class="modal-title">매출입력</h4>
-								        </div>
-								        
-								        <div class="modal-body" id = "modalCons">
-								        <form action="${ctx }/sales/create.do" method="POST">
-								          	매출 : <input type="number" name="revenue">
-								          	<input type="hidden" name="date" id="date1" value="">
-								          	위치 : <input type="text" name="location" id="locat" style="width:300px">
-								          	<input type="submit" value="등록">
-								        </form> 
-								         <div id = "map2" style="width:400px;height:300px;margin-top:20px">
-								          
-								        </div>
-								        <div class="modal-footer">
-								          <input type="button" class="btn btn-default" data-dismiss="modal" value="닫기">
-								        </div>
-								      </div>
-								      
-								    </div>
-								  </div>
+	</div>
+	<%-- <div class="modal-dialog">
+		<!-- Modal content-->
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">매출입력</h4>
+			</div>
+
+			<div class="modal-body" id="modalCons">
+				<form action="${ctx }/sales/create.do" method="POST">
+					매출 : <input type="number" name="revenue"> <input
+						type="hidden" name="date" id="date1" value=""> 위치 : <input
+						type="text" name="location" id="locat" style="width: 300px">
+					<input type="submit" value="등록">
+				</form>
+				<div id="map2" style="width: 400px; height: 300px; margin-top: 20px">
+
+				</div>
+				<div class="modal-footer">
+					<input type="button" class="btn btn-default" data-dismiss="modal"
+						value="닫기">
+				</div>
+			</div>
+
+		</div>
+	</div> --%>
 
 
 	</div>
