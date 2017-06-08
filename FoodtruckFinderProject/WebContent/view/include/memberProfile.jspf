@@ -19,7 +19,9 @@
 			<div class="col-lg-8" style="margin-top:20px;">
 				<h2 style="display:inline">${member.memberId }</h2> 
 				<span style="float: right; margin-right: 10px;">
+					<c:if test="${loginUserId ne member.memberId }">
                     <button id="favoriteBtn" type="button" class="btn btn-default btn-circle btn-lg" onclick="follow'${member.memberId }');"><i class="fa fa-heart"></i></button>
+                    </c:if>
                     <a href="${ctx }/review/create.do?foodtruckId=${truck.foodtruckId}"><button id="favoriteBtn" type="button" class="btn btn-primary btn-circle btn-lg" onclick="follow'${member.memberId }');"><i class="fa fa-list"></i></button></a>
 				</span>
 			</div>

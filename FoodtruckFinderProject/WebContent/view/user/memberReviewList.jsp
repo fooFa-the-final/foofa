@@ -43,7 +43,7 @@
                 
                 
                 <div class="col-lg-12" style="background-color:white;padding:30px">
-                	<h3>Favorite</font></h3>
+                	<h3>Review</font></h3>
                 		<c:forEach items="${list }" var="review">
                 		<div class="col-lg-7" style="margin-top:30px" id="rev${review.reviewId }">
                 			<div class="col-lg-11" style="display:inline-block">
