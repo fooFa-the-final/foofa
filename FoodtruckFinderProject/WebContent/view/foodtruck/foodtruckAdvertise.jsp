@@ -78,7 +78,7 @@ $(document).ready(function(){
 						<div class="panel-body">
 							<span> <a class="navbar-brand" href="#"
 								style="margin-top: 10px;"> <img
-									src="${ctx }/resources/img/${truck.foodtruckImg}"
+									src="${ctx }/resources/img/food/${truck.foodtruckImg}"
 									style="height: 250px; width: 250px" />
 							</a>
 							</span>
