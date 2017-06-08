@@ -181,8 +181,8 @@
 														var options = {
 															'dataset' : {
 																title : 'Web accessibility status',
-																values : [ ${maList[4].ages }, ${maList[3].ages }, ${maList[2].ages },
-																	20, ${maList[0].ages } ],
+																values : [ ${list10[4].count },  ${list10[3].count},  ${list10[2].count},
+																	 ${list10[1].count},  ${list10[0].count} ],
 																colorset : [
 																		'#56b4e9',
 																		'#e69f00',
@@ -215,8 +215,8 @@
 														var options = {
 															'dataset' : {
 																title : 'Web accessibility status',
-																values : [ ${maList[4].ages }, 20, ${maList[2].ages },
-																	${maList[1].ages }, ${maList[0].ages } ],
+																values : [ ${list20[4].count },  ${list20[3].count},  ${list20[2].count},
+																	 ${list20[1].count},  ${list20[0].count} ],
 																colorset : [
 																		'#56b4e9',
 																		'#e69f00',
@@ -249,8 +249,8 @@
 														var options = {
 															'dataset' : {
 																title : 'Web accessibility status',
-																values : [ ${maList[4].ages }, ${maList[3].ages }, ${maList[2].ages },
-																	${maList[1].ages }, ${maList[0].ages } ],
+																values :  [ ${list30[4].count },  ${list30[3].count},  ${list30[2].count},
+																	 ${list30[1].count},  ${list30[0].count} ],
 																colorset : [
 																		'#56b4e9',
 																		'#e69f00',
@@ -283,8 +283,8 @@
 														var options = {
 															'dataset' : {
 																title : 'Web accessibility status',
-																values : [ ${maList[4].ages }, ${maList[3].ages }, ${maList[2].ages },
-																	${maList[1].ages }, ${maList[0].ages } ],
+																values :  [ ${list40[4].count },  ${list40[3].count},  ${list40[2].count},
+																	 ${list40[1].count},  ${list40[0].count} ],
 																colorset : [
 																		'#56b4e9',
 																		'#e69f00',
@@ -317,8 +317,8 @@
 														var options = {
 															'dataset' : {
 																title : 'Web accessibility status',
-																values : [ ${maList[4].ages }, ${maList[3].ages }, ${maList[2].ages },
-																	${maList[1].ages }, ${maList[0].ages } ],
+																values : [ ${list50[4].count },  ${list50[3].count},  ${list50[2].count},
+																	 ${list50[1].count},  ${list50[0].count} ],
 																colorset : [
 																		'#56b4e9',
 																		'#e69f00',
