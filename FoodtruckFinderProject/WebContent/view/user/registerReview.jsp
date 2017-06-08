@@ -111,7 +111,7 @@
 			<div class="col-lg-3">
 				<div class="blog-stripe">
 					<img width="200px" height="200px"
-						src="${ctx }/resources/img/pizzahut.png">
+						src="${ctx }/resources/img/food/${truck.foodtruckImg}">
 				</div>
 			</div>
 			<div class="col-lg-6">

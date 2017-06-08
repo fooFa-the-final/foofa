@@ -262,11 +262,27 @@ input.cmn-toggle-round-flat:checked + label:after {
 	<script>
 		$(document).ready(function() {
 			$('#side-info').attr('class', 'selected');
-			var position = new naver.maps.LatLng(37.4795169, 126.8824995);
-			var map = new naver.maps.Map('map', {
-				center: position,
-				zoom: 10
-			});
+			naver.maps.Service.geocode({
+	 			address: "${truck.location}"
+	 		}, function(status, response){
+	 			if (status === naver.maps.Service.Status.ERROR) {
+	 				position = new naver.maps.LatLng(37.4795169, 126.8824995);
+		            return alert('잘못 입력 되어있는 주소입니다. 기본 좌표를 찍어주겠습니다.');
+		        }
+	 			
+	 			var item = response.result.items[0],
+	 				point = new naver.maps.Point(item.point.x, item.point.y);
+	 		
+	 			var map = new naver.maps.Map('map', {
+				    center: point,
+				    zoom: 10
+				});
+	 			
+	 			var marker = new naver.maps.Marker({
+					position: point,
+					map: map
+				});
+	 		}
 		});
 		
 		function fileinfo(input){

@@ -1,5 +1,6 @@
 package fofa.controller.web;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -114,18 +115,37 @@ public class ReviewController {
 		MultipartHttpServletRequest multipartHttpServletRequest = (MultipartHttpServletRequest)req;
 	    Iterator<String> iterator = multipartHttpServletRequest.getFileNames();
 	    MultipartFile multipartFile = null;
-	    List<Image> images;
+	    List<Image> images = new ArrayList<>();
+	    String root = req.getSession().getServletContext().getRealPath("\\");
+        String path = root+"\\resources\\img\\reviewImg\\";
+        System.out.println(path);
+        String newFileName = "";
+        File dir = new File(path);
+        if(!dir.isDirectory()){
+            dir.mkdir();
+        }
 	    while(iterator.hasNext()){
 	        multipartFile = multipartHttpServletRequest.getFile(iterator.next());
 	        if(multipartFile.isEmpty() == false){
 	        	Image image = new Image();
-	        	image.setFilename(multipartFile.getName());
+	        	String fileName = multipartFile.getOriginalFilename();
+	        	newFileName = System.currentTimeMillis()+"."
+	                    +fileName.substring(fileName.lastIndexOf(".")+1);
+	        	image.setFilename(newFileName);
+	        	images.add(image);
 	            /*System.out.println("name : "+multipartFile.getName());
 	            System.out.println("filename : "+multipartFile.getOriginalFilename());
 	            System.out.println("size : "+multipartFile.getSize());*/
+	        	
+	        	try {
+	                multipartFile.transferTo(new File(path+newFileName));
+	            } catch (Exception e) {
+	                e.printStackTrace();
+	            }
 	        }
 	    }
 	    
+	    review.setImages(images);
 		reviewService.register(review);
 		if(req.getParameter("isSurvey") != null){
 			Survey survey = new Survey();

@@ -31,7 +31,6 @@ public class ImageStoreLogicTest {
 		image.setCategoryId("R1");
 		image.setFilename("momo.jpg");
 		
-		assertEquals(1, store.insertImage(image.getCategoryId(), image));
 	}
 
 	@Test

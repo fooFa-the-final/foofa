@@ -33,7 +33,7 @@ public class ImageStoreLogic implements ImageStore {
 	}
 
 	@Override
-	public int insertImage(String reviewId, Image image) {
+	public int insertImage(Image image) {
 		SqlSession session = factory.openSession();
 		int insert = 0;
 		try{

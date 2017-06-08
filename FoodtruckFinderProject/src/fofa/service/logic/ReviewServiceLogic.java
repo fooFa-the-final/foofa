@@ -37,8 +37,12 @@ public class ReviewServiceLogic implements ReviewService {
 	@Override
 	public String register(Review review) {
 		String reviewId = reviewStore.insert(review);
-		for(Image image : review.getImages()){
-			imageStore.insertImage(reviewId, image);
+		System.out.println(reviewId);
+		if(review.getImages() != null){
+			for(Image image : review.getImages()){
+				image.setCategoryId(reviewId);
+				imageStore.insertImage(image);
+			}
 		}
 		return reviewId;
 	}
