@@ -44,7 +44,7 @@
 						<div id="${truck.foodtruckId }" style="margin-bottom: 50px">
 							<a class="navbar-brand" href="#"
 								style="margin-top: 10px; margin-left: 20px"> <img
-								src="../resources/img/waikiki.jpg"
+								src="${ctx }/resources/img/truck/${truck.foodtruckImg }"
 								style="height: 70px; width: 70px" />
 							</a>
 							<div class="user-info">
@@ -56,11 +56,12 @@
 								<h5>${truck.reviewCount } Reviews</h5>
 								<br>
 							</div>
-							<div style="float: right;">
-								<br> <br> <br>
+							<c:if test="${loginUserId eq member.memberId }">
+							<div style="float: right; vertical-align: middle;">
+								
 								<button type="button" class="btn btn-default"
-									onclick="favorite('${truck.foodtruckId }');">Unfavorite</button>
-							</div>
+									onclick="unfavorite('${truck.foodtruckId }');">Unfavorite</button>
+							</div></c:if>
 							</div>
 					</c:forEach>
 				</div>
@@ -106,7 +107,7 @@
 				});
 			}
 
-			var favorite = function(foodtruckId) {
+			var unfavorite = function(foodtruckId) {
 					
 					$.ajax({
 						type : 'GET',
