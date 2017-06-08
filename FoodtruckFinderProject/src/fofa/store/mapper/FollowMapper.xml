@@ -25,7 +25,7 @@
     <select id="selectByFromId" parameterType="String" resultMap="followMap">
     select from_id, to_Id
     FROM follow_tb
-    WHERE from_Id= #{fromId}
+    WHERE to_Id= #{ToId}
     </select>
     <select id="selectByToId" parameterType="String" resultType="int">
     select count(*) followCount

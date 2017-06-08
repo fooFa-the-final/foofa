@@ -56,12 +56,15 @@ public class FollowController {
 		Member member = memberService.findById(fromId);
 		model.addAttribute("member",member);
 		List<Follow> follow =  followService.findFollow(fromId);
+		
+		System.out.println(follow.size());
 		List<Member> mfollow = new ArrayList<>();
 		for(int i = 0 ; i < follow.size(); i++) {
 			Member e = new Member();
-			e = memberService.findById(follow.get(i).getToId());
+			e = memberService.findById(follow.get(i).getFromId());
 			mfollow.add(e);
 		}
+		System.out.println(mfollow.size());
 		model.addAttribute("follow", mfollow);
 		
 		return "../view/user/memberFollowerList.jsp";
@@ -70,9 +73,10 @@ public class FollowController {
 	public int searchCount(String memberId,HttpSession session, Model model){
 		memberId = ((String)(session.getAttribute("loginUserId")));
 		List<Follow> follow =  followService.findFollow(memberId);
+		follow.size();
+		System.out.println(follow.size());
 		int count;
 		count=follow.size();
-		
 		model.addAttribute("followCount", count);
 		return count;
 	}
