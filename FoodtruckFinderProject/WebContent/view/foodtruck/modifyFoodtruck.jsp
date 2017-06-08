@@ -19,6 +19,8 @@
     <link rel="stylesheet" type="text/css" href="${ctx }/resources/css/jquery.timepicker.css"/>
     <script src="${ctx }/resources/plugins/timepicker/jquery.timepicker.js"></script>
      <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=noUvsaR702FX6WH5un5h&submodules=geocoder"></script>
+	<script src="http://malsup.github.com/jquery.form.js"></script> 
+	
     <script>
         $(document).ready(function(){
             $('#startTime').timepicker();
@@ -73,7 +75,7 @@
         	var comHtml = "";
         	var count = c++;
         	comHtml += '<tr class="odd gradeX">';
-        	comHtml += '<td></td><td align="left"><input type="text" id="menuName'+(count)+'" name="menuName" value="'+$("#inputMenuName").val()+'" style="border:0px; background-color:transparent" readonly></td>';
+        	comHtml += '<td align="left"><input type="text" id="menuName'+(count)+'" name="menuName" value="'+$("#inputMenuName").val()+'" style="border:0px; background-color:transparent" readonly></td>';
         	comHtml += '<td align="left"><input type="text" id="menuPrice'+(count)+'" name="menuPrice" value="'+$("#inputMenuPrice").val()+'" style="border:0px; background-color:transparent" readonly></td>';
         	comHtml += '<td ><input type="text" id="menuState'+(count)+'" name="menuState" value="'+ $("#inputMenuState").val() +'" style="border:0px; background-color:transparent" readonly></td>';
         	comHtml += '<td>';
@@ -83,14 +85,27 @@
             comHtml += '</tr>';
         	$('#menus tr:last').before(comHtml);
         	
-        	$('#menus tr:last').find("input[name^=inputMenuName]").val("").end();
-        	$('#menus tr:last').find("input[name^=inputMenuPrice]").val("").end();
-        	$('#menus tr:last').find("select[name^=inputMenuState]").val("판매중").end();
+        	$('#menus tr:last').find("input[id^=inputMenuName]").val("").end();
+        	$('#menus tr:last').find("input[id^=inputMenuPrice]").val("").end();
+        	$('#menus tr:last').find("select[id^=inputMenuState]").val("판매중").end();
         }
 
         var removeMenu = function(obj){
+        	var menuId = $(obj).parent().find("input[name^=menuId]").val();
+        	var foodtruckId = $("#foodtruckId").val();
         	var removeThis = $(obj).parent().parent();
             removeThis.remove();
+            $.ajax({
+            	url: "${ctx}/foodtruck/removeMenu.do",
+            	data: {menuId:menuId, foodtruckId:foodtruckId},
+            	type: "get",
+            	success: function(result){
+            		alert("삭제되었습니다.");
+            	},
+            	error: function(rexult){
+            		alert("실패했습니다. 다시 시도하세요.");
+            	} 
+            });
         }
     </script>
 </head>
@@ -107,16 +122,18 @@
         <!--  page-wrapper -->
         <div id="page-wrapper">
             <form action="${ctx }/foodtruck/modify.do" method="post" class="form-inline">
-            <input type="hidden" name="foodtruckId" value="${truck.foodtruckId }">
+            <input type="hidden" id="foodtruckId" name="foodtruckId" value="${truck.foodtruckId }">
             <div class="row">
                 <!-- Page Header -->
                 
                 <div class="col-md-12" style="background-color:white; height:300px">
                     	<div class="col-md-3">
-                            <a class="navbar-brand" href="#" style="margin-top:10px;">
-                                <img src="${ctx }/resources/img/${truck.foodtruckImg }" style="height:250px; width:250px"/>
-                                <input type="hidden" name="foodtruckImg" value="${truck.foodtruckImg }">
-                            </a>
+                           <form id="fileForm" method="post" enctype="multipart/form-data">
+	                            <a class="navbar-brand" href="#" style="margin-top:10px;" >
+	                                <img name="image" id="image" src="${ctx }/resources/img/food/${truck.foodtruckImg }" style="height:250px; width:250px" onClick="document.all.file.click();"/>
+	                            	<input type="file" name="file" id="file" style="display: none;" onchange="fileinfo(this)" />
+	                            </a>
+	                        </form> 
                         </div>
                         <div class="col-md-6" style="margin-top:30px;">
                             <h1><input class="form-control" type="text" name="foodtruckName" value="${truck.foodtruckName }" style="width:61.5%"></h1><br>
@@ -197,7 +214,7 @@
                                             <th colspan="1"></th>
                                         </tr>
                                     </thead>
-                                    <tbody align="center">
+                                    <tbody >
                                     	<c:forEach items="${truck.menus }" var="menu">
                                         <tr class="odd gradeX">
                                             <td><input type="text" name="menuName" value="${menu.menuName }" style="border:0px; background-color:transparent" readonly></td>
@@ -214,21 +231,21 @@
                                                 <button type="button" class="btn btn-default btn-circle" id="menu1mod" onclick="modify_menu_click();">
                                                     <i class="fa fa-pencil"></i>
                                                 </button>
-                                                <button type="button" class="btn btn-danger btn-circle"><i class="fa fa-times"></i></button>
+                                                <button type="button" class="btn btn-danger btn-circle" onClick="removeMenu(this)"><i class="fa fa-times"></i></button>
                                             </td>
                                         </tr>
                                         </c:forEach>
                                          <tr class="odd gradeX">
-                                            <td align="left"><input type="text" placeholder="메뉴 명"></td>
-                                            <td align="left"><input type="text" placeholder="메뉴 가격"></td>
+                                            <td align="left"><input type="text" placeholder="메뉴 명" id="inputMenuName"></td>
+                                            <td align="left"><input type="text" placeholder="메뉴 가격" id="inputMenuPrice"></td>
                                             <td>
-                                                <select>
+                                                <select id="inputMenuState">
                                                     <option>판매중</option>
                                                     <option>매진</option>
                                                 </select>
                                             </td>
                                             <td align="center">
-                                                <button type="button" class="btn btn-primary btn-circle"><i class="fa fa-plus"></i></button>
+                                                <button type="button" class="btn btn-primary btn-circle" onclick="registMenu()"><i class="fa fa-plus"></i></button>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -334,15 +351,36 @@
 
     <!-- Core Scripts - Include with every page -->
     
-    <script src="../resources/plugins/bootstrap/bootstrap.min.js"></script>
-    <script src="../resources/plugins/metisMenu/jquery.metisMenu.js"></script>
-    <script src="../resources/plugins/pace/pace.js"></script>
-    <script src="../resources/scripts/siminta.js"></script>
+    <script src="${ctx }/resources/plugins/bootstrap/bootstrap.min.js"></script>
+    <script src="${ctx }/resources/plugins/metisMenu/jquery.metisMenu.js"></script>
+    <script src="${ctx }/resources/plugins/pace/pace.js"></script>
+    <script src="${ctx }/resources/scripts/siminta.js"></script>
     <script>
         function modify_menu_click() {
 	       alert("수정버튼을 누르셨습니다.");
             /*수정버튼 클릭이벤트: 데이터 받아와서 inputText로 변환해주고 버튼 submit버튼으로 변경해주는 자바스크립트 적용할 것*/
         }
+        
+        function fileinfo(input){
+	      	if (input.files && input.files[0]) {
+	            var reader = new FileReader();
+	            reader.onload = function (e) {
+	                    $("#image").attr("src", e.target.result);
+	                }
+	            reader.readAsDataURL(input.files[0]);
+            }
+	      	$("#fileForm").ajaxForm({
+	      		url:"${ctx}/foodtruck/modifyPicture.do",
+	      		enctype: "multipart/form-data",
+	      		success: function(result){
+	      			alert("사진이 등록되었습니다.");
+	      		},
+	      		error: function(){
+	      			alert("등록에 실패하였습니다. 다시 시도해주세요.")
+	      		}
+	      	});
+	      	$("#fileForm").submit();
+		}
     </script>
 
 </body>

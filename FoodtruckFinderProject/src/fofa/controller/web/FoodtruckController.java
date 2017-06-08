@@ -335,7 +335,7 @@ public class FoodtruckController {
 	
 	@RequestMapping("/removeMenu.do")
 	public List<Menu> removeMenu(String menuId, String foodtruckId){
-		
+		foodtruckService.removeMenu(menuId, foodtruckId);
 		return null;
 	}
 	
