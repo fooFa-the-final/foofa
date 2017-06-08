@@ -149,7 +149,11 @@
         
         <form id = "submit" method = "post" enctype="multipart/form-data">
         	<input type="hidden" name = "foodtruckId" value="${truck.foodtruckId }">
+        	<c:if test="${review ne 'null'}">
+				<input type="hidden" value="${review.reviewId }" name="reviewId">
+			</c:if>
 				<div class="col-lg-12">
+				
 						<table width="1150px">
 							<thead>
 								<tr>
@@ -255,7 +259,6 @@
 		          <button type="button" class="close" data-dismiss="modal">&times;</button>
 		          <h4 class="modal-title">사진 업로드</h4>
 		        </div>
-		        <form id = "uploadImage" method = "POST" action="${ctx }/review/img.do" enctype="multipart/form-data">
 		        <div class="modal-body">
 		           	<input type="file" id = "file1" name = "file1" onchange="fileinfo(this)"><br>
 		          	<input type="file" id = "file2" name = "file2" onchange="fileinfo(this)">
@@ -264,7 +267,6 @@
 		        <input type="button" class="btn btn-default" data-dismiss="modal" value="업로드" onclick="imgUpload()">
 		          <input type="button" class="btn btn-default" data-dismiss="modal" value="닫기">
 		        </div>
-		        </form>
 		      </div>
 		      
 		    </div>

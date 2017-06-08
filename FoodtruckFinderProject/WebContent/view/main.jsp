@@ -89,7 +89,7 @@
 			</li>
 			<li class="row" style="display: block;">
 				<div id="col-lg-12">
-					<img id="mainMemberImg"  class="main_img_person" src="${ctx}/resources/img/${mainMember.profileImg}" onclick="location.href='${ctx}/review/list/member.do?memberId=${mainMember.memberId}'" />
+					<img id="mainMemberImg"  class="main_img_person" src="${ctx}/resources/img/member/${mainMember.profileImg}" onclick="location.href='${ctx}/review/list/member.do?memberId=${mainMember.memberId}'" />
 				</div>
 			</li>
 
@@ -191,7 +191,6 @@
 		var mainMemberSrc = "${mainMember.profileImg}";
 		
 		$("#mainNav").css("background-image", "url('${ctx}/resources/img/food/"+mainImgSrc+"')");
-		
 	});
 	
 	var previewImage = function(target, idNo){
