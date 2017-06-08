@@ -92,10 +92,10 @@ ul li a:hover, ul li a:focus {
                     	 <input type="checkbox" id="catering" name="checkFilter">케이터링
                     </label>
                     </div>
-                    <div class="cil-md-3">               
-                     	 <select id="disabledSelect" class="form-control" style="width:15%">
-                            <option>리뷰많은 순</option>
-                            <option>단골많은 순</option>
+                    <div class="col-md-3">               
+                     	 <select id="stand" name="stand" class="form-control" style="width:70%" onChange="selectBtn()">
+                            <option value="reviewCount">리뷰많은 순</option>
+                            <option value="favoriteCount">단골많은 순</option>
                          </select>
                     </div>
                 </div>
@@ -356,12 +356,23 @@ ul li a:hover, ul li a:focus {
 			$("#search-with-filter").submit();
 		} else {
 			$(obj).removeClass("btn btn-success").addClass("btn btn-outline btn-default");
-			$("#openstate").val("");
+			$("#openstate").val("false");
 			$("#search-with-filter").submit();
 		}
 	}
 	
-	
+	var selectBtn = function(){
+		var notChecked = [], checked = [];
+	    $(":checkbox").map(function() {
+	        this.checked ? checked.push(this.id) : notChecked.push(this.id);
+	    });
+	    var checked2 = "";
+	    for(var a=0; a<checked.length; a++){
+	    	checked2 += checked[a] + "/";
+	    }
+	    $("#checking").val(checked2);
+	    $("#search-with-filter").submit();
+	}
 	
 	
     </script>

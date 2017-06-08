@@ -255,6 +255,8 @@ public class FoodtruckController {
 		String location = request.getParameter("location");
 		String keyword = request.getParameter("keyword");
 		String checked = request.getParameter("checking");
+		String sort = request.getParameter("stand");
+		System.out.println("sort : " + sort);
 		int currentIndex = 1;
 		boolean state = Boolean.parseBoolean(request.getParameter("openstate"));
 //		String state = request.getParameter("openstate");
@@ -293,7 +295,7 @@ public class FoodtruckController {
 		foodtruck.setLocation(location);
 		foodtruck.setFoodtruckName(keyword);
 		
-		List<HashMap<String, String>> sqlMap = foodtruckService.findByFilter(currentIndex, foodtruck);
+		List<HashMap<String, String>> sqlMap = foodtruckService.findByFilter(currentIndex, foodtruck, sort);
 		List<Foodtruck> trucks = new ArrayList<>();
 		int allCount = 0;
 //		System.out.println("궁금궁금 : " + sqlMap.size() + "/" + Integer.parseInt(sqlMap.get(0).get("allCount")));
