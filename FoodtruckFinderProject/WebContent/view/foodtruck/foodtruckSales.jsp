@@ -161,7 +161,7 @@ h2 {
 		<!-- navbar top -->
 		<%@ include file="../header.jspf"%>
 
-		<%@ include file="../left/sellerLeft.jspf"%>
+		<%@ include file="../include/sellerLeft.jspf"%>
 		<div id="page-wrapper">
 			<!--매출페이지 시작  -->
 			<div>
@@ -281,8 +281,7 @@ h2 {
 					}
 				</script>
 				<script>
-				var loc;
-				var change = function(e){
+				var change = function(e, id){
 					var tm128 = naver.maps.TransCoord.fromLatLngToTM128(e.coord);
 					naver.maps.Service.reverseGeocode({
 				        location: tm128,
@@ -293,10 +292,8 @@ h2 {
 				        }
 				        var item = response.result.items[0],
 		 				point = new naver.maps.Point(item.point.x, item.point.y);
-				        $("#locat").val(item.address);
-				   		loc = e.coord;
+				        $(id).val(item.address);
 					});
-					
 				};
 				
 				var marker;
@@ -325,16 +322,9 @@ h2 {
 					
 					naver.maps.Event.addListener(map2, 'click', function(e) {
 		 			   marker2.setPosition(e.coord);
-		 			   change(e);
+		 			   change(e, "#locat");
 		 			});
 				});
-				
-				var mapChange = function(){
-					console.log(loc);
-					marker.setPosition(loc);
-					map.setCenter(loc);
-					return true;
-				};
 				
 				var modify = function(address){
 					naver.maps.Service.geocode({
@@ -357,6 +347,11 @@ h2 {
 							position: point,
 							map: map
 						});
+			 			
+			 			naver.maps.Event.addListener(map, 'click', function(e) {
+				 			   marker.setPosition(e.coord);
+				 			   change(e, "#location1");
+				 		});
 			 		});
 				}
 				</script>
@@ -441,7 +436,7 @@ h2 {
 				</div>
 
 				<div class="modal-body" id="modalCons">
-					<form action="${ctx }/sales/create.do" method="POST" onsubmit="return mapChange();">
+					<form action="${ctx }/sales/create.do" method="POST">
 						매출 : <input type="number" name="revenue"> <input
 							type="hidden" name="date" id="date1" value=""> 위치 : <input
 							type="text" name="location" id="locat"> <input type="submit"

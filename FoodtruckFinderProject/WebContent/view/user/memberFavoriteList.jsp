@@ -28,7 +28,7 @@
 <body>
    <div id="wrapper">
 		<%@ include file="../header.jspf"%>
-		<%@ include file="../left/memberLeft.jspf"%>
+		<%@ include file="../include/memberLeft.jspf"%>
 		<!--  page-wrapper -->
 		<div id="page-wrapper">
 		

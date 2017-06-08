@@ -75,7 +75,7 @@
 			<%@ include file="../header.jspf"%>
 		</header>
 
-		<%@ include file="../left/memberLeft.jspf"%>
+		<%@ include file="../include/memberLeft.jspf"%>
 
 		<!--  page-wrapper -->
 		<div id="page-wrapper">
