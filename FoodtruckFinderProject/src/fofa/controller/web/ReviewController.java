@@ -193,7 +193,9 @@ public class ReviewController {
 	}
 	
 	@RequestMapping(value="/review/modify.do", method=RequestMethod.POST)
-	public String modifyReview(Review review, HttpSession session){
+	public String modifyReview(Review review, MultipartHttpServletRequest req, HttpSession session){
+		System.out.println(review.toString());
+		review.setReviewId(req.getParameter("reviewId"));
 		String memberId = (String)session.getAttribute("loginUserId");
 		reviewService.modify(review);
 		return "redirect:list/member.do?memberId="+memberId;
