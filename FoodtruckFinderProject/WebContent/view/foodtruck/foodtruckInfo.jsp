@@ -75,7 +75,7 @@ input.cmn-toggle-round-flat:checked + label:after {
         <div id="page-wrapper">
             <div class="row">
                 <!-- Page Header -->
-                <div class="col-md-12" style="background-color:white; height:300px">
+                <div class="col-md-12" style="background-color:white; height:300px;">
                     <div class="col-md-8">
                     	<form id="fileForm" method="post" enctype="multipart/form-data">
                             <a class="navbar-brand" href="#" style="margin-top:10px;" >
@@ -91,12 +91,14 @@ input.cmn-toggle-round-flat:checked + label:after {
                                 <h5>${truck.reviewCount }Reviews</h5>
                             </div>
                     </div>
-                    <div class="col-md-3" style="float:right; margin-right:30px; margin-top: 30px">
+                    <div class="col-md-3" style="float:right; margin-right:30px; margin-top:30px; height:300px; position:relative;">
                         <a href="${ctx }/seller/modify.do"><button type="button" class="btn btn-default">판매자 정보 수정</button></a>
                         <a href="${ctx }/seller/checkPw.do"><button type="button" class="btn btn-default">판매자 탈퇴</button></a>
+                   		<div class="col-md-3" style="position:absolute; bottom:100px; margin-left:10px" align="right">
+		                    <input type="button" id="openstateBtn" name="openstateBtn" class="btn btn-outline btn-default" onClick="stateBtn(this)" style="width:200px; height:70px" value="OPEN NOW">        
+		                	<input type="hidden" id="openstate" name="openstate" value="${truck.state}">
+                		</div>
                     </div>
-                    <button type="button" id="openstateBtn" name="openstateBtn" class="btn btn-outline btn-default" onClick="stateBtn(this)">OPEN NOW</button>        
-                	<input type="hidden" id="openstate" name="openstate" value="">
                 </div>
                 <!--End Page Header -->
                 
@@ -267,7 +269,7 @@ input.cmn-toggle-round-flat:checked + label:after {
 	 		}, function(status, response){
 	 			if (status === naver.maps.Service.Status.ERROR) {
 	 				position = new naver.maps.LatLng(37.4795169, 126.8824995);
-		            return alert('잘못 입력 되어있는 주소입니다. 기본 좌표를 찍어주겠습니다.');
+		            return alert('없는 주소입니다. 기본 좌표를 찍어주겠습니다.');
 		        }
 	 			
 	 			var item = response.result.items[0],
@@ -283,6 +285,16 @@ input.cmn-toggle-round-flat:checked + label:after {
 					map: map
 				});
 	 		});
+			
+			var state = '${truck.state}';
+			if(state=="true"){
+				$("#openstateBtn").removeClass("btn btn-outline btn-default").addClass("btn btn-success");
+				$("#openstateBtn").val("OPEN NOW");
+			}
+			if(state=="false"){
+				$("#openstateBtn").removeClass("btn btn-success").addClass("btn btn-outline btn-default");
+				$("#openstateBtn").val("CLOSED");
+			}
 		});
 		
 		function fileinfo(input){
@@ -308,28 +320,29 @@ input.cmn-toggle-round-flat:checked + label:after {
 		
 		
 
-// var stateBtn = function(obj){
-// 	if($(obj).hasClass("btn btn-outline btn-default")){
-// 		$(obj).removeClass("btn btn-outline btn-default").addClass("btn btn-success");
-// 		$("#openstate").val("true");
-// 	} else {
-// 		$(obj).removeClass("btn btn-success").addClass("btn btn-outline btn-default");
-// 		$("#openstate").val("false");
-// 	}
-// 	$.ajax({
-// 		 url: '${ctx }/foodtruck/modifyState.do',
-// 	     processData: false,
-// 	     contentType: false,
-// 	     data: {openstate:$("#openstate").val()},
-// 	     type: 'get',
-// 	     success: function(result){
-// 	         alert(result);
-// 	     },
-// 	     error: function(){
-// 	     	alert("실패");
-// 	     }
-// 	});
-// }
+var stateBtn = function(obj){
+	if($(obj).hasClass("btn btn-outline btn-default")){
+		$(obj).removeClass("btn btn-outline btn-default").addClass("btn btn-success");
+		$("#openstate").val("true");
+		$("#openstateBtn").val("OPEN NOW");
+	} else {
+		$(obj).removeClass("btn btn-success").addClass("btn btn-outline btn-default");
+		$("#openstate").val("false");
+		$("#openstateBtn").val("CLOSED");
+	}
+	$.ajax({
+		 url: '${ctx }/foodtruck/modifyState.do',
+	     data: {openstate:$("#openstate").val()},
+	     type: 'get',
+	     success: function(result){
+	         alert("영업상태가 변경되었습니다.");
+	         
+	     },
+	     error: function(){
+	     	alert("영업상태 변경을 실패하였습니다. 다시 시도해주세요.");
+	     }
+	});
+}
 	</script>
 
 </body>

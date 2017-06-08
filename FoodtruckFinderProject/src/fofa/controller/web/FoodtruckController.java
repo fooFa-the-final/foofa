@@ -147,15 +147,19 @@ public class FoodtruckController {
         return "success";
 	}
 	
+	@ResponseBody
 	@RequestMapping(value="/modifyState.do", method=RequestMethod.GET)
-	public boolean modifyState(String foodtruckId, boolean operation_state){
-		Foodtruck foodtruck = foodtruckService.findById(foodtruckId);
+	public boolean modifyState(HttpSession session, boolean operation_state){
+		System.out.println("controller");
+		
+		Foodtruck foodtruck = foodtruckService.findBySeller((String)session.getAttribute("loginUserId"));
 		
 		if(operation_state){
 			foodtruck.setState(false);
 		}else{
 			foodtruck.setState(true);
 		}
+		
 		foodtruckService.modify(foodtruck);
 
 		return foodtruck.isState();
