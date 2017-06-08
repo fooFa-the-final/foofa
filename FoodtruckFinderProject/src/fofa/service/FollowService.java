@@ -10,5 +10,6 @@ public interface FollowService {
 	boolean remove(Follow follow);
 	List<Follow> findFollow(String toId);
 	int findFollowsCount(String toId);
+	boolean alreadyFollow(Follow follow);
 	
 }

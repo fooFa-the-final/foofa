@@ -70,15 +70,19 @@ public class FollowController {
 		return "../view/user/memberFollowerList.jsp";
 	}
 	@RequestMapping("follow/count.do")
-	public int searchCount(String memberId,HttpSession session, Model model){
-		memberId = ((String)(session.getAttribute("loginUserId")));
-		List<Follow> follow =  followService.findFollow(memberId);
-		follow.size();
-		System.out.println(follow.size());
-		int count;
-		count=follow.size();
+	@ResponseBody
+	public int searchCount(String toId, HttpSession session, Model model){
+		int count =  followService.findFollowsCount(toId);
 		model.addAttribute("followCount", count);
 		return count;
 	}
-	
+	@RequestMapping(value="follow/exist.do", method=RequestMethod.GET)
+	@ResponseBody
+	public boolean exist(String toId, HttpSession session){
+		Follow follow = new Follow();
+		follow.setFromId((String)session.getAttribute("loginUserId"));
+		follow.setToId(toId);
+		
+		return followService.alreadyFollow(follow);
+	}		
 }

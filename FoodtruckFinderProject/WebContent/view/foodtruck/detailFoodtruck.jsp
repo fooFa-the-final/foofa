@@ -40,7 +40,7 @@
                                 <h1>${truck.foodtruckName }</h1><br>
                                 <h5>${truck.category1 }</h5>
                                 <h5>${truck.spot }</h5>
-                                <h5><span id="followCount">${truck.favoriteCount }</span>이 해당 푸드트럭을 단골로 등록했습니다.</h5>
+                                <h5><span id="favoriteCount">${truck.favoriteCount }</span>이 해당 푸드트럭을 단골로 등록했습니다.</h5>
                                 <h5>${fn:length(reviewList)} Reviews</h5>
                             </div>
                     </span>
@@ -177,7 +177,7 @@
 		}
 	 	$(document).ready(function(){
 	 		favoriteCount("${truck.foodtruckId}");
-	 		exist("${truck.foodtruckId}");
+	 		favoriteExist("${truck.foodtruckId}");
 	 		
  	 		
 	 		naver.maps.Service.geocode({

@@ -38,4 +38,9 @@ public class FollowServiceLogic implements FollowService{
 		return store.selectByToId(toId);
 	}
 
+	@Override
+	public boolean alreadyFollow(Follow follow) {
+		return store.select(follow)>0;
+	}
+
 }
