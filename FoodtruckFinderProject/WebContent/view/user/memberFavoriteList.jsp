@@ -28,7 +28,7 @@
 <body>
    <div id="wrapper">
 		<%@ include file="../header.jspf"%>
-		<%@ include file="../left/memberLeft.jspf"%>
+		<%@ include file="../include/memberLeft.jspf"%>
 		<!--  page-wrapper -->
 		<div id="page-wrapper">
 		
@@ -36,17 +36,7 @@
 					<!-- Page Header -->
 					<div class="col-lg-12 div-profile"
 						style="height: 350px; background-color: #FFFFFF; ">
-						<a class="navbar-brand" href="#"
-							style="margin-top: 10px; margin-left: 20px"> <img
-							src="${ctx }/resources/upload/${member.profileImg }"
-							style="height: 250px; width: 250px" /> <br>
-
-							<form id="fileForm" action="fileUpload" method="post" enctype="multipart/form-data">
-								<input type="file" id="fileUp" name="fileUp" /> <input
-									type="button" value="전송하기" onClick="fileSubmit();">
-							</form>
-
-						</a>
+				        <img name="image" id="image" src="${ctx }/resources/upload/${member.profileImg }" style="height:250px; width:250px"/>
 						<div class="user-info">
                                 <h2>${member.memberId}</h2><br>	
                                 <h5>${member.email }</h5>

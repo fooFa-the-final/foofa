@@ -24,16 +24,14 @@
         <!-- navbar top -->
         <%@ include file="../header.jspf"%>
         <!-- end navbar top -->
-        <%@ include file="../left/memberLeft.jspf"%>
+        <%@ include file="../include/memberLeft.jspf"%>
         
         <!--  page-wrapper -->
         <div id="page-wrapper">
                 <div class="row" >
                 	<div style="height:300px; background-color:#FFFFFF; position:relative; width:83.5%; display:block">
                     <span>
-                            <a class="navbar-brand" href="#" style="margin-top:10px; margin-left:20px">
-                                <img src="${ctx}/resources/img/waikiki.jpg" style="height:250px; width:250px"/>
-                            </a>
+                                  <img name="image" id="image" src="${ctx }/resources/upload/${member.profileImg }" style="height:250px; width:250px"/>
                             <div class="user-info" >
                                 <h2>${member.memberId}</h2><br>	
                                 <h5>${member.email }</h5>

@@ -7,6 +7,22 @@
             <div class="sidebar-collapse">
                 <!-- side-menu -->
                 <ul class="nav" id="side-menu">
+                <c:choose>
+                	<c:when test="${loginUserId ne member.memberId }">
+                     <li id="side-review" >
+                        <a href="${ctx }/review/list/member.do?memberId=${member.memberId}"><i class="fa fa-dashboard fa-fw"></i>My Reviews </a>
+                    </li>
+                     <li id="side-follow" >
+                        <a href="${ctx }/follow/list.do?fromId=${member.memberId}"><i class="fa fa-flask fa-fw"></i>팔로우 목록</a>
+                    </li>
+                    <li id="side-news" >
+                        <a href="${ctx }/review/list/follow.do?fromId=${member.memberId}"><i class="fa fa-flask fa-fw"></i>팔로우 뉴스피드</a>
+                    </li>
+                    <li id="side-favorite" >
+                        <a href="${ctx }/favorite/list.do?memberId=${member.memberId}"><i class="fa fa-table fa-fw"></i>단골 목록</a>
+                    </li>               	
+                	</c:when>
+                	<c:otherwise>
                     <li id="side-review" >
                         <a href="${ctx }/review/list/member.do"><i class="fa fa-dashboard fa-fw"></i>My Reviews </a>
                     </li>
@@ -19,13 +35,14 @@
                     <li id="side-favorite" >
                         <a href="${ctx }/favorite/list.do"><i class="fa fa-table fa-fw"></i>단골 목록</a>
                     </li>
-                    <c:if test="${loginUser != member.memberId || loginUser eq '' }"></c:if>
                     <li id="side-modify" >
                         <a href="${ctx }/member/modify.do"><i class="fa fa-edit fa-fw"></i>회원 정보 수정</a>
                     </li>
                     <li id="side-remove" >
                         <a href="${ctx }/member/checkPw.do"><i class="fa fa-table fa-fw"></i>회원 탈퇴</a>
                     </li>
+                	</c:otherwise>
+                </c:choose>
                 </ul>
                 <!-- end side-menu -->
             </div>

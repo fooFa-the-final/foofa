@@ -31,7 +31,7 @@
 	<div id="wrapper">
 		<%@ include file="../header.jspf"%>
 
-		<%@ include file="../left/sellerLeft.jspf"%>
+		<%@ include file="../include/sellerLeft.jspf"%>
 		<!-- end sidebar-collapse -->
 		</nav>
 		<!-- end navbar side -->

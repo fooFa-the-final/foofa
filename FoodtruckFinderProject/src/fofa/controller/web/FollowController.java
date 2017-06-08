@@ -41,6 +41,7 @@ public class FollowController {
 	@RequestMapping(value="follow/remove.do", method=RequestMethod.GET)
 	public boolean remove(String toId, HttpSession session){
 		Member member = memberService.findById((String)(session.getAttribute("loginUserId")));
+		
 		String fromId = member.getMemberId();
 		Follow follow = new Follow();
 		follow.setToId(toId);
@@ -48,10 +49,12 @@ public class FollowController {
 		return followService.remove(follow);
 	}
 	@RequestMapping("follow/list.do")
-	public String search(HttpSession session, Model model){
-		Member member = memberService.findById((String)(session.getAttribute("loginUserId")));
+	public String search(String fromId, HttpSession session, Model model){
+		if(fromId == null ){
+			fromId = (String)session.getAttribute("loginUserId");
+		}
+		Member member = memberService.findById(fromId);
 		model.addAttribute("member",member);
-		String fromId = member.getMemberId();
 		List<Follow> follow =  followService.findFollow(fromId);
 		List<Member> mfollow = new ArrayList<>();
 		for(int i = 0 ; i < follow.size(); i++) {
