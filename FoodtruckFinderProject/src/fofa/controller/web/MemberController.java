@@ -103,7 +103,6 @@ public class MemberController {
         // 저장 경로 설정
         String root = request.getSession().getServletContext().getRealPath("/");
         String path = root+"resources\\upload\\";
-         System.out.println("path : " + path);
         String newFileName = ""; // 업로드 되는 파일명
          
         File dir = new File(path);

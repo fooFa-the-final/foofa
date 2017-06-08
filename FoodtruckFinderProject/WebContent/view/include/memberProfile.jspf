@@ -8,7 +8,7 @@
 			<form id="fileUpload" method="post" enctype="multipart/form-data">
 				<a class="navbar-brand" href="#"> <img
 					name="image" id="image"
-					src="${ctx }/resources/img/member/${member.profileImg }"
+					src="${ctx }/resources/upload/${member.profileImg }"
 					style="height: 250px; width: 250px"
 					onClick="document.all.file.click();" /> <input type="file"
 					name="file" id="file" style="display: none;"
