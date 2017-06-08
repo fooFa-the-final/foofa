@@ -129,7 +129,7 @@ h2 {
 											document.getElementById("date2").value = data.da;
 
 											jQuery('#showModal').modal();
-
+											modify(data.lo);
 										},
 										error : function() {
 											document.getElementById("date1").value = date;
@@ -281,6 +281,7 @@ h2 {
 					}
 				</script>
 				<script>
+				var loc;
 				var change = function(e){
 					var tm128 = naver.maps.TransCoord.fromLatLngToTM128(e.coord);
 					naver.maps.Service.reverseGeocode({
@@ -293,7 +294,7 @@ h2 {
 				        var item = response.result.items[0],
 		 				point = new naver.maps.Point(item.point.x, item.point.y);
 				        $("#locat").val(item.address);
-				   		mapChange(point);
+				   		loc = e.coord;
 					});
 					
 				};
@@ -305,7 +306,7 @@ h2 {
 					var position = new naver.maps.LatLng(37.4795169, 126.8824995);
 					map = new naver.maps.Map('map', {
 						center: position,
-						zoom: 10
+						zoom: 9
 					});
 					marker = new naver.maps.Marker({
 						position: position,
@@ -328,14 +329,40 @@ h2 {
 		 			});
 				});
 				
-				var mapChange = function(point){
-					marker.setPosition(point);
-					map.setCenter(point);
+				var mapChange = function(){
+					console.log(loc);
+					marker.setPosition(loc);
+					map.setCenter(loc);
+					return true;
 				};
+				
+				var modify = function(address){
+					naver.maps.Service.geocode({
+			 			address: address
+			 		}, function(status, response){
+			 			if (status === naver.maps.Service.Status.ERROR) {
+			 				position = new naver.maps.LatLng(37.4795169, 126.8824995);
+				            return alert('없는 주소입니다. 기본 좌표를 찍어주겠습니다.');
+				        }
+			 			
+			 			var item = response.result.items[0],
+			 				point = new naver.maps.Point(item.point.x, item.point.y);
+			 		
+			 			var map = new naver.maps.Map('map', {
+						    center: point,
+						    zoom: 9
+						});
+			 			
+			 			var marker = new naver.maps.Marker({
+							position: point,
+							map: map
+						});
+			 		});
+				}
 				</script>
 			</div>
 			<div id='calendar' />
-			<div id='map' style="height: 400px; width: 300px"></div>
+			
 		</div>
 		<div class="modal fade" id="showModal" role="dialog">
 			<div class="modal-dialog">
@@ -348,14 +375,22 @@ h2 {
 
 					<div class="modal-body" id="modalCons">
 						<form action="${ctx }/sales/modify.do" method="POST">
-							매출 : <input type="number" name="revenue" id="revenue" value=""><br>
-							위치 : <input type="text" name="location" id="location1" value=""><br>
-							날짜 : <input type="text" name="date" id="date" value=""><br>
-							<input type="submit" value="수정">
+						<div style="display:inline">
+							<div class="col-lg-6">
+								매출 : <input type="number" name="revenue" id="revenue" value=""><br>
+								위치 : <input type="text" name="location" id="location1" value=""><br>
+								날짜 : <input type="text" name="date" id="date" value=""><br>
+							</div>
+							<div class="col-lg-6">
+								<div id='map' style="width: 300px; height: 200px"></div>
+							</div>
+						</div>	
+							
+							<input type="submit" value="수정" class="btn btn-result">
 						</form>
 						<form action="${ctx }/sales/remove.do" method="GET">
 							<input type="hidden" name="date" id="date2" value=""><br>
-							<input type="submit" value="삭제">
+							<input type="submit" value="삭제" class="btn btn-result">
 						</form>
 					</div>
 					<div class="modal-footer">
@@ -406,13 +441,15 @@ h2 {
 				</div>
 
 				<div class="modal-body" id="modalCons">
-					<form action="${ctx }/sales/create.do" method="POST">
+					<form action="${ctx }/sales/create.do" method="POST" onsubmit="return mapChange();">
 						매출 : <input type="number" name="revenue"> <input
 							type="hidden" name="date" id="date1" value=""> 위치 : <input
-							type="text" name="location"> <input type="submit"
-							value="등록">
+							type="text" name="location" id="locat"> <input type="submit"
+							value="등록" >
 					</form>
+				<div id="map2" style="width: 400px; height: 300px; margin-top: 20px">
 
+				</div>
 
 				</div>
 				<div class="modal-footer">
