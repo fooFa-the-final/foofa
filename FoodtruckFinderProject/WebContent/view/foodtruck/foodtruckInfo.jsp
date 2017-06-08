@@ -57,6 +57,9 @@ input.cmn-toggle-round-flat:checked + label:after {
     <link href="${ctx }/resources/css/style.css" rel="stylesheet" />
       <link href="${ctx }/resources/css/main-style.css" rel="stylesheet" />
 	<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=noUvsaR702FX6WH5un5h&submodules=geocoder"></script>
+	 <script src="${ctx }/resources/plugins/jquery-1.10.2.js"></script>
+	<script src="http://malsup.github.com/jquery.form.js"></script> 
+	
 	
 </head>
 
@@ -76,14 +79,14 @@ input.cmn-toggle-round-flat:checked + label:after {
                     <div class="col-md-8">
                     	<form id="fileForm" method="post" enctype="multipart/form-data">
                             <a class="navbar-brand" href="#" style="margin-top:10px;" >
-                                <img name="image" id="image" src="${ctx }/resources/img/${truck.foodtruckImg }" style="height:250px; width:250px" onClick="document.all.file.click();"/>
+                                <img name="image" id="image" src="${ctx }/resources/img/truck/${truck.foodtruckImg }" style="height:250px; width:250px" onClick="document.all.file.click();"/>
                             	<input type="file" name="file" id="file" style="display: none;" onchange="fileinfo(this)" />
                             </a>
                         </form>    
                             <div class="user-info" style="margin-top:30px;">
                                 <h1>${truck.foodtruckName }</h1><br>
                                 <h5>${truck.category1 }</h5>
-                                <h5>${truck.spot }</h5>
+                                <h5>${truck.location }</h5>
                                 <h5>${truck.favoriteCount }Followers</h5>
                                 <h5>Reviews</h5>
                             </div>
@@ -107,7 +110,7 @@ input.cmn-toggle-round-flat:checked + label:after {
                                 <h4>Truck Location</h4>
                             </div>
                             <div class="panel-body">
-                                <h5>${truck.location }</h5>
+                                <h5>${truck.spot }</h5>
                             </div>
                           </div>
                       </div>
@@ -251,7 +254,7 @@ input.cmn-toggle-round-flat:checked + label:after {
     <!-- end wrapper -->
 
     <!-- Core Scripts - Include with every page -->
-    <script src="${ctx }/resources/plugins/jquery-1.10.2.js"></script>
+   
     <script src="${ctx }/resources/plugins/bootstrap/bootstrap.min.js"></script>
     <script src="${ctx }/resources/plugins/metisMenu/jquery.metisMenu.js"></script>
     <script src="${ctx }/resources/plugins/pace/pace.js"></script>
@@ -278,11 +281,16 @@ input.cmn-toggle-round-flat:checked + label:after {
 	      		url:"${ctx}/foodtruck/modifyPicture.do",
 	      		enctype: "multipart/form-data",
 	      		success: function(result){
-	      			alert(result);
+	      			alert("사진이 등록되었습니다.");
+	      		},
+	      		error: function(){
+	      			alert("등록에 실패하였습니다. 다시 시도해주세요.")
 	      		}
 	      	});
 	      	$("#fileForm").submit();
 		}
+		
+		
 
 // var stateBtn = function(obj){
 // 	if($(obj).hasClass("btn btn-outline btn-default")){

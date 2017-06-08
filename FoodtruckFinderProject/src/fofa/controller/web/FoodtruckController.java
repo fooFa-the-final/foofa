@@ -116,62 +116,36 @@ public class FoodtruckController {
 	@RequestMapping(value="/modifyPicture.do", method=RequestMethod.POST)
 	public String modifyPicture(MultipartHttpServletRequest request){
 		
-		System.out.println("controller");
-		MultipartHttpServletRequest multipartHttpServletRequest = (MultipartHttpServletRequest)request;
-	    Iterator<String> iterator = multipartHttpServletRequest.getFileNames();
-	    MultipartFile multipartFile = null;
-	    while(iterator.hasNext()){
-	        multipartFile = multipartHttpServletRequest.getFile(iterator.next());
-	        if(multipartFile.isEmpty() == false){
-	            System.out.println("name : "+multipartFile.getName());
-	            System.out.println("filename : "+multipartFile.getOriginalFilename());
-	            System.out.println("size : "+multipartFile.getSize());
-	        }
-	    }
-	    return "1";
-		
-		
-//		  	String img= null;
-//	        // 저장 경로 설정
-//	        String root = multi.getSession().getServletContext().getRealPath("/");
-//	        String path = root+"resources/upload/";
-//	         
-//	        String newFileName = ""; // 업로드 되는 파일명
-//	         
-//	        File dir = new File(path);
-//	        if(!dir.isDirectory()){
-//	            dir.mkdir();
-//	        }
-//	         
-//	        Iterator<String> files = multi.getFileNames();
-//	        while(files.hasNext()){
-//	            String uploadFile = files.next();
-//	                         
-//	            MultipartFile mFile = multi.getFile(uploadFile);
-//	            String fileName = mFile.getOriginalFilename();
-//	            newFileName = System.currentTimeMillis() + "." +fileName.substring(fileName.lastIndexOf(".") + 1);
-////	            Member member = service.findById((String)(session.getAttribute("loginUserId")));
-//	            Foodtruck foodtruck = foodtruckService.findBySeller((String)session.getAttribute("loginUserId"));
-////	            member.setProfileImg(newFileName);
-//	            foodtruck.setFoodtruckImg(newFileName);
-////	            service.modifyImg(member);
-////	            foodtruckService.modify(foodtruck);
-////	            String imgurl = member.getProfileImg();
-//	            img = path + newFileName;
-////	            member.setProfileImg(img);
-//	            foodtruck.setFoodtruckImg(img);
-////	            service.modifyImg(member);
-//	            
-//	            System.out.println("newFileName : " + newFileName);
-//	            System.out.println("img : " + img);
-//	            
-//	            try {
-//	                mFile.transferTo(new File(path+newFileName));
-//	            } catch (Exception e) {
-//	                e.printStackTrace();
-//	            }
-//	        }
-//			return img;
+		String img= null;
+        // 저장 경로 설정
+        String root = request.getSession().getServletContext().getRealPath("/");
+        String path = root+"resources\\img\\truck\\";
+         	System.out.println("path : " + path);
+        String newFileName = ""; // 업로드 되는 파일명
+         
+        File dir = new File(path);
+        if(!dir.isDirectory()){
+            dir.mkdir();
+        }
+         
+        Iterator<String> files = request.getFileNames();
+        while(files.hasNext()){
+            String uploadFile = files.next();
+                         
+            MultipartFile mFile = request.getFile(uploadFile);
+            String fileName = mFile.getOriginalFilename();
+            newFileName = System.currentTimeMillis() + "." + fileName.substring(fileName.lastIndexOf(".") + 1);
+            Foodtruck foodtruck = foodtruckService.findBySeller((String)request.getSession().getAttribute("loginUserId"));
+            foodtruck.setFoodtruckImg(newFileName);
+            foodtruckService.modify(foodtruck);
+            
+            try {
+                mFile.transferTo(new File(path+newFileName));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return "success";
 	}
 	
 	@RequestMapping(value="/modifyState.do", method=RequestMethod.GET)
@@ -191,6 +165,9 @@ public class FoodtruckController {
 	@RequestMapping("/searchById.do")
 	public String searchById(Model model, HttpSession session){
 		Foodtruck foodtruck = foodtruckService.findBySeller((String)session.getAttribute("loginUserId"));
+		
+//		String[] truckImg = foodtruck.getFoodtruckImg().split("/");
+//		System.out.println(truckImg.length);
 		
 		String[] operationTime = foodtruck.getOperationTime().split("/");
 		String startTime = operationTime[0];
