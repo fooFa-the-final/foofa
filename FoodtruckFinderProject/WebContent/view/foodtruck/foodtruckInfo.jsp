@@ -282,7 +282,7 @@ input.cmn-toggle-round-flat:checked + label:after {
 					position: point,
 					map: map
 				});
-	 		}
+	 		});
 		});
 		
 		function fileinfo(input){
