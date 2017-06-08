@@ -56,12 +56,15 @@ public class FollowController {
 		Member member = memberService.findById(fromId);
 		model.addAttribute("member",member);
 		List<Follow> follow =  followService.findFollow(fromId);
+		
+		System.out.println(follow.size());
 		List<Member> mfollow = new ArrayList<>();
 		for(int i = 0 ; i < follow.size(); i++) {
 			Member e = new Member();
-			e = memberService.findById(follow.get(i).getToId());
+			e = memberService.findById(follow.get(i).getFromId());
 			mfollow.add(e);
 		}
+		System.out.println(mfollow.size());
 		model.addAttribute("follow", mfollow);
 		
 		return "../view/user/memberFollowerList.jsp";
