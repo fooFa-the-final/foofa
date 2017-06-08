@@ -75,21 +75,11 @@ var report = function(reviewId){
         <!--  page-wrapper -->
         <div id="page-wrapper">
                 <div class="row" >
-                	<div style="height:300px; background-color:#FFFFFF; position:relative; width:83.5%; display:block">
-                    <span>
-                                  <img name="image" id="image" src="${ctx }/resources/upload/${member.profileImg }" style="height:250px; width:250px"/>
-                            <div class="user-info" >
-                                <h2>${member.memberId}</h2><br>	
-                                <h5>${member.email }</h5>
-                                <h5>팔로워수&nbsp; ${member.followCount }</h5>
-                                <h5>리뷰작성&nbsp;&nbsp;${member.reviewCount }</h5>
-                            </div>  
-                    </span>
-                        </div>
-            
-                <!-- Page Header -->
 
+                <!-- Page Header -->
+ 					<%@ include file="../include/memberProfile.jspf" %>
                 <!--End Page Header -->
+            
                 <div class="col-md-12">
                 	<h1>My Followers Review</h1>
                 	<c:forEach items="${list }" var="Review">
@@ -150,9 +140,13 @@ var report = function(reviewId){
     <script src="${ctx}/resources/plugins/metisMenu/jquery.metisMenu.js"></script>
     <script src="${ctx}/resources/plugins/pace/pace.js"></script>
     <script src="${ctx}/resources/scripts/siminta.js"></script>
+
+	<!-- Page-Level Plugin Scripts-->
+    <script src="${ctx}/resources/scripts/profile.js"></script>
     <script>
     $(document).ready(function () {
 		$('#side-news').attr('class', 'selected');
+		followExist('${member.memberId}');
     });
     </script>
 

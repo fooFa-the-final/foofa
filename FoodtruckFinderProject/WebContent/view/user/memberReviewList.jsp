@@ -38,7 +38,6 @@
             <div class="row">
                 <!-- Page Header -->
  					<%@ include file="../include/memberProfile.jspf" %>
-
                 <!--End Page Header -->
                 
                 <div class="col-lg-12" style="background-color:white;padding:30px">
@@ -91,7 +90,7 @@
     <script src="${ctx}/resources/scripts/siminta.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-	<!--  Page Script  -->	
+	<!-- Page-Level Plugin Scripts-->
     <script src="${ctx}/resources/scripts/profile.js"></script>
 	<script>
 	
