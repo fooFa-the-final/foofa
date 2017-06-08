@@ -321,6 +321,8 @@ input.cmn-toggle-round-flat:checked + label:after {
 		
 
 var stateBtn = function(obj){
+	var openState = $("#openstate").val();
+	
 	if($(obj).hasClass("btn btn-outline btn-default")){
 		$(obj).removeClass("btn btn-outline btn-default").addClass("btn btn-success");
 		$("#openstate").val("true");
@@ -332,7 +334,7 @@ var stateBtn = function(obj){
 	}
 	$.ajax({
 		 url: '${ctx }/foodtruck/modifyState.do',
-	     data: {openstate:$("#openstate").val()},
+	     data: {operation_state: openState},
 	     type: 'get',
 	     success: function(result){
 	         alert("영업상태가 변경되었습니다.");
