@@ -86,15 +86,15 @@
 												var options = {
 													'dataset' : {
 														title : 'Web accessibility status',
-														values : [ 18, 12, 3,
-																10, 7 ],
+														values : [ ${feList[4].ages }, ${feList[3].ages }, ${feList[2].ages },
+															${feList[1].ages }, ${feList[0].ages } ],
 														colorset : [ '#56b4e9',
 																'#e69f00',
 																'#cc79a7',
 																'#009e73',
 																'#0072b2' ],
-														fields : [ 'A', 'B',
-																'C', 'D', 'E' ]
+														fields : [ '5', '4',
+																'3', '2', '1' ]
 													},
 													'donut_width' : 100,
 													'core_circle_radius' : 0,
@@ -126,20 +126,19 @@
 														var options = {
 															'dataset' : {
 																title : 'Web accessibility status',
-																values : [ 18,
-																		12, 3,
-																		10, 7 ],
+																values : [ ${maList[4].ages }, ${maList[3].ages }, ${maList[2].ages },
+																	${maList[1].ages }, ${maList[0].ages } ],
 																colorset : [
 																		'#56b4e9',
 																		'#e69f00',
 																		'#cc79a7',
 																		'#009e73',
 																		'#0072b2' ],
-																fields : [ 'A',
-																		'B',
-																		'C',
-																		'D',
-																		'E' ]
+																fields : [ '5',
+																		'4',
+																		'3',
+																		'2',
+																		'1' ]
 															},
 															'donut_width' : 100,
 															'core_circle_radius' : 0,
