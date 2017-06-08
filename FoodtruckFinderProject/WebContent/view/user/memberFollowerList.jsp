@@ -56,7 +56,7 @@
 							<c:if test="${loginUserId eq member.memberId }">
 							<div style="float: right;">
 								<br> <br> <br>
-								<button type="button" class="btn btn-default"
+								<button id="delete" type="button" class="btn btn-default"
 									onclick="unfollow('${follow.memberId}');">UNFOLLOW</button>
 							</div></c:if>
 							</div>
