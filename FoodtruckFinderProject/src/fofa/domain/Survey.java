@@ -10,6 +10,13 @@ public class Survey {
 	private String surveyId;
 	private String foodtruckId;
 	private int ages;
+	private int count;
+	public int getCount() {
+		return count;
+	}
+	public void setCount(int count) {
+		this.count = count;
+	}
 	private char gender;
 	private String suggestion;
 	private List<SurveyReply> replies;
@@ -18,10 +25,12 @@ public class Survey {
 	public String getSurveyId() {
 		return surveyId;
 	}
+	
 	@Override
 	public String toString() {
-		return "Survey [surveyId=" + surveyId + ", foodtruckId=" + foodtruckId + ", ages=" + ages + ", gender=" + gender
-				+ ", suggestion=" + suggestion + ", replies=" + replies + ", score=" + score + "]";
+		return "Survey [surveyId=" + surveyId + ", foodtruckId=" + foodtruckId + ", ages=" + ages + ", count=" + count
+				+ ", gender=" + gender + ", suggestion=" + suggestion + ", replies=" + replies + ", score=" + score
+				+ "]";
 	}
 	public void setSurveyId(String surveyId) {
 		this.surveyId = surveyId;

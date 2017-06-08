@@ -63,6 +63,8 @@ public class SurveyStoreLogic implements SurveyStore {
 			params.put("foodtruckId", foodtruckId);
 			params.put("itemId", itemId);
 			surveys = mapper.selectAvgByAges(params);
+
+			System.out.println("age : " + surveys.toString());
 			session.commit();
 		} finally {
 			session.close();
@@ -82,7 +84,7 @@ public class SurveyStoreLogic implements SurveyStore {
 			// params.put("itemId", itemId);
 
 			surveys = mapper.selectAvgByGender(foodtruckId, itemId);
-			//System.out.println(surveys.get(0).toString());
+			// System.out.println(surveys.get(0).toString());
 			session.commit();
 		} finally {
 			session.close();
