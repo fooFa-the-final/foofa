@@ -150,7 +150,7 @@ public class FoodtruckController {
 	@ResponseBody
 	@RequestMapping(value="/modifyState.do", method=RequestMethod.GET)
 	public boolean modifyState(HttpSession session, boolean operation_state){
-		System.out.println("controller");
+		System.out.println("state : " + operation_state);
 		
 		Foodtruck foodtruck = foodtruckService.findBySeller((String)session.getAttribute("loginUserId"));
 		
