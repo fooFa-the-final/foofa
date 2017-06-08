@@ -98,12 +98,12 @@ public class MemberController {
      
     @ResponseBody
     @RequestMapping(value = "member/fileUpload.do", method=RequestMethod.POST)
-    public String fileUp(MultipartHttpServletRequest multi, HttpSession session,Model model) {
+    public String fileUp(MultipartHttpServletRequest request) {
          String img= null;
         // 저장 경로 설정
-        String root = multi.getSession().getServletContext().getRealPath("/");
-        String path = root+"resources/upload/";
-         
+        String root = request.getSession().getServletContext().getRealPath("/");
+        String path = root+"resources\\upload\\";
+         System.out.println("path : " + path);
         String newFileName = ""; // 업로드 되는 파일명
          
         File dir = new File(path);
@@ -111,18 +111,18 @@ public class MemberController {
             dir.mkdir();
         }
          
-        Iterator<String> files = multi.getFileNames();
+        Iterator<String> files = request.getFileNames();
         while(files.hasNext()){
             String uploadFile = files.next();
                          
-            MultipartFile mFile = multi.getFile(uploadFile);
+            MultipartFile mFile = request.getFile(uploadFile);
             String fileName = mFile.getOriginalFilename();
             newFileName = System.currentTimeMillis()+"."
                     +fileName.substring(fileName.lastIndexOf(".")+1);
-            Member member = service.findById((String)(session.getAttribute("loginUserId")));
+            Member member = service.findById((String)(request.getSession().getAttribute("loginUserId")));
             member.setProfileImg(newFileName);
             service.modifyImg(member);
-            System.out.println(member.toString());
+            System.out.println(member.getProfileImg());
             
             try {
                 mFile.transferTo(new File(path+newFileName));
@@ -130,6 +130,6 @@ public class MemberController {
                 e.printStackTrace();
             }
         }
-		return img;
+		return "success";
     }
 }

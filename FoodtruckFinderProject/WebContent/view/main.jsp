@@ -78,15 +78,7 @@
 				<div class="col-lg-12">
 					<!-- search section-->
 					<div class="input-group custom-search-form">
-<<<<<<< HEAD
-						<form method="post" action="${ctx }/foodtruck/searchByKeyLoc.do" style="margin:7px;">
-		                        		<input type="text" class="form-control" id="keyword" name="keyword" placeholder="Search" style="width: 300px; padding:0px;">
-		                            	<input type="text" class="form-control" id="location" name="location" placeholder="Location" style="width: 300px; padding:0px;">
-	                                <button class="btn btn-default" type="submit" style="height:34px">
-	                                    <i class="fa fa-search" style="padding:0px"></i>
-	                                </button>
-	                            </form>
-=======
+
 	                   <form method="post" action="${ctx }/foodtruck/searchByKeyLoc.do" style="margin:7px;">
 						<input id="searchKey" type="text" class="form-control"  name="keyword"  placeholder="Search"
 							style="width: 400px"> <input id="searchLoc" name="location"  type="text"
@@ -95,7 +87,6 @@
 							<i class="fa fa-search"></i>
 						</button>
 						</form>
->>>>>>> branch '170524' of https://github.com/fooFa-the-final/foofa.git
 					</div>
 					<!--end search section-->
 				</div>

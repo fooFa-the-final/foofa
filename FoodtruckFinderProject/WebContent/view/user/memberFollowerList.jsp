@@ -33,17 +33,13 @@
 				<div class="row">
 				<div 
 						style="height: 300px; background-color: #FFFFFF; position: absolute; width: 83.5%">
-						<a class="navbar-brand" href="#"
-							style="margin-top: 10px; margin-left: 20px"> 
-							<img id ="blah" src="${ctx }/resources/upload/${member.profileImg }" style="height: 250px; width: 250px" /> <br>
-
-							<form id="fileForm" runat="server" action="fileUpload" method="post"
-								enctype="multipart/form-data" style="font-size:10px;">
-								<input type="file" id="fileUp" name="fileUp" onchange='readURL(this)'/> 
-								<input type="button" value="전송하기" onClick="fileSubmit();">
-							</form>
-
-						</a>
+						
+                    	<form id="fileUpload" method="post" enctype="multipart/form-data">
+                            <a class="navbar-brand" href="#" style="margin-top:10px;" >
+                                <img name="image" id="image" src="${ctx }/resources/upload/${member.profileImg }" style="height:250px; width:250px" onClick="document.all.file.click();"/>
+                            	<input type="file" name="file" id="file" style="display: none;" onchange="fileinfo(this)" />
+                            </a>
+                        </form> 
 						<div class="user-info">
                                 <h2>${member.memberId}</h2><br>	
                                 <h5>${member.email }</h5>
@@ -110,64 +106,44 @@
 			src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script src="resources/js/jquery-3.1.1.min.js"></script>
 		<script>
-			function fileSubmit() {
-				var formData = new FormData($("#fileForm")[0]);
-				$.ajax({
-					type : 'post',
-					url : '${ctx }/member/fileUpload.do',
-					data : formData,
-					processData : false,
-					contentType : false,
-					success : function(html) {
-						alert("파일 업로드에 성공하였습니다.");
-					},
-					error : function(error) {
-						alert("파일 업로드에 실패하였습니다.");
-						console.log(error);
-						console.log(error.status);
-					}
-				});
-			}
-
-			var follow = function(toId) {
-				$(document).ready(function() {
-					var btn = $("#delete");
-					$.ajax({
-						type : 'GET',
-						url : "${ctx }/follow/remove.do",
-						data : {
-							toId : toId
-						},
-						success : function(data) {
-							var fowId = "#follwer"+toId;
-							$(fowId).remove();
-							
-						}
+		function fileinfo(input){
+	      	if (input.files && input.files[0]) {
+	            var reader = new FileReader();
+	            reader.onload = function (e) {
+	                    $("#image").attr("src", e.target.result);
+	                }
+	            reader.readAsDataURL(input.files[0]);
+            }
+	      	$("#fileUpload").ajaxForm({
+	      		url:"${ctx}/member/fileUpload.do",
+	      		enctype: "multipart/form-data",
+	      		success: function(result){
+	      			alert("사진이 등록되었습니다.");
+	      		},
+	      		error: function(){
+	      			alert("등록에 실패하였습니다. 다시 시도해주세요.")
+	      		}
+	      	});
+	      	$("#fileUpload").submit();
+		}
+				var follow = function(toId) {
+					$(document).ready(function() {
+						var btn = $("#delete");
+						$.ajax({
+							type : 'GET',
+							url : "${ctx }/follow/remove.do",
+							data : {
+								toId : toId
+							},
+							success : function(data) {
+								var fowId = "#follwer"+toId;
+								$(fowId).remove();
+								
+							}
+						});
 					});
-				});
-			}
-			
-			
-			  function readURL(input) {
-			        if (input.files && input.files[0]) {
-			            var reader = new FileReader();
-			            
-			            reader.onload = function (e) {
-			                $('#blah').attr('src', e.target.result);
-			            }
-			            
-			            reader.readAsDataURL(input.files[0]);
-			        }
-			    }
-			    
-			    $("#fileUp").change(function(){
-			        readURL(this);
-			    });	        
-			    
-			    $(document).ready(function () {
-					$('#side-follow').attr('class', 'selected');
-		        });
-		</script>
+				}
+				</script>
 
 </body>
 
