@@ -20,7 +20,7 @@
 <link href="${ctx}/resources/css/main-style.css" rel="stylesheet" />
 
 <!-- Page-Level CSS -->
-<link href="resources/plugins/dataTables/dataTables.bootstrap.css"
+<link href="${ctx }/resources/plugins/dataTables/dataTables.bootstrap.css"
 	rel="stylesheet" />
 
 <c:set var="ctx">${pageContext.request.contextPath }</c:set>
@@ -37,7 +37,7 @@
                     	<form id="fileUpload" method="post" enctype="multipart/form-data">
                             <a class="navbar-brand" href="#" style="margin-top:10px;" >
                                 <img name="image" id="image" src="${ctx }/resources/upload/${member.profileImg }" style="height:250px; width:250px" onClick="document.all.file.click();"/>
-                            	<input type="file" name="file" id="file" style="display: none;" onchange="fileinfo(this)" />
+                            	<input type="file" name="file" id="file" style="display: none;" onchange="fileinfo(this)"/>
                             </a>
                         </form> 
 						<div class="user-info">
@@ -93,18 +93,21 @@
 	<!-- end wrapper -->
 </div>
 	<!-- Core Scripts - Include with every page -->
-	<script src="../../resources/plugins/jquery-1.10.2.js"></script>
-	<script src="../../resources/plugins/bootstrap/bootstrap.min.js"></script>
-	<script src="../../resources/plugins/metisMenu/jquery.metisMenu.js"></script>
-	<script src="../../resources/plugins/pace/pace.js"></script>
-	<script src="../../resources/scripts/siminta.js"></script>
+	<script src="${ctx }/resources/plugins/jquery-1.10.2.js"></script>
+	<script src="${ctx }/resources/plugins/bootstrap/bootstrap.min.js"></script>
+	<script src="${ctx }/resources/plugins/metisMenu/jquery.metisMenu.js"></script>
+	<script src="${ctx }/resources/plugins/pace/pace.js"></script>
+	<script src="${ctx }/resources/scripts/siminta.js"></script>
 	<!-- Page-Level Plugin Scripts-->
-	<script src="../../resources/plugins/dataTables/jquery.dataTables.js"></script>
+	<script src="${ctx }/resources/plugins/dataTables/jquery.dataTables.js"></script>
 	<script
-		src="../../resources/plugins/dataTables/dataTables.bootstrap.js"></script>
+		src="${ctx }/resources/plugins/dataTables/dataTables.bootstrap.js"></script>
+		
 		<script
 			src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<script src="resources/js/jquery-3.1.1.min.js"></script>
+<script src="${ctx }/resources/js/jquery-3.1.1.min.js"></script>
+	<script src="http://malsup.github.com/jquery.form.js"></script> 
+
 		<script>
 		function fileinfo(input){
 	      	if (input.files && input.files[0]) {
