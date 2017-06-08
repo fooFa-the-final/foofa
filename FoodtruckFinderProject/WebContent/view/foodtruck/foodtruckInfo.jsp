@@ -79,16 +79,16 @@ input.cmn-toggle-round-flat:checked + label:after {
                     <div class="col-md-8">
                     	<form id="fileForm" method="post" enctype="multipart/form-data">
                             <a class="navbar-brand" href="#" style="margin-top:10px;" >
-                                <img name="image" id="image" src="${ctx }/resources/img/truck/${truck.foodtruckImg }" style="height:250px; width:250px" onClick="document.all.file.click();"/>
+                                <img name="image" id="image" src="${ctx }/resources/img/food/${truck.foodtruckImg }" style="height:250px; width:250px" onClick="document.all.file.click();"/>
                             	<input type="file" name="file" id="file" style="display: none;" onchange="fileinfo(this)" />
                             </a>
                         </form>    
                             <div class="user-info" style="margin-top:30px;">
-                                <h1>${truck.foodtruckName }</h1><br>
+                                <font size="6">${truck.foodtruckName }</font><br><br>
                                 <h5>${truck.category1 }</h5>
-                                <h5>${truck.location }</h5>
+                                <h5>${truck.spot }</h5>
                                 <h5>${truck.favoriteCount }Followers</h5>
-                                <h5>Reviews</h5>
+                                <h5>${truck.reviewCount }Reviews</h5>
                             </div>
                     </div>
                     <div class="col-md-3" style="float:right; margin-right:30px; margin-top: 30px">
@@ -110,7 +110,7 @@ input.cmn-toggle-round-flat:checked + label:after {
                                 <h4>Truck Location</h4>
                             </div>
                             <div class="panel-body">
-                                <h5>${truck.spot }</h5>
+                                <h5>${truck.location }</h5>
                             </div>
                           </div>
                       </div>

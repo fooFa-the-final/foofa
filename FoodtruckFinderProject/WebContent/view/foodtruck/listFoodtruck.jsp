@@ -128,7 +128,7 @@ ul li a:hover, ul li a:focus {
           		<c:forEach items="${trucks }" var="truck">
           			<tr>
 	          			<td rowspan="2" style="padding:10px;" align="right">
-	          				<img width="130px" height="130px" src="${ctx }/resources/img/${truck.foodtruckImg }" style="margin-right:10px">
+	          				<img width="130px" height="130px" src="${ctx }/resources/img/food/${truck.foodtruckImg }" style="margin-right:10px">
 	          			</td>
 	          			<td style="height:60px">
 	          				<a href="${ctx }/review/list/truck.do?foodtruckId=${truck.foodtruckId }"><font size="5px" color="black">${truck.foodtruckName }</font></a>&nbsp;
@@ -139,7 +139,7 @@ ul li a:hover, ul li a:focus {
           			<tr>
           				<td valign="top">
           					<i class="fa fa-heart"></i> ${truck.favoriteCount } Fans<br>
-          					<i class="fa fa-comment fa-fw"></i> 100 Reviews
+          					<i class="fa fa-comment fa-fw"></i> ${truck.reviewCount } Reviews
           				</td>
           			</tr>
           		</c:forEach>

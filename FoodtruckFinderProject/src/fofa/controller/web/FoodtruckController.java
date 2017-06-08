@@ -119,8 +119,7 @@ public class FoodtruckController {
 		String img= null;
         // 저장 경로 설정
         String root = request.getSession().getServletContext().getRealPath("/");
-        String path = root+"resources\\img\\truck\\";
-         	System.out.println("path : " + path);
+        String path = root+"resources\\img\\food\\";
         String newFileName = ""; // 업로드 되는 파일명
          
         File dir = new File(path);
@@ -165,9 +164,6 @@ public class FoodtruckController {
 	@RequestMapping("/searchById.do")
 	public String searchById(Model model, HttpSession session){
 		Foodtruck foodtruck = foodtruckService.findBySeller((String)session.getAttribute("loginUserId"));
-		
-//		String[] truckImg = foodtruck.getFoodtruckImg().split("/");
-//		System.out.println(truckImg.length);
 		
 		String[] operationTime = foodtruck.getOperationTime().split("/");
 		String startTime = operationTime[0];
