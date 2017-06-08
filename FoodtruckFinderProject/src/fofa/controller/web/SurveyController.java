@@ -64,25 +64,101 @@ public class SurveyController {
 		}
 
 		System.out.println("list : " + list.toString());
-		for(Survey survey : list){
-			for (int i=0;i<5;i++) {
-				if (survey.getGender() == 'M' && survey.getScore() == i+1) {
+		for (Survey survey : list) {
+			for (int i = 0; i < 5; i++) {
+				if (survey.getGender() == 'M' && survey.getScore() == i + 1) {
 					maList.remove(i);
-					maList.add(i,survey);
-				} else if (survey.getGender() == 'F' &&  survey.getScore() == i+1) {
+					maList.add(i, survey);
+				} else if (survey.getGender() == 'F' && survey.getScore() == i + 1) {
 					feList.remove(i);
-					feList.add(i,survey);
+					feList.add(i, survey);
 				}
 			}
 		}
-		
 
 		System.out.println("ma : " + maList.toString());
 
 		model.addAttribute("maList", maList);
 		model.addAttribute("feList", feList);
 
-		model.addAttribute("ageStat", surveyService.findAvgByAges(foodtruckId, itemId));
+		List<Survey> list2 = surveyService.findAvgByAges(foodtruckId, itemId);
+
+		List<Survey> list10 = new ArrayList<>();
+		List<Survey> list20 = new ArrayList<>();
+		List<Survey> list30 = new ArrayList<>();
+		List<Survey> list40 = new ArrayList<>();
+		List<Survey> list50 = new ArrayList<>();
+
+		for (int i = 0; i < 5; i++) {
+			Survey survey = new Survey();
+			Survey survey1 = new Survey();
+			Survey survey2 = new Survey();
+			Survey survey3 = new Survey();
+			Survey survey4 = new Survey();
+
+			survey.setScore(i + 1);
+			survey1.setScore(i + 1);
+			survey2.setScore(i + 1);
+			survey3.setScore(i + 1);
+			survey4.setScore(i + 1);
+
+			survey.setAges(10);
+			survey1.setAges(20);
+			survey2.setAges(30);
+			survey3.setAges(40);
+			survey4.setAges(50);
+
+			list10.add(i, survey);
+			list20.add(i, survey1);
+			list30.add(i, survey2);
+			list40.add(i, survey3);
+			list50.add(i, survey4);
+		}
+		
+		System.out.println("list2 : " + list2.toString());
+
+		for (Survey survey : list2) {
+			for (int i = 0; i < 5; i++) {
+				if (list10.get(i).getAges() == survey.getAges()) {
+					if (list10.get(i).getScore() == survey.getScore()) {
+						list10.remove(i);
+						list10.add(i, survey);
+					}
+				} else if (list20.get(i).getAges() == survey.getAges()) {
+					if (list20.get(i).getScore() == survey.getScore()) {
+						list20.remove(i);
+						list20.add(i, survey);
+					}
+				} else if (list30.get(i).getAges() == survey.getAges()) {
+					if (list30.get(i).getScore() == survey.getScore()) {
+						list30.remove(i);
+						list30.add(i, survey);
+					}
+				} else if (list40.get(i).getAges() == survey.getAges()) {
+					if (list40.get(i).getScore() == survey.getScore()) {
+						list40.remove(i);
+						list40.add(i, survey);
+					}
+				} else if (list50.get(i).getAges() == survey.getAges()) {
+					if (list50.get(i).getScore() == survey.getScore()) {
+						list50.remove(i);
+						list50.add(i, survey);
+					}
+				}
+			}
+		}
+
+		System.out.println("list10 : " + list10.toString());
+		System.out.println("list20 : " + list20.toString());
+		System.out.println("list30 : " + list30.toString());
+		System.out.println("list40 : " + list40.toString());
+		System.out.println("list50 : " + list50.toString());
+
+		model.addAttribute("list10",list10);
+		model.addAttribute("list20",list20);
+		model.addAttribute("list30",list30);
+		model.addAttribute("list40",list40);
+		model.addAttribute("list50",list50);
 		return "/view/foodtruck/foodtruckSurveyDetail.jsp";
 	}
 
