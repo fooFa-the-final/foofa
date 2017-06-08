@@ -329,13 +329,6 @@ h2 {
 		 			});
 				});
 				
-				var mapChange = function(){
-					console.log(loc);
-					marker.setPosition(loc);
-					map.setCenter(loc);
-					return true;
-				};
-				
 				var modify = function(address){
 					naver.maps.Service.geocode({
 			 			address: address
@@ -441,7 +434,7 @@ h2 {
 				</div>
 
 				<div class="modal-body" id="modalCons">
-					<form action="${ctx }/sales/create.do" method="POST" onsubmit="return mapChange();">
+					<form action="${ctx }/sales/create.do" method="POST">
 						매출 : <input type="number" name="revenue"> <input
 							type="hidden" name="date" id="date1" value=""> 위치 : <input
 							type="text" name="location" id="locat"> <input type="submit"
