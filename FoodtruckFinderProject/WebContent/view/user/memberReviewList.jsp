@@ -59,7 +59,7 @@
                 <div class="col-lg-12" style="background-color:white;padding:30px">
                 	<h3>Favorite</font></h3>
                 		<c:forEach items="${list }" var="review">
-                		<div class="col-lg-10" style="margin-top:30px" id="rev${review.reviewId }">
+                		<div class="col-lg-7" style="margin-top:30px" id="rev${review.reviewId }">
                 			<div class="col-lg-11" style="display:inline-block">
                 				<div class="col-lg-9">
                 					<h4><a href="${ctx }/review/list/truck.do?foodtruckId=${review.foodtruck.foodtruckId }">${review.foodtruck.foodtruckName }</a></h4>
@@ -73,16 +73,14 @@
 	                			</div>
                 			</div>
                 			<div class="col-lg-12" style="display:inline-block">
-                				<div class="col-lg-4">
-                					<img src="${ctx}/resources/img/food01.jpg" alt="" style="width:320px;height:300px"/>
-                				</div>
-                				<div class="col-lg-4">
-                					<img src="${ctx}/resources/img/food02.jpg" alt="" style="width:320px;height:300px"/>
-                				</div>
+                				<c:forEach items="${review.images }" var = "image">
+			                			<img src="${ctx }/resources/img/reviewImg/${image.filename}" width="150px" height="150px">
+			                	</c:forEach>
                 			</div>
                 			<div class="col-lg-11" style="display:inline-block;margin-top:30px">
                 			<font size="4">
                 				<div class="col-lg-10">
+                					${review.contents }<br>
                 					<i class="fa fa-thumbs-up" ></i> : ${review.recommand }
                 				</div>
                 				<div class="col-lg-2">

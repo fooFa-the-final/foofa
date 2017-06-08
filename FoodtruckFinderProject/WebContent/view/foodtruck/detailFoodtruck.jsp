@@ -253,7 +253,9 @@
 	                		<div class = "col-md-offset-1 col-md-11" style="margin-top:50px">
 		                		<span><font class="h3"><a href="${ctx }/review/list/member.do?memberId=${Review.writer.memberId}">${Review.writer.memberId}</a></font></span>
 		                		<span style="float:right"><input type="button" value="follow" class="btn btn-result"> <input type="button" value="!" class="btn btn-result" data-toggle="modal" data-target="#myModal${Review.reviewId }"></span><br>
-		                		<img src="../../resources/img/smile.png" width="300px" height="300px"><br><br>
+			                		<c:forEach items="${Review.images }" var = "image">
+			                			<img src="${ctx }/resources/img/reviewImg/${image.filename}" width="150px" height="150px">
+			                		</c:forEach><br><br>
 		                		<font size="4px">
 		                		<span>점수 : ${Review.score } <button style="border:0;background-color:white" onClick="recReview('${Review.reviewId}')"><i class="fa fa-thumbs-up" id="rec" ></i></button>: 
 		                		<input type="text" id="rec${Review.reviewId}" value="${Review.recommand }" style="border: 0px;" size=1 readonly></span>
@@ -277,8 +279,8 @@
 								          <input type="radio" name = "reason${Review.reviewId }" value="음란" onClick="untype()"> 음란<br>
 								          <input type="radio" name = "reason${Review.reviewId }" value="광고" onClick="untype()"> 광고<br>
 								          <input type="radio" name = "reason${Review.reviewId }" value="부적절한 리뷰" onClick="untype()"> 부적절한 리뷰<br>
-								          <input type="radio" name = "reason${Review.reviewId }" value="direct" onClick="availableType()"> 직접 적겠습니다.<br>
-								          <input type="text" class="form-control" placeholder="신고 사유를 적어주세요" id="reason${Review.reviewId}" name="reasonContents">
+								          <input type="radio" name = "reason${Review.reviewId }" value="direct" onClick="availableType()" > 직접 적겠습니다.<br>
+								          <input type="text" class="form-control" placeholder="신고 사유를 적어주세요" id="reason${Review.reviewId}" readonly disabled name="reasonContents">
 								        </div>
 								        <div class="modal-footer">
 								          <input type="button" class="btn btn-default" data-dismiss="modal" value="신고" onClick="report('${Review.reviewId}')">

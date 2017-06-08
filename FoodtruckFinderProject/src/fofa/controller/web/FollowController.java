@@ -51,7 +51,6 @@ public class FollowController {
 	public String search(HttpSession session, Model model){
 		Member member = memberService.findById((String)(session.getAttribute("loginUserId")));
 		model.addAttribute("member",member);
-		System.out.println(member.toString());
 		String fromId = member.getMemberId();
 		List<Follow> follow =  followService.findFollow(fromId);
 		List<Member> mfollow = new ArrayList<>();
