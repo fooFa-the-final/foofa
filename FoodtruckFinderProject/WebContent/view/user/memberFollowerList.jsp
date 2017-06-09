@@ -35,14 +35,13 @@
  					<%@ include file="../include/memberProfile.jspf" %>
             	    <!--End Page Header -->
                 
-					<h1>Follwer List</h1>
+					<h1>follower List</h1>
 					<br>
 					<c:forEach var="follow" items="${follow}" varStatus="sts">
-						<div id="follwer${follow.memberId }" style="margin-bottom: 50px">
+						<div id="follower${follow.memberId }" style="margin-bottom: 50px">
 							<a class="navbar-brand" href="#"
-								style="margin-top: 10px; margin-left: 20px"> <img
-								src="${ctx }/resources/img/${follow.profileImg }"
-								style="height: 70px; width: 70px" />
+								style="margin-top: 10px; margin-left: 20px"> 
+								<img src="${ctx }/resources/upload/${follow.profileImg }" style="height:70px;width:70px">
 							</a>
 							<div class="user-info">
 								<tr class="odd gradeX">
@@ -79,7 +78,6 @@
 	<script src="${ctx }/resources/plugins/dataTables/jquery.dataTables.js"></script>
 	<script src="${ctx }/resources/plugins/dataTables/dataTables.bootstrap.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-	<script src="${ctx }/resources/js/jquery-3.1.1.min.js"></script>
 	<script src="http://malsup.github.com/jquery.form.js"></script> 
 	<script>
         $(document).ready(function () {
@@ -105,7 +103,8 @@
 	      			alert("등록에 실패하였습니다. 다시 시도해주세요.")
 	      		}
 	      	});
-	      	$("#fileUpload").submit();
+	      	alert("submit");
+  			$("#fileUpload").submit();
 		}
 		var unfollow = function(toId) {
 						var btn = $("#delete");
@@ -116,7 +115,7 @@
 								toId : toId
 							},
 							success : function(data) {
-								var fowId = "#follwer"+toId;
+								var fowId = "#follower"+toId;
 								$(fowId).remove();
 								
 							}

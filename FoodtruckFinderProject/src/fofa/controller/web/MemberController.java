@@ -116,6 +116,7 @@ public class MemberController {
                          
             MultipartFile mFile = request.getFile(uploadFile);
             String fileName = mFile.getOriginalFilename();
+            System.out.println(fileName);
             newFileName = System.currentTimeMillis()+"."
                     +fileName.substring(fileName.lastIndexOf(".")+1);
             Member member = service.findById((String)(request.getSession().getAttribute("loginUserId")));
