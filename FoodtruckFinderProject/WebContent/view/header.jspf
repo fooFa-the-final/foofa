@@ -58,17 +58,16 @@
                     <!-- dropdown user-->
                     
                     <ul class="dropdown-menu dropdown-user">
-                        <li><a href="${ctx }/review/list/member.do"><i class="fa fa-user fa-fw"></i>${loginUserId } Profile</a>
-                        </li>
-                        <li><a href="${ctx }/member/modify.do"><i class="fa fa-gear fa-fw"></i>Modify Info</a>
-                        </li>
-                        <li class="divider"></li>
                         <c:choose>
                         	<c:when test="${loginUserId ne null }">
-                        		<li><a href="${ctx }/logout.do"><i class="fa fa-sign-out fa-fw"></i>Logout</a></li>
+                       			 <li><a href="${ctx }/review/list/member.do"><i class="fa fa-user fa-fw"></i>${loginUserId } Profile</a></li>
+                        		 <li><a href="${ctx }/member/modify.do"><i class="fa fa-gear fa-fw"></i>Modify Info</a></li>
+                        		 <li class="divider"></li>
+                        		 <li><a href="${ctx }/logout.do"><i class="fa fa-sign-out fa-fw"></i>Logout</a></li>
                         	</c:when>
                         	<c:otherwise>
-                      		  	<li><a href="${ctx }/login.do"><i class="fa fa-sign-out fa-fw"></i>Login</a></li>
+                        		 <li><a href="${ctx }/logout.do"><i class="fa fa-check fa-fw"></i>Login</a></li>
+                      		  	 <li><a href="${ctx }/member/createForm.do"><i class="fa fa-edit fa-fw"></i>Sign up</a></li>
                         	</c:otherwise>
                         </c:choose>
                     </ul>

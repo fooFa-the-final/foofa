@@ -137,18 +137,19 @@ a.link {font-size: 0.7em; color:blue;}
 </div>
 				
 		</div>
-				<div class="row div-gray">
+				<div class="row div-gray" style="">
 				<h4>Hot Reviews</h4>
 				<div class="sub-container">
 				<div class="col-lg-9">
 						<div class="panel panel-primary text-left" style="height:327px">
-							<div class="review-heading padding-10" style="	height: 90px;">
-								<img class="somenail" src="${ctx }/resources/img/member/${review.writer.profileImg }"/>
-								<div style="float:left; width:80%;">
-									<ul>
+							<div class="review-heading padding-10" style="height: 90px;">
+								<img class="somenail" src="${ctx }/resources/img/member/${hotReview.writer.profileImg }"/>
+								<div style="float:left; margin-left:20px;">
+									<ul class="list-unstyled">
 										<li><a href="${ctx }/review/list/member.do?memberId=${hotReview.writer.memberId }">${hotReview.writer.memberId }</a></li>
-										<li> <span class="sub-li-follow"><i class="fa fa-thumbs-up fa-1x"></i>${hotReview.recommand } </span>
-											 <span class="sub-li-favorite"><i class="fa fa-twitter fa-1x"></i>${hotReview.recommand } </span>
+										<li> <span class="sub-li-recommand"><i class="fa fa-thumbs-up fa-1x"></i>${hotReview.recommand } </span>
+											 <span class="sub-li-follow"><i class="fa fa-twitter fa-1x"></i>${hotReview.writer.followCount } </span>
+											 <span class="sub-li-follow"><i class="fa fa-pencil fa-1x"></i>${hotReview.writer.followCount } </span>
 										</li>
 										<li> <a href="${ctx }/review/list/truck.do?foodtruckId=${hotReview.foodtruck.foodtruckId }">${hotReview.foodtruck.foodtruckName }</a> 에 대한 리뷰 </li>
 									</ul>
@@ -156,7 +157,7 @@ a.link {font-size: 0.7em; color:blue;}
 							</div>
 							<div class="panel-body ">
 								<div style="display:block;width:500px; float:right;">
-									<span class="starRating" style="text-align:left;"><span style="width: ${hotReview.score *20}%">${hotReview.score }점</span></span> ${review.writeDate}
+									<span class="starRating" style="text-align:left;"><span style="width: ${hotReview.score *20}%">${hotReview.score }점</span></span> ${hotReview.writeDate}
 									<p class="reviewContent">
 								 		${hotReview.contents }
 									</p>
