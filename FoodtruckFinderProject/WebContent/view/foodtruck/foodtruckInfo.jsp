@@ -72,35 +72,11 @@ input.cmn-toggle-round-flat:checked + label:after {
         <%@ include file="../include/sellerLeft.jspf"%>
      
         <!--  page-wrapper -->
-        <div id="page-wrapper">
-            <div class="row">
-                <!-- Page Header -->
-                <div class="col-md-12" style="background-color:white; height:300px;">
-                    <div class="col-md-8">
-                    	<form id="fileForm" method="post" enctype="multipart/form-data">
-                            <a class="navbar-brand" href="#" style="margin-top:10px;" >
-                                <img name="image" id="image" src="${ctx }/resources/img/food/${truck.foodtruckImg }" style="height:250px; width:250px" onClick="document.all.file.click();"/>
-                            	<input type="file" name="file" id="file" style="display: none;" onchange="fileinfo(this)" />
-                            </a>
-                        </form>    
-                            <div class="user-info" style="margin-top:30px;">
-                                <font size="6">${truck.foodtruckName }</font><br><br>
-                                <h5>${truck.category1 }</h5>
-                                <h5>${truck.spot }</h5>
-                                <h5>${truck.favoriteCount }Followers</h5>
-                                <h5>${truck.reviewCount }Reviews</h5>
-                            </div>
-                    </div>
-                    <div class="col-md-3" style="float:right; margin-right:30px; margin-top:30px; height:300px; position:relative;">
-                        <a href="${ctx }/seller/modify.do"><button type="button" class="btn btn-default">판매자 정보 수정</button></a>
-                        <a href="${ctx }/seller/checkPw.do"><button type="button" class="btn btn-default">판매자 탈퇴</button></a>
-                   		<div class="col-md-3" style="position:absolute; bottom:100px; margin-left:10px" align="right">
-		                    <input type="button" id="openstateBtn" name="openstateBtn" class="btn btn-outline btn-default" onClick="stateBtn(this)" style="width:200px; height:70px" value="OPEN NOW">        
-		                	<input type="hidden" id="openstate" name="openstate" value="${truck.state}">
-                		</div>
-                    </div>
-                </div>
-                <!--End Page Header -->
+		<div id="page-wrapper">
+			<div class="row">
+				<!-- Page Header -->
+               		 <%@ include file="../include/sellerProfile.jspf" %>
+				<!--End Page Header -->
                 
                 <div class="col-md-12" style="margin-top:30px; margin-bottom:50px">
                    <div class="col-md-8">
@@ -261,6 +237,7 @@ input.cmn-toggle-round-flat:checked + label:after {
     <script src="${ctx }/resources/plugins/metisMenu/jquery.metisMenu.js"></script>
     <script src="${ctx }/resources/plugins/pace/pace.js"></script>
     <script src="${ctx }/resources/scripts/siminta.js"></script>
+    <script src="${ctx }/resources/scripts/seller-profile.js"></script>
 	<script>
 		$(document).ready(function() {
 			$('#side-info').attr('class', 'selected');
@@ -287,64 +264,9 @@ input.cmn-toggle-round-flat:checked + label:after {
 	 		});
 			
 			var state = '${truck.state}';
-			if(state=="true"){
-				$("#openstateBtn").removeClass("btn btn-outline btn-default").addClass("btn btn-success");
-				$("#openstateBtn").val("OPEN NOW");
-			}
-			if(state=="false"){
-				$("#openstateBtn").removeClass("btn btn-success").addClass("btn btn-outline btn-default");
-				$("#openstateBtn").val("CLOSED");
-			}
+			stateCheck(state);
 		});
-		
-		function fileinfo(input){
-	      	if (input.files && input.files[0]) {
-	            var reader = new FileReader();
-	            reader.onload = function (e) {
-	                    $("#image").attr("src", e.target.result);
-	                }
-	            reader.readAsDataURL(input.files[0]);
-            }
-	      	$("#fileForm").ajaxForm({
-	      		url:"${ctx}/foodtruck/modifyPicture.do",
-	      		enctype: "multipart/form-data",
-	      		success: function(result){
-	      			alert("사진이 등록되었습니다.");
-	      		},
-	      		error: function(){
-	      			alert("등록에 실패하였습니다. 다시 시도해주세요.")
-	      		}
-	      	});
-	      	$("#fileForm").submit();
-		}
-		
-		
 
-var stateBtn = function(obj){
-	var openState = $("#openstate").val();
-	
-	if($(obj).hasClass("btn btn-outline btn-default")){
-		$(obj).removeClass("btn btn-outline btn-default").addClass("btn btn-success");
-		$("#openstate").val("true");
-		$("#openstateBtn").val("OPEN NOW");
-	} else {
-		$(obj).removeClass("btn btn-success").addClass("btn btn-outline btn-default");
-		$("#openstate").val("false");
-		$("#openstateBtn").val("CLOSED");
-	}
-	$.ajax({
-		 url: '${ctx }/foodtruck/modifyState.do',
-	     data: {operation_state: openState},
-	     type: 'get',
-	     success: function(result){
-	         alert("영업상태가 변경되었습니다.");
-	         
-	     },
-	     error: function(){
-	     	alert("영업상태 변경을 실패하였습니다. 다시 시도해주세요.");
-	     }
-	});
-}
 	</script>
 
 </body>

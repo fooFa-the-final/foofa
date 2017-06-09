@@ -57,7 +57,7 @@
 						$("form").submit();
 						return true;
 					} else if ($.trim(data) == 'no') {
-						$("#passwordResult").html("비밀번호가 일치하지않습니다");
+						$("#passwordResult").html("비밀번호가 일치하지않습니다.");
 					}
 
 				}
@@ -73,24 +73,21 @@
 		<!--  page-wrapper -->
 		<div id="page-wrapper">
 			<div class="row">
-				<div class="col-lg-12">
-					<div class="col-lg-10">
+				<div class="col-md-4 col-md-offset-4">
+					<div class="login-panel panel panel-danger">
+						<div class="panel-heading">
+							<h3 class="panel-title">비밀번호 확인 </h3>
+						</div>
+						<div class="panel-body">
 						<form role="form" action="${ctx }/seller/remove.do" method="GET">
 							<div class="form-group">
-																												<div class="col-md-6 col-md-offset-3 text-center logo-margin">
-							
-								<label>비밀번호 변경</label> <input class="form-control" id="password"
-									name="password" type="password" placeholder="비밀번호를 입력해 주세요">
-								<br>
-								<p id="passwordResult"></p>
+								<input class="form-control" id="password"
+									name="password" type="password" placeholder="비밀번호를 입력해 주세요" />
+								<p id="passwordResult" style="color:red;text-align:center; margin-top:5px;"></p>
 							</div>
-																					<div class="col-md-6 col-md-offset-3 text-center logo-margin">
-								
-								<button type="button" class="btn btn-primary" id="pwCheck">submit</button>
-						</div>
-							</div>
+							<button type="button" class="btn btn-danger" style="float:right;"id="pwCheck">확인</button>
 						</form>
-					</div>
+					</div></div>
 				</div>
 			</div>
 		</div>

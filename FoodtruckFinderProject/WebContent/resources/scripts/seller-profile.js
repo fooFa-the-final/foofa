@@ -125,6 +125,18 @@ var followCount = function(memberId) {
 	});
 }
 
+//truck state 확인
+var stateCheck = function(state){
+	if(state=="true"){
+		$("#openstateBtn").removeClass("btn btn-outline btn-default").addClass("btn btn-success");
+		$("#openstateBtn").val("OPEN NOW");
+	}
+	if(state=="false"){
+		$("#openstateBtn").removeClass("btn btn-success").addClass("btn btn-outline btn-default");
+		$("#openstateBtn").val("CLOSED");
+	}
+}
+
 //truck state 변경
 var stateBtn = function(obj){
 	var openState = $("#openstate").val();
@@ -150,4 +162,26 @@ var stateBtn = function(obj){
 	     	alert("영업상태 변경을 실패하였습니다. 다시 시도해주세요.");
 	     }
 	});
+}
+
+//푸드트럭 사진 변경 
+function fileinfo(input){
+  	if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+                $("#image").attr("src", e.target.result);
+            }
+        reader.readAsDataURL(input.files[0]);
+    }
+  	$("#fileForm").ajaxForm({
+  		url:"${ctx}/foodtruck/modifyPicture.do",
+  		enctype: "multipart/form-data",
+  		success: function(result){
+  			alert("사진이 등록되었습니다.");
+  		},
+  		error: function(){
+  			alert("등록에 실패하였습니다. 다시 시도해주세요.")
+  		}
+  	});
+  	$("#fileForm").submit();
 }

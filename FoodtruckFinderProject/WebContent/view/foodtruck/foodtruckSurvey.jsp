@@ -33,34 +33,62 @@
 		<div id="page-wrapper">
 			<div class="row">
 				<!-- Page Header -->
-				<div class="col-lg-12" style="margin-top: 20px;">
-					<div class="panel panel-default panel-body">
-                        	<div class="col-lg-4" style=""><img src="${ctx }/resources/img/waikiki.jpg" style="height:250px; width:250px;"/></div>
-                            	<div class="col-lg-8 user-info">
-                            		<div style="width:100%">
-                                		<span><b>${truck.foodtruckName }</b></span>
-                                		<span style="float:right;">
-                        			   <button id="favoriteBtn" type="button" class="btn btn-default btn-circle btn-lg" onclick="favorite('${truck.foodtruckId }');"><i class="fa fa-heart"></i></button>
-                       						 <a href="#"><button type="button" class="btn btn-danger">리뷰 작성</button></a>    </span>                     		
-                            		</div>
-                                	<h5>${truck.category1 }</h5>
-                                	<h5>${truck.spot }</h5>
-                                	<h5><span id="followCount"></span>이 이푸드트럭을 단골로 등록했습니다.</h5>
-                                	<h5>${fn:length(reviewList)} Reviews</h5>
-                            	</div>
-                    	<span style="float:right; margin-right:50px; margin-top: 30px">
-
-                    </span>        
-               		 </div>
-				</div>
+               		 <%@ include file="../include/sellerProfile.jspf" %>
 				<!--End Page Header -->
 
 				<div class="col-lg-12">
 					<div class="panel panel-default panel-body">
 						<h1 class="page-header" style="margin-top:20px;">Survey Statics</h1>
 						<div class="col-lg-10">
-                          <h2>Score</h2>
-                          <div class="col-lg-8" style="float: left">
+                          
+                          	<div class="col-lg-5 panel panel-success">
+                          		<div class="panel-heading">
+                          			설문 조사 통계
+                          		</div>
+                          		<div class="panel-body">
+                          		 	<div class="table-responsive">
+                          				<table class="table table-hover">
+                          					<thead>
+                          						<tr>
+                          						<th>#</th>
+                          						<th>설문항목</th>
+                          						<th>점수</th>
+                          						</tr>
+                          					</thead>
+                          					<tbody>
+                          			<c:choose>
+                          				<c:when test="${fn:length(avgItemList) == 0 }">
+                          					<tr><td colspan="3">등록된 설문조사가 없습니다. </td>
+                          				</c:when>
+                          				<c:otherwise>
+		                                	<c:forEach var="item" items="${avgItemList }" varStatus="sts">
+		                                  	 	<tr>
+		                                  	 		<td>${sts.count }</td>
+		                                       		<td><a href="${ctx }/itemStat.do?itemId=${item.itemId }&foodtruckId=${truck.foodtruckId}">${item.surveyId }</a> </td>
+		                                        	<td>
+													<span class="starRating" style="text-align:left;"><span style="width: ${item.score*20 }%">${item.score }점</span></span>
+		                                        	</td>
+		                                  	 	</tr>
+		                                 	</c:forEach> 
+                          				</c:otherwise>
+                          			</c:choose>
+                          					</tbody>
+                          				</table>
+                          			</div>  
+                        			
+                          		</div>
+                          	</div>
+                          	<div class="col-lg-5 panel panel-success">
+                          		<div class="panel-heading">
+                          			건의 사항 
+                          		</div>
+                          		<div class="panel-body">
+                          			<c:if test="${fn:length(avgItemList) == 0 }">
+                          				<p>등록된 설문조사가 없습니다. </p>
+                          			</c:if>
+                          		</div>
+                          	</div>
+                          	                         
                               <table>
                               <thead>
                                   <tr>
@@ -69,14 +97,7 @@
                                   </tr>
                               </thead>
                                <tbody>
-                               	<c:forEach var="item" items="${avgItemList }">
-                                   <tr>
-                                       <td><a href="${ctx }/itemStat.do?itemId=${item.itemId }&foodtruckId=${truck.foodtruckId}">${item.surveyId }</a> </td>
-                                        <td>
-											<span class="starRating" style="text-align:left;"><span style="width: ${item.score*20 }%">${item.score }점</span></span>
-                                        </td>
-                                   </tr>
-                                 </c:forEach>
+
                                </tbody>
                            </table>
                           </div>
@@ -92,6 +113,9 @@
                                   </tr>
                               </thead>
                                <tbody>
+                               	<c:if test="${commentList eq null || fn:length(commentList) == 0 }">
+                               		<h3>등록된 코멘트가 없습니다. </h3>
+                               	</c:if>
                                	<c:forEach var="comment" items="${commentList }">
                                    <tr>
                                        <td>${comment.suggestion }</td>
@@ -118,11 +142,16 @@
 	<script src="${ctx}/resources/plugins/pace/pace.js"></script>
 	<script src="${ctx}/resources/scripts/siminta.js"></script>
 	<!-- Page-Level Plugin Scripts-->
-	<script src="${ctx}/resources/plugins/flot/jquery.flot.js"></script>
-	<script src="${ctx}/resources/plugins/flot/jquery.flot.tooltip.min.js"></script>
-	<script src="${ctx}/resources/flot/jquery.flot.resize.js"></script>
-	<script src="${ctx}/resources/flot/jquery.flot.pie.js"></script>
-	<script src="${ctx}/resources/scripts/flot-demo.js"></script>
+    <script src="${ctx }/resources/scripts/seller-profile.js"></script>
+	<script>
+	$(document).ready(function() {
+		var state = '${truck.state}';
+		stateCheck(state);
+		$('#side-survey').attr('class', 'selected');
+
+	});
+
+	</script>
 </body>
 
 </html>

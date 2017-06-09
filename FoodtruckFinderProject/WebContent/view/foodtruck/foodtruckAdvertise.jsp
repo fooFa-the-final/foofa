@@ -72,34 +72,9 @@ $(document).ready(function(){
 		<!--  page-wrapper -->
 		<div id="page-wrapper">
 			<div class="row">
-				<div class="col-lg-12">
-					<div class="panel panel-default"
-						style="margin-top: 15px; height: 320px;">
-						<div class="panel-body">
-							<span> <a class="navbar-brand" href="#"
-								style="margin-top: 10px;"> <img
-									src="${ctx }/resources/img/food/${truck.foodtruckImg}"
-									style="height: 250px; width: 250px" />
-							</a>
-							</span>
-							<div class="user-info">
-								<h1>${truck.foodtruckName }</h1>
-								<br>
-								<h5>${truck.category1 }</h5>
-								<h5>${truck.location }</h5>
-								<h5>단골수:&nbsp;&nbsp; ${truck.favoriteCount }</h5>
-								<h5>리뷰수:&nbsp;&nbsp; ${truck.reviewCount }</h5>
-							</div>
-							<%-- 
-							<span style="float: right; margin-right: 30px; margin-top: 30px">
-								<a href="${ctx }/seller/modify.do"><button type="button"
-										class="btn btn-default" onclick="${ctx}/seller/modify.do">판매자정보 수정</button></a> <a href="${ctx }/seller/remove.do">
-										<button type="button" class="btn btn-default">판매자 탈퇴</button></a>
-							</span>
-							 --%>
-						</div>
-					</div>
-				</div>
+				<!-- Page Header -->
+               		 <%@ include file="../include/sellerProfile.jspf" %>
+				<!--End Page Header -->
 			</div>
 			<div class="row">
 				<div class="col-lg-12">

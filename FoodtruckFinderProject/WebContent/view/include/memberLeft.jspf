@@ -20,13 +20,7 @@
                     </li>
                     <li id="side-favorite" >
                         <a href="${ctx }/favorite/list.do?memberId=${member.memberId}"><i class="fa fa-table fa-fw"></i>단골 목록</a>
-                    </li>    
-                    <li id="side-modify" >
-                        <a href="${ctx }/member/modify.do?memberId=${member.memberId}"><i class="fa fa-edit fa-fw"></i>회원 수정</a>
-                    </li> 
-                    <li id="side-delete" >
-                        <a href="${ctx }/member/checkPw.do?memberId=${member.memberId}"><i class="fa fa-table fa-fw"></i>회원 탈퇴</a>
-                    </li>                                                    	
+                    </li>                                                     	
                 	</c:when>
                 	<c:otherwise>
                     <li id="side-review" >
