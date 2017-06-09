@@ -39,15 +39,16 @@
 				<div class="col-lg-12">
 					<div class="panel panel-default panel-body">
 						<h1 class="page-header" style="margin-top:20px;">Survey Statics</h1>
-						<div class="col-lg-10">
                           
-                          	<div class="col-lg-5 panel panel-success">
+                          	<div class="col-lg-8">
+                          		<div class="panel panel-success">
+                          		
                           		<div class="panel-heading">
                           			설문 조사 통계
                           		</div>
                           		<div class="panel-body">
                           		 	<div class="table-responsive">
-                          				<table class="table table-hover">
+                          				<table class="table table-hover table-striped">
                           					<thead>
                           						<tr>
                           						<th>#</th>
@@ -56,78 +57,46 @@
                           						</tr>
                           					</thead>
                           					<tbody>
-                          			<c:choose>
-                          				<c:when test="${fn:length(avgItemList) == 0 }">
-                          					<tr><td colspan="3">등록된 설문조사가 없습니다. </td>
-                          				</c:when>
-                          				<c:otherwise>
-		                                	<c:forEach var="item" items="${avgItemList }" varStatus="sts">
-		                                  	 	<tr>
-		                                  	 		<td>${sts.count }</td>
-		                                       		<td><a href="${ctx }/itemStat.do?itemId=${item.itemId }&foodtruckId=${truck.foodtruckId}">${item.surveyId }</a> </td>
-		                                        	<td>
-													<span class="starRating" style="text-align:left;"><span style="width: ${item.score*20 }%">${item.score }점</span></span>
-		                                        	</td>
-		                                  	 	</tr>
-		                                 	</c:forEach> 
-                          				</c:otherwise>
-                          			</c:choose>
+			                          			<c:choose>
+			                          				<c:when test="${fn:length(avgItemList) == 0 }">
+			                          					<tr><td colspan="3">등록된 설문조사가 없습니다. </td>
+			                          				</c:when>
+			                          				<c:otherwise>
+					                                	<c:forEach var="item" items="${avgItemList }" varStatus="sts">
+					                                  	 	<tr>
+					                                  	 		<td>${sts.count }</td>
+					                                       		<td><a href="${ctx }/itemStat.do?itemId=${item.itemId }&foodtruckId=${truck.foodtruckId}">${item.surveyId }</a> </td>
+					                                        	<td>
+																<span class="starRating" style="text-align:left;"><span style="width: ${item.score*20 }%">${item.score }점</span></span>
+					                                        	</td>
+					                                  	 	</tr>
+					                                 	</c:forEach> 
+			                          				</c:otherwise>
+			                          			</c:choose>
                           					</tbody>
                           				</table>
                           			</div>  
-                        			
+                        			</div>
                           		</div>
                           	</div>
-                          	<div class="col-lg-5 panel panel-success">
+                          	<div class="col-lg-4">
+                          	<div class=" panel panel-info">
                           		<div class="panel-heading">
                           			건의 사항 
                           		</div>
                           		<div class="panel-body">
-                          			<c:if test="${fn:length(avgItemList) == 0 }">
-                          				<p>등록된 설문조사가 없습니다. </p>
-                          			</c:if>
+                          			<ol>
+	                          			<c:if test="${fn:length(avgItemList) == 0 }">
+    	                      				<li>등록된 설문조사가 없습니다. </li>
+    	                      			</c:if>
+										<c:forEach var="comment" items="${commentList }">
+											<li>${comment.suggestion }</li>
+										</c:forEach>                          				
+                          			</ol>
                           		</div>
                           	</div>
-                          	                         
-                              <table>
-                              <thead>
-                                  <tr>
-                                      <th width="150px"></th>
-                                      <th></th>
-                                  </tr>
-                              </thead>
-                               <tbody>
-
-                               </tbody>
-                           </table>
                           </div>
                       </div>
-						<div class="col-lg-10">
-                          <h2>Comments</h2>
-                          <div class="col-lg-8" style="float: left">
-                              <table>
-                              <thead>
-                                  <tr>
-                                      <th width="150px"></th>
-                                      <th></th>
-                                  </tr>
-                              </thead>
-                               <tbody>
-                               	<c:if test="${commentList eq null || fn:length(commentList) == 0 }">
-                               		<h3>등록된 코멘트가 없습니다. </h3>
-                               	</c:if>
-                               	<c:forEach var="comment" items="${commentList }">
-                                   <tr>
-                                       <td>${comment.suggestion }</td>
-                                   </tr>
-                                 </c:forEach>
-                               </tbody>
-                           </table>
-                          </div>
-                      </div>						
-					</div>
-				</div>
-
 			</div>
 		</div>
 		<!-- end page-wrapper -->

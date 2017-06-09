@@ -88,12 +88,9 @@ public class Review {
 	public Image getMainImage(){
 		if(this.images.size()==0){
 			Image image = new Image();
-			double mainRandom = Math.random();
-			int intMain = (int)(mainRandom*99);
-			image.setFilename("food/food"+intMain+".jpg");
+			image.setFilename("noimagefound.jpg");
 			return image;
 		}
-		System.out.println(this.images.size()+" :" + this.reviewId);
 		return this.images.get(0);
 	}
 
