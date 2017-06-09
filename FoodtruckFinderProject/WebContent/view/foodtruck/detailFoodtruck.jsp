@@ -104,7 +104,7 @@
                 		<span style="float:right"><a href="${ctx }/review/create.do?foodtruckId=${truck.foodtruckId}" class="btn btn-default">+ Add my review</a></span>
                 	</div>
                 	<div class="col-lg-10">
-                		<ul class="timeline">
+                		<ul class="timeline" style="background-color:white;">
                 		
                 		<c:forEach items="${reviewList }" var="review">
                 			<li class="timeline-inverted">
@@ -135,27 +135,26 @@
 									</div>
 								</div>
 								</div>
-								<div class="timeline-panel" style="width:15%; margin-left:5%; height:100%;">
-									<button type="button" class="btn btn-danger">추천하기</button>
-									<button type="button" class="btn btn-danger">신고하기</button>
-									<button type="button" class="btn btn-danger">팔로우</button>
+								
+								<div class="timeline-badge"  style="left:75%;">
+									<i class="fa fa-check"></i>
+									<div class="timeline-panel drop-down-btn">
+                       					<button id="recommandBtn_${review.reviewId }" type="button" class="btn btn-success btn-circle btn-lg" style="
+	margin:5px;" onclick="recReview('${review.reviewId}');">
+											<i class="fa fa-thumbs-up"></i></button>&nbsp;추천하기
+                       					<button id="repportBtn_${review.reviewId }" type="button" class="btn btn-default btn-circle btn-lg" style="
+	margin:5px;" onclick="report('${review.reviewId}');'">
+											<i class="fa fa-warning"></i></button>&nbsp;신고하기
+                       					<button id="FollowBtn_${review.reviewId }" type="button" class="btn btn-danger btn-circle btn-lg" style="
+	margin:5px;" onclick="follow('${review.reviewId}');">
+											<i class="fa fa-heart"></i></button>&nbsp;팔로우
+									</div>									
 								</div>
-                			</li>
- 
-		             <!--   		<span><font class="h3"><a href="${ctx }/review/list/member.do?memberId=${Review.writer.memberId}">${Review.writer.memberId}</a></font></span>
-		                		<span style="float:right"><input type="button" value="follow" class="btn btn-result"> <input type="button" value="!" class="btn btn-result" data-toggle="modal" data-target="#myModal${Review.reviewId }"></span><br>
-			                		<c:forEach items="${Review.images }" var = "image">
-			                			<img src="${ctx }/resources/img/reviewImg/${image.filename}" width="150px" height="150px">
-			                		</c:forEach><br><br>
-		                		<font size="4px">
-		                		<span>점수 : ${Review.score } <button style="border:0;background-color:white" onClick="recReview('${Review.reviewId}')"><i class="fa fa-thumbs-up" id="rec" ></i></button>: 
-		                		<input type="text" id="rec${Review.reviewId}" value="${Review.recommand }" style="border: 0px;" size=1 readonly></span>
-		                		<span style="float:right">${Review.writeDate }</span><br>
-		                		${Review.contents }	
-		                		</font> --> 
+
+                			</li> 
 		                		
 		                		<!-- Modal -->
-								  <div class="modal fade" id="myModal${Review.reviewId }" role="dialog">
+								  <div class="modal fade" id="myModal${review.reviewId }" role="dialog">
 								    <div class="modal-dialog">
 								      <!-- Modal content-->
 								      <div class="modal-content">
@@ -165,16 +164,16 @@
 								        </div>
 								        
 								        <div class="modal-body">
-								           	<h4>리뷰 내용 : ${Review.contents }</h4>
-								          <input type="radio" name = "reason${Review.reviewId }" value="욕설" onClick="untype()"> 욕설<br>
-								          <input type="radio" name = "reason${Review.reviewId }" value="음란" onClick="untype()"> 음란<br>
-								          <input type="radio" name = "reason${Review.reviewId }" value="광고" onClick="untype()"> 광고<br>
-								          <input type="radio" name = "reason${Review.reviewId }" value="부적절한 리뷰" onClick="untype()"> 부적절한 리뷰<br>
-								          <input type="radio" name = "reason${Review.reviewId }" value="direct" onClick="availableType()" > 직접 적겠습니다.<br>
-								          <input type="text" class="form-control" placeholder="신고 사유를 적어주세요" id="reason${Review.reviewId}" readonly disabled name="reasonContents">
+								           	<h4>리뷰 내용 : ${review.contents }</h4>
+								          <input type="radio" name = "reason${review.reviewId }" value="욕설" onClick="untype()"> 욕설<br>
+								          <input type="radio" name = "reason${review.reviewId }" value="음란" onClick="untype()"> 음란<br>
+								          <input type="radio" name = "reason${review.reviewId }" value="광고" onClick="untype()"> 광고<br>
+								          <input type="radio" name = "reason${review.reviewId }" value="부적절한 리뷰" onClick="untype()"> 부적절한 리뷰<br>
+								          <input type="radio" name = "reason${review.reviewId }" value="direct" onClick="availableType()" > 직접 적겠습니다.<br>
+								          <input type="text" class="form-control" placeholder="신고 사유를 적어주세요" id="reason${review.reviewId}" readonly disabled name="reasonContents">
 								        </div>
 								        <div class="modal-footer">
-								          <input type="button" class="btn btn-default" data-dismiss="modal" value="신고" onClick="report('${Review.reviewId}')">
+								          <input type="button" class="btn btn-default" data-dismiss="modal" value="신고" onClick="report('${review.reviewId}')">
 								          <input type="button" class="btn btn-default" data-dismiss="modal" value="신고 취소">
 								        </div>
 								      </div>
