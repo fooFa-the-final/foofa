@@ -38,7 +38,7 @@
                 <div class="col-md-10 col-md-offset-1" style="height:300px; background-color:#FFFFFF">
                     <span>
                             <a class="navbar-brand" href="#" style="margin-top:10px; margin-left:20px">
-                                <img src="${ctx }/resources/img/truck/${truck.foodtruckImg}" style="height:250px; width:250px"/>
+                                <img src="${ctx }/resources/img/food/${truck.foodtruckImg}" style="height:250px; width:250px"/>
                             </a>
                             <div class="user-info">
                                 <h1>${truck.foodtruckName }</h1>
@@ -115,7 +115,7 @@
                 			<li class="timeline-inverted">
                					<div class="panel panel-primary text-left"  style="height:327px; width:80%; display:inline-block;">
                 				<div class="review-heading padding-10" style="height: 85px;">
-                					<img class="somenail" src="${ctx }/resources/img/member/${review.writer.profileImg }"/>
+                					<img class="somenail" src="${ctx }/resources/img/food/${review.writer.profileImg }"/>
                 					<div style="float:left; margin-left:20px;">
 									<ul class="list-unstyled">
 										<li><a href="${ctx }/review/list/member.do?memberId=${review.writer.memberId }">${review.writer.memberId }</a></li>
