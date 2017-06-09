@@ -20,6 +20,8 @@
     <link href="${ctx }/resources/plugins/pace/pace-theme-big-counter.css" rel="stylesheet" />
     <link href="${ctx }/resources/css/style.css" rel="stylesheet" />
     <link href="${ctx }/resources/css/main-style.css" rel="stylesheet" />
+    <!-- Page Level CSS -->
+    <link href="${ctx }/resources/plugins/timeline/timeline.css" rel="stylesheet">
 </head>
 
 <body>
@@ -34,10 +36,10 @@
                 <div class="col-md-10 col-md-offset-1" style="height:300px; background-color:#FFFFFF">
                     <span>
                             <a class="navbar-brand" href="#" style="margin-top:10px; margin-left:20px">
-                                <img src="../../resources/img/waikiki.jpg" style="height:250px; width:250px"/>
+                                <img src="${ctx }/resources/img/truck/${truck.foodtruckImg}" style="height:250px; width:250px"/>
                             </a>
                             <div class="user-info">
-                                <h1>${truck.foodtruckName }</h1><br>
+                                <h1>${truck.foodtruckName }</h1>
                                 <h5>${truck.category1 }</h5>
                                 <h5>${truck.spot }</h5>
                                 <h5><span id="favoriteCount">${truck.favoriteCount }</span>이 해당 푸드트럭을 단골로 등록했습니다.</h5>
@@ -97,13 +99,50 @@
 	                		
 	                	</div>
                 	</div>
-                	<div class="col-md-12" style="margin-top:30px; margin-bottom:20px;display:inline-block">
-                		<div class="col-md-7" style="margin-top:20px">
+                	<div class="col-lg-8" style="margin-top:30px; margin-bottom:20px;display:inline-block">
                 		<font size="6">Reviews</font>
                 		<span style="float:right"><a href="${ctx }/review/create.do?foodtruckId=${truck.foodtruckId}" class="btn btn-default">+ Add my review</a></span>
-                		<c:forEach items="${reviewList }" var="Review">
-	                		<div class = "col-md-offset-1 col-md-11" style="margin-top:50px">
-		                		<span><font class="h3"><a href="${ctx }/review/list/member.do?memberId=${Review.writer.memberId}">${Review.writer.memberId}</a></font></span>
+                	</div>
+                	<div class="col-lg-10">
+                		<ul class="timeline">
+                		
+                		<c:forEach items="${reviewList }" var="review">
+                			<li class="timeline-inverted">
+               					<div class="panel panel-primary text-left"  style="height:327px; width:80%; display:inline-block;">
+                				<div class="review-heading padding-10" style="height: 85px;">
+                					<img class="somenail" src="${ctx }/resources/img/member/${review.writer.profileImg }"/>
+                					<div style="float:left; margin-left:20px;">
+									<ul class="list-unstyled">
+										<li><a href="${ctx }/review/list/member.do?memberId=${review.writer.memberId }">${review.writer.memberId }</a></li>
+										<li> <span class="sub-li-recommand"><i class="fa fa-thumbs-up fa-1x"></i>${review.recommand } </span>
+											 <span class="sub-li-follow"><i class="fa fa-twitter fa-1x"></i>${review.writer.followCount } </span>
+										</li>
+									</ul>
+									</div>
+								</div>
+	                			<div class ="pannel-body">
+									<div style="float:left; width:180px">
+										<img id="${review.reviewId}" src="${ctx }/resources/img/food/${review.mainImage.filename }" style="width: 160px; height:160px; margin:10px"/>
+										<div class="somenail-list">
+											<c:forEach var="image" varStatus="imageNo" items="${review.images }">
+												<img src="${ctx }/resources/img/food/${image.filename}" onclick="previewImage(this.src, '${review.reviewId}');"/>
+											</c:forEach>
+										</div>
+									</div>	
+	                				<div style="display:block; float:left; margin:10px;">
+										<span class="starRating" style="text-align:left;"><span style="width: ${review.score *20}%">${review.score }점</span></span> ${review.writeDate}
+										<p class="reviewContent">${review.contents }</p>
+									</div>
+								</div>
+								</div>
+								<div class="timeline-panel" style="width:15%; margin-left:5%; height:100%;">
+									<button type="button" class="btn btn-danger">추천하기</button>
+									<button type="button" class="btn btn-danger">신고하기</button>
+									<button type="button" class="btn btn-danger">팔로우</button>
+								</div>
+                			</li>
+ 
+		             <!--   		<span><font class="h3"><a href="${ctx }/review/list/member.do?memberId=${Review.writer.memberId}">${Review.writer.memberId}</a></font></span>
 		                		<span style="float:right"><input type="button" value="follow" class="btn btn-result"> <input type="button" value="!" class="btn btn-result" data-toggle="modal" data-target="#myModal${Review.reviewId }"></span><br>
 			                		<c:forEach items="${Review.images }" var = "image">
 			                			<img src="${ctx }/resources/img/reviewImg/${image.filename}" width="150px" height="150px">
@@ -113,11 +152,11 @@
 		                		<input type="text" id="rec${Review.reviewId}" value="${Review.recommand }" style="border: 0px;" size=1 readonly></span>
 		                		<span style="float:right">${Review.writeDate }</span><br>
 		                		${Review.contents }	
-		                		</font>
+		                		</font> --> 
+		                		
 		                		<!-- Modal -->
 								  <div class="modal fade" id="myModal${Review.reviewId }" role="dialog">
 								    <div class="modal-dialog">
-								    
 								      <!-- Modal content-->
 								      <div class="modal-content">
 								        <div class="modal-header">
@@ -139,15 +178,13 @@
 								          <input type="button" class="btn btn-default" data-dismiss="modal" value="신고 취소">
 								        </div>
 								      </div>
-								      
 								    </div>
 								  </div>
-	                		</div>
+		                		<!-- End Modal -->
                 		</c:forEach>
-                	</div>
+                		</ul>
                 </div>
             </div>
-			
         </div>
         <!-- end page-wrapper -->
        </div>
@@ -173,13 +210,8 @@
 			});
 			
 			markers.push(marker);
-		    console.log(position + "length : " +markers.length);
 		}
 	 	$(document).ready(function(){
-	 		favoriteCount("${truck.foodtruckId}");
-	 		favoriteExist("${truck.foodtruckId}");
-	 		
- 	 		
 	 		naver.maps.Service.geocode({
 	 			address: "${truck.location}"
 	 		}, function(status, response){
@@ -203,6 +235,12 @@
 		 		
 	 		}
 	 		)   
+
+	 		favoriteCount("${truck.foodtruckId}");
+	 		if("${loginUserId}" != ''){
+	 			console.log("gma");
+	 			favoriteExist("${truck.foodtruckId}");
+	 		}
 	 	});
 	 	var recReview = function(reviewId){
 	 		
