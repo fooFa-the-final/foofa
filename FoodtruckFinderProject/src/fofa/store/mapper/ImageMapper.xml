@@ -18,7 +18,7 @@
 	
 	<update id="updateImage" parameterType="Image">
 		UPDATE photo_tb
-		SET review_id = #{categoryId}, file_name=#{filename}
+		SET file_name=#{filename}
 		WHERE photo_id = #{imageId}	
 	</update>
 	

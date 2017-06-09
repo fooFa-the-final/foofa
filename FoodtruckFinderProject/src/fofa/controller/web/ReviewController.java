@@ -192,15 +192,57 @@ public class ReviewController {
 	public String modifyReviewForm(String reviewId, Model model){
 		Review review = reviewService.findById(reviewId);
 		model.addAttribute("review", review);
+		model.addAttribute("img1", review.getImages().get(0).getFilename());
+		model.addAttribute("img2", review.getImages().get(1).getFilename());
 		return "/view/user/registerReview.jsp";
 	}
 	
 	@RequestMapping(value="/review/modify.do", method=RequestMethod.POST)
-	public String modifyReview(Review review, MultipartHttpServletRequest req, HttpSession session){
+	public String modifyReview(Review review2, MultipartHttpServletRequest req, HttpSession session){
+		Review review = reviewService.findById(req.getParameter("reviewId"));
+		review.setContents(req.getParameter("contents"));
+		review.setScore(Integer.parseInt(req.getParameter("score")));
 		System.out.println(review.toString());
-		review.setReviewId(req.getParameter("reviewId"));
 		String memberId = (String)session.getAttribute("loginUserId");
-		reviewService.modify(review);
+		
+		MultipartHttpServletRequest multipartHttpServletRequest = (MultipartHttpServletRequest)req;
+	    Iterator<String> iterator = multipartHttpServletRequest.getFileNames();
+	    MultipartFile multipartFile = null;
+	    List<Image> images = new ArrayList<>();
+	    String root = req.getSession().getServletContext().getRealPath("\\");
+        String path = root+"\\resources\\img\\reviewImg\\";
+        String newFileName = "";
+        File dir = new File(path);
+        if(!dir.isDirectory()){
+            dir.mkdir();
+        }
+        int count = 0;
+	    while(iterator.hasNext()){
+	        multipartFile = multipartHttpServletRequest.getFile(iterator.next());
+	        if(multipartFile.isEmpty() == false){
+	        	Image image = new Image();
+	        	for(Image i : review.getImages()){
+	        		System.out.println(i.toString());
+	        	}
+	        	image.setImageId(review.getImages().get(count).getImageId());
+	        	String fileName = multipartFile.getOriginalFilename();
+	        	newFileName = System.currentTimeMillis()+"."
+	                    +fileName.substring(fileName.lastIndexOf(".")+1);
+	        	image.setFilename(newFileName);
+	        	images.add(image);
+	            /*System.out.println("name : "+multipartFile.getName());
+	            System.out.println("filename : "+multipartFile.getOriginalFilename());
+	            System.out.println("size : "+multipartFile.getSize());*/
+	        	count++;
+	        	try {
+	                multipartFile.transferTo(new File(path+newFileName));
+	            } catch (Exception e) {
+	                e.printStackTrace();
+	            }
+	        }
+	    }
+	    review.setImages(images);
+	    reviewService.modify(review);
 		return "redirect:list/member.do?memberId="+memberId;
 	}
 	
