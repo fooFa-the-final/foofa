@@ -79,7 +79,7 @@ public class ReviewController {
 	}
 	
 	@RequestMapping("/review/list/truck.do")
-	public String searchByFoodtruckId(String foodtruckId, Model model){
+	public String searchByFoodtruckId(String foodtruckId, Model model, HttpSession session){
 		Foodtruck truck = truckService.findById(foodtruckId);
 		List<Review> reviewList = reviewService.findByTruckId(foodtruckId);
 		String[] operationTime = truck.getOperationTime().split("/");
@@ -89,6 +89,7 @@ public class ReviewController {
 		model.addAttribute("endTime", endTime);
 		model.addAttribute("truck", truck);
 		model.addAttribute("reviewList", reviewList);
+		model.addAttribute("memberId", (String)session.getAttribute("loginUserId"));
 		System.out.println(truck.getFoodtruckId());
 		return "../../view/foodtruck/detailFoodtruck.jsp";
 	}
@@ -108,7 +109,9 @@ public class ReviewController {
 		Foodtruck truck = truckService.findById(foodtruckId);
 		review.setFoodtruck(truck);
 		HttpSession session = req.getSession();
+//		System.out.println((String)session.getAttribute("loginUserId"));
 		Member member = memberService.findById((String)session.getAttribute("loginUserId"));
+		System.out.println(member.toString());
 		review.setWriter(member);
 		MultipartHttpServletRequest multipartHttpServletRequest = (MultipartHttpServletRequest)req;
 	    Iterator<String> iterator = multipartHttpServletRequest.getFileNames();

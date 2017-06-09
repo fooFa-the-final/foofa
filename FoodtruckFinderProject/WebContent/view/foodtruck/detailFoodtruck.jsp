@@ -20,6 +20,8 @@
     <link href="${ctx }/resources/plugins/pace/pace-theme-big-counter.css" rel="stylesheet" />
     <link href="${ctx }/resources/css/style.css" rel="stylesheet" />
     <link href="${ctx }/resources/css/main-style.css" rel="stylesheet" />
+    <script src="${ctx}/resources/plugins/jquery-1.10.2.js"></script>
+	
     <!-- Page Level CSS -->
     <link href="${ctx }/resources/plugins/timeline/timeline.css" rel="stylesheet">
 </head>
@@ -48,7 +50,9 @@
                     </span>
                     <span style="float:right; margin-right:50px; margin-top: 30px">
                         <button id="favoriteBtn" type="button" class="btn btn-default btn-circle btn-lg" onclick="favorite('${truck.foodtruckId }');"><i class="fa fa-heart"></i></button>
-                        <a href="${ctx }/review/create.do?foodtruckId=${truck.foodtruckId}"><button type="button" class="btn btn-danger">리뷰 작성</button></a>
+                        <a href="#" class="createReview">
+                        	<button type="button" class="btn btn-danger" onclick="loginCheck()">리뷰 작성</button>
+                       	</a>
                     </span>        
                 </div>
                 <!--End Page Header -->
@@ -101,7 +105,8 @@
                 	</div>
                 	<div class="col-lg-8" style="margin-top:30px; margin-bottom:20px;display:inline-block">
                 		<font size="6">Reviews</font>
-                		<span style="float:right"><a href="${ctx }/review/create.do?foodtruckId=${truck.foodtruckId}" class="btn btn-default">+ Add my review</a></span>
+                		<!-- <span style="float:right"><a href="${ctx }/review/create.do?foodtruckId=${truck.foodtruckId}" class="btn btn-default">+ Add my review</a></span> -->
+                		&nbsp;<span style="float:right"><a href="#" class="btn btn-default createReview">+ Add my review</a></span>
                 	</div>
                 	<div class="col-lg-10">
                 		<ul class="timeline" style="background-color:white;">
@@ -151,7 +156,8 @@
 									</div>									
 								</div>
 
-                			</li> 
+                			</li>
+
 		                		
 		                		<!-- Modal -->
 								  <div class="modal fade" id="myModal${review.reviewId }" role="dialog">
@@ -293,7 +299,19 @@
 	 		 $("input[name=reasonContents]").attr("readonly",false).attr("disabled", false);
 	 		 //$("input[name=reasonContents]").attr("disabled",true);
 	 	}
-
+		
+	 	var memberId = "${memberId}";
+		if(memberId){
+			$(".createReview").attr("href", "${ctx }/review/create.do?foodtruckId=${truck.foodtruckId}");
+		} else{
+			$(".createReview").attr("href", "${ctx }/login.do");
+		}
+		
+		var loginCheck = function(){
+			if(!memberId){
+				alert("로그인이 안되어 있어 로그인 화면으로 이동합니다.");
+			}
+		}
 	 </script>
 </body>
 </html>
