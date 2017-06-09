@@ -29,7 +29,9 @@
 			$('input:radio[name=score]:input[value='+${review.score}+']').attr("checked", true);
 			$('#contents').val("${review.contents}");
 			$('#submit').attr("action", "${ctx }/review/modify.do");
-			$("#isSurvey").attr("disabled", true); 
+			$("#isSurvey").attr("disabled", true);
+			$("#img1").attr("src", "${ctx }/resources/img/reviewImg/${img1}");
+			$("#img2").attr("src", "${ctx }/resources/img/reviewImg/${img2}");
 		</c:when>
 		<c:otherwise>
 			console.log("등록");
@@ -110,8 +112,16 @@
 		
 			<div class="col-lg-3">
 				<div class="blog-stripe">
+				<c:choose>
+					<c:when test="${review eq 'null'}">
 					<img width="200px" height="200px"
 						src="${ctx }/resources/img/food/${truck.foodtruckImg}">
+					</c:when>
+					<c:otherwise>
+					<img width="200px" height="200px"
+						src="${ctx }/resources/img/food/${review.foodtruck.foodtruckImg}">
+					</c:otherwise>
+				</c:choose>
 				</div>
 			</div>
 			<div class="col-lg-6">
@@ -264,7 +274,7 @@
 		          	<input type="file" id = "file2" name = "file2" onchange="fileinfo(this)">
 		        </div>
 		        <div class="modal-footer">
-		        <input type="button" class="btn btn-default" data-dismiss="modal" value="업로드" onclick="imgUpload()">
+		        <input type="button" class="btn btn-default" data-dismiss="modal" value="업로드">
 		          <input type="button" class="btn btn-default" data-dismiss="modal" value="닫기">
 		        </div>
 		      </div>
