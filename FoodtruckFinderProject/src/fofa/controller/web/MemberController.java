@@ -101,8 +101,8 @@ public class MemberController {
     public String fileUp(MultipartHttpServletRequest request) {
          String img= null;
         // 저장 경로 설정
-        String root = request.getSession().getServletContext().getRealPath("/");
-        String path = root+"resources\\upload\\";
+        String root = request.getSession().getServletContext().getRealPath("\\");
+        String path = root+"\\resources\\upload\\";
         String newFileName = ""; // 업로드 되는 파일명
          
         File dir = new File(path);
@@ -120,8 +120,12 @@ public class MemberController {
             newFileName = System.currentTimeMillis()+"."
                     +fileName.substring(fileName.lastIndexOf(".")+1);
             Member member = service.findById((String)(request.getSession().getAttribute("loginUserId")));
+            System.out.println(member.toString());
             member.setProfileImg(newFileName);
-            service.modifyImg(member);
+            boolean t = service.modifyImg(member);
+            System.out.println(t);
+            member = service.findById((String)(request.getSession().getAttribute("loginUserId")));
+            
             System.out.println(member.getProfileImg());
             
             try {

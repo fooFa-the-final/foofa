@@ -8,13 +8,14 @@ import org.junit.Test;
 
 import fofa.domain.Member;
 import fofa.domain.Report;
+import fofa.service.MemberService;
+import fofa.service.logic.MemberServiceLogic;
 import fofa.store.MemberStore;
 import fofa.store.logic.MemberStoreLogic;
 
 public class MemberStoreLogicTest {
 	
 private MemberStore store = new MemberStoreLogic();
-
 //@Test
 //public void testMemberInsert(){
 //	Member member = new Member();
@@ -42,5 +43,15 @@ private MemberStore store = new MemberStoreLogic();
 //	System.out.println(select);
 //}
 
+  @Test
+  public void imgTest(){
+	  MemberService service = new MemberServiceLogic();
+	  Member m = store.select("sana");
+	  System.out.println("update 전" + m.toString());
+	  m.setProfileImg("profile1.jpg");
+	  System.out.println("update 후 " +m.toString());;
+	  System.out.println("update 후 " +service.modifyImg(m));
+	  assertTrue(service.modifyImg(m));
+  }
 
 }
