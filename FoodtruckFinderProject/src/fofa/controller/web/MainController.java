@@ -2,6 +2,7 @@ package fofa.controller.web;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -40,7 +41,6 @@ public class MainController {
 
 	@RequestMapping("index.do")
 	public String showMain(Model model){
-		System.out.println(System.currentTimeMillis());
 		List<Review> allReview = reviewService.findByRecommand();
 		List<Review> reviews = new ArrayList<>();
 		reviews.add(allReview.get(1));
@@ -49,33 +49,42 @@ public class MainController {
 		model.addAttribute("reviews", reviews);
 		model.addAttribute("hotReview", allReview.get(0));
 
-		System.out.println(System.currentTimeMillis());
-		double mainRandom = Math.random();
-		int intMain = (int)(mainRandom*allReview.size());
-		Review mainReview = reviewService.findById(allReview.get(intMain).getReviewId());
-		model.addAttribute("mainFoodImg",mainReview.getImages().get(0).getFilename());
+		Review mainReview;
+		while(true){
+			double mainRandom = Math.random();
+			int intMain = (int)(mainRandom*allReview.size());
+			mainReview = reviewService.findById(allReview.get(intMain).getReviewId());		
+			
+			if(mainReview.getImages().size()>=1){
+				break;
+			}
+		}
+
+		model.addAttribute("mainFoodImg",mainReview.getImages().get(0).getFilename());	
 		model.addAttribute("mainMember", memberService.findById(mainReview.getWriter().getMemberId()));
 
-		System.out.println(System.currentTimeMillis());
 		List<Advertise> allAdv = advertiseService.findNowAd();
 		List<Foodtruck> adTrucks = new ArrayList<>();
 
-		System.out.println(System.currentTimeMillis());
 		for(int i=0; i<9; i++){
 			String sellerId = allAdv.get(i).getSellerId();
 			adTrucks.add(foodtruckService.findBySeller(sellerId));
 		}
 		model.addAttribute("adTrucks", adTrucks);
-
-		System.out.println(System.currentTimeMillis());
-//		List<Foodtruck> allTrucks = foodtruckService.findByLoc("가산동");
-//		List<Foodtruck> nearTrucks = new ArrayList<>();
-//		for(int i=0; i<3; i++){
-//			double randomValue = Math.random();
-//			int intValue = (int)(randomValue*allTrucks.size());
-//			nearTrucks.add(allTrucks.get(intValue));
-//		}
-//		model.addAttribute("nearTrucks", nearTrucks);		
+		
+		List<HashMap<String, String>> allTrucks = foodtruckService.findByLoc(1, "가산동");
+		List<Foodtruck> nearTrucks = new ArrayList<>();
+		for(int i=0; i<9; i++){
+			Foodtruck t = new Foodtruck();
+			t.setFoodtruckId(allTrucks.get(i).get("foodtruckId"));
+			t.setFoodtruckName(allTrucks.get(i).get("foodtruckName"));
+			t.setFoodtruckImg(allTrucks.get(i).get("foodtruckImg"));
+			t.setCategory1(allTrucks.get(i).get("category1"));
+			t.setSpot(allTrucks.get(i).get("spot"));
+			t.setLocation(allTrucks.get(i).get("location"));
+			nearTrucks.add(t);
+		}
+		model.addAttribute("nearTrucks", nearTrucks);
 		return "view/index.jsp";
 	}
 
