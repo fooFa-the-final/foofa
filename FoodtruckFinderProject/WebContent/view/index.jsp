@@ -69,7 +69,7 @@ a.link {font-size: 0.7em; color:blue;}
 			</li>
 			</ul>
 			<div id="col-lg-12" class="text-center">
-					<img id="mainMemberImg"  class="main_img_person" src="${ctx}/resources/img/member/${mainMember.profileImg}" onclick="location.href='${ctx}/review/list/member.do?memberId=${mainMember.memberId}'" />
+					<img id="mainMemberImg"  class="main_img_person" src="${ctx}/resources/upload/${mainMember.profileImg}" onclick="location.href='${ctx}/review/list/member.do?memberId=${mainMember.memberId}'" />
 			</div>
 		<!-- navbar-top-links -->
 	</nav>
@@ -139,7 +139,7 @@ a.link {font-size: 0.7em; color:blue;}
 						<div class="col-lg-9">
 								<div class="panel panel-primary text-left" style="height:327px">
 									<div class="review-heading padding-10" style="height: 90px;">
-										<img class="somenail" src="${ctx }/resources/img/member/${hotReview.writer.profileImg }"/>
+										<img class="somenail" src="${ctx }/resources/upload/${hotReview.writer.profileImg }"/>
 										<div style="float:left; margin-left:20px;">
 											<ul class="list-unstyled">
 												<li><a href="${ctx }/review/list/member.do?memberId=${hotReview.writer.memberId }">${hotReview.writer.memberId }</a></li>
