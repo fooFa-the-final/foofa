@@ -115,7 +115,7 @@
                 			<li class="timeline-inverted">
                					<div class="panel panel-primary text-left"  style="height:327px; width:80%; display:inline-block;">
                 				<div class="review-heading padding-10" style="height: 85px;">
-                					<img class="somenail" src="${ctx }/resources/img/food/${review.writer.profileImg }"/>
+                					<img class="somenail" src="${ctx }/resources/upload/${review.writer.profileImg }"/>
                 					<div style="float:left; margin-left:20px;">
 									<ul class="list-unstyled">
 										<li><a href="${ctx }/review/list/member.do?memberId=${review.writer.memberId }">${review.writer.memberId }</a></li>
@@ -127,10 +127,10 @@
 								</div>
 	                			<div class ="pannel-body">
 									<div style="float:left; width:180px">
-										<img id="${review.reviewId}" src="${ctx }/resources/img/food/${review.mainImage.filename }" style="width: 160px; height:160px; margin:10px"/>
+										<img id="${review.reviewId}" src="${ctx }/resources/img/reviewImg/${review.mainImage.filename }" style="width: 160px; height:160px; margin:10px"/>
 										<div class="somenail-list">
 											<c:forEach var="image" varStatus="imageNo" items="${review.images }">
-												<img src="${ctx }/resources/img/food/${image.filename}" onclick="previewImage(this.src, '${review.reviewId}');"/>
+												<img src="${ctx }/resources/img/reviewImg/${image.filename}" onclick="previewImage(this.src, '${review.reviewId}');"/>
 											</c:forEach>
 										</div>
 									</div>	
@@ -148,7 +148,7 @@
 	margin:5px;" onclick="recReview('${review.reviewId}');">
 											<i class="fa fa-thumbs-up"></i></button>&nbsp;추천하기
                        					<button id="repportBtn_${review.reviewId }" type="button" class="btn btn-default btn-circle btn-lg" style="
-	margin:5px;" onclick="report('${review.reviewId}');'">
+	margin:5px;" data-toggle="modal" data-target="#myModal${review.reviewId }">
 											<i class="fa fa-warning"></i></button>&nbsp;신고하기
                        					<button id="FollowBtn_${review.reviewId }" type="button" class="btn btn-danger btn-circle btn-lg" style="
 	margin:5px;" onclick="follow('${review.reviewId}');">

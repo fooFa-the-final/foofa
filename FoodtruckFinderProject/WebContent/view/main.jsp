@@ -133,10 +133,10 @@
 											</p>
 										</div>
 										<div style="float:left; width:180px">
-											<img id="${review.reviewId}" src="${ctx }/resources/img/food/${review.mainImage.filename }" style="width: 160px; height:160px; margin:10px"/>
+											<img id="${review.reviewId}" src="${ctx }/resources/img/reviewImg/${review.mainImage.filename }" style="width: 160px; height:160px; margin:10px"/>
 											<div class="somenail-list">
 												<c:forEach var="image" varStatus="imageNo" items="${review.images }">
-													<img src="${ctx }/resources/img/food/${image.filename}" onclick="previewImage(this.src, '${review.reviewId}');"/>
+													<img src="${ctx }/resources/img/reviewImg/${image.filename}" onclick="previewImage(this.src, '${review.reviewId}');"/>
 												</c:forEach>
 											</div>
 										</div>							
