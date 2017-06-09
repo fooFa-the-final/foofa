@@ -115,7 +115,7 @@
 							<c:forEach var="review" varStatus="reviewNo" items="${reviews }">
 								<div class="panel panel-primary text-left">
 									<div class="review-heading padding-10">
-										<img class="somenail" src="${ctx }/resources/img/${review.writer.profileImg }"/>
+										<img class="somenail" src="${ctx }/resources/img/member/${review.writer.profileImg }"/>
 										<div style="float:left; width:80%;">
 											<ul>
 												<li><a href="${ctx }/review/list/member.do?memberId=${review.writer.memberId }">${review.writer.memberId }</a></li>

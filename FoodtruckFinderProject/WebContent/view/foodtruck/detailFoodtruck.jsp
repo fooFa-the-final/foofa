@@ -20,6 +20,8 @@
     <link href="${ctx }/resources/plugins/pace/pace-theme-big-counter.css" rel="stylesheet" />
     <link href="${ctx }/resources/css/style.css" rel="stylesheet" />
     <link href="${ctx }/resources/css/main-style.css" rel="stylesheet" />
+    <script src="${ctx}/resources/plugins/jquery-1.10.2.js"></script>
+	
 </head>
 
 <body>
@@ -46,7 +48,9 @@
                     </span>
                     <span style="float:right; margin-right:50px; margin-top: 30px">
                         <button id="favoriteBtn" type="button" class="btn btn-default btn-circle btn-lg" onclick="favorite('${truck.foodtruckId }');"><i class="fa fa-heart"></i></button>
-                        <a href="${ctx }/review/create.do?foodtruckId=${truck.foodtruckId}"><button type="button" class="btn btn-danger">리뷰 작성</button></a>
+                        <a href="#" id="createReview">
+                        	<button type="button" class="btn btn-danger" onclick="loginCheck()">리뷰 작성</button>
+                       	</a>
                     </span>        
                 </div>
                 <!--End Page Header -->
@@ -100,7 +104,7 @@
                 	<div class="col-md-12" style="margin-top:30px; margin-bottom:20px;display:inline-block">
                 		<div class="col-md-7" style="margin-top:20px">
                 		<font size="6">Reviews</font>
-                		<span style="float:right"><a href="${ctx }/review/create.do?foodtruckId=${truck.foodtruckId}" class="btn btn-default">+ Add my review</a></span>
+                		<!-- <span style="float:right"><a href="${ctx }/review/create.do?foodtruckId=${truck.foodtruckId}" class="btn btn-default">+ Add my review</a></span> -->
                 		<c:forEach items="${reviewList }" var="Review">
 	                		<div class = "col-md-offset-1 col-md-11" style="margin-top:50px">
 		                		<span><font class="h3"><a href="${ctx }/review/list/member.do?memberId=${Review.writer.memberId}">${Review.writer.memberId}</a></font></span>
@@ -256,7 +260,19 @@
 	 		 $("input[name=reasonContents]").attr("readonly",false).attr("disabled", false);
 	 		 //$("input[name=reasonContents]").attr("disabled",true);
 	 	}
-
+		
+	 	var memberId = "${memberId}";
+		if(memberId){
+			$("#createReview").attr("href", "${ctx }/review/create.do?foodtruckId=${truck.foodtruckId}");
+		} else{
+			$("#createReview").attr("href", "${ctx }/login.do");
+		}
+		
+		var loginCheck = function(){
+			if(!memberId){
+				alert("로그인이 안되어 있어 로그인 화면으로 이동합니다.");
+			}
+		}
 	 </script>
 </body>
 </html>
