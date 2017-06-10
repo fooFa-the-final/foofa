@@ -26,7 +26,8 @@
 <body class="body-Login-back">
  <!--  wrapper -->
     <div id="wrapper">
-		<%@ include file="../header.jspf"%>
+
+		<%@ include file="../include/header.jspf"%>
 	</div>
 	
  <!--  end wrapper -->

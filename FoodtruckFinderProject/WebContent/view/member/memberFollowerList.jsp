@@ -27,7 +27,8 @@
 </head>
 <body>
    <div id="wrapper">
-		<%@ include file="../header.jspf"%>
+
+		<%@ include file="../include/header.jspf"%>
 		<%@ include file="../include/memberLeft.jspf"%>
 		<div id="page-wrapper">
 				<div class="row">
@@ -82,7 +83,9 @@
 	<script>
         $(document).ready(function () {
 			$('#side-follow').attr('class', 'selected');
-			followExist('${member.memberId}');
+			if ('${loginUserId}' !=''){
+				followExist('${member.memberId}');
+			}
         });
 		
 		function fileinfo(input){

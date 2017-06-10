@@ -27,7 +27,7 @@
 <body>
 	<!--  wrapper -->
 	<div id="wrapper">
-		<%@ include file="../header.jspf"%>
+		<%@ include file="../include/header.jspf"%>
 		<%@ include file="../include/sellerLeft.jspf"%>
 		<!--  page-wrapper -->
 		<div id="page-wrapper">
@@ -103,7 +103,7 @@
 
 	</div>
 	<!-- end wrapper -->
-
+</div>
 	<!-- Core Scripts - Include with every page -->
 	<script src="${ctx}/resources/plugins/jquery-1.10.2.js"></script>
 	<script src="${ctx}/resources/plugins/bootstrap/bootstrap.min.js"></script>

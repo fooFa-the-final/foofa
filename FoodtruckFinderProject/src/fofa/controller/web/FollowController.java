@@ -65,7 +65,7 @@ public class FollowController {
 		}
 		model.addAttribute("follow", mfollow);
 		
-		return "../view/user/memberFollowerList.jsp";
+		return "../view/member/memberFollowerList.jsp";
 	}
 	@RequestMapping("follow/count.do")
 	@ResponseBody

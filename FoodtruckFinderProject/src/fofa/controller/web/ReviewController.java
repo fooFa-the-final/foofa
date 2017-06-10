@@ -62,7 +62,7 @@ public class ReviewController {
 		model.addAttribute("nowId", (String)session.getAttribute("loginUserId"));
 		List<Review> list = reviewService.findByMemberId(memberId);
 		model.addAttribute("list", list);
-		return "../../view/user/memberReviewList.jsp";
+		return "../../view/member/memberReviewList.jsp";
 	}
 
 	@RequestMapping("/review/list/follow.do")
@@ -75,7 +75,7 @@ public class ReviewController {
 		model.addAttribute("list", list);
 		Member member = memberService.findById(fromId);
 		model.addAttribute("member", member);
-		return "../../view/user/memberNewsfeed.jsp";
+		return "../../view/member/memberNewsfeed.jsp";
 	}
 	
 	@RequestMapping("/review/list/truck.do")

@@ -159,7 +159,7 @@ h2 {
 <body>
 	<div id="wrapper">
 		<!-- navbar top -->
-		<%@ include file="../header.jspf"%>
+		<%@ include file="../include/header.jspf"%>
 
 		<%@ include file="../include/sellerLeft.jspf"%>
 		<div id="page-wrapper">

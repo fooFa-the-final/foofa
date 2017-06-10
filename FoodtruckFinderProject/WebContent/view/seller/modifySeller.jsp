@@ -52,7 +52,8 @@ $(document).ready(function(){
 <body>
 	<!--  wrapper -->
 	<div id="wrapper">
-		<%@ include file="../header.jspf"%>
+
+		<%@ include file="../include/header.jspf"%>
 		<%@ include file="../include/sellerLeft.jspf"%>
 		<!--  page-wrapper -->
 		<div id="page-wrapper">
