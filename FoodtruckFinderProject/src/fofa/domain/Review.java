@@ -1,13 +1,20 @@
 package fofa.domain;
 
 import java.sql.Date;
+
 import java.util.List;
+
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 
 import org.springframework.stereotype.Component;
 
 import fofa.store.RecommandStore;
 import fofa.store.logic.RecommandStoreLogic;
 
+@XmlRootElement(name="review")
+@XmlAccessorType(XmlAccessType.FIELD)
 @Component
 public class Review {
 	private String reviewId;

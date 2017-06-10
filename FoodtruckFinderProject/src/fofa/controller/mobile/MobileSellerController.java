@@ -1,7 +1,5 @@
 package fofa.controller.mobile;
 
-import java.util.ArrayList; 
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -13,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import fofa.domain.Foodtruck;
 import fofa.domain.Seller;
 import fofa.service.FoodtruckService;
+import fofa.service.ReviewService;
 import fofa.service.SellerService;
 
 @Controller
@@ -22,6 +21,8 @@ public class MobileSellerController {
 	private SellerService sellerService;
 	@Autowired
 	private FoodtruckService truckService;
+	@Autowired
+	private ReviewService reviewService;
 	
 	@RequestMapping(value="/mobilelogin.do")
 	public @ResponseBody String sellerLogin(String id, String password) {
@@ -38,16 +39,27 @@ public class MobileSellerController {
 		if(result == false) {
 			return "false";
 		} else {
-			return "redirect:trucklist";
+			return "true";
 		}
 		
 	}	
-	@RequestMapping(value="/trucklist.do")
+	@RequestMapping(value="/trucklist.do", produces="application/xml")
 	public @ResponseBody Foodtruck getMusicToXMl(String id, HttpServletRequest req){
 			Foodtruck truck = new Foodtruck();
 			truck = truckService.findById(id);
 			return truck;
 	}
+
+	@RequestMapping(value = "/mobile/detail.do", produces="application/xml")
+	public @ResponseBody Foodtruck detailTruck(String id){
+		Foodtruck foodtruck = truckService.findBySeller(id);
+		return foodtruck;
+	}
+	
+	@RequestMapping(value ="/mobile/truck/modify.do", produces="application/xml")
+	public @ResponseBody void modifyTruck(Foodtruck foodtruck){
+		truckService.modify(foodtruck);
+	}
+	
 }			
-	
-	
+
