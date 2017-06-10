@@ -8,13 +8,18 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import fofa.domain.Favorite;
 import fofa.domain.Follow;
+import fofa.domain.Foodtruck;
+import fofa.domain.Foodtrucks;
 import fofa.domain.Member;
 import fofa.domain.Members;
 import fofa.domain.Review;
 import fofa.domain.Reviews;
 import fofa.domain.Seller;
+import fofa.service.FavoriteService;
 import fofa.service.FollowService;
+import fofa.service.FoodtruckService;
 import fofa.service.MemberService;
 import fofa.service.ReviewService;
 import fofa.service.SellerService;
@@ -29,6 +34,10 @@ public class MobileMemberController {
 	private ReviewService reviewService;
 	@Autowired
 	private FollowService followService;
+	@Autowired
+	private FavoriteService favoriteService;
+	@Autowired
+	private FoodtruckService truckService;
 	
 	@RequestMapping(value="/login.do")
 	public @ResponseBody String memberLogin(String id, String password) {
@@ -76,5 +85,19 @@ public class MobileMemberController {
 		members.setMembers(member);
 		
 		return members;
+	}
+	
+	@RequestMapping(value="/favorite/list.do", produces="application/xml")
+	public @ResponseBody Foodtrucks searchFavorites(String memberId){
+		List<Favorite> favorite = favoriteService.findMemberId(memberId);
+		List<Foodtruck> foodtruck = new ArrayList<>();
+		for(Favorite f : favorite){
+			foodtruck.add(truckService.findById(f.getFoodtruckId()));
+		}
+		
+		Foodtrucks foodtrucks = new Foodtrucks();
+		foodtrucks.setFoodtrucks(foodtruck);
+		
+		return foodtrucks;
 	}
 }
