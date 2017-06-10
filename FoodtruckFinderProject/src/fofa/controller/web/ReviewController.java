@@ -133,9 +133,9 @@ public class ReviewController {
 	                    +fileName.substring(fileName.lastIndexOf(".")+1);
 	        	image.setFilename(newFileName);
 	        	images.add(image);
-	            /*System.out.println("name : "+multipartFile.getName());
+	            /*System.out.println("name : "+multipartFile.getName());*/
 	            System.out.println("filename : "+multipartFile.getOriginalFilename());
-	            System.out.println("size : "+multipartFile.getSize());*/
+//	            System.out.println("size : "+multipartFile.getSize());
 	        	
 	        	try {
 	                multipartFile.transferTo(new File(path+newFileName));
@@ -192,8 +192,11 @@ public class ReviewController {
 	public String modifyReviewForm(String reviewId, Model model){
 		Review review = reviewService.findById(reviewId);
 		model.addAttribute("review", review);
-		model.addAttribute("img1", review.getImages().get(0).getFilename());
-		model.addAttribute("img2", review.getImages().get(1).getFilename());
+		List<String> list = new ArrayList<>();
+		for(Image i : review.getImages()){
+			list.add(i.getFilename());
+		}
+		model.addAttribute("imglist", list);
 		return "/view/user/registerReview.jsp";
 	}
 	
@@ -202,7 +205,6 @@ public class ReviewController {
 		Review review = reviewService.findById(req.getParameter("reviewId"));
 		review.setContents(req.getParameter("contents"));
 		review.setScore(Integer.parseInt(req.getParameter("score")));
-		System.out.println(review.toString());
 		String memberId = (String)session.getAttribute("loginUserId");
 		
 		MultipartHttpServletRequest multipartHttpServletRequest = (MultipartHttpServletRequest)req;
@@ -221,10 +223,8 @@ public class ReviewController {
 	        multipartFile = multipartHttpServletRequest.getFile(iterator.next());
 	        if(multipartFile.isEmpty() == false){
 	        	Image image = new Image();
-	        	for(Image i : review.getImages()){
-	        		System.out.println(i.toString());
-	        	}
-	        	image.setImageId(review.getImages().get(count).getImageId());
+	        	image.setCategoryId(review.getReviewId());
+	        	//image.setImageId(review.getImages().get(count).getImageId());
 	        	String fileName = multipartFile.getOriginalFilename();
 	        	newFileName = System.currentTimeMillis()+"."
 	                    +fileName.substring(fileName.lastIndexOf(".")+1);
@@ -239,9 +239,15 @@ public class ReviewController {
 	            } catch (Exception e) {
 	                e.printStackTrace();
 	            }
+	        	
+	        }
+	        if(images.size() > 0){
+	        	review.setImages(images);
+	        }
+	        else {
+	        	review.setImages(reviewService.findById(review.getReviewId()).getImages());
 	        }
 	    }
-	    review.setImages(images);
 	    reviewService.modify(review);
 		return "redirect:list/member.do?memberId="+memberId;
 	}

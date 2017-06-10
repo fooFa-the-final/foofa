@@ -30,8 +30,16 @@
 			$('#contents').val("${review.contents}");
 			$('#submit').attr("action", "${ctx }/review/modify.do");
 			$("#isSurvey").attr("disabled", true);
-			$("#img1").attr("src", "${ctx }/resources/img/reviewImg/${img1}");
-			$("#img2").attr("src", "${ctx }/resources/img/reviewImg/${img2}");
+			var count = 0;
+			<c:forEach items="${imglist}" var="filename">
+				count++;
+				var imgname = "#img" + count;
+				var filename = "#file" + count;
+				var filemodifyname = "#filemodify" + count;
+				$(imgname).attr("src", "${ctx}/resources/img/reviewImg/${filename}");
+				$(filemodifyname).val("${filename}");
+				$(imgname).css("display", "");
+			</c:forEach>	
 		</c:when>
 		<c:otherwise>
 			console.log("등록");
@@ -39,8 +47,6 @@
 		
 		</c:otherwise>
 		</c:choose>
-		
-		
 	});
 	var openSurvey = function(){
 		if($("input:checkbox[id='isSurvey']").is(":checked"))
@@ -50,16 +56,32 @@
 	var uploadImage = function(){
 		$('#upload').modal();
 	}
+	
 	var image1;
 	var image2;
+	var flag = true;
 	var fileinfo = function(input){
 		if (input.files && input.files[0]) {
             var reader = new FileReader();
             reader.onload = function (e) {
-            	if(input.id == "file1")
+            	/* if(input.id == "file1")
             		$("#img1").attr("src", e.target.result);
             	else
-            		$("#img2").attr("src", e.target.result);
+            		$("#img2").attr("src", e.target.result); */
+            	var id = input.id;
+				
+            	var imgid = "#img" + id.charAt(id.length -1);
+            	var filemodifyid = "#filemodify" + id.charAt(id.length -1);
+				if(flag == true){
+            		flag = false;
+            		for(var i=2;i<=5;i++){
+            			var imgid2 = "#img" + i;
+            			$(imgid2).attr("src","");
+            			$(imgid2).css("display", "none");;
+            		}
+            	}
+            	console.log(filemodifyid);
+            	$(imgid).attr("src", e.target.result);
             }
             reader.readAsDataURL(input.files[0]);
         }
@@ -75,6 +97,20 @@
 		});
 		$("#uploadImage").submit();
     } */
+    
+    var count = 1;
+    var addImage = function(){
+    	if(count==5){
+    		alert("이미지 업로드는 최대 5장까지 가능합니다.");
+    	}
+    	else{
+		   	count++;
+		   	filename = "#file" + count;
+		   	imgname = "#img" + count;
+		   	$(filename).css("display", "");
+		   	$(imgname).css("display", "");
+    	}
+   	}
 </script>
 </head>
 
@@ -149,9 +185,12 @@
 				</ul>
 			</div>
 			<!-- 「그림」 -->
-			<div class="col-lg-4" style="height:200px;display:inline-block">
+			<div style="height:200px;display:inline-block" id="imgDiv">
 				<img id = "img1" style="width:150px;height:150px;border:0px">
-				<img id = "img2" style="width:150px;height:150px;border:0px">
+				<img id = "img2" style="width:150px;height:150px;border:0px;display:none">
+				<img id = "img3" style="width:150px;height:150px;border:0px;display:none">
+				<img id = "img4" style="width:150px;height:150px;border:0px;display:none">
+				<img id = "img5" style="width:150px;height:150px;border:0px;display:none">
 			</div>
 				<div class="text-right">
 						<input type="button" class="btn btn-primary" data-toggle="modal" data-target="#upload" value="Add Photo">
@@ -269,13 +308,21 @@
 		          <button type="button" class="close" data-dismiss="modal">&times;</button>
 		          <h4 class="modal-title">사진 업로드</h4>
 		        </div>
-		        <div class="modal-body">
-		           	<input type="file" id = "file1" name = "file1" onchange="fileinfo(this)"><br>
-		          	<input type="file" id = "file2" name = "file2" onchange="fileinfo(this)">
+		        <div class="modal-body" id="fileDiv">
+		           	<input type="file" id = "file1" name = "file1" onchange="fileinfo(this)">
+		           	<input type="file" id = "file2" name = "file2" onchange="fileinfo(this)" style="display:none">
+		           	<input type="file" id = "file3" name = "file3" onchange="fileinfo(this)" style="display:none">
+		           	<input type="file" id = "file4" name = "file4" onchange="fileinfo(this)" style="display:none">
+		           	<input type="file" id = "file5" name = "file5" onchange="fileinfo(this)" style="display:none">
+		           	<input type="hidden" id="filemodify1" name="filemodify1">
+		           	<input type="hidden" id="filemodify2" name="filemodify2">
+		           	<input type="hidden" id="filemodify3" name="filemodify3">
+		           	<input type="hidden" id="filemodify4" name="filemodify4">
+		           	<input type="hidden" id="filemodify5" name="filemodify5">
 		        </div>
 		        <div class="modal-footer">
-		        <input type="button" class="btn btn-default" data-dismiss="modal" value="업로드">
-		          <input type="button" class="btn btn-default" data-dismiss="modal" value="닫기">
+			        <input type="button" value="사진 추가" class="btn btn-default" onclick="addImage()">
+			        <input type="button" class="btn btn-default" data-dismiss="modal" value="업로드">
 		        </div>
 		      </div>
 		      

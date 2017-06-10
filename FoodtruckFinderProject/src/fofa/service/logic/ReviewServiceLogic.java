@@ -49,8 +49,12 @@ public class ReviewServiceLogic implements ReviewService {
 
 	@Override
 	public boolean modify(Review review) {
+		List<Image> list = imageStore.selectReviewImage(review.getReviewId());
+		for(Image i : list){
+			imageStore.deleteImage(i.getImageId());
+		}
 		for(Image i : review.getImages()){
-			imageStore.updateImage(i);
+			imageStore.insertImage(i);
 		}
 		
 		return reviewStore.update(review) > 0;
