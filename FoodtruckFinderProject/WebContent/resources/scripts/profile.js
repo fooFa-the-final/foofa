@@ -152,4 +152,26 @@ var stateBtn = function(obj){
 	     	alert("영업상태 변경을 실패하였습니다. 다시 시도해주세요.");
 	     }
 	});
-}
+};
+
+var fileinfo = function(input){
+  	if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+                $("#image").css("background-image", "url("+e.target.result+")");
+            }
+        reader.readAsDataURL(input.files[0]);
+    }
+  	$("#fileUpload").ajaxForm({
+  		url:"/FoodtruckFinderProject/member/fileUpload.do",
+  		enctype: "multipart/form-data",
+  		success: function(result){
+  			alert("사진이 등록되었습니다.");
+  		},
+  		error: function(){
+  			alert("등록에 실패하였습니다. 다시 시도해주세요.")
+  		}
+  	});
+  	alert("submit");
+		$("#fileUpload").submit();
+};

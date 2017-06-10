@@ -132,7 +132,7 @@
 	<!--  wrapper -->
 	<div id="wrapper">
 		<header>
-			<%@ include file="../header.jspf"%>
+			<%@ include file="../include/header.jspf"%>
 		</header>
 
 		<!--  page-wrapper -->

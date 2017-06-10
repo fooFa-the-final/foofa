@@ -8,11 +8,12 @@
 			<c:choose>
 				<c:when test="${loginUserId eq member.memberId }">
 					<form id="fileUpload" method="post" enctype="multipart/form-data">
-						<div class="profileImg" id="image" style="background-image:url('${ctx }/resources/upload/momo.png');" onClick="document.all.file.click();">
-							<input type="file"
-							name="file" id="file" style="display: none;"
-							onchange="fileinfo(this)" />						
+						<div class="profileImg" id="image" style="background-image:url('${ctx }/resources/upload/${member.profileImg }');" onClick="document.all.file.click();">
+				
 						</div>
+						<input type="file"
+							name="file" id="file" style="display: none;"
+							onchange="fileinfo(this)" />		
 <%-- 						<a class="navbar-brand" href="#"> 
 						<img
 							name="image" id="image"

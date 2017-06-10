@@ -178,6 +178,8 @@ var previewImage = function(target, idNo){
 
 	<!-- Page-Level Plugin Scripts-->
     <script src="${ctx}/resources/scripts/profile.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script src="http://malsup.github.com/jquery.form.js"></script> 
     <script>
     $(document).ready(function () {
 		$('#side-news').attr('class', 'selected');
