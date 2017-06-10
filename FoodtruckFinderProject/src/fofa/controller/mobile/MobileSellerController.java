@@ -11,8 +11,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import fofa.domain.Foodtruck;
+import fofa.domain.Review;
+import fofa.domain.Reviews;
 import fofa.domain.Seller;
 import fofa.service.FoodtruckService;
+import fofa.service.ReviewService;
 import fofa.service.SellerService;
 
 @Controller
@@ -22,6 +25,8 @@ public class MobileSellerController {
 	private SellerService sellerService;
 	@Autowired
 	private FoodtruckService truckService;
+	@Autowired
+	private ReviewService reviewService;
 	
 	@RequestMapping(value="/mobilelogin.do")
 	public @ResponseBody String sellerLogin(String id, String password) {
@@ -55,6 +60,13 @@ public class MobileSellerController {
 		return foodtruck;
 	}
 	
+	@RequestMapping(value = "/mobile/review/list/truck.do", produces="application/xml")
+	public @ResponseBody Reviews findReviewBytruckId(String foodtruckId){
+		List<Review> review = reviewService.findByTruckId(foodtruckId);
+		Reviews reviews = new Reviews();
+		reviews.setReviews(review);
+		return reviews;
+	}
 }			
 	
 	

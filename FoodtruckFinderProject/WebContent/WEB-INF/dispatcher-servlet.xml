@@ -14,7 +14,7 @@
 	<context:component-scan base-package="fofa.controller" />
 	<context:component-scan base-package="fofa.service.logic" />
 	<context:component-scan base-package="fofa.store.logic" />
-
+	<context:component-scan base-package="fofa.domain"/>
 	<!-- <bean id="advertiseServiceLogic" class="fofa.service.logic.AdvertiseServiceLogic"/> -->
 
 	<bean name="ApproveAdJob"
@@ -46,4 +46,10 @@
         <property name="maxUploadSize" value="100000000" />
         <property name="maxInMemorySize" value="100000000" />
     </bean>
+    
+    <bean id="xmlViewer" class = "org.springframework.web.servlet.view.xml.MarshallingView">
+	<constructor-arg>
+		<bean class = "org.springframework.oxm.jaxb.Jaxb2Marshaller" p:classesToBeBound="fofa.domain.Reviews"/>
+	</constructor-arg>
+	</bean>
 </beans>
