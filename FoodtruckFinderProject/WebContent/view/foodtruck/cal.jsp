@@ -122,7 +122,7 @@ h2 {
 <body>
 	<div id="wrapper">
 		<!-- navbar top -->
-		<%@ include file="../header.jspf"%>
+		<%@ include file="../include/header.jspf"%>
 		<!-- end navbar top -->
 
 

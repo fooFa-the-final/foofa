@@ -198,8 +198,7 @@
 	<!--  wrapper -->
 	<div id="wrapper">
 
-		<%@ include file="../header.jspf"%>
-		<!-- navbar top -->
+		<%@ include file="../include/header.jspf"%>
 	</div>
 	<div id="Register">
 		<b style="margin-left: 15px"><font size="6">Join With us

@@ -29,7 +29,7 @@
 <body>
 	<!--  wrapper -->
        <div id="wrapper">
-		<%@ include file="../header.jspf"%>
+		<%@ include file="../include/header.jspf"%>
 		<%@ include file="../include/memberLeft.jspf"%>
 
         <!-- end navbar side -->
@@ -97,7 +97,9 @@
 	
     $(document).ready(function () {
 		$('#side-review').attr('class', 'selected');
-		followExist('${member.memberId}');
+		if ('${loginUserId}' !=''){
+			followExist('${member.memberId}');
+		}
     });
     
 	var revDel = function(reviewId){

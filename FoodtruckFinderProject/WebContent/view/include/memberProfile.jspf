@@ -5,16 +5,30 @@
 	<div class="panel panel-danger">
 		<div class="panel-body">
 			<div class="col-lg-4" style="height:300px">
-			<form id="fileUpload" method="post" enctype="multipart/form-data">
-				<a class="navbar-brand" href="#"> <img
-					name="image" id="image"
-					src="${ctx }/resources/upload/${member.profileImg }"
-					style="height: 250px; width: 250px"
-					onClick="document.all.file.click();" /> <input type="file"
-					name="file" id="file" style="display: none;"
-					onchange="fileinfo(this)" />
-				</a>
-			</form>
+			<c:choose>
+				<c:when test="${loginUserId eq member.memberId }">
+					<form id="fileUpload" method="post" enctype="multipart/form-data">
+						<a class="navbar-brand" href="#"> 
+						<img
+							name="image" id="image"
+							src="${ctx }/resources/upload/${member.profileImg }"
+							style="height: 250px; width: 250px"
+							onClick="document.all.file.click();" /> 
+							<input type="file"
+							name="file" id="file" style="display: none;"
+							onchange="fileinfo(this)" />
+						</a>
+					</form>				
+				</c:when>
+				<c:otherwise>
+					<img
+							name="image" id="image"
+							src="${ctx }/resources/upload/${member.profileImg }"
+							style="height: 250px; width: 250px"
+							onClick="document.all.file.click();" /> 
+				</c:otherwise>
+			</c:choose>
+
 			</div>
 			<div class="col-lg-8" style="margin-top:20px;">
 				<h2 style="display:inline">${member.memberId }</h2> 

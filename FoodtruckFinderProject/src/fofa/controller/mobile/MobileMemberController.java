@@ -11,6 +11,7 @@ import fofa.service.MemberService;
 import fofa.service.SellerService;
 
 @Controller
+@RequestMapping("/mobile/member")
 public class MobileMemberController {
 
 	@Autowired
@@ -18,7 +19,7 @@ public class MobileMemberController {
 	
 
 	
-	@RequestMapping(value="/mobile/mlogin.do")
+	@RequestMapping(value="/login.do")
 	public @ResponseBody String memberLogin(String id, String password) {
 
 		Member member = new Member();

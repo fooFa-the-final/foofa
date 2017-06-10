@@ -16,8 +16,8 @@
     <link href="${ctx}/resources/css/main-style.css" rel="stylesheet" />
 <script>
 	var recReview = function(reviewId){
-		if(${loginUserId == null || loginUserId == ''}){
-			
+		if('${loginUserId}' == '') {
+			location.href='${ctx}/login.do';
 		} else {
 		
 		$.ajax({
@@ -72,9 +72,7 @@ var previewImage = function(target, idNo){
     <!--  wrapper -->
     
     <div id="wrapper">
-        <!-- navbar top -->
-        <%@ include file="../header.jspf"%>
-        <!-- end navbar top -->
+		<%@ include file="../include/header.jspf"%>
         <%@ include file="../include/memberLeft.jspf"%>
         
         <!--  page-wrapper -->
@@ -183,7 +181,9 @@ var previewImage = function(target, idNo){
     <script>
     $(document).ready(function () {
 		$('#side-news').attr('class', 'selected');
-		followExist('${member.memberId}');
+		if ('${loginUserId}' !=''){
+			followExist('${member.memberId}');
+		}
     });
     </script>
 

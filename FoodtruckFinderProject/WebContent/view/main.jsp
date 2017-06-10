@@ -10,12 +10,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>FoodtruckMain</title>
 <!-- Core CSS - Include with every page -->
-<link href="${ctx}/resources/plugins/bootstrap/bootstrap.css"
-	rel="stylesheet" />
-<link href="${ctx}/resources/font-awesome/css/font-awesome.css"
-	rel="stylesheet" />
-<link href="${ctx}/resources/plugins/pace/pace-theme-big-counter.css"
-	rel="stylesheet" />
+<link href="${ctx}/resources/plugins/bootstrap/bootstrap.css" rel="stylesheet" />
+<link href="${ctx}/resources/font-awesome/css/font-awesome.css" rel="stylesheet" />
+<link href="${ctx}/resources/plugins/pace/pace-theme-big-counter.css" rel="stylesheet" />
 <link href="${ctx}/resources/css/style.css" rel="stylesheet" />
 <link href="${ctx}/resources/css/main-style.css" rel="stylesheet" />
 
@@ -89,7 +86,7 @@
 			</li>
 			<li class="row" style="display: block;">
 				<div id="col-lg-12">
-					<img id="mainMemberImg"  class="main_img_person" src="${ctx}/resources/img/member/${mainMember.profileImg}" onclick="location.href='${ctx}/review/list/member.do?memberId=${mainMember.memberId}'" />
+					<img id="mainMemberImg"  class="main_img_person" src="${ctx}/resources/upload/${mainMember.profileImg}" onclick="location.href='${ctx}/review/list/member.do?memberId=${mainMember.memberId}'" />
 				</div>
 			</li>
 
@@ -115,7 +112,7 @@
 							<c:forEach var="review" varStatus="reviewNo" items="${reviews }">
 								<div class="panel panel-primary text-left">
 									<div class="review-heading padding-10">
-										<img class="somenail" src="${ctx }/resources/img/member/${review.writer.profileImg }"/>
+										<img class="somenail" src="${ctx }/resources/upload/${review.writer.profileImg }"/>
 										<div style="float:left; width:80%;">
 											<ul>
 												<li><a href="${ctx }/review/list/member.do?memberId=${review.writer.memberId }">${review.writer.memberId }</a></li>
