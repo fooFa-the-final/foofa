@@ -43,7 +43,7 @@ public class MobileSellerController {
 		if(result == false) {
 			return "false";
 		} else {
-			return "redirect:trucklist";
+			return "true";
 		}
 		
 	}	
@@ -53,7 +53,7 @@ public class MobileSellerController {
 			truck = truckService.findById(id);
 			return truck;
 	}
-	
+
 	@RequestMapping(value = "/mobile/detail.do", produces="application/xml")
 	public @ResponseBody Foodtruck detailTruck(String id){
 		Foodtruck foodtruck = truckService.findBySeller(id);
@@ -68,5 +68,4 @@ public class MobileSellerController {
 		return reviews;
 	}
 }			
-	
-	
+
