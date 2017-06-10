@@ -14,16 +14,7 @@
 						<input type="file"
 							name="file" id="file" style="display: none;"
 							onchange="fileinfo(this)" />		
-<%-- 						<a class="navbar-brand" href="#"> 
-						<img
-							name="image" id="image"
-							src="${ctx }/resources/upload/${member.profileImg }"
-							style=""
-							onClick="document.all.file.click();" /> 
-							<input type="file"
-							name="file" id="file" style="display: none;"
-							onchange="fileinfo(this)" />
-						</a> --%>
+
 					</form>				
 				</c:when>
 				<c:otherwise>
@@ -42,7 +33,7 @@
                     <c:if test="${loginUserId eq null || loginUserId eq '' }">
                     <button id="followBtn" type="button" class="btn btn-default btn-circle btn-lg" onclick="location.href='${ctx}/login.do'"><i class="fa fa-heart"></i></button>
                     </c:if>
-                    <a href="${ctx }/review/list/member.do?memberId=${member.memberId}"><button type="button" class="btn btn-primary btn-circle btn-lg"><i class="fa fa-list"></i></button></a>
+                    <a href="${ctx }/review/list/member.do?memberId=${member.memberId}"><button type="button" class="btn btn-info btn-outline btn-circle btn-lg"><i class="fa fa-list"></i></button></a>
 				</span>
 			</div>
 

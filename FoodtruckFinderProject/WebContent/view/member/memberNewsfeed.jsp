@@ -60,11 +60,7 @@ var report = function(reviewId){
 			}
 		});
 	}
-var previewImage = function(target, idNo){
-	$("#"+idNo).attr('src', target);
-	var targetDiv = document.getElementById(idNo);
-	var src = target;
-};	  
+	  
 </script>
 </head>
 

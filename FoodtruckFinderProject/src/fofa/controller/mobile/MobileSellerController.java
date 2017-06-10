@@ -48,4 +48,12 @@ public class MobileSellerController {
 			truck = truckService.findById(id);
 			return truck;
 	}
+
+	@RequestMapping(value = "/mobile/detail.do", produces="application/xml")
+	public @ResponseBody Foodtruck detailTruck(String id){
+		Foodtruck foodtruck = truckService.findBySeller(id);
+		return foodtruck;
+	}
+	
 }			
+

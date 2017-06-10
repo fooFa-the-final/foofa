@@ -11,15 +11,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>리뷰 목록</title>
 <!-- Core CSS - Include with every page -->
-<link href="${ctx}/resources/plugins/bootstrap/bootstrap.css"
-	rel="stylesheet" />
-<link href="${ctx}/resources/font-awesome/css/font-awesome.css"
-	rel="stylesheet" />
-<link href="${ctx}/resources/plugins/pace/pace-theme-big-counter.css"
-	rel="stylesheet" />
+<link href="${ctx}/resources/plugins/bootstrap/bootstrap.css" rel="stylesheet" />
+<link href="${ctx}/resources/font-awesome/css/font-awesome.css" rel="stylesheet" />
+<link href="${ctx}/resources/plugins/pace/pace-theme-big-counter.css" rel="stylesheet" />
 <link href="${ctx}/resources/css/style.css" rel="stylesheet" />
 <link href="${ctx}/resources/css/main-style.css" rel="stylesheet" />
-<script src="${ctx}/resources/plugins/jquery-1.10.2.js"></script>
 <!-- Page-Level CSS -->
 <link href="${ctx}/resources/plugins/dataTables/dataTables.bootstrap.css"
 	rel="stylesheet" />
@@ -27,61 +23,102 @@
 </head>
 
 <body>
-	<!--  wrapper -->
-       <div id="wrapper">
+<!--  wrapper -->
+<div id="wrapper">
 		<%@ include file="../include/header.jspf"%>
 		<%@ include file="../include/memberLeft.jspf"%>
 
-        <!-- end navbar side -->
         <!--  page-wrapper -->
         <div id="page-wrapper">
             <div class="row">
                 <!-- Page Header -->
  					<%@ include file="../include/memberProfile.jspf" %>
                 <!--End Page Header -->
-                
-                <div class="col-lg-12" style="background-color:white;padding:30px">
-                	<h3>Review</h3>
-                		<c:forEach items="${list }" var="review">
-                		<div class="col-lg-7" style="margin-top:30px" id="rev${review.reviewId }">
-                			<div class="col-lg-11" style="display:inline-block">
-                				<div class="col-lg-9">
-                					<h4><a href="${ctx }/review/list/truck.do?foodtruckId=${review.foodtruck.foodtruckId }">${review.foodtruck.foodtruckName }</a></h4>
-                					<h4>${review.foodtruck.category1 }</h4>
-                				</div>
-                				<div class="col-lg-3">
-	                			<c:set value="${review.writer.memberId }" var="writerId"/>
-	                			<c:if test="${nowId eq writerId}">
-	                				<span style="float:right"><a href = "${ctx }/review/modify.do?reviewId=${review.reviewId}" class="btn btn-default">modify</a><input type="button" class="btn btn-default" value="delete" onClick="revDel('${review.reviewId}')"></span>
-	                			</c:if><br>
-	                			</div>
-                			</div>
-                			<div class="col-lg-12" style="display:inline-block">
-                				<c:forEach items="${review.images }" var = "image">
-			                			<img src="${ctx }/resources/img/reviewImg/${image.filename}" width="150px" height="150px">
-			                	</c:forEach>
-                			</div>
-                			<div class="col-lg-11" style="display:inline-block;margin-top:30px">
-                			<font size="4">
-                				<div>
-                					${review.contents }<br>
-                					<i class="fa fa-thumbs-up" ></i> : ${review.recommand }
-                				</div>
-                				<div class="col-lg-2">
-                					${review.writeDate }
-                				</div>
-                			</font>
-                			</div>
-                			
-                		</div>
-                		</c:forEach>
-                	</div>
-                	
-            	</div>
             </div>
+            <div class="row">
+                <div class="col-lg-12">
+	                <div class="panel panel-default">
+                        <div class="panel-heading">
+                			<h4 class="panel-title">My Reviews</h4>
+                        </div>
+                        <div class="panel-body">
+                            <div class="panel-group" id="accordion">
+		                		<c:forEach items="${list }" var="review" varStatus="sts">
+		                			<c:choose>
+			                			<c:when test="${sts.count ==1 }">
+			                                <div class="panel panel-success"  id="rev${review.reviewId }">
+			                                    <div class="panel-heading">
+			                                        <h4 class="panel-title" style="display:inline-block;">
+			                                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">${review.foodtruck.foodtruckName }</a>
+			                                        </h4>
+			                                        <span style="float:right;margin-top:5px; font-size:1em; color:black;">${review.writeDate}</span>
+			                                    </div>
+			                                    <div id="collapseOne" class="panel-collapse collapse in">
+			                                        <div class="panel-body">
+														<div style="float:left; width:180px">
+															<img id="${review.reviewId}" src="${ctx }/resources/img/reviewImg/${review.mainImage.filename }" style="width: 160px; height:160px; margin:10px"/>
+															<div class="somenail-list">
+																<c:forEach var="image" varStatus="imageNo" items="${review.images }">
+																	<img src="${ctx }/resources/img/reviewImg/${image.filename}" onclick="previewImage(this.src, '${review.reviewId}');"/>
+																</c:forEach>
+															</div>
+														</div>
+														<div style="display:block;width:70%; float:left;">
+															<span class="starRating" style="text-align:left; margin-bottom:10px;"><span style="width: ${review.score *20}%">${review.score }점</span></span> 
+															<p class="reviewContent">${review.contents }
+															</p>
+														</div>
+			                                        	<c:if test="${loginUserId == member.memberId }">
+															<span style="float:right; width:12%; text-align:right;">
+			                                        		<button type="button" class="btn btn-circle btn-primary  btn-lg" style="margin-right:5px;" onclick="location.href='${ctx }/review/modify.do?reviewId=${review.reviewId}'"><i class="fa fa-edit"></i></button><button type="button" class="btn btn-circle btn-danger  btn-lg"><i class="fa fa-times"  onclick="revDel('${review.reviewId}');"></i></button></span>
+			                                        	</c:if>
+			                                        </div>
+			                                       	 
+			                                    </div>
+			                                </div>
+			                			</c:when>
+			                			<c:otherwise>
+			                                <div class="panel panel-success" id="rev${review.reviewId }">
+			                                    <div class="panel-heading">
+			                                        <h4 class="panel-title" style="display:inline-block;">
+			                                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse${sts.count }">${review.foodtruck.foodtruckName }</a>
+			                                        </h4>
+			                                        <span style="float:right;margin-top:5px; font-size:1em; color:black;">${review.writeDate}</span>
+			                                    </div>
+			                                    <div id="collapse${sts.count }" class="panel-collapse collapse">
+			                                        <div class="panel-body">
+														<div style="float:left; width:180px">
+															<img id="${review.reviewId}" src="${ctx }/resources/img/reviewImg/${review.mainImage.filename }" style="width: 160px; height:160px; margin:10px"/>
+															<div class="somenail-list">
+																<c:forEach var="image" varStatus="imageNo" items="${review.images }">
+																	<img src="${ctx }/resources/img/reviewImg/${image.filename}" onclick="previewImage(this.src, '${review.reviewId}');"/>
+																</c:forEach>
+															</div>
+														</div>
+														<div style="display:block;width:70%; float:left;">
+															<span class="starRating" style="text-align:left;margin-bottom:10px;"><span style="width: ${review.score *20}%">${review.score }점</span></span> 
+															<p class="reviewContent">${review.contents }
+															</p>
+														</div>
+			                                        	<c:if test="${loginUserId == member.memberId }">
+															<span style="float:right; width:12%; text-align:right;">
+			                                        		<button type="button" class="btn btn-circle btn-primary btn-lg" style="margin-right:5px;" onclick="location.href='${ctx }/review/modify.do?reviewId=${review.reviewId}'"><i class="fa fa-edit"></i></button><button type="button" class="btn btn-circle btn-danger  btn-lg"><i class="fa fa-times"  onclick="revDel('${review.reviewId}');"></i></button></span>
+			                                        	</c:if>
+			                                        </div>
+			                                    </div>
+			                                </div>
+			                			</c:otherwise>	
+			                		</c:choose>
+		                		</c:forEach>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+      </div>
         <!-- end page-wrapper -->
-        
-	</div>
+</div>
 	    <!-- Core Scripts - Include with every page -->
     <script src="${ctx}/resources/plugins/jquery-1.10.2.js"></script>
     <script src="${ctx}/resources/plugins/bootstrap/bootstrap.min.js"></script>
@@ -89,10 +126,8 @@
     <script src="${ctx}/resources/plugins/pace/pace.js"></script>
     <script src="${ctx}/resources/scripts/siminta.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-	<script src="http://malsup.github.com/jquery.form.js"></script> 
 	<!-- Page-Level Plugin Scripts-->
     <script src="${ctx}/resources/scripts/profile.js"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 	<script src="http://malsup.github.com/jquery.form.js"></script> 
 	<script>
 	
