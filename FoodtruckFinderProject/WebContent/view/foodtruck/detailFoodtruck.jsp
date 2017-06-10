@@ -49,7 +49,14 @@
                             </div>
                     </span>
                     <span style="float:right; margin-right:50px; margin-top: 30px">
-                        <button id="favoriteBtn" type="button" class="btn btn-default btn-circle btn-lg" onclick="favorite('${truck.foodtruckId }');"><i class="fa fa-heart"></i></button>
+                    	<c:choose>
+                    		<c:when test="${ loginUserId == null }">
+                        	  	<button id="favoriteBtn" type="button" class="btn btn-default btn-circle btn-lg" onclick="location.href='${ctx}/login.do'"><i class="fa fa-heart"></i></button>
+                    		</c:when>
+                    		<c:otherwise>
+                    			<button id="favoriteBtn" type="button" class="btn btn-default btn-circle btn-lg" onclick="favorite('${truck.foodtruckId }');"><i class="fa fa-heart"></i></button>
+                    		</c:otherwise>
+                    	</c:choose>
                         <a href="#" class="createReview">
                         	<button type="button" class="btn btn-danger" onclick="loginCheck()">리뷰 작성</button>
                        	</a>
@@ -113,47 +120,61 @@
                 		
                 		<c:forEach items="${reviewList }" var="review">
                 			<li class="timeline-inverted">
-               					<div class="panel panel-primary text-left"  style="height:327px; width:80%; display:inline-block;">
-                				<div class="review-heading padding-10" style="height: 85px;">
-                					<img class="somenail" src="${ctx }/resources/upload/${review.writer.profileImg }"/>
-                					<div style="float:left; margin-left:20px;">
-									<ul class="list-unstyled">
-										<li><a href="${ctx }/review/list/member.do?memberId=${review.writer.memberId }">${review.writer.memberId }</a></li>
-										<li> <span class="sub-li-recommand"><i class="fa fa-thumbs-up fa-1x"></i>${review.recommand } </span>
-											 <span class="sub-li-follow"><i class="fa fa-twitter fa-1x"></i>${review.writer.followCount } </span>
-										</li>
-									</ul>
-									</div>
-								</div>
-	                			<div class ="pannel-body">
-									<div style="float:left; width:180px">
-										<img id="${review.reviewId}" src="${ctx }/resources/img/reviewImg/${review.mainImage.filename }" style="width: 160px; height:160px; margin:10px"/>
-										<div class="somenail-list">
-											<c:forEach var="image" varStatus="imageNo" items="${review.images }">
-												<img src="${ctx }/resources/img/reviewImg/${image.filename}" onclick="previewImage(this.src, '${review.reviewId}');"/>
-											</c:forEach>
+               					<div class="panel panel-primary text-left"  style=" width:80%; display:inline-block;">
+	                				<div class="review-heading padding-10" style="height: 85px;">
+	                					<img class="somenail" src="${ctx }/resources/upload/${review.writer.profileImg }"/>
+	                					<div style="float:left; margin-left:20px;">
+										<ul class="list-unstyled">
+											<li><a href="${ctx }/review/list/member.do?memberId=${review.writer.memberId }">${review.writer.memberId }</a></li>
+											<li> <span class="sub-li-recommand"><i class="fa fa-thumbs-up fa-1x"></i>${review.recommand } </span>
+												 <span class="sub-li-follow"><i class="fa fa-twitter fa-1x"></i>${review.writer.followCount } </span>
+											</li>
+											<li><b>작성일</b> :  ${review.writeDate} <b>평점</b> : <span class="starRating" style="text-align:left;"><span style="width: ${review.score *20}%">${review.score }점</span></span></li>
+										</ul>
 										</div>
-									</div>	
-	                				<div style="display:block; float:left; margin:10px;">
-										<span class="starRating" style="text-align:left;"><span style="width: ${review.score *20}%">${review.score }점</span></span> ${review.writeDate}
-										<p class="reviewContent">${review.contents }</p>
 									</div>
-								</div>
+		                			<div class ="pannel-body">
+		                				<c:if test="${review.mainImage.filename != 'noimagefound.jpg'}">
+												<div style="float:left; width:180px; height:225px;">
+													<img id="${review.reviewId}" src="${ctx }/resources/img/reviewImg/${review.mainImage.filename }" style="width: 160px; height:160px; margin:10px"/>
+													<div class="somenail-list">
+														<c:forEach var="image" varStatus="imageNo" items="${review.images }">
+															<img src="${ctx }/resources/img/reviewImg/${image.filename}" onclick="previewImage(this.src, '${review.reviewId}');"/>
+														</c:forEach>
+													</div>
+												</div>
+										</c:if>
+		                				<div style="display:block; float:left; margin:10px;">
+											<p class="reviewContent">${review.contents }</p>
+										</div>
+									</div>
 								</div>
 								
-								<div class="timeline-badge"  style="left:75%;">
+								<div class="timeline-badge info"  style="left:75%;">
 									<i class="fa fa-check"></i>
-									<div class="timeline-panel drop-down-btn">
-                       					<button id="recommandBtn_${review.reviewId }" type="button" class="btn btn-success btn-circle btn-lg" style="
-	margin:5px;" onclick="recReview('${review.reviewId}');">
-											<i class="fa fa-thumbs-up"></i></button>&nbsp;추천하기
-                       					<button id="repportBtn_${review.reviewId }" type="button" class="btn btn-default btn-circle btn-lg" style="
-	margin:5px;" data-toggle="modal" data-target="#myModal${review.reviewId }">
-											<i class="fa fa-warning"></i></button>&nbsp;신고하기
-                       					<button id="FollowBtn_${review.reviewId }" type="button" class="btn btn-danger btn-circle btn-lg" style="
-	margin:5px;" onclick="follow('${review.reviewId}');">
-											<i class="fa fa-heart"></i></button>&nbsp;팔로우
-									</div>									
+									<c:choose>
+										<c:when test="${loginUserId eq '' || loginUserId == null }">
+											<div class="timeline-panel drop-down-btn">
+		                       					<button id="recommandBtn_${review.reviewId }" type="button" class="btn btn-success btn-circle btn-lg" style="margin:5px;" onclick="location.href='${ctx}/login.do'">
+													<i class="fa fa-thumbs-up"></i></button>&nbsp;추천하기
+		                       					<button id="repportBtn_${review.reviewId }" type="button" class="btn btn-warning btn-circle btn-lg" style="margin:5px;" onclick="location.href='${ctx}/login.do'">
+													<i class="fa fa-warning"></i></button>&nbsp;신고하기
+		                       					<button id="FollowBtn_${review.reviewId }" type="button" class="btn btn-danger btn-circle btn-lg" style="margin:5px;" onclick="location.href='${ctx}/login.do'">
+													<i class="fa fa-heart"></i></button>&nbsp;팔로우
+											</div>	
+										</c:when>
+										<c:otherwise>
+											<div class="timeline-panel drop-down-btn">
+		                       					<button id="recommandBtn_${review.reviewId }" type="button" class="btn btn-success btn-circle btn-lg" style="margin:5px;" onclick="recReview('${review.reviewId}');">
+													<i class="fa fa-thumbs-up"></i></button>&nbsp;추천하기
+		                       					<button id="repportBtn_${review.reviewId }" type="button" class="btn btn-warning btn-circle btn-lg" style="margin:5px;" data-toggle="modal" data-target="#myModal${review.reviewId }">
+													<i class="fa fa-warning"></i></button>&nbsp;신고하기
+		                       					<button id="FollowBtn_${review.reviewId }" type="button" class="btn btn-danger btn-circle btn-lg" style="margin:5px;" onclick="follow('${review.reviewId}');">
+													<i class="fa fa-heart"></i></button>&nbsp;팔로우
+											</div>	
+										</c:otherwise>
+									</c:choose>
+								
 								</div>
 
                 			</li>
@@ -190,6 +211,9 @@
                 		</ul>
                 </div>
             </div>
+        <div style="width:100%; height:200px;">
+        </div>
+        
         </div>
         <!-- end page-wrapper -->
        </div>

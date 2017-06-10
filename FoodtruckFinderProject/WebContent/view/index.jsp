@@ -133,7 +133,7 @@ a.link {font-size: 0.7em; color:blue;}
 						  </div>
 					</div>
 				</div>
-				<div class="row div-gray" style="">
+				<div class="row div-gray" style="margin-top:20px;">
 					<h4>Hot Reviews</h4>
 					<div class="sub-container">
 						<div class="col-lg-9">
@@ -175,16 +175,13 @@ a.link {font-size: 0.7em; color:blue;}
 									<div class="review-heading" style="height:25px">
 										 <a href="${ctx }/review/list/truck.do?foodtruckId=${review.foodtruck.foodtruckId }">${review.foodtruck.foodtruckName }</a>		 By <a href="${ctx }/review/list/member.do?memberId=${review.writer.memberId }">${review.writer.memberId }</a>						
 									</div>
-									<div class="panel-body" style="padding:5px;">
-										<img class="somenail" src="${ctx }/resources/img/food/${review.mainImage.filename}"/>
+									<div class="panel-body" style="padding:10px; height:85px;">
+										<img class="somenail" src="${ctx }/resources/img/food/${review.mainImage.filename}" style="margin-right:10px;"/>
 		
 										 <p class="index-overflow">${review.contents }</p>
 									</div>					
 								
-								</c:forEach>
-								<hr style="margin:5px 20px;">	
-		
-								<a class="link"> Read more list</a>					
+								</c:forEach>				
 							</div>	
 						</div>
 					</div>
