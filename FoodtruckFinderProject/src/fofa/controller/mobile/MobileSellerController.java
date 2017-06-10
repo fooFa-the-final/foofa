@@ -9,13 +9,14 @@ import fofa.domain.Seller;
 import fofa.service.SellerService;
 
 @Controller
+@RequestMapping("/mobile/seller")
 public class MobileSellerController {
 
 	@Autowired
 	private SellerService sellerService;
 	
 	
-	@RequestMapping(value="/mobile/slogin.do")
+	@RequestMapping(value="/login.do", produces="application/xml")
 	public @ResponseBody String sellerLogin(String id, String password) {
 		
 		Seller seller = new Seller();
@@ -34,4 +35,10 @@ public class MobileSellerController {
 		}
 		
 	}	
+	
+	
+	
+	
+	
+	
 }
