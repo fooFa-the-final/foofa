@@ -49,7 +49,16 @@
     
     <bean id="xmlViewer" class = "org.springframework.web.servlet.view.xml.MarshallingView">
 	<constructor-arg>
-		<bean class = "org.springframework.oxm.jaxb.Jaxb2Marshaller" p:classesToBeBound="fofa.domain.Reviews"/>
+		<bean class = "org.springframework.oxm.jaxb.Jaxb2Marshaller">
+			<property name="classesToBeBound">
+				<list>
+					<value>fofa.domain.Reviews</value>
+					<value>fofa.domain.Members</value>
+					<value>fofa.domain.Sales</value>
+					<value>fofa.domain.Foodtrucks</value>
+				</list>
+			</property>
+		</bean>
 	</constructor-arg>
 	</bean>
 </beans>

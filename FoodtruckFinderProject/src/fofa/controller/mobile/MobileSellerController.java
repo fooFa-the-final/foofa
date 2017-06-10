@@ -47,7 +47,7 @@ public class MobileSellerController {
 		}
 		
 	}	
-	@RequestMapping(value="/trucklist.do")
+	@RequestMapping(value="/trucklist.do", produces="application/xml")
 	public @ResponseBody Foodtruck getMusicToXMl(String id, HttpServletRequest req){
 			Foodtruck truck = new Foodtruck();
 			truck = truckService.findById(id);
@@ -60,12 +60,6 @@ public class MobileSellerController {
 		return foodtruck;
 	}
 	
-	@RequestMapping(value = "/mobile/review/list/truck.do", produces="application/xml")
-	public @ResponseBody Reviews findReviewBytruckId(String foodtruckId){
-		List<Review> review = reviewService.findByTruckId(foodtruckId);
-		Reviews reviews = new Reviews();
-		reviews.setReviews(review);
-		return reviews;
-	}
+	
 }			
 
