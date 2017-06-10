@@ -175,3 +175,9 @@ var fileinfo = function(input){
   	alert("submit");
 		$("#fileUpload").submit();
 };
+
+var previewImage = function(target, idNo){
+	$("#"+idNo).attr('src', target);
+	var targetDiv = document.getElementById(idNo);
+	var src = target;
+};
