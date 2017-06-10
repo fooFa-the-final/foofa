@@ -35,6 +35,7 @@ public class FollowController {
 		Follow follow = new Follow();
 		follow.setFromId((String)session.getAttribute("loginUserId"));
 		follow.setToId(toId);
+		System.out.println(follow.getFromId() +" : " + follow.getToId());
 		return followService.register(follow);
 	}
 	@ResponseBody
@@ -65,7 +66,7 @@ public class FollowController {
 		}
 		model.addAttribute("follow", mfollow);
 		
-		return "../view/user/memberFollowerList.jsp";
+		return "../view/member/memberFollowerList.jsp";
 	}
 	@RequestMapping("follow/count.do")
 	@ResponseBody

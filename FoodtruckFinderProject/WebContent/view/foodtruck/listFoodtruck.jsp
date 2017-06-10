@@ -35,7 +35,7 @@
 <body>
     <!--  wrapper -->
     <div id="wrapper" style="color:#FFFFFF">
-		<%@ include file="../header.jspf"%>
+		<%@ include file="../include/header.jspf"%>
         <!--  page-wrapper -->
     </div>
 		<form id="search-with-filter" action="${ctx }/foodtruck/searchByFilter.do" method="post">

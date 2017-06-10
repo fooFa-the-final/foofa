@@ -62,7 +62,7 @@ public class FavoriteController {
 		model.addAttribute("trucks", trucks);
 		model.addAttribute("member", memberService.findById(memberId));
 		
-		return "../view/user/memberFavoriteList.jsp";
+		return "../view/member/memberFavoriteList.jsp";
 	}
 	
 	@RequestMapping(value="/count.do", method=RequestMethod.GET)

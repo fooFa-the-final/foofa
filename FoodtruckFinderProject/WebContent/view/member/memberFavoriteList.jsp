@@ -27,7 +27,8 @@
 </head>
 <body>
    <div id="wrapper">
-		<%@ include file="../header.jspf"%>
+
+		<%@ include file="../include/header.jspf"%>
 		<%@ include file="../include/memberLeft.jspf"%>
 		<!--  page-wrapper -->
 		<div id="page-wrapper">
@@ -81,31 +82,9 @@
 
 	<!-- Page-Level Plugin Scripts-->
     <script src="${ctx}/resources/scripts/profile.js"></script>
-	<script src="${ctx}/resources/plugins/dataTables/jquery.dataTables.js"></script>
-	<script
-		src="${ctx}/resources/plugins/dataTables/dataTables.bootstrap.js"></script>
-		<script
-			src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script src="http://malsup.github.com/jquery.form.js"></script> 
 	<script>
-
-			function fileSubmit() {
-				var formData = new FormData($("#fileForm")[0]);
-				$.ajax({
-					type : 'post',
-					url : '${ctx }/member/fileUpload.do',
-					data : formData,
-					processData : false,
-					contentType : false,
-					success : function(html) {
-						alert("파일 업로드하였습니다.");
-					},
-					error : function(error) {
-						alert("파일 업로드에 실패하였습니다.");
-						console.log(error);
-						console.log(error.status);
-					}
-				});
-			}
 
 			var unfavorite = function(foodtruckId) {
 					
@@ -123,7 +102,9 @@
 			
 	        $(document).ready(function () {
 				$('#side-favorite').attr('class', 'selected');
-				followExist('${member.memberId}');
+				if ('${loginUserId}' !=''){
+					followExist('${member.memberId}');
+				}
 	        });
 	</script>
 

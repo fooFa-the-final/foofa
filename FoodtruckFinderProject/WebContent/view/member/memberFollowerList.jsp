@@ -27,7 +27,8 @@
 </head>
 <body>
    <div id="wrapper">
-		<%@ include file="../header.jspf"%>
+
+		<%@ include file="../include/header.jspf"%>
 		<%@ include file="../include/memberLeft.jspf"%>
 		<div id="page-wrapper">
 				<div class="row">
@@ -75,37 +76,17 @@
 
 	<!-- Page-Level Plugin Scripts-->
     <script src="${ctx}/resources/scripts/profile.js"></script>
-	<script src="${ctx }/resources/plugins/dataTables/jquery.dataTables.js"></script>
-	<script src="${ctx }/resources/plugins/dataTables/dataTables.bootstrap.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 	<script src="http://malsup.github.com/jquery.form.js"></script> 
 	<script>
         $(document).ready(function () {
 			$('#side-follow').attr('class', 'selected');
-			followExist('${member.memberId}');
+			if ('${loginUserId}' !=''){
+				followExist('${member.memberId}');
+			}
         });
 		
-		function fileinfo(input){
-	      	if (input.files && input.files[0]) {
-	            var reader = new FileReader();
-	            reader.onload = function (e) {
-	                    $("#image").attr("src", e.target.result);
-	                }
-	            reader.readAsDataURL(input.files[0]);
-            }
-	      	$("#fileUpload").ajaxForm({
-	      		url:"${ctx}/member/fileUpload.do",
-	      		enctype: "multipart/form-data",
-	      		success: function(result){
-	      			alert("사진이 등록되었습니다.");
-	      		},
-	      		error: function(){
-	      			alert("등록에 실패하였습니다. 다시 시도해주세요.")
-	      		}
-	      	});
-	      	alert("submit");
-  			$("#fileUpload").submit();
-		}
+
 		var unfollow = function(toId) {
 						var btn = $("#delete");
 						$.ajax({

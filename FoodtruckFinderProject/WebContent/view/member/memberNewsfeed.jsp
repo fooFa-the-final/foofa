@@ -16,8 +16,8 @@
     <link href="${ctx}/resources/css/main-style.css" rel="stylesheet" />
 <script>
 	var recReview = function(reviewId){
-		if(${loginUserId == null || loginUserId == ''}){
-			
+		if('${loginUserId}' == '') {
+			location.href='${ctx}/login.do';
 		} else {
 		
 		$.ajax({
@@ -72,9 +72,7 @@ var previewImage = function(target, idNo){
     <!--  wrapper -->
     
     <div id="wrapper">
-        <!-- navbar top -->
-        <%@ include file="../header.jspf"%>
-        <!-- end navbar top -->
+		<%@ include file="../include/header.jspf"%>
         <%@ include file="../include/memberLeft.jspf"%>
         
         <!--  page-wrapper -->
@@ -102,7 +100,7 @@ var previewImage = function(target, idNo){
                 		</font> --%>
                 		<div class="panel panel-primary text-left">
 									<div class="review-heading padding-10">
-										<img class="somenail" src="${ctx }/resources/img/${Review.writer.profileImg }"/>
+										<img class="somenail" src="${ctx }/resources/upload/${Review.writer.profileImg }"/>
 										<div style="float:left; width:40%;">
 											<ul>
 												<li><a href="${ctx }/review/list/member.do?memberId=${Review.writer.memberId }">${Review.writer.memberId }</a></li>
@@ -180,10 +178,14 @@ var previewImage = function(target, idNo){
 
 	<!-- Page-Level Plugin Scripts-->
     <script src="${ctx}/resources/scripts/profile.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script src="http://malsup.github.com/jquery.form.js"></script> 
     <script>
     $(document).ready(function () {
 		$('#side-news').attr('class', 'selected');
-		followExist('${member.memberId}');
+		if ('${loginUserId}' !=''){
+			followExist('${member.memberId}');
+		}
     });
     </script>
 

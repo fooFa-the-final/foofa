@@ -29,11 +29,10 @@
 	<!--  wrapper -->
 
 	<div id="wrapper">
-		<%@ include file="../header.jspf"%>
+		<%@ include file="../include/header.jspf"%>
 
 		<%@ include file="../include/sellerLeft.jspf"%>
 		<!-- end sidebar-collapse -->
-		</nav>
 		<!-- end navbar side -->
 		<!--  page-wrapper -->
 		<div id="page-wrapper" style="margin-top: 80px">

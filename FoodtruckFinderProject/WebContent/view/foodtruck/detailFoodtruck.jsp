@@ -31,7 +31,7 @@
     
     <div id="wrapper">
 
-		<%@ include file="../header.jspf"%>
+		<%@ include file="../include/header.jspf"%>
         <!--  page-wrapper -->
             <div class="row">
                 <!-- Page Header -->

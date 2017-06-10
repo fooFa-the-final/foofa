@@ -40,7 +40,7 @@
 	<!--  wrapper -->
 	<div id="wrapper">
 
-		<%@ include file="../header.jspf"%>
+		<%@ include file="../include/header.jspf"%>
 		<%@ include file="../include/adminLeft.jspf"%>
 		
 		<!--  page-wrapper -->

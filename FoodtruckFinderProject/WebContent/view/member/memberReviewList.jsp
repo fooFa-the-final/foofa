@@ -29,7 +29,7 @@
 <body>
 	<!--  wrapper -->
        <div id="wrapper">
-		<%@ include file="../header.jspf"%>
+		<%@ include file="../include/header.jspf"%>
 		<%@ include file="../include/memberLeft.jspf"%>
 
         <!-- end navbar side -->
@@ -41,7 +41,7 @@
                 <!--End Page Header -->
                 
                 <div class="col-lg-12" style="background-color:white;padding:30px">
-                	<h3>Review</font></h3>
+                	<h3>Review</h3>
                 		<c:forEach items="${list }" var="review">
                 		<div class="col-lg-7" style="margin-top:30px" id="rev${review.reviewId }">
                 			<div class="col-lg-11" style="display:inline-block">
@@ -92,12 +92,16 @@
 	<script src="http://malsup.github.com/jquery.form.js"></script> 
 	<!-- Page-Level Plugin Scripts-->
     <script src="${ctx}/resources/scripts/profile.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script src="http://malsup.github.com/jquery.form.js"></script> 
 	<script>
 	
 	
     $(document).ready(function () {
 		$('#side-review').attr('class', 'selected');
-		followExist('${member.memberId}');
+		if ('${loginUserId}' !=''){
+			followExist('${member.memberId}');
+		}
     });
     
 	var revDel = function(reviewId){
@@ -116,26 +120,6 @@
 		});
 	}
 
-	function fileinfo(input){
-      	if (input.files && input.files[0]) {
-            var reader = new FileReader();
-            reader.onload = function (e) {
-                    $("#image").attr("src", e.target.result);
-                }
-            reader.readAsDataURL(input.files[0]);
-        }
-      	$("#fileUpload").ajaxForm({
-      		url:"${ctx}/member/fileUpload.do",
-      		enctype: "multipart/form-data",
-      		success: function(result){
-      			alert("사진이 등록되었습니다.");
-      		},
-      		error: function(){
-      			alert("등록에 실패하였습니다. 다시 시도해주세요.");
-      		}
-      	});
-		$("#fileUpload").submit();
-	}
 </script>
 
 	

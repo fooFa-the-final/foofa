@@ -29,6 +29,11 @@
 .w3-badge {height:13px;width:13px;padding:0}	
 a.link {font-size: 0.7em; color:blue;}
 
+.horizonal-ul{list-style:none; margin:0; padding:0;}
+.horizonal-ul li {
+display:inline; border-left: 1px solid #999; padding: 0 20px;}
+.horizonal-ul li:first-child{border-left:none;}
+
 </style>
 </head>
 
@@ -145,24 +150,30 @@ a.link {font-size: 0.7em; color:blue;}
 												<li><a href="${ctx }/review/list/member.do?memberId=${hotReview.writer.memberId }">${hotReview.writer.memberId }</a></li>
 												<li> <span class="sub-li-recommand"><i class="fa fa-thumbs-up fa-1x"></i>${hotReview.recommand } </span>
 													 <span class="sub-li-follow"><i class="fa fa-twitter fa-1x"></i>${hotReview.writer.followCount } </span>
-													 <span class="sub-li-follow"><i class="fa fa-pencil fa-1x"></i>${hotReview.writer.followCount } </span>
+													 <span class="sub-li-follow"><i class="fa fa-pencil fa-1x"></i>${hotReview.writer.reviewCount } </span>
 												</li>
-												<li> <a href="${ctx }/review/list/truck.do?foodtruckId=${hotReview.foodtruck.foodtruckId }">${hotReview.foodtruck.foodtruckName }</a> 에 대한 리뷰 </li>
+												<li> 
+													<ul class="horizonal-ul">
+														<li><a href="${ctx }/review/list/truck.do?foodtruckId=${hotReview.foodtruck.foodtruckId }">${hotReview.foodtruck.foodtruckName }</a> 에 대한 리뷰 	</li>
+														<li><b>점수 : </b><span class="starRating" style="text-align:left;"><span style="width: ${hotReview.score *20}%">${hotReview.score }점</span></span></li>
+														<li><b>작성일 : </b> ${hotReview.writeDate}</li>
+													</ul>
+																						
+												</li>
 											</ul>
 										</div>
 									</div>
 									<div class="panel-body ">
 										<div style="display:block;width:500px; float:right;">
-											<span class="starRating" style="text-align:left;"><span style="width: ${hotReview.score *20}%">${hotReview.score }점</span></span> ${hotReview.writeDate}
 											<p class="reviewContent">
 										 		${hotReview.contents }
 											</p>
 										</div>
 										<div style="float:left; width:180px">
-											<img id="${hotReview.reviewId}" src="${ctx }/resources/img/food/${hotReview.mainImage.filename }" style="width: 160px; height:160px; margin:10px"/>
+											<img id="${hotReview.reviewId}" src="${ctx }/resources/img/reviewImg/${hotReview.mainImage.filename }" style="width: 160px; height:160px; margin:10px"/>
 											<div class="somenail-list">
 											<c:forEach var="image" varStatus="imageNo" items="${hotReview.images }">
-												<img src="${ctx }/resources/img/food/${image.filename}" onclick="previewImage(this.src, '${hotReview.reviewId}');"/>
+												<img src="${ctx }/resources/img/reviewImg/${image.filename}" onclick="previewImage(this.src, '${hotReview.reviewId}');"/>
 											</c:forEach>
 											</div>
 										</div>							
@@ -176,7 +187,7 @@ a.link {font-size: 0.7em; color:blue;}
 										 <a href="${ctx }/review/list/truck.do?foodtruckId=${review.foodtruck.foodtruckId }">${review.foodtruck.foodtruckName }</a>		 By <a href="${ctx }/review/list/member.do?memberId=${review.writer.memberId }">${review.writer.memberId }</a>						
 									</div>
 									<div class="panel-body" style="padding:10px; height:85px;">
-										<img class="somenail" src="${ctx }/resources/img/food/${review.mainImage.filename}" style="margin-right:10px;"/>
+										<img class="somenail" src="${ctx }/resources/img/reviewImg/${review.mainImage.filename}" style="margin-right:10px;"/>
 		
 										 <p class="index-overflow">${review.contents }</p>
 									</div>					
@@ -311,7 +322,7 @@ function showDivs2(n) {
 		var mainImgSrc = "${mainFoodImg}";
 		var mainMemberSrc = "${mainMember.profileImg}";
 		
-		$("#mainNav").css("background-image", "url('${ctx}/resources/img/food/"+mainImgSrc+"')");
+		$("#mainNav").css("background-image", "url('${ctx}/resources/img/reviewImg/"+mainImgSrc+"')");
 		
 	});
 	
