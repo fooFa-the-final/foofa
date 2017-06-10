@@ -49,5 +49,3 @@ public class MobileSellerController {
 			return truck;
 	}
 }			
-	
-	
