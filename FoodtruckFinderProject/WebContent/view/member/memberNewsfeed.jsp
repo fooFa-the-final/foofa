@@ -100,7 +100,7 @@ var previewImage = function(target, idNo){
                 		</font> --%>
                 		<div class="panel panel-primary text-left">
 									<div class="review-heading padding-10">
-										<img class="somenail" src="${ctx }/resources/img/${Review.writer.profileImg }"/>
+										<img class="somenail" src="${ctx }/resources/upload/${Review.writer.profileImg }"/>
 										<div style="float:left; width:40%;">
 											<ul>
 												<li><a href="${ctx }/review/list/member.do?memberId=${Review.writer.memberId }">${Review.writer.memberId }</a></li>

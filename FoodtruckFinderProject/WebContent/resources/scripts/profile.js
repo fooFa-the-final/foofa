@@ -85,10 +85,11 @@ var follow = function(memberId) {
 		success : function(data) {
 			if (data) {
 				btn.attr("class", classN);
+				console.log("end");
+				followCount(memberId);
 			}
 		}
 	});
-	followCount(memberId);
 };
 
 // 팔로우 존재 확인
@@ -123,6 +124,7 @@ var followCount = function(memberId) {
 			$("#followCount").html(data);
 		}
 	});
+	console.log("123");
 }
 
 //truck state 변경

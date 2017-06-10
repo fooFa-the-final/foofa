@@ -35,6 +35,7 @@ public class FollowController {
 		Follow follow = new Follow();
 		follow.setFromId((String)session.getAttribute("loginUserId"));
 		follow.setToId(toId);
+		System.out.println(follow.getFromId() +" : " + follow.getToId());
 		return followService.register(follow);
 	}
 	@ResponseBody
