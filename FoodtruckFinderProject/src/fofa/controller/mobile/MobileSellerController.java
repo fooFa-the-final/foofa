@@ -38,7 +38,7 @@ public class MobileSellerController {
 		if(result == false) {
 			return "false";
 		} else {
-			return "redirect:trucklist";
+			return "true";
 		}
 		
 	}	
