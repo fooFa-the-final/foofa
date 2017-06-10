@@ -454,14 +454,7 @@ div.main-container div.row {
 	height: 34px;
 }
 
-div.somenail-list {
-	margin: 0 10px;
-}
 
-div.somenail-list img {
-	width: 30px;
-	height: 30px;
-}
 
 img.somenail {
 	width: 60px;
@@ -547,7 +540,23 @@ img.somenail {
   pointer-events: none;
   content: " ";
 }
+div.reviewMainImg {
+	float:left; width:190px;
+}
 
+div.reviewMainImg img {
+	width: 160px; height:160px; margin:12px;
+}
+
+div.somenail-list {
+	margin: 0 10px;
+}
+
+div.somenail-list img {
+	width: 30px;
+	height: 30px;
+	margin: 0;
+}
 
 /***** CSS Magic to Highlight Stars on Hover *****/
 .rating>input:checked ~ label, /* show gold star when clicked */ .rating:not
