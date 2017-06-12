@@ -38,6 +38,21 @@ public class MobileMemberController {
 	@Autowired
 	private FoodtruckService truckService;
 	
+	
+	@RequestMapping(value="/mobile/memberRegister.do")
+	public @ResponseBody String memberLogin(Member member) {
+
+		if(memberService.checkId(member.getMemberId())){
+			if(memberService.register(member)){
+				return "true";
+			}else{
+				return "false";
+			}
+		}else {
+			return "duplicatedId";
+		}
+	}
+	
 	@RequestMapping(value="/mobile/memberlogin.do")
 	public @ResponseBody String memberLogin(String id, String password) {
 
@@ -98,6 +113,7 @@ public class MobileMemberController {
 		Foodtrucks foodtrucks = new Foodtrucks();
 		foodtrucks.setFoodtrucks(foodtruck);
 		
+		System.out.println("^^");
 		return foodtrucks;
 	}
 }
