@@ -3,10 +3,16 @@ package fofa.controller.mobile;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.fasterxml.jackson.core.JsonParser;
 
 import fofa.domain.Favorite;
 import fofa.domain.Follow;
@@ -99,5 +105,31 @@ public class MobileMemberController {
 		foodtrucks.setFoodtrucks(foodtruck);
 		
 		return foodtrucks;
+	}
+	
+	@RequestMapping(value="/mobile/foodtruck/modify.do", method=RequestMethod.POST, produces="application/json")
+	public @ResponseBody String modifyFoodtruck(@RequestBody String data){
+		String result = "";
+		try {
+			
+			JSONParser jsonParser = new JSONParser();
+				
+			JSONObject jsonObject = (JSONObject) jsonParser.parse(data);
+								
+				String name = jsonObject.get("name").toString();
+				String number = jsonObject.get("country").toString();
+				String twitter = jsonObject.get("twitter").toString();
+				
+				result = "ok";
+				
+				System.out.println(name + " " + number + " " + twitter);
+				
+	//Do something..
+		}
+		catch (Exception e) {
+			result = "fail";
+		}
+	
+		return result;
 	}
 }
