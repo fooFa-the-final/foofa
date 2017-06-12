@@ -25,7 +25,6 @@ import fofa.service.ReviewService;
 import fofa.service.SellerService;
 
 @Controller
-@RequestMapping("/mobile")
 public class MobileMemberController {
 
 	@Autowired
@@ -39,7 +38,7 @@ public class MobileMemberController {
 	@Autowired
 	private FoodtruckService truckService;
 	
-	@RequestMapping(value="/login.do")
+	@RequestMapping(value="/mobile/memberlogin.do")
 	public @ResponseBody String memberLogin(String id, String password) {
 
 		Member member = new Member();
@@ -57,7 +56,7 @@ public class MobileMemberController {
 		}
 		
 	}	
-	@RequestMapping(value = "/review/list/truck.do", produces="application/xml")
+	@RequestMapping(value = "/mobile/review/list/truck.do", produces="application/xml")
 	public @ResponseBody Reviews searchReviewBytruckId(String foodtruckId){
 		List<Review> review = reviewService.findByTruckId(foodtruckId);
 		Reviews reviews = new Reviews();
@@ -65,7 +64,7 @@ public class MobileMemberController {
 		return reviews;
 	}
 
-	@RequestMapping(value = "/review/followReview.do", produces="application/xml")
+	@RequestMapping(value = "/mobile/review/followReview.do", produces="application/xml")
 	public @ResponseBody Reviews searchReviewByFollow(String memberId){
 		List<Review> review = reviewService.findByFromId(memberId);
 		Reviews reviews = new Reviews();
@@ -73,7 +72,7 @@ public class MobileMemberController {
 		return reviews;
 	}
 	
-	@RequestMapping(value = "/follow/list.do", produces="application/xml")
+	@RequestMapping(value = "/mobile/follow/list.do", produces="application/xml")
 	public @ResponseBody Members searchFollowers(String toId){
 		List<Follow> follow = followService.findFollow(toId);
 		List<Member> member = new ArrayList<>();
@@ -87,7 +86,7 @@ public class MobileMemberController {
 		return members;
 	}
 	
-	@RequestMapping(value="/favorite/list.do", produces="application/xml")
+	@RequestMapping(value="/mobile/favorite/list.do", produces="application/xml")
 	public @ResponseBody Foodtrucks searchFavorites(String memberId){
 		List<Favorite> favorite = favoriteService.findMemberId(memberId);
 		List<Foodtruck> foodtruck = new ArrayList<>();

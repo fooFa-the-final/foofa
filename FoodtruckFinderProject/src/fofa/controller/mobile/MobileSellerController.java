@@ -24,7 +24,7 @@ public class MobileSellerController {
 	@Autowired
 	private ReviewService reviewService;
 	
-	@RequestMapping(value="/mobilelogin.do")
+	@RequestMapping(value="/mobile/sellerlogin.do")
 	public @ResponseBody String sellerLogin(String id, String password) {
 		
 		Seller seller = new Seller();
@@ -43,7 +43,7 @@ public class MobileSellerController {
 		}
 		
 	}	
-	@RequestMapping(value="/trucklist.do", produces="application/xml")
+	@RequestMapping(value="/mobile/trucklist.do", produces="application/xml")
 	public @ResponseBody Foodtruck getMusicToXMl(String id, HttpServletRequest req){
 			Foodtruck truck = new Foodtruck();
 			truck = truckService.findById(id);
