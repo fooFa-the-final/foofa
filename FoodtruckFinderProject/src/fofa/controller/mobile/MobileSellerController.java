@@ -1,6 +1,9 @@
 package fofa.controller.mobile;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import fofa.domain.Foodtruck;
+import fofa.domain.Review;
+import fofa.domain.Reviews;
 import fofa.domain.Seller;
 import fofa.service.FoodtruckService;
 import fofa.service.ReviewService;
@@ -62,6 +67,17 @@ public class MobileSellerController {
 	public @ResponseBody void modifyTruck(Foodtruck foodtruck){
 		truckService.modify(foodtruck);
 	}
+	
+	@RequestMapping(value = "/mobile/review/list/turck.do", produces="application/xml")
+	public @ResponseBody Reviews truckReviews(String foodtruckId){
+		
+		List<Review> list = new ArrayList<>();
+		Reviews truckReviews = new Reviews();
+		list = reviewService.findByTruckId(foodtruckId);
+		truckReviews.setReviews(list);
+		return truckReviews;
+	}
+	
 	
 }			
 
