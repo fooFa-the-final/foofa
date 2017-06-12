@@ -112,6 +112,8 @@
 	<script src="${ctx}/resources/scripts/siminta.js"></script>
 	<!-- Page-Level Plugin Scripts-->
     <script src="${ctx }/resources/scripts/seller-profile.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script src="http://malsup.github.com/jquery.form.js"></script> 
 	<script>
 	$(document).ready(function() {
 		var state = '${truck.state}';

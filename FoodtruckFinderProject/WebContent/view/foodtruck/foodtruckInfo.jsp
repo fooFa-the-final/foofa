@@ -238,6 +238,8 @@ input.cmn-toggle-round-flat:checked + label:after {
     <script src="${ctx }/resources/plugins/pace/pace.js"></script>
     <script src="${ctx }/resources/scripts/siminta.js"></script>
     <script src="${ctx }/resources/scripts/seller-profile.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script src="http://malsup.github.com/jquery.form.js"></script> 
 	<script>
 		$(document).ready(function() {
 			$('#side-info').attr('class', 'selected');

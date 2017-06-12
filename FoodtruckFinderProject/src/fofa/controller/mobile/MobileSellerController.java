@@ -36,6 +36,8 @@ public class MobileSellerController {
 		
 		result = sellerService.checkPw(id, password);
 		
+		System.out.println(result+"s");
+		
 		if(result == false) {
 			return "false";
 		} else {

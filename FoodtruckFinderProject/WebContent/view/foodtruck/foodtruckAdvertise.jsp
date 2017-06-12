@@ -162,6 +162,9 @@ $(document).ready(function(){
 	<script src="${ctx}/resources/plugins/dataTables/jquery.dataTables.js"></script>
 	<script
 		src="${ctx}/resources/plugins/dataTables/dataTables.bootstrap.js"></script>
+    <script src="${ctx }/resources/scripts/seller-profile.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script src="http://malsup.github.com/jquery.form.js"></script> 
 	<script>
 		$(document).ready(function() {
 			$('#dataTables-example').dataTable();

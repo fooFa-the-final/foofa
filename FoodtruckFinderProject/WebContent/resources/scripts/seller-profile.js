@@ -174,7 +174,7 @@ function fileinfo(input){
         reader.readAsDataURL(input.files[0]);
     }
   	$("#fileForm").ajaxForm({
-  		url:"${ctx}/foodtruck/modifyPicture.do",
+  		url:"/FoodtruckFinderProject/foodtruck/modifyPicture.do",
   		enctype: "multipart/form-data",
   		success: function(result){
   			alert("사진이 등록되었습니다.");

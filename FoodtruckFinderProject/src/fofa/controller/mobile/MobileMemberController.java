@@ -48,7 +48,8 @@ public class MobileMemberController {
 		boolean result;
 		
 		result = memberService.checkPw(id, password);
-		
+
+		System.out.println(result+"m");
 		if(result == false) {
 			return "false";
 		} else {
