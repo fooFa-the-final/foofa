@@ -18,7 +18,7 @@
 	rel="stylesheet" />
 <link href="${ctx}/resources/css/style.css" rel="stylesheet" />
 <link href="${ctx}/resources/css/main-style.css" rel="stylesheet" />
-
+ <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=noUvsaR702FX6WH5un5h&submodules=geocoder"></script>
 <!-- Page-Level CSS -->
 <link href="resources/plugins/dataTables/dataTables.bootstrap.css"
 	rel="stylesheet" />
@@ -44,13 +44,13 @@
                         </div>
                         <div class="panel-body">
 							<c:forEach var="truck" items="${trucks}" varStatus="sts">
-								<div id="${truck.foodtruckId }" >
+								<div id="panel${sts.index }" >
 									<ul class="list-inline" style="width:100%; padding:0px 0px 15px; border-bottom:1px solid #eee;">
 										<li><img src="${ctx }/resources/img/truck/${truck.foodtruckImg }" style="height: 100px; width: 100px" /></li>
 										<li style="width:50%;"><a href="${ctx }/review/list/truck.do?foodtruckId=${truck.foodtruckId }"><b style="font-size:1.2em;">${truck.foodtruckName }</b></a><br><br>
 											<i class="fa fa-heart"> &nbsp;</i>단골 : &nbsp; ${truck.favoriteCount } &nbsp; <i class="fa fa-pencil"> &nbsp;</i>리뷰 : &nbsp;${truck.reviewCount  }
 										</li>
-										<li><button id="delete" type="button" class="btn btn-info btn-outline" onclick="location.href='${ctx}/favorite/list.do?memberId=${follow.memberId }'">위치 보기</button></li>
+										<li><input type="button" class="btn btn-info btn-outline" onclick="change('${sts.index}')" value="위치 보기"></li>
 										<c:if test="${loginUserId eq member.memberId }">
 										<li><button id="delete" type="button" class="btn btn-danger btn-outline" onclick="unfavorite('${truck.foodtruckId }');">단골해제</button></li>
 										</c:if>
@@ -60,13 +60,12 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-lg-4" id="map" style="height:300px;">
+				<div class="col-lg-4" style="height:300px;">
 	                <div class="panel panel-default">
 				        <div class="panel-heading">
 	               			<h4 class="panel-title">Location</h4>
 	                    </div>
-	                    <div class="panel-body"  style="height:300px;">
-	                    	<h1>map!!!</h1>
+	                    <div class="panel-body"  style="height:300px;" id = "map">
 	                    </div>
 	                </div>
 				</div>
@@ -81,7 +80,8 @@
 	<script src="${ctx}/resources/plugins/metisMenu/jquery.metisMenu.js"></script>
 	<script src="${ctx}/resources/plugins/pace/pace.js"></script>
 	<script src="${ctx}/resources/scripts/siminta.js"></script>
-
+	
+	 
 	<!-- Page-Level Plugin Scripts-->
     <script src="${ctx}/resources/scripts/profile.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -102,12 +102,82 @@
 					});
 			}
 			
+			
+			
+			var pos = [];
+			
+			var map;
+			var markers = [];
 	        $(document).ready(function () {
+	        	var truckName = [];
+	        	
 				$('#side-favorite').attr('class', 'selected');
 				if ('${loginUserId}' !=''){
 					followExist('${member.memberId}');
 				}
+				
+				<c:forEach var="truck" items="${trucks}">
+					pos.push("${truck.location}");
+					truckName.push("${truck.foodtruckName}");
+				</c:forEach>
+				var count = 0;
+				for(var i=0;i<pos.length;i++){
+					console.log(pos[i]);
+					naver.maps.Service.geocode({
+			 			address: pos[i]
+			 		}, function(status, response){
+			 			if (status === naver.maps.Service.Status.ERROR) {
+			 				position = new naver.maps.LatLng(37.4795169, 126.8824995);
+				            return console.log('없는 주소 : ' + pos[i]);
+				        }
+			 			
+			 			var item = response.result.items[0],
+			 				point = new naver.maps.Point(item.point.x, item.point.y);
+				 		if(map == undefined){
+				 			map = new naver.maps.Map('map', {
+							    center: point,
+							    zoom: 9
+							});
+				 		}
+			 			var marker = new naver.maps.Marker({
+							position: point,
+							map: map
+						});
+			 			marker.setZIndex(count);
+			 			var contentString = [
+			 				'<div style="padding:10px;font-size:11px;">',
+			 					'<h4>'+ truckName[count] +'</h4>',
+			 					'<p>' + pos[count] + '</p>',
+			 				'</div>'
+			 			].join('');
+			 			
+			 			var infowindow = new naver.maps.InfoWindow({
+			 				content: contentString
+			 			});
+			 			
+			 			naver.maps.Event.addListener(marker, 'click', function(e) {
+			 			    if (infowindow.getMap()) {
+			 			        infowindow.close();
+			 			    } else {
+			 			        infowindow.open(map, marker);
+			 			    }
+			 			    
+			 			    // panelId가 저 div 아이디고 누나가 고칠거는 밑에 fadetoggle부분만 고치시면 되거든요.
+			 			    var panelId = "#panel" + marker.getZIndex()
+			 			    console.log(panelId);
+			 			   $(panelId).fadeToggle(2000).fadeToggle(2000);
+			 			});
+			 			count++;
+			 			markers.push(marker);
+			 		});
+				}
 	        });
+
+	        var change = function(index){
+				 map.setCenter(markers[index].getPosition());
+			}
+	        
+	        
 	</script>
 
 </body>
