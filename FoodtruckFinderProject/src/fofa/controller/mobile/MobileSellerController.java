@@ -69,11 +69,11 @@ public class MobileSellerController {
 	}
 	
 	@RequestMapping(value = "/mobile/review/list/turck.do", produces="application/xml")
-	public @ResponseBody Reviews truckReviews(String foodtruckId){
-		
+	public @ResponseBody Reviews truckReviews(String id){
+		Foodtruck foodtruck = truckService.findBySeller(id);
 		List<Review> list = new ArrayList<>();
 		Reviews truckReviews = new Reviews();
-		list = reviewService.findByTruckId(foodtruckId);
+		list = reviewService.findByTruckId(foodtruck.getFoodtruckId());
 		truckReviews.setReviews(list);
 		return truckReviews;
 	}
