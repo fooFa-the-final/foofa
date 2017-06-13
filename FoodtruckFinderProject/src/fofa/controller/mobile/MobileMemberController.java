@@ -45,8 +45,9 @@ public class MobileMemberController {
 	private FoodtruckService truckService;
 	
 	
-	@RequestMapping(value="/mobile/memberRegister.do")
+	@RequestMapping(value="/mobile/memberRegister.do", produces="application/json", method=RequestMethod.POST)
 	public @ResponseBody String memberLogin(Member member) {
+		System.out.println("여기까지왔군");
 
 		if(memberService.checkId(member.getMemberId())){
 			if(memberService.register(member)){
