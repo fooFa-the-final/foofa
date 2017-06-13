@@ -47,13 +47,13 @@
 								<div id="follow_${follow.memberId }"class="col-lg-6" style="border-bottom:1px solid #eee; padding:10px; margin:0px 0 10px 0;">
 									<ul class="list-inline" style="display:inline-block; width:100%; ">
 										<li><img src="${ctx }/resources/upload/${follow.profileImg }" style="height:70px;width:70px"></li>
-										<li style="width:35%"><a href="${ctx }/review/list/member.do?memberId=${follow.memberId }"><b style="font-size:1.2em;">${follow.memberId }</b></a><br>
-											<i class="fa fa-twitter"> &nbsp;</i>팔로워 : &nbsp; ${follow.followCount } &nbsp; <i class="fa fa-pencil"> &nbsp;</i>리뷰 : &nbsp;${follow.reviewCount }
+										<li style="width:22%"><a href="${ctx }/review/list/member.do?memberId=${follow.memberId }"><b style="font-size:1.2em;">${follow.memberId }</b></a><br><br>
+											<i class="fa fa-twitter"> &nbsp;</i>팔로워 : &nbsp; ${follow.followCount } <br> <i class="fa fa-pencil"> &nbsp;</i>리뷰 : &nbsp;${follow.reviewCount }
 										</li>
-										<li><button id="delete" type="button" class="btn btn-success btn-outline" onclick="location.href='${ctx}/review/list/member.do?memberId=${follow.memberId }'">리뷰 보기</button></li>
-										<li><button id="delete" type="button" class="btn btn-info btn-outline" onclick="location.href='${ctx}/favorite/list.do?memberId=${follow.memberId }'">단골 보기</button></li>
+										<li><button id="revList" type="button" class="btn btn-success btn-outline" onclick="location.href='${ctx}/review/list/member.do?memberId=${follow.memberId }'">리뷰 보기</button></li>
+										<li><button id="favList" type="button" class="btn btn-info btn-outline" onclick="location.href='${ctx}/favorite/list.do?memberId=${follow.memberId }'">단골 보기</button></li>
 										<c:if test="${loginUserId eq member.memberId }">
-										<li><button id="delete" type="button" class="btn btn-danger btn-outline" onclick="unfollow('${follow.memberId}');">언팔로우</button></li>
+										<li><button id="unfollow" type="button" class="btn btn-danger btn-outline" onclick="unfollow('${follow.memberId}');">언팔로우</button></li>
 										</c:if>
 									</ul>
 								</div>

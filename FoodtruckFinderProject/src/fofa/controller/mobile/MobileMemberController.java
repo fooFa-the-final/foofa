@@ -1,18 +1,19 @@
 package fofa.controller.mobile;
 
-import java.util.ArrayList;
+import java.util.ArrayList; 
 import java.util.List;
 
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.fasterxml.jackson.core.JsonParser;
 
 import fofa.domain.Favorite;
 import fofa.domain.Follow;
@@ -22,13 +23,11 @@ import fofa.domain.Member;
 import fofa.domain.Members;
 import fofa.domain.Review;
 import fofa.domain.Reviews;
-import fofa.domain.Seller;
 import fofa.service.FavoriteService;
 import fofa.service.FollowService;
 import fofa.service.FoodtruckService;
 import fofa.service.MemberService;
 import fofa.service.ReviewService;
-import fofa.service.SellerService;
 
 @Controller
 public class MobileMemberController {
@@ -45,10 +44,11 @@ public class MobileMemberController {
 	private FoodtruckService truckService;
 	
 	
-	@RequestMapping(value="/mobile/memberRegister.do")
-	public @ResponseBody String memberLogin(Member member) {
+	@RequestMapping(value="/mobile/memberRegister.do", produces="application/json", method=RequestMethod.POST)
+	public @ResponseBody String memberLogin(@RequestBody Member member) {
+		System.out.println("여기까지왔군"+member.getMemberId());
 
-		if(memberService.checkId(member.getMemberId())){
+		if(!memberService.checkId(member.getMemberId())){
 			if(memberService.register(member)){
 				return "true";
 			}else{
@@ -112,10 +112,23 @@ public class MobileMemberController {
 		
 		Members members = new Members();
 		members.setMembers(member);
-		
 		return members;
 	}
-	
+	@RequestMapping("/mobile/follow/remove")
+	public String removeFollow(@RequestParam("memberId") String toId, HttpServletRequest req){
+		HttpSession session = req.getSession(false);
+		if(session == null || session.getAttribute("loginUserId")==null){
+			return "redirect:/mobile/memberlogin.do";
+		}
+		Follow follow = new Follow();
+		String fromId = (String) session.getAttribute("loginUserId");
+		follow.setFromId(fromId);
+		follow.setToId(toId);
+		System.out.println(follow);
+		followService.remove(follow);
+		
+		return "redirect:/mobile/follow/list.do";
+	}
 	@RequestMapping(value="/mobile/favorite/list.do", produces="application/xml")
 	public @ResponseBody Foodtrucks searchFavorites(String memberId){
 		List<Favorite> favorite = favoriteService.findMemberId(memberId);
