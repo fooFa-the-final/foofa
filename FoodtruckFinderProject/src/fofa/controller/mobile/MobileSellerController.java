@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import fofa.domain.Foodtruck;
 import fofa.domain.Menu;
@@ -106,25 +107,26 @@ public class MobileSellerController {
 	
 	@RequestMapping(value="/mobile/foodtruck/modify.do", method=RequestMethod.POST, produces="application/json")
 	public @ResponseBody String modifyFoodtruck(@RequestBody String data){
+		Gson gson = new GsonBuilder().create();
 		String result = "";
 		try {
-			
-			/*JSONParser jsonParser = new JSONParser();
+			JSONParser jsonParser = new JSONParser();
 				
-			JSONObject jsonObject = (JSONObject) jsonParser.parse(data);*/
-										
-			result = "ok";
-			
-			Foodtruck foodtruck = new Gson().fromJson(data, Foodtruck.class);
-			foodtruck.toString();
-			System.out.println(data);
+			Foodtruck foodtruck = gson.fromJson(((JSONObject) jsonParser.parse(data)).toJSONString(), Foodtruck.class);
+			foodtruck.setState(true);
+			foodtruck.setFoodtruckImg("food8.jpg");
+			foodtruck.setSpot("제주 애월읍");
+			foodtruck.setCategory1("브라질//");
+			truckService.modify(foodtruck);
+			System.out.println(foodtruck.toString());
 				
 			//Do something..
+			result = "ok";
 		}
 		catch (Exception e) {
 			result = "fail";
 		}
-	
+		System.out.println(result);
 		return result;
 	}
 	
