@@ -78,4 +78,12 @@
   	 <select id = "selectMemberCount" resultType="int" parameterType="String">
   		select count(*)  reviewCount from review_tb where member_id = #{memberId}
   	</select>
+  	 <select id = "selectMainReview" resultMap="ReviewMap">
+  	select * from (
+  		SELECT r.review_id, r.member_id, r.foodtruck_id, r.contents, r.score, r.writedate
+  		FROM review_tb r, photo_tb
+  		where r.review_id = photo_tb.review_id
+		order by DBMS_RANDOM.RANDOM 
+  	)	where rownum = 1
+  	  	</select>  	
   </mapper>

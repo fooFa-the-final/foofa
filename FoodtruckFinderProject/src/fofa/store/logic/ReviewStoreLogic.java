@@ -168,4 +168,17 @@ public class ReviewStoreLogic implements ReviewStore {
 		} 
 		return count;
 	}
+	@Override
+	public Review selectMainReview() {
+		SqlSession session = factory.openSession();
+		Review review = new Review();
+		try{
+			ReviewMapper mapper = session.getMapper(ReviewMapper.class);
+			review = mapper.selectMainReview();
+
+		} finally {
+			session.close();
+		} 
+		return review;
+	}
 }

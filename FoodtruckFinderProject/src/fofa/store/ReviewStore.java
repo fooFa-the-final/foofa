@@ -16,5 +16,6 @@ public interface ReviewStore {
 	int selectTruckCount(String foodtruckId);
 	List<Review> selectByFromId(String fromId);
 	int selectMemberCount(String foodtruckId);
+	Review selectMainReview();
 }
 

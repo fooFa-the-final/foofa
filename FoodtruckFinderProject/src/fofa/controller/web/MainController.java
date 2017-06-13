@@ -50,16 +50,7 @@ public class MainController {
 		model.addAttribute("reviews", reviews);
 		model.addAttribute("hotReview", allReview.get(0));
 
-		Review mainReview;
-		while(true){
-			double mainRandom = Math.random();
-			int intMain = (int)(mainRandom*allReview.size());
-			mainReview = reviewService.findById(allReview.get(intMain).getReviewId());		
-			
-			if(mainReview.getImages().size()>=1){
-				break;
-			}
-		}
+		Review mainReview = reviewService.findMainReview();
 
 		model.addAttribute("mainFoodImg",mainReview.getImages().get(0).getFilename());	
 		model.addAttribute("mainMember", memberService.findById(mainReview.getWriter().getMemberId()));

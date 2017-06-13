@@ -130,4 +130,9 @@ public class ReviewServiceLogic implements ReviewService {
 	public boolean removeReport(String reviewId) {
 		return reportStore.delete(reviewId) > 0;
 	}
+	
+	@Override
+	public Review findMainReview(){
+		return reviewStore.selectMainReview();
+	}
 }
