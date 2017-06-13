@@ -164,13 +164,13 @@ display:inline; border-left: 1px solid #999; padding: 0 20px;}
 										</div>
 									</div>
 									<div class="panel-body ">
-										<div style="display:block;width:500px; float:right;">
+										<div style="display:block;width:490px; float:right;">
 											<p class="reviewContent">
 										 		${hotReview.contents }
 											</p>
 										</div>
-										<div style="float:left; width:180px">
-											<img id="${hotReview.reviewId}" src="${ctx }/resources/img/reviewImg/${hotReview.mainImage.filename }" style="width: 160px; height:160px; margin:10px"/>
+										<div class="reviewMainImg">
+											<img id="${hotReview.reviewId}" src="${ctx }/resources/img/reviewImg/${hotReview.mainImage.filename }"/>
 											<div class="somenail-list">
 											<c:forEach var="image" varStatus="imageNo" items="${hotReview.images }">
 												<img src="${ctx }/resources/img/reviewImg/${image.filename}" onclick="previewImage(this.src, '${hotReview.reviewId}');"/>

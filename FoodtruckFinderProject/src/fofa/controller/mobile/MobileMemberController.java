@@ -42,10 +42,11 @@ public class MobileMemberController {
 	private FoodtruckService truckService;
 	
 	
-	@RequestMapping(value="/mobile/memberRegister.do")
-	public @ResponseBody String memberLogin(Member member) {
+	@RequestMapping(value="/mobile/memberRegister.do", produces="application/json", method=RequestMethod.POST)
+	public @ResponseBody String memberLogin(@RequestBody Member member) {
+		System.out.println("여기까지왔군"+member.getMemberId());
 
-		if(memberService.checkId(member.getMemberId())){
+		if(!memberService.checkId(member.getMemberId())){
 			if(memberService.register(member)){
 				return "true";
 			}else{

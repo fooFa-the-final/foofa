@@ -56,6 +56,9 @@ public class ReviewController {
 	public String searchByMemberId(String memberId, HttpSession session, Model model){
 		if(memberId == null){
 			memberId = (String)session.getAttribute("loginUserId");
+			if(memberId==null || memberId.equals("")){
+				return "redirect:/login.do";
+			}
 		}
 		Member member = memberService.findById(memberId);
 		model.addAttribute("member", member);
@@ -69,6 +72,9 @@ public class ReviewController {
 	public String searchByFollower(String fromId, HttpSession session, Model model){
 		if(fromId == null){
 			fromId = (String)session.getAttribute("loginUserId");
+			if(fromId==null || fromId.equals("")){
+				return "redirect:/login.do";
+			}
 		}
 		List<Review> list = reviewService.findByFromId(fromId);
 

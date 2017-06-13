@@ -52,6 +52,9 @@ public class FavoriteController {
 	public String search(HttpSession session, String memberId, Model model){
 		if(memberId == null ||memberId.equals("")){
 			memberId = (String)session.getAttribute("loginUserId");
+			if(memberId==null || memberId.equals("")){
+				return "redirect:/login.do";
+			}
 		}
 		List<Foodtruck> trucks = new ArrayList<>();
 		for(Favorite f :  favoriteService.findMemberId(memberId))  {
