@@ -74,13 +74,15 @@ public class MainController {
 			t.setCategory1((String)allTrucks.get(i).get("category1"));
 			t.setSpot((String)allTrucks.get(i).get("spot"));
 			t.setLocation((String)allTrucks.get(i).get("location"));
+			if(allTrucks.get(i).get("score")!=null){
 			t.setFavoriteCount((int)allTrucks.get(i).get("favoriteCount"));
+			}
+			if(allTrucks.get(i).get("score")!=null){
 			t.setFavoriteCount((int)allTrucks.get(i).get("favoriteCount"));
+			}
 			t.setReviewCount((int)allTrucks.get(i).get("reviewCount"));
 			if(allTrucks.get(i).get("score")!=null){
 				t.setScore((double)allTrucks.get(i).get("score"));
-			}else {
-				t.setScore(0);
 			}
 			nearTrucks.add(t);
 		}
