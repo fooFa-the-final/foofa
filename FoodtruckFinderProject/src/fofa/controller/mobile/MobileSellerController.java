@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.google.gson.Gson;
 
 import fofa.domain.Foodtruck;
+import fofa.domain.Menu;
+import fofa.domain.Menus;
 import fofa.domain.Review;
 import fofa.domain.Reviews;
 import fofa.domain.Seller;
@@ -68,6 +70,21 @@ public class MobileSellerController {
 		Foodtruck foodtruck = truckService.findBySeller(id);
 		return foodtruck;
 	}
+
+	
+	@RequestMapping(value = "/mobile/menu/detail.do", produces="application/xml")
+	public @ResponseBody Menus detailTruckMenu(String id){
+		List<Menu> menus = new ArrayList<>();
+
+		Foodtruck foodtruck = truckService.findBySeller(id);
+		menus = foodtruck.getMenus();
+		Menus truckmenu = new Menus();
+		truckmenu.setMenus(menus);
+		
+		return truckmenu;
+	}
+	
+	
 	
 	@RequestMapping(value ="/mobile/truck/modify.do", produces="application/xml")
 	public @ResponseBody void modifyTruck(Foodtruck foodtruck){
@@ -83,6 +100,9 @@ public class MobileSellerController {
 		truckReviews.setReviews(list);
 		return truckReviews;
 	}
+	
+	
+	
 	
 	@RequestMapping(value="/mobile/foodtruck/modify.do", method=RequestMethod.POST, produces="application/json")
 	public @ResponseBody String modifyFoodtruck(@RequestBody String data){
@@ -107,5 +127,9 @@ public class MobileSellerController {
 	
 		return result;
 	}
+	
+	
+	
+	
 }			
 
