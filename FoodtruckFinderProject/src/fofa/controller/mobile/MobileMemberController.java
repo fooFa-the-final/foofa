@@ -95,8 +95,8 @@ public class MobileMemberController {
 	}
 	
 	@RequestMapping(value = "/mobile/follow/list.do", produces="application/xml")
-	public @ResponseBody Members searchFollowers(String toId){
-		List<Follow> follow = followService.findFollow(toId);
+	public @ResponseBody Members searchFollowers(String fromId){
+		List<Follow> follow = followService.findFollow(fromId);
 		List<Member> member = new ArrayList<>();
 		for(Follow f : follow){
 			member.add(memberService.findById(f.getToId()));
