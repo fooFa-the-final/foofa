@@ -72,16 +72,24 @@ public class MainController {
 		}
 		model.addAttribute("adTrucks", adTrucks);
 		
-		List<HashMap<String, String>> allTrucks = foodtruckService.findByLoc(1, "가산동");
+		List<HashMap<String, Object>> allTrucks = foodtruckService.findByLoc(1, "가산동");
 		List<Foodtruck> nearTrucks = new ArrayList<>();
 		for(int i=0; i<9; i++){
 			Foodtruck t = new Foodtruck();
-			t.setFoodtruckId(allTrucks.get(i).get("foodtruckId"));
-			t.setFoodtruckName(allTrucks.get(i).get("foodtruckName"));
-			t.setFoodtruckImg(allTrucks.get(i).get("foodtruckImg"));
-			t.setCategory1(allTrucks.get(i).get("category1"));
-			t.setSpot(allTrucks.get(i).get("spot"));
-			t.setLocation(allTrucks.get(i).get("location"));
+			t.setFoodtruckId((String)allTrucks.get(i).get("foodtruckId"));
+			t.setFoodtruckName((String)allTrucks.get(i).get("foodtruckName"));
+			t.setFoodtruckImg((String)allTrucks.get(i).get("foodtruckImg"));
+			t.setCategory1((String)allTrucks.get(i).get("category1"));
+			t.setSpot((String)allTrucks.get(i).get("spot"));
+			t.setLocation((String)allTrucks.get(i).get("location"));
+			t.setFavoriteCount((int)allTrucks.get(i).get("favoriteCount"));
+			t.setFavoriteCount((int)allTrucks.get(i).get("favoriteCount"));
+			t.setReviewCount((int)allTrucks.get(i).get("reviewCount"));
+			if(allTrucks.get(i).get("score")!=null){
+				t.setScore((double)allTrucks.get(i).get("score"));
+			}else {
+				t.setScore(0);
+			}
 			nearTrucks.add(t);
 		}
 		model.addAttribute("nearTrucks", nearTrucks);

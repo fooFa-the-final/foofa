@@ -52,7 +52,7 @@ public class FoodtruckStoreLogicTest {
 
 	@Test
 	public void testSelectByLoc() {
-		List<HashMap<String, String>> list = store.selectByLoc(1, "서울");
+		List<HashMap<String, Object>> list = store.selectByLoc(1, "서울");
 		
 		assertEquals("sampleTruck106", list.get(0).get("foodtruckName"));
 		assertEquals("485", list.get(0).get("allCount"));

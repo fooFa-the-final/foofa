@@ -61,7 +61,7 @@
 				</div>
 				<div class="col-lg-3">
 					<div class="alert alert-info text-center" style="padding:15px 30px; margin-bottom:15px;">
-						<i class="fa fa-heart fa-3x"style="display:inline-block; float:left;"></i><span style="flaot:left;"><b>${member.reviewCount }</b>개의 단골을<br> 추가하셨습니다.</span>
+						<i class="fa fa-heart fa-3x"style="display:inline-block; float:left;"></i><span style="flaot:left;"><b>${member.favoriteCount }</b>개의 단골을<br> 추가하셨습니다.</span>
 					</div>
 				</div>
 		</div>

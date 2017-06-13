@@ -180,8 +180,8 @@ public class FoodtruckController {
 	
 	@RequestMapping(value="/searchByKeyLoc.do", method=RequestMethod.GET)
 	public String searchByKeyLoc(String keyword, String location, int currentIndex, Model model){
-		List<HashMap<String, String>> sqlMap;
-		List<Foodtruck> trucks = new ArrayList<>();
+		List<HashMap<String, Object>> sqlMap;
+		List<Foodtruck> trucks= new ArrayList<>();
 		int allCount = 0;
 
 		if(keyword==null || keyword==""){
@@ -190,18 +190,9 @@ public class FoodtruckController {
 			sqlMap = foodtruckService.findByKeyLoc(currentIndex, keyword, location);
 		}
 		
-		for(int i = 0; i < sqlMap.size(); i++){
-			Foodtruck t = new Foodtruck();
-			t.setFoodtruckId(sqlMap.get(i).get("foodtruckId"));
-			t.setFoodtruckName(sqlMap.get(i).get("foodtruckName"));
-			t.setFoodtruckImg(sqlMap.get(i).get("foodtruckImg"));
-			t.setCategory1(sqlMap.get(i).get("category1"));
-			t.setSpot(sqlMap.get(i).get("spot"));
-			t.setLocation(sqlMap.get(i).get("location"));
-			trucks.add(t);
-		}
 		if(!sqlMap.isEmpty()){
-			allCount = Integer.parseInt(sqlMap.get(0).get("allCount"));
+			trucks = sqlMapping(sqlMap);
+			allCount = (int)sqlMap.get(0).get("allCount");
 		}
 		model.addAttribute("currentIndex", currentIndex);
 		model.addAttribute("allCount", allCount);
@@ -216,27 +207,18 @@ public class FoodtruckController {
 		if(currentIndex==null){
 			currentIndex = 1;
 		}
-		List<HashMap<String, String>> sqlMap;
-		List<Foodtruck> trucks = new ArrayList<>();
+		List<HashMap<String, Object>> sqlMap;
+		
 		int allCount = 0;
 		if(keyword.isEmpty()){
 			sqlMap = foodtruckService.findByLoc(currentIndex, location);
 		} else {
 			sqlMap = foodtruckService.findByKeyLoc(currentIndex, keyword, location);
 		}
-		
-		for(int i = 0; i < sqlMap.size(); i++){
-			Foodtruck t = new Foodtruck();
-			t.setFoodtruckId(sqlMap.get(i).get("foodtruckId"));
-			t.setFoodtruckName(sqlMap.get(i).get("foodtruckName"));
-			t.setFoodtruckImg(sqlMap.get(i).get("foodtruckImg"));
-			t.setCategory1(sqlMap.get(i).get("category1"));
-			t.setSpot(sqlMap.get(i).get("spot"));
-			t.setLocation(sqlMap.get(i).get("location"));
-			trucks.add(t);
-		}
+		List<Foodtruck> trucks = new ArrayList<>();
 		if(!sqlMap.isEmpty()){
-			allCount = Integer.parseInt(sqlMap.get(0).get("allCount"));
+			trucks = sqlMapping(sqlMap);
+			allCount = (int)sqlMap.get(0).get("allCount");
 		}
 		model.addAttribute("currentIndex", currentIndex);
 		model.addAttribute("allCount", allCount);
@@ -294,23 +276,15 @@ public class FoodtruckController {
 		foodtruck.setLocation(location);
 		foodtruck.setFoodtruckName(keyword);
 		
-		List<HashMap<String, String>> sqlMap = foodtruckService.findByFilter(currentIndex, foodtruck, sort);
+		List<HashMap<String, Object>> sqlMap = foodtruckService.findByFilter(currentIndex, foodtruck, sort);
 		List<Foodtruck> trucks = new ArrayList<>();
 		int allCount = 0;
 //		System.out.println("궁금궁금 : " + sqlMap.size() + "/" + Integer.parseInt(sqlMap.get(0).get("allCount")));
+
 		
-		for(int i = 0; i < sqlMap.size(); i++){
-			Foodtruck t = new Foodtruck();
-			t.setFoodtruckId(sqlMap.get(i).get("foodtruckId"));
-			t.setFoodtruckName(sqlMap.get(i).get("foodtruckName"));
-			t.setFoodtruckImg(sqlMap.get(i).get("foodtruckImg"));
-			t.setCategory1(sqlMap.get(i).get("category1"));
-			t.setSpot(sqlMap.get(i).get("spot"));
-			t.setLocation(sqlMap.get(i).get("location"));
-			trucks.add(t);
-		}
 		if(!sqlMap.isEmpty()){
-			allCount = Integer.parseInt(sqlMap.get(0).get("allCount"));
+			trucks = sqlMapping(sqlMap);
+			allCount = (int)sqlMap.get(0).get("allCount");
 		}
 		model.addAttribute("currentIndex", currentIndex);
 		model.addAttribute("allCount", allCount);
@@ -339,6 +313,31 @@ public class FoodtruckController {
 		return null;
 	}
 	
+	private List<Foodtruck> sqlMapping(List<HashMap<String, Object>> sqlMap){
+		
+		List<Foodtruck> trucks = new ArrayList<>();
+		
+		for(int i = 0; i < sqlMap.size(); i++){
+			Foodtruck t = new Foodtruck();
+			t.setFoodtruckId((String)sqlMap.get(i).get("foodtruckId"));
+			t.setFoodtruckName((String)sqlMap.get(i).get("foodtruckName"));
+			t.setFoodtruckImg((String)sqlMap.get(i).get("foodtruckImg"));
+			t.setCategory1((String)sqlMap.get(i).get("category1"));
+			t.setSpot((String)sqlMap.get(i).get("spot"));
+			t.setLocation((String)sqlMap.get(i).get("location"));
+			t.setFavoriteCount((int)sqlMap.get(i).get("favoriteCount"));
+			t.setFavoriteCount((int)sqlMap.get(i).get("favoriteCount"));
+			t.setReviewCount((int)sqlMap.get(i).get("reviewCount"));
+			if(sqlMap.get(i).get("score")!=null){
+				t.setScore((double)sqlMap.get(i).get("score"));
+			}else {
+				t.setScore(0);
+			}
+			trucks.add(t);
+		}		
+		return trucks;
+		
+	}
 	
 }
 

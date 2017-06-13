@@ -64,7 +64,7 @@ public class FoodtruckStoreLogic implements FoodtruckStore{
 	}
 
 	@Override
-	public List<HashMap<String, String>> selectByLoc(int pageNum, String location) {
+	public List<HashMap<String, Object>> selectByLoc(int pageNum, String location) {
 		SqlSession session = factory.openSession();
 		
 		int nPageIndex = 0;
@@ -78,7 +78,7 @@ public class FoodtruckStoreLogic implements FoodtruckStore{
 		map.put("START", (nPageIndex * nPageRow) + 1);
 		map.put("END", (nPageIndex * nPageRow) + nPageRow);
 		map.put("location", location);
-		List<HashMap<String, String>> sqlMap;
+		List<HashMap<String, Object>> sqlMap;
 		try{
 			FoodtruckMapper mapper = session.getMapper(FoodtruckMapper.class);
 			sqlMap = mapper.selectByLoc(map);
@@ -89,7 +89,7 @@ public class FoodtruckStoreLogic implements FoodtruckStore{
 	}
 
 	@Override
-	public List<HashMap<String, String>> selectByKeyLoc(int pageNum, String keyword, String location) {
+	public List<HashMap<String, Object>> selectByKeyLoc(int pageNum, String keyword, String location) {
 		SqlSession session = factory.openSession();
 		
 		int nPageIndex = 0;
@@ -105,7 +105,7 @@ public class FoodtruckStoreLogic implements FoodtruckStore{
 		map.put("keyword", keyword);
 		map.put("location", location);
 		
-		List<HashMap<String, String>> sqlMap;
+		List<HashMap<String, Object>> sqlMap;
 		try{
 			FoodtruckMapper mapper = session.getMapper(FoodtruckMapper.class);
 			sqlMap = mapper.selectByKeyLoc(map);
@@ -116,7 +116,7 @@ public class FoodtruckStoreLogic implements FoodtruckStore{
 	}
 
 	@Override
-	public List<HashMap<String, String>> selectByFilter(int pageNum, Foodtruck foodtruck, String sort) {
+	public List<HashMap<String, Object>> selectByFilter(int pageNum, Foodtruck foodtruck, String sort) {
 		SqlSession session = factory.openSession();
 		
 		int nPageIndex = 0;
@@ -145,7 +145,7 @@ public class FoodtruckStoreLogic implements FoodtruckStore{
 			map.put("state", true);
 		}
 		
-		List<HashMap<String, String>> sqlMap;
+		List<HashMap<String, Object>> sqlMap;
 		try{
 			FoodtruckMapper mapper = session.getMapper(FoodtruckMapper.class);
 			sqlMap = mapper.selectByFilter(map);

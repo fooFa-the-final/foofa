@@ -14,11 +14,11 @@ public interface FoodtruckService {
 	
 	Foodtruck findById(String foodtruckId);
 	
-	List<HashMap<String, String>> findByLoc(int pageNum, String location);
+	List<HashMap<String, Object>> findByLoc(int pageNum, String location);
 	
-	List<HashMap<String, String>> findByKeyLoc(int pageNum, String keyword, String location);
+	List<HashMap<String, Object>> findByKeyLoc(int pageNum, String keyword, String location);
 	
-	List<HashMap<String, String>> findByFilter(int pageNum, Foodtruck foodtruck, String sort);
+	List<HashMap<String, Object>> findByFilter(int pageNum, Foodtruck foodtruck, String sort);
 	
 	Foodtruck findBySeller(String sellerId);
 	

@@ -13,11 +13,11 @@ public interface FoodtruckStore {
 	
 	Foodtruck selectById(String foodtruckId);
 	
-	List<HashMap<String, String>> selectByLoc(int pageNum, String location);
+	List<HashMap<String, Object>> selectByLoc(int pageNum, String location);
 	
-	List<HashMap<String, String>> selectByKeyLoc(int pageNum, String keyword, String location);
+	List<HashMap<String, Object>> selectByKeyLoc(int pageNum, String keyword, String location);
 	
-	List<HashMap<String, String>> selectByFilter(int pageNum, Foodtruck foodtruck, String sort);
+	List<HashMap<String, Object>> selectByFilter(int pageNum, Foodtruck foodtruck, String sort);
 	
 	Foodtruck selectBySellerId(String sellerId);
 

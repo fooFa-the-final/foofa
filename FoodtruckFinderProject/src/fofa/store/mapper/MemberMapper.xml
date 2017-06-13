@@ -21,6 +21,10 @@
 	  	select = "fofa.store.mapper.ReviewMapper.selectMemberCount"
 	  	javaType="int" jdbcType="INTEGER"/>
 	  	
+	  	<association column="member_id" property="favoriteCount"
+	  	select = "fofa.store.mapper.FavoriteMapper.selectCount"
+	  	javaType="int" jdbcType="INTEGER"/>
+	  	
 	</resultMap> 
 	
 	<insert id="insert" parameterType="Member">

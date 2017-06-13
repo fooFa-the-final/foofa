@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -43,20 +44,22 @@
 	                			<h4 class="panel-title">Follower List</h4>
 	                        </div>
 	                        <div class="panel-body">
-								<c:forEach var="follow" items="${follow}" varStatus="sts">
-								<div id="follow_${follow.memberId }"class="col-lg-6" style="border-bottom:1px solid #eee; padding:10px; margin:0px 0 10px 0;">
+								<c:forEach var="follow_i" items="${follow}" varStatus="sts">
+								<div id="follow_${follow_i.memberId }"class="col-lg-6" style=" padding:10px; margin:0px 0 10px 0;">
 									<ul class="list-inline" style="display:inline-block; width:100%; ">
-										<li><img src="${ctx }/resources/upload/${follow.profileImg }" style="height:70px;width:70px"></li>
-										<li style="width:22%"><a href="${ctx }/review/list/member.do?memberId=${follow.memberId }"><b style="font-size:1.2em;">${follow.memberId }</b></a><br><br>
-											<i class="fa fa-twitter"> &nbsp;</i>팔로워 : &nbsp; ${follow.followCount } <br> <i class="fa fa-pencil"> &nbsp;</i>리뷰 : &nbsp;${follow.reviewCount }
+										<li><img src="${ctx }/resources/upload/${follow_i.profileImg }" style="height:70px;width:70px;"></li>
+										<li style="width:22%"><a href="${ctx }/review/list/member.do?memberId=${follow_i.memberId }"><b style="font-size:1.2em;">${follow_i.memberId }</b></a><br><br>
+											<i class="fa fa-twitter"> &nbsp;</i>팔로워 : &nbsp; ${follow_i.followCount } <br> <i class="fa fa-pencil"> &nbsp;</i>리뷰 : &nbsp;${follow_i.reviewCount }
 										</li>
-										<li><button id="revList" type="button" class="btn btn-success btn-outline" onclick="location.href='${ctx}/review/list/member.do?memberId=${follow.memberId }'">리뷰 보기</button></li>
-										<li><button id="favList" type="button" class="btn btn-info btn-outline" onclick="location.href='${ctx}/favorite/list.do?memberId=${follow.memberId }'">단골 보기</button></li>
+										<li><button id="revList" type="button" class="btn btn-success btn-outline" onclick="location.href='${ctx}/review/list/member.do?memberId=${follow_i.memberId }'">리뷰 보기</button></li>
+										<li><button id="favList" type="button" class="btn btn-info btn-outline" onclick="location.href='${ctx}/favorite/list.do?memberId=${follow_i.memberId }'">단골 보기</button></li>
 										<c:if test="${loginUserId eq member.memberId }">
-										<li><button id="unfollow" type="button" class="btn btn-danger btn-outline" onclick="unfollow('${follow.memberId}');">언팔로우</button></li>
+										<li><button id="unfollow" type="button" class="btn btn-danger btn-outline" onclick="unfollow('${follow_i.memberId}');">언팔로우</button></li>
 										</c:if>
 									</ul>
 								</div>
+								<c:if test="${(sts.count %2 == 0 )&&( sts.count != fn:length(follow))}">
+									<hr style="border:1px solid #eee"></c:if>
 								</c:forEach>
 								
 							</div>

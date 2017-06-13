@@ -18,6 +18,7 @@ public class Member {
 	private String profileImg;
 	private int followCount;
 	private int reviewCount;
+	private int favoriteCount;
 	
 	public int getFollowCount() {
 		return followCount;
@@ -66,6 +67,14 @@ public class Member {
 	}
 	public void setProfileImg(String profileImg) {
 		this.profileImg = profileImg;
+	}
+	
+	
+	public int getFavoriteCount() {
+		return favoriteCount;
+	}
+	public void setFavoriteCount(int favoriteCount) {
+		this.favoriteCount = favoriteCount;
 	}
 	@Override
 	public String toString() {

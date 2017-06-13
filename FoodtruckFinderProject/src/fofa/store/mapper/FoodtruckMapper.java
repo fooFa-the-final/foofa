@@ -14,11 +14,11 @@ public interface FoodtruckMapper {
 	
 	Foodtruck selectById(String foodtruckId);
 	
-	List<HashMap<String, String>> selectByLoc(Map<String, Object> map);
+	List<HashMap<String, Object>> selectByLoc(Map<String, Object> map);
 	
-	List<HashMap<String, String>> selectByKeyLoc(Map<String, Object> map);
+	List<HashMap<String, Object>> selectByKeyLoc(Map<String, Object> map);
 	
-	List<HashMap<String, String>> selectByFilter(Map<String, Object> map);
+	List<HashMap<String, Object>> selectByFilter(Map<String, Object> map);
 	
 	Foodtruck selectBySellerId(String sellerId);
 	
