@@ -6,10 +6,16 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.google.gson.Gson;
 
 import fofa.domain.Foodtruck;
 import fofa.domain.Review;
@@ -69,15 +75,37 @@ public class MobileSellerController {
 	}
 	
 	@RequestMapping(value = "/mobile/review/list/turck.do", produces="application/xml")
-	public @ResponseBody Reviews truckReviews(String foodtruckId){
-		
+	public @ResponseBody Reviews truckReviews(String id){
+		Foodtruck foodtruck = truckService.findBySeller(id);
 		List<Review> list = new ArrayList<>();
 		Reviews truckReviews = new Reviews();
-		list = reviewService.findByTruckId(foodtruckId);
+		list = reviewService.findByTruckId(foodtruck.getFoodtruckId());
 		truckReviews.setReviews(list);
 		return truckReviews;
 	}
 	
+	@RequestMapping(value="/mobile/foodtruck/modify.do", method=RequestMethod.POST, produces="application/json")
+	public @ResponseBody String modifyFoodtruck(@RequestBody String data){
+		String result = "";
+		try {
+			
+			/*JSONParser jsonParser = new JSONParser();
+				
+			JSONObject jsonObject = (JSONObject) jsonParser.parse(data);*/
+										
+			result = "ok";
+			
+			Foodtruck foodtruck = new Gson().fromJson(data, Foodtruck.class);
+			foodtruck.toString();
+			System.out.println(data);
+				
+			//Do something..
+		}
+		catch (Exception e) {
+			result = "fail";
+		}
 	
+		return result;
+	}
 }			
 
