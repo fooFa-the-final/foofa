@@ -107,13 +107,13 @@ public class MobileMemberController {
 		return members;
 	}
 	@RequestMapping("/mobile/follow/remove")
-	public String removeFavoriteMusic(@RequestParam("memberId") String toId, HttpServletRequest req){
+	public String removeFollow(@RequestParam("memberId") String toId, HttpServletRequest req){
 		HttpSession session = req.getSession(false);
-		if(session == null || session.getAttribute("userId")==null){
-			return "redirect:login";
+		if(session == null || session.getAttribute("loginUserId")==null){
+			return "redirect:/mobile/memberlogin.do";
 		}
 		Follow follow = new Follow();
-		String fromId = (String) session.getAttribute("userId");
+		String fromId = (String) session.getAttribute("loginUserId");
 		follow.setFromId(fromId);
 		follow.setToId(toId);
 		System.out.println(follow);
