@@ -53,6 +53,9 @@ public class FollowController {
 	public String search(String fromId, HttpSession session, Model model){
 		if(fromId == null ){
 			fromId = (String)session.getAttribute("loginUserId");
+			if(fromId==null || fromId.equals("")){
+				return "redirect:/login.do";
+			}
 		}
 		Member member = memberService.findById(fromId);
 		model.addAttribute("member",member);

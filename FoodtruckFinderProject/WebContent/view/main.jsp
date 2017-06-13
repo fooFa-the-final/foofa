@@ -129,7 +129,7 @@
 											<p class="reviewContent">${review.contents }
 											</p>
 										</div>
-										<div style="float:left; width:180px">
+										<div class="reviewMainImg">
 											<img id="${review.reviewId}" src="${ctx }/resources/img/reviewImg/${review.mainImage.filename }" style="width: 160px; height:160px; margin:10px"/>
 											<div class="somenail-list">
 												<c:forEach var="image" varStatus="imageNo" items="${review.images }">

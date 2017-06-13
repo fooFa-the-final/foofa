@@ -135,8 +135,8 @@
 									</div>
 		                			<div class ="pannel-body">
 		                				<c:if test="${review.mainImage.filename != 'noimagefound.jpg'}">
-												<div style="float:left; width:180px; height:225px;">
-													<img id="${review.reviewId}" src="${ctx }/resources/img/reviewImg/${review.mainImage.filename }" style="width: 160px; height:160px; margin:10px"/>
+												<div class="reviewMainImg">
+													<img id="${review.reviewId}" src="${ctx }/resources/img/reviewImg/${review.mainImage.filename }" />
 													<div class="somenail-list">
 														<c:forEach var="image" varStatus="imageNo" items="${review.images }">
 															<img src="${ctx }/resources/img/reviewImg/${image.filename}" onclick="previewImage(this.src, '${review.reviewId}');"/>
