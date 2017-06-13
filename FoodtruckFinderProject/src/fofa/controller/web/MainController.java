@@ -1,7 +1,6 @@
 package fofa.controller.web;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
@@ -13,6 +12,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 import fofa.domain.Advertise;
 import fofa.domain.Foodtruck;
@@ -92,6 +93,13 @@ public class MainController {
 			}
 			nearTrucks.add(t);
 		}
+		
+        HttpServletRequest req = ((ServletRequestAttributes)RequestContextHolder.currentRequestAttributes()).getRequest();
+        String ip = req.getHeader("X-FORWARDED-FOR");
+        if (ip == null)
+            ip = req.getRemoteAddr();
+         
+        System.out.println("접속 ip"+ip);
 		model.addAttribute("nearTrucks", nearTrucks);
 		return "view/index.jsp";
 	}
