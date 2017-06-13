@@ -96,8 +96,8 @@ public class MobileMemberController {
 	}
 	
 	@RequestMapping(value = "/mobile/follow/list.do", produces="application/xml")
-	public @ResponseBody Members searchFollowers(String toId){
-		List<Follow> follow = followService.findFollow(toId);
+	public @ResponseBody Members searchFollowers(String fromId){
+		List<Follow> follow = followService.findFollow(fromId);
 		List<Member> member = new ArrayList<>();
 		for(Follow f : follow){
 			member.add(memberService.findById(f.getToId()));
@@ -124,29 +124,5 @@ public class MobileMemberController {
 		return foodtrucks;
 	}
 	
-	@RequestMapping(value="/mobile/foodtruck/modify.do", method=RequestMethod.POST, produces="application/json")
-	public @ResponseBody String modifyFoodtruck(@RequestBody String data){
-		String result = "";
-		try {
-			
-			JSONParser jsonParser = new JSONParser();
-				
-			JSONObject jsonObject = (JSONObject) jsonParser.parse(data);
-								
-				String name = jsonObject.get("name").toString();
-				String number = jsonObject.get("country").toString();
-				String twitter = jsonObject.get("twitter").toString();
-				
-				result = "ok";
-				
-				System.out.println(name + " " + number + " " + twitter);
-				
-	//Do something..
-		}
-		catch (Exception e) {
-			result = "fail";
-		}
 	
-		return result;
-	}
 }
