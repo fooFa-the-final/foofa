@@ -8,7 +8,9 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -111,9 +113,9 @@ public class MobileMemberController {
 			return "redirect:login";
 		}
 		Follow follow = new Follow();
-		Member fromId = (Member) session.getAttribute("userId");
-		follow.getFromId();
-		follow.getToId();
+		String fromId = (String) session.getAttribute("userId");
+		follow.setFromId(fromId);
+		follow.setToId(toId);
 		System.out.println(follow);
 		followService.remove(follow);
 		
