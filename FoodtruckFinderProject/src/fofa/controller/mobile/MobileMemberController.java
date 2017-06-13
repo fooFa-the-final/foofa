@@ -94,6 +94,14 @@ public class MobileMemberController {
 		return reviews;
 	}
 	
+	@RequestMapping(value = "/mobile/review/member/list.do", produces="application/xml")
+	public @ResponseBody Reviews searchReviewByMember(String memberId){
+		List<Review> review = reviewService.findByMemberId(memberId);
+		Reviews reviews = new Reviews();
+		reviews.setReviews(review);
+		return reviews;
+	}
+	
 	@RequestMapping(value = "/mobile/follow/list.do", produces="application/xml")
 	public @ResponseBody Members searchFollowers(String fromId){
 		List<Follow> follow = followService.findFollow(fromId);
