@@ -34,6 +34,20 @@ a.link {font-size: 0.7em; color:blue;}
 display:inline; border-left: 1px solid #999; padding: 0 20px;}
 .horizonal-ul li:first-child{border-left:none;}
 
+#trapezoid {
+	border-top: 500px solid rgba(255, 0, 0, 0.6);
+	border-right: 150px solid transparent;
+	height: 0;
+	width: 350px;
+}
+
+.mainTableDiv {
+width:750px;
+height:500px; background-image:url('${ctx}/resources/img/waikiki.jpg'); padding:0;
+background-position: right center;
+	background-repeat : no-repeat;
+	background-size :cover;display:inline-block;float:left;
+}
 </style>
 </head>
 
@@ -83,6 +97,24 @@ display:inline; border-left: 1px solid #999; padding: 0 20px;}
 	<!--  main-container -->
 	<div class="main-container">
 		<h3 class="page-header">Foodtruck Finder</h3>
+		<div class="row text-center" >
+				<h4>How about this?</h4>
+			<div class="sub-container" style="height:500px;">
+			<div class="mainTableDiv">
+			
+			<div id="trapezoid"></div>
+			
+			</div>
+			<div style="padding:0; display:inline-block; width:450px;">
+				<c:forEach varStatus="no" var="truck" items="${adTrucks }">
+					<div class="col-lg-4" style="height:150px; padding:0;">
+						<img src="${ctx}/resources/img/truck/${truck.foodtruckImg }"  style="width:150px; height:150px;"onclick="location.href='${ctx }/review/list/truck.do?foodtruckId=${truck.foodtruckId}'"/>
+					</div>
+				</c:forEach>
+			</div>
+			</div>
+		</div>
+		
 		<div class="row">
 				<h4>How about this?</h4>
 				<div class="w3-content w3-display-container text-center">
