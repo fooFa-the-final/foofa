@@ -419,7 +419,8 @@ div.main-container div.sub-container {
 }
 
 div.div-gray {
-	background-color: #eee;
+	background-color: #eee;	
+	padding:30px 0;
 }
 
 img.main-truck-img {

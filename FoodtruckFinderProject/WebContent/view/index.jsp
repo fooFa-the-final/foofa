@@ -39,7 +39,7 @@ display:inline; border-left: 1px solid #999; padding: 0 20px;}
 	border-top: 360px solid rgba(255, 246, 244, 0.84);
 	border-right: 150px solid transparent;
 	height: 0;
-	width: 350px;
+	width: 330px;
 	 position:absolute;
 }
 
@@ -136,7 +136,7 @@ text-align:left;
 					</div>				
 					<div style="padding:0; display:inline-block; width:360px;">
 					</c:if>
-							<div class="col-lg-4 background-cover mainTableImgs" 
+							<div class="col-lg-4 background-cover mainTableImgs effect" 
 							style="background-image:url('${ctx}/resources/img/truck/${truck.foodtruckImg }');"
 							onmouseover="show('${truck.foodtruckImg}', '${truck.foodtruckName }', '${truck.score }', '${truck.location }', this);"
 							onclick="location.href='${ctx }/review/list/truck.do?foodtruckId=${truck.foodtruckId}"
