@@ -120,7 +120,7 @@ text-align:left;
 		<h3 class="page-header">Foodtruck Finder</h3>
 		<div class="row" >
 				<h4>How about this?</h4>
-			<div class="sub-container" style="height:400px;">
+			<div class="sub-container" >
 				<c:forEach varStatus="no" var="truck" items="${adTrucks }">
 					<c:if test="${no.index == 0 }">
 					<div id="mainTable" class="background-cover mainTableDiv" style="background-image:url('${ctx}/resources/img/truck/${truck.foodtruckImg }');">
