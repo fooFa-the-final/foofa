@@ -31,6 +31,11 @@
   		WHERE menu_id=#{menuId} AND foodtruck_id=#{foodtruckId}
   	</delete>
   	
+  	<delete id="deleteAll" parameterType="String">
+  		DELETE FROM menu_tb
+  		WHERE foodtruck_id=#{foodtruckId}
+  	</delete>
+  	
   	<select id="selectByTruckId" parameterType="String" resultMap="menuMap">
   		SELECT menu_id, menu_name, price, menu_state, foodtruck_id
   		FROM menu_tb

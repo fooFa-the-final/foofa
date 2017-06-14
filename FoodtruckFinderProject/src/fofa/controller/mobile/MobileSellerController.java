@@ -110,7 +110,7 @@ public class MobileSellerController {
 	
 	
 	
-	@RequestMapping(value="/mobile/foodtruck/modify.do", method=RequestMethod.POST, produces="application/json")
+	@RequestMapping(value="/mobile/foodtruck/open.do", method=RequestMethod.POST, produces="application/json")
 	public @ResponseBody String modifyFoodtruck(@RequestBody String data){
 		Gson gson = new GsonBuilder().create();
 		String result = "";
@@ -119,6 +119,8 @@ public class MobileSellerController {
 				
 			Foodtruck foodtruck = gson.fromJson(((JSONObject) jsonParser.parse(data)).toJSONString(), Foodtruck.class);
 			foodtruck.setState(true);
+			String[] img = foodtruck.getFoodtruckImg().split("/");
+			foodtruck.setFoodtruckImg(img[img.length-1]);
 			truckService.modify(foodtruck);
 			System.out.println(foodtruck.toString());
 				

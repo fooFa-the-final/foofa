@@ -37,12 +37,7 @@ public class FoodtruckServiceLogic implements FoodtruckService{
 	public boolean modify(Foodtruck foodtruck) {
 		int modTruck = foodtruckStore.update(foodtruck);
 		List<Menu> menus = foodtruck.getMenus();
-		int modMenu = 0;
-		
-		for(Menu menu : menus){
-			modMenu = menuStore.update(menu);
-		}
-		
+		int modMenu = menuStore.update(menus);
 		return modTruck > 0 && modMenu > 0;
 	}
 
