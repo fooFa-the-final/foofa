@@ -18,12 +18,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import fofa.domain.Advertise;
 import fofa.domain.Foodtruck;
 import fofa.domain.Menu;
 import fofa.domain.Menus;
 import fofa.domain.Review;
 import fofa.domain.Reviews;
 import fofa.domain.Seller;
+import fofa.service.AdvertiseService;
 import fofa.service.FoodtruckService;
 import fofa.service.ReviewService;
 import fofa.service.SellerService;
@@ -37,6 +39,9 @@ public class MobileSellerController {
 	private FoodtruckService truckService;
 	@Autowired
 	private ReviewService reviewService;
+	@Autowired
+	private AdvertiseService advertiseService;
+	
 	
 	@RequestMapping(value="/mobile/sellerlogin.do")
 	public @ResponseBody String sellerLogin(String id, String password) {
@@ -124,6 +129,18 @@ public class MobileSellerController {
 		}
 		
 		return result;
+	}
+	
+	@RequestMapping(value="/mobile/advertiseRegister.do", produces="application/json", method=RequestMethod.POST)
+	public @ResponseBody String memberLogin(@RequestBody Advertise advertise) {
+
+		advertiseService.register(advertise);
+		
+		if(!advertiseService.register(advertise)){
+				return "true";
+			}else{
+				return "false";
+			}
 	}
 	
 	
