@@ -419,7 +419,8 @@ div.main-container div.sub-container {
 }
 
 div.div-gray {
-	background-color: #eee;
+	background-color: #eee;	
+	padding:30px 0;
 }
 
 img.main-truck-img {
@@ -476,7 +477,7 @@ img.somenail {
 }
 
 .starRating {
-	width: 79px;
+	width: 78px;
 	vertical-align: middle;
 }
 
@@ -487,6 +488,28 @@ img.somenail {
 	text-indent: -100px;
 	*text-indent: 0;
 	background-position: 0 -14px;
+}
+
+/* Star Rating */
+.starRating2, .starRating2 span {
+	display: inline-block;
+	height: 27px;
+	background: transparent url(../img/icoFiveStar150.gif) no-repeat;
+	overflow: hidden;
+}
+
+.starRating2 {
+	width: 150px;
+	vertical-align: middle;
+}
+
+.starRating2 span {
+	font-size: 0;
+	line-height: 0;
+	vertical-align: top;
+	text-indent: -100px;
+	*text-indent: 0;
+	background-position: 0 -27px;
 }
 
 .review-heading {

@@ -39,7 +39,7 @@ public class SalesController {
 	}
 
 	@RequestMapping(value = "sales/modify.do", method = RequestMethod.POST)
-	public String modify(HttpServletRequest req,Sale sale) {
+	public String modify(HttpServletRequest req, Sale sale) {
 		/*
 		 * HttpSession session = req.getSession(); String foodtruckId = (String)
 		 * session.getAttribute("loginTruckId");
@@ -74,12 +74,11 @@ public class SalesController {
 		 * session.getAttribute("loginTruckId");
 		 */
 		Sale sale = service.findDateSale(date, "F1");
-		
-	
-			JSONObject obj = new JSONObject();
-			obj.put("re", sale.getRevenue());
-			obj.put("lo", sale.getLocation());
-			obj.put("da", sale.getDate());
+
+		JSONObject obj = new JSONObject();
+		obj.put("re", sale.getRevenue());
+		obj.put("lo", sale.getLocation());
+		obj.put("da", sale.getDate());
 
 		System.out.println("date : " + obj);
 
@@ -88,10 +87,9 @@ public class SalesController {
 
 	@RequestMapping(value = "sales/year.do")
 	public @ResponseBody JSONArray search1YearSales(HttpServletRequest req) {
-		/*
-		 * HttpSession session = req.getSession(); String foodtruckId = (String)
-		 * session.getAttribute("loginTruckId");
-		 */
+		HttpSession session = req.getSession();
+		String foodtruckId = (String) session.getAttribute("loginTruckId");
+
 		List<Sale> list = new ArrayList<>();
 
 		for (int i = 0; i < 12; i++) {
@@ -101,43 +99,55 @@ public class SalesController {
 		}
 
 		for (int i = 0; i < 12; i++) {
-			for (int j = 0; j < service.find1YearSales("F1").size(); j++) {
-				if ("0".equals(service.find1YearSales("F1").get(j).getDate().substring(5))) {
+			for (int j = 0; j < service.find1YearSales(foodtruckId).size(); j++) {
+				if ("0".equals(service.find1YearSales(foodtruckId).get(j).getDate().substring(5))) {
 					list.remove(9);
-					list.add(9, service.find1YearSales("F1").get(j));
-				} else if ("1".equals(service.find1YearSales("F1").get(j).getDate().substring(5))) {
-					if ("01".equals(service.find1YearSales("F1").get(j).getDate().substring(4))) {
+					list.add(9, service.find1YearSales(foodtruckId).get(j));
+				} else if ("1".equals(service.find1YearSales(foodtruckId).get(j).getDate().substring(5))) {
+					if ("01".equals(service.find1YearSales(foodtruckId).get(j).getDate().substring(4))) {
 						list.remove(0);
-						list.add(0, service.find1YearSales("F1").get(j));
+						list.add(0, service.find1YearSales(foodtruckId).get(j));
 					}
-					if ("11".equals(service.find1YearSales("F1").get(j).getDate().substring(4))) {
+					if ("11".equals(service.find1YearSales(foodtruckId).get(j).getDate().substring(4))) {
 						list.remove(10);
-						list.add(10, service.find1YearSales("F1").get(j));
+						list.add(10, service.find1YearSales(foodtruckId).get(j));
 					}
-				} else if ("2".equals(service.find1YearSales("F1").get(j).getDate().substring(5))) {
-					if ("02".equals(service.find1YearSales("F1").get(j).getDate().substring(4))) {
+				} else if ("2".equals(service.find1YearSales(foodtruckId).get(j).getDate().substring(5))) {
+					if ("02".equals(service.find1YearSales(foodtruckId).get(j).getDate().substring(4))) {
 						list.remove(1);
-						list.add(1, service.find1YearSales("F1").get(j));
+						list.add(1, service.find1YearSales(foodtruckId).get(j));
 					}
-					if ("12".equals(service.find1YearSales("F1").get(j).getDate().substring(4))) {
+					if ("12".equals(service.find1YearSales(foodtruckId).get(j).getDate().substring(4))) {
 						list.remove(11);
-						list.add(11, service.find1YearSales("F1").get(j));
+						list.add(11, service.find1YearSales(foodtruckId).get(j));
 					}
 				}
 
-				else if (Integer.toString(i + 1).equals(service.find1YearSales("F1").get(j).getDate().substring(5))) {
+				else if (Integer.toString(i + 1).equals(service.find1YearSales(foodtruckId).get(j).getDate().substring(5))) {
 					list.remove(i);
-					list.add(i, service.find1YearSales("F1").get(j));
+					list.add(i, service.find1YearSales(foodtruckId).get(j));
 				}
 			}
 		}
-
+		////////////////////////// 밑으로 json변환 부분
 		JSONArray jsonArray = new JSONArray();
+
+		int max = 0;// 그래프의 최대값 계산
+		int inc = 0;// 최대값을 10으로 나눈 값
+
+		for (int i = 0; i < list.size(); i++) {
+			if (max < list.get(i).getRevenue()) {
+				max = list.get(i).getRevenue();
+			}
+		}
+		inc = max / 10;
 
 		for (int i = 0; i < list.size(); i++) {
 
 			JSONObject obj = new JSONObject();
 			obj.put("re", list.get(i).getRevenue());
+			obj.put("max", max);
+			obj.put("inc", inc);
 			jsonArray.add(obj);
 
 		}
@@ -149,10 +159,10 @@ public class SalesController {
 
 	@RequestMapping(value = "sales/10days.do")
 	public @ResponseBody JSONArray search10DaysSales(HttpServletRequest req) {
-		/*
-		 * HttpSession session = req.getSession(); String foodtruckId = (String)
-		 * session.getAttribute("loginTruckId");
-		 */
+
+		HttpSession session = req.getSession();
+		String foodtruckId = (String) session.getAttribute("loginTruckId");
+
 		List<Sale> list = new ArrayList<>();
 
 		for (int i = 0; i < 10; i++) {
@@ -163,7 +173,7 @@ public class SalesController {
 		}
 
 		int k = 0;
-		for (Sale sale : service.find10DaysSales("F1")) {
+		for (Sale sale : service.find10DaysSales(foodtruckId)) {
 			String date = sale.getDate().substring(4);
 			sale.setDate(date);
 			list.remove(9 - k);
@@ -171,18 +181,31 @@ public class SalesController {
 			k++;
 		}
 
+		////////////////////////// 밑으로 json변환 부분
 		JSONArray jsonArray = new JSONArray();
+
+		int max = 0;
+		int inc = 0;
+
+		for (int i = 0; i < list.size(); i++) {
+			if (max < list.get(i).getRevenue()) {
+				max = list.get(i).getRevenue();
+			}
+		}
+		inc = max / 10;
 
 		for (int i = 0; i < list.size(); i++) {
 
 			JSONObject obj = new JSONObject();
 			obj.put("re", list.get(i).getRevenue());
 			obj.put("da", list.get(i).getDate());
+			obj.put("max", max);
+			obj.put("inc", inc);
 			jsonArray.add(obj);
 
 		}
 
-		System.out.println(jsonArray);
+		System.out.println("10days : " + jsonArray);
 		return jsonArray;
 
 	}

@@ -67,7 +67,7 @@
 			<li class="row">
 				<div class="col-lg-12">
 					<a class="navbar-brand" style="align: center"
-						href="${ctx }/index.do"> <img style="height:60px;" src="${ctx}/resources/img/mainLogo.png" alt="" />
+						href="${ctx }/main.do"> <img style="height:60px;" src="${ctx}/resources/img/mainLogo.png" alt="" />
 					</a>
 				</div>
 			</li>
@@ -99,54 +99,7 @@
 	<div class="main-container">
 		<h3 class="page-header">Foodtruck Finder</h3>
 		<div class="row">
-			<h4>Recent Activity</h4>
-			<div class="sub-container">
-				<div class="col-lg-9">
-					<c:choose>
-						<c:when test="${fn:length(reviews) == 0 }">
-								<div class="panel panel-primary text-left">
-									등록된 팔로우들의 리뷰가 없습니다.
-								</div>							
-						</c:when>
-						<c:otherwise>
-							<c:forEach var="review" varStatus="reviewNo" items="${reviews }">
-								<div class="panel panel-primary text-left">
-									<div class="review-heading padding-10">
-										<img class="somenail" src="${ctx }/resources/upload/${review.writer.profileImg }"/>
-										<div style="float:left; width:80%;">
-											<ul>
-												<li><a href="${ctx }/review/list/member.do?memberId=${review.writer.memberId }">${review.writer.memberId }</a></li>
-												<li> <span class="sub-li-follow"><i class="fa fa-thumbs-up"></i> ${review.recommand } </span>
-													 <span class="sub-li-favorite">71 </span>
-												</li>
-												<li> <a href="${ctx }/review/list/truck.do?foodtruckId=${review.foodtruck.foodtruckId }">${review.foodtruck.foodtruckName }</a> 에 대한 리뷰 </li>
-											</ul>
-										</div>
-									</div>
-									<div class="panel-body ">
-										<div style="display:block;width:500px; float:right;">
-											<span class="starRating" style="text-align:left;"><span style="width: ${review.score *20}%">${review.score }점</span></span> ${review.writeDate}
-											<p class="reviewContent">${review.contents }
-											</p>
-										</div>
-										<div class="reviewMainImg">
-											<img id="${review.reviewId}" src="${ctx }/resources/img/reviewImg/${review.mainImage.filename }" style="width: 160px; height:160px; margin:10px"/>
-											<div class="somenail-list">
-												<c:forEach var="image" varStatus="imageNo" items="${review.images }">
-													<img src="${ctx }/resources/img/reviewImg/${image.filename}" onclick="previewImage(this.src, '${review.reviewId}');"/>
-												</c:forEach>
-											</div>
-										</div>							
-									</div>
-								</div>					
-							</c:forEach>						
-						</c:otherwise>
-					</c:choose>
-					
-
-				</div>
-
-				<div class="col-lg-3">
+		
 					<div class="alert alert-warning text-center">
 						<i class="fa fa-thumbs-up fa-2x"></i>
 						<b>500</b> 단골 <br/>
@@ -167,7 +120,140 @@
 						<i class="fa fa-tumbs-up fa-1x"></i>
 						<b>500</b> 팔로우  
 					</div>		
-				</div>	
+		</div>
+		
+		<div class="row">
+			<h4>Recent Activity</h4>
+			<div class="sub-container" style="text-align:left;">
+				<div class="col-lg-12">
+					<c:set scope="page" var="lsize" value="${fn:length(reviews) /3 }"/>
+					<c:choose>
+						<c:when test="${fn:length(reviews) == 0 }">
+								<div class="panel panel-primary text-left">
+									등록된 팔로우들의 리뷰가 없습니다.
+								</div>							
+						</c:when>
+						<c:otherwise>
+							<c:forEach var="review" varStatus="reviewNo" items="${reviews }">
+								<c:choose>
+									<c:when test="${reviewNo.count < lsize+1 }">
+									<c:if test="${reviewNo.count == 1 }">
+									<div class="col-lg-4">
+									</c:if>
+										<div class="panel panel-default" id="${reviewNo.count }">
+											<div class="panel-heading" style="height:80px;">
+												<img class="somenail" src="${ctx }/resources/upload/${review.writer.profileImg }"/>
+												<div style="float:left; width:220px; margin-left:10px; overflow:hidden;">
+													<ul class="list-unstyled">
+														<li><a href="${ctx }/review/list/member.do?memberId=${review.writer.memberId }">${review.writer.memberId }</a></li>
+														<li> <span class="sub-li-follow"><i class="fa fa-thumbs-up"></i> ${review.recommand } </span>
+															 <span class="sub-li-favorite">71 </span>
+														</li>
+														<li style="overflow:hidden;"> <a href="${ctx }/review/list/truck.do?foodtruckId=${review.foodtruck.foodtruckId }">${review.foodtruck.foodtruckName }</a> 에 대한 리뷰 </li>
+													</ul>
+												</div>	
+											</div>
+											<div class="panel-body" style="min-height:150px;">
+												<c:if test="${review.mainImage.filename != 'noimagefound.jpg'}">
+												<div class="reviewMainImg" style="width:100%; padding-bottom:10px; border-bottom:1px solid #eee; margin-bottom:10px;">
+													<img id="${review.reviewId}" src="${ctx }/resources/img/reviewImg/${review.mainImage.filename }" style="width: 80%; height:160px; margin:0px; float:left;"/>
+													<div class="somenail-list" style="width:2%;float:left;">
+														<c:forEach var="image" varStatus="imageNo" items="${review.images }">
+															<img src="${ctx }/resources/img/reviewImg/${image.filename}" onclick="previewImage(this.src, '${review.reviewId}');"/>
+														</c:forEach>
+													</div>
+												</div>	
+												</c:if>
+												<p>
+											${review.contents }1111
+											</p>
+											</div>									
+											
+										</div>
+									</c:when>
+									<c:when test="${reviewNo.count > lsize*2 }">
+										<div class="panel panel-default">
+											<div class="panel-heading" style="height:80px;">
+												<img class="somenail" src="${ctx }/resources/upload/${review.writer.profileImg }"/>
+												<div style="float:left; width:220px; margin-left:10px; overflow:hidden;">
+													<ul class="list-unstyled">
+														<li><a href="${ctx }/review/list/member.do?memberId=${review.writer.memberId }">${review.writer.memberId }</a></li>
+														<li> <span class="sub-li-follow"><i class="fa fa-thumbs-up"></i> ${review.recommand } </span>
+															 <span class="sub-li-favorite">71 </span>
+														</li>
+														<li style="overflow:hidden;"> <a href="${ctx }/review/list/truck.do?foodtruckId=${review.foodtruck.foodtruckId }">${review.foodtruck.foodtruckName }</a> 에 대한 리뷰 </li>
+													</ul>
+												</div>	
+											</div>
+											<div class="panel-body" style="min-height:150px;">
+												<c:if test="${review.mainImage.filename != 'noimagefound.jpg'}">
+												<div class="reviewMainImg" style="width:100%; padding-bottom:10px; border-bottom:1px solid #eee; margin-bottom:10px;">
+													<img id="${review.reviewId}" src="${ctx }/resources/img/reviewImg/${review.mainImage.filename }" style="width: 80%; height:160px; margin:0px; float:left;"/>
+													<div class="somenail-list" style="width:2%;float:left;">
+														<c:forEach var="image" varStatus="imageNo" items="${review.images }">
+															<img src="${ctx }/resources/img/reviewImg/${image.filename}" onclick="previewImage(this.src, '${review.reviewId}');"/>
+														</c:forEach>
+													</div>
+												</div>	
+												</c:if>
+												<p>
+											${review.contents }2222${reviewNo.count }${lsize }
+											</p>
+											</div>									
+											
+										</div>
+									</c:when>
+									<c:otherwise>
+										<c:if test="${reviewNo.count <= lsize+2 }">
+										</div>
+										<div class="col-lg-4" id="next">
+										</c:if>
+											<div class="panel panel-default">
+												<div class="panel-heading" style="height:80px;">
+													<img class="somenail" src="${ctx }/resources/upload/${review.writer.profileImg }"/>
+													<div style="float:left; width:220px; margin-left:10px; overflow:hidden;">
+														<ul class="list-unstyled">
+															<li><a href="${ctx }/review/list/member.do?memberId=${review.writer.memberId }">${review.writer.memberId }</a></li>
+															<li> <span class="sub-li-follow"><i class="fa fa-thumbs-up"></i> ${review.recommand } </span>
+																 <span class="sub-li-favorite">71 </span>
+															</li>
+															<li style="overflow:hidden;"> <a href="${ctx }/review/list/truck.do?foodtruckId=${review.foodtruck.foodtruckId }">${review.foodtruck.foodtruckName }</a> 에 대한 리뷰 </li>
+														</ul>
+													</div>	
+												</div>
+												<div class="panel-body" style="min-height:150px;">
+													<c:if test="${review.mainImage.filename != 'noimagefound.jpg'}">
+													<div class="reviewMainImg" style="width:100%; padding-bottom:10px; border-bottom:1px solid #eee; margin-bottom:10px;">
+														<img id="${review.reviewId}" src="${ctx }/resources/img/reviewImg/${review.mainImage.filename }" style="width: 80%; height:160px; margin:0px; float:left;"/>
+														<div class="somenail-list" style="width:2%;float:left;">
+															<c:forEach var="image" varStatus="imageNo" items="${review.images }">
+																<img src="${ctx }/resources/img/reviewImg/${image.filename}" onclick="previewImage(this.src, '${review.reviewId}');"/>
+															</c:forEach>
+														</div>
+													</div>	
+													</c:if>
+													<p>
+												${review.contents }3333${reviewNo.count }
+												</p>
+												</div>									
+												
+											</div>
+										
+										<c:if test="${reviewNo.count >= lsize*2-1 }">
+										</div>
+										<div class="col-lg-4">
+										</c:if>
+									</c:otherwise>
+								</c:choose>
+							
+							</c:forEach>		
+							</div>				
+						</c:otherwise>
+					</c:choose>
+					
+
+				</div>
+
 			</div>
 		</div>
 	</div>
