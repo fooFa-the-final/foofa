@@ -114,19 +114,15 @@ public class MobileSellerController {
 				
 			Foodtruck foodtruck = gson.fromJson(((JSONObject) jsonParser.parse(data)).toJSONString(), Foodtruck.class);
 			foodtruck.setState(true);
-			foodtruck.setFoodtruckImg("food8.jpg");
-			foodtruck.setSpot("제주 애월읍");
-			foodtruck.setCategory1("브라질//");
 			truckService.modify(foodtruck);
 			System.out.println(foodtruck.toString());
 				
-			//Do something..
 			result = "ok";
 		}
 		catch (Exception e) {
 			result = "fail";
 		}
-		System.out.println(result);
+		
 		return result;
 	}
 	
