@@ -144,5 +144,11 @@ public class MobileMemberController {
 		return foodtrucks;
 	}
 	
+
+	@RequestMapping(value = "/mobile/member/detail.do", produces="application/xml")
+	public @ResponseBody Member detail(String id){
+		Member member = memberService.findById(id);
+		return member;
+	}
 	
 }
