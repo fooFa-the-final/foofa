@@ -132,15 +132,23 @@ public class MobileSellerController {
 	}
 	
 	@RequestMapping(value="/mobile/advertiseRegister.do", produces="application/json", method=RequestMethod.POST)
-	public @ResponseBody String memberLogin(@RequestBody Advertise advertise) {
-
-		advertiseService.register(advertise);
+	public @ResponseBody String mobileAdvRegister(@RequestBody String data) {
+		Gson gson = new GsonBuilder().create();
+		String result = "";
 		
-		if(!advertiseService.register(advertise)){
-				return "true";
-			}else{
-				return "false";
-			}
+		try {
+			JSONParser jsonParser = new JSONParser();
+				
+			Advertise advertise = gson.fromJson(((JSONObject) jsonParser.parse(data)).toJSONString(), Advertise.class);
+			advertiseService.register(advertise);
+				
+			result = "true";
+		}
+		catch (Exception e) {
+			result = "false";
+		}
+		
+		return result;
 	}
 	
 	
