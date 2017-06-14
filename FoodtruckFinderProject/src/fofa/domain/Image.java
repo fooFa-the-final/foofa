@@ -1,5 +1,14 @@
 package fofa.domain;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
+
+import org.springframework.stereotype.Component;
+
+@XmlRootElement(name="image")
+@XmlAccessorType(XmlAccessType.FIELD)
+@Component
 public class Image {
 	private String imageId;
 	private String category;
