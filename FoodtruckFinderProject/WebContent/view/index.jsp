@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt" %>
 <!DOCTYPE>
 <html>
@@ -35,18 +36,38 @@ display:inline; border-left: 1px solid #999; padding: 0 20px;}
 .horizonal-ul li:first-child{border-left:none;}
 
 #trapezoid {
-	border-top: 500px solid rgba(255, 0, 0, 0.6);
+	border-top: 360px solid rgba(255, 246, 244, 0.84);
 	border-right: 150px solid transparent;
 	height: 0;
 	width: 350px;
+	 position:absolute;
 }
 
 .mainTableDiv {
-width:750px;
-height:500px; background-image:url('${ctx}/resources/img/waikiki.jpg'); padding:0;
-background-position: right center;
+width:740px;
+height:360px;  padding:0;
+background-position: right center;display:inline-block;float:left; position:relative;
+}
+
+.background-cover{
+	background-position: center center;
 	background-repeat : no-repeat;
-	background-size :cover;display:inline-block;float:left;
+	background-size :cover;
+}
+
+#mainTableh3{
+color:rgb(130, 7, 9);
+font-size:2.4em;
+
+}
+#mainTableh4{
+font-size:1.8em;
+text-align:left;
+}
+
+.mainTableImgs{
+ border: 1px solid #eee;
+ height:120px; padding:10px;  
 }
 </style>
 </head>
@@ -97,79 +118,38 @@ background-position: right center;
 	<!--  main-container -->
 	<div class="main-container">
 		<h3 class="page-header">Foodtruck Finder</h3>
-		<div class="row text-center" >
+		<div class="row" >
 				<h4>How about this?</h4>
-			<div class="sub-container" style="height:500px;">
-			<div class="mainTableDiv">
-			
-			<div id="trapezoid"></div>
-			
-			</div>
-			<div style="padding:0; display:inline-block; width:450px;">
+			<div class="sub-container" style="height:400px;">
 				<c:forEach varStatus="no" var="truck" items="${adTrucks }">
-					<div class="col-lg-4" style="height:150px; padding:0;">
-						<img src="${ctx}/resources/img/truck/${truck.foodtruckImg }"  style="width:150px; height:150px;"onclick="location.href='${ctx }/review/list/truck.do?foodtruckId=${truck.foodtruckId}'"/>
-					</div>
-				</c:forEach>
-			</div>
+					<c:if test="${no.index == 0 }">
+					<div id="mainTable" class="background-cover mainTableDiv" style="background-image:url('${ctx}/resources/img/truck/${truck.foodtruckImg }');">
+					
+						<div id="trapezoid">
+						</div>
+						<div  style=" font-weight:bold; position:absolute; left:15px; top:20px; text-align:left;">
+							<h3 id="mainTableh3">${truck.foodtruckName }</h3>
+							<h4 id="mainTableh4"><span class="starRating2" style="text-align:left;"><span id="mainTableScore" style="width: ${truck.score*20 }%">${truck.score }점</span></span></h4>
+							<img src="${ctx }/resources/img/location.png" style="width:30px; " ><span id="mainTableLocation"style="line-height:13px;vertical-align:bottom;">&nbsp;${truck.location }</span>
+						</div>
+					
+					</div>				
+					<div style="padding:0; display:inline-block; width:360px;">
+					</c:if>
+							<div class="col-lg-4 background-cover mainTableImgs" 
+							style="background-image:url('${ctx}/resources/img/truck/${truck.foodtruckImg }');"
+							onmouseover="show('${truck.foodtruckImg}', '${truck.foodtruckName }', '${truck.score }', '${truck.location }', this);"
+							onclick="location.href='${ctx }/review/list/truck.do?foodtruckId=${truck.foodtruckId}"
+							>
+							<!-- 	<div style="padding:10px; border-radius:10px; border:1px solid white; height:100%;"></div> -->
+							</div>
+					<c:if test="${no.count == fn:length(adTrucks) }">
+					</div>	
+					</c:if>
+			</c:forEach>
 			</div>
 		</div>
-		
-		<div class="row">
-				<h4>How about this?</h4>
-				<div class="w3-content w3-display-container text-center">
-						<c:forEach varStatus="no" var="truck" items="${adTrucks }">
-							<c:choose>	
-								<c:when test="${(no.count mod 3) == 1 }">
-								<div class="mySlides">	
-									<div class="col-lg-4">
-										<div class="panel panel-danger">
-											<div class="panel-header">
-												<img src="${ctx}/resources/img/truck/${truck.foodtruckImg }" class="main-truck-img"onclick="location.href='${ctx }/review/list/truck.do?foodtruckId=${truck.foodtruckId}'"/>
-											</div>
-											<div class="panel-body text-left">
-												<b><a href="${ctx }/review/list/truck.do?foodtruckId=${truck.foodtruckId }">${truck.foodtruckName }</a></b> <br> <p > 평점 :<span class="starRating" style="text-align:left;"><span style="width: ${truck.score*20 }%">${truck.score }점</span></span></p>리뷰수 : ${truck.reviewCount }
-											</div>
-										</div>
-									</div>		
-								</c:when>
-								<c:when test="${(no.count mod 3) == 2 }">
-									<div class="col-lg-4">
-										<div class="panel panel-danger">
-											<div class="panel-header">
-												<img src="${ctx}/resources/img/truck/${truck.foodtruckImg }" class="main-truck-img" onclick="location.href='${ctx }/review/list/truck.do?foodtruckId=${truck.foodtruckId}'"/>
-											</div>
-											<div class="panel-body text-left">
-													<b><a href="${ctx }/review/list/truck.do?foodtruckId=${truck.foodtruckId }">${truck.foodtruckName }</a></b> <br> <p > 평점 :<span class="starRating" style="text-align:left;"><span style="width: ${truck.score*20 }%">${truck.score }점</span></span></p>리뷰수 : ${truck.reviewCount }
-											</div>
-										</div>
-									
-									</div>	
-								</c:when>
-								<c:otherwise>
-									<div class="col-lg-4">
-										<div class="panel panel-danger">
-											<div class="panel-header">
-												<img src="${ctx}/resources/img/truck/${truck.foodtruckImg }" class="main-truck-img" onclick="location.href='${ctx }/review/list/truck.do?foodtruckId=${truck.foodtruckId}'" />
-											</div>
-											<div class="panel-body text-left">
-													<b><a href="${ctx }/review/list/truck.do?foodtruckId=${truck.foodtruckId }">${truck.foodtruckName }</a></b> <br> <p > 평점 :<span class="starRating" style="text-align:left;"><span style="width: ${truck.score*20 }%">${truck.score }점</span></span></p>리뷰수 : ${truck.reviewCount }
-											</div>
-										</div>	
-									</div>
-								</div>			
-								</c:otherwise>
-							</c:choose>
-						</c:forEach>
-						<button class="w3-button w3-white w3-display-left" onclick="plusDivs(-1)">&#10094;</button>
-				 		<button class="w3-button w3-white w3-display-right" onclick="plusDivs(1)">&#10095;</button>
-						  <div class="w3-center w3-container w3-section w3-large w3-text-gray" style="width:100%">
-							    <span class="w3-badge demo w3-border w3-transparent w3-hover-gray" onclick="currentDiv(1)"></span>
-							    <span class="w3-badge demo w3-border w3-transparent w3-hover-gray" onclick="currentDiv(2)"></span>
-							    <span class="w3-badge demo w3-border w3-transparent w3-hover-gray" onclick="currentDiv(3)"></span>
-						  </div>
-					</div>
-				</div>
+
 				<div class="row div-gray" style="margin-top:20px;">
 					<h4>Hot Reviews</h4>
 					<div class="sub-container">
@@ -297,7 +277,6 @@ background-position: right center;
 	<script>
 var slideIndex = 1;
 var slideIndex2 = 1;
-showDivs(slideIndex);
 showDivs2(slideIndex2);
 
 function plusDivs(n) {
@@ -344,17 +323,16 @@ function showDivs2(n) {
 	  x[slideIndex2-1].style.display = "block";  
 	  dots[slideIndex2-1].className += " w3-gray";
 	}
-
-</script>
-
-	<!--  Page Script  -->
-	<script>
 	
 	$( document ).ready(function() {
 		var mainImgSrc = "${mainFoodImg}";
 		var mainMemberSrc = "${mainMember.profileImg}";
 		
 		$("#mainNav").css("background-image", "url('${ctx}/resources/img/reviewImg/"+mainImgSrc+"')");
+		
+		$(".mainTableImgs").mouseout(function(){
+			$(this).css("border", "1px solid #eee");
+		});
 		
 	});
 	
@@ -379,6 +357,22 @@ function showDivs2(n) {
 			window.location.href = "${ctx}/searchByKeyLoc.do?location="+loc+'&keyword='+keyword;
 		}
 	};
+	
+	var show = function(img, name, score, location, div){
+		$(div).css('border', "1px solid red");
+		console.log("g"+location);
+		$("#mainTable").css('background-image', "url('${ctx}/resources/img/truck/"+img+"')");
+		$("#mainTableh3").text(name);
+		$("#mainTableScore").text(score);
+		$("#mainTableScore").css("width", score*20+"%");
+		$("#mainTableLocation").text(location);
+		
+		
+	};
+		
+		
+		
+
 	</script>
 </body>
 </html>
