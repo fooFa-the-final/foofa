@@ -110,7 +110,7 @@ public class MobileSellerController {
 	
 	
 	
-	@RequestMapping(value="/mobile/foodtruck/modify.do", method=RequestMethod.POST, produces="application/json")
+	@RequestMapping(value="/mobile/foodtruck/open.do", method=RequestMethod.POST, produces="application/json")
 	public @ResponseBody String modifyFoodtruck(@RequestBody String data){
 		Gson gson = new GsonBuilder().create();
 		String result = "";
