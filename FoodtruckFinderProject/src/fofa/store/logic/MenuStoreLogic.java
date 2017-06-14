@@ -74,4 +74,21 @@ public class MenuStoreLogic implements MenuStore{
 		return list;
 	}
 
+	@Override
+	public int update(List<Menu> menus) {
+		SqlSession session = factory.openSession();
+		String foodtruckId = menus.get(0).getFoodtruckId();
+		try{
+			MenuMapper mapper = session.getMapper(MenuMapper.class);
+			mapper.deleteAll(foodtruckId);
+			for(Menu menu: menus){
+				mapper.insert(menu);
+			}
+			session.commit();
+		} finally {
+			session.close();
+		}
+		return 0;
+	}
+
 }

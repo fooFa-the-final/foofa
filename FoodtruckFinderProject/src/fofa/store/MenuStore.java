@@ -10,6 +10,8 @@ public interface MenuStore {
 	
 	int update(Menu menu);
 	
+	int update(List<Menu> menus);
+	
 	int delete(String menuId, String foodtruckId);
 	
 	List<Menu> selectByTruckId(String foodtruckId);

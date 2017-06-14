@@ -114,6 +114,8 @@ public class MobileSellerController {
 				
 			Foodtruck foodtruck = gson.fromJson(((JSONObject) jsonParser.parse(data)).toJSONString(), Foodtruck.class);
 			foodtruck.setState(true);
+			String[] img = foodtruck.getFoodtruckImg().split("/");
+			foodtruck.setFoodtruckImg(img[img.length-1]);
 			truckService.modify(foodtruck);
 			System.out.println(foodtruck.toString());
 				

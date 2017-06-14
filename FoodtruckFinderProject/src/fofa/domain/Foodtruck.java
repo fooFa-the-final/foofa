@@ -156,6 +156,15 @@ public class Foodtruck {
 	public void setScore(double score) {
 		this.score = score;
 	}
+	@Override
+	public String toString() {
+		return "Foodtruck [foodtruckId=" + foodtruckId + ", sellerId=" + sellerId + ", foodtruckName=" + foodtruckName
+				+ ", foodtruckImg=" + foodtruckImg + ", operationTime=" + operationTime + ", spot=" + spot + ", notice="
+				+ notice + ", location=" + location + ", category1=" + category1 + ", category2=" + category2
+				+ ", category3=" + category3 + ", card=" + card + ", parking=" + parking + ", drinking=" + drinking
+				+ ", catering=" + catering + ", state=" + state + ", favoriteCount=" + favoriteCount + ", reviewCount="
+				+ reviewCount + ", score=" + score + ", menus=" + menus + "]";
+	}
 	
 
 	

@@ -14,6 +14,8 @@ public interface MenuMapper {
 	
 	int delete(@Param("menuId")String menuId, @Param("foodtruckId")String foodtruckId);
 	
+	int deleteAll(String foodtruckId);
+	
 	List<Menu> selectByTruckId(String foodtruckId);
 	
 }

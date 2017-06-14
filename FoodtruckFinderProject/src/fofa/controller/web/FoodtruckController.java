@@ -101,10 +101,11 @@ public class FoodtruckController {
 		
 		for(int i = 0; i< menuNames.length; i++){
 			Menu menu = new Menu();
-			menu.setMenuId(menuId[i]);
+			//menu.setMenuId(menuId[i]);
 			menu.setMenuName(menuNames[i]);
 			menu.setPrice(Integer.parseInt(menuPrices[i]));
 			menu.setMenuState(Boolean.parseBoolean(menuStates[i]));
+			menu.setFoodtruckId(foodtruck.getFoodtruckId());
 			menus.add(menu);
 		}
 		foodtruck.setMenus(menus);

@@ -47,6 +47,11 @@ public class Menu {
 	public void setFoodtruckId(String foodtruckId) {
 		this.foodtruckId = foodtruckId;
 	}
+	@Override
+	public String toString() {
+		return "Menu [menuId=" + menuId + ", menuName=" + menuName + ", price=" + price + ", menuState=" + menuState
+				+ ", foodtruckId=" + foodtruckId + "]";
+	}
 	
 	
 	
