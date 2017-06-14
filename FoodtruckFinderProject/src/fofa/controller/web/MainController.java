@@ -47,13 +47,8 @@ public class MainController {
 		reviews.add(allReview.get(1));
 		reviews.add(allReview.get(2));
 		reviews.add(allReview.get(3));
-		model.addAttribute("reviews", reviews);
-		model.addAttribute("hotReview", allReview.get(0));
 
 		Review mainReview = reviewService.findMainReview();
-
-		model.addAttribute("mainFoodImg",mainReview.getImages().get(0).getFilename());	
-		model.addAttribute("mainMember", memberService.findById(mainReview.getWriter().getMemberId()));
 
 		List<Advertise> allAdv = advertiseService.findNowAd();
 		List<Foodtruck> adTrucks = new ArrayList<>();
@@ -62,7 +57,7 @@ public class MainController {
 			String sellerId = allAdv.get(i).getSellerId();
 			adTrucks.add(foodtruckService.findBySeller(sellerId));
 		}
-		model.addAttribute("adTrucks", adTrucks);
+
 		
 		List<HashMap<String, Object>> allTrucks = foodtruckService.findByLoc(1, "가산동");
 		List<Foodtruck> nearTrucks = new ArrayList<>();
@@ -86,13 +81,12 @@ public class MainController {
 			}
 			nearTrucks.add(t);
 		}
-		
-        HttpServletRequest req = ((ServletRequestAttributes)RequestContextHolder.currentRequestAttributes()).getRequest();
-        String ip = req.getHeader("X-FORWARDED-FOR");
-        if (ip == null)
-            ip = req.getRemoteAddr();
-         
-        System.out.println("접속 ip"+ip);
+
+		model.addAttribute("reviews", reviews);
+		model.addAttribute("hotReview", allReview.get(0));
+		model.addAttribute("mainFoodImg",mainReview.getImages().get(0).getFilename());	
+		model.addAttribute("mainMember", memberService.findById(mainReview.getWriter().getMemberId()));
+		model.addAttribute("adTrucks", adTrucks);
 		model.addAttribute("nearTrucks", nearTrucks);
 		return "view/index.jsp";
 	}
@@ -100,31 +94,66 @@ public class MainController {
 	@RequestMapping("main.do")
 	public String showMainLogin(HttpSession session, Model model){
 		String memberId = (String)session.getAttribute("loginUserId");
-		List<Review> followReviews = reviewService.findByFromId(memberId);
+		List<Review> beforFollowReviews = reviewService.findByFromId(memberId);
 
-		List<Review> reviews = new ArrayList<>();
-		if(followReviews.size()!=0){
+		List<Review> followReviews = new ArrayList<>();
+		if(beforFollowReviews.size()!=0){
 			for(int i = 0; i < 20; i++){
-			reviews.add(followReviews.get(i));
+				followReviews.add(beforFollowReviews.get(i));
 				}
 			}
-		
-		model.addAttribute("reviews", reviews);
 
-		List<Review> allReview = reviewService.findByRecommand();
-		Review mainReview = new Review();
-		while(true){
-			double mainRandom = Math.random();
-			int intMain = (int)(mainRandom*allReview.size());
-			Review randomReview = reviewService.findById(allReview.get(intMain).getReviewId());
-			if((!randomReview.getImages().isEmpty()) && randomReview.getImages().get(0)!=null){
-				mainReview = randomReview;
-				break;
-			}
-		}
+		model.addAttribute("member", memberService.findById(memberId));
+		model.addAttribute("followReviews", followReviews);
 		
-		model.addAttribute("mainFoodImg", mainReview.getImages().get(0).getFilename());
+		
+//		index
+		List<Review> allReview = reviewService.findByRecommand();
+		List<Review> reviews = new ArrayList<>();
+		reviews.add(allReview.get(1));
+		reviews.add(allReview.get(2));
+		reviews.add(allReview.get(3));
+
+		Review mainReview = reviewService.findMainReview();
+
+		List<Advertise> allAdv = advertiseService.findNowAd();
+		List<Foodtruck> adTrucks = new ArrayList<>();
+
+		for(int i=0; i<9; i++){
+			String sellerId = allAdv.get(i).getSellerId();
+			adTrucks.add(foodtruckService.findBySeller(sellerId));
+		}
+
+		
+		List<HashMap<String, Object>> allTrucks = foodtruckService.findByLoc(1, "가산동");
+		List<Foodtruck> nearTrucks = new ArrayList<>();
+		for(int i=0; i<9; i++){
+			Foodtruck t = new Foodtruck();
+			t.setFoodtruckId((String)allTrucks.get(i).get("foodtruckId"));
+			t.setFoodtruckName((String)allTrucks.get(i).get("foodtruckName"));
+			t.setFoodtruckImg((String)allTrucks.get(i).get("foodtruckImg"));
+			t.setCategory1((String)allTrucks.get(i).get("category1"));
+			t.setSpot((String)allTrucks.get(i).get("spot"));
+			t.setLocation((String)allTrucks.get(i).get("location"));
+			if(allTrucks.get(i).get("score")!=null){
+			t.setFavoriteCount((int)allTrucks.get(i).get("favoriteCount"));
+			}
+			if(allTrucks.get(i).get("score")!=null){
+			t.setFavoriteCount((int)allTrucks.get(i).get("favoriteCount"));
+			}
+			t.setReviewCount((int)allTrucks.get(i).get("reviewCount"));
+			if(allTrucks.get(i).get("score")!=null){
+				t.setScore((double)allTrucks.get(i).get("score"));
+			}
+			nearTrucks.add(t);
+		}
+
+		model.addAttribute("reviews", reviews);
+		model.addAttribute("hotReview", allReview.get(0));
+		model.addAttribute("mainFoodImg",mainReview.getImages().get(0).getFilename());	
 		model.addAttribute("mainMember", memberService.findById(mainReview.getWriter().getMemberId()));
+		model.addAttribute("adTrucks", adTrucks);
+		model.addAttribute("nearTrucks", nearTrucks);
 		
 		return "view/main.jsp";
 	}
