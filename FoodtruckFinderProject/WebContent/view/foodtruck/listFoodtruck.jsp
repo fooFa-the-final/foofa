@@ -93,8 +93,8 @@
           			</tr>
           		</c:when>
           		<c:otherwise>
-          		<c:forEach items="${trucks }" var="truck">
-          			<tr>
+          		<c:forEach items="${trucks }" var="truck" varStatus="sts">
+          			<tr onmouseover="setCenter('${truck.foodtruckId}')">
 	          			<td rowspan="2" style="padding:10px;" align="right">
 	          				<img width="130px" height="130px" src="${ctx }/resources/img/food/${truck.foodtruckImg }" style="margin-right:10px">
 	          			</td>
@@ -104,7 +104,7 @@
 	          				<font size="2px">${truck.spot }</font>
 	          			</td>
           			</tr>
-          			<tr>
+          			<tr onmouseover="setCenter('${truck.foodtruckId}')">
           				<td valign="top">
           					<i class="fa fa-heart"></i> ${truck.favoriteCount } Fans<br>
           					<i class="fa fa-comment fa-fw"></i> ${truck.reviewCount } Reviews
@@ -148,7 +148,11 @@
     <script src="${ctx }/resources/plugins/dataTables/jquery.dataTables.js"></script>
     <script src="${ctx }/resources/plugins/dataTables/dataTables.bootstrap.js"></script>
     <script>
-    
+    var pos = [];
+    var ids = [];
+    var markers = [];
+	var position;
+	var map;
     $(document).ready(function() {
     	
     	var allCount = $("#allCount").val();
@@ -244,53 +248,64 @@
     	}
     	
     	// 지도
-    	var position;
-    	<c:forEach items="${trucks }" var="truck">
-    	naver.maps.Service.geocode({
- 			address: "${truck.location}"
- 		}, function(status, response){
- 			if (status === naver.maps.Service.Status.ERROR) {
-	           console.log('${truck.location} = 잘못찍힌주소');
-	        }
- 			
- 			var item = response.result.items[0],
- 				point = new naver.maps.Point(item.point.x, item.point.y);
- 			
- 			if(position === undefined){
- 				position = point;
- 				map.setCenter(position);
- 			}
- 			
- 			var contentString = [
- 				'<div style="padding:10px;width:200px;font-size:14px;line-height:20px;">',
- 					'<h3>${truck.foodtruckName}</h3>',
- 					'<p>${truck.location}</p>',
- 				'</div>'
- 			].join('');
- 			
- 			var infowindow = new naver.maps.InfoWindow({
- 				content: contentString
- 			});
- 			var marker = new naver.maps.Marker({
-				position: point,
-				map: map
-			});
- 			naver.maps.Event.addListener(marker, 'click', function(e) {
- 			    if (infowindow.getMap()) {
- 			        infowindow.close();
- 			    } else {
- 			        infowindow.open(map, marker);
- 			    }
- 			});
- 			
- 			}
- 		);  
+    	
+    	<c:forEach items="${trucks }" var="truck" varStatus="sts">
+	    	naver.maps.Service.geocode({
+	 			address: "${truck.location}"
+	 		}, function(status, response){
+	 			if (status === naver.maps.Service.Status.ERROR) {
+		           return console.log('${truck.location} = 잘못찍힌주소');
+		        }
+	 			var item = response.result.items[0],
+	 				point = new naver.maps.Point(item.point.x, item.point.y);
+	 			
+	 			pos.push(point);
+	 			ids.push("${truck.foodtruckId}");
+	 			console.log("${truck.foodtruckName}");
+	 			if(position == undefined && point != undefined){
+	 				position = point;
+	 				map = new naver.maps.Map('map', {
+		 	    		center: position,
+		 	    	    zoom: 10
+		 	    	});
+	 			}
+	 			
+	 			var contentString = [
+	 				'<div style="padding:10px;width:200px;font-size:14px;line-height:20px;">',
+	 					'<h3>${truck.foodtruckName}</h3>',
+	 					'<p>${truck.location}</p>',
+	 				'</div>'
+	 			].join('');
+	 			
+	 			var infowindow = new naver.maps.InfoWindow({
+	 				content: contentString
+	 			});
+	 			var marker = new naver.maps.Marker({
+					position: point,
+					map: map
+				});
+	 			marker.setZIndex("${sts.index}");
+	 			markers.push(marker);
+	 			naver.maps.Event.addListener(marker, 'click', function(e) {
+	 			    if (infowindow.getMap()) {
+	 			        infowindow.close();
+	 			    } else {
+	 			        infowindow.open(map, marker);
+	 			    }
+	 			});
+	 		});  
     	</c:forEach>
-    	var map = new naver.maps.Map('map', {
-    		center: position,
-    	    zoom: 11
-    	});
+    	
 	});
+    
+    var setCenter = function(id){
+    	for(var i=0;i<ids.length;i++){
+    		if(ids[i] == id){
+    			map.setCenter(pos[i]);
+    			break;
+    		}
+    	}
+	}
     
     var movePage = function(pageNum) {
 		$("#currentIndex").val(pageNum);

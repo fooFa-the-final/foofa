@@ -19,6 +19,8 @@ import fofa.domain.Favorite;
 import fofa.domain.Follow;
 import fofa.domain.Foodtruck;
 import fofa.domain.Foodtrucks;
+import fofa.domain.Image;
+import fofa.domain.Images;
 import fofa.domain.Member;
 import fofa.domain.Members;
 import fofa.domain.Review;
@@ -144,5 +146,20 @@ public class MobileMemberController {
 		return foodtrucks;
 	}
 	
+	@RequestMapping(value="mobile/review/detail.do")
+	public @ResponseBody Images searchReviewImage(String reviewId){
+		Review review = reviewService.findById(reviewId);
+		
+		List<Image> images = review.getImages();
+		Images image = new Images();
+		image.setImages(images);
+		return image;
+	}
+
+	@RequestMapping(value = "/mobile/member/detail.do", produces="application/xml")
+	public @ResponseBody Member detail(String id){
+		Member member = memberService.findById(id);
+		return member;
+	}
 	
 }

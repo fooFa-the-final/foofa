@@ -211,8 +211,8 @@ h2 {
 												height : 500
 											},
 											'minValue' : 0,
-											'maxValue' : 1000000,
-											'increment' : 100000,
+											'maxValue' : data[0].max,
+											'increment' : data[0].inc,
 											'isGuideLineNeeded' : false
 										//default set to false
 										};
@@ -269,8 +269,8 @@ h2 {
 												height : 500
 											},
 											'minValue' : 0,
-											'maxValue' : 1000000,
-											'increment' : 100000,
+											'maxValue' : data[0].max,
+											'increment' : data[0].inc,
 											'isGuideLineNeeded' : false
 										//default set to false
 										};
