@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 <!DOCTYPE html>
 <html>
 <c:set value="${pageContext.request.contextPath}" var="ctx" />
@@ -78,86 +79,78 @@ var report = function(reviewId){
                 <!-- Page Header -->
  					<%@ include file="../include/memberProfile.jspf" %>
                 <!--End Page Header -->
-                <div class="col-md-10">
-                	<h1>My Followers Review</h1>
-                	<c:forEach items="${list }" var="Review">
-                		<%-- <div class = "col-md-offset-1 col-md-6" style="margin-top:50px">
-                		<span><font class="h3"><a href="${ctx }/review/list/truck.do?foodtruckId=${Review.foodtruck.foodtruckId }">${Review.writer.memberId }</a></font></span>
-                		<span style="float:right"><input type="button" value="follow" class="btn btn-result"> <input type="button" value="!" class="btn btn-result" data-toggle="modal" data-target="#myModal${Review.reviewId }"></span><br>
-                		<c:forEach items="${Review.images }" var = "image">
-			                			<img src="${ctx }/resources/img/reviewImg/${image.filename}" width="150px" height="150px">
-                		</c:forEach>
-			                		<br><br>
-                		<font size="4px">
-                		<span>점수 : ${Review.score } <button style="border:0;background-color:transparent" onClick="recReview('${Review.reviewId}')"><i class="fa fa-thumbs-up" id="rec" ></i></button>: 
-		                		<input type="text" id="rec${Review.reviewId}" value="${Review.recommand }" style="border: 0px;" size=1 readonly></span>
-		                		<span style="float:right">${Review.writeDate }</span><br>
-		                		${Review.contents }	
-                		</font> --%>
-                		<div class="panel panel-primary text-left">
-									<div class="review-heading padding-10">
-										<img class="somenail" src="${ctx }/resources/upload/${Review.writer.profileImg }"/>
-										<div style="float:left; width:40%;">
-											<ul>
-												<li><a href="${ctx }/review/list/member.do?memberId=${Review.writer.memberId }">${Review.writer.memberId }</a></li>
-												<li> <span class="sub-li-follow"><button style="border:0;background-color:transparent" onClick="recReview('${Review.reviewId}')"><i class="fa fa-thumbs-up" id="rec" ></i></button> <input type="text" id="rec${Review.reviewId}" value="${Review.recommand }" style="border: 0px;background-color:transparent" size=1 readonly> </span>
-													 <span class="sub-li-favorite">71 </span>
-												</li>
-												<li> <a href="${ctx }/review/list/truck.do?foodtruckId=${Review.foodtruck.foodtruckId }">${Review.foodtruck.foodtruckName }</a> 에 대한 리뷰 </li>
-											</ul>
-										</div>
-										<div style="float:right">
-											<span style="float:right"><input type="button" value="follow" class="btn btn-default"> <input type="button" value="!" class="btn btn-default" data-toggle="modal" data-target="#myModal${Review.reviewId }"></span>
-										</div>
-									</div>
-									<div class="panel-body ">
-										<div style="display:block;width:500px; float:right;">
-											<span class="starRating" style="text-align:left;"><span style="width: ${Review.score *20}%">${Review.score }점</span></span> ${Review.writeDate}
-											<p class="reviewContent">${Review.contents }
-											</p>
-										</div>
-										<div style="float:left; width:180px">
-											<img id="${Review.reviewId}" src="${ctx }/resources/img/reviewImg/${Review.mainImage.filename }" style="width: 160px; height:160px; margin:10px"/>
-											<div class="somenail-list">
-												<c:forEach var="image" varStatus="imageNo" items="${Review.images }">
-													<img src="${ctx }/resources/img/reviewImg/${image.filename}" onclick="previewImage(this.src, '${Review.reviewId}');"/>
-												</c:forEach>
+                
+                		<div class="col-lg-12">
+						<c:set scope="page" var="lsize" value="${fn:length(list) /3 }"/>
+						<c:choose>
+							<c:when test="${fn:length(list) == 0 }">
+									<div class="panel panel-primary text-left">
+										등록된 팔로우들의 리뷰가 없습니다.
+									</div>							
+							</c:when>
+							<c:otherwise>
+								<c:forEach var="review" varStatus="reviewNo" items="${list }">
+										<c:if test="${reviewNo.count == 1 }">
+										<div class="col-lg-4"  style=" z-index: 1;position: relative;">
+										</c:if>
+											<div class="panel panel-default" id="${reviewNo.count }">
+												<div class="panel-heading" style="height:80px;">
+													<img class="somenail" src="${ctx }/resources/upload/${review.writer.profileImg }"/>
+													<div style="float:left; width:180px; margin-left:10px; overflow:hidden;">
+														<ul class="list-unstyled">
+															<li><h4><a href="${ctx }/review/list/member.do?memberId=${review.writer.memberId }">${review.writer.memberId }</a></h4></li>
+															<li> <span class="sub-li-follow"><i class="fa fa-thumbs-up"></i> <span  id="rec${review.reviewId }" >${review.recommand }</span> </span>
+																 <span class="sub-li-favorite"><i class="fa fa-twitter"></i>${review.writer.followCount } </span>
+																 <span class="sub-li-edit"><i class="fa fa-edit"></i>${review.writer.reviewCount } </span>
+															</li>
+														</ul>
+													</div>	
+												<div class="drop-down-btn-check info drop-down-btn"> 
+													<i class="fa fa-check"></i>
+															<div class="dis-none drop-down-list">
+						                       					<button id="recommandBtn_${review.reviewId }" type="button" class="btn btn-success btn-circle btn-lg" style="margin:5px;" onclick="recReview('${review.reviewId}');">
+																	<i class="fa fa-thumbs-up"></i></button>&nbsp;추천하기
+						                       					<button id="repportBtn_${review.reviewId }" type="button" class="btn btn-warning btn-circle btn-lg" style="margin:5px;" data-toggle="modal" data-target="#myModal${review.reviewId }">
+																	<i class="fa fa-warning"></i></button>&nbsp;신고하기
+																<c:if test="${loginUserId == member.memberId }">
+																	<button id="repportBtn_${review.reviewId }" type="button" class="btn btn-default btn-circle btn-lg" style="margin:5px;" onclick="unfollow('${review.writer.memberId}')">
+																		<i class="fa fa-twitter"></i></button>&nbsp;언팔로우
+																</c:if>
+																
+															</div>	
+												</div>
+
+												</div>
+												<div class="panel-body" style="min-height:150px;">
+													<h5><a href="${ctx }/review/list/truck.do?foodtruckId=${review.foodtruck.foodtruckId }">${review.foodtruck.foodtruckName }</a>&nbsp;&nbsp;<span class="starRating" style="text-align:left;"> <span style="width: ${review.score *20}%">${review.score }점</span></span></h5>
+													 ${review.writeDate}
+													<hr>
+													<c:if test="${review.mainImage.filename != 'noimagefound.jpg'}">
+													<div class="reviewMainImg" style="width:100%; padding-bottom:10px; border-bottom:1px solid #eee; margin-bottom:10px;">
+														<img id="${review.reviewId}" src="${ctx }/resources/img/reviewImg/${review.mainImage.filename }" style="width: 88%; height:160px; margin:0px; float:left;"/>
+														<div class="somenail-list" style="width:2%;float:left;">
+															<c:forEach var="image" varStatus="imageNo" items="${review.images }">
+																<img src="${ctx }/resources/img/reviewImg/${image.filename}" onclick="previewImage(this.src, '${review.reviewId}');"/>
+															</c:forEach>
+														</div>
+													</div>	
+													</c:if>
+
+													<p>
+												${review.contents }
+												</p>
+												</div>		
 											</div>
-										</div>							
-									</div>
-								</div>					
-                		<!-- Modal -->
-                		
-								  <div class="modal fade" id="myModal${Review.reviewId }" role="dialog">
-								    <div class="modal-dialog">
-								    
-								      <!-- Modal content-->
-								      <div class="modal-content">
-								        <div class="modal-header">
-								          <button type="button" class="close" data-dismiss="modal">&times;</button>
-								          <h4 class="modal-title">신고창</h4>
-								        </div>
-								        
-								        <div class="modal-body">
-								           	<h4>리뷰 내용 : ${Review.contents }</h4>
-								          <input type="radio" name = "reason${Review.reviewId }" value="욕설" onClick="untype()"> 욕설<br>
-								          <input type="radio" name = "reason${Review.reviewId }" value="음란" onClick="untype()"> 음란<br>
-								          <input type="radio" name = "reason${Review.reviewId }" value="광고" onClick="untype()"> 광고<br>
-								          <input type="radio" name = "reason${Review.reviewId }" value="부적절한 리뷰" onClick="untype()"> 부적절한 리뷰<br>
-								          <input type="radio" name = "reason${Review.reviewId }" value="direct" onClick="availableType()" > 직접 적겠습니다.<br>
-								          <input type="text" class="form-control" placeholder="신고 사유를 적어주세요" id="reason${Review.reviewId}" readonly disabled name="reasonContents">
-								        </div>
-								        <div class="modal-footer">
-								          <input type="button" class="btn btn-default" data-dismiss="modal" value="신고" onClick="report('${Review.reviewId}')">
-								          <input type="button" class="btn btn-default" data-dismiss="modal" value="신고 취소">
-								        </div>
-								      </div>
-								      
-								    </div>
-								  </div>
-                		
-                	</c:forEach>
-                </div>
+											<c:if test="${(lsize < reviewNo.count && reviewNo.count <= lsize+1)  || (lsize*2-1 <= reviewNo.count && reviewNo.count  < lsize*2)}">
+											</div>
+											<div class="col-lg-4" id="next${reviewNo.count }">
+											</c:if>
+								</c:forEach>		
+								</div>				
+								<button type="button" class="btn btn-info btn-lg btn-block" onclick="location.href='${ctx}/follow/list.do'">내 팔로우들 뉴스피드 보러가기</button>
+							</c:otherwise>
+						</c:choose>
+					</div>
             </div>
         </div>
         <!-- end page-wrapper -->
@@ -173,7 +166,7 @@ var report = function(reviewId){
     <script src="${ctx}/resources/scripts/siminta.js"></script>
 
 	<!-- Page-Level Plugin Scripts-->
-    <script src="${ctx}/resources/scripts/profile.js"></script>
+    <script src="${ctx}/resources/scripts/default.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 	<script src="http://malsup.github.com/jquery.form.js"></script> 
     <script>
@@ -183,6 +176,21 @@ var report = function(reviewId){
 			followExist('${member.memberId}');
 		}
     });
+    
+	var unfollow = function(toId) {
+		var btn = $("#delete");
+		$.ajax({
+			type : 'GET',
+			url : "${ctx }/follow/remove.do",
+			data : {
+				toId : toId
+			},
+			success : function(data) {
+				window.location.reload();
+				
+			}
+		});
+	};
     </script>
 
 </body>
