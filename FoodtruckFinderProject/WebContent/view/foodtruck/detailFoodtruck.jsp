@@ -51,10 +51,10 @@
                     <span style="float:right; margin-right:50px; margin-top: 30px">
                     	<c:choose>
                     		<c:when test="${ loginUserId == null }">
-                        	  	<button id="favoriteBtn" type="button" class="btn btn-default btn-circle btn-lg" onclick="location.href='${ctx}/login.do'"><i class="fa fa-heart"></i></button>
+                        	  	<button id="favoriteBtn" type="button" class="btn btn-default" onclick="location.href='${ctx}/login.do'"><i class="fa fa-heart"></i>&nbsp;단골등록</button>
                     		</c:when>
                     		<c:otherwise>
-                    			<button id="favoriteBtn" type="button" class="btn btn-default btn-circle btn-lg" onclick="favorite('${truck.foodtruckId }');"><i class="fa fa-heart"></i></button>
+                    			<button id="favoriteBtn" type="button" class="btn btn-default" onclick="favorite('${truck.foodtruckId }');"><i class="fa fa-heart"></i>&nbsp;단골등록</button>
                     		</c:otherwise>
                     	</c:choose>
                         <a href="#" class="createReview">
@@ -116,21 +116,45 @@
                 		&nbsp;<span style="float:right"><a href="#" class="btn btn-default createReview">+ Add my review</a></span>
                 	</div>
                 	<div class="col-lg-10">
-                		<ul class="timeline" style="background-color:white;">
                 		
                 		<c:forEach items="${reviewList }" var="review">
-                			<li class="timeline-inverted">
                					<div class="panel panel-primary text-left"  style=" width:80%; display:inline-block;">
 	                				<div class="review-heading padding-10" style="height: 85px;">
 	                					<img class="somenail" src="${ctx }/resources/upload/${review.writer.profileImg }"/>
 	                					<div style="float:left; margin-left:20px;">
-										<ul class="list-unstyled">
-											<li><a href="${ctx }/review/list/member.do?memberId=${review.writer.memberId }">${review.writer.memberId }</a></li>
-											<li> <span class="sub-li-recommand"><i class="fa fa-thumbs-up fa-1x"></i>${review.recommand } </span>
-												 <span class="sub-li-follow"><i class="fa fa-twitter fa-1x"></i>${review.writer.followCount } </span>
-											</li>
-											<li><b>작성일</b> :  ${review.writeDate} <b>평점</b> : <span class="starRating" style="text-align:left;"><span style="width: ${review.score *20}%">${review.score }점</span></span></li>
-										</ul>
+											<ul class="list-unstyled">
+												<li><a href="${ctx }/review/list/member.do?memberId=${review.writer.memberId }">${review.writer.memberId }</a></li>
+												<li> <span class="sub-li-recommand"><i class="fa fa-thumbs-up fa-1x"></i>${review.recommand } </span>
+													 <span class="sub-li-follow"><i class="fa fa-twitter fa-1x"></i>${review.writer.followCount } </span>
+												</li>
+												<li><b>작성일</b> :  ${review.writeDate} <b>평점</b> : <span class="starRating" style="text-align:left;"><span style="width: ${review.score *20}%">${review.score }점</span></span></li>
+											</ul>
+										</div>
+																									
+										<div class="drop-down-btn-check info drop-down-btn"  style="float:right;"> 
+											<i class="fa fa-check"></i>
+											<c:choose>
+												<c:when test="${loginUserId eq '' || loginUserId == null }">
+													<div class="dis-none drop-down-list">
+				                       					<button id="recommandBtn_${review.reviewId }" type="button" class="btn btn-success btn-circle btn-lg" style="margin:5px;" onclick="location.href='${ctx}/login.do'">
+															<i class="fa fa-thumbs-up"></i></button>&nbsp;추천하기
+				                       					<button id="repportBtn_${review.reviewId }" type="button" class="btn btn-warning btn-circle btn-lg" style="margin:5px;" onclick="location.href='${ctx}/login.do'">
+															<i class="fa fa-warning"></i></button>&nbsp;신고하기
+				                       					<button id="FollowBtn_${review.reviewId }" type="button" class="btn btn-danger btn-circle btn-lg" style="margin:5px;" onclick="location.href='${ctx}/login.do'">
+															<i class="fa fa-heart"></i></button>&nbsp;팔로우
+													</div>	
+												</c:when>
+												<c:otherwise>
+													<div class="dis-none drop-down-list">
+				                       					<button id="recommandBtn_${review.reviewId }" type="button" class="btn btn-success btn-circle btn-lg" style="margin:5px;" onclick="recReview('${review.reviewId}');">
+															<i class="fa fa-thumbs-up"></i></button>&nbsp;추천하기
+				                       					<button id="repportBtn_${review.reviewId }" type="button" class="btn btn-warning btn-circle btn-lg" style="margin:5px;" data-toggle="modal" data-target="#myModal${review.reviewId }">
+															<i class="fa fa-warning"></i></button>&nbsp;신고하기
+				                       					<button id="FollowBtn_${review.reviewId }" type="button" class="btn btn-danger btn-circle btn-lg" style="margin:5px;" onclick="follow('${review.reviewId}');">
+															<i class="fa fa-heart"></i></button>&nbsp;팔로우
+													</div>	
+												</c:otherwise>
+											</c:choose>
 										</div>
 									</div>
 		                			<div class ="pannel-body">
@@ -149,37 +173,7 @@
 										</div>
 									</div>
 								</div>
-								
-								<div class="timeline-badge info"  style="left:75%;">
-									<i class="fa fa-check"></i>
-									<c:choose>
-										<c:when test="${loginUserId eq '' || loginUserId == null }">
-											<div class="timeline-panel drop-down-btn">
-		                       					<button id="recommandBtn_${review.reviewId }" type="button" class="btn btn-success btn-circle btn-lg" style="margin:5px;" onclick="location.href='${ctx}/login.do'">
-													<i class="fa fa-thumbs-up"></i></button>&nbsp;추천하기
-		                       					<button id="repportBtn_${review.reviewId }" type="button" class="btn btn-warning btn-circle btn-lg" style="margin:5px;" onclick="location.href='${ctx}/login.do'">
-													<i class="fa fa-warning"></i></button>&nbsp;신고하기
-		                       					<button id="FollowBtn_${review.reviewId }" type="button" class="btn btn-danger btn-circle btn-lg" style="margin:5px;" onclick="location.href='${ctx}/login.do'">
-													<i class="fa fa-heart"></i></button>&nbsp;팔로우
-											</div>	
-										</c:when>
-										<c:otherwise>
-											<div class="timeline-panel drop-down-btn">
-		                       					<button id="recommandBtn_${review.reviewId }" type="button" class="btn btn-success btn-circle btn-lg" style="margin:5px;" onclick="recReview('${review.reviewId}');">
-													<i class="fa fa-thumbs-up"></i></button>&nbsp;추천하기
-		                       					<button id="repportBtn_${review.reviewId }" type="button" class="btn btn-warning btn-circle btn-lg" style="margin:5px;" data-toggle="modal" data-target="#myModal${review.reviewId }">
-													<i class="fa fa-warning"></i></button>&nbsp;신고하기
-		                       					<button id="FollowBtn_${review.reviewId }" type="button" class="btn btn-danger btn-circle btn-lg" style="margin:5px;" onclick="follow('${review.reviewId}');">
-													<i class="fa fa-heart"></i></button>&nbsp;팔로우
-											</div>	
-										</c:otherwise>
-									</c:choose>
-								
-								</div>
-
-                			</li>
-
-		                		
+ 
 		                		<!-- Modal -->
 								  <div class="modal fade" id="myModal${review.reviewId }" role="dialog">
 								    <div class="modal-dialog">
@@ -208,7 +202,6 @@
 								  </div>
 		                		<!-- End Modal -->
                 		</c:forEach>
-                		</ul>
                 </div>
             </div>
         <div style="width:100%; height:200px;">
@@ -228,7 +221,7 @@
     
     <!-- Page Scripts -->
     <script src="${ctx }/resources/plugins/jquery-1.10.2.js"></script>
-    <script src="${ctx }/resources/scripts/profile.js"></script>
+    <script src="${ctx }/resources/scripts/default.js"></script>
 	 <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=noUvsaR702FX6WH5un5h&submodules=geocoder"></script>
 
 	 <script>
@@ -271,48 +264,7 @@
 	 			favoriteExist("${truck.foodtruckId}");
 	 		}
 	 	});
-	 	var recReview = function(reviewId){
-	 		
-	 		$.ajax({
-	 			type:'get',
-	 			url : "${ctx }/review/recommand.do",
-	 			data:{
-	 				reviewId : reviewId
-	 			},
-	 			success : function(data){
-	 				var revId = "#rec" + reviewId;
- 					var recCount = eval($(revId).val());
- 					$(revId).val("");
-	 				if ($.trim(data) == 'true') {
-	 					$(revId).val(recCount+1);
-						alert("리뷰를 추천하셨습니다.");
-					} else if ($.trim(data) == 'false') {
-	 					$(revId).val(recCount-1);
-						alert("리뷰를 추천 해제 하셨습니다.")
-					}
-	 			}
-	 		});
-	 	}
-	 	
-	 	var report = function(reviewId){
-	 		var reaId = "#reason" + reviewId;
-	 		var name = "reason" + reviewId
-	 		var st = $(":input:radio[name='"+ name + "']:checked").val();
-	 		$.ajax({
-	 			type:'POST',
-	 			url : "${ctx}/review/report/create.do",
-	 			data:{
-	 				reviewId : reviewId, reason : st
-	 			},
-	 			success : function(data){
-	 				if ($.trim(data) == 'true') {
-						alert("신고 등록이 완료되었습니다.");
-					} else if ($.trim(data) == 'false') {
-						alert("이미 신고된 리뷰입니다.");
-					}
-	 			}
-	 		});
-	 	}
+
 	 	
 	 	var untype = function(){
 	 		 $("input[name=reasonContents]").attr("readonly",true).attr("disabled", true);

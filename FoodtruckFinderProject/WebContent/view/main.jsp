@@ -63,6 +63,7 @@ text-align:left;
  border: 1px solid #eee;
  height:120px; padding:10px;  
 }
+
 </style>
 </head>
 
@@ -148,7 +149,7 @@ text-align:left;
 
 				<div class="col-lg-4">
 					<div class="alert alert-success text-center" style="padding:15px 30px; margin-bottom:15px;">
-						<i class="fa fa-pencil fa-3x"style="display:inline-block; float:left;"></i><span style="flaot:left;"><b>${member.reviewCount }</b>개의 리뷰를 <br>작성하셨습니다.</span>
+						<i class="fa fa-edit fa-3x"style="display:inline-block; float:left;"></i><span style="flaot:left;"><b>${member.reviewCount }</b>개의 리뷰를 <br>작성하셨습니다.</span>
 					</div>
 				</div>
 				<div class="col-lg-4">
@@ -161,7 +162,7 @@ text-align:left;
 		<div class="row">
 			<ul class="list-inline">
 				<li class="tab-li" ><h4><a href="#home" data-toggle="tab">Home</a></li>
-				<li class="tab-li" style="border-bottom:2px solid #FAC6C6"><h4><a href="#recent" data-toggle="tab">Recent Activity</a></h4></li>
+				<li class="tab-li" style="border-bottom:2px solid #FAC6C6;"><h4><a href="#recent" data-toggle="tab" style=" color:#d32323;">Recent Activity</a></h4></li>
 			</ul>
 			<div class="tab-content">
 				<div class="tab-pane fade" id="home">
@@ -189,7 +190,7 @@ text-align:left;
 										<div class="col-lg-4 background-cover mainTableImgs effect" 
 										style="background-image:url('${ctx}/resources/img/truck/${truck.foodtruckImg }');"
 										onmouseover="show('${truck.foodtruckImg}', '${truck.foodtruckName }', '${truck.score }', '${truck.location }', '${truck.state }',this);"
-										onclick="location.href='${ctx }/review/list/truck.do?foodtruckId=${truck.foodtruckId}"
+										onclick="location.href='${ctx }/review/list/truck.do?foodtruckId=${truck.foodtruckId}'"
 										>
 										<!-- 	<div style="padding:10px; border-radius:10px; border:1px solid white; height:100%;"></div> -->
 										</div>
@@ -211,7 +212,7 @@ text-align:left;
 													<li><a href="${ctx }/review/list/member.do?memberId=${hotReview.writer.memberId }">${hotReview.writer.memberId }</a></li>
 													<li> <span class="sub-li-recommand"><i class="fa fa-thumbs-up fa-1x"></i>${hotReview.recommand } </span>
 														 <span class="sub-li-follow"><i class="fa fa-twitter fa-1x"></i>${hotReview.writer.followCount } </span>
-														 <span class="sub-li-follow"><i class="fa fa-pencil fa-1x"></i>${hotReview.writer.reviewCount } </span>
+														 <span class="sub-li-review"><i class="fa fa-pencil fa-1x"></i>${hotReview.writer.reviewCount } </span>
 													</li>
 													<li> 
 														<ul class="list-inline">
@@ -327,22 +328,35 @@ text-align:left;
 							<c:otherwise>
 								<c:forEach var="review" varStatus="reviewNo" items="${followReviews }">
 										<c:if test="${reviewNo.count == 1 }">
-										<div class="col-lg-4">
+										<div class="col-lg-4"  style=" z-index: 1;position: relative;">
 										</c:if>
 											<div class="panel panel-default" id="${reviewNo.count }">
 												<div class="panel-heading" style="height:80px;">
 													<img class="somenail" src="${ctx }/resources/upload/${review.writer.profileImg }"/>
-													<div style="float:left; width:220px; margin-left:10px; overflow:hidden;">
+													<div style="float:left; width:180px; margin-left:10px; overflow:hidden;">
 														<ul class="list-unstyled">
 															<li><h4><a href="${ctx }/review/list/member.do?memberId=${review.writer.memberId }">${review.writer.memberId }</a></h4></li>
-															<li> <span class="sub-li-follow"><i class="fa fa-thumbs-up"></i> ${review.recommand } </span>
-																 <span class="sub-li-favorite"><i class="fa fa-twitter"></i>${review.writer.followCount } </span>
-																 <span class="sub-li-edit"><i class="fa fa-edit"></i>${review.writer.reviewCount } </span>
+															<li> <span class="sub-li-recommand"><i class="fa fa-thumbs-up"></i> <span  id="rec${review.reviewId }" >${review.recommand }</span> </span>
+																 <span class="sub-li-follow"><i class="fa fa-twitter"></i>${review.writer.followCount } </span>
+																 <span class="sub-li-review"><i class="fa fa-pencil"></i>${review.writer.reviewCount } </span>
 															</li>
 														</ul>
 													</div>	
+												<div class="drop-down-btn-check info drop-down-btn"  style=" padding-top:17px;"> 
+													<i class="fa fa-check"></i>
+															<div class="dis-none drop-down-list">
+						                       					<button id="recommandBtn_${review.reviewId }" type="button" class="btn btn-success btn-circle btn-lg" style="margin:5px;" onclick="recReview('${review.reviewId}');">
+																	<i class="fa fa-thumbs-up"></i></button>&nbsp;추천하기
+						                       					<button id="repportBtn_${review.reviewId }" type="button" class="btn btn-warning btn-circle btn-lg" style="margin:5px;" data-toggle="modal" data-target="#myModal${review.reviewId }">
+																	<i class="fa fa-warning"></i></button>&nbsp;신고하기
+															</div>	
+												</div>
+
 												</div>
 												<div class="panel-body" style="min-height:150px;">
+													<h5><a href="${ctx }/review/list/truck.do?foodtruckId=${review.foodtruck.foodtruckId }">${review.foodtruck.foodtruckName }</a>&nbsp;&nbsp;<span class="starRating" style="text-align:left;"> <span style="width: ${review.score *20}%">${review.score }점</span></span></h5>
+													 ${review.writeDate}
+													<hr>
 													<c:if test="${review.mainImage.filename != 'noimagefound.jpg'}">
 													<div class="reviewMainImg" style="width:100%; padding-bottom:10px; border-bottom:1px solid #eee; margin-bottom:10px;">
 														<img id="${review.reviewId}" src="${ctx }/resources/img/reviewImg/${review.mainImage.filename }" style="width: 88%; height:160px; margin:0px; float:left;"/>
@@ -353,21 +367,19 @@ text-align:left;
 														</div>
 													</div>	
 													</c:if>
-													<h5><a href="${ctx }/review/list/truck.do?foodtruckId=${review.foodtruck.foodtruckId }">${review.foodtruck.foodtruckName }</a></h5>
-													<span class="starRating" style="text-align:left;"><span style="width: ${review.score *20}%">${review.score }점</span></span> ${review.writeDate}
-													<hr>
+
 													<p>
 												${review.contents }
 												</p>
-												</div>									
-												
+												</div>		
 											</div>
-											<c:if test="${(lsize+1 < reviewNo.count && reviewNo.count <= lsize+2)  || (reviewNo.count >= lsize*2-1 )}">
+											<c:if test="${(lsize < reviewNo.count && reviewNo.count <= lsize+1)  || (lsize*2-1 <= reviewNo.count && reviewNo.count  < lsize*2)}">
 											</div>
 											<div class="col-lg-4" id="next">
 											</c:if>
 								</c:forEach>		
 								</div>				
+								<button type="button" class="btn btn-info btn-lg btn-block" onclick="location.href='${ctx}/follow/list.do'">내 팔로우들 뉴스피드 보러가기</button>
 							</c:otherwise>
 						</c:choose>
 					</div>
@@ -385,6 +397,7 @@ text-align:left;
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
 	<!--  Page Script  -->
+    <script src="${ctx }/resources/scripts/default.js"></script>
 	<script>
 	
 	$( document ).ready(function() {
@@ -399,7 +412,11 @@ text-align:left;
 		
 		$(".tab-li").click(function(){
 			$(".tab-li").css("border-bottom", "0px");
+			$(".tab-li").css("color", "black");
 			$(this).css("border-bottom", "2px solid #FAC6C6");
+			$(this).css("color", "rgb(130, 7, 9)");
+			
+			
 			
 		});
 	});
