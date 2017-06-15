@@ -24,8 +24,7 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
 <style>
-.mySlides {display:none; margin: 0 auto; width:90%;}
-.mySlides2 {display:none; margin: 0 auto; width:90%;}
+.mySlides {display:none; margin: 0 auto; width:1200px;}
 .w3-left, .w3-right, .w3-badge {cursor:pointer}
 .w3-badge {height:13px;width:13px;padding:0}	
 a.link {font-size: 0.7em; color:blue;}
@@ -44,7 +43,7 @@ display:inline; border-left: 1px solid #999; padding: 0 20px;}
 }
 
 .mainTableDiv {
-width:740px;
+width:810px;
 height:360px;  padding:0;
 background-position: right center;display:inline-block;float:left; position:relative;
 }
@@ -120,25 +119,28 @@ text-align:left;
 		<h3 class="page-header">Foodtruck Finder</h3>
 		<div class="row" >
 				<h4>How about this?</h4>
-			<div class="sub-container" >
+			<div class="sub-container" style="padding: 0 15px;">
 				<c:forEach varStatus="no" var="truck" items="${adTrucks }">
 					<c:if test="${no.index == 0 }">
-					<div id="mainTable" class="background-cover mainTableDiv" style="background-image:url('${ctx}/resources/img/truck/${truck.foodtruckImg }');">
-					
-						<div id="trapezoid">
-						</div>
-						<div  style=" font-weight:bold; position:absolute; left:15px; top:20px; text-align:left;">
-							<h3 id="mainTableh3">${truck.foodtruckName }</h3>
-							<h4 id="mainTableh4"><span class="starRating2" style="text-align:left;"><span id="mainTableScore" style="width: ${truck.score*20 }%">${truck.score }점</span></span></h4>
-							<img src="${ctx }/resources/img/location.png" style="width:30px; " ><span id="mainTableLocation"style="line-height:13px;vertical-align:bottom;">&nbsp;${truck.location }</span>
-						</div>
-					
-					</div>				
+								<div id="mainTable" class="background-cover mainTableDiv" style="background-image:url('${ctx}/resources/img/truck/${truck.foodtruckImg }');">
+								
+									<div id="trapezoid">
+									</div>
+									<div  style=" font-weight:bold; position:absolute; left:15px; top:20px; text-align:left; height:85%;">
+										<h3 id="mainTableh3">${truck.foodtruckName }</h3>
+										<h4 id="mainTableh4"><span class="starRating2" style="text-align:left;"><span id="mainTableScore" style="width: ${truck.score*20 }%">${truck.score }점</span></span></h4>
+										<img src="${ctx }/resources/img/location.png" style="width:30px; " ><span id="mainTableLocation"style="line-height:13px;vertical-align:bottom;">&nbsp;${truck.location }</span>
+										<div id="mainTableState" style="display:none; position:absolute; bottom:0px;">
+										<span class="user-circle-online btn btn-success btn-circle "></span>&nbsp;Now Open
+										</div>
+									</div>
+								
+								</div>				
 					<div style="padding:0; display:inline-block; width:360px;">
 					</c:if>
 							<div class="col-lg-4 background-cover mainTableImgs effect" 
 							style="background-image:url('${ctx}/resources/img/truck/${truck.foodtruckImg }');"
-							onmouseover="show('${truck.foodtruckImg}', '${truck.foodtruckName }', '${truck.score }', '${truck.location }', this);"
+							onmouseover="show('${truck.foodtruckImg}', '${truck.foodtruckName }', '${truck.score }','${truck.location }', '${truck.state }', this);"
 							onclick="location.href='${ctx }/review/list/truck.do?foodtruckId=${truck.foodtruckId}"
 							>
 							<!-- 	<div style="padding:10px; border-radius:10px; border:1px solid white; height:100%;"></div> -->
@@ -210,59 +212,59 @@ text-align:left;
 					</div>
 				</div>
 				<div class="row">
-					<h4>Nearlest Foodtrucks</h4>
-				<div class="w3-content w3-display-container text-center">
-						<c:forEach varStatus="no" var="ntruck" items="${nearTrucks }">
-							<c:choose>	
-								<c:when test="${(no.count mod 3) == 1 }">
-									<div class="mySlides2">	
-										<div class="col-lg-4">
-											<div class="panel panel-danger">
-												<div class="panel-header">
-													<img src="${ctx}/resources/img/truck/${ntruck.foodtruckImg }" class="main-truck-img"onclick="location.href='${ctx }/review/list/truck.do?foodtruckId=${truck.foodtruckId}'"/>
+						<h4>Nearlest Foodtrucks</h4>
+						<div class="w3-content w3-display-container text-center"  style="width:1300px; max-width:1300px;">
+								<c:forEach varStatus="no" var="ntruck" items="${nearTrucks }">
+									<c:choose>	
+										<c:when test="${(no.count mod 3) == 1 }">
+											<div class="mySlides">	
+												<div class="col-lg-4">
+													<div class="panel panel-danger">
+														<div class="panel-header">
+															<img src="${ctx}/resources/img/truck/${ntruck.foodtruckImg }" class="main-truck-img"onclick="location.href='${ctx }/review/list/truck.do?foodtruckId=${truck.foodtruckId}'"/>
+														</div>
+														<div class="panel-body text-left">
+															<b><a href="${ctx }/review/list/truck.do?foodtruckId=${ntruck.foodtruckId }">${ntruck.foodtruckName }</a></b> <br> <p > 평점 :<span class="starRating" style="text-align:left;"><span style="width: ${ntruck.score*20 }%">${ntruck.score }점</span></span></p>리뷰수 : ${ntruck.reviewCount }
+														</div>
+													</div>
+												</div>		
+										</c:when>
+										<c:when test="${(no.count mod 3) == 2 }">
+												<div class="col-lg-4">
+													<div class="panel panel-danger">
+														<div class="panel-header">
+															<img src="${ctx}/resources/img/truck/${ntruck.foodtruckImg }" class="main-truck-img" onclick="location.href='${ctx }/review/list/truck.do?foodtruckId=${ntruck.foodtruckId}'"/>
+														</div>
+														<div class="panel-body text-left">
+																<b><a href="${ctx }/review/list/truck.do?foodtruckId=${ntruck.foodtruckId }">${ntruck.foodtruckName }</a></b> <br> <p > 평점 :<span class="starRating" style="text-align:left;"><span style="width: ${ntruck.score*20 }%">${ntruck.score }점</span></span></p>리뷰수 : ${ntruck.reviewCount }
+														</div>
+													</div>
+												
+												</div>	
+										</c:when>
+										<c:otherwise>
+												<div class="col-lg-4">
+													<div class="panel panel-danger">
+														<div class="panel-header">
+															<img src="${ctx}/resources/img/truck/${ntruck.foodtruckImg }" class="main-truck-img" onclick="location.href='${ctx }/review/list/truck.do?foodtruckId=${ntruck.foodtruckId}'" />
+														</div>
+														<div class="panel-body text-left">
+																<b><a href="${ctx }/review/list/truck.do?foodtruckId=${ntruck.foodtruckId }">${ntruck.foodtruckName }</a></b> <br> <p > 평점 :<span class="starRating" style="text-align:left;"><span style="width: ${ntruck.score*20 }%">${ntruck.score }점</span></span></p>리뷰수 : ${ntruck.reviewCount }
+														</div>
+													</div>	
 												</div>
-												<div class="panel-body text-left">
-													<b><a href="${ctx }/review/list/truck.do?foodtruckId=${ntruck.foodtruckId }">${ntruck.foodtruckName }</a></b> <br> <p > 평점 :<span class="starRating" style="text-align:left;"><span style="width: ${ntruck.score*20 }%">${ntruck.score }점</span></span></p>리뷰수 : ${ntruck.reviewCount }
-												</div>
-											</div>
-										</div>		
-								</c:when>
-								<c:when test="${(no.count mod 3) == 2 }">
-										<div class="col-lg-4">
-											<div class="panel panel-danger">
-												<div class="panel-header">
-													<img src="${ctx}/resources/img/truck/${ntruck.foodtruckImg }" class="main-truck-img" onclick="location.href='${ctx }/review/list/truck.do?foodtruckId=${ntruck.foodtruckId}'"/>
-												</div>
-												<div class="panel-body text-left">
-														<b><a href="${ctx }/review/list/truck.do?foodtruckId=${ntruck.foodtruckId }">${ntruck.foodtruckName }</a></b> <br> <p > 평점 :<span class="starRating" style="text-align:left;"><span style="width: ${ntruck.score*20 }%">${ntruck.score }점</span></span></p>리뷰수 : ${ntruck.reviewCount }
-												</div>
-											</div>
-										
-										</div>	
-								</c:when>
-								<c:otherwise>
-										<div class="col-lg-4">
-											<div class="panel panel-danger">
-												<div class="panel-header">
-													<img src="${ctx}/resources/img/truck/${ntruck.foodtruckImg }" class="main-truck-img" onclick="location.href='${ctx }/review/list/truck.do?foodtruckId=${ntruck.foodtruckId}'" />
-												</div>
-												<div class="panel-body text-left">
-														<b><a href="${ctx }/review/list/truck.do?foodtruckId=${ntruck.foodtruckId }">${ntruck.foodtruckName }</a></b> <br> <p > 평점 :<span class="starRating" style="text-align:left;"><span style="width: ${ntruck.score*20 }%">${ntruck.score }점</span></span></p>리뷰수 : ${ntruck.reviewCount }
-												</div>
-											</div>	
-										</div>
-									</div>			
-								</c:otherwise>
-							</c:choose>
-						</c:forEach>
-						<button class="w3-button w3-white w3-display-left" onclick="plusDivs2(-1)">&#10094;</button>
-				 		<button class="w3-button w3-white w3-display-right" onclick="plusDivs2(1)">&#10095;</button>
-						  <div class="w3-center w3-container w3-section w3-large w3-text-gray" style="width:100%">
-							    <span class="w3-badge demo2 w3-border w3-transparent w3-hover-gray" onclick="currentDiv2(1)"></span>
-							    <span class="w3-badge demo2 w3-border w3-transparent w3-hover-gray" onclick="currentDiv2(2)"></span>
-							    <span class="w3-badge demo2 w3-border w3-transparent w3-hover-gray" onclick="currentDiv2(3)"></span>
-						</div>
-					</div>
+											</div>			
+										</c:otherwise>
+									</c:choose>
+								</c:forEach>
+								<button class="w3-button w3-white w3-display-left" onclick="plusDivs(-1)">&#10094;</button>
+						 		<button class="w3-button w3-white w3-display-right" onclick="plusDivs(1)">&#10095;</button>
+								  <div class="w3-center w3-container w3-section w3-large w3-text-gray" style="width:100%">
+									    <span class="w3-badge demo w3-border w3-transparent w3-hover-gray" onclick="currentDiv(1)"></span>
+									    <span class="w3-badge demo w3-border w3-transparent w3-hover-gray" onclick="currentDiv(2)"></span>
+									    <span class="w3-badge demo w3-border w3-transparent w3-hover-gray" onclick="currentDiv(3)"></span>
+								</div>
+							</div>
 			</div>
 	<!-- end main-container -->
 </div>
@@ -276,20 +278,13 @@ text-align:left;
 	<!--  Page Script  -->
 	<script>
 var slideIndex = 1;
-var slideIndex2 = 1;
-showDivs2(slideIndex2);
+showDivs(slideIndex);
 
 function plusDivs(n) {
   showDivs(slideIndex += n);
 }
-function plusDivs2(n) {
-	  showDivs2(slideIndex2 += n);
-}
 function currentDiv(n) {
   showDivs(slideIndex = n);
-}
-function currentDiv2(n) {
-	  showDivs2(slideIndex2 = n);
 }
 
 function showDivs(n) {
@@ -307,22 +302,6 @@ function showDivs(n) {
   x[slideIndex-1].style.display = "block";  
   dots[slideIndex-1].className += " w3-gray";
 }
-
-function showDivs2(n) {
-	  var i;
-	  var x = document.getElementsByClassName("mySlides2");
-	  var dots = document.getElementsByClassName("demo2");
-	  if (n > x.length) {slideIndex2 = 1}    
-	  if (n < 1) {slideIndex2 = x.length}
-	  for (i = 0; i < x.length; i++) {
-	     x[i].style.display = "none";  
-	  }
-	  for (i = 0; i < dots.length; i++) {
-	     dots[i].className = dots[i].className.replace(" w3-gray", "");
-	  }
-	  x[slideIndex2-1].style.display = "block";  
-	  dots[slideIndex2-1].className += " w3-gray";
-	}
 	
 	$( document ).ready(function() {
 		var mainImgSrc = "${mainFoodImg}";
@@ -358,7 +337,7 @@ function showDivs2(n) {
 		}
 	};
 	
-	var show = function(img, name, score, location, div){
+	var show = function(img, name, score, location, state,  div){
 		$(div).css('border', "1px solid red");
 		console.log("g"+location);
 		$("#mainTable").css('background-image', "url('${ctx}/resources/img/truck/"+img+"')");
@@ -366,8 +345,11 @@ function showDivs2(n) {
 		$("#mainTableScore").text(score);
 		$("#mainTableScore").css("width", score*20+"%");
 		$("#mainTableLocation").text(location);
-		
-		
+		if(state == 'true'){
+			$("#mainTableState").css("display","block");
+		}else {
+			$("#mainTableState").css("display","none");
+		}
 	};
 		
 		

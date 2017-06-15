@@ -400,7 +400,10 @@ div.main-container {
 	text-align: center;
 	padding: 20px;
 }
-
+div.main-container h2 {
+	color: rgb(130, 7, 9);
+	font-weight: bold;
+}
 div.main-container h3 {
 	color: rgb(130, 7, 9);
 	font-weight: bold;
@@ -413,6 +416,10 @@ div.main-container h4 {
 	font-weight: bold;
 }
 
+h5 a {
+	color:#3B0B88;
+	font-weight: bold;
+}
 div.main-container div.sub-container {
 	width: 1200px;
 	margin: 0 auto;
@@ -424,7 +431,7 @@ div.div-gray {
 }
 
 img.main-truck-img {
-	width: 261px;
+	width: 368px;
 	height: 225px;
 	cursor: pointer;
 }
@@ -568,7 +575,7 @@ div.reviewMainImg {
 }
 
 div.reviewMainImg img {
-	width: 160px; height:160px; margin:12px; 
+	width: 160px; height:160px; margin:0 12px 12px; 
 	border-radius: 8px;
 }
 
