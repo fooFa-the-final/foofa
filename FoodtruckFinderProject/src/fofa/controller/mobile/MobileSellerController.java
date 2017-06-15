@@ -111,7 +111,7 @@ public class MobileSellerController {
 	
 	
 	@RequestMapping(value="/mobile/foodtruck/open.do", method=RequestMethod.POST, produces="application/json")
-	public @ResponseBody String modifyFoodtruck(@RequestBody String data){
+	public @ResponseBody String openFoodtruck(@RequestBody String data){
 		Gson gson = new GsonBuilder().create();
 		String result = "";
 		try {
@@ -143,6 +143,26 @@ public class MobileSellerController {
 			}else{
 				return "false";
 			}
+	}
+	
+	@RequestMapping(value="/mobile/foodtruck/modify.do", method=RequestMethod.POST, produces="application/json")
+	public @ResponseBody String modifyFoodtruck(@RequestBody String data){
+		Gson gson = new GsonBuilder().create();
+		String result = "";
+		try {
+			JSONParser jsonParser = new JSONParser();
+				
+			Foodtruck foodtruck = gson.fromJson(((JSONObject) jsonParser.parse(data)).toJSONString(), Foodtruck.class);
+			String[] img = foodtruck.getFoodtruckImg().split("/");
+			foodtruck.setFoodtruckImg(img[img.length-1]);
+			truckService.modify(foodtruck);
+				
+			result = "ok";
+		}
+		catch (Exception e) {
+			result = "fail";
+		}
+		return result;
 	}
 	
 	
