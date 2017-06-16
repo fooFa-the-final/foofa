@@ -65,7 +65,7 @@
 					                                	<c:forEach var="item" items="${avgItemList }" varStatus="sts">
 					                                  	 	<tr>
 					                                  	 		<td>${sts.count }</td>
-					                                       		<td><a href="${ctx }/itemStat.do?itemId=${item.itemId }&foodtruckId=${truck.foodtruckId}">${item.surveyId }</a> </td>
+					                                       		<td><a href="${ctx }/survey/itemStat.do?itemId=${item.itemId }&foodtruckId=${truck.foodtruckId}">${item.surveyId }</a> </td>
 					                                        	<td>
 																<span class="starRating" style="text-align:left;"><span style="width: ${item.score*20 }%">${item.score }점</span></span>
 					                                        	</td>

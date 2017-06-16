@@ -17,8 +17,6 @@
     <!-- Page-Level CSS -->
 
 </head>
-
-
 <body>
 	<!--  wrapper -->
 	<div id="wrapper">
@@ -116,9 +114,11 @@
     <!-- Page-Level Plugin Scripts-->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 	<script src="http://malsup.github.com/jquery.form.js"></script> 
+    <script src="${ctx }/resources/scripts/seller-profile.js"></script>
 	<script>
 		$(document).ready(function() {
 			$('#side-adv').attr('class', 'selected');
+			stateCheck('${truck.state}');
 
 		    $("form").submit(function(){
 				var st = $(":input:radio[name=period]:checked").val();

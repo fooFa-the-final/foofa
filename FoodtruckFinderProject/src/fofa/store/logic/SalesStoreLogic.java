@@ -89,7 +89,6 @@ public class SalesStoreLogic implements SalesStore {
 		} finally {
 			session.close();
 		}
-		System.out.println("date : " + sale.getDate());
 		return sale;
 	}
 

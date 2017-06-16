@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import fofa.domain.Foodtruck;
 import fofa.domain.Sale;
+import fofa.service.FoodtruckService;
 import fofa.service.SalesService;
 import fofa.service.logic.SalesServiceLogic;
 
@@ -24,63 +26,60 @@ public class SalesController {
 
 	@Autowired
 	private SalesServiceLogic service;
+	@Autowired
+	private FoodtruckService foodtruckService;
 
 	@RequestMapping(value = "sales/create.do", method = RequestMethod.POST)
 	public String create(HttpServletRequest req, Sale sale) {
-		/*
-		 * HttpSession session = req.getSession(); String foodtruckId = (String)
-		 * session.getAttribute("loginTruckId");
-		 */
 
-		sale.setFoodtruckId("F1");
-		System.out.println("input : " + sale.toString());
+		 HttpSession session = req.getSession(); 
+		 String foodtruckId = (String)session.getAttribute("loginTruckId");
+
+		sale.setFoodtruckId(foodtruckId);
 		service.register(sale);
 		return "redirect:/sales/truck.do";
 	}
 
 	@RequestMapping(value = "sales/modify.do", method = RequestMethod.POST)
 	public String modify(HttpServletRequest req, Sale sale) {
-		/*
-		 * HttpSession session = req.getSession(); String foodtruckId = (String)
-		 * session.getAttribute("loginTruckId");
-		 */
-		sale.setFoodtruckId("F1");
+		 HttpSession session = req.getSession(); 
+		 String foodtruckId = (String)session.getAttribute("loginTruckId");
+		sale.setFoodtruckId(foodtruckId);
 		service.modify(sale);
 		return "redirect:/sales/truck.do";
 	}
 
 	@RequestMapping("sales/remove.do")
 	public String remove(HttpServletRequest req, String date) {
-		/*
-		 * HttpSession session = req.getSession(); String foodtruckId = (String)
-		 * session.getAttribute("loginTruckId");
-		 */
+
+ HttpSession session = req.getSession(); 
+ String foodtruckId = (String)session.getAttribute("loginTruckId");
+
 		Sale sale = new Sale();
 		sale.setDate(date);
-		sale.setFoodtruckId("F1");
+		sale.setFoodtruckId(foodtruckId);
 		service.remove(sale);
 		return "redirect:/sales/truck.do";
 	}
 
 	@RequestMapping("sales/truck.do")
-	public String searchTruckSales(String foodtruckId, Model model) {
+	public String searchTruckSales(String foodtruckId, Model model, HttpSession session) {
+		Foodtruck foodtruck = foodtruckService.findBySeller((String)session.getAttribute("loginUserId"));
+		model.addAttribute("truck", foodtruck);
 		return "/view/foodtruck/foodtruckSales.jsp";
 	}
 
 	@RequestMapping(value = "sales/date.do", method = RequestMethod.POST)
 	public @ResponseBody JSONObject searchDateSale(String date, HttpServletRequest req) {
-		/*
-		 * HttpSession session = req.getSession(); String foodtruckId = (String)
-		 * session.getAttribute("loginTruckId");
-		 */
-		Sale sale = service.findDateSale(date, "F1");
+
+		HttpSession session = req.getSession(); String foodtruckId = (String)session.getAttribute("loginTruckId");
+
+		Sale sale = service.findDateSale(date, foodtruckId);
 
 		JSONObject obj = new JSONObject();
 		obj.put("re", sale.getRevenue());
 		obj.put("lo", sale.getLocation());
 		obj.put("da", sale.getDate());
-
-		System.out.println("date : " + obj);
 
 		return obj;
 	}
@@ -151,10 +150,7 @@ public class SalesController {
 			jsonArray.add(obj);
 
 		}
-
-		System.out.println(jsonArray);
 		return jsonArray;
-
 	}
 
 	@RequestMapping(value = "sales/10days.do")
@@ -205,19 +201,17 @@ public class SalesController {
 
 		}
 
-		System.out.println("10days : " + jsonArray);
 		return jsonArray;
 
 	}
 
 	@RequestMapping(value = "sales/month.do")
 	public @ResponseBody JSONArray search1MonthSales(HttpServletRequest req) {
-		/*
-		 * HttpSession session = req.getSession(); String foodtruckId = (String)
-		 * session.getAttribute("loginTruckId");
-		 */
 
-		List<Sale> list = service.find1MonthSales("F1");
+		HttpSession session = req.getSession(); 
+		String foodtruckId = (String)session.getAttribute("loginTruckId");
+
+		List<Sale> list = service.find1MonthSales(foodtruckId);
 		JSONArray jsonArray = new JSONArray();
 
 		for (int i = 0; i < list.size(); i++) {
@@ -228,8 +222,6 @@ public class SalesController {
 			jsonArray.add(obj);
 
 		}
-		System.out.println(list.size());
-		System.out.println(jsonArray);
 		return jsonArray;
 
 	}

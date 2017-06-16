@@ -62,12 +62,13 @@
 
 	<select id="select10DaysSales" parameterType="String"
 		resultMap="SaleMap">
+		select * from(
 		SELECT sales_id,foodtruck_id,day,location,revenue
 		From sales_tb
 		WHERE
 		foodtruck_id=#{foodtruckId}
-		AND<![CDATA[ ROWNUM < 11 ]]>
-		order by day DESC
+		order by day DESC )
+		where ROWNUM <![CDATA[  < 11 ]]>
 	</select>
 
 
