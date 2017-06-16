@@ -13,7 +13,7 @@
 	                        </form>    
                             <div class="user-info" style="margin-top:30px;">
                                 <font size="6">${truck.foodtruckName }</font><br><br>
-                                <h5>${truck.category1 }</h5>
+                                <h5>${truck.category1 } &nbsp; ${truck.category2 } &nbsp; ${truck.category3 }</h5>
                                 <h5>${truck.spot }</h5>
                                 <h5>${truck.favoriteCount }Followers</h5>
                                 <h5>${truck.reviewCount }Reviews</h5>
