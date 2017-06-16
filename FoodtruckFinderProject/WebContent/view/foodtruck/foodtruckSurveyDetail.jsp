@@ -373,6 +373,15 @@
 	<script src="${ctx }/resources/flot/jquery.flot.resize.js"></script>
 	<script src="${ctx }/resources/flot/jquery.flot.pie.js"></script>
 	<script src="${ctx }/resources/scripts/flot-demo.js"></script>
+	<script>
+	$(document).ready(function() {
+		var state = '${truck.state}';
+		stateCheck(state);
+		$('#side-survey').attr('class', 'selected');
+
+	});
+
+	</script>
 </body>
 
 </html>
