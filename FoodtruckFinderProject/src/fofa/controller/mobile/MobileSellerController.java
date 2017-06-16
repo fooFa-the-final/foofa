@@ -1,6 +1,5 @@
 package fofa.controller.mobile;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,10 +23,13 @@ import fofa.domain.Menu;
 import fofa.domain.Menus;
 import fofa.domain.Review;
 import fofa.domain.Reviews;
+import fofa.domain.Sale;
+import fofa.domain.Sales;
 import fofa.domain.Seller;
 import fofa.service.AdvertiseService;
 import fofa.service.FoodtruckService;
 import fofa.service.ReviewService;
+import fofa.service.SalesService;
 import fofa.service.SellerService;
 
 @Controller
@@ -38,67 +40,65 @@ public class MobileSellerController {
 	@Autowired
 	private FoodtruckService truckService;
 	@Autowired
+	private SalesService salesService;
+	@Autowired
 	private ReviewService reviewService;
 	@Autowired
 	private AdvertiseService advertiseService;
-	
-	
-	@RequestMapping(value="/mobile/sellerlogin.do")
+
+	@RequestMapping(value = "/mobile/sellerlogin.do")
 	public @ResponseBody String sellerLogin(String id, String password) {
-		
+
 		Seller seller = new Seller();
 		seller.setSellerId(id);
 		seller.setPassword(password);
-		
 
 		boolean result;
-		
+
 		result = sellerService.checkPw(id, password);
-		
-		System.out.println(result+"s");
-		
-		if(result == false) {
+
+		System.out.println(result + "s");
+
+		if (result == false) {
 			return "false";
 		} else {
 			return "true";
 		}
-		
-	}	
-	@RequestMapping(value="/mobile/trucklist.do", produces="application/xml")
-	public @ResponseBody Foodtruck getMusicToXMl(String id, HttpServletRequest req){
-			Foodtruck truck = new Foodtruck();
-			truck = truckService.findById(id);
-			return truck;
+
 	}
 
-	@RequestMapping(value = "/mobile/detail.do", produces="application/xml")
-	public @ResponseBody Foodtruck detailTruck(String id){
+	@RequestMapping(value = "/mobile/trucklist.do", produces = "application/xml")
+	public @ResponseBody Foodtruck getMusicToXMl(String id, HttpServletRequest req) {
+		Foodtruck truck = new Foodtruck();
+		truck = truckService.findById(id);
+		return truck;
+	}
+
+	@RequestMapping(value = "/mobile/detail.do", produces = "application/xml")
+	public @ResponseBody Foodtruck detailTruck(String id) {
 		Foodtruck foodtruck = truckService.findBySeller(id);
 		return foodtruck;
 	}
 
-	
-	@RequestMapping(value = "/mobile/menu/detail.do", produces="application/xml")
-	public @ResponseBody Menus detailTruckMenu(String id){
+	@RequestMapping(value = "/mobile/menu/detail.do", produces = "application/xml")
+	public @ResponseBody Menus detailTruckMenu(String id) {
 		List<Menu> menus = new ArrayList<>();
 
 		Foodtruck foodtruck = truckService.findBySeller(id);
 		menus = foodtruck.getMenus();
 		Menus truckmenu = new Menus();
 		truckmenu.setMenus(menus);
-		
+
 		return truckmenu;
 	}
-	
-	
-	
-	@RequestMapping(value ="/mobile/truck/modify.do", produces="application/xml")
-	public @ResponseBody void modifyTruck(Foodtruck foodtruck){
+
+	@RequestMapping(value = "/mobile/truck/modify.do", produces = "application/xml")
+	public @ResponseBody void modifyTruck(Foodtruck foodtruck) {
 		truckService.modify(foodtruck);
 	}
-	
-	@RequestMapping(value = "/mobile/review/list/turck.do", produces="application/xml")
-	public @ResponseBody Reviews truckReviews(String id){
+
+	@RequestMapping(value = "/mobile/review/list/turck.do", produces = "application/xml")
+	public @ResponseBody Reviews truckReviews(String id) {
 		Foodtruck foodtruck = truckService.findBySeller(id);
 		List<Review> list = new ArrayList<>();
 		Reviews truckReviews = new Reviews();
@@ -106,67 +106,82 @@ public class MobileSellerController {
 		truckReviews.setReviews(list);
 		return truckReviews;
 	}
-	
-	
-	
-	
-	@RequestMapping(value="/mobile/foodtruck/open.do", method=RequestMethod.POST, produces="application/json")
-	public @ResponseBody String openFoodtruck(@RequestBody String data){
+
+	@RequestMapping(value = "/mobile/foodtruck/open.do", method = RequestMethod.POST, produces = "application/json")
+	public @ResponseBody String openFoodtruck(@RequestBody String data) {
 		Gson gson = new GsonBuilder().create();
 		String result = "";
 		try {
 			JSONParser jsonParser = new JSONParser();
-				
+
 			Foodtruck foodtruck = gson.fromJson(((JSONObject) jsonParser.parse(data)).toJSONString(), Foodtruck.class);
 			foodtruck.setState(true);
 			String[] img = foodtruck.getFoodtruckImg().split("/");
-			foodtruck.setFoodtruckImg(img[img.length-1]);
+			foodtruck.setFoodtruckImg(img[img.length - 1]);
 			truckService.modify(foodtruck);
 			System.out.println(foodtruck.toString());
-				
+
 			result = "ok";
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			result = "fail";
 		}
-		
+
 		return result;
 	}
-	
-	@RequestMapping(value="/mobile/advertiseRegister.do", produces="application/json", method=RequestMethod.POST)
+
+	@RequestMapping(value = "/mobile/advertiseRegister.do", produces = "application/json", method = RequestMethod.POST)
 	public @ResponseBody String memberLogin(@RequestBody Advertise advertise) {
 
 		advertiseService.register(advertise);
-		
-		if(!advertiseService.register(advertise)){
-				return "true";
-			}else{
-				return "false";
-			}
+
+		if (!advertiseService.register(advertise)) {
+			return "true";
+		} else {
+			return "false";
+		}
 	}
-	
-	@RequestMapping(value="/mobile/foodtruck/modify.do", method=RequestMethod.POST, produces="application/json")
-	public @ResponseBody String modifyFoodtruck(@RequestBody String data){
+
+	@RequestMapping(value = "/mobile/foodtruck/modify.do", method = RequestMethod.POST, produces = "application/json")
+	public @ResponseBody String modifyFoodtruck(@RequestBody String data) {
 		Gson gson = new GsonBuilder().create();
 		String result = "";
 		try {
 			JSONParser jsonParser = new JSONParser();
-				
+
 			Foodtruck foodtruck = gson.fromJson(((JSONObject) jsonParser.parse(data)).toJSONString(), Foodtruck.class);
 			String[] img = foodtruck.getFoodtruckImg().split("/");
-			foodtruck.setFoodtruckImg(img[img.length-1]);
+			foodtruck.setFoodtruckImg(img[img.length - 1]);
 			truckService.modify(foodtruck);
-				
+
 			result = "ok";
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			result = "fail";
 		}
 		return result;
 	}
-	
-	
-	
-	
-}			
 
+	///////////////////// foodtruck_Close
+
+	@RequestMapping(value = "/mobile/closeTruck.do")
+	public @ResponseBody void closeTrcuk(String id, String revenue, String today) {
+
+		System.out.println("동작됨");
+		Foodtruck foodtruck = truckService.findBySeller(id);
+		foodtruck.setState(false);
+
+		System.out.println("this is foodtruck: " + foodtruck.toString() + "today is : " + today);
+
+		truckService.modify(foodtruck);// 영업종료로 DB수정
+
+		Sale sale = new Sale();
+
+		sale.setFoodtruckId(foodtruck.getFoodtruckId());
+		sale.setLocation(foodtruck.getLocation());
+		sale.setRevenue(Integer.parseInt(revenue));
+		sale.setDate(today);
+
+		salesService.register(sale);
+
+	}
+
+}
