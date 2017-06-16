@@ -68,6 +68,10 @@ public class MemberServiceLogic implements MemberService{
 		return store.imgupdate(member) > 0;
 	}
 	
+	@Override
+	public boolean mobileupdate(Member member){
+		return store.mobileupdate(member)>0;
+	}
 	
 
 }
