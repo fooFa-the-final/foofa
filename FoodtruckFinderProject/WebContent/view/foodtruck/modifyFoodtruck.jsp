@@ -22,53 +22,53 @@
 	<script src="http://malsup.github.com/jquery.form.js"></script> 
 	
     <script>
-        $(document).ready(function(){
-            $('#startTime').timepicker();
-            $('#endTime').timepicker();
-            var position = new naver.maps.LatLng(37.4795169, 126.8824995);
-            var map = new naver.maps.Map('map', {
-			    center: position,
+    var infowindow;
+    function searchCoordinateToAddress(latlng) {
+        var tm128 = naver.maps.TransCoord.fromLatLngToTM128(latlng);
+        naver.maps.Service.reverseGeocode({
+            location: tm128,
+            coordType: naver.maps.Service.CoordType.TM128
+        }, function(status, response) {
+            if (status === naver.maps.Service.Status.ERROR) {
+                return alert('Something Wrong!');
+            }
+            var items = response.result.items,
+            address = items[0].address;
+            $("#loc1").val(address);
+            console.log(address);
+            
+        });
+    }
+       $(document).ready(function(){
+           $('#startTime').timepicker();
+           $('#endTime').timepicker();
+           naver.maps.Service.geocode({
+ 			address: "${truck.location}"
+ 		}, function(status, response){
+ 			if (status === naver.maps.Service.Status.ERROR) {
+ 				position = new naver.maps.LatLng(37.4795169, 126.8824995);
+	            return alert('잘못 입력 되어있는 주소입니다. 기본 좌표를 찍어주겠습니다.');
+	        }
+ 			
+ 			var item = response.result.items[0],
+ 				point = new naver.maps.Point(item.point.x, item.point.y);
+ 		
+ 			var map = new naver.maps.Map('map', {
+			    center: point,
 			    zoom: 10
 			});
-            var marker = new naver.maps.Marker({
-				position: position,
+ 			
+ 			var marker = new naver.maps.Marker({
+				position: point,
 				map: map
 			});
-            var infoWindow = new naver.maps.InfoWindow({
-                anchorSkew: true
-            });
-            
-            var address = "";
-            function searchCoordinateToAddress(latlng) {
-                var tm128 = naver.maps.TransCoord.fromLatLngToTM128(latlng);
-                infoWindow.close();
-
-                naver.maps.Service.reverseGeocode({
-                    location: tm128,
-                    coordType: naver.maps.Service.CoordType.TM128
-                }, function(status, response) {
-                    if (status === naver.maps.Service.Status.ERROR) {
-                        return alert('Something Wrong!');
-                    }
-
-                    var items = response.result.items,
-                    address = items[0].address;
-                    
-                    console.log(address);
-
-                    infoWindow.setContent([
-                            '<div style="padding:10px;min-width:200px;line-height:150%;">',
-                            '<h4 style="margin-top:5px;">검색 좌표 : '+ address +'</h4></div>'
-                        ].join('\n'));
-
-                    infoWindow.open(map, latlng);
-                });
-            }
-            naver.maps.Event.addListener(map, 'click', function(e){
+ 			naver.maps.Event.addListener(map, 'click', function(e){
             	marker.setPosition(e.coord);
             	searchCoordinateToAddress(e.coord);
             });
-        });
+ 		});
+       });
+       
         
         var c = 0;
         var registMenu = function(){
@@ -141,7 +141,7 @@
                                	<input class="form-control" type="text" name="category2" value="${truck.category2 }" style="width:20%">
                                	<input class="form-control" type="text" name="category3" value="${truck.category3 }" style="width:20%">
                            	  </h5>
-                              <h5><input class="form-control" type="text" name="location" value="${truck.location }" style="width:61.5%"></h5>
+                              <h5><input class="form-control" type="text" name="location" value="${truck.location }" id = "loc1" style="width:61.5%"></h5>
                         </div>
                 </div>
                 <!--End Page Header -->
