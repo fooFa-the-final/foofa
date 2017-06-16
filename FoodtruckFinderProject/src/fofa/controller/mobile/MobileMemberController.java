@@ -41,8 +41,10 @@ import fofa.domain.Recommand;
 import fofa.domain.Report;
 import fofa.domain.Review;
 import fofa.domain.Reviews;
+import fofa.domain.Survey;
 import fofa.domain.SurveyItem;
 import fofa.domain.SurveyItems;
+import fofa.domain.SurveyReply;
 import fofa.service.FavoriteService;
 import fofa.service.FollowService;
 import fofa.service.FoodtruckService;
@@ -66,7 +68,8 @@ public class MobileMemberController {
 	private FoodtruckService truckService;
 	@Autowired
 	private SurveyItemService surveyItemService;
-	
+	@Autowired
+	private SurveyService surveyService;
 	@RequestMapping(value="/mobile/memberRegister.do", produces="application/json", method=RequestMethod.POST)
 	public @ResponseBody String memberLogin(@RequestBody Member member) {
 		System.out.println("여기까지왔군"+member.getMemberId());
@@ -181,9 +184,13 @@ public class MobileMemberController {
 	}
 	
 	
-	
-	
 	@RequestMapping(value="mobile/review/detail.do")
+	public @ResponseBody Review searchReviewDetail------------(String reviewId){
+		Review review = reviewService.findById(reviewId);
+		return review;
+	}
+	
+	@RequestMapping(value="mobile/review/imageList.do")
 	public @ResponseBody Images searchReviewImage(String reviewId){
 		Review review = reviewService.findById(reviewId);
 		List<Image> images = review.getImages();
@@ -286,10 +293,38 @@ public class MobileMemberController {
 	}
 	
 	@RequestMapping(value="mobile/survey/form.do" , produces="application/xml")
-	public @ResponseBody SurveyItems surveyItems(){
+	public @ResponseBody SurveyItems getSurveyItems(){
 		List<SurveyItem> items = surveyItemService.findAll();
 		SurveyItems surveyItems = new SurveyItems();
 		surveyItems.setSurveyItems(items);
 		return surveyItems;
+	}
+	
+	@RequestMapping(value="/mobile/survey/create.do", method=RequestMethod.POST, produces="application/json")
+	public @ResponseBody String createSurvey(@RequestBody String data) throws JsonSyntaxException, ParseException{
+		Gson gson = new GsonBuilder().create();
+		JSONParser jsonParser = new JSONParser();
+			
+		Survey survey = gson.fromJson(((JSONObject) jsonParser.parse(data)).toJSONString(), Survey.class);
+		
+		List<String> itemId = new ArrayList<>();
+		List<SurveyItem> itemList = surveyItemService.findAll();
+		List<SurveyReply> replyList = new ArrayList<>();
+		for(SurveyItem s : itemList){
+			String id = s.getItemId();
+			itemId.add(id);
+		}
+		
+		for(String s : itemId){
+			SurveyReply reply = new SurveyReply();
+			//reply.setScore(Integer.parseInt(req.getParameter("q" + s)));
+			reply.setItemId(s);
+			replyList.add(reply);
+		}
+		
+		survey.setReplies(replyList);
+		surveyService.register(survey);
+		return "true";
+			
 	}
 }
