@@ -9,60 +9,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>foodtruckAdvertise</title>
 <!-- Core CSS - Include with every page -->
-<link href="${ctx}/resources/plugins/bootstrap/bootstrap.css"
-	rel="stylesheet" />
-<link href="${ctx}/resources/font-awesome/css/font-awesome.css"
-	rel="stylesheet" />
-<link href="${ctx}/resources/plugins/pace/pace-theme-big-counter.css"
-	rel="stylesheet" />
-<link href="${ctx}/resources/css/style.css" rel="stylesheet" />
-<link href="${ctx}/resources/css/main-style.css" rel="stylesheet" />
-
-<!-- Page-Level CSS -->
-<link
-	href="${ctx}/resources/plugins/dataTables/dataTables.bootstrap.css"
-	rel="stylesheet" />
+    <link href="${ctx}/resources/plugins/bootstrap/bootstrap.css" rel="stylesheet" />
+    <link href="${ctx}/resources/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <link href="${ctx}/resources/plugins/pace/pace-theme-big-counter.css" rel="stylesheet" />
+    <link href="${ctx}/resources/css/style.css" rel="stylesheet" />
+    <link href="${ctx}/resources/css/main-style.css" rel="stylesheet" />
+    <!-- Page-Level CSS -->
 
 </head>
 
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-
-<script>
-
-$(document).ready(function(){
-    $("form").submit(function(){
-		var st = $(":input:radio[name=period]:checked").val();
-    	var today = new Date();  
-    	var dateString =  $("input[name='startdate']").val();
-    	var dateArray = dateString.split("-");  
-    	var dateObj = new Date(dateArray[0], Number(dateArray[1])-1, dateArray[2]);  
-    	var betweenDay = (today.getTime() - dateObj.getTime());  
-	        if($("input[name='startdate']").val() == ""){
-            $("input[name='startdate']").css("border", "1px solid red").after("<span>날짜를 입력해주세요.</span>");
-            $("span").css("color", "red").fadeOut(3000);
-            return false;
-        	} else if(betweenDay > 0){
-                $("input[name='startdate']").css("border", "1px solid red").after("<span>광고시작 날짜는 지난 날짜를 선택할 수 없습니다.</span>");
-                $("span").css("color", "red").fadeOut(3000); 				
- 				return false;       		
-        	}else if (st == null){
-            	var sel_type = null;
-            	var chk_radio = document.getElementsByName('period');
-            	for(var i=0;i<chk_radio.length;i++){
-            		if(chk_radio[i].checked == true){ 
-            			sel_type = chk_radio[i].value;
-            		}
-            	}
-            	if(sel_type == null){
-                	$("input[name='result']").css("border", "1px solid red").after("<span>기간을 선택해 주세요.</span>");
-                    $("span").css("color", "red").fadeOut(3000);
-            		return false;
-            	}
-        	} 
-    });   
-});
-</script>
 
 <body>
 	<!--  wrapper -->
@@ -152,25 +107,50 @@ $(document).ready(function(){
 	</div>
 	<!-- end wrapper -->
 
-	<!-- Core Scripts - Include with every page -->
-	<script src="${ctx}/resources/plugins/jquery-1.10.2.js"></script>
-	<script src="${ctx}/resources/plugins/bootstrap/bootstrap.min.js"></script>
-	<script src="${ctx}/resources/plugins/metisMenu/jquery.metisMenu.js"></script>
-	<script src="${ctx}/resources/plugins/pace/pace.js"></script>
-	<script src="${ctx}/resources/scripts/siminta.js"></script>
-	<!-- Page-Level Plugin Scripts-->
-	<script src="${ctx}/resources/plugins/dataTables/jquery.dataTables.js"></script>
-	<script
-		src="${ctx}/resources/plugins/dataTables/dataTables.bootstrap.js"></script>
-    <script src="${ctx }/resources/scripts/seller-profile.js"></script>
+    <!-- Core Scripts - Include with every page -->
+    <script src="${ctx}/resources/plugins/jquery-1.10.2.js"></script>
+    <script src="${ctx}/resources/plugins/bootstrap/bootstrap.min.js"></script>
+    <script src="${ctx}/resources/plugins/metisMenu/jquery.metisMenu.js"></script>
+    <script src="${ctx}/resources/plugins/pace/pace.js"></script>
+    <script src="${ctx}/resources/scripts/siminta.js"></script>
+    <!-- Page-Level Plugin Scripts-->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 	<script src="http://malsup.github.com/jquery.form.js"></script> 
 	<script>
 		$(document).ready(function() {
-			$('#dataTables-example').dataTable();
 			$('#side-adv').attr('class', 'selected');
-		});
-	</script>
 
+		    $("form").submit(function(){
+				var st = $(":input:radio[name=period]:checked").val();
+		    	var today = new Date();  
+		    	var dateString =  $("input[name='startdate']").val();
+		    	var dateArray = dateString.split("-");  
+		    	var dateObj = new Date(dateArray[0], Number(dateArray[1])-1, dateArray[2]);  
+		    	var betweenDay = (today.getTime() - dateObj.getTime());  
+			        if($("input[name='startdate']").val() == ""){
+		            $("input[name='startdate']").css("border", "1px solid red").after("<span>날짜를 입력해주세요.</span>");
+		            $("span").css("color", "red").fadeOut(3000);
+		            return false;
+		        	} else if(betweenDay > 0){
+		                $("input[name='startdate']").css("border", "1px solid red").after("<span>광고시작 날짜는 지난 날짜를 선택할 수 없습니다.</span>");
+		                $("span").css("color", "red").fadeOut(3000); 				
+		 				return false;       		
+		        	}else if (st == null){
+		            	var sel_type = null;
+		            	var chk_radio = document.getElementsByName('period');
+		            	for(var i=0;i<chk_radio.length;i++){
+		            		if(chk_radio[i].checked == true){ 
+		            			sel_type = chk_radio[i].value;
+		            		}
+		            	}
+		            	if(sel_type == null){
+		                	$("input[name='result']").css("border", "1px solid red").after("<span>기간을 선택해 주세요.</span>");
+		                    $("span").css("color", "red").fadeOut(3000);
+		            		return false;
+		            	}
+		        	} 
+		    });   
+});
+</script>
 </body>
 </html>

@@ -10,7 +10,7 @@ var favoriteCount = function(truckId) {
 			$("#favoriteCount").html(data);
 		}
 	});
-}
+};
 
 // 버튼 서식 지정
 var favoriteExist = function(truckId) {
@@ -31,7 +31,7 @@ var favoriteExist = function(truckId) {
 			}
 		}
 	});
-}
+};
 // favorite : unfavorite
 var favorite = function(truckId) {
 	console.log(truckId + " : come");
@@ -109,7 +109,7 @@ var followExist = function(memberId) {
 			}
 		}
 	});
-}
+};
 
 //follow 수 반환
 var followCount = function(memberId) {
@@ -123,7 +123,7 @@ var followCount = function(memberId) {
 			$("#followCount").html(data);
 		}
 	});
-}
+};
 
 //truck state 확인
 var stateCheck = function(state){
@@ -135,7 +135,7 @@ var stateCheck = function(state){
 		$("#openstateBtn").removeClass("btn btn-success").addClass("btn btn-outline btn-default");
 		$("#openstateBtn").val("CLOSED");
 	}
-}
+};
 
 //truck state 변경
 var stateBtn = function(obj){
@@ -162,10 +162,10 @@ var stateBtn = function(obj){
 	     	alert("영업상태 변경을 실패하였습니다. 다시 시도해주세요.");
 	     }
 	});
-}
+};
 
 //푸드트럭 사진 변경 
-function fileinfo(input){
+var fileinfo = function(input){
   	if (input.files && input.files[0]) {
         var reader = new FileReader();
         reader.onload = function (e) {
@@ -184,4 +184,4 @@ function fileinfo(input){
   		}
   	});
   	$("#fileForm").submit();
-}
+};

@@ -595,12 +595,21 @@ img.somenail {
   pointer-events: none;
   content: " ";
 }
+div.reportImg{
+	
+}
+
+div.reportImg img{
+	width: 80px; height:80px; margin:0 12px 12px; 
+	border-radius: 8px;
+}
+
 div.reviewMainImg {
 	float:left; width:190px;
 }
 
 div.reviewMainImg img {
-	width: 160px; height:160px; margin:0 12px 12px; 
+	width: 160px; height:160px; margin:0 12px 12px 0px; 
 	border-radius: 8px;
 }
 

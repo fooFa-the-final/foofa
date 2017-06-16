@@ -56,14 +56,11 @@ input.cmn-toggle-round-flat:checked + label:after {
     <link href="${ctx }/resources/plugins/pace/pace-theme-big-counter.css" rel="stylesheet" />
     <link href="${ctx }/resources/css/style.css" rel="stylesheet" />
       <link href="${ctx }/resources/css/main-style.css" rel="stylesheet" />
-	<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=noUvsaR702FX6WH5un5h&submodules=geocoder"></script>
-	 <script src="${ctx }/resources/plugins/jquery-1.10.2.js"></script>
-	<script src="http://malsup.github.com/jquery.form.js"></script> 
 	
 	
 </head>
 
-<body>
+<body >
     <!--  wrapper -->
     
     <div id="wrapper">
@@ -233,16 +230,21 @@ input.cmn-toggle-round-flat:checked + label:after {
 
     <!-- Core Scripts - Include with every page -->
    
+	 <script src="${ctx }/resources/plugins/jquery-1.10.2.js"></script>
     <script src="${ctx }/resources/plugins/bootstrap/bootstrap.min.js"></script>
     <script src="${ctx }/resources/plugins/metisMenu/jquery.metisMenu.js"></script>
     <script src="${ctx }/resources/plugins/pace/pace.js"></script>
     <script src="${ctx }/resources/scripts/siminta.js"></script>
-    <script src="${ctx }/resources/scripts/seller-profile.js"></script>
+    
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=noUvsaR702FX6WH5un5h&submodules=geocoder"></script>
 	<script src="http://malsup.github.com/jquery.form.js"></script> 
+    <script src="${ctx }/resources/scripts/seller-profile.js"></script>
+	
 	<script>
 		$(document).ready(function() {
 			$('#side-info').attr('class', 'selected');
+			
 			naver.maps.Service.geocode({
 	 			address: "${truck.location}"
 	 		}, function(status, response){
@@ -267,6 +269,7 @@ input.cmn-toggle-round-flat:checked + label:after {
 			
 			var state = '${truck.state}';
 			stateCheck(state);
+			console.log("123");
 		});
 
 	</script>

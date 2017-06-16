@@ -10,19 +10,270 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Foodtruck Finder</title>
     <!-- Core CSS - Include with every page -->
-    <script src="${ctx }/resources/plugins/jquery-1.10.2.js"></script>
     <link href="${ctx }/resources/plugins/bootstrap/bootstrap.css" rel="stylesheet" />
     <link href="${ctx }/resources/font-awesome/css/font-awesome.css" rel="stylesheet" />
     <link href="${ctx }/resources/plugins/pace/pace-theme-big-counter.css" rel="stylesheet" />
     <link href="${ctx }/resources/css/style.css" rel="stylesheet" />
     <link href="${ctx }/resources/css/main-style.css" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="${ctx }/resources/css/jquery.timepicker.css"/>
+</head>
+<style>
+label {
+width: 120px;margin-right: 20px;}
+textarea.form-control {
+}
+</style>
+<body>
+    <!--  wrapper -->
+    
+    <div id="wrapper">
+
+		<%@ include file="../include/header.jspf"%>
+		<%@ include file="../include/sellerLeft.jspf"%>
+
+        <!--  page-wrapper -->
+        <div id="page-wrapper">
+            <form action="${ctx }/foodtruck/modify.do" method="post" class="form-inline">
+            <input type="hidden" id="foodtruckId" name="foodtruckId" value="${truck.foodtruckId }">
+            <div class="row">
+                <!-- Page Header -->
+                
+                <div class="col-md-12" style="margin-top:20px;" >
+                	<div class="panel panel-danger">
+                		<div class="panel-body" style="height:300px">
+	                    	<div class="col-md-4">
+	                           <form id="fileForm" method="post" enctype="multipart/form-data">
+		                            <a href="#" >
+		                                <img name="image" id="image" src="${ctx }/resources/img/food/${truck.foodtruckImg }" alt="사진을 변경하려면 클릭하세요." style="height:250px; width:250px" onClick="document.all.file.click();"/>
+		                            	<input type="file" name="file" id="file" style="display: none;" onchange="fileinfo(this)" />
+		                            </a>
+		                        </form> 
+	                        </div>
+	                        <div class="col-md-6" style="margin-top:30px;">
+	                            <h1 style="margin:0; "><label>푸드트럭 이름</label><input class="form-control" type="text" name="foodtruckName" value="${truck.foodtruckName }" style="width:61.5%"></h1><br>
+	                              <h5><label>카테고리</label>
+	                              	<input class="form-control" type="text" name="category1" value="${truck.category1 }" style="width:20%">
+	                               	<input class="form-control" type="text" name="category2" value="${truck.category2 }" style="width:20%">
+	                               	<input class="form-control" type="text" name="category3" value="${truck.category3 }" style="width:20%">
+	                           	  </h5>
+	                              <h5><label>현재 위치</label><input class="form-control" type="text" name="location" value="${truck.location }" style="width:61.5%"></h5>
+	                        </div>
+                		</div>
+                	</div>
+                </div>
+                <!--End Page Header -->
+                
+                <div class="col-md-12" style=" margin-bottom:50px; padding:0px;">
+                   <div class="col-md-8">
+                   
+                   <!--Truck Location Section-->
+                      <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">Truck Location</h4>
+                        </div>
+                        <div class="panel-body">
+                           <textarea class="form-control" name="spot" rows="3"  style="border:0px; width:100%;">${truck.spot }</textarea>
+                        </div>
+                      </div>
+                  <!--End of Truck Location-->
+                  
+                  <!--Notice Section-->
+                      <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">Notice</h4>
+                        </div>
+                        <div class="panel-body">
+                            <textarea class="form-control" name="notice" rows="3" style="border:0px; width:100%;">${truck.notice }</textarea>
+                        </div>
+                      </div>
+                  <!--End of Notice-->
+                  
+                  <!--Truck Hour Section-->
+                     <div class="panel panel-default">
+                       <div class="panel-heading">
+                           <h4 class="panel-title">Truck Hour</h4>
+                       </div>
+                       <div class="panel-body">
+                            <input id="startTime" name="startTime" type="text" class="time ui-timepicker-input" autocomplete="off" size="8" value="${startTime }"> 부터 
+                            <input id="endTime" name="endTime" type="text" class="time ui-timepicker-input" autocomplete="off" size="8" value="${endTime }"> 까지
+                       </div>
+                     </div>
+                  <!--End of Foodtruck Hour-->
+                                                
+                    <!-- Advanced Tables -->
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                             <h4 class="panel-title">Menu</h4> 
+                        </div>
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <table class="table table-striped table-bordered table-hover" id="menus" name="menus">
+                                	<colgroup>
+										<col width="*" />
+										<col width="100" />
+										<col width="60" />
+										<col width="100" />
+									</colgroup>
+                                    <thead>
+                                        <tr>
+                                            <th style="text-align:center"> Menu </th>
+                                            <th style="text-align:center"> Price </th>
+                                            <th style="text-align:center"> State </th>
+                                            <th colspan="1"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody >
+                                    	<c:forEach items="${truck.menus }" var="menu">
+                                        <tr class="odd gradeX">
+                                            <td><input type="text" name="menuName" value="${menu.menuName }" style="border:0px; background-color:transparent" readonly></td>
+                                            <td><input type="text" name="menuPrice" value="${menu.price }" style="border:0px; background-color:transparent" readonly></td>
+                                            <c:if test="${menu.menuState eq true }">
+                                            	<td>판매중</td>
+                                            </c:if>
+                                            <c:if test="${menu.menuState eq false }">
+                                            	<td>매진</td>
+                                            </c:if>
+                                            <td>
+                                            	<input type="hidden" name="menuId" value="${menu.menuId }">
+                                            	 <input type="hidden" name="menuState" value="${menu.menuState }"> 
+                                                <button type="button" class="btn btn-default btn-circle" id="menu1mod" onclick="modify_menu_click();">
+                                                    <i class="fa fa-pencil"></i>
+                                                </button>
+                                                <button type="button" class="btn btn-danger btn-circle" onClick="removeMenu(this)"><i class="fa fa-times"></i></button>
+                                            </td>
+                                        </tr>
+                                        </c:forEach>
+                                         <tr class="odd gradeX">
+                                            <td align="left"><input type="text" placeholder="메뉴 명" id="inputMenuName"></td>
+                                            <td align="left"><input type="text" placeholder="메뉴 가격" id="inputMenuPrice"></td>
+                                            <td>
+                                                <select id="inputMenuState">
+                                                    <option>판매중</option>
+                                                    <option>매진</option>
+                                                </select>
+                                            </td>
+                                            <td align="center">
+                                                <button type="button" class="btn btn-primary btn-circle" onclick="registMenu()"><i class="fa fa-plus"></i></button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            
+                    </div>
+                    <!--End Advanced Tables -->
+                </div>
+                 
+             </div>
+          	 <div class="col-md-4">
+          	 	<div class="panel panel-default">
+          	 		<div class="panel-heading"><h4 class="panel-title">Map</h4></div>
+          	 		<div class="panel-body" style="background-color: white; height:350px" id="map">
+          	 		</div>
+          	 	</div>
+          	 	<div class="panel panel-default">
+          	 		<div class="panel-heading"><h4 class="panel-title">More Info</h4></div>
+ 					<div class="panel-body">
+                           <table>
+                              <thead>
+                                  <tr>
+                                      <th width="150px"></th>
+                                      <th></th>
+                                  </tr>
+                              </thead>
+                               <tbody>
+                                   <tr>
+                                       <td>Accept Card</td>
+                                       <c:if test="${truck.card eq true }">
+	                                       <td>
+	                                            <input type="radio" name="card" id="optionsRadiosInline1" value="true" checked>YES
+	                                            <input type="radio" name="card" id="optionsRadiosInline2" value="false">NO
+	                                        </td>
+                                        </c:if>
+                                        <c:if test="${truck.card eq false }">
+	                                       <td>
+	                                            <input type="radio" name="card" id="optionsRadiosInline1" value="true">YES
+	                                            <input type="radio" name="card" id="optionsRadiosInline2" value="false" checked>NO
+	                                        </td>
+                                        </c:if>
+                                   </tr>
+                                   <tr>
+                                       <td>Alcohol</td>
+                                       <c:if test="${truck.drinking eq true }">
+	                                       <td>
+	                                            <input type="radio" name="drinking" id="optionsRadiosInline1" value="true" checked>YES
+	                                            <input type="radio" name="drinking" id="optionsRadiosInline2" value="false">NO
+	                                        </td>
+                                        </c:if>
+                                        <c:if test="${truck.drinking eq false }">
+	                                       <td>
+	                                            <input type="radio" name="drinking" id="optionsRadiosInline1" value="true">YES
+	                                            <input type="radio" name="drinking" id="optionsRadiosInline2" value="false" checked>NO
+	                                        </td>
+                                        </c:if>
+                                   </tr>
+                                   <tr>
+                                       <td>Parking</td>
+                                       <c:if test="${truck.parking eq true }">
+	                                       <td>
+	                                            <input type="radio" name="parking" id="optionsRadiosInline1" value="true" checked>YES
+	                                            <input type="radio" name="parking" id="optionsRadiosInline2" value="false">NO
+	                                        </td>
+                                        </c:if>
+                                        <c:if test="${truck.parking eq false }">
+	                                       <td>
+	                                            <input type="radio" name="parking" id="optionsRadiosInline1" value="true">YES
+	                                            <input type="radio" name="parking" id="optionsRadiosInline2" value="false" checked>NO
+	                                        </td>
+                                        </c:if>
+                                   </tr>
+                                   <tr>
+                                       <td>Catering</td>
+                                       <c:if test="${truck.catering eq true }">
+	                                       <td>
+	                                            <input type="radio" name="catering" id="optionsRadiosInline1" value="true" checked>YES
+	                                            <input type="radio" name="catering" id="optionsRadiosInline2" value="false">NO
+	                                        </td>
+                                        </c:if>
+                                        <c:if test="${truck.catering eq false }">
+	                                       <td>
+	                                            <input type="radio" name="catering" id="optionsRadiosInline1" value="true">YES
+	                                            <input type="radio" name="catering" id="optionsRadiosInline2" value="false" checked>NO
+	                                        </td>
+                                        </c:if>
+                                   </tr>
+                               </tbody>
+                           </table>
+                       </div>
+                       </div>
+                   </div>                   
+                </div>
+                 <div class="col-md-1" style="margin-left:550px; margin-bottom: 100px">
+                        <button type="submit" class="btn btn-success btn-default btn-lg">SUBMIT</button>
+                   </div>
+                
+            </div>
+            </form>
+        </div>
+        <!-- end page-wrapper -->
+    </div>
+    <!-- end wrapper -->
+
+    <!-- Core Scripts - Include with every page -->
+    <script src="${ctx }/resources/plugins/jquery-1.10.2.js"></script>
+    <script src="${ctx }/resources/plugins/bootstrap/bootstrap.min.js"></script>
+    <script src="${ctx }/resources/plugins/metisMenu/jquery.metisMenu.js"></script>
+    <script src="${ctx }/resources/plugins/pace/pace.js"></script>
+    <script src="${ctx }/resources/scripts/siminta.js"></script>
+    
     <script src="${ctx }/resources/plugins/timepicker/jquery.timepicker.js"></script>
      <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=noUvsaR702FX6WH5un5h&submodules=geocoder"></script>
 	<script src="http://malsup.github.com/jquery.form.js"></script> 
 	
     <script>
         $(document).ready(function(){
+			$('#side-modify').attr('class', 'selected');
+        	
             $('#startTime').timepicker();
             $('#endTime').timepicker();
             var position = new naver.maps.LatLng(37.4795169, 126.8824995);
@@ -108,252 +359,6 @@
             });
         }
     </script>
-</head>
-
-<body>
-    <!--  wrapper -->
-    
-    <div id="wrapper">
-
-		<%@ include file="../include/header.jspf"%>
-		<%@ include file="../include/sellerLeft.jspf"%>
-
-        <!--  page-wrapper -->
-        <div id="page-wrapper">
-            <form action="${ctx }/foodtruck/modify.do" method="post" class="form-inline">
-            <input type="hidden" id="foodtruckId" name="foodtruckId" value="${truck.foodtruckId }">
-            <div class="row">
-                <!-- Page Header -->
-                
-                <div class="col-md-12" style="background-color:white; height:300px">
-                    	<div class="col-md-3">
-                           <form id="fileForm" method="post" enctype="multipart/form-data">
-	                            <a class="navbar-brand" href="#" style="margin-top:10px;" >
-	                                <img name="image" id="image" src="${ctx }/resources/img/food/${truck.foodtruckImg }" style="height:250px; width:250px" onClick="document.all.file.click();"/>
-	                            	<input type="file" name="file" id="file" style="display: none;" onchange="fileinfo(this)" />
-	                            </a>
-	                        </form> 
-                        </div>
-                        <div class="col-md-6" style="margin-top:30px;">
-                            <h1><input class="form-control" type="text" name="foodtruckName" value="${truck.foodtruckName }" style="width:61.5%"></h1><br>
-                              <h5>
-                              	<input class="form-control" type="text" name="category1" value="${truck.category1 }" style="width:20%">
-                               	<input class="form-control" type="text" name="category2" value="${truck.category2 }" style="width:20%">
-                               	<input class="form-control" type="text" name="category3" value="${truck.category3 }" style="width:20%">
-                           	  </h5>
-                              <h5><input class="form-control" type="text" name="location" value="${truck.location }" style="width:61.5%"></h5>
-                        </div>
-                </div>
-                <!--End Page Header -->
-                
-                <div class="col-md-12" style="margin-top:30px; margin-bottom:50px">
-                   <div class="col-md-8">
-                   
-                   <!--Truck Location Section-->
-                      <div class="col-lg-12">
-                          <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h4>Truck Location</h4>
-                            </div>
-                            <div class="panel-body">
-                               <textarea class="form-control" name="spot" rows="3" cols="94" style="border:0px">${truck.spot }</textarea>
-                            </div>
-                          </div>
-                      </div>
-                  <!--End of Truck Location-->
-                  
-                  <!--Notice Section-->
-                      <div class="col-lg-12">
-                          <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h4>Notice</h4>
-                            </div>
-                            <div class="panel-body">
-                                <textarea class="form-control" name="notice" rows="3" cols="94" style="border:0px">${truck.notice }</textarea>
-                            </div>
-                          </div>
-                      </div>
-                  <!--End of Notice-->
-                  
-                  <!--Truck Hour Section-->
-                      <div class="col-lg-12">
-                          <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h4>Truck Hour</h4>
-                            </div>
-                            <div class="panel-body">
-                                 <input id="startTime" name="startTime" type="text" class="time ui-timepicker-input" autocomplete="off" size="8" value="${startTime }"> 부터 
-                                 <input id="endTime" name="endTime" type="text" class="time ui-timepicker-input" autocomplete="off" size="8" value="${endTime }"> 까지
-                            </div>
-                          </div>
-                      </div>
-                  <!--End of Foodtruck Hour-->
-                                                
-                       <div class="col-lg-12">                       
-                       
-                    <!-- Advanced Tables -->
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                             <h4>Menu</h4> 
-                        </div>
-                        <div class="panel-body">
-                            <div class="table-responsive">
-                                <table class="table table-striped table-bordered table-hover" id="menus" name="menus">
-                                	<colgroup>
-										<col width="*" />
-										<col width="100" />
-										<col width="60" />
-										<col width="100" />
-									</colgroup>
-                                    <thead>
-                                        <tr>
-                                            <th style="text-align:center"> Menu </th>
-                                            <th style="text-align:center"> Price </th>
-                                            <th style="text-align:center"> State </th>
-                                            <th colspan="1"></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody >
-                                    	<c:forEach items="${truck.menus }" var="menu">
-                                        <tr class="odd gradeX">
-                                            <td><input type="text" name="menuName" value="${menu.menuName }" style="border:0px; background-color:transparent" readonly></td>
-                                            <td><input type="text" name="menuPrice" value="${menu.price }" style="border:0px; background-color:transparent" readonly></td>
-                                            <c:if test="${menu.menuState eq true }">
-                                            	<td>판매중</td>
-                                            </c:if>
-                                            <c:if test="${menu.menuState eq false }">
-                                            	<td>매진</td>
-                                            </c:if>
-                                            <td>
-                                            	<input type="hidden" name="menuId" value="${menu.menuId }">
-                                            	 <input type="hidden" name="menuState" value="${menu.menuState }"> 
-                                                <button type="button" class="btn btn-default btn-circle" id="menu1mod" onclick="modify_menu_click();">
-                                                    <i class="fa fa-pencil"></i>
-                                                </button>
-                                                <button type="button" class="btn btn-danger btn-circle" onClick="removeMenu(this)"><i class="fa fa-times"></i></button>
-                                            </td>
-                                        </tr>
-                                        </c:forEach>
-                                         <tr class="odd gradeX">
-                                            <td align="left"><input type="text" placeholder="메뉴 명" id="inputMenuName"></td>
-                                            <td align="left"><input type="text" placeholder="메뉴 가격" id="inputMenuPrice"></td>
-                                            <td>
-                                                <select id="inputMenuState">
-                                                    <option>판매중</option>
-                                                    <option>매진</option>
-                                                </select>
-                                            </td>
-                                            <td align="center">
-                                                <button type="button" class="btn btn-primary btn-circle" onclick="registMenu()"><i class="fa fa-plus"></i></button>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            
-                        </div>
-                    </div>
-                    <!--End Advanced Tables -->
-                </div>
-                 
-                   </div>
-                   <div class="col-md-4" style="background-color: white; height:350px" id="map">
-                       <h2>Map</h2>
-                       
-                   </div>
-                   
-                   <div class="col-md-4" style="margin-top: 20px">
-                       <h4><ins>More Info</ins></h4>
-                           <table>
-                              <thead>
-                                  <tr>
-                                      <th width="150px"></th>
-                                      <th></th>
-                                  </tr>
-                              </thead>
-                               <tbody>
-                                   <tr>
-                                       <td>Accept Card</td>
-                                       <c:if test="${truck.card eq true }">
-	                                       <td>
-	                                            <input type="radio" name="card" id="optionsRadiosInline1" value="true" checked>YES
-	                                            <input type="radio" name="card" id="optionsRadiosInline2" value="false">NO
-	                                        </td>
-                                        </c:if>
-                                        <c:if test="${truck.card eq false }">
-	                                       <td>
-	                                            <input type="radio" name="card" id="optionsRadiosInline1" value="true">YES
-	                                            <input type="radio" name="card" id="optionsRadiosInline2" value="false" checked>NO
-	                                        </td>
-                                        </c:if>
-                                   </tr>
-                                   <tr>
-                                       <td>Alcohol</td>
-                                       <c:if test="${truck.drinking eq true }">
-	                                       <td>
-	                                            <input type="radio" name="drinking" id="optionsRadiosInline1" value="true" checked>YES
-	                                            <input type="radio" name="drinking" id="optionsRadiosInline2" value="false">NO
-	                                        </td>
-                                        </c:if>
-                                        <c:if test="${truck.drinking eq false }">
-	                                       <td>
-	                                            <input type="radio" name="drinking" id="optionsRadiosInline1" value="true">YES
-	                                            <input type="radio" name="drinking" id="optionsRadiosInline2" value="false" checked>NO
-	                                        </td>
-                                        </c:if>
-                                   </tr>
-                                   <tr>
-                                       <td>Parking</td>
-                                       <c:if test="${truck.parking eq true }">
-	                                       <td>
-	                                            <input type="radio" name="parking" id="optionsRadiosInline1" value="true" checked>YES
-	                                            <input type="radio" name="parking" id="optionsRadiosInline2" value="false">NO
-	                                        </td>
-                                        </c:if>
-                                        <c:if test="${truck.parking eq false }">
-	                                       <td>
-	                                            <input type="radio" name="parking" id="optionsRadiosInline1" value="true">YES
-	                                            <input type="radio" name="parking" id="optionsRadiosInline2" value="false" checked>NO
-	                                        </td>
-                                        </c:if>
-                                   </tr>
-                                   <tr>
-                                       <td>Catering</td>
-                                       <c:if test="${truck.catering eq true }">
-	                                       <td>
-	                                            <input type="radio" name="catering" id="optionsRadiosInline1" value="true" checked>YES
-	                                            <input type="radio" name="catering" id="optionsRadiosInline2" value="false">NO
-	                                        </td>
-                                        </c:if>
-                                        <c:if test="${truck.catering eq false }">
-	                                       <td>
-	                                            <input type="radio" name="catering" id="optionsRadiosInline1" value="true">YES
-	                                            <input type="radio" name="catering" id="optionsRadiosInline2" value="false" checked>NO
-	                                        </td>
-                                        </c:if>
-                                   </tr>
-                               </tbody>
-                           </table>
-                       
-                   </div>                   
-                </div>
-                 <div class="col-md-1" style="margin-left:550px; margin-bottom: 100px">
-                        <button type="submit" class="btn btn-success btn-default btn-lg">SUBMIT</button>
-                   </div>
-                
-            </div>
-            </form>
-        </div>
-        <!-- end page-wrapper -->
-    </div>
-    <!-- end wrapper -->
-
-    <!-- Core Scripts - Include with every page -->
-    
-    <script src="${ctx }/resources/plugins/bootstrap/bootstrap.min.js"></script>
-    <script src="${ctx }/resources/plugins/metisMenu/jquery.metisMenu.js"></script>
-    <script src="${ctx }/resources/plugins/pace/pace.js"></script>
-    <script src="${ctx }/resources/scripts/siminta.js"></script>
     <script>
         function modify_menu_click() {
 	       alert("수정버튼을 누르셨습니다.");
