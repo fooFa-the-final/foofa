@@ -116,21 +116,7 @@ public class MobileMemberController {
 		members.setMembers(member);
 		return members;
 	}
-	@RequestMapping("/mobile/follow/remove")
-	public String removeFollow(@RequestParam("memberId") String toId, HttpServletRequest req){
-		HttpSession session = req.getSession(false);
-		if(session == null || session.getAttribute("loginUserId")==null){
-			return "redirect:/mobile/memberlogin.do";
-		}
-		Follow follow = new Follow();
-		String fromId = (String) session.getAttribute("loginUserId");
-		follow.setFromId(fromId);
-		follow.setToId(toId);
-		System.out.println(follow);
-		followService.remove(follow);
-		
-		return "redirect:/mobile/follow/list.do";
-	}
+
 	@RequestMapping(value="/mobile/favorite/list.do", produces="application/xml")
 	public @ResponseBody Foodtrucks searchFavorites(String memberId){
 		List<Favorite> favorite = favoriteService.findMemberId(memberId);
@@ -163,15 +149,10 @@ public class MobileMemberController {
 	}
 	@RequestMapping(value ="/mobile/member/modify.do", produces="application/xml")
 	public @ResponseBody void modifyMember(Member member){
+		System.out.println(member);
+		
 		memberService.mobileupdate(member);
 	}
-	@RequestMapping(value ="/moblie/member/reviewList.do", produces="application/xml")
-	public @ResponseBody Reviews memberReviews(String id){
-	List<Review> list = new ArrayList<>();
-	Reviews memberReviews = new Reviews();
-	list = reviewService.findByMemberId(id);
-	memberReviews.setReviews(list);
-	return memberReviews;	
-	}
+
 	
 }
