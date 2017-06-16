@@ -146,8 +146,18 @@ public class MobileMemberController {
 		return result;
 	}
 	
-	
-	
+	@RequestMapping("/mobile/follow/remove")
+	public @ResponseBody String removeFollow(String toId,String fromId){
+		System.out.println("옴?");
+		Follow follow = new Follow();
+		follow.setFromId(fromId);
+		follow.setToId(toId);
+		System.out.println(follow);
+		followService.remove(follow);
+		String result = "result";
+		
+		return result;
+	}
 	
 	
 	
