@@ -38,7 +38,11 @@ public class AdvertiseController {
 	public String request(HttpSession session, Advertise advertise) {
 
 		String sellerId = ((String) session.getAttribute("loginUserId"));
+		System.out.println(1);
+		System.out.println(advertise.toString());
+
 		advertiseService.register(advertise);
+		System.out.println(advertise.toString());
 		return "redirect:searchById.do";
 	
 	}

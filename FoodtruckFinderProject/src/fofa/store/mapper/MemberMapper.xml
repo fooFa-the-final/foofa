@@ -56,6 +56,12 @@
 	WHERE member_id = #{memberId}
 	
 	</update>
+	<update id="mobileupdate" parameterType="Member">
+	update member_tb
+	SET password = #{password}, email=#{email}
+	WHERE member_id = #{memberId}
+	
+	</update>
 	
 	
 	</mapper>
