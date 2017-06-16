@@ -80,7 +80,12 @@ var report = function(reviewId){
  					<%@ include file="../include/memberProfile.jspf" %>
                 <!--End Page Header -->
                 
-                		<div class="col-lg-12">
+               		<div class="col-lg-12">
+                		<div class="panel panel-default">
+                			<div class="panel-heading">
+                				Follower Newspeed
+                			</div>
+                			<div class=" panel-body panel-default">
 						<c:set scope="page" var="lsize" value="${fn:length(list) /3 }"/>
 						<c:choose>
 							<c:when test="${fn:length(list) == 0 }">
@@ -150,7 +155,9 @@ var report = function(reviewId){
 								<button type="button" class="btn btn-info btn-lg btn-block" onclick="location.href='${ctx}/follow/list.do'">내 팔로우들 뉴스피드 보러가기</button>
 							</c:otherwise>
 						</c:choose>
+						</div>
 					</div>
+				</div>
             </div>
         </div>
         <!-- end page-wrapper -->

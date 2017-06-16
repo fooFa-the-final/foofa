@@ -178,7 +178,7 @@ text-align:left;
 									<div  style=" font-weight:bold; position:absolute; left:15px; top:20px; text-align:left; height:85%;">
 										<h3 id="mainTableh3">${truck.foodtruckName }</h3>
 										<h4 id="mainTableh4"><span class="starRating2" style="text-align:left;"><span id="mainTableScore" style="width: ${truck.score*20 }%">${truck.score }점</span></span></h4>
-										<img src="${ctx }/resources/img/location.png" style="width:30px; " ><span id="mainTableLocation"style="line-height:13px;vertical-align:bottom;">&nbsp;${truck.location }</span>
+										<i class="fa fa-map-marker"></i><span id="mainTableLocation"style="line-height:13px;vertical-align:bottom;">&nbsp;${truck.location }</span>
 										<div id="mainTableState" style="display:none; position:absolute; bottom:0px;">
 										<span class="user-circle-online btn btn-success btn-circle "></span>&nbsp;Now Open
 										</div>
@@ -264,9 +264,9 @@ text-align:left;
 						<div class="w3-content w3-display-container text-center"  style="width:1300px; max-width:1300px;">
 								<c:forEach varStatus="no" var="ntruck" items="${nearTrucks }">
 									<c:choose>	
-										<c:when test="${(no.count mod 3) == 1 }">
+										<c:when test="${(no.count mod 4) == 1 }">
 											<div class="mySlides">	
-												<div class="col-lg-4">
+												<div class="col-lg-3">
 													<div class="panel panel-danger">
 														<div class="panel-header">
 															<img src="${ctx}/resources/img/truck/${ntruck.foodtruckImg }" class="main-truck-img"onclick="location.href='${ctx }/review/list/truck.do?foodtruckId=${truck.foodtruckId}'"/>
@@ -277,8 +277,8 @@ text-align:left;
 													</div>
 												</div>		
 										</c:when>
-										<c:when test="${(no.count mod 3) == 2 }">
-												<div class="col-lg-4">
+										<c:when test="${(no.count mod 4) != 0 }">
+												<div class="col-lg-3">
 													<div class="panel panel-danger">
 														<div class="panel-header">
 															<img src="${ctx}/resources/img/truck/${ntruck.foodtruckImg }" class="main-truck-img" onclick="location.href='${ctx }/review/list/truck.do?foodtruckId=${ntruck.foodtruckId}'"/>
@@ -291,7 +291,7 @@ text-align:left;
 												</div>	
 										</c:when>
 										<c:otherwise>
-												<div class="col-lg-4">
+												<div class="col-lg-3">
 													<div class="panel panel-danger">
 														<div class="panel-header">
 															<img src="${ctx}/resources/img/truck/${ntruck.foodtruckImg }" class="main-truck-img" onclick="location.href='${ctx }/review/list/truck.do?foodtruckId=${ntruck.foodtruckId}'" />

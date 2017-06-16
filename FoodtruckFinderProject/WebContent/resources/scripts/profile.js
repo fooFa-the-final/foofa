@@ -7,6 +7,8 @@ var favoriteCount = function(truckId) {
 			foodtruckId : truckId
 		},
 		success : function(data) {
+			console.log("truckId : a"+truckId);
+			console.log("dat : a"+data);
 			$("#favoriteCount").html(data);
 		}
 	});
@@ -14,7 +16,6 @@ var favoriteCount = function(truckId) {
 
 // 버튼 서식 지정
 var favoriteExist = function(truckId) {
-	console.log("ajwl22");
 	$.ajax({
 		type : 'get',
 		url : "/FoodtruckFinderProject/favorite/exist.do",

@@ -19,7 +19,7 @@
                         <a href="${ctx }/review/list/follow.do?fromId=${member.memberId}"><i class="fa fa-list fa-fw"></i>&nbsp;팔로우 뉴스피드</a>
                     </li>
                     <li id="side-favorite" >
-                        <a href="${ctx }/favorite/list.do?memberId=${member.memberId}"><i class="fa fa-heart fa-fw"></i>&nbsp;단골 목록</a>
+                        <a href="${ctx }/favorite/list.do?memberId=${member.memberId}"><i class="fa fa-star fa-fw"></i>&nbsp;단골 목록</a>
                     </li>                                                     	
                 	</c:when>
                 	<c:otherwise>
@@ -33,7 +33,7 @@
                         <a href="${ctx }/review/list/follow.do"><i class="fa fa-list fa-fw"></i>&nbsp;팔로우 뉴스피드</a>
                     </li>
                     <li id="side-favorite" >
-                        <a href="${ctx }/favorite/list.do"><i class="fa fa-heart fa-fw"></i>&nbsp;단골 목록</a>
+                        <a href="${ctx }/favorite/list.do"><i class="fa fa-star fa-fw"></i>&nbsp;단골 목록</a>
                     </li>
                     <li id="side-modify" >
                         <a href="${ctx }/member/modify.do"><i class="fa fa-pencil fa-fw"></i>&nbsp;회원 정보 수정</a>
