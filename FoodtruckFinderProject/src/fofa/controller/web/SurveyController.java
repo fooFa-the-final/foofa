@@ -47,7 +47,7 @@ public class SurveyController {
 
 	@RequestMapping(value = "/itemStat.do", method = RequestMethod.GET)
 	public String searchItemStat(String foodtruckId, String itemId, Model model) {
-		// System.out.println(foodtruckId + ItemId);
+		model.addAttribute("truck", foodtruckService.findById(foodtruckId));
 
 		List<Survey> list = surveyService.findAvgByGender(foodtruckId, itemId);
 
