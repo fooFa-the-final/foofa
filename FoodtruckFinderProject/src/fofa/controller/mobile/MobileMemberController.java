@@ -161,5 +161,17 @@ public class MobileMemberController {
 		Member member = memberService.findById(id);
 		return member;
 	}
+	@RequestMapping(value ="/mobile/member/modify.do", produces="application/xml")
+	public @ResponseBody void modifyMember(Member member){
+		memberService.mobileupdate(member);
+	}
+	@RequestMapping(value ="/moblie/member/reviewList.do", produces="application/xml")
+	public @ResponseBody Reviews memberReviews(String id){
+	List<Review> list = new ArrayList<>();
+	Reviews memberReviews = new Reviews();
+	list = reviewService.findByMemberId(id);
+	memberReviews.setReviews(list);
+	return memberReviews;	
+	}
 	
 }
