@@ -169,18 +169,18 @@ public class MobileSellerController {
 		Foodtruck foodtruck = truckService.findBySeller(id);
 		foodtruck.setState(false);
 
-		System.out.println("this is foodtruck: " + foodtruck.toString() + "today is : " + today);
+		System.out.println("this is foodtruck: " + foodtruck.toString() + "today is : " + today + "revenue : " +revenue);
 
 		truckService.modify(foodtruck);// 영업종료로 DB수정
 
-		Sale sale = new Sale();
+		Sale sale = new Sale();///////////////매출을 여기 넣어서 보내야함
 
 		sale.setFoodtruckId(foodtruck.getFoodtruckId());
 		sale.setLocation(foodtruck.getLocation());
 		sale.setRevenue(Integer.parseInt(revenue));
 		sale.setDate(today);
 
-		salesService.register(sale);
+		salesService.register(sale);// 영업날 매출 입력
 
 	}
 
