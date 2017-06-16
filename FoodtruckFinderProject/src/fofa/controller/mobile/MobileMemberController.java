@@ -41,11 +41,15 @@ import fofa.domain.Recommand;
 import fofa.domain.Report;
 import fofa.domain.Review;
 import fofa.domain.Reviews;
+import fofa.domain.SurveyItem;
+import fofa.domain.SurveyItems;
 import fofa.service.FavoriteService;
 import fofa.service.FollowService;
 import fofa.service.FoodtruckService;
 import fofa.service.MemberService;
 import fofa.service.ReviewService;
+import fofa.service.SurveyItemService;
+import fofa.service.SurveyService;
 
 @Controller
 public class MobileMemberController {
@@ -60,7 +64,8 @@ public class MobileMemberController {
 	private FavoriteService favoriteService;
 	@Autowired
 	private FoodtruckService truckService;
-	
+	@Autowired
+	private SurveyItemService surveyItemService;
 	
 	@RequestMapping(value="/mobile/memberRegister.do", produces="application/json", method=RequestMethod.POST)
 	public @ResponseBody String memberLogin(@RequestBody Member member) {
@@ -278,5 +283,13 @@ public class MobileMemberController {
 		}
 		
 		return "true";
+	}
+	
+	@RequestMapping(value="mobile/survey/form.do" , produces="application/xml")
+	public @ResponseBody SurveyItems surveyItems(){
+		List<SurveyItem> items = surveyItemService.findAll();
+		SurveyItems surveyItems = new SurveyItems();
+		surveyItems.setSurveyItems(items);
+		return surveyItems;
 	}
 }
