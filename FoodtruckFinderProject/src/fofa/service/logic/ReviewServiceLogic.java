@@ -48,6 +48,12 @@ public class ReviewServiceLogic implements ReviewService {
 	}
 
 	@Override
+	public String registerImage(Image image){
+		imageStore.insertImage(image);
+		return image.getCategoryId();
+	}
+	
+	@Override
 	public boolean modify(Review review) {
 		List<Image> list = imageStore.selectReviewImage(review.getReviewId());
 		for(Image i : list){
