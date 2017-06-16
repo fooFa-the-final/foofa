@@ -2,12 +2,14 @@ package fofa.service;
 
 import java.util.List;
 
+import fofa.domain.Image;
 import fofa.domain.Recommand;
 import fofa.domain.Report;
 import fofa.domain.Review;
 
 public interface ReviewService {
 	String register(Review review);
+	String registerImage(Image image);
 	boolean modify(Review review);
 	boolean remove(String reviewId);
 	Review findById(String reviewId);
