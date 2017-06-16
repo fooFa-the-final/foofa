@@ -89,5 +89,19 @@ public class MemberStoreLogic implements MemberStore{
 		
 		return update;
 	}
+	
+	@Override
+	public int mobileupdate(Member member){
+		SqlSession session = factory.openSession();
+		int update = 0;
+		try{
+			MemberMapper mapper = session.getMapper(MemberMapper.class);
+			update = mapper.mobileupdate(member);
+			session.commit();
+		}finally{
+			session.close();
+		}
+		return update;
+	}
 
 }

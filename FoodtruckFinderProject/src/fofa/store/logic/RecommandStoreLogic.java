@@ -27,10 +27,11 @@ public class RecommandStoreLogic implements RecommandStore {
 			insert = mapper.insert(recommand);
 			session.commit();
 		}catch(Exception e){
+			e.printStackTrace();
 			return 0;
 		} finally {
 			session.close();
-		} 
+		}
 		return insert;
 	}
 
@@ -44,7 +45,8 @@ public class RecommandStoreLogic implements RecommandStore {
 			session.commit();
 		} finally {
 			session.close();
-		} 
+		}
+		
 		return delete;
 	}
 
