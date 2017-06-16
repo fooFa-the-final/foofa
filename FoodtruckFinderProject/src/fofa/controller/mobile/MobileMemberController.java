@@ -146,6 +146,26 @@ public class MobileMemberController {
 		return foodtrucks;
 	}
 	
+	
+	@RequestMapping(value="/mobile/favorite/remove.do", produces="application/xml")
+	public @ResponseBody String removeFavorites(String memberId, String foodtruckId ){
+		System.out.println("여기");
+		Favorite favorite = new Favorite();
+		favorite.setMemberId(memberId);
+		favorite.setFoodtruckId(foodtruckId);
+				favoriteService.remove(favorite);
+		System.out.println(favorite);
+		
+		String result = "result";
+		return result;
+	}
+	
+	
+	
+	
+	
+	
+	
 	@RequestMapping(value="mobile/review/detail.do")
 	public @ResponseBody Images searchReviewImage(String reviewId){
 		Review review = reviewService.findById(reviewId);
