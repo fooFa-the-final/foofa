@@ -46,12 +46,13 @@
 		                		<c:forEach items="${list }" var="review" varStatus="sts">
 		                			<c:choose>
 			                			<c:when test="${sts.count ==1 }">
-			                                <div class="panel panel-success"  id="rev${review.reviewId }">
+			                                <div class="panel panel-info"  id="rev${review.reviewId }">
 			                                    <div class="panel-heading">
-			                                        <h4 class="panel-title" style="display:inline-block;">
+			                                        <h4 class="panel-title" style="display:inline-block; margin-right:20px;">
 			                                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">${review.foodtruck.foodtruckName }</a>
 			                                        </h4>
-			                                        <span style="float:right;margin-top:5px; font-size:1em; color:black;">${review.writeDate}</span>
+			                                        <span style="float:right;font-size:1em; color:black;">${review.writeDate}</span>
+			                                        <span class="starRating" style="text-align:left;"><span style="width: ${review.score *20}%">${review.score }점</span></span> 
 			                                    </div>
 			                                    <div id="collapseOne" class="panel-collapse collapse in">
 			                                        <div class="panel-body">
@@ -64,13 +65,13 @@
 															</div>
 														</div>
 														<div style="display:block;width:70%; float:left;">
-															<span class="starRating" style="text-align:left; margin-bottom:10px;"><span style="width: ${review.score *20}%">${review.score }점</span></span> 
 															<p class="reviewContent">${review.contents }
 															</p>
 														</div>
 			                                        	<c:if test="${loginUserId == member.memberId }">
 															<span style="float:right; width:12%; text-align:right;">
-			                                        		<button type="button" class="btn btn-circle btn-primary  btn-lg" style="margin-right:5px;" onclick="location.href='${ctx }/review/modify.do?reviewId=${review.reviewId}'"><i class="fa fa-edit"></i></button><button type="button" class="btn btn-circle btn-danger  btn-lg"><i class="fa fa-times"  onclick="revDel('${review.reviewId}');"></i></button></span>
+			                                        			<button type="button" class="btn btn-circle btn-primary  btn-lg" style="margin-right:5px;" onclick="location.href='${ctx }/review/modify.do?reviewId=${review.reviewId}'"><i class="fa fa-edit"></i></button>
+			                                        			<button type="button" class="btn btn-circle btn-danger  btn-lg"><i class="fa fa-bitbucket"  onclick="revDel('${review.reviewId}');"></i></button></span>
 			                                        	</c:if>
 			                                        </div>
 			                                       	 
@@ -78,12 +79,13 @@
 			                                </div>
 			                			</c:when>
 			                			<c:otherwise>
-			                                <div class="panel panel-success" id="rev${review.reviewId }">
+			                                <div class="panel panel-info" id="rev${review.reviewId }">
 			                                    <div class="panel-heading">
-			                                        <h4 class="panel-title" style="display:inline-block;">
+			                                        <h4 class="panel-title" style="display:inline-block; margin-right:20px;">
 			                                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse${sts.count }">${review.foodtruck.foodtruckName }</a>
 			                                        </h4>
-			                                        <span style="float:right;margin-top:5px; font-size:1em; color:black;">${review.writeDate}</span>
+			                                        <span style="float:right;font-size:1em; color:black;">${review.writeDate}</span>
+			                                        <span class="starRating" style="text-align:left;"><span style="width: ${review.score *20}%">${review.score }점</span></span> 
 			                                    </div>
 			                                    <div id="collapse${sts.count }" class="panel-collapse collapse">
 			                                        <div class="panel-body">
@@ -138,7 +140,7 @@
 			followExist('${member.memberId}');
 		}
     });
-    
+
 	var revDel = function(reviewId){
 		$.ajax({
 			type:'get',

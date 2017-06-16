@@ -24,6 +24,12 @@
 <link href="${ctx }/resources/plugins/dataTables/dataTables.bootstrap.css"
 	rel="stylesheet" />
 
+<style>
+.wid200 {
+width:58px;
+display:inline-block;
+}
+</style>
 <c:set var="ctx">${pageContext.request.contextPath }</c:set>
 </head>
 <body>
@@ -49,13 +55,19 @@
 									<ul class="list-inline" style="display:inline-block; width:100%; ">
 										<li><img src="${ctx }/resources/upload/${follow_i.profileImg }" style="height:70px;width:70px;"></li>
 										<li style="width:22%"><a href="${ctx }/review/list/member.do?memberId=${follow_i.memberId }"><b style="font-size:1.2em;">${follow_i.memberId }</b></a><br><br>
-											<i class="fa fa-twitter"> &nbsp;</i>팔로워 : &nbsp; ${follow_i.followCount } <br> <i class="fa fa-pencil"> &nbsp;</i>리뷰 : &nbsp;${follow_i.reviewCount }
+											<span><span class="wid200"><i class="fa fa-twitter"> &nbsp;</i>팔로워 </span>: ${follow_i.followCount } </span><br> 
+											<span><span class="wid200"><i class="fa fa-pencil"> &nbsp;</i>리뷰 </span>: ${follow_i.reviewCount }</span>
 										</li>
-										<li><button id="revList" type="button" class="btn btn-success btn-outline" onclick="location.href='${ctx}/review/list/member.do?memberId=${follow_i.memberId }'">리뷰 보기</button></li>
-										<li><button id="favList" type="button" class="btn btn-info btn-outline" onclick="location.href='${ctx}/favorite/list.do?memberId=${follow_i.memberId }'">단골 보기</button></li>
-										<c:if test="${loginUserId eq member.memberId }">
-										<li><button id="unfollow" type="button" class="btn btn-danger btn-outline" onclick="unfollow('${follow_i.memberId}');">언팔로우</button></li>
-										</c:if>
+										<li style="width:57%;">
+											<div style="float:right; vertical-align:center">
+												<button id="revList" type="button" class="btn btn-success btn-outline" onclick="location.href='${ctx}/review/list/member.do?memberId=${follow_i.memberId }'">리뷰 보기</button>
+												<button id="favList" type="button" class="btn btn-info btn-outline" onclick="location.href='${ctx}/favorite/list.do?memberId=${follow_i.memberId }'">단골 보기</button>
+											
+												<c:if test="${loginUserId eq member.memberId }">
+													<button id="unfollow" type="button" class="btn btn-danger btn-outline" onclick="unfollow('${follow_i.memberId}');">언팔로우</button>
+												</c:if>
+											</div>
+										</li>
 									</ul>
 								</div>
 								<c:if test="${(sts.count %2 == 0 )&&( sts.count != fn:length(follow))}">

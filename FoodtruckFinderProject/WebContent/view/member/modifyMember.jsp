@@ -35,11 +35,7 @@ $(document).ready(function(){
             $("input[name='password1']").css("border", "1px solid red").after("<span>비밀번호가 일치하지 않습니다</span>");
             $("span").css("color", "red").fadeOut(3000);
             return false;
-        } else if ($("input[name='certification']").val().length != 10) {
-				$("input[name='certification']").css("border","1px solid red").after("<span>사업자등록번호를 10자리를 입력해주세요</span>");
-				$("span").css("color", "red").fadeOut(3000);
-				return false;
-		} else if ($("input[name='birthday']").val() != ""){
+        } else if ($("input[name='birthday']").val() != ""){
 			var data = document.getElementById("birthday").value;
 			var y = parseInt(data.substr(0, 4), 10); 
 			var m = parseInt(data.substr(4, 2), 10); 
@@ -80,45 +76,65 @@ $(document).ready(function(){
 		<div id="page-wrapper">
 			<div class="row">
 				<div class="col-lg-12">
-					<h2>Modify your Info</h2>
-					<div class="form-group">
-						<form role="form" action="${ctx }/member/modify.do" method="post">
-							<input type="hidden" value="${member.memberId }" name="memberId">
-							<div class="form-group">
-								<label>ID</label> <b class="form-control">${member.memberId }</b>
+					<h2 class="page-header">Modify your Info</h2>
+					<div class="col-lg-8 col-lg-push-2">
+						<div class="panel panel-default">
+							<div class="panel-heading">
+							 수정할 정보를 입력해주세요.
 							</div>
-							<div class="form-group">
-								<br><label>Password</label> <input class="form-control" id="password"
-									type="password" name="password" value="${member.password}">
-								<br> <label>Password Check</label><input class="form-control" id="password1"
-						name="password1"			type="password" value="${member.password}"> <br>
-							</div>
-							<div class="form-group">
-								<label>Email</label> <input class="form-control" id="email"
-									type="text" name="email" value="${member.email}"> <br>
-							</div>
-							<div class="form-group">
-								<label>Birthday</label> <input class="form-control"
-									id="birthday" type="text" name="birthday"
-									value="${member.birthday}"> <br>
-							</div>
-							<div class="form-group">
-								<div>
-								<label>성별</label><br>
-								<c:if test="${member.gender eq 'M' }">
-									 <label class="radio-inline">
-										<input type="radio" checked="checked" name="gender" id="gender" value="${member.gender }">남성
-								</label>
-								</c:if>
-								<c:if test="${member.gender eq 'F' }">
-									 <label class="radio-inline"> <input type="radio" checked="checked"
-										name="gender" id="gender" value="${member.gender }">여성
-									</label>
-									</c:if>
+							<div class="panel-body">
+								<div class="form-group">
+									<form role="form" action="${ctx }/member/modify.do" method="post">
+										<input type="hidden" value="${member.memberId }" name="memberId">
+										<div class="form-group">
+											<label>ID</label> <b class="form-control" style="background-color:#eee;">${member.memberId }</b>
+										</div>
+										<div class="form-group">
+											<br><label>Password</label> <input class="form-control" id="password"
+												type="password" name="password" value="${member.password}">
+											<br> <label>Password Check</label><input class="form-control" id="password1"
+									name="password1"			type="password" value="${member.password}"> <br>
+										</div>
+										<div class="form-group">
+											<label>Email</label> <input class="form-control" id="email"
+												type="text" name="email" value="${member.email}"> <br>
+										</div>
+										<div class="form-group">
+											<label>Birthday</label> <input class="form-control"
+												id="birthday" type="text" name="birthday"
+												value="${member.birthday}"> <br>
+										</div>
+										<div class="form-group">
+											<div>
+											<label>성별</label><br>
+											<c:choose>
+												<c:when test="${member.gender eq 'M' }">
+													<label class="radio-inline">
+														<input type="radio" checked="checked" name="gender" id="gender" value="${member.gender }">남성
+													</label>
+													 <label class="radio-inline">
+														<input type="radio" name="gender" id="gender" value="F">여성
+													</label>
+												</c:when>
+												<c:otherwise>
+													<label class="radio-inline">
+														<input type="radio" checked="checked" name="gender" id="gender" value="M">남성
+													</label>
+													 <label class="radio-inline">
+														<input type="radio" name="gender" checked="checked" id="gender" value="F">여성
+													</label>
+												</c:otherwise>
+											</c:choose>
+											</div>
+										</div>
+										<div style="text-align:center;">
+											<button type="submit" class="btn btn-primary">Modify</button>
+											<button type="reset" class="btn btn-default" onclick="javascript:history.back();">Cancel</button>
+										</div>
+									</form>
 								</div>
 							</div>
-							<button type="submit" class="btn btn-primary">Modify</button>
-						</form>
+						</div>
 					</div>
 				</div>
 			</div>

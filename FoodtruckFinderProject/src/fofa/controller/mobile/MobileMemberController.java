@@ -132,21 +132,7 @@ public class MobileMemberController {
 		members.setMembers(member);
 		return members;
 	}
-	@RequestMapping("/mobile/follow/remove")
-	public String removeFollow(@RequestParam("memberId") String toId, HttpServletRequest req){
-		HttpSession session = req.getSession(false);
-		if(session == null || session.getAttribute("loginUserId")==null){
-			return "redirect:/mobile/memberlogin.do";
-		}
-		Follow follow = new Follow();
-		String fromId = (String) session.getAttribute("loginUserId");
-		follow.setFromId(fromId);
-		follow.setToId(toId);
-		System.out.println(follow);
-		followService.remove(follow);
-		
-		return "redirect:/mobile/follow/list.do";
-	}
+
 	@RequestMapping(value="/mobile/favorite/list.do", produces="application/xml")
 	public @ResponseBody Foodtrucks searchFavorites(String memberId){
 		List<Favorite> favorite = favoriteService.findMemberId(memberId);
@@ -162,6 +148,36 @@ public class MobileMemberController {
 		return foodtrucks;
 	}
 	
+	
+	@RequestMapping(value="/mobile/favorite/remove.do", produces="application/xml")
+	public @ResponseBody String removeFavorites(String memberId, String foodtruckId ){
+		System.out.println("여기");
+		Favorite favorite = new Favorite();
+		favorite.setMemberId(memberId);
+		favorite.setFoodtruckId(foodtruckId);
+				favoriteService.remove(favorite);
+		System.out.println(favorite);
+		
+		String result = "result";
+		return result;
+	}
+	
+	@RequestMapping("/mobile/follow/remove")
+	public @ResponseBody String removeFollow(String toId,String fromId){
+		System.out.println("옴?");
+		Follow follow = new Follow();
+		follow.setFromId(fromId);
+		follow.setToId(toId);
+		System.out.println(follow);
+		followService.remove(follow);
+		String result = "result";
+		
+		return result;
+	}
+	
+	
+	
+	
 	@RequestMapping(value="mobile/review/detail.do")
 	public @ResponseBody Images searchReviewImage(String reviewId){
 		Review review = reviewService.findById(reviewId);
@@ -176,6 +192,13 @@ public class MobileMemberController {
 		Member member = memberService.findById(id);
 		return member;
 	}
+	@RequestMapping(value ="/mobile/member/modify.do", produces="application/xml")
+	public @ResponseBody void modifyMember(Member member){
+		System.out.println(member);
+		
+		memberService.mobileupdate(member);
+	}
+
 	
 	@RequestMapping(value = "/mobile/review/create.do")
 	public @ResponseBody String createReview(@RequestBody String data){

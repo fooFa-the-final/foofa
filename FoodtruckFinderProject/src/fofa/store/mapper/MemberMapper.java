@@ -9,5 +9,6 @@ public interface MemberMapper {
 	int delete(String memberId);
 	Member select(String memberId);
 	int imgupdate(Member member);
+	int mobileupdate(Member member);
 
 }

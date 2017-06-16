@@ -9,5 +9,6 @@ public interface MemberStore {
 	int delete(String memberId);
 	Member select(String memberId);
 	int imgupdate(Member member);
+	int mobileupdate(Member member);
 }
 

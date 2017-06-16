@@ -141,7 +141,7 @@ text-align:left;
 							<div class="col-lg-4 background-cover mainTableImgs effect" 
 							style="background-image:url('${ctx}/resources/img/truck/${truck.foodtruckImg }');"
 							onmouseover="show('${truck.foodtruckImg}', '${truck.foodtruckName }', '${truck.score }','${truck.location }', '${truck.state }', this);"
-							onclick="location.href='${ctx }/review/list/truck.do?foodtruckId=${truck.foodtruckId}"
+							onclick="location.href='${ctx }/review/list/truck.do?foodtruckId=${truck.foodtruckId}'"
 							>
 							<!-- 	<div style="padding:10px; border-radius:10px; border:1px solid white; height:100%;"></div> -->
 							</div>
@@ -164,7 +164,7 @@ text-align:left;
 												<li><a href="${ctx }/review/list/member.do?memberId=${hotReview.writer.memberId }">${hotReview.writer.memberId }</a></li>
 												<li> <span class="sub-li-recommand"><i class="fa fa-thumbs-up fa-1x"></i>${hotReview.recommand } </span>
 													 <span class="sub-li-follow"><i class="fa fa-twitter fa-1x"></i>${hotReview.writer.followCount } </span>
-													 <span class="sub-li-follow"><i class="fa fa-pencil fa-1x"></i>${hotReview.writer.reviewCount } </span>
+													 <span class="sub-li-review"><i class="fa fa-pencil fa-1x"></i>${hotReview.writer.reviewCount } </span>
 												</li>
 												<li> 
 													<ul class="horizonal-ul">
