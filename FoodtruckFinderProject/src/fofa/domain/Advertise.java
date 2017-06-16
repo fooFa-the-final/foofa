@@ -3,8 +3,15 @@ package fofa.domain;
 import java.sql.Date;
 import java.util.Calendar;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+
 import org.springframework.stereotype.Component;
 
+@XmlRootElement(name="advertise")
+@XmlAccessorType(XmlAccessType.FIELD)
 @Component
 public class Advertise {
 
@@ -66,4 +73,12 @@ public class Advertise {
 		this.approve = approve;
 	}
 
+	@Override
+	public String toString() {
+		return "Advertise [advId=" + advId + ", sellerId=" + sellerId + ", period=" + period + ", approve=" + approve
+				+ ", startdate=" + startdate + "]";
+	}
+
+	
+	
 }
