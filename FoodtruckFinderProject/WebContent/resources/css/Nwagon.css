@@ -15,7 +15,7 @@ v\: * {
 }
 
 ul.accessibility {
-	font-size: 1px;
+	font-size: 0px;
 	height: 1px;
 	line-height: 1px;
 	overflow: hidden;

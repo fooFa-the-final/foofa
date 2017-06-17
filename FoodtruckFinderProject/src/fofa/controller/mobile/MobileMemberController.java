@@ -30,6 +30,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonSyntaxException;
 
 import fofa.domain.Favorite;
+import fofa.domain.Favorites;
 import fofa.domain.Follow;
 import fofa.domain.Foodtruck;
 import fofa.domain.Foodtrucks;
@@ -155,6 +156,36 @@ public class MobileMemberController {
 		System.out.println("^^");
 		return foodtrucks;
 	}
+
+	@RequestMapping(value="/mobile/favorite/favList.do", produces="application/xml")
+	public @ResponseBody Favorites searchFavoritesMember(String memberId){
+		List<Favorite> favorite = favoriteService.findMemberId(memberId);
+
+		Favorites fav = new Favorites();
+		fav.setFavorites(favorite);
+		
+		System.out.println("여기");
+		return fav;
+	}	
+	
+	
+	
+	@RequestMapping(value="/mobile/favorite/register.do", produces="application/json", method=RequestMethod.POST)
+	public @ResponseBody String registerFavorite(Favorite favorite){
+		
+		favoriteService.register(favorite);
+		
+		boolean result;
+		
+		result = favoriteService.register(favorite);
+
+		System.out.println(result+"m");
+		if(result == false) {
+			return "false";
+		} else {
+			return "true";
+		}
+	}	
 	
 	
 	@RequestMapping(value="/mobile/favorite/remove.do", produces="application/xml")
@@ -182,8 +213,12 @@ public class MobileMemberController {
 		
 		return result;
 	}
+	@RequestMapping(value="mobile/member/find.do")
+	public @ResponseBody Member findMember(String memberId){
+		Member member = memberService.findById(memberId);
+		return member;
 	
-	
+	}	
 	@RequestMapping(value="mobile/review/detail.do")
 	public @ResponseBody Review searchReviewDetail(String reviewId){
 		Review review = reviewService.findById(reviewId);
