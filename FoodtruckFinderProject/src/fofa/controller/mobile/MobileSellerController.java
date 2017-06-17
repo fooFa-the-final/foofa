@@ -142,8 +142,8 @@ public class MobileSellerController {
 		
 		try {
 			Foodtruck foodtruck = gson.fromJson(((JSONObject)jsonParser.parse(data)).toJSONString(), Foodtruck.class);
-			List<HashMap<String, Object>> sqlMap = truckService.findByFilter(0, foodtruck, foodtruck.getFoodtruckId());
-			foodtruck.setFoodtruckId(null);
+			List<HashMap<String, Object>> sqlMap = truckService.findByFilter(foodtruck.getFavoriteCount(), foodtruck, foodtruck.getFoodtruckId());
+			System.out.println("TEST : " + foodtruck.toString());
 			//	List<HashMap<String, Object>> sqlMap = foodtruckService.findByFilter(currentIndex, foodtruck, sort);
 			if(!sqlMap.isEmpty()){
 				foodtrucks = sqlMapping(sqlMap);
@@ -154,6 +154,7 @@ public class MobileSellerController {
 			e.printStackTrace();
 		}
 		String jsonList = gson.toJson(foodtrucks);
+		System.out.println("TEST : " + foodtrucks.size() + " / " + foodtrucks.get(0).toString());
 		return jsonList;
 	}
 	
