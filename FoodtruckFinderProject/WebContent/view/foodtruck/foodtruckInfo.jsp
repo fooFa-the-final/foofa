@@ -246,7 +246,6 @@ margin:5px;}
 				});
 	 		});
 			
-			stateCheck('${truck.state}');
 		});
 
 	</script>
