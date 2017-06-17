@@ -118,7 +118,6 @@
 	<script>
 		$(document).ready(function() {
 			$('#side-adv').attr('class', 'selected');
-			stateCheck('${truck.state}');
 
 		    $("form").submit(function(){
 				var st = $(":input:radio[name=period]:checked").val();
