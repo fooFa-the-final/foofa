@@ -22,8 +22,8 @@
 								</div>
 								<div class="col-lg-3">
 									<span style="float: right; margin-right: 10px;">
-				                       <a href="${ctx }/foodtruck/modifyForm.do"><button type="button" class="btn btn-info btn-circle btn-lg"><i class="fa fa-wrench"></i></button></a>
-				                       <a href="${ctx }/seller/modify.do"><button type="button" class="btn btn-warning btn-circle btn-lg"><i class="fa fa-pencil"></i></button></a>
+				                       <a href="${ctx }/foodtruck/modifyForm.do"><button type="button" class="btn btn-info btn-outline btn-circle btn-lg"><i class="fa fa-wrench"></i></button></a>
+				                       <a href="${ctx }/seller/modify.do"><button type="button" class="btn btn-warning btn-outline btn-circle btn-lg"><i class="fa fa-gear"></i></button></a>
 									</span>
 								</div>
 							</div>
