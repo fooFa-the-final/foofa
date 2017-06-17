@@ -185,7 +185,7 @@ public class MobileMemberController {
 	
 	
 	@RequestMapping(value="mobile/review/detail.do")
-	public @ResponseBody Review searchReviewDetail------------(String reviewId){
+	public @ResponseBody Review searchReviewDetail(String reviewId){
 		Review review = reviewService.findById(reviewId);
 		return review;
 	}
