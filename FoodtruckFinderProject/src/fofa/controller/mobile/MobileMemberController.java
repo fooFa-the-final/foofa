@@ -213,8 +213,12 @@ public class MobileMemberController {
 		
 		return result;
 	}
+	@RequestMapping(value="mobile/member/find.do")
+	public @ResponseBody Member findMember(String memberId){
+		Member member = memberService.findById(memberId);
+		return member;
 	
-	
+	}	
 	@RequestMapping(value="mobile/review/detail.do")
 	public @ResponseBody Review searchReviewDetail(String reviewId){
 		Review review = reviewService.findById(reviewId);
