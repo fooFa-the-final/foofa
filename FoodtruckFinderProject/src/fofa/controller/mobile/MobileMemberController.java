@@ -146,8 +146,8 @@ public class MobileMemberController {
 		return result;
 	}
 	
-	@RequestMapping("/mobile/follow/remove")
-	public @ResponseBody String removeFollow(String toId,String fromId){
+	@RequestMapping(value="/mobile/follow/remove.do", produces="application/xml")
+	public @ResponseBody String removeFollows(String toId,String fromId){
 		System.out.println("옴?");
 		Follow follow = new Follow();
 		follow.setFromId(fromId);
@@ -177,12 +177,38 @@ public class MobileMemberController {
 		Member member = memberService.findById(id);
 		return member;
 	}
-	@RequestMapping(value ="/mobile/member/modify.do", produces="application/xml")
-	public @ResponseBody void modifyMember(Member member){
-		System.out.println(member);
+	@RequestMapping(value ="/mobile/member/modify.do",produces="application/json", method=RequestMethod.POST)
+	public @ResponseBody void modifyMember(@RequestBody Member member){
+		System.out.println(member.toString());
+		
 		
 		memberService.mobileupdate(member);
 	}
-
+	@RequestMapping(value = "/mobile/review/followerReview.do", produces="application/xml")
+	public @ResponseBody Reviews searchReviewByFollower(String fromId){
+		List<Review> review = reviewService.findByFromId(fromId);
+		Reviews reviews = new Reviews();
+		reviews.setReviews(review);
+		return reviews;
+	}
 	
+	@RequestMapping(value = "/mobile/member/find.do", produces="application/xml")
+	public @ResponseBody Member findMember(String memberId){
+		Member member = new Member();
+		member = memberService.findById(memberId);
+		
+		return member;
+	}
+	@RequestMapping(value="/mobile/follow/follow.do", produces="application/xml")
+	public @ResponseBody String createFollow(String toId,String fromId){
+		System.out.println("옴?");
+		Follow follow = new Follow();
+		follow.setFromId(fromId);
+		follow.setToId(toId);
+		System.out.println(follow);
+		followService.register(follow);
+		String result = "result";
+		
+		return result;
+	}
 }
