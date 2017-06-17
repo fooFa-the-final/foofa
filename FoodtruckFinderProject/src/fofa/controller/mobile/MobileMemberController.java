@@ -1,30 +1,22 @@
 package fofa.controller.mobile;
 
-import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
-import org.springframework.web.multipart.MultipartRequest;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -46,7 +38,6 @@ import fofa.domain.Reviews;
 import fofa.domain.Survey;
 import fofa.domain.SurveyItem;
 import fofa.domain.SurveyItems;
-import fofa.domain.SurveyReply;
 import fofa.service.FavoriteService;
 import fofa.service.FollowService;
 import fofa.service.FoodtruckService;
@@ -171,16 +162,21 @@ public class MobileMemberController {
 	
 	
 	
-	@RequestMapping(value="/mobile/favorite/register.do", produces="application/json", method=RequestMethod.POST)
-	public @ResponseBody String registerFavorite(Favorite favorite){
+	@RequestMapping(value="/mobile/favorite/register.do", produces="application/xml")
+	public @ResponseBody String registerFavorite(String memberId, String foodtruckId){
+		System.out.println("여기111");
 		
+		Favorite favorite = new Favorite();
+		favorite.setMemberId(memberId);
+		favorite.setFoodtruckId(foodtruckId);
 		favoriteService.register(favorite);
 		
 		boolean result;
 		
+		System.out.println(favorite);
+		
 		result = favoriteService.register(favorite);
 
-		System.out.println(result+"m");
 		if(result == false) {
 			return "false";
 		} else {
