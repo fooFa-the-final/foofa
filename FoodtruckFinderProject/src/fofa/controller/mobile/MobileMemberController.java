@@ -16,6 +16,7 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -245,8 +246,17 @@ public class MobileMemberController {
 		
 		memberService.mobileupdate(member);
 	}
+	@RequestMapping(value="/mobile/survey/detail.do", produces="application/xml")
+	public @ResponseBody List<Survey> surveyDetail(String foodtruckId){
+		List<Survey> survey = new ArrayList<>();
+		survey = surveyService.findByTruckId(foodtruckId);
+//		surveyService.findAvgScoreBySurveyItem(foodtruckId);
+//		truckService.findById(foodtruckId);
+		
+		return survey;
+	}
 
-	
+	 
 	@RequestMapping(value = "/mobile/review/create.do")
 	public @ResponseBody String createReview(@RequestBody String data){
 		Gson gson = new GsonBuilder().create();
@@ -362,4 +372,6 @@ public class MobileMemberController {
 		return "true";
 			
 	}
+
+	
 }
