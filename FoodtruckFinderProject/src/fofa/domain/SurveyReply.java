@@ -27,5 +27,9 @@ public class SurveyReply {
 	public void setScore(int score) {
 		this.score = score;
 	}
-
+	@Override
+	public String toString() {
+		return "SurveyReply [itemId=" + itemId + ", score=" + score + ", surveyId=" + surveyId + "]";
+	}
+	
 }

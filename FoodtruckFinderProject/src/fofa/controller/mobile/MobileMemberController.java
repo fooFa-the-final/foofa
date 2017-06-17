@@ -220,6 +220,7 @@ public class MobileMemberController {
 			JSONParser jsonParser = new JSONParser();
 				
 			Review review = gson.fromJson(((JSONObject) jsonParser.parse(data)).toJSONString(), Review.class);
+			System.out.println(review.toString());
 			String reviewId = reviewService.register(review);
 			System.out.println(reviewId);
 			result = reviewId;
@@ -306,23 +307,8 @@ public class MobileMemberController {
 		JSONParser jsonParser = new JSONParser();
 			
 		Survey survey = gson.fromJson(((JSONObject) jsonParser.parse(data)).toJSONString(), Survey.class);
+		System.out.println(survey.toString());
 		
-		List<String> itemId = new ArrayList<>();
-		List<SurveyItem> itemList = surveyItemService.findAll();
-		List<SurveyReply> replyList = new ArrayList<>();
-		for(SurveyItem s : itemList){
-			String id = s.getItemId();
-			itemId.add(id);
-		}
-		
-		for(String s : itemId){
-			SurveyReply reply = new SurveyReply();
-			//reply.setScore(Integer.parseInt(req.getParameter("q" + s)));
-			reply.setItemId(s);
-			replyList.add(reply);
-		}
-		
-		survey.setReplies(replyList);
 		surveyService.register(survey);
 		return "true";
 			
