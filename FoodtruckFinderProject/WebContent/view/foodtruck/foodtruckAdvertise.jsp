@@ -30,13 +30,15 @@
 				<!--End Page Header -->
 			</div>
 			<div class="row">
-				<div class="col-lg-12">
+				<div class="col-lg-8">
 					<!-- Advanced Tables -->
 					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h4 class="panel-title">광고 요청</h4>
+						</div>
 						<div class="panel-body">
 							<form action="${ctx }/foodtruck/reqest.do" method="post">
 								<input type="hidden" name="sellerId" value="${truck.sellerId }">
-								<h2 style="border-bottom: 1px solid #eee">광고 요청</h2>
 								<p>광고는 요청된 기간동안 메인페이지와 검색결과 상단에 무작위로 노출됩니다.</p>
 								<br />
 								<div class="form-group">
@@ -63,16 +65,17 @@
 									</label>
 								</div>
 
-								<div class="col-lg-6" style="display: block">
-									<div class=" alert alert-warning">
+								<div class="col-lg-12" style="display: block">
+									<div class=" alert alert-default">
 										<p>요청이 많으면 광고가 지연될 수 있습니다. 문의사항은 관리자에게 연락주세요.</p>
 										<p>항상 최상의 서비스를 선사하는 FOOFA 되겠습니다. 감사합니다.</p>
 									</div>
 								</div>
-								<div style="width: 100%; height: 90px;"></div>
+								<div class="col-lg-12" style=" text-align:center; margin: 25px 0;">
 								<button type="button" class="btn btn-primary btn-lg" aria-expanded="true"
 											data-toggle="modal" data-target="#myModal"
 									>결제</button>
+									</div>
 								<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
 									aria-labelledby="myModalLabel" aria-hidden="true">
 									<div class="modal-dialog">
@@ -97,6 +100,20 @@
 					</div>
 					<!--End Advanced Tables -->
 				</div>
+				<div class="col-lg-4">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h4 class="panel-title">관리자에게 문의</h4>
+						</div>
+						<div class="panel-body" style="text-align:center;">
+							<img src="${ctx }/resources/img/adverimg.png">
+							<p>
+							<h4 style="font-weight:bold; color:firebrick;">관리자에게 문의가 필요하신가요? </h4>
+							메일주시면 빠르게 답변드리겠습니다. ^^.<br>
+							<label>광고 관련 문의 : </label>adv.admin@icloud.com</p>
+						</div>
+					</div>
+				</div>
 			</div>
 
 		</div>
@@ -118,7 +135,6 @@
 	<script>
 		$(document).ready(function() {
 			$('#side-adv').attr('class', 'selected');
-			stateCheck('${truck.state}');
 
 		    $("form").submit(function(){
 				var st = $(":input:radio[name=period]:checked").val();
@@ -128,12 +144,12 @@
 		    	var dateObj = new Date(dateArray[0], Number(dateArray[1])-1, dateArray[2]);  
 		    	var betweenDay = (today.getTime() - dateObj.getTime());  
 			        if($("input[name='startdate']").val() == ""){
-		            $("input[name='startdate']").css("border", "1px solid red").after("<span>날짜를 입력해주세요.</span>");
-		            $("span").css("color", "red").fadeOut(3000);
+		            $("input[name='startdate']").css("border", "1px solid red").after('<span id="noDate">날짜를 입력해주세요.</span>');
+		            $('span[id="noDate"]').css("color", "red").fadeOut(3000);
 		            return false;
 		        	} else if(betweenDay > 0){
-		                $("input[name='startdate']").css("border", "1px solid red").after("<span>광고시작 날짜는 지난 날짜를 선택할 수 없습니다.</span>");
-		                $("span").css("color", "red").fadeOut(3000); 				
+		                $("input[name='startdate']").css("border", "1px solid red").after('<span id="invalidDate">광고시작 날짜는 지난 날짜를 선택할 수 없습니다.</span>');
+		                $('span[id="invalidDate"]').css("color", "red").fadeOut(3000); 				
 		 				return false;       		
 		        	}else if (st == null){
 		            	var sel_type = null;

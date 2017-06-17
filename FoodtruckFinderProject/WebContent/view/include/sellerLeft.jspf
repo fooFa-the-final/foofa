@@ -13,8 +13,8 @@
                     <li id="side-sales" >
                         <a href="${ctx }/sales/truck.do"><i class="fa fa-bar-chart-o fa-fw"></i>&nbsp;매출통계</a>
                     </li>
-                    <li id="side-survey" ><a href="${ctx }/survey/truckStat.do?foodtruckId=${loginTruckId}"><i class="fa fa-filter fa-fw"></i>&nbsp;설문통계</a></li>
-                    <li id="side-modify-seller" ><a href="${ctx }/seller/modify.do"><i class="fa fa-edit fa-fw"></i>&nbsp;판매자 정보 수정</a></li>
+                    <li id="side-survey" ><a href="${ctx }/survey/truckStat.do"><i class="fa fa-filter fa-fw"></i>&nbsp;설문통계</a></li>
+                    <li id="side-modify-seller" ><a href="${ctx }/seller/modify.do"><i class="fa fa-gear fa-fw"></i>&nbsp;판매자 정보 수정</a></li>
                     <li id="side-remove-seller" ><a href="${ctx }/seller/checkPw.do"><i class="fa fa-trash-o fa-fw"></i>&nbsp;판매자 탈퇴</a></li>             
                 
                 </ul>
