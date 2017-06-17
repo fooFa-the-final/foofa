@@ -45,6 +45,7 @@ textarea.form-control {
 			    center: position,
 			    map : map
             });
+        });
     		var infowindow;
             
     		function searchCoordinateToAddress(latlng) {
@@ -61,8 +62,8 @@ textarea.form-control {
             $("#loc1").val(address);
             console.log(address);
             
-        });
-    }
+        	});
+    	}
             naver.maps.Service.geocode({
      			address: "${truck.location}"
      		}, function(status, response){
@@ -183,7 +184,7 @@ textarea.form-control {
 	                               	<input class="form-control" type="text" name="category2" value="${truck.category2 }" style="width:20%">
 	                               	<input class="form-control" type="text" name="category3" value="${truck.category3 }" style="width:20%">
 	                           	  </h5>
-	                              <h5><label>현재 위치</label><input class="form-control" type="text" name="location" value="${truck.location }" style="width:61.5%"></h5>
+	                              <h5><label>현재 위치</label><input class="form-control" type="text" name="location" id = "loc1" value="${truck.location }" style="width:61.5%"></h5>
 	                        </div>
                 		</div>
                 	</div>

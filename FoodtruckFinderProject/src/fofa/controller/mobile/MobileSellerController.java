@@ -110,6 +110,26 @@ public class MobileSellerController {
 		truckReviews.setReviews(list);
 		return truckReviews;
 	}
+	
+	
+
+	@RequestMapping(value = "/mobile/detailFoodtruckId.do", produces = "application/xml")
+	public @ResponseBody Foodtruck detailFoodtruck(String id) {
+		Foodtruck foodtruck = truckService.findById(id);
+		return foodtruck;
+	}
+	
+	@RequestMapping(value = "/mobile/menu/detailFoodtruckId.do", produces = "application/xml")
+	public @ResponseBody Menus detailTruckMenuTruckID(String id) {
+		List<Menu> menus = new ArrayList<>();
+
+		Foodtruck foodtruck = truckService.findById(id);
+		menus = foodtruck.getMenus();
+		Menus truckmenu = new Menus();
+		truckmenu.setMenus(menus);
+		return truckmenu;
+	}
+	
 
 	@RequestMapping(value="/mobile/foodtruck/open.do", method=RequestMethod.POST, produces="application/json")
 	public @ResponseBody String openFoodtruck(@RequestBody String data){
@@ -142,8 +162,8 @@ public class MobileSellerController {
 		
 		try {
 			Foodtruck foodtruck = gson.fromJson(((JSONObject)jsonParser.parse(data)).toJSONString(), Foodtruck.class);
-			List<HashMap<String, Object>> sqlMap = truckService.findByFilter(0, foodtruck, foodtruck.getFoodtruckId());
-			foodtruck.setFoodtruckId(null);
+			List<HashMap<String, Object>> sqlMap = truckService.findByFilter(foodtruck.getFavoriteCount(), foodtruck, foodtruck.getFoodtruckId());
+			System.out.println("TEST : " + foodtruck.toString());
 			//	List<HashMap<String, Object>> sqlMap = foodtruckService.findByFilter(currentIndex, foodtruck, sort);
 			if(!sqlMap.isEmpty()){
 				foodtrucks = sqlMapping(sqlMap);
@@ -154,6 +174,7 @@ public class MobileSellerController {
 			e.printStackTrace();
 		}
 		String jsonList = gson.toJson(foodtrucks);
+		System.out.println("TEST : " + foodtrucks.size() + " / " + foodtrucks.get(0).toString());
 		return jsonList;
 	}
 	
