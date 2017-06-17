@@ -13,7 +13,16 @@
         table.border {
             
         }
-        
+        tr.border_bottom td {
+		  border-bottom:1pt solid #eee;
+		}
+		 .tr_ad td{
+		  border-bottom:1pt solid #ebc074;
+		  padding: 8px 0;
+		 }
+		 .map h3 {
+		 padding: 5px;
+		 font-size: 14px;}
     </style>
 <head>
     <meta charset="utf-8">
@@ -34,99 +43,150 @@
 
 <body>
     <!--  wrapper -->
-    <div id="wrapper" style="color:#FFFFFF">
+    <div id="wrapper">
 		<%@ include file="../include/header.jspf"%>
         <!--  page-wrapper -->
     </div>
+    <div class="main-container" style="padding:0;">
 		<form id="search-with-filter" action="${ctx }/foodtruck/searchByFilter.do" method="post">
-            <div class="row" style="margin-left:25%">
+            <div class="row"  style="background-color:#eee;">
+				<div class="sub-container" style="padding:20px 0;">
                 <!-- Page Header -->
-                <div class="col-lg-10" style="margin-top:6%; margin-bottom:4%">
-                    <div class="col-sm-2">
-                    	<button type="button" id="openstateBtn" name="openstateBtn" class="btn btn-outline btn-default" onClick="stateBtn(this)">OPEN NOW</button>
-                    	<input type="hidden" id="openstate" name="openstate" value="">
-                	</div>    
-                	<div class="col-md-6"> 
-                    <label class="checkbox-inline">
-                   		<input type="checkbox" id="card" name="checkFilter">카드 결제
-                    </label>
-                    <label class="checkbox-inline">
-                     	<input type="checkbox" id="drinking" name="checkFilter">알콜 판매
-                    </label>
-                    <label class="checkbox-inline">
-                    	 <input type="checkbox" id="parking" name="checkFilter">주차 가능
-                    </label>
-                    <label class="checkbox-inline">
-                    	 <input type="checkbox" id="catering" name="checkFilter">케이터링
-                    </label>
-                    </div>
-                    <div class="col-md-3">               
-                     	 <select id="stand" name="stand" class="form-control" style="width:70%" onChange="selectBtn()">
-                            <option value="reviewCount">리뷰많은 순</option>
-                            <option value="favoriteCount">단골많은 순</option>
-                         </select>
-                    </div>
-                </div>
-                <input type="hidden" id="keyword" name="keyword" value="${keyword }">
-				<input type="hidden" id="location" name="location" value="${location }">
-				<input type="hidden" id="checking" name="checking" value="">
-            </div>
-    
-    
-    <div class="row">
-    <div class="col-sm-2"></div>
-    <div class="col-md-6" id="searchList">
-            <table style="width:100%" id="dataTables-example">
-            	<colgroup>
-            		<col width="30%"/>
-            		<col width="70%"/>
-            	</colgroup>
-            	<thead>
-            		<tr></tr>
-            		<tr></tr>
-            	</thead>
-          		<tbody id="ajax-tbody-results">
-          		<c:choose>
-          		<c:when test="${trucks eq null || empty trucks }">
-          			<tr>
-          				<td align="center">해당 검색 결과가 없습니다.</td>
-          			</tr>
-          		</c:when>
-          		<c:otherwise>
-          		<c:forEach items="${trucks }" var="truck" varStatus="sts">
-          			<tr onmouseover="setCenter('${truck.foodtruckId}')">
-	          			<td rowspan="2" style="padding:10px;" align="right">
-	          				<img width="130px" height="130px" src="${ctx }/resources/img/food/${truck.foodtruckImg }" style="margin-right:10px">
-	          			</td>
-	          			<td style="height:60px">
-	          				<a href="${ctx }/review/list/truck.do?foodtruckId=${truck.foodtruckId }"><font size="5px" color="black">${truck.foodtruckName }</font></a>&nbsp;
-	          				<font size="2px">${truck.category1 }  ${truck.category2 }  ${truck.category3 }</font><br>
-	          				<font size="2px">${truck.spot }</font>
-	          			</td>
-          			</tr>
-          			<tr onmouseover="setCenter('${truck.foodtruckId}')">
-          				<td valign="top">
-          					<i class="fa fa-star"></i> ${truck.favoriteCount } Fans<br>
-          					<i class="fa fa-comment fa-fw"></i> ${truck.reviewCount } Reviews
-          				</td>
-          			</tr>
-          		</c:forEach>
-          		</c:otherwise>
-          		</c:choose>	
-          		</tbody>
-          </table>
-        </div>
+                		<h4 class="panel-title">상세 검색</h4>
+	                    	<button type="button" id="openstateBtn" name="openstateBtn" class="btn btn-outline btn-default" onClick="stateBtn(this)">OPEN NOW</button>
+	                    	<input type="hidden" id="openstate" name="openstate" value="">
+		                    <label class="checkbox-inline" style=" margin-left:50px;">
+		                   		<input type="checkbox" id="card" name="checkFilter">카드 결제
+		                    </label>
+				            <label class="checkbox-inline">
+		                     	<input type="checkbox" id="drinking" name="checkFilter">알콜 판매
+		                    </label>
+		                    <label class="checkbox-inline">
+		                    	 <input type="checkbox" id="parking" name="checkFilter">주차 가능
+		                    </label>
+		                    <label class="checkbox-inline">
+		                    	 <input type="checkbox" id="catering" name="checkFilter">케이터링
+		                    </label>
+                     	 	<select id="stand" name="stand" class="form-control" style="width:120px; display:inline-block; margin-left:50px;" onChange="selectBtn()">
+	                            <option value="reviewCount">리뷰많은 순</option>	
+	                            <option value="favoriteCount">단골많은 순</option>
+                            </select>
+		                <input type="hidden" id="keyword" name="keyword" value="${keyword }">
+						<input type="hidden" id="location" name="location" value="${location }">
+						<input type="hidden" id="checking" name="checking" value="">
+            	</div>
+			</div>
+		    <div class="row sub-container" style="text-align:left;">
+		    	<div class="col-md-12">
+	   				 <div class="col-md-8" id="searchList">
+		          		<table style="width:100%" id="dataTables-example">
+			            	<colgroup>
+			            		<col width="20%"/>
+			            		<col width="40%"/>
+			            		<col width="40%"/>
+			            	</colgroup>
+			            	<thead>
+			            		<tr></tr>
+			            		<tr></tr>
+			            	</thead>
+			          		<tbody id="ajax-tbody-results">
+			          		<c:forEach items="${adtruck }" var="truck" varStatus="sts">
+			          			<tr onmouseover="setCenter('${truck.foodtruckId}')" class="tr_ad">
+				          			<td rowspan="2" style="padding:10px;">
+				          				<img width="130px" height="130px" src="${ctx }/resources/img/food/${truck.foodtruckImg }" style="margin-right:10px">
+				          			</td>
+				          			<td  colspan="2" style="height:60px">
+				          				<a href="${ctx }/review/list/truck.do?foodtruckId=${truck.foodtruckId }"><font size="5px" color="firebrick"><b>${truck.foodtruckName }</b></font></a>&nbsp;
+				          				 <button type="button" class="btn btn-outline btn-danger btn-xs">광고</button>
+				          				 <c:choose>
+				          				 	<c:when test="${truck.state == true }">
+												<button type="button" class="btn btn-success btn-xs">Now Open</button>
+				          				 	</c:when>
+				          				 	<c:otherwise>
+												<button type="button" class="btn btn-outline btn-success btn-xs">Closed</button>
+				          				 	</c:otherwise>
+				          				 </c:choose>
+				          			</td>
+			          			</tr>
+			          			<tr onmouseover="setCenter('${truck.foodtruckId}')"  class="tr_ad">
+			    			        <td valign="top">
+			          					<span class="starRating" style="text-align:left;"><span id="mainTableScore" style="width: ${truck.score*20 }%">${truck.score }점</span></span><br>
+			          					<i class="fa fa-comment fa-fw"></i> ${truck.reviewCount } Reviews &nbsp;
+			          					<i class="fa fa-star"></i> ${truck.favoriteCount } Fans<br>
+				          			
+			          				</td>
+			          				<td valign="top">
+				          				<i class="fa fa-location-arrow"></i><font size="2px">&nbsp;${truck.spot }</font><Br>
+				          				<i class="fa fa-map-marker"></i><font size="2px">&nbsp;${truck.location }</font>
+			          					<br><i class="fa fa-bookmark"></i><font size="2px">&nbsp;${truck.category1 }&nbsp;${truck.category2 }&nbsp; ${truck.category3 }</font><br>
+			          				</td>
 
-       <div class="col-md-3" id = "map" style="height:400px">
-			
-        </div>
-        <div class="col-sm-2"></div>
+			          			</tr>
+			          		</c:forEach>
+			          		<c:choose>
+			          		<c:when test="${trucks eq null || empty trucks }">
+			          			<tr>
+			          				<td align="center">해당 검색 결과가 없습니다.</td>
+			          			</tr>
+			          		</c:when>
+			          		<c:otherwise>
+			          		<c:forEach items="${trucks }" var="truck" varStatus="sts">
+			          			<tr onmouseover="setCenter('${truck.foodtruckId}')" class="border_bottom">
+				          			<td rowspan="2" style="padding:10px;">
+				          				<img width="130px" height="130px" src="${ctx }/resources/img/food/${truck.foodtruckImg }" style="margin-right:10px">
+				          			</td>
+				          			<td  colspan="2" style="height:60px">
+				          				<a href="${ctx }/review/list/truck.do?foodtruckId=${truck.foodtruckId }"><b><font size="5px" color="black">${truck.foodtruckName }</font></b></a>
+				          				 <c:choose>
+				          				 	<c:when test="${truck.state == true }">
+												<button type="button" class="btn btn-success btn-xs">Now Open</button>
+				          				 	</c:when>
+				          				 	<c:otherwise>
+												<button type="button" class="btn btn-outline btn-success btn-xs">Closed</button>
+				          				 	</c:otherwise>
+				          				 </c:choose>
+				          			</td>
+			          			</tr>
+			          			<tr onmouseover="setCenter('${truck.foodtruckId}')"  class="border_bottom">
+			    			        <td valign="top">
+			          					<span class="starRating" style="text-align:left;"><span id="mainTableScore" style="width: ${truck.score*20 }%">${truck.score }점</span></span><br>
+			          					<i class="fa fa-comment fa-fw"></i> ${truck.reviewCount } Reviews &nbsp;
+			          					<i class="fa fa-star"></i> ${truck.favoriteCount } Fans<br>
+				          			
+			          				</td>
+			          				<td valign="top">
+				          				<i class="fa fa-location-arrow"></i><font size="2px">&nbsp;${truck.spot }</font><Br>
+				          				<i class="fa fa-map-marker"></i><font size="2px">&nbsp;${truck.location }</font>
+			          					<br><i class="fa fa-bookmark"></i><font size="2px">&nbsp;${truck.category1 }&nbsp;${truck.category2 }&nbsp; ${truck.category3 }</font><br>
+			          				</td>
+
+			          			</tr>
+			          		</c:forEach>
+			          		</c:otherwise>
+			          		</c:choose>	
+			          		</tbody>
+		         	 	</table>
+	       			 </div>
+	       			 <div class="col-md-4" id="scroll">
+		       			 <div class="panel panel-danger">
+		       			 	<div class="panel-heading">
+		       			 		Map
+		       			 	</div>
+		       			 	<div class="panel-body" style="padding:0px;">
+	       						<div id = "map" style="height:400px;"></div>
+		       			 	</div>
+		       			 </div>
+	       			 </div>
+				</div>
+        
+		<div class="col-lg-12" id="pagingArea" style="text-align:center; margin-bottom:100px; margin-top:50px">
+			<input type="hidden" id="currentIndex" value="${currentIndex }">
+			<input type="hidden" id="allCount" value="${allCount }">
+		</div>
+	</div>
+
+	</form>
 </div>
-<div class="col-lg-12" id="pagingArea" style="text-align:center; margin-bottom:100px; margin-top:50px">
-	<input type="hidden" id="currentIndex" value="${currentIndex }">
-	<input type="hidden" id="allCount" value="${allCount }">
-</div>
-</form>
         <!-- end page-wrapper -->
     <!-- end wrapper -->
 
@@ -143,7 +203,7 @@
     var markers = [];
 	var position;
 	var map;
-	var floatPosition = parseInt($("#map").css('top'));
+	var floatPosition = parseInt($("#scroll").css('top'));
 	$(window).scroll(function() {
 		// 현재 스크롤 위치를 가져온다.
 		var scrollTop = $(window).scrollTop();
@@ -153,7 +213,7 @@
 		 $("#floatMenu").css('top', newPosition);
 		 */
 
-		$("#map").stop().animate({
+		$("#scroll").stop().animate({
 			"top" : newPosition
 		}, 500);
 

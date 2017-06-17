@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import fofa.domain.Advertise;
 import fofa.domain.Foodtruck;
 import fofa.domain.Member;
 import fofa.domain.Menu;
@@ -196,11 +197,24 @@ public class FoodtruckController {
 			trucks = sqlMapping(sqlMap);
 			allCount = (int)sqlMap.get(0).get("allCount");
 		}
+
+		List<Advertise> advs= advertiseService.findNowAd();
+		List<Foodtruck> adtruck=  new ArrayList<>();
+		
+		for(int i=0; i<2; i++){
+			Advertise ad = advs.get(i);
+			Foodtruck truck = foodtruckService.findBySeller(ad.getSellerId());
+			adtruck.add(truck);
+		}
+		model.addAttribute("adtruck", adtruck);
+		
+		
 		model.addAttribute("currentIndex", currentIndex);
 		model.addAttribute("allCount", allCount);
 		model.addAttribute("trucks", trucks);
 		model.addAttribute("keyword", keyword);
 		model.addAttribute("location", location);
+		System.out.println(adtruck.size());
 		return "../view/foodtruck/listFoodtruck.jsp";
 	}
 	
@@ -222,6 +236,16 @@ public class FoodtruckController {
 			trucks = sqlMapping(sqlMap);
 			allCount = (int)sqlMap.get(0).get("allCount");
 		}
+		List<Advertise> advs= advertiseService.findNowAd();
+		List<Foodtruck> adtruck=  new ArrayList<>();
+		
+		for(int i=0; i<2; i++){
+			Advertise ad = advs.get(i);
+			Foodtruck truck = foodtruckService.findBySeller(ad.getSellerId());
+			adtruck.add(truck);
+		}
+		System.out.println(adtruck.size());
+		model.addAttribute("adtruck", adtruck);
 		model.addAttribute("currentIndex", currentIndex);
 		model.addAttribute("allCount", allCount);
 		model.addAttribute("trucks", trucks);
@@ -274,14 +298,12 @@ public class FoodtruckController {
 			}
 		}
 		
-//		System.out.println("loc:"+location+" key:"+keyword+" index:"+currentIndex + " checked:" + checked);
 		foodtruck.setLocation(location);
 		foodtruck.setFoodtruckName(keyword);
 		
 		List<HashMap<String, Object>> sqlMap = foodtruckService.findByFilter(currentIndex, foodtruck, sort);
 		List<Foodtruck> trucks = new ArrayList<>();
 		int allCount = 0;
-//		System.out.println("궁금궁금 : " + sqlMap.size() + "/" + Integer.parseInt(sqlMap.get(0).get("allCount")));
 
 		
 		if(!sqlMap.isEmpty()){
@@ -293,6 +315,16 @@ public class FoodtruckController {
 		model.addAttribute("trucks", trucks);
 		model.addAttribute("keyword", foodtruck.getFoodtruckName());
 		model.addAttribute("location", foodtruck.getLocation());
+		
+		List<Advertise> advs= advertiseService.findNowAd();
+		List<Foodtruck> adtruck =  new ArrayList<>();
+		
+		for(int i=0; i<2; i++){
+			Advertise ad = advs.get(i);
+			Foodtruck truck = foodtruckService.findBySeller(ad.getSellerId());
+			adtruck.add(truck);
+		}
+		model.addAttribute("adtruck", adtruck);
 		
 		return "../view/foodtruck/listFoodtruck.jsp";
 	}
