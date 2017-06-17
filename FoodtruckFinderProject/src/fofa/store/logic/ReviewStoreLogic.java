@@ -82,7 +82,9 @@ public class ReviewStoreLogic implements ReviewStore {
 		try{
 			ReviewMapper mapper = session.getMapper(ReviewMapper.class);
 			review = mapper.selectByMemberId(memberId);
-
+			for(Review r : review){
+				r.setRecommand(r.getRecommand());
+			}
 		} finally {
 			session.close();
 		} 

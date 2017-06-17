@@ -38,8 +38,10 @@
     				var reportHtml = "<input type='button' id = 'rep"+reviewId+"' value='" + data.length + "' + style='border:0;background-color:transparent'>"
     				$("#report" + reviewId).html(reportHtml);
     				var reportContents = "";
-    				for(var i=0;i<contents.length;i++)
-    					reportContents += contents[i].memberId + " : " + contents[i].reason + "<br>";
+    				for(var i=0;i<contents.length;i++){
+    					reportContents += "<p><label>신고자 : </label>&nbsp;"+contents[i].memberId+"<br>";
+    					reportContents += "<label>신고사유 : </label>&nbsp;"+ contents[i].reason + "</p>";
+    				}
     				$(mContentId).append(reportContents);
     				$("#rep"+reviewId).click(function(){
     					$(modalId).modal();
@@ -59,7 +61,7 @@
     				var trId = "#tr" + reviewId;
     				console.log(trId);
     				$(trId).remove();
-    				alert("신고처리가 완료되었습니다.");
+    				alert("신고가 기각되었습니다.");
     			}
     		});	
 			$('#dataTables-example').dataTable();
@@ -76,7 +78,7 @@
     				var trId = "#tr" + reviewId;
     				console.log(trId);
     				$(trId).remove();
-    				alert("신고처리가 완료되었습니다.");
+    				alert("해당 리뷰가 삭제되었습니다.");
     			}
     		});
 			$('#dataTables-example').dataTable();
@@ -109,14 +111,15 @@
                         </div>
                         <div class="panel-body">
                             <div class="table-responsive">
-                                <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                                <table class="table table-striped table-bordered table-hover" id="dataTables-example" style="text-align:center">
                                     <thead>
                                         <tr>
                                         	<th>Status</th>
                                             <th>Comments</th>
                                             <th>ID</th>
                                             <th>Count</th>
-                                            <th>P/D</th>
+                                            <th>Pass</th>
+                                            <th>Delete</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -125,12 +128,13 @@
 	                                            <td>${status.count }</td>
 	                                            <td class="center">${review.contents }</td>
 	                                            <td class="center">${review.writer.memberId }</td>
-	                                            <td class="center" id="report${review.reviewId }">
+	                                            <td class="text-center" id="report${review.reviewId }">
 	                                            	<script>
 		                                            	reportList("${review.reviewId}");
 	                                            	</script>
 	                                            </td>
-	                                			<td><button type="button" class="btn btn-primary" onclick = "pass('${review.reviewId}')">PASS</button><button type="button" class="btn btn-danger" onclick="del('${review.reviewId}')">DELETE</button></td>
+	                                			<td><button type="button" class="btn btn-primary" onclick = "pass('${review.reviewId}')">PASS</button></td>
+	                                			<td><button type="button" class="btn btn-danger" onclick="del('${review.reviewId}')">DELETE</button></td>
 	                                        </tr>
 	                                       <!-- Modal -->
 								  	<div class="modal fade" id="myModal${review.reviewId }" role="dialog">
@@ -139,14 +143,28 @@
 								      <div class="modal-content">
 								        <div class="modal-header">
 								          <button type="button" class="close" data-dismiss="modal">&times;</button>
-								          <h4 class="modal-title">접수된 신고 이유</h4>
+								          <h4 class="modal-title">신고 내용 상세보기</h4>
 								        </div>
-								        
-								        <div class="modal-body" id = "modalCons${review.reviewId }">
-								           	<h4>신고 된 리뷰 내용 : ${review.contents }</h4>
-								          
+								        <div class="modal-body">
+						         		  	<h4>신고 된 리뷰 내용</h4>		
+							           	 	<div class="panel panel-danger">
+							           	 		<div class="panel-body">
+									        		<div class="reportImg">
+										           	 	<c:forEach var="image" varStatus="imageNo" items="${review.images }">
+															<img src="${ctx }/resources/img/reviewImg/${image.filename}" onclick="previewImage(this.src, '${review.reviewId}');"/>
+														</c:forEach>
+														<hr style="border-color:#eee;">
+								           	 		</div>
+								           	 		${review.contents }
+								           	 	</div>
+											</div>
+												<h4>신고자 정보</h4>
+											<div class="well" id = "modalCons${review.reviewId }">
+											</div>
 								        </div>
 								        <div class="modal-footer">
+								       		 <button type="button" class="btn btn-primary" onclick = "pass('${review.reviewId}')" data-dismiss="modal" >PASS</button>
+								       		 <button type="button" class="btn btn-danger" onclick="del('${review.reviewId}')" data-dismiss="modal" >DELETE</button>
 								          <input type="button" class="btn btn-default" data-dismiss="modal" value="닫기">
 								        </div>
 								      </div>

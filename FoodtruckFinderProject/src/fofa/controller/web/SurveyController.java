@@ -3,6 +3,8 @@ package fofa.controller.web;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.hamcrest.FeatureMatcher;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -37,8 +39,10 @@ public class SurveyController {
 	}
 
 	@RequestMapping("/truckStat.do")
-	public String searchSurveysStat(String foodtruckId, Model model) {
+	public String searchSurveysStat(HttpSession session, Model model) {
 
+		String foodtruckId = (String)session.getAttribute("loginTruckId");
+		
 		model.addAttribute("commentList", surveyService.findByTruckId(foodtruckId));
 		model.addAttribute("avgItemList", surveyService.findAvgScoreBySurveyItem(foodtruckId));
 		model.addAttribute("truck", foodtruckService.findById(foodtruckId));
@@ -46,8 +50,9 @@ public class SurveyController {
 	}
 
 	@RequestMapping(value = "/itemStat.do", method = RequestMethod.GET)
-	public String searchItemStat(String foodtruckId, String itemId, Model model) {
-		// System.out.println(foodtruckId + ItemId);
+	public String searchItemStat(HttpSession session, String itemId, Model model) {
+		String foodtruckId = (String)session.getAttribute("loginTruckId");
+		model.addAttribute("truck", foodtruckService.findById(foodtruckId));
 
 		List<Survey> list = surveyService.findAvgByGender(foodtruckId, itemId);
 
@@ -63,7 +68,6 @@ public class SurveyController {
 			maList.add(i, survey1);
 		}
 
-		System.out.println("list : " + list.toString());
 		for (Survey survey : list) {
 			for (int i = 0; i < 5; i++) {
 				if (survey.getGender() == 'M' && survey.getScore() == i + 1) {
@@ -76,7 +80,6 @@ public class SurveyController {
 			}
 		}
 
-		System.out.println("ma : " + maList.toString());
 
 		model.addAttribute("maList", maList);
 		model.addAttribute("feList", feList);
@@ -115,7 +118,6 @@ public class SurveyController {
 			list50.add(i, survey4);
 		}
 		
-		System.out.println("list2 : " + list2.toString());
 
 		for (Survey survey : list2) {
 			for (int i = 0; i < 5; i++) {
@@ -148,12 +150,6 @@ public class SurveyController {
 			}
 		}
 
-		System.out.println("list10 : " + list10.toString());
-		System.out.println("list20 : " + list20.toString());
-		System.out.println("list30 : " + list30.toString());
-		System.out.println("list40 : " + list40.toString());
-		System.out.println("list50 : " + list50.toString());
-
 		model.addAttribute("list10",list10);
 		model.addAttribute("list20",list20);
 		model.addAttribute("list30",list30);
@@ -166,7 +162,6 @@ public class SurveyController {
 	@ResponseBody
 	public List<SurveyItem> createItem(String question) {
 		surveyItemService.register(question);
-		System.out.println("꺼져");
 		return surveyItemService.findAll();
 	}
 

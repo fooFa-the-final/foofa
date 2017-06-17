@@ -44,6 +44,21 @@ input.cmn-toggle-round-flat:checked + label:after {
   margin-left: 60px;
   background-color: #8ce196;
 }
+
+label {
+	width: 130px;
+}
+
+span.moreYes{
+	font-weight: bold;
+	color: blue;
+}
+span.moreNo{
+}
+div.panel-body hr {
+border-color: #eee;
+margin:5px;}
+
 </style>
 
 <head>
@@ -56,14 +71,11 @@ input.cmn-toggle-round-flat:checked + label:after {
     <link href="${ctx }/resources/plugins/pace/pace-theme-big-counter.css" rel="stylesheet" />
     <link href="${ctx }/resources/css/style.css" rel="stylesheet" />
       <link href="${ctx }/resources/css/main-style.css" rel="stylesheet" />
-	<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=noUvsaR702FX6WH5un5h&submodules=geocoder"></script>
-	 <script src="${ctx }/resources/plugins/jquery-1.10.2.js"></script>
-	<script src="http://malsup.github.com/jquery.form.js"></script> 
 	
 	
 </head>
 
-<body>
+<body >
     <!--  wrapper -->
     
     <div id="wrapper">
@@ -78,55 +90,47 @@ input.cmn-toggle-round-flat:checked + label:after {
                		 <%@ include file="../include/sellerProfile.jspf" %>
 				<!--End Page Header -->
                 
-                <div class="col-md-12" style="margin-top:30px; margin-bottom:50px">
+                <div class="col-md-12" style="margin-top:30px; margin-bottom:50px; padding:0px;">
                    <div class="col-md-8">
                    
                    <!--Truck Location Section-->
-                      <div class="col-lg-12">
                           <div class="panel panel-default">
                             <div class="panel-heading">
-                                <h4>Truck Location</h4>
+                                <h4 class="panel-title">Truck Location</h4>
                             </div>
                             <div class="panel-body">
                                 <h5>${truck.location }</h5>
                             </div>
                           </div>
-                      </div>
                   <!--End of Truck Location-->
                    
-                   
                  <!--Notice Section-->
-                      <div class="col-lg-12">
                           <div class="panel panel-default">
                             <div class="panel-heading">
-                                <h4>Notice</h4>
+                                <h4 class="panel-title">Notice</h4>
                             </div>
                             <div class="panel-body">
                                 <h5>${truck.notice }</h5>
                             </div>
                           </div>
-                      </div>
                   <!--End of Notice-->
                   
                   <!--Truck Hour Section-->
-                      <div class="col-lg-12">
                           <div class="panel panel-default">
                             <div class="panel-heading">
-                                <h4>Truck Hour</h4>
+                                <h4 class="panel-title">Truck Hour</h4>
                             </div>
                             <div class="panel-body">
                                 <h5>${startTime } 부터    ${endTime } 까지 영업합니다.</h5>
                             </div>
                           </div>
-                      </div>
                   <!--End of Foodtruck Hour-->
                   
-                       <div class="col-lg-12">                       
                        
                     <!-- Advanced Tables -->
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                             <h4>Menu</h4> 
+                             <h4 class="panel-title">Menu</h4> 
                         </div>
                         <div class="panel-body">
                             <div class="table-responsive">
@@ -160,69 +164,41 @@ input.cmn-toggle-round-flat:checked + label:after {
                                         </c:forEach>
                                     </tbody>
                                 </table>
-                            </div>
-                            
                         </div>
                     </div>
                     <!--End Advanced Tables -->
                 </div>
                  
                    </div>
-                   <div class="col-md-4" id = "map" style="background-color: white; height:350px">
-                       
-                   </div>
+                   <div class="col-md-4">
+                   		<div class="panel panel-default">
+                   			<div class="panel-heading">
+                   				<h4 class="panel-title">Map</h4>
+                   			</div>
+                   			<div class="panel-body" id = "map" style="height:350px">
+                   			</div>
+                   		</div>
                    
-                   <div class="col-md-4" style="margin-top: 20px">
-                       <h4><ins>More Info</ins></h4>
-                           <table>
-                              <thead>
-                                  <tr>
-                                      <th width="150px"></th>
-                                      <th></th>
-                                  </tr>
-                              </thead>
-                               <tbody>
-                                   <tr>
-                                       <td>Accept Card</td>
-                                       	<c:if test="${truck.card eq true}">
-                                       		<td>YES</td>
-                                       	</c:if>
-										<c:if test="${truck.card eq false}">
-											<td>NO</td>
-										</c:if>                                       	
-                                   </tr>
-                                   <tr>
-                                       <td>Alcohol</td>
-                                       <c:if test="${truck.drinking eq true}">
-                                       		<td>YES</td>
-                                       	</c:if>
-										<c:if test="${truck.drinking eq false}">
-											<td>NO</td>
-										</c:if>
-                                   </tr>
-                                   <tr>
-                                       <td>Parking</td>
-                                       <c:if test="${truck.parking eq true}">
-                                       		<td>YES</td>
-                                       	</c:if>
-										<c:if test="${truck.parking eq false}">
-											<td>NO</td>
-										</c:if>
-                                   </tr>
-                                   <tr> 
-                                       <td>Catering</td>
-                                       <c:if test="${truck.catering eq true}">
-                                       		<td>YES</td>
-                                       	</c:if>
-										<c:if test="${truck.catering eq false}">
-											<td>NO</td>
-										</c:if>
-                                   </tr>
-                               </tbody>
-                           </table>
-                       
+                   		<div class="panel panel-default">
+                   			<div class="panel-heading">
+                   				<h4 class="panel-title">More Info</h4>
+                   			</div>
+                   			<div class="panel-body" style="padding:20px;">
+                   				<label>Accept Card</label>
+                  					<c:if test="${truck.card eq true}"><span class="moreYes">YES</span></c:if>
+									<c:if test="${truck.card eq false}"><span class="moreNo">No</span></c:if>  <hr>
+                   				<label>Alcohol</label>
+                  					<c:if test="${truck.drinking eq true}"><span class="moreYes">YES</span></c:if>
+									<c:if test="${truck.drinking eq false}"><span class="moreNo">No</span></c:if>  <hr>
+                   				<label>Parking</label>
+                  					<c:if test="${truck.parking eq true}"><span class="moreYes">YES</span></c:if>
+									<c:if test="${truck.parking eq false}"><span class="moreNo">No</span></c:if> <hr>
+                   				<label>Catering</label>
+                  					<c:if test="${truck.catering eq true}"><span class="moreYes">YES</span></c:if>
+									<c:if test="${truck.catering eq false}"><span class="moreNo">No</span></c:if>
+                       </div>
                    </div>
-                   
+                   </div>
                 </div>
             </div>
         </div>
@@ -233,16 +209,21 @@ input.cmn-toggle-round-flat:checked + label:after {
 
     <!-- Core Scripts - Include with every page -->
    
+	 <script src="${ctx }/resources/plugins/jquery-1.10.2.js"></script>
     <script src="${ctx }/resources/plugins/bootstrap/bootstrap.min.js"></script>
     <script src="${ctx }/resources/plugins/metisMenu/jquery.metisMenu.js"></script>
     <script src="${ctx }/resources/plugins/pace/pace.js"></script>
     <script src="${ctx }/resources/scripts/siminta.js"></script>
-    <script src="${ctx }/resources/scripts/seller-profile.js"></script>
+    
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=noUvsaR702FX6WH5un5h&submodules=geocoder"></script>
 	<script src="http://malsup.github.com/jquery.form.js"></script> 
+    <script src="${ctx }/resources/scripts/seller-profile.js"></script>
+	
 	<script>
 		$(document).ready(function() {
 			$('#side-info').attr('class', 'selected');
+			
 			naver.maps.Service.geocode({
 	 			address: "${truck.location}"
 	 		}, function(status, response){
@@ -265,8 +246,6 @@ input.cmn-toggle-round-flat:checked + label:after {
 				});
 	 		});
 			
-			var state = '${truck.state}';
-			stateCheck(state);
 		});
 
 	</script>

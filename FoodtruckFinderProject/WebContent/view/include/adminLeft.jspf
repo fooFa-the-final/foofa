@@ -8,13 +8,13 @@
                 <!-- side-menu -->
                 <ul class="nav" id="side-menu">
                     <li id="side-report" >
-                        <a href="${ctx }/review/report/list.do"><i class="fa fa-dashboard fa-fw"></i>신고 관리 </a>
+                        <a href="${ctx }/review/report/list.do"><i class="fa fa-warning fa-fw"></i>신고 관리 </a>
                     </li>
                      <li id="side-survey">
-                        <a href="${ctx }/survey/item/list.do"><i class="fa fa-flask fa-fw"></i>설문조사 관리</a>
+                        <a href="${ctx }/survey/item/list.do"><i class="fa fa-bar-chart-o fa-fw"></i>설문조사 관리</a>
                     </li>
                     <li id="side-advertise">
-                        <a href="${ctx }/advertise/list/asc.do"><i class="fa fa-table fa-fw"></i>광고 관리</a>
+                        <a href="${ctx }/advertise/list/asc.do"><i class="fa fa-tags fa-fw"></i>광고 관리</a>
                     </li>
                 </ul>
                 <!-- end side-menu -->

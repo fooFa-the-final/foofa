@@ -59,6 +59,7 @@ public class SalesServiceLogic implements SalesService {
 	@Override
 	public List<Sale> find10DaysSales(String foodtruckId) {
 		List<Sale> list = store.select10DaysSales(foodtruckId);
+		System.out.println("서비스단 : "+ list.size());
 		return list;
 	}
 

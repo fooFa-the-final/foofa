@@ -106,7 +106,7 @@
           			</tr>
           			<tr onmouseover="setCenter('${truck.foodtruckId}')">
           				<td valign="top">
-          					<i class="fa fa-heart"></i> ${truck.favoriteCount } Fans<br>
+          					<i class="fa fa-star"></i> ${truck.favoriteCount } Fans<br>
           					<i class="fa fa-comment fa-fw"></i> ${truck.reviewCount } Reviews
           				</td>
           			</tr>
@@ -128,14 +128,6 @@
 </div>
 </form>
         <!-- end page-wrapper -->
-<!-- <center><div class=conatiner>
-    <a style="color:white; font-size: 30px;">1</a>
-    <a style="color:white; font-size: 30px;">2</a>
-    <a style="color:white; font-size: 30px;">3</a>
-    <a style="color:white; font-size: 30px;">4</a>
-    <a style="color:white; font-size: 30px;">5</a>
-
-    </div></center> -->
     <!-- end wrapper -->
 
     <!-- Core Scripts - Include with every page -->
@@ -145,8 +137,6 @@
     <script src="${ctx }/resources/plugins/pace/pace.js"></script>
     <script src="${ctx }/resources/scripts/siminta.js"></script>
     <!-- Page-Level Plugin Scripts-->
-    <script src="${ctx }/resources/plugins/dataTables/jquery.dataTables.js"></script>
-    <script src="${ctx }/resources/plugins/dataTables/dataTables.bootstrap.js"></script>
     <script>
     var pos = [];
     var ids = [];

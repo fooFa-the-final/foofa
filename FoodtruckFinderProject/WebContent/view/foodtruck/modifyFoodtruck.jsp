@@ -10,65 +10,109 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Foodtruck Finder</title>
     <!-- Core CSS - Include with every page -->
-    <script src="${ctx }/resources/plugins/jquery-1.10.2.js"></script>
     <link href="${ctx }/resources/plugins/bootstrap/bootstrap.css" rel="stylesheet" />
     <link href="${ctx }/resources/font-awesome/css/font-awesome.css" rel="stylesheet" />
     <link href="${ctx }/resources/plugins/pace/pace-theme-big-counter.css" rel="stylesheet" />
     <link href="${ctx }/resources/css/style.css" rel="stylesheet" />
     <link href="${ctx }/resources/css/main-style.css" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="${ctx }/resources/css/jquery.timepicker.css"/>
+</head>
+<style>
+label {
+width: 120px;margin-right: 20px;}
+textarea.form-control {
+}
+</style>
+    <!-- Core Scripts - Include with every page -->
+    <script src="${ctx }/resources/plugins/jquery-1.10.2.js"></script>
+    <script src="${ctx }/resources/plugins/bootstrap/bootstrap.min.js"></script>
+    <script src="${ctx }/resources/plugins/metisMenu/jquery.metisMenu.js"></script>
+    <script src="${ctx }/resources/plugins/pace/pace.js"></script>
+    <script src="${ctx }/resources/scripts/siminta.js"></script>
+    
     <script src="${ctx }/resources/plugins/timepicker/jquery.timepicker.js"></script>
-     <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=noUvsaR702FX6WH5un5h&submodules=geocoder"></script>
+    <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=noUvsaR702FX6WH5un5h&submodules=geocoder"></script>
 	<script src="http://malsup.github.com/jquery.form.js"></script> 
 	
     <script>
         $(document).ready(function(){
+			$('#side-modify').attr('class', 'selected');
+        	
             $('#startTime').timepicker();
             $('#endTime').timepicker();
             var position = new naver.maps.LatLng(37.4795169, 126.8824995);
             var map = new naver.maps.Map('map', {
 			    center: position,
-			    zoom: 10
-			});
-            var marker = new naver.maps.Marker({
-				position: position,
-				map: map
-			});
-            var infoWindow = new naver.maps.InfoWindow({
-                anchorSkew: true
+			    map : map
             });
+    		var infowindow;
             
-            var address = "";
-            function searchCoordinateToAddress(latlng) {
-                var tm128 = naver.maps.TransCoord.fromLatLngToTM128(latlng);
-                infoWindow.close();
-
-                naver.maps.Service.reverseGeocode({
-                    location: tm128,
-                    coordType: naver.maps.Service.CoordType.TM128
-                }, function(status, response) {
-                    if (status === naver.maps.Service.Status.ERROR) {
-                        return alert('Something Wrong!');
-                    }
-
-                    var items = response.result.items,
-                    address = items[0].address;
-                    
-                    console.log(address);
-
-                    infoWindow.setContent([
-                            '<div style="padding:10px;min-width:200px;line-height:150%;">',
-                            '<h4 style="margin-top:5px;">검색 좌표 : '+ address +'</h4></div>'
-                        ].join('\n'));
-
-                    infoWindow.open(map, latlng);
-                });
+    		function searchCoordinateToAddress(latlng) {
+       		 var tm128 = naver.maps.TransCoord.fromLatLngToTM128(latlng);
+       		 naver.maps.Service.reverseGeocode({
+            location: tm128,
+            coordType: naver.maps.Service.CoordType.TM128
+        	}, function(status, response) {
+            if (status === naver.maps.Service.Status.ERROR) {
+                return alert('Something Wrong!');
             }
-            naver.maps.Event.addListener(map, 'click', function(e){
-            	marker.setPosition(e.coord);
-            	searchCoordinateToAddress(e.coord);
-            });
+            var items = response.result.items,
+            address = items[0].address;
+            $("#loc1").val(address);
+            console.log(address);
+            
         });
+    }
+            naver.maps.Service.geocode({
+     			address: "${truck.location}"
+     		}, function(status, response){
+     			if (status === naver.maps.Service.Status.ERROR) {
+     				position = new naver.maps.LatLng(37.4795169, 126.8824995);
+    	            return alert('잘못 입력 되어있는 주소입니다. 기본 좌표를 찍어주겠습니다.');
+    	        }
+     			
+     			var item = response.result.items[0],
+     				point = new naver.maps.Point(item.point.x, item.point.y);
+     		
+     			var map = new naver.maps.Map('map', {
+    			    center: point,
+    			    zoom: 10
+    			});
+     			
+     			var marker = new naver.maps.Marker({
+    				position: point,
+    				map: map
+    			});
+     			naver.maps.Event.addListener(map, 'click', function(e){
+                	marker.setPosition(e.coord);
+                	searchCoordinateToAddress(e.coord);
+                });
+     		});
+            function modify_menu_click() {
+     	       alert("수정버튼을 누르셨습니다.");
+                 /*수정버튼 클릭이벤트: 데이터 받아와서 inputText로 변환해주고 버튼 submit버튼으로 변경해주는 자바스크립트 적용할 것*/
+             }
+             
+             function fileinfo(input){
+     	      	if (input.files && input.files[0]) {
+     	            var reader = new FileReader();
+     	            reader.onload = function (e) {
+     	                    $("#image").attr("src", e.target.result);
+     	                }
+     	            reader.readAsDataURL(input.files[0]);
+                 }
+     	      	$("#fileForm").ajaxForm({
+     	      		url:"${ctx}/foodtruck/modifyPicture.do",
+     	      		enctype: "multipart/form-data",
+     	      		success: function(result){
+     	      			alert("사진이 등록되었습니다.");
+     	      		},
+     	      		error: function(){
+     	      			alert("등록에 실패하였습니다. 다시 시도해주세요.")
+     	      		}
+     	      	});
+     	      	$("#fileForm").submit();
+     		}
         
         var c = 0;
         var registMenu = function(){
@@ -108,13 +152,9 @@
             });
         }
     </script>
-</head>
-
 <body>
     <!--  wrapper -->
-    
     <div id="wrapper">
-
 		<%@ include file="../include/header.jspf"%>
 		<%@ include file="../include/sellerLeft.jspf"%>
 
@@ -125,76 +165,72 @@
             <div class="row">
                 <!-- Page Header -->
                 
-                <div class="col-md-12" style="background-color:white; height:300px">
-                    	<div class="col-md-3">
-                           <form id="fileForm" method="post" enctype="multipart/form-data">
-	                            <a class="navbar-brand" href="#" style="margin-top:10px;" >
-	                                <img name="image" id="image" src="${ctx }/resources/img/food/${truck.foodtruckImg }" style="height:250px; width:250px" onClick="document.all.file.click();"/>
-	                            	<input type="file" name="file" id="file" style="display: none;" onchange="fileinfo(this)" />
-	                            </a>
-	                        </form> 
-                        </div>
-                        <div class="col-md-6" style="margin-top:30px;">
-                            <h1><input class="form-control" type="text" name="foodtruckName" value="${truck.foodtruckName }" style="width:61.5%"></h1><br>
-                              <h5>
-                              	<input class="form-control" type="text" name="category1" value="${truck.category1 }" style="width:20%">
-                               	<input class="form-control" type="text" name="category2" value="${truck.category2 }" style="width:20%">
-                               	<input class="form-control" type="text" name="category3" value="${truck.category3 }" style="width:20%">
-                           	  </h5>
-                              <h5><input class="form-control" type="text" name="location" value="${truck.location }" style="width:61.5%"></h5>
-                        </div>
+                <div class="col-md-12" style="margin-top:20px;" >
+                	<div class="panel panel-danger">
+                		<div class="panel-body" style="height:300px">
+	                    	<div class="col-md-4">
+	                           <form id="fileForm" method="post" enctype="multipart/form-data">
+		                            <a href="#" >
+		                                <img name="image" id="image" src="${ctx }/resources/img/food/${truck.foodtruckImg }" alt="사진을 변경하려면 클릭하세요." style="height:250px; width:250px" onClick="document.all.file.click();"/>
+		                            	<input type="file" name="file" id="file" style="display: none;" onchange="fileinfo(this)" />
+		                            </a>
+		                        </form> 
+	                        </div>
+	                        <div class="col-md-6" style="margin-top:30px;">
+	                            <h1 style="margin:0; "><label>푸드트럭 이름</label><input class="form-control" type="text" name="foodtruckName" value="${truck.foodtruckName }" style="width:61.5%"></h1><br>
+	                              <h5><label>카테고리</label>
+	                              	<input class="form-control" type="text" name="category1" value="${truck.category1 }" style="width:20%">
+	                               	<input class="form-control" type="text" name="category2" value="${truck.category2 }" style="width:20%">
+	                               	<input class="form-control" type="text" name="category3" value="${truck.category3 }" style="width:20%">
+	                           	  </h5>
+	                              <h5><label>현재 위치</label><input class="form-control" type="text" name="location" value="${truck.location }" style="width:61.5%"></h5>
+	                        </div>
+                		</div>
+                	</div>
                 </div>
                 <!--End Page Header -->
                 
-                <div class="col-md-12" style="margin-top:30px; margin-bottom:50px">
+                <div class="col-md-12" style=" margin-bottom:50px; padding:0px;">
                    <div class="col-md-8">
                    
                    <!--Truck Location Section-->
-                      <div class="col-lg-12">
-                          <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h4>Truck Location</h4>
-                            </div>
-                            <div class="panel-body">
-                               <textarea class="form-control" name="spot" rows="3" cols="94" style="border:0px">${truck.spot }</textarea>
-                            </div>
-                          </div>
+                      <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">Truck Location</h4>
+                        </div>
+                        <div class="panel-body">
+                           <textarea class="form-control" name="spot" rows="3"  style="border:0px; width:100%;">${truck.spot }</textarea>
+                        </div>
                       </div>
                   <!--End of Truck Location-->
                   
                   <!--Notice Section-->
-                      <div class="col-lg-12">
-                          <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h4>Notice</h4>
-                            </div>
-                            <div class="panel-body">
-                                <textarea class="form-control" name="notice" rows="3" cols="94" style="border:0px">${truck.notice }</textarea>
-                            </div>
-                          </div>
+                      <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">Notice</h4>
+                        </div>
+                        <div class="panel-body">
+                            <textarea class="form-control" name="notice" rows="3" style="border:0px; width:100%;">${truck.notice }</textarea>
+                        </div>
                       </div>
                   <!--End of Notice-->
                   
                   <!--Truck Hour Section-->
-                      <div class="col-lg-12">
-                          <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h4>Truck Hour</h4>
-                            </div>
-                            <div class="panel-body">
-                                 <input id="startTime" name="startTime" type="text" class="time ui-timepicker-input" autocomplete="off" size="8" value="${startTime }"> 부터 
-                                 <input id="endTime" name="endTime" type="text" class="time ui-timepicker-input" autocomplete="off" size="8" value="${endTime }"> 까지
-                            </div>
-                          </div>
-                      </div>
+                     <div class="panel panel-default">
+                       <div class="panel-heading">
+                           <h4 class="panel-title">Truck Hour</h4>
+                       </div>
+                       <div class="panel-body">
+                            <input id="startTime" name="startTime" type="text" class="time ui-timepicker-input" autocomplete="off" size="8" value="${startTime }"> 부터 
+                            <input id="endTime" name="endTime" type="text" class="time ui-timepicker-input" autocomplete="off" size="8" value="${endTime }"> 까지
+                       </div>
+                     </div>
                   <!--End of Foodtruck Hour-->
                                                 
-                       <div class="col-lg-12">                       
-                       
                     <!-- Advanced Tables -->
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                             <h4>Menu</h4> 
+                             <h4 class="panel-title">Menu</h4> 
                         </div>
                         <div class="panel-body">
                             <div class="table-responsive">
@@ -251,19 +287,20 @@
                                 </table>
                             </div>
                             
-                        </div>
                     </div>
                     <!--End Advanced Tables -->
                 </div>
                  
-                   </div>
-                   <div class="col-md-4" style="background-color: white; height:350px" id="map">
-                       <h2>Map</h2>
-                       
-                   </div>
-                   
-                   <div class="col-md-4" style="margin-top: 20px">
-                       <h4><ins>More Info</ins></h4>
+             </div>
+          	 <div class="col-md-4">
+          	 	<div class="panel panel-default">
+          	 		<div class="panel-heading"><h4 class="panel-title">Map</h4></div>
+          	 		<div class="panel-body" style="background-color: white; height:350px" id="map">
+          	 		</div>
+          	 	</div>
+          	 	<div class="panel panel-default">
+          	 		<div class="panel-heading"><h4 class="panel-title">More Info</h4></div>
+ 					<div class="panel-body">
                            <table>
                               <thead>
                                   <tr>
@@ -334,7 +371,8 @@
                                    </tr>
                                </tbody>
                            </table>
-                       
+                       </div>
+                       </div>
                    </div>                   
                 </div>
                  <div class="col-md-1" style="margin-left:550px; margin-bottom: 100px">
@@ -347,40 +385,6 @@
         <!-- end page-wrapper -->
     </div>
     <!-- end wrapper -->
-
-    <!-- Core Scripts - Include with every page -->
-    
-    <script src="${ctx }/resources/plugins/bootstrap/bootstrap.min.js"></script>
-    <script src="${ctx }/resources/plugins/metisMenu/jquery.metisMenu.js"></script>
-    <script src="${ctx }/resources/plugins/pace/pace.js"></script>
-    <script src="${ctx }/resources/scripts/siminta.js"></script>
-    <script>
-        function modify_menu_click() {
-	       alert("수정버튼을 누르셨습니다.");
-            /*수정버튼 클릭이벤트: 데이터 받아와서 inputText로 변환해주고 버튼 submit버튼으로 변경해주는 자바스크립트 적용할 것*/
-        }
-        
-        function fileinfo(input){
-	      	if (input.files && input.files[0]) {
-	            var reader = new FileReader();
-	            reader.onload = function (e) {
-	                    $("#image").attr("src", e.target.result);
-	                }
-	            reader.readAsDataURL(input.files[0]);
-            }
-	      	$("#fileForm").ajaxForm({
-	      		url:"${ctx}/foodtruck/modifyPicture.do",
-	      		enctype: "multipart/form-data",
-	      		success: function(result){
-	      			alert("사진이 등록되었습니다.");
-	      		},
-	      		error: function(){
-	      			alert("등록에 실패하였습니다. 다시 시도해주세요.")
-	      		}
-	      	});
-	      	$("#fileForm").submit();
-		}
-    </script>
 
 </body>
 

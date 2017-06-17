@@ -2,35 +2,24 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
         <!-- navbar side -->
-        <nav class="navbar-default navbar-static-side" role="navigation" >
+    <nav class="navbar-default navbar-static-side" role="navigation" >
             <!-- sidebar-collapse -->
             <div class="sidebar-collapse">
                 <!-- side-menu -->
                 <ul class="nav" id="side-menu">
-                    <li class="active">
-                        <a href="#"><i class="fa fa-files-o fa-fw"></i>Truck Info<span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li id="side-info" >
-                                <a href="${ctx }/foodtruck/searchById.do">Truck Info</a>
-                            </li>
-                            <li id="side-modify" >
-                                <a href="${ctx }/foodtruck/modifyForm.do">트럭정보 수정</a>
-                            </li>
-                        </ul>
-                        <!-- second-level-items -->
-                    </li>
-                     <li id="side-adv" >
-                        <a href="${ctx }/foodtruck/reqest.do"><i class="fa fa-flask fa-fw"></i>광고요청</a>
-                    </li>
+                    <li id="side-info" ><a href="${ctx }/foodtruck/searchById.do"><i class="fa fa-info fa-fw"></i>&nbsp;Truck Info</a></li>
+                    <li id="side-modify" ><a href="${ctx }/foodtruck/modifyForm.do"><i class="fa fa-wrench fa-fw"></i>&nbsp;트럭정보 수정</a></li>
+                     <li id="side-adv" ><a href="${ctx }/foodtruck/reqest.do"><i class="fa fa-tags fa-fw"></i>&nbsp;광고요청</a></li>
                     <li id="side-sales" >
-                        <a href="${ctx }/sales/truck.do"><i class="fa fa-table fa-fw"></i>매출통계</a>
+                        <a href="${ctx }/sales/truck.do"><i class="fa fa-bar-chart-o fa-fw"></i>&nbsp;매출통계</a>
                     </li>
-                    <li id="side-survey" ><a href="${ctx }/survey/truckStat.do?foodtruckId=${loginTruckId}"><i class="fa fa-edit fa-fw"></i>설문통계</a></li>
-                    <li id="side-modify-seller" ><a href="${ctx }/seller/modify.do"><i class="fa fa-edit fa-fw"></i>판매자 정보 수정</a></li>
-                    <li id="side-remove-seller" ><a href="${ctx }/seller/checkPw.do"><i class="fa fa-edit fa-fw"></i>판매자 탈퇴</a></li>
+                    <li id="side-survey" ><a href="${ctx }/survey/truckStat.do"><i class="fa fa-filter fa-fw"></i>&nbsp;설문통계</a></li>
+                    <li id="side-modify-seller" ><a href="${ctx }/seller/modify.do"><i class="fa fa-gear fa-fw"></i>&nbsp;판매자 정보 수정</a></li>
+                    <li id="side-remove-seller" ><a href="${ctx }/seller/checkPw.do"><i class="fa fa-trash-o fa-fw"></i>&nbsp;판매자 탈퇴</a></li>             
+                
                 </ul>
                 <!-- end side-menu -->
             </div>
             <!-- end sidebar-collapse -->
-        </nav>
+        </nav> 
         <!-- end navbar side -->

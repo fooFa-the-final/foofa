@@ -60,8 +60,8 @@ display:inline-block;
 										</li>
 										<li style="width:57%;">
 											<div style="float:right; vertical-align:center">
-												<button id="revList" type="button" class="btn btn-success btn-outline" onclick="location.href='${ctx}/review/list/member.do?memberId=${follow_i.memberId }'">리뷰 보기</button>
-												<button id="favList" type="button" class="btn btn-info btn-outline" onclick="location.href='${ctx}/favorite/list.do?memberId=${follow_i.memberId }'">단골 보기</button>
+												<button id="revList" type="button" class="btn btn-info  btn-outline" onclick="location.href='${ctx}/review/list/member.do?memberId=${follow_i.memberId }'">리뷰 보기</button>
+												<button id="favList" type="button" class="btn btn-success btn-outline" onclick="location.href='${ctx}/favorite/list.do?memberId=${follow_i.memberId }'">단골 보기</button>
 											
 												<c:if test="${loginUserId eq member.memberId }">
 													<button id="unfollow" type="button" class="btn btn-danger btn-outline" onclick="unfollow('${follow_i.memberId}');">언팔로우</button>

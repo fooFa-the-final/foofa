@@ -10,7 +10,7 @@ var favoriteCount = function(truckId) {
 			$("#favoriteCount").html(data);
 		}
 	});
-}
+};
 
 // 버튼 서식 지정
 var favoriteExist = function(truckId) {
@@ -31,7 +31,7 @@ var favoriteExist = function(truckId) {
 			}
 		}
 	});
-}
+};
 // favorite : unfavorite
 var favorite = function(truckId) {
 	console.log(truckId + " : come");
@@ -109,7 +109,7 @@ var followExist = function(memberId) {
 			}
 		}
 	});
-}
+};
 
 //follow 수 반환
 var followCount = function(memberId) {
@@ -123,7 +123,7 @@ var followCount = function(memberId) {
 			$("#followCount").html(data);
 		}
 	});
-}
+};
 
 //truck state 확인
 var stateCheck = function(state){
@@ -135,7 +135,7 @@ var stateCheck = function(state){
 		$("#openstateBtn").removeClass("btn btn-success").addClass("btn btn-outline btn-default");
 		$("#openstateBtn").val("CLOSED");
 	}
-}
+};
 
 //truck state 변경
 var stateBtn = function(obj){
@@ -155,17 +155,23 @@ var stateBtn = function(obj){
 	     data: {operation_state: openState},
 	     type: 'get',
 	     success: function(result){
-	         alert("영업상태가 변경되었습니다.");
+	    	 
+	    	 if($("#openstate").val() == 'false'){
+		         alert("영업이 종료되었습니다! 오늘의 매출을 입력해주세요!^^!");
+		         location.href='/FoodtruckFinderProject/sales/truck.do';
+	    	 }else {
+		         alert("영업을 시작합니다!");
+	    	 }
 	         
 	     },
 	     error: function(){
 	     	alert("영업상태 변경을 실패하였습니다. 다시 시도해주세요.");
 	     }
 	});
-}
+};
 
 //푸드트럭 사진 변경 
-function fileinfo(input){
+var fileinfo = function(input){
   	if (input.files && input.files[0]) {
         var reader = new FileReader();
         reader.onload = function (e) {
@@ -184,4 +190,4 @@ function fileinfo(input){
   		}
   	});
   	$("#fileForm").submit();
-}
+};

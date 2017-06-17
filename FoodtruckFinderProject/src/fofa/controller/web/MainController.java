@@ -60,8 +60,9 @@ public class MainController {
 
 		
 		List<HashMap<String, Object>> allTrucks = foodtruckService.findByLoc(1, "가산동");
+		allTrucks.addAll(foodtruckService.findByLoc(2, "가산동"));
 		List<Foodtruck> nearTrucks = new ArrayList<>();
-		for(int i=0; i<9; i++){
+		for(int i=0; i<12; i++){
 			Foodtruck t = new Foodtruck();
 			t.setFoodtruckId((String)allTrucks.get(i).get("foodtruckId"));
 			t.setFoodtruckName((String)allTrucks.get(i).get("foodtruckName"));
@@ -126,8 +127,9 @@ public class MainController {
 
 		
 		List<HashMap<String, Object>> allTrucks = foodtruckService.findByLoc(1, "가산동");
+		allTrucks.addAll(foodtruckService.findByLoc(2, "가산동"));
 		List<Foodtruck> nearTrucks = new ArrayList<>();
-		for(int i=0; i<9; i++){
+		for(int i=0; i<12; i++){
 			Foodtruck t = new Foodtruck();
 			t.setFoodtruckId((String)allTrucks.get(i).get("foodtruckId"));
 			t.setFoodtruckName((String)allTrucks.get(i).get("foodtruckName"));
