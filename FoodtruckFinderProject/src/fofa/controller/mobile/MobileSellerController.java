@@ -238,25 +238,27 @@ public class MobileSellerController {
 	///////////////////// foodtruck_Close
 
 	@RequestMapping(value = "/mobile/closeTruck.do")
-	public @ResponseBody void closeTrcuk(String id, String revenue, String today) {
+	public @ResponseBody String closeTrcuk(String id, String revenue, String today) {
+		String result="";
 
-		System.out.println("동작됨");
-		Foodtruck foodtruck = truckService.findBySeller(id);
-		foodtruck.setState(false);
-
-		System.out.println("this is foodtruck: " + foodtruck.toString() + "today is : " + today);
-
-		truckService.modify(foodtruck);// 영업종료로 DB수정
-
-		Sale sale = new Sale();
-
-		sale.setFoodtruckId(foodtruck.getFoodtruckId());
-		sale.setLocation(foodtruck.getLocation());
-		sale.setRevenue(Integer.parseInt(revenue));
-		sale.setDate(today);
-
-		salesService.register(sale);
-
+		try{
+			Foodtruck foodtruck = truckService.findBySeller(id);
+			foodtruck.setState(false);
+			//System.out.println("this is foodtruck: " + foodtruck.toString() + "today is : " + today);
+			truckService.modify(foodtruck);// 영업종료로 DB수정
+	
+			Sale sale = new Sale();
+			sale.setFoodtruckId(foodtruck.getFoodtruckId());
+			sale.setLocation(foodtruck.getLocation());
+			sale.setRevenue(Integer.parseInt(revenue));
+			sale.setDate(today);
+			salesService.register(sale);
+			
+			result = "ok";
+		} catch (Exception e){
+			result = "fail";
+		}
+		return result;
 	}
 
 }
