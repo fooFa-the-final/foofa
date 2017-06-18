@@ -623,18 +623,7 @@ div.somenail-list img {
 	margin: 0;
 }
 
-.sub-li-recommand i{
-color:firebrick;
-}
-.sub-li-follow i{
-color:dodgerblue;
-}
-.sub-li-edit i{
-color:slategray;
-}
-.sub-li-review i{
-color:slategray;
-}
+
 
 /***** CSS Magic to Highlight Stars on Hover *****/
 .rating>input:checked ~ label, /* show gold star when clicked */ .rating:not
