@@ -122,6 +122,10 @@ public class FoodtruckStoreLogic implements FoodtruckStore{
 		int nPageIndex = 0;
 		int nPageRow = 10;
 		
+		if(pageNum != 0){
+			nPageIndex = pageNum - 1;
+		}
+		
 		Map<String, Object> map = new HashMap<>();
 		map.put("START", (nPageIndex * nPageRow) + 1);
 		map.put("END", (nPageIndex * nPageRow) + nPageRow);

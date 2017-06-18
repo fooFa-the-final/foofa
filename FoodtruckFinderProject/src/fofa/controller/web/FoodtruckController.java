@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import fofa.domain.Advertise;
 import fofa.domain.Foodtruck;
 import fofa.domain.Member;
 import fofa.domain.Menu;
@@ -91,7 +92,9 @@ public class FoodtruckController {
 	
 	@RequestMapping(value="/modify.do", method=RequestMethod.POST)
 	public String modify(Foodtruck foodtruck, HttpServletRequest request){
+		foodtruck.setFoodtruckImg(foodtruckService.findById(foodtruck.getFoodtruckId()).getFoodtruckImg());
 		foodtruck.setOperationTime((String)request.getParameter("startTime") + "/" + (String)request.getParameter("endTime"));
+		foodtruck.setCategory1(foodtruck.getCategory1() + "/" + foodtruck.getCategory2() + "/" + foodtruck.getCategory3());
 		List<Menu> menus = new ArrayList<>();
 		
 		String[] menuId = request.getParameterValues("menuId");
@@ -137,6 +140,7 @@ public class FoodtruckController {
             Foodtruck foodtruck = foodtruckService.findBySeller((String)request.getSession().getAttribute("loginUserId"));
             foodtruck.setFoodtruckImg(newFileName);
             foodtruckService.modify(foodtruck);
+            foodtruck = foodtruckService.findBySeller((String)request.getSession().getAttribute("loginUserId"));
             
             try {
                 mFile.transferTo(new File(path + newFileName));
@@ -195,11 +199,24 @@ public class FoodtruckController {
 			trucks = sqlMapping(sqlMap);
 			allCount = (int)sqlMap.get(0).get("allCount");
 		}
+
+		List<Advertise> advs= advertiseService.findNowAd();
+		List<Foodtruck> adtruck=  new ArrayList<>();
+		
+		for(int i=0; i<2; i++){
+			Advertise ad = advs.get(i);
+			Foodtruck truck = foodtruckService.findBySeller(ad.getSellerId());
+			adtruck.add(truck);
+		}
+		model.addAttribute("adtruck", adtruck);
+		
+		
 		model.addAttribute("currentIndex", currentIndex);
 		model.addAttribute("allCount", allCount);
 		model.addAttribute("trucks", trucks);
 		model.addAttribute("keyword", keyword);
 		model.addAttribute("location", location);
+		System.out.println(adtruck.size());
 		return "../view/foodtruck/listFoodtruck.jsp";
 	}
 	
@@ -221,6 +238,16 @@ public class FoodtruckController {
 			trucks = sqlMapping(sqlMap);
 			allCount = (int)sqlMap.get(0).get("allCount");
 		}
+		List<Advertise> advs= advertiseService.findNowAd();
+		List<Foodtruck> adtruck=  new ArrayList<>();
+		
+		for(int i=0; i<2; i++){
+			Advertise ad = advs.get(i);
+			Foodtruck truck = foodtruckService.findBySeller(ad.getSellerId());
+			adtruck.add(truck);
+		}
+		System.out.println(adtruck.size());
+		model.addAttribute("adtruck", adtruck);
 		model.addAttribute("currentIndex", currentIndex);
 		model.addAttribute("allCount", allCount);
 		model.addAttribute("trucks", trucks);
@@ -241,14 +268,12 @@ public class FoodtruckController {
 		model.addAttribute("stand", sort);
 		int currentIndex = 1;
 		boolean state = Boolean.parseBoolean(request.getParameter("openstate"));
-//		String state = request.getParameter("openstate");
 		
 		if(request.getParameter("currentIndex") != null){
 			currentIndex = Integer.parseInt(request.getParameter("currentIndex"));
 		}
 		if(state){
-//			System.out.println("state true");
-			foodtruck.setState(state);
+			foodtruck.setState(true);
 			model.addAttribute("openState", true);
 		}
 		
@@ -273,14 +298,12 @@ public class FoodtruckController {
 			}
 		}
 		
-//		System.out.println("loc:"+location+" key:"+keyword+" index:"+currentIndex + " checked:" + checked);
 		foodtruck.setLocation(location);
 		foodtruck.setFoodtruckName(keyword);
 		
 		List<HashMap<String, Object>> sqlMap = foodtruckService.findByFilter(currentIndex, foodtruck, sort);
 		List<Foodtruck> trucks = new ArrayList<>();
 		int allCount = 0;
-//		System.out.println("궁금궁금 : " + sqlMap.size() + "/" + Integer.parseInt(sqlMap.get(0).get("allCount")));
 
 		
 		if(!sqlMap.isEmpty()){
@@ -292,6 +315,16 @@ public class FoodtruckController {
 		model.addAttribute("trucks", trucks);
 		model.addAttribute("keyword", foodtruck.getFoodtruckName());
 		model.addAttribute("location", foodtruck.getLocation());
+		
+		List<Advertise> advs= advertiseService.findNowAd();
+		List<Foodtruck> adtruck =  new ArrayList<>();
+		
+		for(int i=0; i<2; i++){
+			Advertise ad = advs.get(i);
+			Foodtruck truck = foodtruckService.findBySeller(ad.getSellerId());
+			adtruck.add(truck);
+		}
+		model.addAttribute("adtruck", adtruck);
 		
 		return "../view/foodtruck/listFoodtruck.jsp";
 	}
@@ -327,8 +360,8 @@ public class FoodtruckController {
 			t.setSpot((String)sqlMap.get(i).get("spot"));
 			t.setLocation((String)sqlMap.get(i).get("location"));
 			t.setFavoriteCount((int)sqlMap.get(i).get("favoriteCount"));
-			t.setFavoriteCount((int)sqlMap.get(i).get("favoriteCount"));
 			t.setReviewCount((int)sqlMap.get(i).get("reviewCount"));
+			t.setState((boolean)sqlMap.get(i).get("state"));
 			if(sqlMap.get(i).get("score")!=null){
 				t.setScore((double)sqlMap.get(i).get("score"));
 			}else {

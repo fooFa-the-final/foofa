@@ -32,6 +32,7 @@
   		<result javaType="java.lang.String" column="category" property="category1"/>
   		<result javaType="java.lang.String" column="area" property="spot"/>
   		<result javaType="java.lang.String" column="location" property="location"/>
+  		<result javaType="boolean" column="operation_state" property="state"/>
   		<result javaType="int" column="allCount" property="allCount"/>
    		<association column="foodtruck_id" property="favoriteCount" javaType="int" jdbcType="INTEGER" select="fofa.store.mapper.FavoriteMapper.selectByTruckId" />
   		<association column="foodtruck_id" property="reviewCount" javaType="int" jdbcType="INTEGER" select="fofa.store.mapper.ReviewMapper.selectTruckCount" />
@@ -47,7 +48,7 @@
   	</sql>
   	
   	<sql id="pagingTrucksOrderbyReviewCount">
-  		SELECT f.FOODTRUCK_ID, f.TRUCKNAME, f.TRUCK_IMAGE, f.CATEGORY, f.AREA, f.LOCATION, count(*)over() AS allCount FROM (
+  		SELECT f.FOODTRUCK_ID, f.TRUCKNAME, f.TRUCK_IMAGE, f.CATEGORY, f.AREA, f.LOCATION, f.OPERATION_STATE, count(*)over() AS allCount FROM (
 		SELECT count(foodtruck_id) stand, foodtruck_id
 		FROM review_tb
 		GROUP BY foodtruck_id)
@@ -55,7 +56,7 @@
   	</sql>
   	
   	<sql id="pagingTrucksOrderbyFavoriteCount">
-  		SELECT f.FOODTRUCK_ID, f.TRUCKNAME, f.TRUCK_IMAGE, f.CATEGORY, f.AREA, f.LOCATION, count(*)over() AS allCount FROM (
+  		SELECT f.FOODTRUCK_ID, f.TRUCKNAME, f.TRUCK_IMAGE, f.CATEGORY, f.AREA, f.LOCATION, f.OPERATION_STATE, count(*)over() AS allCount FROM (
 		SELECT count(foodtruck_id) stand, foodtruck_id
 		FROM favorite
 		GROUP BY foodtruck_id)
@@ -64,9 +65,9 @@
   	
   	<sql id="pagingPre">
   		<![CDATA[
-  			SELECT X.rnum, X.foodtruck_id, X.truckName, X.truck_image, X.category, X.area, X.location, allCount
+  			SELECT X.rnum, X.foodtruck_id, X.truckName, X.truck_image, X.category, X.area, X.location, X.operation_state, allCount
 			FROM ( 
-    		SELECT rownum AS rnum, A.foodtruck_id, A.truckName, A.truck_image, A.category, A.area, A.location, allCount
+    		SELECT rownum AS rnum, A.foodtruck_id, A.truckName, A.truck_image, A.category, A.area, A.location, A.operation_state, allCount
     		FROM (
   		]]>
   	</sql>
@@ -89,7 +90,7 @@
   	
   	<update id="update" parameterType="Foodtruck">
   		UPDATE foodtruck_tb
-  		SET truckName=#{foodtruckName}, truckHour=#{operationTime}, area=#{spot}, notice=#{notice}, location=#{location}, category=#{category1}, payment=#{card}, parking=#{parking}, drinking=#{drinking}, catering=#{catering}, operation_state=#{state}
+  		SET truckName=#{foodtruckName}, truckHour=#{operationTime}, area=#{spot}, notice=#{notice}, location=#{location}, category=#{category1}, payment=#{card}, parking=#{parking}, drinking=#{drinking}, catering=#{catering}, operation_state=#{state}, truck_image=#{foodtruckImg}
   		WHERE foodtruck_id=#{foodtruckId} 
   	</update>
   	

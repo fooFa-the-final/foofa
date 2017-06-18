@@ -5,30 +5,57 @@
                 <div class="col-lg-12" style="margin-top:20px;">
 					<div class="panel panel-danger">
 	                    <div class="panel-body">
-	                    	<form id="fileForm" method="post" enctype="multipart/form-data">
-	                            <a class="navbar-brand" href="#" style="margin-top:10px;" >
-	                                <img name="image" id="image" src="${ctx }/resources/img/food/${truck.foodtruckImg }" style="height:250px; width:250px" onClick="document.all.file.click();"/>
-	                            	<input type="file" name="file" id="file" style="display: none;" onchange="fileinfo(this)" />
-	                            </a>
-	                        </form>    
-                            <div class="user-info" style="margin-top:30px;">
-                                <font size="6">${truck.foodtruckName }</font><br><br>
-                                <h5>${truck.category1 }</h5>
-                                <h5>${truck.spot }</h5>
-                                <h5>${truck.favoriteCount }Followers</h5>
-                                <h5>${truck.reviewCount }Reviews</h5>
-                            </div>
-	                    
-		                    <div class="col-lg-3" style="float:right; margin-right:30px; margin-top:30px; height:270px; position:relative;">
-		                        <a href="${ctx }/seller/modify.do"><button type="button" class="btn btn-default">판매자 정보 수정</button></a>
-		                        <a href="${ctx }/seller/checkPw.do"><button type="button" class="btn btn-default">판매자 탈퇴</button></a>
-		                    <div style="position:absolute; bottom:20px; margin-left:10px" align="right">
-				                    <input type="button" id="openstateBtn" name="openstateBtn" class="btn btn-outline btn-default" onClick="stateBtn(this)" style="width:200px; height:70px" value="OPEN NOW">        
-				                	<input type="hidden" id="openstate" name="openstate" value="${truck.state}">
-		                	</div>
-		                    </div>
-
-	                    </div>
+							<div class="col-lg-3" style="height:260px">
+		                    	<form id="fileForm" method="post" enctype="multipart/form-data">
+		                            <a class="navbar-brand" href="#" style="margin-top:10px;" >
+		                                <img name="image" id="image" src="${ctx }/resources/img/food/${truck.foodtruckImg }" style="height:250px; width:250px" onClick="document.all.file.click();"/>
+		                            	<input type="file" name="file" id="file" style="display: none;" onchange="fileinfo(this)" />
+		                            </a>
+		                        </form>  
+	                        </div>  
+							<div class="col-lg-9" style="margin-top:20px;">
+								<div class="col-lg-9">
+												<h2 style="display:inline">${truck.foodtruckName }</h2>
+								<h5><i class="fa fa-bookmark"></i>&nbsp; ${truck.category1 } &nbsp; ${truck.category2 } &nbsp; ${truck.category3 }</h5>
+								<h5><i class="fa fa-location-arrow"></i>&nbsp;  ${truck.spot }</h5>
+								<h5><i class="fa fa-map-marker"></i>&nbsp;  ${truck.location }</h5>
+								</div>
+								<div class="col-lg-3">
+									<span style="float: right; margin-right: 10px;">
+				                       <a href="${ctx }/foodtruck/modifyForm.do"><button type="button" class="btn btn-info btn-outline btn-circle btn-lg"><i class="fa fa-wrench"></i></button></a>
+				                       <a href="${ctx }/seller/modify.do"><button type="button" class="btn btn-warning btn-outline btn-circle btn-lg"><i class="fa fa-gear"></i></button></a>
+									</span>
+								</div>
+							</div>
+							<div class="col-lg-9">
+								<div class="alert alert-warning"  style="margin-top:15px; margin-bottom:15px;">
+									<i class="fa fa-bell"></i><b>&nbsp;Hello ! </b> Welcome Back to <b>Foofa ! </b> Are you wondering comments about your truck? <b><a style="color:firebrick;" href="${ctx }/survey/truckStat.do">Please click Me! </a></b>
+								</div>
+							</div>		
+				
+								<div class="col-lg-3">
+									<div class="alert alert-danger text-center " style="padding:15px 30px; margin-bottom:15px;">
+										<input type="hidden" id="openstate" name="openstate" value="${truck.state}">
+										<i class="fa fa-star fa-3x" style="display:inline-block; float:left;"></i><span style="flaot:left;"><b>${truck.favoriteCount }</b>명의 회원들이<br>단골로 등록했습니다</span>
+									</div>
+								</div>
+				
+								<div class="col-lg-3">
+									<div class="alert alert-info text-center" style="padding:15px 30px; margin-bottom:15px;">
+										<i class="fa fa-edit fa-3x"style="display:inline-block; float:left;"></i><span style="flaot:left;"><b>${truck.reviewCount }</b>개의 리뷰가 <br>작성되었습니다.</span>
+									</div>
+								</div>
+								<div class="col-lg-3">
+									<c:choose>
+										<c:when test="${truck.state == true}">
+											 <input type="button" id="openstateBtn" name="openstateBtn" class="btn btn-success" onClick="stateBtn(this)" style="width:100%; height:75px" value="OPEN NOW"> 
+										</c:when>
+										<c:when test="${truck.state == false}">
+											 <input type="button" id="openstateBtn" name="openstateBtn" class="btn btn-outline btn-default" onClick="stateBtn(this)" style="width:100%; height:75px" value="CLOSED"> 
+										</c:when>
+									</c:choose>       
+								</div>
+						</div>
 	                </div>
                 </div>
                 <!--End Page Header -->

@@ -52,12 +52,9 @@ div {
 	font-size: 10px
 }
 
-h2 {
+.fc-left h2 {
 	margin: 0;
-	padding: 20px;
-	border: 1px solid #000;
-	background-color: #f9f9f9;
-	border-width: 1px 0;
+	padding: 5px;
 	font-family: Tahoma;
 }
 </style>
@@ -84,7 +81,6 @@ h2 {
 <script>
 	$(document).ready(
 			function() {
-				stateCheck('${truck.state}');
 				$('#side-sales').attr('class', 'selected');
 				$('#calendar').fullCalendar({
 
@@ -124,8 +120,7 @@ h2 {
 								dataType : 'json',
 								success : function(data) {
 									document.getElementById("revenue").value = data.re;
-									document
-											.getElementById("location1").value = data.lo;
+									document.getElementById("location1").value = data.lo;
 									document.getElementById("date").value = data.da;
 									document.getElementById("date2").value = data.da;
 

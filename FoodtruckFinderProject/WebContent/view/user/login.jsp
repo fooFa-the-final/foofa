@@ -8,7 +8,6 @@
 <head>
 <c:set value="${pageContext.request.contextPath}" var="ctx" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="google-signin-client_id" content="523035851566-fepi8b7bio35dgo0rmah2th0rbcmv832.apps.googleusercontent.com"></meta>
     <title>FooFa Login</title>
     <!-- Core CSS - Include with every page -->
     <link href="${ctx}/resources/plugins/bootstrap/bootstrap.css" rel="stylesheet" />
@@ -59,7 +58,6 @@
                                 </div>
                                 <!-- Change this to a button or input when using this as a form -->
                                 <button type="submit" class="btn btn-lg btn-success btn-block" style="margin-right:30px; display:inline-block; vertical-align:middle; width:45%;">Login</button>
-                                <div id="signin-button" style="display:inline-block; vertical-align:middle; width:190px;"></div>
                             </fieldset>
                         </form>
                     </div>

@@ -3,6 +3,8 @@ package fofa.controller.web;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.hamcrest.FeatureMatcher;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -37,8 +39,10 @@ public class SurveyController {
 	}
 
 	@RequestMapping("/truckStat.do")
-	public String searchSurveysStat(String foodtruckId, Model model) {
+	public String searchSurveysStat(HttpSession session, Model model) {
 
+		String foodtruckId = (String)session.getAttribute("loginTruckId");
+		
 		model.addAttribute("commentList", surveyService.findByTruckId(foodtruckId));
 		model.addAttribute("avgItemList", surveyService.findAvgScoreBySurveyItem(foodtruckId));
 		model.addAttribute("truck", foodtruckService.findById(foodtruckId));
@@ -46,8 +50,9 @@ public class SurveyController {
 	}
 
 	@RequestMapping(value = "/itemStat.do", method = RequestMethod.GET)
-	public String searchItemStat(String foodtruckId, String itemId, Model model) {
-		// System.out.println(foodtruckId + ItemId);
+	public String searchItemStat(HttpSession session, String itemId, Model model) {
+		String foodtruckId = (String)session.getAttribute("loginTruckId");
+		model.addAttribute("truck", foodtruckService.findById(foodtruckId));
 
 		List<Survey> list = surveyService.findAvgByGender(foodtruckId, itemId);
 

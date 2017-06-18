@@ -20,8 +20,6 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link href="${ctx}/resources/plugins/timeline/timeline.css" rel="stylesheet" />
 <link href="${ctx}/resources/plugins/morris/morris-0.4.3.min.css" rel="stylesheet" />
-    
-
 
 <style>
 .mySlides {display:none; width: 1200px; margin: 0 auto;}
@@ -204,8 +202,8 @@ text-align:left;
 						<h4>Hot Reviews</h4>
 						<div class="sub-container">
 							<div class="col-lg-9">
-									<div class="panel panel-primary text-left" style="height:327px">
-										<div class="review-heading padding-10" style="height: 90px;">
+									<div class="panel panel-danger text-left" style="height:327px">
+										<div class="panel-heading padding-10" style="height: 90px;">
 											<img class="somenail" src="${ctx }/resources/upload/${hotReview.writer.profileImg }"/>
 											<div style="float:left; margin-left:20px;">
 												<ul class="list-unstyled">
@@ -243,10 +241,10 @@ text-align:left;
 									</div>		
 							</div>
 							<div class="col-lg-3">
-								<div class="panel panel-primary text-center" style="height:327px">
+								<div class="panel panel-danger text-center" style="height:327px">
 									<c:forEach var="review" varStatus="no" items="${reviews}"> 
-										<div class="review-heading" style="height:25px">
-											 <a href="${ctx }/review/list/truck.do?foodtruckId=${review.foodtruck.foodtruckId }">${review.foodtruck.foodtruckName }</a>		 By <a href="${ctx }/review/list/member.do?memberId=${review.writer.memberId }">${review.writer.memberId }</a>						
+										<div class="panel-heading" style="height:25px; padding:0 10px;">
+											 <b><a href="${ctx }/review/list/truck.do?foodtruckId=${review.foodtruck.foodtruckId }">${review.foodtruck.foodtruckName }</a></b>		 By <b><a href="${ctx }/review/list/member.do?memberId=${review.writer.memberId }">${review.writer.memberId }</a></b>						
 										</div>
 										<div class="panel-body" style="padding:10px; height:85px;">
 											<img class="somenail" src="${ctx }/resources/img/reviewImg/${review.mainImage.filename}" style="margin-right:10px;"/>

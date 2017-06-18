@@ -1,15 +1,11 @@
 package fofa.controller.mobile;
 
-import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -19,17 +15,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
-import org.springframework.web.multipart.MultipartRequest;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonSyntaxException;
 
 import fofa.domain.Favorite;
+import fofa.domain.Favorites;
 import fofa.domain.Follow;
 import fofa.domain.Foodtruck;
 import fofa.domain.Foodtrucks;
@@ -41,11 +35,16 @@ import fofa.domain.Recommand;
 import fofa.domain.Report;
 import fofa.domain.Review;
 import fofa.domain.Reviews;
+import fofa.domain.Survey;
+import fofa.domain.SurveyItem;
+import fofa.domain.SurveyItems;
 import fofa.service.FavoriteService;
 import fofa.service.FollowService;
 import fofa.service.FoodtruckService;
 import fofa.service.MemberService;
 import fofa.service.ReviewService;
+import fofa.service.SurveyItemService;
+import fofa.service.SurveyService;
 
 @Controller
 public class MobileMemberController {
@@ -60,8 +59,10 @@ public class MobileMemberController {
 	private FavoriteService favoriteService;
 	@Autowired
 	private FoodtruckService truckService;
-	
-	
+	@Autowired
+	private SurveyItemService surveyItemService;
+	@Autowired
+	private SurveyService surveyService;
 	@RequestMapping(value="/mobile/memberRegister.do", produces="application/json", method=RequestMethod.POST)
 	public @ResponseBody String memberLogin(@RequestBody Member member) {
 		System.out.println("여기까지왔군"+member.getMemberId());
@@ -147,6 +148,41 @@ public class MobileMemberController {
 		System.out.println("^^");
 		return foodtrucks;
 	}
+
+	@RequestMapping(value="/mobile/favorite/favList.do", produces="application/xml")
+	public @ResponseBody Favorites searchFavoritesMember(String memberId){
+		List<Favorite> favorite = favoriteService.findMemberId(memberId);
+
+		Favorites fav = new Favorites();
+		fav.setFavorites(favorite);
+		
+		System.out.println("여기");
+		return fav;
+	}	
+	
+	
+	
+	@RequestMapping(value="/mobile/favorite/register.do", produces="application/xml")
+	public @ResponseBody String registerFavorite(String memberId, String foodtruckId){
+		System.out.println("여기111");
+		
+		Favorite favorite = new Favorite();
+		favorite.setMemberId(memberId);
+		favorite.setFoodtruckId(foodtruckId);
+		favoriteService.register(favorite);
+		
+		boolean result;
+		
+		System.out.println(favorite);
+		
+		result = favoriteService.register(favorite);
+
+		if(result == false) {
+			return "false";
+		} else {
+			return "true";
+		}
+	}	
 	
 	
 	@RequestMapping(value="/mobile/favorite/remove.do", produces="application/xml")
@@ -174,11 +210,19 @@ public class MobileMemberController {
 		
 		return result;
 	}
+	@RequestMapping(value="mobile/member/find.do")
+	public @ResponseBody Member findMember(String memberId){
+		Member member = memberService.findById(memberId);
+		return member;
 	
-	
-	
-	
+	}	
 	@RequestMapping(value="mobile/review/detail.do")
+	public @ResponseBody Review searchReviewDetail(String reviewId){
+		Review review = reviewService.findById(reviewId);
+		return review;
+	}
+	
+	@RequestMapping(value="mobile/review/imageList.do")
 	public @ResponseBody Images searchReviewImage(String reviewId){
 		Review review = reviewService.findById(reviewId);
 		List<Image> images = review.getImages();
@@ -198,8 +242,17 @@ public class MobileMemberController {
 		
 		memberService.mobileupdate(member);
 	}
+	@RequestMapping(value="/mobile/survey/detail.do", produces="application/xml")
+	public @ResponseBody List<Survey> surveyDetail(String foodtruckId){
+		List<Survey> survey = new ArrayList<>();
+		survey = surveyService.findByTruckId(foodtruckId);
+//		surveyService.findAvgScoreBySurveyItem(foodtruckId);
+//		truckService.findById(foodtruckId);
+		
+		return survey;
+	}
 
-	
+	 
 	@RequestMapping(value = "/mobile/review/create.do")
 	public @ResponseBody String createReview(@RequestBody String data){
 		Gson gson = new GsonBuilder().create();
@@ -208,6 +261,7 @@ public class MobileMemberController {
 			JSONParser jsonParser = new JSONParser();
 				
 			Review review = gson.fromJson(((JSONObject) jsonParser.parse(data)).toJSONString(), Review.class);
+			System.out.println(review.toString());
 			String reviewId = reviewService.register(review);
 			System.out.println(reviewId);
 			result = reviewId;
@@ -279,4 +333,27 @@ public class MobileMemberController {
 		
 		return "true";
 	}
+	
+	@RequestMapping(value="mobile/survey/form.do" , produces="application/xml")
+	public @ResponseBody SurveyItems getSurveyItems(){
+		List<SurveyItem> items = surveyItemService.findAll();
+		SurveyItems surveyItems = new SurveyItems();
+		surveyItems.setSurveyItems(items);
+		return surveyItems;
+	}
+	
+	@RequestMapping(value="/mobile/survey/create.do", method=RequestMethod.POST, produces="application/json")
+	public @ResponseBody String createSurvey(@RequestBody String data) throws JsonSyntaxException, ParseException{
+		Gson gson = new GsonBuilder().create();
+		JSONParser jsonParser = new JSONParser();
+			
+		Survey survey = gson.fromJson(((JSONObject) jsonParser.parse(data)).toJSONString(), Survey.class);
+		System.out.println(survey.toString());
+		
+		surveyService.register(survey);
+		return "true";
+			
+	}
+
+	
 }

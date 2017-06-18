@@ -155,7 +155,13 @@ var stateBtn = function(obj){
 	     data: {operation_state: openState},
 	     type: 'get',
 	     success: function(result){
-	         alert("영업상태가 변경되었습니다.");
+	    	 
+	    	 if($("#openstate").val() == 'false'){
+		         alert("영업이 종료되었습니다! 오늘의 매출을 입력해주세요!^^!");
+		         location.href='/FoodtruckFinderProject/sales/truck.do';
+	    	 }else {
+		         alert("영업을 시작합니다!");
+	    	 }
 	         
 	     },
 	     error: function(){
