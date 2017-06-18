@@ -92,6 +92,7 @@ public class FoodtruckController {
 	
 	@RequestMapping(value="/modify.do", method=RequestMethod.POST)
 	public String modify(Foodtruck foodtruck, HttpServletRequest request){
+		foodtruck.setFoodtruckImg(foodtruckService.findById(foodtruck.getFoodtruckId()).getFoodtruckImg());
 		foodtruck.setOperationTime((String)request.getParameter("startTime") + "/" + (String)request.getParameter("endTime"));
 		foodtruck.setCategory1(foodtruck.getCategory1() + "/" + foodtruck.getCategory2() + "/" + foodtruck.getCategory3());
 		List<Menu> menus = new ArrayList<>();
