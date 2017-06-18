@@ -172,7 +172,7 @@ public class MobileSellerController {
 		System.out.println("this is foodtruck: " + foodtruck.toString() + "today is : " + today + "revenue : " +revenue);
 
 		truckService.modify(foodtruck);// 영업종료로 DB수정
-
+///////////////////////////////////////////////////////////////////////////
 		Sale sale = new Sale();///////////////매출을 여기 넣어서 보내야함
 
 		sale.setFoodtruckId(foodtruck.getFoodtruckId());
