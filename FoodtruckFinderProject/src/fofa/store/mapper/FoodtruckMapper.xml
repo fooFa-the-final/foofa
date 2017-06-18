@@ -89,7 +89,7 @@
   	
   	<update id="update" parameterType="Foodtruck">
   		UPDATE foodtruck_tb
-  		SET truckName=#{foodtruckName}, truckHour=#{operationTime}, area=#{spot}, notice=#{notice}, location=#{location}, category=#{category1}, payment=#{card}, parking=#{parking}, drinking=#{drinking}, catering=#{catering}, operation_state=#{state}
+  		SET truckName=#{foodtruckName}, truckHour=#{operationTime}, area=#{spot}, notice=#{notice}, location=#{location}, category=#{category1}, payment=#{card}, parking=#{parking}, drinking=#{drinking}, catering=#{catering}, operation_state=#{state}, truck_image=#{foodtruckImg}
   		WHERE foodtruck_id=#{foodtruckId} 
   	</update>
   	
