@@ -35,39 +35,69 @@
         <!--  page-wrapper -->
             <div class="row">
                 <!-- Page Header -->
-                <div class="col-md-10 col-md-offset-1" style="height:300px; background-color:#FFFFFF">
-                    <span>
-                            <a class="navbar-brand" href="#" style="margin-top:10px; margin-left:20px">
-                                <img src="${ctx }/resources/img/food/${truck.foodtruckImg}" style="height:250px; width:250px"/>
-                            </a>
-                            <div class="user-info">
-                                <h1>${truck.foodtruckName }</h1>
-                                <h5>${truck.category1 }</h5>
-                                <h5>${truck.spot }</h5>
-                                <h5><span id="favoriteCount">${truck.favoriteCount}</span>이 해당 푸드트럭을 단골로 등록했습니다.</h5>
-                                <h5>${fn:length(reviewList)} Reviews</h5>
-                            </div>
-                    </span>
-                    <span style="float:right; margin-right:50px; margin-top: 30px">
-                    	<c:choose>
-                    		<c:when test="${ loginUserId == null }">
-                        	  	<button id="favoriteBtn" type="button" class="btn btn-default btn-circle btn-lg" onclick="location.href='${ctx}/login.do'"><i class="fa fa-heart"></i></button>
-                    		</c:when>
-                    		<c:otherwise>
-                    			<button id="favoriteBtn" type="button" class="btn btn-danger btn-circle btn-lg" onclick="favorite('${truck.foodtruckId }');"><i class="fa fa-heart"></i></button>
-                    		</c:otherwise>
-                    	</c:choose>
-                        <a href="#" class="createReview">
-                        	<button type="button" class="btn btn-primary btn-circle btn-lg" onclick="loginCheck()"><i class="fa fa-edit"></i></button>
-                       	</a>
-                    </span>        
-                </div>
+                <div class="col-md-10 col-md-offset-1" style="margin-top:20px;">
+					<div class="panel panel-danger">
+	                    <div class="panel-body">
+							<div class="col-lg-3" style="height:300px">
+		                       <img name="image" id="image" src="${ctx }/resources/img/food/${truck.foodtruckImg }" style="height:300px; width:300px; border-radius:12px;"/>
+	                        </div>  
+							<div class="col-lg-9" style="margin-top:20px;">
+								<div class="col-lg-9">
+												<h2 style="display:inline">${truck.foodtruckName }</h2>
+								<h5><i class="fa fa-bookmark"></i>&nbsp; ${truck.category1 } &nbsp; ${truck.category2 } &nbsp; ${truck.category3 }</h5>
+								<h5><i class="fa fa-location-arrow"></i>&nbsp;  ${truck.spot }</h5>
+								<h5><i class="fa fa-map-marker"></i>&nbsp;  ${truck.location }</h5>
+								</div>
+								<div class="col-lg-3">
+									<span style="float: right; margin-right: 10px;">
+			                    	<c:choose>
+			                    		<c:when test="${ loginUserId == null }">
+			                        	  	<button id="favoriteBtn" type="button" class="btn btn-default btn-circle btn-lg" onclick="location.href='${ctx}/login.do'"><i class="fa fa-heart"></i></button>
+			                    		</c:when>
+			                    		<c:otherwise>
+			                    			<button id="favoriteBtn" type="button" class="btn btn-danger btn-circle btn-lg" onclick="favorite('${truck.foodtruckId }');"><i class="fa fa-heart"></i></button>
+			                    		</c:otherwise>
+			                    	</c:choose>
+			                        <a href="#" class="createReview">
+			                        	<button type="button" class="btn btn-primary btn-circle btn-lg" onclick="loginCheck()"><i class="fa fa-edit"></i></button>
+			                       	</a>
+  									</span>
+								</div>
+							</div>
+							<div class="col-lg-9">
+								<div class="alert alert-warning"  style="margin-top:15px; margin-bottom:15px;">
+									<i class="fa fa-bell"></i><b>&nbsp;Hello ! </b> 이 푸드트럭이 마음에 드시나요? <b>단골</b> 등록하는 건 어떨까요?
+								</div>
+							</div>		
+				
+								<div class="col-lg-3">
+									<div class="alert alert-danger text-center " style="padding:15px 30px; margin-bottom:15px;">
+										<input type="hidden" id="openstate" name="openstate" value="${truck.state}">
+										<i class="fa fa-star fa-3x" style="display:inline-block; float:left;"></i><span style="flaot:left;"><b>${truck.favoriteCount }</b>명의 회원들이<br>단골로 등록했습니다</span>
+									</div>
+								</div>
+				
+								<div class="col-lg-3">
+									<div class="alert alert-info text-center" style="padding:15px 30px; margin-bottom:15px;">
+										<i class="fa fa-edit fa-3x"style="display:inline-block; float:left;"></i><span style="flaot:left;"><b>${truck.reviewCount }</b>개의 리뷰가 <br>작성되었습니다.</span>
+									</div>
+								</div>
+								<div class="col-lg-3">
+									<c:choose>
+										<c:when test="${truck.state == true}">
+											 <input type="button" id="openstateBtn" name="openstateBtn" class="btn btn-success" style="width:100%; height:75px" value="OPEN NOW" disabled> 
+										</c:when>
+										<c:when test="${truck.state == false}">
+											 <input type="button" id="openstateBtn" name="openstateBtn" class="btn btn-outline btn-default" style="width:100%; height:75px" value="CLOSED" disabled> 
+										</c:when>
+									</c:choose>       
+								</div>
+
                 <!--End Page Header -->
-                <div class="col-md-10 col-md-offset-1" style="background-color:white">
                 	<div class="col-md-12" style="background-color:black;height:2px;margin-top:10px">
                 	</div>
-                	<div class="col-md-12" style="margin-top:10px; margin-left:50px; display:inline-block">
-	                	<div class="col-md-6">
+                	<div class="col-md-12" style="margin-top:10px; display:inline-block">
+	                	<div class="col-md-8">
 		                	<form>
 								 <fieldset class="truck-border">
 								  <legend class="truck-border">Today</legend>
@@ -106,8 +136,7 @@
 							</form>
 							
 	                	</div>
-	                	<div class="col-md-4 col-md-offset-1" style="border: 1px solid; height:400px; margin-top:15px;" id="map">
-	                		
+	                	<div class="col-md-4" style="border: 1px solid; height:400px; margin-top:15px; padding:0 5px;" id="map">
 	                	</div>
                 	</div>
                 	<div class="col-lg-8" style="margin-top:30px; margin-bottom:20px;display:inline-block">
@@ -116,10 +145,12 @@
                 		&nbsp;<span style="float:right"><a href="#" class="btn btn-default createReview">+ Add my review</a></span>
                 	</div>
                 	<div class="col-lg-10">
-                		
+                		<c:if test="${fn:length(reviewList) == 0 }">
+                			등록된 리뷰가 없습니다.
+                		</c:if>
                 		<c:forEach items="${reviewList }" var="review">
-               					<div class="panel panel-primary text-left"  style=" width:80%; display:inline-block;">
-	                				<div class="review-heading padding-10" style="height: 85px;">
+               					<div class="panel panel-default text-left"  style=" width:80%; display:inline-block;">
+	                				<div class="panel-heading padding-10" style="height: 85px;">
 	                					<img class="somenail" src="${ctx }/resources/upload/${review.writer.profileImg }"/>
 	                					<div style="float:left; margin-left:20px;">
 											<ul class="list-unstyled">
@@ -140,8 +171,6 @@
 															<i class="fa fa-thumbs-up"></i></button>&nbsp;추천하기
 				                       					<button id="repportBtn_${review.reviewId }" type="button" class="btn btn-warning btn-circle btn-lg" style="margin:5px;" onclick="location.href='${ctx}/login.do'">
 															<i class="fa fa-warning"></i></button>&nbsp;신고하기
-				                       					<button id="FollowBtn_${review.reviewId }" type="button" class="btn btn-danger btn-circle btn-lg" style="margin:5px;" onclick="location.href='${ctx}/login.do'">
-															<i class="fa fa-heart"></i></button>&nbsp;팔로우
 													</div>	
 												</c:when>
 												<c:otherwise>
@@ -150,14 +179,12 @@
 															<i class="fa fa-thumbs-up"></i></button>&nbsp;추천하기
 				                       					<button id="repportBtn_${review.reviewId }" type="button" class="btn btn-warning btn-circle btn-lg" style="margin:5px;" data-toggle="modal" data-target="#myModal${review.reviewId }">
 															<i class="fa fa-warning"></i></button>&nbsp;신고하기
-				                       					<button id="FollowBtn_${review.reviewId }" type="button" class="btn btn-danger btn-circle btn-lg" style="margin:5px;" onclick="follow('${review.reviewId}');">
-															<i class="fa fa-heart"></i></button>&nbsp;팔로우
-													</div>	
+														</div>	
 												</c:otherwise>
 											</c:choose>
 										</div>
 									</div>
-		                			<div class ="pannel-body">
+		                			<div class ="pannel-body" style=" padding:10px;height:220px;">
 		                				<c:if test="${review.mainImage.filename != 'noimagefound.jpg'}">
 												<div class="reviewMainImg">
 													<img id="${review.reviewId}" src="${ctx }/resources/img/reviewImg/${review.mainImage.filename }" />
@@ -204,9 +231,9 @@
                 		</c:forEach>
                 </div>
             </div>
-        <div style="width:100%; height:200px;">
-        </div>
-        
+
+						</div>
+	                </div>
         </div>
         <!-- end page-wrapper -->
        </div>

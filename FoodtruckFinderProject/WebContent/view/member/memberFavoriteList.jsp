@@ -49,8 +49,17 @@
 								
 								<div id="panel${sts.index }"  >
 									<ul class="list-inline" style="width:100%; padding:0; margin:0; ">
-										<li><img src="${ctx }/resources/img/truck/${truck.foodtruckImg }" style="height: 100px; width: 100px" /></li>
-										<li style="width:50%;"><a href="${ctx }/review/list/truck.do?foodtruckId=${truck.foodtruckId }"><b style="font-size:1.2em;">${truck.foodtruckName }</b></a><br><br>
+										<li><img src="${ctx }/resources/img/food/${truck.foodtruckImg }" style="height: 100px; width: 100px" /></li>
+										<li style="width:50%;"><a href="${ctx }/review/list/truck.do?foodtruckId=${truck.foodtruckId }"><b style="font-size:1.2em;">${truck.foodtruckName }</b></a>	&nbsp;
+										<c:choose>
+				          				 	<c:when test="${truck.state == true }">
+												<button type="button" class="btn btn-success btn-xs">Now Open</button>
+				          				 	</c:when>
+				          				 	<c:otherwise>
+												<button type="button" class="btn btn-outline btn-success btn-xs">Closed</button>
+				          				 	</c:otherwise>
+				          				 </c:choose><br>
+										<span class="starRating" style="text-align:left;"><span id="mainTableScore" style="width: ${truck.score*20 }%">${truck.score }점</span></span><br><br>
 											<i class="fa fa-heart"> &nbsp;</i>단골 : &nbsp; ${truck.favoriteCount } &nbsp; <i class="fa fa-pencil"> &nbsp;</i>리뷰 : &nbsp;${truck.reviewCount  }
 										</li>
 										<li><input type="button" class="btn btn-info btn-outline" onclick="change('${sts.index}')" value="위치 보기"></li>

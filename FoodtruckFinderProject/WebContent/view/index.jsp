@@ -122,7 +122,7 @@ text-align:left;
 			<div class="sub-container" style="padding: 0 15px;">
 				<c:forEach varStatus="no" var="truck" items="${adTrucks }">
 					<c:if test="${no.index == 0 }">
-								<div id="mainTable" class="background-cover mainTableDiv" style="background-image:url('${ctx}/resources/img/truck/${truck.foodtruckImg }');">
+								<div id="mainTable" class="background-cover mainTableDiv" style="background-image:url('${ctx}/resources/img/food/${truck.foodtruckImg }');">
 								
 									<div id="trapezoid">
 									</div>
@@ -139,7 +139,7 @@ text-align:left;
 					<div style="padding:0; display:inline-block; width:360px;">
 					</c:if>
 							<div class="col-lg-4 background-cover mainTableImgs effect" 
-							style="background-image:url('${ctx}/resources/img/truck/${truck.foodtruckImg }');"
+							style="background-image:url('${ctx}/resources/img/food/${truck.foodtruckImg }');"
 							onmouseover="show('${truck.foodtruckImg}', '${truck.foodtruckName }', '${truck.score }','${truck.location }', '${truck.state }', this);"
 							onclick="location.href='${ctx }/review/list/truck.do?foodtruckId=${truck.foodtruckId}'"
 							>
@@ -221,7 +221,7 @@ text-align:left;
 												<div class="col-lg-3">
 													<div class="panel panel-danger">
 														<div class="panel-header">
-															<img src="${ctx}/resources/img/truck/${ntruck.foodtruckImg }" class="main-truck-img"onclick="location.href='${ctx }/review/list/truck.do?foodtruckId=${truck.foodtruckId}'"/>
+															<img src="${ctx}/resources/img/food/${ntruck.foodtruckImg }" class="main-truck-img"onclick="location.href='${ctx }/review/list/truck.do?foodtruckId=${truck.foodtruckId}'"/>
 														</div>
 														<div class="panel-body text-left">
 															<b><a href="${ctx }/review/list/truck.do?foodtruckId=${ntruck.foodtruckId }">${ntruck.foodtruckName }</a></b> <br> <p > 평점 :<span class="starRating" style="text-align:left;"><span style="width: ${ntruck.score*20 }%">${ntruck.score }점</span></span></p>리뷰수 : ${ntruck.reviewCount }
@@ -233,7 +233,7 @@ text-align:left;
 												<div class="col-lg-3">
 													<div class="panel panel-danger">
 														<div class="panel-header">
-															<img src="${ctx}/resources/img/truck/${ntruck.foodtruckImg }" class="main-truck-img" onclick="location.href='${ctx }/review/list/truck.do?foodtruckId=${ntruck.foodtruckId}'"/>
+															<img src="${ctx}/resources/img/food/${ntruck.foodtruckImg }" class="main-truck-img" onclick="location.href='${ctx }/review/list/truck.do?foodtruckId=${ntruck.foodtruckId}'"/>
 														</div>
 														<div class="panel-body text-left">
 																<b><a href="${ctx }/review/list/truck.do?foodtruckId=${ntruck.foodtruckId }">${ntruck.foodtruckName }</a></b> <br> <p > 평점 :<span class="starRating" style="text-align:left;"><span style="width: ${ntruck.score*20 }%">${ntruck.score }점</span></span></p>리뷰수 : ${ntruck.reviewCount }
@@ -245,7 +245,7 @@ text-align:left;
 												<div class="col-lg-3">
 													<div class="panel panel-danger">
 														<div class="panel-header">
-															<img src="${ctx}/resources/img/truck/${ntruck.foodtruckImg }" class="main-truck-img" onclick="location.href='${ctx }/review/list/truck.do?foodtruckId=${ntruck.foodtruckId}'" />
+															<img src="${ctx}/resources/img/food/${ntruck.foodtruckImg }" class="main-truck-img" onclick="location.href='${ctx }/review/list/truck.do?foodtruckId=${ntruck.foodtruckId}'" />
 														</div>
 														<div class="panel-body text-left">
 																<b><a href="${ctx }/review/list/truck.do?foodtruckId=${ntruck.foodtruckId }">${ntruck.foodtruckName }</a></b> <br> <p > 평점 :<span class="starRating" style="text-align:left;"><span style="width: ${ntruck.score*20 }%">${ntruck.score }점</span></span></p>리뷰수 : ${ntruck.reviewCount }
@@ -339,7 +339,7 @@ function showDivs(n) {
 	var show = function(img, name, score, location, state,  div){
 		$(div).css('border', "1px solid red");
 		console.log("g"+location);
-		$("#mainTable").css('background-image', "url('${ctx}/resources/img/truck/"+img+"')");
+		$("#mainTable").css('background-image', "url('${ctx}/resources/img/food/"+img+"')");
 		$("#mainTableh3").text(name);
 		$("#mainTableScore").text(score);
 		$("#mainTableScore").css("width", score*20+"%");

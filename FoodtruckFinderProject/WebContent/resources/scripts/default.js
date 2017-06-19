@@ -91,6 +91,8 @@ var follow = function(memberId) {
 	});
 };
 
+
+
 // 팔로우 존재 확인
 var followExist = function(memberId) {
 	$.ajax({

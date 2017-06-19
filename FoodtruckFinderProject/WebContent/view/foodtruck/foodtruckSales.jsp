@@ -215,7 +215,7 @@ div {
 													'leftOffsetValue' : 90,
 													'bottomOffsetValue' : 70,
 													'chartSize' : {
-														width : 750,
+														width : 850,
 														height : 400
 													},
 													'minValue' : 0,
@@ -273,7 +273,7 @@ div {
 													'leftOffsetValue' : 90,
 													'bottomOffsetValue' : 70,
 													'chartSize' : {
-														width : 750,
+														width : 850,
 														height : 400
 													},
 													'minValue' : 0,
@@ -373,7 +373,7 @@ div {
 					<div class="panel-heading">
 						<h4 class="panel-title">매출 달력</h4>
 					</div>
-					<div class="panel-body" id="calendar">
+					<div class="panel-body" id="calendar" style="height:450px">
 					</div>
 					<div class="panel-footer">
 						매출을 확인하거나 수정하려면 원하는 날짜를 선택하세요. 
@@ -398,10 +398,10 @@ div {
 				<div class="modal-body" id="modalCons">
 					<form action="${ctx }/sales/modify.do" method="POST" style="display:inline;">
 					<div style="display:inline">
-						<div class="col-lg-6">
+						<div class="col-lg-12">
 							날짜 : <input type="text" name="date" id="date" value="" disabled  class="form-control" style="display:inline-block; width:40%; background-color:#eee; margin-right:10px;">
 							매출 : <input type="number" name="revenue" id="revenue" value="" class="form-control" style="display:inline-block; width:40%;"><br>
-							위치 : <input type="text" name="location" id="location1" value="" class="form-control" style="display:inline-block; width:90%;margin-top:5px;">
+							위치 : <input type="text" name="location" id="location1" value="" class="form-control" style="display:inline-block; width:90%;margin-top:5px; margin-bottom:10px;">
 						</div>
 						<div id='map' style="width: 550px; height: 300px;  margin-top: 20px"></div>
 					</div>	
