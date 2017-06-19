@@ -51,14 +51,14 @@
                     <span style="float:right; margin-right:50px; margin-top: 30px">
                     	<c:choose>
                     		<c:when test="${ loginUserId == null }">
-                        	  	<button id="favoriteBtn" type="button" class="btn btn-default" onclick="location.href='${ctx}/login.do'"><i class="fa fa-heart"></i>&nbsp;단골등록</button>
+                        	  	<button id="favoriteBtn" type="button" class="btn btn-default btn-circle btn-lg" onclick="location.href='${ctx}/login.do'"><i class="fa fa-heart"></i></button>
                     		</c:when>
                     		<c:otherwise>
-                    			<button id="favoriteBtn" type="button" class="btn btn-default" onclick="favorite('${truck.foodtruckId }');"><i class="fa fa-heart"></i>&nbsp;단골등록</button>
+                    			<button id="favoriteBtn" type="button" class="btn btn-default btn-circle btn-lg" onclick="favorite('${truck.foodtruckId }');"><i class="fa fa-heart"></i></button>
                     		</c:otherwise>
                     	</c:choose>
                         <a href="#" class="createReview">
-                        	<button type="button" class="btn btn-danger" onclick="loginCheck()">리뷰 작성</button>
+                        	<button type="button" class="btn btn-danger btn-circle btn-lg" onclick="loginCheck()"><i class="fa fa-edit"></i></button>
                        	</a>
                     </span>        
                 </div>

@@ -139,7 +139,9 @@ public class FoodtruckController {
             Foodtruck foodtruck = foodtruckService.findBySeller((String)request.getSession().getAttribute("loginUserId"));
             foodtruck.setFoodtruckImg(newFileName);
             foodtruckService.modify(foodtruck);
+            System.out.println("newFileName : "+newFileName);
             foodtruck = foodtruckService.findBySeller((String)request.getSession().getAttribute("loginUserId"));
+            System.out.println("foodtruck : "+foodtruck.getFoodtruckImg());
             
             try {
                 mFile.transferTo(new File(path + newFileName));

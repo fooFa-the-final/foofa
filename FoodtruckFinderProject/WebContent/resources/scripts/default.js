@@ -23,10 +23,10 @@ var favoriteExist = function(truckId) {
 		success : function(data) {
 			if (data) {
 				$("#favoriteBtn").attr('class',
-						'btn btn-danger btn-lg');
+						'btn btn-danger btn-circle btn-lg');
 			} else {
 				$("#favoriteBtn").attr('class',
-						'btn btn-default btn-lg');
+						'btn btn-default btn-circle btn-lg');
 			}
 		}
 	});
