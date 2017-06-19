@@ -430,7 +430,7 @@ text-align:left;
 		var mainImgSrc = "${mainFoodImg}";
 		var mainMemberSrc = "${mainMember.profileImg}";
 		
-		$("#mainNav").css("background-image", "url('${ctx}/resources/img/food/"+mainImgSrc+"')");
+		$("#mainNav").css("background-image", "url('${ctx}/resources/img/reviewImg/"+mainImgSrc+"')");
 		
 		$(".mainTableImgs").mouseout(function(){
 			$(this).css("border", "1px solid #eee");

@@ -68,6 +68,10 @@ text-align:left;
  border: 1px solid #eee;
  height:120px; padding:10px;  
 }
+
+.panel-heading a{
+font-weight:bold;
+}
 </style>
 </head>
 
@@ -156,8 +160,8 @@ text-align:left;
 					<h4>Hot Reviews</h4>
 					<div class="sub-container">
 						<div class="col-lg-9">
-								<div class="panel panel-primary text-left" style="height:327px">
-									<div class="review-heading padding-10" style="height: 90px;">
+									<div class="panel panel-danger text-left" style="height:327px">
+									<div class="panel-heading padding-10" style="height: 90px;">
 										<img class="somenail" src="${ctx }/resources/upload/${hotReview.writer.profileImg }"/>
 										<div style="float:left; margin-left:20px;">
 											<ul class="list-unstyled">
@@ -195,9 +199,9 @@ text-align:left;
 								</div>		
 						</div>
 						<div class="col-lg-3">
-							<div class="panel panel-primary text-center" style="height:327px">
+							<div class="panel panel-danger text-center" style="height:327px">
 								<c:forEach var="review" varStatus="no" items="${reviews}"> 
-									<div class="review-heading" style="height:25px">
+										<div class="panel-heading" style="height:25px; padding:0 10px;">
 										 <a href="${ctx }/review/list/truck.do?foodtruckId=${review.foodtruck.foodtruckId }">${review.foodtruck.foodtruckName }</a>		 By <a href="${ctx }/review/list/member.do?memberId=${review.writer.memberId }">${review.writer.memberId }</a>						
 									</div>
 									<div class="panel-body" style="padding:10px; height:85px;">

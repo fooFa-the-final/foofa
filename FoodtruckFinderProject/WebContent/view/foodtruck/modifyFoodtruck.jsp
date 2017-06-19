@@ -19,7 +19,7 @@
 </head>
 <style>
 label {
-width: 120px;margin-right: 20px;}
+width: 160px;margin-right: 20px;}
 textarea.form-control {
 }
 </style>
@@ -89,9 +89,17 @@ textarea.form-control {
                 	searchCoordinateToAddress(e.coord);
                 });
      		});
-            function modify_menu_click() {
-     	       alert("수정버튼을 누르셨습니다.");
-                 /*수정버튼 클릭이벤트: 데이터 받아와서 inputText로 변환해주고 버튼 submit버튼으로 변경해주는 자바스크립트 적용할 것*/
+            function modify_menu_click(menuId, menuName, price, menuState) {
+            	
+                 $("#inputMenuName").val(menuName);
+                 $("#inputMenuPrice").val(price);
+                 $("#inputMenuId").val(menuId);
+                 if(menuState == true){
+                     $("#inputMenuState").val("sale").prop("selected", true);
+                 }else {
+                     $("#inputMenuState").val("nosale").prop("selected", true);
+                 }
+                 $("#submitBtn").attr("class","fa fa-save");
              }
              
              function fileinfo(input){
@@ -172,19 +180,19 @@ textarea.form-control {
 	                    	<div class="col-md-4">
 	                           <form id="fileForm" method="post" enctype="multipart/form-data">
 		                            <a href="#" >
-		                                <img name="image" id="image" src="${ctx }/resources/img/food/${truck.foodtruckImg }" alt="사진을 변경하려면 클릭하세요." style="height:250px; width:250px" onClick="document.all.file.click();"/>
+		                                <img name="image" id="image" src="${ctx }/resources/img/food/${truck.foodtruckImg }" alt="사진을 변경하려면 클릭하세요." style="border-radius:15px; height:250px; width:250px" onClick="document.all.file.click();"/>
 		                            	<input type="file" name="file" id="file" style="display: none;" onchange="fileinfo(this)" />
 		                            </a>
 		                        </form> 
 	                        </div>
-	                        <div class="col-md-6" style="margin-top:30px;">
-	                            <h1 style="margin:0; "><label>푸드트럭 이름</label><input class="form-control" type="text" name="foodtruckName" value="${truck.foodtruckName }" style="width:61.5%"></h1><br>
+	                        <div class="col-md-8" style="margin-top:30px;">
+	                            <h1 style="margin:0; "><label>푸드트럭 이름</label><input class="form-control" type="text" name="foodtruckName" value="${truck.foodtruckName }" style="width:45%"></h1><br>
 	                              <h5><label>카테고리</label>
-	                              	<input class="form-control" type="text" name="category1" value="${truck.category1 }" style="width:20%">
-	                               	<input class="form-control" type="text" name="category2" value="${truck.category2 }" style="width:20%">
-	                               	<input class="form-control" type="text" name="category3" value="${truck.category3 }" style="width:20%">
+	                              	<input class="form-control" type="text" name="category1" value="${truck.category1 }" style="width:15%">
+	                               	<input class="form-control" type="text" name="category2" value="${truck.category2 }" style="width:15%">
+	                               	<input class="form-control" type="text" name="category3" value="${truck.category3 }" style="width:15%">
 	                           	  </h5>
-	                              <h5><label>현재 위치</label><input class="form-control" type="text" name="location" id = "loc1" value="${truck.location }" style="width:61.5%"></h5>
+	                              <h5><label>현재 위치</label><input class="form-control" type="text" name="location" id = "loc1" value="${truck.location }" style="width:45%"></h5>
 	                        </div>
                 		</div>
                 	</div>
@@ -252,7 +260,7 @@ textarea.form-control {
                                     </thead>
                                     <tbody >
                                     	<c:forEach items="${truck.menus }" var="menu">
-                                        <tr class="odd gradeX">
+                                        <tr id="${menu.menuId }+_tr" class="odd gradeX">
                                             <td><input type="text" name="menuName" value="${menu.menuName }" style="border:0px; background-color:transparent" readonly></td>
                                             <td><input type="text" name="menuPrice" value="${menu.price }" style="border:0px; background-color:transparent" readonly></td>
                                             <c:if test="${menu.menuState eq true }">
@@ -264,7 +272,7 @@ textarea.form-control {
                                             <td>
                                             	<input type="hidden" name="menuId" value="${menu.menuId }">
                                             	 <input type="hidden" name="menuState" value="${menu.menuState }"> 
-                                                <button type="button" class="btn btn-default btn-circle" id="menu1mod" onclick="modify_menu_click();">
+                                                <button type="button" class="btn btn-default btn-circle" id="menu1mod" onclick="modify_menu_click('${menu.menuId }', '${menu.menuName }', '${menu.price }', '${menu.menuState }');">
                                                     <i class="fa fa-pencil"></i>
                                                 </button>
                                                 <button type="button" class="btn btn-danger btn-circle" onClick="removeMenu(this)"><i class="fa fa-times"></i></button>
@@ -272,16 +280,16 @@ textarea.form-control {
                                         </tr>
                                         </c:forEach>
                                          <tr class="odd gradeX">
-                                            <td align="left"><input type="text" placeholder="메뉴 명" id="inputMenuName"></td>
+                                            <td align="left"><input type="text" placeholder="메뉴 명" id="inputMenuName"><input type="hidden" id="inputMenuId"></td>
                                             <td align="left"><input type="text" placeholder="메뉴 가격" id="inputMenuPrice"></td>
                                             <td>
                                                 <select id="inputMenuState">
-                                                    <option>판매중</option>
-                                                    <option>매진</option>
+                                                    <option name="sale" value="sale">판매중</option>
+                                                    <option name="nosale" value="nosale">매진</option>
                                                 </select>
                                             </td>
                                             <td align="center">
-                                                <button type="button" class="btn btn-primary btn-circle" onclick="registMenu()"><i class="fa fa-plus"></i></button>
+                                                <buttontype="button" class="btn btn-primary btn-circle" onclick="registMenu()"><i id="submitBtn" class="fa fa-plus"></i></button>
                                             </td>
                                         </tr>
                                     </tbody>
