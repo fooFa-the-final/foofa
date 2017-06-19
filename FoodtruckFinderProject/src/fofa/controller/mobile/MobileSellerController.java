@@ -241,8 +241,7 @@ public class MobileSellerController {
 	public @ResponseBody String closeTrcuk(String id, String revenue, String today) {
 		String result="";
 
-<<<<<<< HEAD
-		System.out.println("동작됨");
+		/*System.out.println("동작됨");
 		Foodtruck foodtruck = truckService.findBySeller(id);
 		foodtruck.setState(false);
 
@@ -258,8 +257,7 @@ public class MobileSellerController {
 		sale.setDate(today);
 
 		salesService.register(sale);// 영업날 매출 입력
-
-=======
+*/
 		try{
 			Foodtruck foodtruck = truckService.findBySeller(id);
 			foodtruck.setState(false);
@@ -278,7 +276,6 @@ public class MobileSellerController {
 			result = "fail";
 		}
 		return result;
->>>>>>> branch '170524' of https://github.com/fooFa-the-final/foofa.git
 	}
 
 }
