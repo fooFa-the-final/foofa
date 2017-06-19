@@ -92,6 +92,7 @@ public class FoodtruckController {
 	
 	@RequestMapping(value="/modify.do", method=RequestMethod.POST)
 	public String modify(Foodtruck foodtruck, HttpServletRequest request){
+		foodtruck.setFoodtruckImg(foodtruckService.findById(foodtruck.getFoodtruckId()).getFoodtruckImg());
 		foodtruck.setOperationTime((String)request.getParameter("startTime") + "/" + (String)request.getParameter("endTime"));
 		foodtruck.setCategory1(foodtruck.getCategory1() + "/" + foodtruck.getCategory2() + "/" + foodtruck.getCategory3());
 		List<Menu> menus = new ArrayList<>();
@@ -269,14 +270,12 @@ public class FoodtruckController {
 		model.addAttribute("stand", sort);
 		int currentIndex = 1;
 		boolean state = Boolean.parseBoolean(request.getParameter("openstate"));
-//		String state = request.getParameter("openstate");
 		
 		if(request.getParameter("currentIndex") != null){
 			currentIndex = Integer.parseInt(request.getParameter("currentIndex"));
 		}
 		if(state){
-//			System.out.println("state true");
-			foodtruck.setState(state);
+			foodtruck.setState(true);
 			model.addAttribute("openState", true);
 		}
 		
@@ -363,8 +362,8 @@ public class FoodtruckController {
 			t.setSpot((String)sqlMap.get(i).get("spot"));
 			t.setLocation((String)sqlMap.get(i).get("location"));
 			t.setFavoriteCount((int)sqlMap.get(i).get("favoriteCount"));
-			t.setFavoriteCount((int)sqlMap.get(i).get("favoriteCount"));
 			t.setReviewCount((int)sqlMap.get(i).get("reviewCount"));
+			t.setState((boolean)sqlMap.get(i).get("state"));
 			if(sqlMap.get(i).get("score")!=null){
 				t.setScore((double)sqlMap.get(i).get("score"));
 			}else {
