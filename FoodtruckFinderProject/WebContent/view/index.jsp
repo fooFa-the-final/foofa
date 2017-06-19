@@ -68,6 +68,10 @@ text-align:left;
  border: 1px solid #eee;
  height:120px; padding:10px;  
 }
+
+.panel-heading a{
+font-weight:bold;
+}
 </style>
 </head>
 
@@ -122,7 +126,7 @@ text-align:left;
 			<div class="sub-container" style="padding: 0 15px;">
 				<c:forEach varStatus="no" var="truck" items="${adTrucks }">
 					<c:if test="${no.index == 0 }">
-								<div id="mainTable" class="background-cover mainTableDiv" style="background-image:url('${ctx}/resources/img/truck/${truck.foodtruckImg }');">
+								<div id="mainTable" class="background-cover mainTableDiv" style="background-image:url('${ctx}/resources/img/food/${truck.foodtruckImg }');">
 								
 									<div id="trapezoid">
 									</div>
@@ -139,7 +143,7 @@ text-align:left;
 					<div style="padding:0; display:inline-block; width:360px;">
 					</c:if>
 							<div class="col-lg-4 background-cover mainTableImgs effect" 
-							style="background-image:url('${ctx}/resources/img/truck/${truck.foodtruckImg }');"
+							style="background-image:url('${ctx}/resources/img/food/${truck.foodtruckImg }');"
 							onmouseover="show('${truck.foodtruckImg}', '${truck.foodtruckName }', '${truck.score }','${truck.location }', '${truck.state }', this);"
 							onclick="location.href='${ctx }/review/list/truck.do?foodtruckId=${truck.foodtruckId}'"
 							>
@@ -156,8 +160,8 @@ text-align:left;
 					<h4>Hot Reviews</h4>
 					<div class="sub-container">
 						<div class="col-lg-9">
-								<div class="panel panel-primary text-left" style="height:327px">
-									<div class="review-heading padding-10" style="height: 90px;">
+									<div class="panel panel-danger text-left" style="height:327px">
+									<div class="panel-heading padding-10" style="height: 90px;">
 										<img class="somenail" src="${ctx }/resources/upload/${hotReview.writer.profileImg }"/>
 										<div style="float:left; margin-left:20px;">
 											<ul class="list-unstyled">
@@ -195,9 +199,9 @@ text-align:left;
 								</div>		
 						</div>
 						<div class="col-lg-3">
-							<div class="panel panel-primary text-center" style="height:327px">
+							<div class="panel panel-danger text-center" style="height:327px">
 								<c:forEach var="review" varStatus="no" items="${reviews}"> 
-									<div class="review-heading" style="height:25px">
+										<div class="panel-heading" style="height:25px; padding:0 10px;">
 										 <a href="${ctx }/review/list/truck.do?foodtruckId=${review.foodtruck.foodtruckId }">${review.foodtruck.foodtruckName }</a>		 By <a href="${ctx }/review/list/member.do?memberId=${review.writer.memberId }">${review.writer.memberId }</a>						
 									</div>
 									<div class="panel-body" style="padding:10px; height:85px;">
@@ -221,7 +225,7 @@ text-align:left;
 												<div class="col-lg-3">
 													<div class="panel panel-danger">
 														<div class="panel-header">
-															<img src="${ctx}/resources/img/truck/${ntruck.foodtruckImg }" class="main-truck-img"onclick="location.href='${ctx }/review/list/truck.do?foodtruckId=${truck.foodtruckId}'"/>
+															<img src="${ctx}/resources/img/food/${ntruck.foodtruckImg }" class="main-truck-img"onclick="location.href='${ctx }/review/list/truck.do?foodtruckId=${truck.foodtruckId}'"/>
 														</div>
 														<div class="panel-body text-left">
 															<b><a href="${ctx }/review/list/truck.do?foodtruckId=${ntruck.foodtruckId }">${ntruck.foodtruckName }</a></b> <br> <p > 평점 :<span class="starRating" style="text-align:left;"><span style="width: ${ntruck.score*20 }%">${ntruck.score }점</span></span></p>리뷰수 : ${ntruck.reviewCount }
@@ -233,7 +237,7 @@ text-align:left;
 												<div class="col-lg-3">
 													<div class="panel panel-danger">
 														<div class="panel-header">
-															<img src="${ctx}/resources/img/truck/${ntruck.foodtruckImg }" class="main-truck-img" onclick="location.href='${ctx }/review/list/truck.do?foodtruckId=${ntruck.foodtruckId}'"/>
+															<img src="${ctx}/resources/img/food/${ntruck.foodtruckImg }" class="main-truck-img" onclick="location.href='${ctx }/review/list/truck.do?foodtruckId=${ntruck.foodtruckId}'"/>
 														</div>
 														<div class="panel-body text-left">
 																<b><a href="${ctx }/review/list/truck.do?foodtruckId=${ntruck.foodtruckId }">${ntruck.foodtruckName }</a></b> <br> <p > 평점 :<span class="starRating" style="text-align:left;"><span style="width: ${ntruck.score*20 }%">${ntruck.score }점</span></span></p>리뷰수 : ${ntruck.reviewCount }
@@ -245,7 +249,7 @@ text-align:left;
 												<div class="col-lg-3">
 													<div class="panel panel-danger">
 														<div class="panel-header">
-															<img src="${ctx}/resources/img/truck/${ntruck.foodtruckImg }" class="main-truck-img" onclick="location.href='${ctx }/review/list/truck.do?foodtruckId=${ntruck.foodtruckId}'" />
+															<img src="${ctx}/resources/img/food/${ntruck.foodtruckImg }" class="main-truck-img" onclick="location.href='${ctx }/review/list/truck.do?foodtruckId=${ntruck.foodtruckId}'" />
 														</div>
 														<div class="panel-body text-left">
 																<b><a href="${ctx }/review/list/truck.do?foodtruckId=${ntruck.foodtruckId }">${ntruck.foodtruckName }</a></b> <br> <p > 평점 :<span class="starRating" style="text-align:left;"><span style="width: ${ntruck.score*20 }%">${ntruck.score }점</span></span></p>리뷰수 : ${ntruck.reviewCount }
@@ -339,7 +343,7 @@ function showDivs(n) {
 	var show = function(img, name, score, location, state,  div){
 		$(div).css('border', "1px solid red");
 		console.log("g"+location);
-		$("#mainTable").css('background-image', "url('${ctx}/resources/img/truck/"+img+"')");
+		$("#mainTable").css('background-image', "url('${ctx}/resources/img/food/"+img+"')");
 		$("#mainTableh3").text(name);
 		$("#mainTableScore").text(score);
 		$("#mainTableScore").css("width", score*20+"%");

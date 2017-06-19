@@ -169,7 +169,7 @@ text-align:left;
 						<div class="sub-container" style="padding: 0 15px;">
 							<c:forEach varStatus="no" var="truck" items="${adTrucks }">
 								<c:if test="${no.index == 0 }">
-								<div id="mainTable" class="background-cover mainTableDiv" style="background-image:url('${ctx}/resources/img/truck/${truck.foodtruckImg }');">
+								<div id="mainTable" class="background-cover mainTableDiv" style="background-image:url('${ctx}/resources/img/food/${truck.foodtruckImg }');">
 								
 									<div id="trapezoid">
 									</div>
@@ -186,7 +186,7 @@ text-align:left;
 								<div style="padding:0; display:inline-block; width:360px;">
 								</c:if>
 										<div class="col-lg-4 background-cover mainTableImgs effect" 
-										style="background-image:url('${ctx}/resources/img/truck/${truck.foodtruckImg }');"
+										style="background-image:url('${ctx}/resources/img/food/${truck.foodtruckImg }');"
 										onmouseover="show('${truck.foodtruckImg}', '${truck.foodtruckName }', '${truck.score }', '${truck.location }', '${truck.state }',this);"
 										onclick="location.href='${ctx }/review/list/truck.do?foodtruckId=${truck.foodtruckId}'"
 										>
@@ -267,7 +267,7 @@ text-align:left;
 												<div class="col-lg-3">
 													<div class="panel panel-danger">
 														<div class="panel-header">
-															<img src="${ctx}/resources/img/truck/${ntruck.foodtruckImg }" class="main-truck-img"onclick="location.href='${ctx }/review/list/truck.do?foodtruckId=${truck.foodtruckId}'"/>
+															<img src="${ctx}/resources/img/food/${ntruck.foodtruckImg }" class="main-truck-img"onclick="location.href='${ctx }/review/list/truck.do?foodtruckId=${truck.foodtruckId}'"/>
 														</div>
 														<div class="panel-body text-left">
 															<b><a href="${ctx }/review/list/truck.do?foodtruckId=${ntruck.foodtruckId }">${ntruck.foodtruckName }</a></b> <br> <p > 평점 :<span class="starRating" style="text-align:left;"><span style="width: ${ntruck.score*20 }%">${ntruck.score }점</span></span></p>리뷰수 : ${ntruck.reviewCount }
@@ -279,7 +279,7 @@ text-align:left;
 												<div class="col-lg-3">
 													<div class="panel panel-danger">
 														<div class="panel-header">
-															<img src="${ctx}/resources/img/truck/${ntruck.foodtruckImg }" class="main-truck-img" onclick="location.href='${ctx }/review/list/truck.do?foodtruckId=${ntruck.foodtruckId}'"/>
+															<img src="${ctx}/resources/img/food/${ntruck.foodtruckImg }" class="main-truck-img" onclick="location.href='${ctx }/review/list/truck.do?foodtruckId=${ntruck.foodtruckId}'"/>
 														</div>
 														<div class="panel-body text-left">
 																<b><a href="${ctx }/review/list/truck.do?foodtruckId=${ntruck.foodtruckId }">${ntruck.foodtruckName }</a></b> <br> <p > 평점 :<span class="starRating" style="text-align:left;"><span style="width: ${ntruck.score*20 }%">${ntruck.score }점</span></span></p>리뷰수 : ${ntruck.reviewCount }
@@ -292,7 +292,7 @@ text-align:left;
 												<div class="col-lg-3">
 													<div class="panel panel-danger">
 														<div class="panel-header">
-															<img src="${ctx}/resources/img/truck/${ntruck.foodtruckImg }" class="main-truck-img" onclick="location.href='${ctx }/review/list/truck.do?foodtruckId=${ntruck.foodtruckId}'" />
+															<img src="${ctx}/resources/img/food/${ntruck.foodtruckImg }" class="main-truck-img" onclick="location.href='${ctx }/review/list/truck.do?foodtruckId=${ntruck.foodtruckId}'" />
 														</div>
 														<div class="panel-body text-left">
 																<b><a href="${ctx }/review/list/truck.do?foodtruckId=${ntruck.foodtruckId }">${ntruck.foodtruckName }</a></b> <br> <p > 평점 :<span class="starRating" style="text-align:left;"><span style="width: ${ntruck.score*20 }%">${ntruck.score }점</span></span></p>리뷰수 : ${ntruck.reviewCount }
@@ -344,7 +344,7 @@ text-align:left;
 													<i class="fa fa-check"></i>
 															<div class="dis-none drop-down-list">
 						                       					<button id="recommandBtn_${review.reviewId }" type="button" class="btn btn-success btn-circle btn-lg" style="margin:5px;" onclick="recReview('${review.reviewId}');">
-																	<i class="fa fa-thumbs-up"></i></button>&nbsp;추천하기
+																	<i class="fa fa-thumbs-up"></i></button>&nbsp;추천하기<br>
 						                       					<button id="repportBtn_${review.reviewId }" type="button" class="btn btn-warning btn-circle btn-lg" style="margin:5px;" data-toggle="modal" data-target="#myModal${review.reviewId }">
 																	<i class="fa fa-warning"></i></button>&nbsp;신고하기
 															</div>	
@@ -371,6 +371,34 @@ text-align:left;
 												</p>
 												</div>		
 											</div>
+											
+													                		<!-- Modal -->
+								  <div class="modal fade" id="myModal${review.reviewId }" role="dialog">
+								    <div class="modal-dialog">
+								      <!-- Modal content-->
+								      <div class="modal-content">
+								        <div class="modal-header">
+								          <button type="button" class="close" data-dismiss="modal">&times;</button>
+								          <h4 class="modal-title">신고창</h4>
+								        </div>
+								        
+								        <div class="modal-body">
+								           	<h4>리뷰 내용 : ${review.contents }</h4>
+								          <input type="radio" name = "reason${review.reviewId }" value="욕설" onClick="untype()"> 욕설<br>
+								          <input type="radio" name = "reason${review.reviewId }" value="음란" onClick="untype()"> 음란<br>
+								          <input type="radio" name = "reason${review.reviewId }" value="광고" onClick="untype()"> 광고<br>
+								          <input type="radio" name = "reason${review.reviewId }" value="부적절한 리뷰" onClick="untype()"> 부적절한 리뷰<br>
+								          <input type="radio" name = "reason${review.reviewId }" value="direct" onClick="availableType()" > 직접 적겠습니다.<br>
+								          <input type="text" class="form-control" placeholder="신고 사유를 적어주세요" id="reason${review.reviewId}" readonly disabled name="reasonContents">
+								        </div>
+								        <div class="modal-footer">
+								          <input type="button" class="btn btn-default" data-dismiss="modal" value="신고" onClick="report('${review.reviewId}')">
+								          <input type="button" class="btn btn-default" data-dismiss="modal" value="신고 취소">
+								        </div>
+								      </div>
+								    </div>
+								  </div>
+		                		<!-- End Modal -->
 											<c:if test="${(lsize < reviewNo.count && reviewNo.count <= lsize+1)  || (lsize*2-1 <= reviewNo.count && reviewNo.count  < lsize*2)}">
 											</div>
 											<div class="col-lg-4" id="next">
@@ -402,7 +430,7 @@ text-align:left;
 		var mainImgSrc = "${mainFoodImg}";
 		var mainMemberSrc = "${mainMember.profileImg}";
 		
-		$("#mainNav").css("background-image", "url('${ctx}/resources/img/food/"+mainImgSrc+"')");
+		$("#mainNav").css("background-image", "url('${ctx}/resources/img/reviewImg/"+mainImgSrc+"')");
 		
 		$(".mainTableImgs").mouseout(function(){
 			$(this).css("border", "1px solid #eee");
@@ -469,7 +497,7 @@ text-align:left;
 	
 	var show = function(img, name, score, location, state, div){
 		$(div).css('border', "1px solid red");
-		$("#mainTable").css('background-image', "url('${ctx}/resources/img/truck/"+img+"')");
+		$("#mainTable").css('background-image', "url('${ctx}/resources/img/food/"+img+"')");
 		$("#mainTableh3").text(name);
 		$("#mainTableScore").text(score);
 		$("#mainTableScore").css("width", score*20+"%");

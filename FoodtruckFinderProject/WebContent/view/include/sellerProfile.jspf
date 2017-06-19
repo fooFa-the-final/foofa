@@ -8,14 +8,14 @@
 							<div class="col-lg-3" style="height:260px">
 		                    	<form id="fileForm" method="post" enctype="multipart/form-data">
 		                            <a class="navbar-brand" href="#" style="margin-top:10px;" >
-		                                <img name="image" id="image" src="${ctx }/resources/img/food/${truck.foodtruckImg }" style="height:250px; width:250px" onClick="document.all.file.click();"/>
+		                                <img name="image" id="image" src="${ctx }/resources/img/food/${truck.foodtruckImg }" style="height:250px; width:250px; border-radius:15px;" onClick="document.all.file.click();"/>
 		                            	<input type="file" name="file" id="file" style="display: none;" onchange="fileinfo(this)" />
 		                            </a>
 		                        </form>  
 	                        </div>  
 							<div class="col-lg-9" style="margin-top:20px;">
 								<div class="col-lg-9">
-												<h2 style="display:inline">${truck.foodtruckName }</h2>
+									<h3 style="display:inline; font-weight:bold;">${truck.foodtruckName } &nbsp; <span class="starRating" style="text-align:left;"><span id="mainTableScore" style="width: ${truck.score*20 }%">${truck.score }점</span></span></h3>
 								<h5><i class="fa fa-bookmark"></i>&nbsp; ${truck.category1 } &nbsp; ${truck.category2 } &nbsp; ${truck.category3 }</h5>
 								<h5><i class="fa fa-location-arrow"></i>&nbsp;  ${truck.spot }</h5>
 								<h5><i class="fa fa-map-marker"></i>&nbsp;  ${truck.location }</h5>
