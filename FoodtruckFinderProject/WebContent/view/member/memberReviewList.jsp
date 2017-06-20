@@ -72,7 +72,8 @@ width:55px;}
                                         	<c:if test="${loginUserId == member.memberId }">
 												<span style="float:right; width:22%; text-align:right;">
                                         			<button type="button" class="btn btn-circle btn-primary  btn-lg" style="margin-right:5px;" onclick="location.href='${ctx }/review/modify.do?reviewId=${review.reviewId}'"><i class="fa fa-edit"></i></button>
-                                        			<button type="button" class="btn btn-circle btn-danger  btn-lg"><i class="fa fa-trash-o"  onclick="revDel('${review.reviewId}');"></i></button></span>
+                                        			<button type="button" class="btn btn-circle btn-danger  btn-lg"><i class="fa fa-trash-o"  onclick="revDel('${review.reviewId}');"></i></button>
+                                        		</span>
                                         	</c:if>
                                         </div>
 	                                     <c:if test="${sts.count ==1 }">
@@ -91,7 +92,7 @@ width:55px;}
                         <div class="panel-body" id="truckBody">
                         	
                 		</div>
-                	</div><c:out value=""></c:out>
+                	</div>
                 </div>
             </div>
 
@@ -189,6 +190,7 @@ width:55px;}
 		
 		var btn = $("#favoriteBtn");
 		var classN = btn.attr('class');
+		var count =$("#favoriteCount").text();
 		var url = "";
 
 		if (classN == "btn btn-outline btn-success") {
@@ -208,6 +210,11 @@ width:55px;}
 			success : function(data) {
 				if (data) {
 					btn.attr("class", classN);
+					if (classN == "btn btn-outline btn-success") {
+						$("#favoriteCount").text(eval(count)-1);
+					} else {
+						$("#favoriteCount").text(eval(count)+1);
+					}
 				}
 			}
 		});

@@ -26,7 +26,7 @@
 
 <style>
 .wid200 {
-width:58px;
+width:70px;
 display:inline-block;
 }
 </style>

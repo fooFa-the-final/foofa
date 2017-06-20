@@ -147,105 +147,64 @@
 		<div class="col-lg-12" style="display:block;">
 		
 			<div class="col-lg-3">
-				<div class="blog-stripe">
 				<c:choose>
 					<c:when test="${review eq 'null'}">
-					<img width="200px" height="200px"
+					<img width="280px" height="280px" style="border-radius:10px;"
 						src="${ctx }/resources/img/food/${truck.foodtruckImg}">
 					</c:when>
 					<c:otherwise>
-					<img width="200px" height="200px"
+					<img width="200px" height="200px"style="border-radius:10px;"
 						src="${ctx }/resources/img/food/${review.foodtruck.foodtruckImg}">
 					</c:otherwise>
 				</c:choose>
+			</div>
+			<div class="col-lg-8">
+				<div class="col-lg-12" style="padding:0 20px;">
+					<h4><a href="" style="color: black; font-weight: bold">${truck.foodtruckName }</a>&nbsp;&nbsp;<span class="starRating" style="text-align:left;"><span id="mainTableScore" style="width: ${truck.score*20 }%">${truck.score }점</span></span></h4>
+					<h5><i class="fa fa-bookmark"></i>&nbsp; ${truck.category1 }&nbsp;${truck.category2 }&nbsp;${truck.category3 }</h5>
+					<h5><i class="fa fa-location-arrow"></i>&nbsp;  ${truck.spot }</h5>
+					<h5><i class="fa fa-map-marker"></i>&nbsp;  ${truck.location }</h5>
+				</div>
+				
+				<div class="col-lg-12">
+					<!-- 「그림」 -->
+					<div style="display:inline-block;padding:20px;border:0px;" id="imgDiv">
+						<img id = "img1" style="width:150px; height:150px;border:0px solid white;">
+						<img id = "img2" style="width:150px;height:150px;border:0px;display:none">
+						<img id = "img3" style="width:150px;height:150px;border:0px;display:none">
+						<img id = "img4" style="width:150px;height:150px;border:0px;display:none">
+						<img id = "img5" style="width:150px;height:150px;border:0px;display:none">
+					</div>
 				</div>
 			</div>
-			<div class="col-lg-6">
-
-				<ul class="all-blogs">
-					<li class="media">
-						<div class="media-body">
-							<h4 class="media-heading">
-								<a href="" style="color: black; font-weight: bold">${truck.foodtruckName }</a>
-							</h4>
-						</div>
-					</li>
-					<li class="media">
-						<div class="media-body">
-							<h4 class="media-heading">${truck.category1 }, ${truck.category2 }</h4>
-
-
-						</div>
-					</li>
-					<li class="media">
-						<div class="media-body" >
-							<h4 class="media-heading">${truck.spot }</h4>
-						</div>
-					</li>
-				</ul>
+			<div class="col-lg-11">
+			
+				설문 응답 여부 : 
+				<input type="checkbox" class = "btn btn-primary btn-outline" name = "isSurvey" id = "isSurvey" onclick="openSurvey()"> 
+				<input type="button" class="btn btn-primary" data-toggle="modal" data-target="#upload" value="Add Photo" style="float:right;">
 			</div>
-			<!-- 「그림」 -->
-			<div style="height:200px;display:inline-block" id="imgDiv">
-				<img id = "img1" style="width:150px;height:150px;border:0px">
-				<img id = "img2" style="width:150px;height:150px;border:0px;display:none">
-				<img id = "img3" style="width:150px;height:150px;border:0px;display:none">
-				<img id = "img4" style="width:150px;height:150px;border:0px;display:none">
-				<img id = "img5" style="width:150px;height:150px;border:0px;display:none">
-			</div>
-				<div class="text-right">
-						<input type="button" class="btn btn-primary" data-toggle="modal" data-target="#upload" value="Add Photo">
-        </div>    
         
         <form id = "submit" method = "post" enctype="multipart/form-data">
         	<input type="hidden" name = "foodtruckId" value="${truck.foodtruckId }">
         	<c:if test="${review ne 'null'}">
 				<input type="hidden" value="${review.reviewId }" name="reviewId">
 			</c:if>
-				<div class="col-lg-12">
-				
-						<table width="1150px">
-							<thead>
-								<tr>
-									<th width="150px"></th>
-									<th></th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td>
-										<!-- <fieldset class="rating">
-										    <input type="radio" id="star5" name="rating" value="5" /><label class = "full" for="star5" title="Awesome - 5 stars"></label>
-										    <input type="radio" id="star4half" name="rating" value="4 and a half" /><label class="half" for="star4half" title="Pretty good - 4.5 stars"></label>
-										    <input type="radio" id="star4" name="rating" value="4" /><label class = "full" for="star4" title="Pretty good - 4 stars"></label>
-										    <input type="radio" id="star3half" name="rating" value="3 and a half" /><label class="half" for="star3half" title="Meh - 3.5 stars"></label>
-										    <input type="radio" id="star3" name="rating" value="3" /><label class = "full" for="star3" title="Meh - 3 stars"></label>
-										    <input type="radio" id="star2half" name="rating" value="2 and a half" /><label class="half" for="star2half" title="Kinda bad - 2.5 stars"></label>
-										    <input type="radio" id="star2" name="rating" value="2" /><label class = "full" for="star2" title="Kinda bad - 2 stars"></label>
-										    <input type="radio" id="star1half" name="rating" value="1 and a half" /><label class="half" for="star1half" title="Meh - 1.5 stars"></label>
-										    <input type="radio" id="star1" name="rating" value="1" /><label class = "full" for="star1" title="Sucks big time - 1 star"></label>
-										    <input type="radio" id="starhalf" name="rating" value="half" /><label class="half" for="starhalf" title="Sucks big time - 0.5 stars"></label>
-										</fieldset> -->
-										<input type = "radio" name="score" value="5"> 5
-										<input type = "radio" name="score" value="4"> 4
-										<input type = "radio" name="score" value="3"> 3
-										<input type = "radio" name="score" value="2"> 2
-										<input type = "radio" name="score" value="1"> 1
-									</td>
-									<td>별점을 매겨주세요</td>
-
-								</tr>
-							</tbody>
-							<tr>
-								<td colspan="2"><textarea name="contents" id="contents"
+				<div class="col-lg-11">
+					<ul class="list-inline" style="margin:10px;">
+						<li><input type = "radio" name="score" value="5"> ★★★★★
+										<input type = "radio" name="score" value="4"> ★★★★
+										<input type = "radio" name="score" value="3"> ★★★
+										<input type = "radio" name="score" value="2"> ★★
+										<input type = "radio" name="score" value="1"> ★</li>
+						<li>별점을 매겨주세요</li>
+					</ul>
+				<textarea name="contents" id="contents"
 										style="width: 100%; border: 1; overflow: visible; text-overflow: ellipsis;"
-										rows=15></textarea></td>
-							</tr>
-						</table>
+										rows=15></textarea>
+
 				</div>
+
 				</div>
-				
-				설문 응답 여부 : 
-				<input type="checkbox" class = "btn btn-default" name = "isSurvey" id = "isSurvey" onclick="openSurvey()"> 
 					
 			
 					<div class="modal fade" id="myModal" role="dialog">

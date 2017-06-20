@@ -73,7 +73,7 @@
 														'core_circle_radius' : 0,
 														'chartDiv' : 'chart1',
 														'chartType' : 'pie',
-														'chartSize' : { width : 400, height : 250 }
+														'chartSize' : { width : 500, height : 300 }
 													};
 
 													Nwagon.chart(options);
@@ -145,7 +145,7 @@
 																	'core_circle_radius' : 0,
 																	'chartDiv' : 'chart2',
 																	'chartType' : 'pie',
-																	'chartSize' : { width : 400, height : 250 }
+																	'chartSize' : { width : 500, height : 300 }
 																};
 
 																Nwagon.chart(options);
@@ -167,7 +167,7 @@
 																	'core_circle_radius' : 0,
 																	'chartDiv' : 'chart3',
 																	'chartType' : 'pie',
-																	'chartSize' : { width : 400, height : 250 }
+																	'chartSize' : { width : 500, height : 300 }
 																};
 
 																Nwagon.chart(options);
@@ -189,7 +189,7 @@
 																	'core_circle_radius' : 0,
 																	'chartDiv' : 'chart4',
 																	'chartType' : 'pie',
-																	'chartSize' : { width : 400, height : 250 }
+																	'chartSize' : { width : 500, height : 300 }
 																};
 
 																Nwagon.chart(options);
@@ -211,7 +211,7 @@
 																	'core_circle_radius' : 0,
 																	'chartDiv' : 'chart5',
 																	'chartType' : 'pie',
-																	'chartSize' : { width : 400, height : 250 }
+																	'chartSize' : { width : 500, height : 300 }
 																};
 
 																Nwagon.chart(options);
@@ -233,7 +233,7 @@
 																	'core_circle_radius' : 0,
 																	'chartDiv' : 'chart6',
 																	'chartType' : 'pie',
-																	'chartSize' : { width : 400, height : 250 }
+																	'chartSize' : { width : 500, height : 300 }
 																};
 
 																Nwagon.chart(options);

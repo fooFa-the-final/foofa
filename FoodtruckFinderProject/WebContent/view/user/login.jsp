@@ -57,7 +57,7 @@
                                     </label>
                                 </div>
                                 <!-- Change this to a button or input when using this as a form -->
-                                <button type="submit" class="btn btn-lg btn-success btn-block" style="margin-right:30px; display:inline-block; vertical-align:middle; width:45%;">Login</button>
+                                <button type="submit" class="btn btn-lg btn-success btn-block" style="margin-right:30px; display:inline-block; vertical-align:middle; ">Login</button>
                             </fieldset>
                         </form>
                     </div>
