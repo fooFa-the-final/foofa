@@ -1,19 +1,11 @@
 # foofa
 food finer, the final project team Jute
 
-�븘�엫�엫
-<<<<<<< HEAD
-�씠�듅嫄�
-=======
-juhee!!!!
-Kim
-<<<<<<< HEAD
-Hi
-=======
-<<<<<<< HEAD
-hi!@!#
-=======
-Jung
->>>>>>> branch 'master' of https://github.com/fooFa-the-final/foofa.git
->>>>>>> branch 'master' of https://github.com/fooFa-the-final/foofa.git
->>>>>>> branch 'master' of https://github.com/fooFa-the-final/foofa
+2017 Kosta 144th Java Spring Framework Developer Program
+
+Juhee Kim
+Seung-gon Lee
+Tae-seung Kim 
+Dae-hyun Seo
+Chan-ki Jung
+Hyeo-jin Kang
